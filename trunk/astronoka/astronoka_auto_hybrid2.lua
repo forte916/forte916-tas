@@ -6,7 +6,7 @@
 --
 -- + Usage
 --   1. Prepare seeds below
---     ++ plain simaimo   = a lot
+--     ++ plain simaimo   = a lot (99 is recomended)
 --     ++ plain kabu      = 30 or more
 --     ++ plain hourensou = 30 or more
 --   2. Go to hybrid machine room
@@ -16,10 +16,6 @@
 -- + This script can
 --     ++ evelove multiple attribute each hybrid
 --     ++ refer multiple attribute each vegees
---
--- + Special Thanks
---   http://homepage3.nifty.com/game-sfccode/astronoka.html
---   http://www009.upp.so-net.ne.jp/dreamy/ps/noka.html
 
 require "astronoka_target_vegee"
 
@@ -34,8 +30,9 @@ require "astronoka_target_vegee"
 --target_vegee = target_vegee_1305
 --target_vegee = target_vegee_1314
 
-target_vegee = target_renkon_m100_m100x3_a
+--target_vegee = target_renkon_m100_m100x3_a
 --target_vegee = target_renkon_m100_m100x3_b
+target_vegee = target_renkon_m100_m100x5_a
 --target_vegee = target_otsu
 --target_vegee = target_vegee_test
 target_total = #target_vegee
@@ -58,7 +55,6 @@ while true do
 	print(string.format("initial = %d", initial))
 	if initial == 0 then
 		for i=1, #target_vegee, 1 do
-			goal_flag = false
 			Hybrid.autoHybrid(target_vegee[i])
 		end
 		for i=1, #target_vegee, 1 do
