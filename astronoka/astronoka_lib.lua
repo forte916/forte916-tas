@@ -765,6 +765,7 @@ function Hybrid.autoHybrid(target)
 		end
 	end
 
+	Hybrid.drawRetryCount(cnt)
 	print("<<< autoHybrid is finished <<<")
 	return ret
 end
