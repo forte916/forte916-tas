@@ -208,6 +208,7 @@ function Hybrid.drawHybrid(sd1, sd2, sd3, tg, style, x, y)
 	tg = tg or {kind1 = 0}
 	style = style or 1
 
+	local header = "   siz wgt ptr ntr sgr txt shp flv sml ton"
 	local sd1_str = string.format("%2x", sd1.kind1)
 	local sd2_str = string.format("%2x", sd2.kind1)
 	local sd3_str = string.format("%2x", sd3.kind1)
@@ -219,7 +220,7 @@ function Hybrid.drawHybrid(sd1, sd2, sd3, tg, style, x, y)
 			sd2_str = sd2_str .. string.format(" %3x", sd2[v])
 			sd3_str = sd3_str .. string.format(" %3x", sd3[v])
 			if tg[v] == nil then
-				tg_str = tg_str .. " any"
+				tg_str = tg_str .. "    "
 			elseif tg[v].value == 0 then
 				tg_str = tg_str .. string.format(" %x+%d", tg[v].rank, tg[v].bit)
 			else
@@ -236,18 +237,19 @@ function Hybrid.drawHybrid(sd1, sd2, sd3, tg, style, x, y)
 		end
 	end
 
-	gui.text(x, y,    sd1_str)
-	gui.text(x, y+10, sd2_str)
-	gui.text(x, y+20, sd3_str)
-	gui.text(x, y+30, tg_str)
+	gui.text(x, y, header)
+	gui.text(x, y+10, sd1_str)
+	gui.text(x, y+20, sd2_str)
+	gui.text(x, y+30, sd3_str)
+	gui.text(x, y+40, tg_str)
 end
 
 function Hybrid.drawRetryCount(cnt, x, y)
 	x = x or 0
 	y = y or 80
-	gui.text(x, y+40, string.format(" retry %4d", cnt))
-	gui.text(x, y+50, string.format(" fail  %4d", fail_cnt))
-	gui.text(x, y+60, string.format(" goal  %4d", goal_cnt))
+	gui.text(x, y+50, string.format(" retry %4d", cnt))
+	gui.text(x, y+60, string.format(" fail  %4d", fail_cnt))
+	gui.text(x, y+70, string.format(" goal %2d/%2d", goal_cnt, target_total))
 end
 
 
@@ -310,7 +312,7 @@ function Hybrid.matchParent(tg, sd)
 	local reached = 0
 	local found4 = false
 
-	print("  >>> matchParent start >>>")
+	--print("  >>> matchParent start >>>")
 
 	if tg.kind1 == sd.kind1 then
 		found1 = true
@@ -466,7 +468,7 @@ function Hybrid.selectFirstSeed(tg)
 			if matched then
 				return true
 			else
-				print("sd1:: not found")
+				--print("sd1:: not found")
 			end
 
 			Hybrid.preAdjustFirstParentView()
@@ -576,7 +578,7 @@ function Hybrid.selectSecondSeed(tg)
 			if matched then
 				return true
 			else
-				print("sd2:: not found")
+				--print("sd2:: not found")
 			end
 
 			Hybrid.preAdjustSecondParentView()
@@ -619,6 +621,8 @@ function Hybrid.matchExpect(tg, sd)
 	local reached = 0
 	local found4 = false
 	local levelup = 0
+	local exceeded = false
+	local str = ""
 
 	--print("  >>> matchExpect start >>>")
 
@@ -633,12 +637,13 @@ function Hybrid.matchExpect(tg, sd)
 	for k, v in pairs(attrb_table) do
 		evolved = false
 		found4 = false
+		exceeded = false
 		--print(k, v)
 		if tg[v] == nil then
 			-- accepts any
 			reached = reached + 1
-			--print("attrb is nil, accepts any")
-			--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+			--str = string.format("reached = %d, levelup = %d", reached, levelup)
+			--print(str..", attrb is nil, accepts any")
 			--continue
 		else
 			-- tv[v] ~= nil means we need to care this attribute, then refer this attribute
@@ -654,15 +659,31 @@ function Hybrid.matchExpect(tg, sd)
 			if tg[v].value ~= 0 and tg[v].value == sd[v] then
 				-- attribute value is matched. it means reached goal
 				reached = reached + 1
-				--print("attrb value is matched")
-				--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+				--str = string.format("reached = %d, levelup = %d", reached, levelup)
+				--print(str..", attrb value is matched")
 				--continue
 			elseif tg[v].value ~= 0 and evolved then
 				-- attribute is eveloved. it means level up
+				
+				local sd_rank = bit.rshift(sd[v], 8)  -- same as x >>= 8
+				if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
+					-- rank is matched
+					if tg[v].order == true and tg[v].value ~= bit.bor(tg[v].value, sd[v]) then
+						--print("attrb value is exceeded")
+						exceeded = true
+						return false
+					end
+					if tg[v].order == false and tg[v].value ~= bit.band(tg[v].value, sd[v]) then
+						--print("attrb value is exceeded")
+						exceeded = true
+						return false
+					end
+				end
 				levelup = levelup + 1
-				--print("attrb value is evolved. value is not 0")
-				--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+				--str = string.format("reached = %d, levelup = %d", reached, levelup)
+				--print(str..", attrb value is evolved. value is not 0")
 				--continue
+
 			elseif tg[v].value == 0 then
 				-- don't care value, but need to care both of rank and bit counts
 
@@ -679,14 +700,14 @@ function Hybrid.matchExpect(tg, sd)
 					if found4 and tg[v].bit == sd_bit then
 						-- both of rank and bit counts are matched. it means reached goal
 						reached = reached + 1
-						--print("rank and bit counts are matched")
-						--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+						--str = string.format("reached = %d, levelup = %d", reached, levelup)
+						--print(str..", rank and bit counts are matched")
 						--continue
 					elseif found4 and evolved then
 						-- attribute is eveloved. it means level up
 						levelup = levelup + 1
-						--print("attrb value is evolved. rank is not 0 and same rank")
-						--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+						--str = string.format("reached = %d, levelup = %d", reached, levelup)
+						--print(str..", attrb value is evolved. rank is not 0 and same rank")
 						--continue
 					else
 						return false
@@ -696,14 +717,14 @@ function Hybrid.matchExpect(tg, sd)
 				elseif tg[v].rank ~= 0 and evolved then
 					-- attribute is eveloved. it means level up
 					levelup = levelup + 1
-					--print("attrb value is evolved. rank is not 0 and different rank")
-					--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+					--str = string.format("reached = %d, levelup = %d", reached, levelup)
+					--print(str..", attrb value is evolved. rank is not 0 and different rank")
 					--continue
 				elseif tg[v].rank == 0 then
 					-- accepts any. value == 0 and rank == 0 means accepting any.
 					reached = reached + 1
-					--print("attrb is 0 and rank is 0, accepts any")
-					--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+					--str = string.format("reached = %d, levelup = %d", reached, levelup)
+					--print(str..", attrb is 0 and rank is 0, accepts any")
 					--continue
 				else
 					return false
@@ -736,7 +757,6 @@ function Hybrid.expect(tg)
 	local matched = Hybrid.matchExpect(tg, Hybrid.sd3)
 
 	if matched then
-		--print("sd3::"..Hybrid.sd3.info)
 		print("sd3:: matched expectation")
 		ret = true
 	else
@@ -901,6 +921,9 @@ function Hybrid.autoHybrid(target)
 	return ret
 end
 
+------------------------------------------------------------
+-- Target
+------------------------------------------------------------
 function targetChildToString(tg)
 	--local str = string.format(" %2x, %s, %3x, %d", 
 	--		target.kind1, target.attrb, target.goal, target.retry)
@@ -1153,17 +1176,17 @@ function toBinary(decimal)
 end
 
 function bitCount8(b8)
-	print(string.format("bit counting in %d, %s", b8, toBinary(b8)))
+	--print(string.format("bit counting in %x, %s", b8, toBinary(b8)))
+	
 	--b8 = ((b8 & 0xAA) >> 1) + (b8 & 0x55)
 	--b8 = ((b8 & 0xCC) >> 2) + (b8 & 0x33)
 	--b8 = ((b8 & 0xF0) >> 4) + (b8 & 0x0F)
-
 	-- count bits set in the number. 8bit limited. same algorithm above
 	b8 = bit.rshift(bit.band(b8, 0xAA), 1) + bit.band(b8, 0x55)
 	b8 = bit.rshift(bit.band(b8, 0xCC), 2) + bit.band(b8, 0x33)
 	b8 = bit.rshift(bit.band(b8, 0xF0), 4) + bit.band(b8, 0x0F)
 
-	print(string.format("bit counts are %d", b8))
+	--print(string.format("bit counts are %d", b8))
 	return b8
 end
 
@@ -1212,7 +1235,7 @@ end
 ------------------------------------------------------------
 -- define
 ------------------------------------------------------------
-
+target_total = 0
 try_cnt1 = 1000  -- max retry count each level up
 try_cnt2 = 24    -- max level up count
 draw_key = 0
