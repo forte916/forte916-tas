@@ -10,6 +10,9 @@
 
 require "astronoka_lib"
 
+------------------------------------------------------------
+-- vegee setting
+------------------------------------------------------------
 -- shimaimo
 local shimaimo_plain = {
 	kind1 = knd_shimaimo,
@@ -154,7 +157,36 @@ local renkon_m100_m100 = {
 	pattern = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	nutrition = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
+local renkon_any_m100txt = {
+	kind1 = knd_renkon,
+	kind2 = 0,
+	texture = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+}
+local renkon_any_m100sgr = {
+	kind1 = knd_renkon,
+	kind2 = 0,
+	sugar = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+}
 
+local renkon_m100bit1_m100x4 = {
+	kind1 = knd_renkon,
+	kind2 = 0,
+	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+	pattern = {rank = 0xB, bit = 1, value = 0, order = false},
+	nutrition = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+	texture = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+}
+local renkon_m100_m100x5 = {
+	kind1 = knd_renkon,
+	kind2 = 0,
+	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+	pattern = {rank = 0xB, bit = 0, value = 0xB00, order = false},
+	nutrition = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+	sugar = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+	texture = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+}
 
 local renkon_bit4 = {
 	kind1 = knd_renkon,
@@ -290,11 +322,21 @@ local kyuri_bit2 = {
 	kind2 = 0,
 	texture = {rank = 0xC, bit = 2, value = 0, order = false},
 }
+local kyuri_m100 = {
+	kind1 = knd_kyuri,
+	kind2 = 0,
+	texture = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+}
 -- kyabetsu
 local kyabetsu_bit2 = {
 	kind1 = knd_kyabetsu,
 	kind2 = 0,
 	sugar = {rank = 0xC, bit = 2, value = 0, order = false},
+}
+local kyabetsu_m100 = {
+	kind1 = knd_kyabetsu,
+	kind2 = 0,
+	sugar = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 
 
@@ -302,6 +344,7 @@ local kyabetsu_bit2 = {
 
 ------------------------------------------------------------
 ----- otsu -----
+------------------------------------------------------------
 local kabu_otsu = {
 	kind1 = knd_kabu,
 	kind2 = 0,
@@ -413,14 +456,14 @@ target_otsu = {
 	{first = tamanegi_otsuB        , second = kabu_otsubit7 , hybrid = gobou_otsuB           , retry = 0, done = 0},
 
 	{first = gobou_otsuB           , second = gobou_otsuA   , hybrid = gobou_otsu            , retry = 0, done = 0},
-
 }
 
 
 
 
 ------------------------------------------------------------
-
+-- target setting for general purpose
+------------------------------------------------------------
 ---- renkon_m100_m100x2 typeA
 target_renkon_m100_m100x2_a = {
 	{first = shimaimo_plain        , second = shimaimo_plain, hybrid = shimaimo_m100         , retry = 0, done = 0},
@@ -458,10 +501,6 @@ target_renkon_m100_m100x2_d = {
 	{first = renkon_bit2           , second = shimaimo_plain, hybrid = renkon_m100           , retry = 0, done = 0},
 	{first = renkon_m100           , second = renkon_bit2_m100x2, hybrid = renkon_m100_m100x2 , retry = 0, done = 0},
 }
-
-
-
-
 
 
 -- renkon_m100_m100x3 typeA
@@ -521,6 +560,36 @@ target_renkon_m100_m100x3_d = {
 	{first = renkon_m100_m100      , second = renkon_bit2_m100x2, hybrid = renkon_m100_m100x3 , retry = 0, done = 0},
 }
 
+
+-- renkon_m100_m100x5 typeA
+target_renkon_m100_m100x5_a = {
+	-- renkon_m100_m100x3
+	{first = shimaimo_plain        , second = shimaimo_plain, hybrid = shimaimo_m100         , retry = 0, done = 0},
+	{first = kabu_plain            , second = kabu_plain    , hybrid = kabu_m100             , retry = 0, done = 0},
+	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_any            , retry = 0, done = 0},
+	{first = renkon_any            , second = shimaimo_plain, hybrid = ninjin_bit2           , retry = 0, done = 0},
+	{first = ninjin_bit2           , second = shimaimo_plain, hybrid = ninjin_m100           , retry = 0, done = 0},
+	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_bit2           , retry = 0, done = 0},
+	{first = renkon_bit2           , second = shimaimo_plain, hybrid = renkon_m100bit3       , retry = 0, done = 0},
+	{first = renkon_m100bit3       , second = shimaimo_m100 , hybrid = renkon_m100bit2_m100  , retry = 0, done = 0},
+	{first = renkon_m100bit2_m100  , second = kabu_m100     , hybrid = renkon_m100bit1_m100x2, retry = 0, done = 0},
+	{first = renkon_m100bit1_m100x2, second = ninjin_m100   , hybrid = renkon_m100_m100x3    , retry = 0, done = 0},
+	-- kyuri
+	{first = hourensou_plain       , second = shimaimo_plain, hybrid = kyuri_bit2            , retry = 0, done = 0},
+	{first = kyuri_bit2            , second = shimaimo_plain, hybrid = kyuri_m100            , retry = 0, done = 0},
+	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_any            , retry = 0, done = 0},
+	{first = renkon_any            , second = kyuri_m100    , hybrid = renkon_any_m100txt    , retry = 0, done = 0},
+	{first = renkon_any_m100txt    , second = renkon_m100_m100x3, hybrid = renkon_m100bit1_m100x4, retry = 0, done = 0},
+	-- kyabetsu
+	{first = hourensou_plain       , second = shimaimo_plain, hybrid = kyuri_any             , retry = 0, done = 0},
+	{first = kyuri_any             , second = shimaimo_plain, hybrid = kyabetsu_bit2         , retry = 0, done = 0},
+	{first = kyabetsu_bit2         , second = shimaimo_plain, hybrid = kyabetsu_m100         , retry = 0, done = 0},
+	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_any            , retry = 0, done = 0},
+	{first = renkon_any            , second = kyabetsu_m100 , hybrid = renkon_any_m100sgr    , retry = 0, done = 0},
+	{first = renkon_any_m100sgr    , second = renkon_m100bit1_m100x4, hybrid = renkon_m100_m100x5, retry = 0, done = 0},
+}
+
+
 -- tamanegi_p200 for contest
 target_tamanegi_p200 = {
 	{first = shimaimo_p200         , second = kabu_plain    , hybrid = renkon_any_p200       , retry = 0, done = 0},
@@ -529,10 +598,12 @@ target_tamanegi_p200 = {
 }
 
 
----------- speed run ----------
+------------------------------------------------------------
+-- target setting for speed run
+------------------------------------------------------------
 -- year1 1/15
 target_vegee_1115 = {
--- need shimaimo_plain 14, kabu_plain 15
+	-- need shimaimo_plain 14, kabu_plain 15
 	{first = shimaimo_plain        , second = shimaimo_plain, hybrid = shimaimo_m100         , retry = 0, done = 0},
 	{first = kabu_plain            , second = kabu_plain    , hybrid = kabu_m100             , retry = 0, done = 0},
 	{first = kabu_m100             , second = shimaimo_m100 , hybrid = renkon_bit2_m100x2    , retry = 0, done = 0},
@@ -543,7 +614,7 @@ target_vegee_1115 = {
 
 -- year1 1/22
 target_vegee_1122 = {
--- need shimaimo_plain 24??, kabu_plain 2??
+	-- need shimaimo_plain 24?, kabu_plain 2?
 	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_any            , retry = 0, done = 0},
 	{first = renkon_any            , second = shimaimo_plain, hybrid = ninjin_bit2           , retry = 0, done = 0},
 	{first = ninjin_bit2           , second = shimaimo_plain, hybrid = ninjin_m100           , retry = 0, done = 0},
@@ -554,7 +625,6 @@ target_vegee_1122 = {
 }
 
 target_vegee_1209 = {
--- need shimaimo_plain 14, kabu_plain 15
 	{first = shimaimo_plain        , second = shimaimo_plain, hybrid = shimaimo_p200         , retry = 0, done = 0},
 	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_bit4           , retry = 0, done = 0},
 	{first = renkon_bit4           , second = shimaimo_plain, hybrid = renkon_p200           , retry = 0, done = 0},
