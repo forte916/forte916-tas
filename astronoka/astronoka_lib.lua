@@ -1,24 +1,10 @@
 -- Astronoka
--- This is auto hybrid script, also shows hybrid expectation.
--- You can uncomment target_vegee table, if needed.
+-- This is a library of astronoka.
 --
 -- + Emulater: psxjin v2.0.2
 --
 -- + Usage
---   1. Prepare seeds below
---     ++ plain simaimo = a lot
---     ++ plain kabu    = 30 or more
---     ++ other vegees  = 2 or more
---   2. Go to hybrid machine room
---   3. Put cursor the first seed
---   4. Start this script
---
--- + This script can
---     ++ evelove only one attribute each vegees
---
--- + This script can not
---     ++ refer multiple attribute each vegees
---     ++ use to optimize for speed run
+--   1. call this file
 --
 -- + Special Thanks
 --   http://homepage3.nifty.com/game-sfccode/astronoka.html
@@ -78,9 +64,9 @@ prvw2_kuzu = 0xD778
 adr_parent_view3 = 0x1FFDFC
 
 
-
 -- cursor of house/main/system menu
 adr_cursor_menu = 0x00143230
+
 
 -- cursor of group in seed inventory
 adr_cursor_group_first = 0x0018F435
@@ -127,8 +113,6 @@ adr_pete_rank = 0x166F0A
 adr_machine_rank = 0x166F0A
 
 
-
-
 -- ## Properties of vegee
 -- kind1
 knd_kuzu      = 0x00  -- くず野菜
@@ -172,8 +156,8 @@ knd_astro     = 0x24  -- アストロキング
 -- kind2
 knd_plain     = 0x63
 
-
 attrb_table = {"size", "weight", "pattern", "nutrition", "sugar", "texture", "shape", "flavor", "smell", "tone"}
+
 
 ------------------------------------------------------------
 -- Hybrid
@@ -395,55 +379,6 @@ function Hybrid.selectFirstSeed(tg)
 
 	print(">>> selectFirstSeed start >>>, "..targetChildToString(tg))
 
---	for j=1, 2 do
---		for i=1, row_max do
---			Hybrid.preAdjustFirstParentView()
---			Hybrid.focusParentSeed()
---
---			if i > 1 then
---				joypadSetHelper(1, {down=1}, 6)
---				cursor = memory.readbyte(adr_cursor_seed_first)
---				if cursor == start_cursor then
---					print("sd1:: not found in this group. changing group")
---					-- if cursor go round one lap then cahnge group
---
---					local prvw2 = memory.readword(adr_parent_view2)
---					assertTrue(prvw2 == prvw2_seed_view)
---					group = memory.readword(adr_filter)
---					--print(string.format("group1 = %4x", group))
---					while group ~= no_filter do
---						joypadSetHelper(1, {r1=1}, 6)
---						group = memory.readword(adr_filter)
---						--print(string.format("group2 = %4x", group))
---					end
---				end
---			else
---				cursor = memory.readbyte(adr_cursor_seed_first)
---				start_cursor = cursor
---			end
---
---			Hybrid.clickParentSeed()
---
---			Hybrid.sd1 = Hybrid.readParentProperty(adr_seed_first)
---			assertFalse(Hybrid.sd1 == nil)
---			if Hybrid.sd1 == nil then
---				print("press again readParentProperty")
---				joypadSetHelper(1, {circle=1}, 7)
---				Hybrid.sd1 = Hybrid.readParentProperty(adr_seed_first)
---			end
---			--print("sd1::"..Hybrid.sd1.info)
---			
---			local matched = Hybrid.matchParent(tg, Hybrid.sd1)
---
---			if matched then
---				return true
---			else
---				print("sd1:: not found")
---			end
---		end
---	end
---
-----------
 	Hybrid.preAdjustFirstParentView()
 	Hybrid.focusParentSeed()
 
@@ -464,7 +399,6 @@ function Hybrid.selectFirstSeed(tg)
 			--print("sd1::"..Hybrid.sd1.info)
 			
 			local matched = Hybrid.matchParent(tg, Hybrid.sd1)
-
 			if matched then
 				return true
 			else
@@ -491,7 +425,6 @@ function Hybrid.selectFirstSeed(tg)
 		end
 	end
 
-----------
 	return false
 end
 
@@ -504,56 +437,6 @@ function Hybrid.selectSecondSeed(tg)
 
 	print(">>> selectSecondSeed start >>>, "..targetChildToString(tg))
 	
---	for j=1, 2 do
---		for i=1, row_max do
---			Hybrid.preAdjustSecondParentView()
---			Hybrid.focusParentSeed()
---
---			if i > 1 then
---				joypadSetHelper(1, {down=1}, 6)
---				cursor = memory.readbyte(adr_cursor_seed_second)
---				if cursor == start_cursor then
---					print("sd2:: not found in this group. changing group")
---					-- if cursor go round one lap then cahnge group
---
---					local prvw2 = memory.readword(adr_parent_view2)
---					assertTrue(prvw2 == prvw2_seed_view)
---					group = memory.readword(adr_filter)
---					--print(string.format("group3 = %4x", group))
---					while group ~= no_filter do
---						joypadSetHelper(1, {r1=1}, 6)
---						group = memory.readword(adr_filter)
---						--print(string.format("group4 = %4x", group))
---					end
---				end
---			else
---				cursor = memory.readbyte(adr_cursor_seed_second)
---				start_cursor = cursor
---			end
---
---			Hybrid.clickParentSeed()
---
---			Hybrid.sd2 = Hybrid.readParentProperty(adr_seed_second)
---			assertFalse(Hybrid.sd2 == nil)
---			if Hybrid.sd2 == nil then
---				print("press again readParentProperty")
---				Hybrid.clickParentSeed()
---				Hybrid.sd2 = Hybrid.readParentProperty(adr_seed_second)
---			end
---			--print("sd2::"..Hybrid.sd2.info)
---
---			local matched = Hybrid.matchParent(tg, Hybrid.sd2)
---
---			if matched then
---				return true
---			else
---				print("sd2:: not found")
---			end
---		end
---	end
---
-----------
-
 	Hybrid.preAdjustSecondParentView()
 	Hybrid.focusParentSeed()
 
@@ -574,7 +457,6 @@ function Hybrid.selectSecondSeed(tg)
 			--print("sd2::"..Hybrid.sd2.info)
 
 			local matched = Hybrid.matchParent(tg, Hybrid.sd2)
-
 			if matched then
 				return true
 			else
@@ -601,7 +483,6 @@ function Hybrid.selectSecondSeed(tg)
 		end
 	end
 
-----------
 	return false
 end
 
@@ -621,7 +502,6 @@ function Hybrid.matchExpect(tg, sd)
 	local reached = 0
 	local found4 = false
 	local levelup = 0
-	local exceeded = false
 	local str = ""
 
 	--print("  >>> matchExpect start >>>")
@@ -670,12 +550,10 @@ function Hybrid.matchExpect(tg, sd)
 					-- rank is matched
 					if tg[v].order == true and tg[v].value ~= bit.bor(tg[v].value, sd[v]) then
 						--print("attrb value is exceeded")
-						exceeded = true
 						return false
 					end
 					if tg[v].order == false and tg[v].value ~= bit.band(tg[v].value, sd[v]) then
 						--print("attrb value is exceeded")
-						exceeded = true
 						return false
 					end
 				end
@@ -755,30 +633,12 @@ function Hybrid.expect(tg)
 	--print("sd3::"..Hybrid.sd3.info)
 
 	local matched = Hybrid.matchExpect(tg, Hybrid.sd3)
-
 	if matched then
 		print("sd3:: matched expectation")
 		ret = true
 	else
 		--print("sd3:: not matched expectation")
 	end
-
-
-	--if target.goal > 0x0C00 and Hybrid.sd3[target.attrb] > Hybrid.sd1[target.attrb] then
-	--	found1 = true
-	--end
-	--if target.goal < 0x0C00 and Hybrid.sd3[target.attrb] < Hybrid.sd1[target.attrb] then
-	--	found2 = true
-	--end
-
-	--if Hybrid.sd3.kind1 == Hybrid.sd1.kind1 and (found1 or found2) then
-	--	print("sd3::"..Hybrid.sd3.info)
-	--	ret = true
-	--	if Hybrid.sd3[target.attrb] == target.goal then
-	--		goal_flag = true
-	--		print("goal_flag is true")
-	--	end
-	--end
 
 	return ret
 end
@@ -789,7 +649,6 @@ function Hybrid.check(tg)
 	print("sd4::"..Hybrid.sd4.info)
 
 	local matched = Hybrid.matchExpect(tg, Hybrid.sd4)
-
 	if matched then
 		print("sd4:: hybrid is succeeded")
 		success_flag = true
@@ -797,27 +656,12 @@ function Hybrid.check(tg)
 	elseif Hybrid.sd4.kind1 == 0 then
 		print("***** failed to produce. kuzu-vegee *****".." <-------------------")
 		fail_cnt = fail_cnt + 1
-		--if target.start < target.goal then  -- for hybridizeSimple()
-		--	target.start = 0x0B00
-		--else
-		--	target.start = 0x0D00
-		--end
 		Hybrid.postConfirm(false)
 	else
 		print("***** failed to produce. miss expectation *****".." <-------------------")
 		fail_cnt = fail_cnt + 1
 		Hybrid.postConfirm(true)
 	end
-
-
-	--if target.start < target.goal and target.start < Hybrid.sd4[target.attrb]  then
-	--	success1 = true
-	--	--print("sd4:: success1 is true")
-	--end
-	--if target.start > target.goal and target.start > Hybrid.sd4[target.attrb]  then
-	--	success2 = true
-	--	--print("sd4:: success2 is true")
-	--end
 
 	return success_flag
 end
@@ -899,8 +743,7 @@ function Hybrid.autoHybrid(target)
 				local fc = emu.framecount()
 				print(string.format("j=%d, i=%d, fc=%d", j, i, fc))
 				Hybrid.hybridize(target.hybrid)
-				--break  -- for hybridizeSimple()
-				if success_flag then  -- for hybridizeReload()
+				if success_flag then
 					target.first = convertTargetFirst(target.first, Hybrid.sd4)
 					break
 				end
@@ -925,19 +768,13 @@ end
 -- Target
 ------------------------------------------------------------
 function targetChildToString(tg)
-	--local str = string.format(" %2x, %s, %3x, %d", 
-	--		target.kind1, target.attrb, target.goal, target.retry)
-	--return str
+	-- TODO:: implement here
 	return tostring(tg)
 end
 
 function targetToSummaryString(target)
-	--local str = string.format(" %2x, %s, %3x, %d", 
-	--		target.kind1, target.attrb, target.goal, target.retry)
-	--return str
-	
 	local str = string.format(" %2x, %d, %d, ", target.hybrid.kind1, target.retry, target.done)
-	str = str .. tostring(target.hybrid)
+	str = str .. targetChildToString(target.hybrid)
 	return str
 end
 
@@ -950,7 +787,7 @@ function convertTargetFirst(tg, sd)
 			--pass, like python
 		else
 			fst[v] = {value = sd[v]}
-			--fst[v].value = sd[v] -- error with this style.
+			--fst[v].value = sd[v]  -- error with this style.
 		end
 	end
 	return fst
@@ -1107,7 +944,7 @@ function FCrop.drawProperty(prop, x, y)
 	gui.text(x, y, "")
 	gui.text(x, y+ 10, "prc")
 	gui.text(x, y+ 20, "siz")
-	gui.text(x, y+ 30, "wgh")
+	gui.text(x, y+ 30, "wgt")
 	gui.text(x, y+ 40, "ptr")
 	gui.text(x, y+ 50, "ntr")
 	gui.text(x, y+ 60, "sgr")
@@ -1212,7 +1049,7 @@ function assertFalse(value, message)
 	end
 end
 
-function switchDrawSeedProperty()
+function switchDrawHybrid()
 	local kbd = input.get()
 	if kbd.B then
 		if draw_key == 0 then
@@ -1250,14 +1087,14 @@ goal_cnt = 0
 
 --[[
 -- astronoka memo
--- + Moving cursor in the filed affects baboo species coming up today.
+--
+-- + It affects hybrid expectation to change the order of hybrid.
+--
+-- + It affects baboo species coming up today that moving cursor in the filed.
 --   But it doesn't do hybrid expectation.
 --   ex.) After moving cursor in the filed, sometimes baboo species are changed.
 --
--- + It affects hybrid expectation to change the order of target_vegee tables.
---
 -- + It affects baboo feather that which time you go to field on the same day.
 --
--- target.knd1 と current.knd1 が違うとき(作る野菜が変わった時)は、group を 全野菜 に移動
 --
 --]]

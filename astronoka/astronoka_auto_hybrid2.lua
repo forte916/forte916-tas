@@ -1,30 +1,26 @@
 -- Astronoka
 -- This is auto hybrid script, also shows hybrid expectation.
--- You can uncomment target_vegee table, if needed.
+-- You can uncomment target_vegee, if needed.
 --
 -- + Emulater: psxjin v2.0.2
 --
 -- + Usage
 --   1. Prepare seeds below
---     ++ plain simaimo = a lot
---     ++ plain kabu    = 30 or more
---     ++ other vegees  = 2 or more
+--     ++ plain simaimo   = a lot
+--     ++ plain kabu      = 30 or more
+--     ++ plain hourensou = 30 or more
 --   2. Go to hybrid machine room
---   3. Put cursol the first seed
+--   3. Put cursor the first seed
 --   4. Start this script
 --
 -- + This script can
---     ++ evelove only one attribute each vegees
---
--- + This script can not
+--     ++ evelove multiple attribute each hybrid
 --     ++ refer multiple attribute each vegees
---     ++ use to optimize for speed run
 --
 -- + Special Thanks
 --   http://homepage3.nifty.com/game-sfccode/astronoka.html
 --   http://www009.upp.so-net.ne.jp/dreamy/ps/noka.html
 
---require "astronoka_lib"
 require "astronoka_target_vegee"
 
 ------------------------------------------------------------
