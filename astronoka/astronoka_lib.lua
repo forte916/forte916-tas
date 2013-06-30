@@ -181,16 +181,19 @@ function Hybrid.readParentProperty(off_parent)
 	return prop
 end
 
-function Hybrid.drawHybrid(sd1, sd2, sd3, tg, style, x, y)
+function Hybrid.drawHybrid(sd1, sd2, sd3, tg, x, y)
+	if draw_switch == 0 then
+		gui.clearuncommitted()
+		return
+	end
+
 	x = x or 0
 	y = y or 80
-
 	sd1 = sd1 or Hybrid.readParentProperty(adr_seed_first)
 	sd2 = sd2 or Hybrid.readParentProperty(adr_seed_second)
 	sd3 = sd3 or Seed.readProperty(adr_seed_hybrid)
 	if sd1 == nil or sd2 == nil then return end
 	tg = tg or {kind1 = 0}
-	style = style or 1
 
 	local header = "   siz wgt ptr ntr sgr txt shp flv sml ton"
 	local sd1_str = string.format("%2x", sd1.kind1)
@@ -199,7 +202,7 @@ function Hybrid.drawHybrid(sd1, sd2, sd3, tg, style, x, y)
 	local tg_str = string.format("%2x", tg.kind1)
 
 	for k, v in pairs(attrb_table) do
-		if style == 1 then
+		if draw_switch == 1 then
 			sd1_str = sd1_str .. string.format(" %3x", sd1[v])
 			sd2_str = sd2_str .. string.format(" %3x", sd2[v])
 			sd3_str = sd3_str .. string.format(" %3x", sd3[v])
@@ -210,10 +213,16 @@ function Hybrid.drawHybrid(sd1, sd2, sd3, tg, style, x, y)
 			else
 				tg_str = tg_str .. string.format(" %3x", tg[v].value)
 			end
-		elseif style == 2 then
+		elseif draw_switch == 2 then
 			sd1_str = sd1_str .. string.format(" %s", toBinary(sd1[v]))
 			sd2_str = sd2_str .. string.format(" %s", toBinary(sd2[v]))
 			sd3_str = sd3_str .. string.format(" %s", toBinary(sd3[v]))
+		elseif draw_switch == 3 then
+			if tg[v] ~= nil then
+				sd1_str = sd1_str .. string.format(" %3x %s", sd1[v], toBinary(sd1[v]))
+				sd2_str = sd2_str .. string.format(" %3x %s", sd2[v], toBinary(sd2[v]))
+				sd3_str = sd3_str .. string.format(" %3x %s", sd3[v], toBinary(sd3[v]))
+			end
 		else
 			sd1_str = sd1_str .. string.format(" %3x %s", sd1[v], toBinary(sd1[v]))
 			sd2_str = sd2_str .. string.format(" %3x %s", sd2[v], toBinary(sd2[v]))
@@ -294,7 +303,6 @@ function Hybrid.matchParent(tg, sd)
 	local found1 = false
 	local found2 = false
 	local reached = 0
-	local found4 = false
 
 	--print("  >>> matchParent start >>>")
 
@@ -316,7 +324,6 @@ function Hybrid.matchParent(tg, sd)
 	-- BUGGY:: I cannot already understand this logic.
 	for k, v in pairs(attrb_table) do
 		if tg[v] == nil then
-			found4 = false
 			-- accepts any
 			reached = reached + 1
 			--continue
@@ -334,13 +341,12 @@ function Hybrid.matchParent(tg, sd)
 
 				local sd_rank =  bit.rshift(sd[v], 8)  -- same as x >>= 2
 				if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
-					found4 = true
 					-- rank is matched, need to refer bit counts
 					
 
 					local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
 					local sd_bit = bitCount8(sd_tmp)
-					if found4 and tg[v].bit == sd_bit then
+					if tg[v].bit == sd_bit then
 						-- both of rank and bit counts are matched. it means reached
 						reached = reached + 1
 						--continue
@@ -500,7 +506,6 @@ function Hybrid.matchExpect(tg, sd)
 	local found1 = false
 	local evolved = false
 	local reached = 0
-	local found4 = false
 	local levelup = 0
 	local str = ""
 
@@ -516,8 +521,6 @@ function Hybrid.matchExpect(tg, sd)
 	-- BUGGY:: I cannot already understand this logic.
 	for k, v in pairs(attrb_table) do
 		evolved = false
-		found4 = false
-		exceeded = false
 		--print(k, v)
 		if tg[v] == nil then
 			-- accepts any
@@ -569,19 +572,19 @@ function Hybrid.matchExpect(tg, sd)
 				local sd_rank = bit.rshift(sd[v], 8)  -- same as x >>= 8
 				--print(string.format("tg[v].rank = %x, sd_rank = %x", tg[v].rank, sd_rank))
 				if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
-					found4 = true
 					-- rank is matched, need to refer bit counts
 
 
 					local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
 					local sd_bit = bitCount8(sd_tmp)
-					if found4 and tg[v].bit == sd_bit then
+					--print(string.format("tg[v].bit = %d, sd_bit = %d", tg[v].bit ,sd_bit))
+					if tg[v].bit == sd_bit then
 						-- both of rank and bit counts are matched. it means reached goal
 						reached = reached + 1
 						--str = string.format("reached = %d, levelup = %d", reached, levelup)
 						--print(str..", rank and bit counts are matched")
 						--continue
-					elseif found4 and evolved then
+					elseif evolved then
 						-- attribute is eveloved. it means level up
 						levelup = levelup + 1
 						--str = string.format("reached = %d, levelup = %d", reached, levelup)
@@ -712,6 +715,7 @@ function Hybrid.autoHybrid(target)
 	local ret = false
 	print(">>> start to autoHybrid >>>, "..targetChildToString(target.hybrid))
 
+	goal_flag = false
 	for j=1, try_cnt2 do
 		success_flag = false
 		-- select first seed
@@ -737,6 +741,7 @@ function Hybrid.autoHybrid(target)
 		for i=1, try_cnt1 do
 			Hybrid.retry(i)
 			target.retry = target.retry + 1
+			switchDrawHybrid()
 
 			-- if status is better/worse then press circle
 			if Hybrid.expect(target.hybrid) then
@@ -1055,17 +1060,11 @@ function switchDrawHybrid()
 		if draw_key == 0 then
 			--draw_switch = bit.bnot(draw_switch)  -- same as draw_switch = ~draw_switch
 			draw_switch = draw_switch + 1
-			if draw_switch > 3 then draw_switch = 0 end
+			if draw_switch > 4 then draw_switch = 0 end
 		end
 		draw_key = draw_key + 1
 	else
 		draw_key = 0
-	end
-
-	if draw_switch ~= 0 then
-		Hybrid.drawHybrid(nil, nil, nil, nil, draw_switch)
-	else
-		gui.clearuncommitted()
 	end
 end
 
@@ -1076,7 +1075,7 @@ target_total = 0
 try_cnt1 = 1000  -- max retry count each level up
 try_cnt2 = 24    -- max level up count
 draw_key = 0
-draw_switch = 0
+draw_switch = 1
 goal_flag = false
 success_flag = false
 fail_cnt = 0
