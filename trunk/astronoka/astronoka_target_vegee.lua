@@ -331,68 +331,11 @@ local kyabetsu_otsu = {
 	sugar = {rank = 0xB, bit = 2, value = 0x0B44, order = false},
 }
 
-local kyuri_otsubit8 = {
-	kind1 = knd_kyuri,
-	kind2 = 0,
-	texture = {rank = 0xB, bit = 8, value = 0x0BFF, order = false},
-}
-local kyuri_otsubit7 = {
-	kind1 = knd_kyuri,
-	kind2 = 0,
-	texture = {rank = 0xB, bit = 7, value = 0x0BFE, order = false},
-}
-local kyuri_otsubit6 = {
-	kind1 = knd_kyuri,
-	kind2 = 0,
-	texture = {rank = 0xB, bit = 6, value = 0x0BFC, order = false},
-}
-local kyabetsu_otsubit8 = {
-	kind1 = knd_kyabetsu,
-	kind2 = 0,
-	sugar = {rank = 0xB, bit = 8, value = 0x0BFF, order = false},
-}
-local kyabetsu_otsubit7 = {
-	kind1 = knd_kyabetsu,
-	kind2 = 0,
-	sugar = {rank = 0xB, bit = 7, value = 0x0BFE, order = false},
-}
-local kyabetsu_otsubit6 = {
-	kind1 = knd_kyabetsu,
-	kind2 = 0,
-	sugar = {rank = 0xB, bit = 6, value = 0x0BFC, order = false},
-}
-local kyabetsu_otsubit5 = {
-	kind1 = knd_kyabetsu,
-	kind2 = 0,
-	sugar = {rank = 0xB, bit = 5, value = 0x0BF4, order = false},
-}
-local kyabetsu_otsubit4 = {
-	kind1 = knd_kyabetsu,
-	kind2 = 0,
-	sugar = {rank = 0xB, bit = 4, value = 0x0BE4, order = false},
-}
-local kyabetsu_otsubit3 = {
-	kind1 = knd_kyabetsu,
-	kind2 = 0,
-	sugar = {rank = 0xB, bit = 3, value = 0x0BC4, order = false},
-}
-local kyabetsu_otsubit2 = {
-	kind1 = knd_kyabetsu,
-	kind2 = 0,
-	sugar = {rank = 0xB, bit = 2, value = 0x0B44, order = false},
-}
-
-local kabu_otsubit8 = {
-	kind1 = knd_kabu,
-	kind2 = 0,
-	size = {rank = 0xB, bit = 8, value = 0x0BFF, order = false},
-}
 local kabu_otsubit7 = {
 	kind1 = knd_kabu,
 	kind2 = 0,
 	size = {rank = 0xB, bit = 7, value = 0x0BFE, order = false},
 }
-
 
 local ninjin_otsuA = {
 	kind1 = knd_ninjin,
@@ -414,7 +357,6 @@ local gobou_otsuA = {
 	sugar = {rank = 0xB, bit = 2, value = 0x0B44, order = false},
 	texture = {rank = 0xB, bit = 5, value = 0x0B7C, order = false},
 }
-
 
 local renkon_otsuB = {
 	kind1 = knd_renkon,
@@ -445,24 +387,15 @@ local gobou_otsu = {
 }
 
 target_otsu = {
-
-	{first = hourensou_plain       , second = shimaimo_plain, hybrid = kyuri_otsubit8        , retry = 0, done = 0},
-	{first = kyuri_otsubit8        , second = shimaimo_plain, hybrid = kyuri_otsubit7        , retry = 0, done = 0},
-	{first = kyuri_otsubit7        , second = shimaimo_plain, hybrid = kyuri_otsubit6        , retry = 0, done = 0},
-	{first = kyuri_otsubit6        , second = shimaimo_plain, hybrid = kyuri_otsu            , retry = 0, done = 0},
+	{first = hourensou_plain       , second = shimaimo_plain, hybrid = kyuri_bit2            , retry = 0, done = 0},
+	{first = kyuri_bit2            , second = shimaimo_plain, hybrid = kyuri_otsu            , retry = 0, done = 0},
 	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_bit2           , retry = 0, done = 0},
 	{first = renkon_bit2           , second = shimaimo_plain, hybrid = renkon_m100           , retry = 0, done = 0},
 	{first = renkon_m100           , second = kyuri_otsu    , hybrid = renkon_otsuA          , retry = 0, done = 0},
 
 	{first = hourensou_plain       , second = shimaimo_plain, hybrid = kyuri_any             , retry = 0, done = 0},
 	{first = kyuri_any             , second = shimaimo_plain, hybrid = kyabetsu_bit2         , retry = 0, done = 0},
-	{first = kyabetsu_bit2         , second = shimaimo_plain, hybrid = kyabetsu_otsubit8     , retry = 0, done = 0},
-	{first = kyabetsu_otsubit8     , second = shimaimo_plain, hybrid = kyabetsu_otsubit7     , retry = 0, done = 0},
-	{first = kyabetsu_otsubit7     , second = shimaimo_plain, hybrid = kyabetsu_otsubit6     , retry = 0, done = 0},
-	{first = kyabetsu_otsubit6     , second = shimaimo_plain, hybrid = kyabetsu_otsubit5     , retry = 0, done = 0},
-	{first = kyabetsu_otsubit5     , second = shimaimo_plain, hybrid = kyabetsu_otsubit4     , retry = 0, done = 0},
-	{first = kyabetsu_otsubit4     , second = shimaimo_plain, hybrid = kyabetsu_otsubit3     , retry = 0, done = 0},
-	{first = kyabetsu_otsubit3     , second = shimaimo_plain, hybrid = kyabetsu_otsu         , retry = 0, done = 0},
+	{first = kyabetsu_bit2         , second = shimaimo_plain, hybrid = kyabetsu_otsu         , retry = 0, done = 0},
 
 	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_any            , retry = 0, done = 0},
 	{first = renkon_any            , second = shimaimo_plain, hybrid = ninjin_bit2           , retry = 0, done = 0},
@@ -470,8 +403,7 @@ target_otsu = {
 	{first = ninjin_m100           , second = kyabetsu_otsu , hybrid = ninjin_otsuA          , retry = 0, done = 0} ,
 	{first = ninjin_otsuA          , second = renkon_otsuA  , hybrid = gobou_otsuA           , retry = 0, done = 0},
 
-	{first = kabu_plain            , second = kabu_plain    , hybrid = kabu_otsubit8         , retry = 0, done = 0},
-	{first = kabu_otsubit8         , second = kabu_plain    , hybrid = kabu_otsubit7         , retry = 0, done = 0},
+	{first = kabu_plain            , second = kabu_plain    , hybrid = kabu_otsubit7         , retry = 0, done = 0},
 
 	{first = shimaimo_plain        , second = shimaimo_plain, hybrid = shimaimo_m100         , retry = 0, done = 0},
 	{first = shimaimo_m100         , second = kabu_plain    , hybrid = renkon_otsuB          , retry = 0, done = 0},
