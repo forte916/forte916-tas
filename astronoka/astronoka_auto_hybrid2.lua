@@ -38,10 +38,11 @@ require "astronoka_target_vegee"
 --target_vegee = target_vegee_1305
 --target_vegee = target_vegee_1314
 
---target_vegee = target_renkon_m100_m100x3_a
+target_vegee = target_renkon_m100_m100x3_a
 --target_vegee = target_renkon_m100_m100x3_b
-target_vegee = target_otsu
+--target_vegee = target_otsu
 --target_vegee = target_vegee_test
+target_total = #target_vegee
 try_cnt1 = 1000  -- max retry count each level up
 try_cnt2 = 24    -- max level up count
 -- <<<
