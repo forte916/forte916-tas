@@ -10,7 +10,7 @@
 --     ++ plain kabu    = 30 or more
 --     ++ other vegees  = 2 or more
 --   2. Go to hybrid machine room
---   3. Put cursol the first seed
+--   3. Put cursor the first seed
 --   4. Start this script
 --
 -- + This script can
@@ -35,7 +35,7 @@ require "bit"
 adr_seed_first = 0x1CD698
 -- second parent, pointing the address of seed in inventory
 adr_seed_second = 0x1CD69C
--- produced seed, listing the property of hybrid seed
+-- produced seed, line up the properties of seed
 adr_seed_hybrid = 0x1CD6A8
 
 -- mendel cross
@@ -82,15 +82,26 @@ adr_parent_view3 = 0x1FFDFC
 -- cursor of house/main/system menu
 adr_cursor_menu = 0x00143230
 
--- groups of seed inventory
-adr_groups_seed = 0x0018F434
-
+-- cursor of group in seed inventory
+adr_cursor_group_first = 0x0018F435
+-- max group counts
+adr_max_group_count_first = 0x0018F436
+-- cursor of seed inventory
+adr_cursor_seed_first = 0x0018F439
+-- max raw counts in current view
+adr_max_raw_count_first = 0x0018F43A
 -- first parent, pointing the address of seed in inventory
 adr_seed_first2 = 0x0018F43C
 
--- cursor of seed inventory
-adr_cursor_seed = 0x0018F440
 
+-- cursor of group in seed inventory
+adr_cursor_group_second = 0x0018F44D
+-- max group counts
+adr_max_group_count_second = 0x0018F44E
+-- cursor of seed inventory
+adr_cursor_seed_second = 0x0018F451
+-- max raw counts in current view
+adr_max_raw_count_second = 0x0018F452
 -- second parent, pointing the address of seed in inventory
 adr_seed_second2 = 0x0018F454
 
@@ -186,45 +197,57 @@ function Hybrid.readParentProperty(off_parent)
 	return prop
 end
 
-function Hybrid.drawHybrid(sd1, sd2, sd3, attrb, x, y)
+function Hybrid.drawHybrid(sd1, sd2, sd3, tg, style, x, y)
 	x = x or 0
 	y = y or 80
 
 	sd1 = sd1 or Hybrid.readParentProperty(adr_seed_first)
 	sd2 = sd2 or Hybrid.readParentProperty(adr_seed_second)
 	sd3 = sd3 or Seed.readProperty(adr_seed_hybrid)
-	--attrb = attrb or "weight"
 	if sd1 == nil or sd2 == nil then return end
+	tg = tg or {kind1 = 0}
+	style = style or 1
 
-	if attrb == nil then
-		local sd1_str = string.format("%2x", sd1.kind1)
-		local sd2_str = string.format("%2x", sd2.kind1)
-		local sd3_str = string.format("%2x", sd3.kind1)
+	local sd1_str = string.format("%2x", sd1.kind1)
+	local sd2_str = string.format("%2x", sd2.kind1)
+	local sd3_str = string.format("%2x", sd3.kind1)
+	local tg_str = string.format("%2x", tg.kind1)
 
-		for k, v in pairs(attrb_table) do
-			print(k, v)
-			sd1_str = sd1_str + string.format(" %3x %s", sd1[v], toBinary(sd1[v]))
-			sd2_str = sd2_str + string.format(" %3x %s", sd2[v], toBinary(sd2[v]))
-			sd3_str = sd3_str + string.format(" %3x %s", sd3[v], toBinary(sd3[v]))
+	for k, v in pairs(attrb_table) do
+		if style == 1 then
+			sd1_str = sd1_str .. string.format(" %3x", sd1[v])
+			sd2_str = sd2_str .. string.format(" %3x", sd2[v])
+			sd3_str = sd3_str .. string.format(" %3x", sd3[v])
+			if tg[v] == nil then
+				tg_str = tg_str .. " any"
+			elseif tg[v].value == 0 then
+				tg_str = tg_str .. string.format(" %x+%d", tg[v].rank, tg[v].bit)
+			else
+				tg_str = tg_str .. string.format(" %3x", tg[v].value)
+			end
+		elseif style == 2 then
+			sd1_str = sd1_str .. string.format(" %s", toBinary(sd1[v]))
+			sd2_str = sd2_str .. string.format(" %s", toBinary(sd2[v]))
+			sd3_str = sd3_str .. string.format(" %s", toBinary(sd3[v]))
+		else
+			sd1_str = sd1_str .. string.format(" %3x %s", sd1[v], toBinary(sd1[v]))
+			sd2_str = sd2_str .. string.format(" %3x %s", sd2[v], toBinary(sd2[v]))
+			sd3_str = sd3_str .. string.format(" %3x %s", sd3[v], toBinary(sd3[v]))
 		end
-	else
-		local sd1_str = string.format("%2x %3x %s", sd1.kind1, sd1[attrb], toBinary(sd1[attrb]))
-		local sd2_str = string.format("%2x %3x %s", sd2.kind1, sd2[attrb], toBinary(sd2[attrb]))
-		local sd3_str = string.format("%2x %3x %s", sd3.kind1, sd3[attrb], toBinary(sd3[attrb]))
 	end
-
 
 	gui.text(x, y,    sd1_str)
 	gui.text(x, y+10, sd2_str)
 	gui.text(x, y+20, sd3_str)
+	gui.text(x, y+30, tg_str)
 end
 
 function Hybrid.drawRetryCount(cnt, x, y)
 	x = x or 0
 	y = y or 80
-	gui.text(x, y+30, string.format(" retry %4d", cnt))
-	gui.text(x, y+40, string.format(" fail  %4d", fail_cnt))
-	gui.text(x, y+50, string.format(" goal  %4d", goal_cnt))
+	gui.text(x, y+40, string.format(" retry %4d", cnt))
+	gui.text(x, y+50, string.format(" fail  %4d", fail_cnt))
+	gui.text(x, y+60, string.format(" goal  %4d", goal_cnt))
 end
 
 
@@ -287,6 +310,8 @@ function Hybrid.matchParent(tg, sd)
 	local reached = 0
 	local found4 = false
 
+	print("  >>> matchParent start >>>")
+
 	if tg.kind1 == sd.kind1 then
 		found1 = true
 	else
@@ -301,47 +326,53 @@ function Hybrid.matchParent(tg, sd)
 		return true
 	end
 
-	-- UGLY:: I realy want to use continue!
+	-- UGLY:: I realy want to use continue!  I hate this code below!
+	-- BUGGY:: I cannot already understand this logic.
 	for k, v in pairs(attrb_table) do
-		print(k, v)
 		if tg[v] == nil then
-			-- accepts any
-			reached = reached + 1
-			--continue
-		end
-
-		if tg[v].value ~= 0 and tg[v].value == sd[v] then
-			-- correspond attribute
-			reached = reached + 1
-			--continue
-		elseif tg[v].value == 0 then
-			-- need to check rank and bit counts
-		else
-			return false
-		end
-		
-		-- if rank is same then true
-		local sd_rank =  bit.rshift(sd[v], 2)  -- same as x >>= 2
-		if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
-			found4 = true
-			-- need to check bit counts
-		elseif tg[v].rank == 0 then
+			found4 = false
 			-- accepts any
 			reached = reached + 1
 			--continue
 		else
-			return false
-		end
+			-- tv[v] ~= nil means we need to care this attribute, then refer this attribute
+			
 
-		-- if bit counts are same then true
-		local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
-		local sd_bit = bitCount8(sd_tmp)
-		if found4 and tg[v].bit == sd_bit then
-			-- correspond attribute
-			reached = reached + 1
-			--continue
-		else
-			return false
+			if tg[v].value ~= 0 and tg[v].value == sd[v] then
+				-- attribute value is matched. it means reached
+				reached = reached + 1
+				--continue
+			elseif tg[v].value == 0 then
+				-- don't care value, but need to care both of rank and bit counts
+
+
+				local sd_rank =  bit.rshift(sd[v], 8)  -- same as x >>= 2
+				if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
+					found4 = true
+					-- rank is matched, need to refer bit counts
+					
+
+					local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
+					local sd_bit = bitCount8(sd_tmp)
+					if found4 and tg[v].bit == sd_bit then
+						-- both of rank and bit counts are matched. it means reached
+						reached = reached + 1
+						--continue
+					else
+						return false
+					end
+					
+
+				elseif tg[v].rank == 0 then
+					-- accepts any. value == 0 and rank == 0 means accepting any.
+					reached = reached + 1
+					--continue
+				else
+					return false
+				end
+			else
+				return false
+			end
 		end
 	end
 
@@ -360,47 +391,74 @@ function Hybrid.selectFirstSeed(tg)
 	local cursor = 0
 	local start_cursor = 0
 
-	print(">>> selectFirstSeed start >>>, "..targetToString(tg))
+	print(">>> selectFirstSeed start >>>, "..targetChildToString(tg))
+
+--	for j=1, 2 do
+--		for i=1, row_max do
+--			Hybrid.preAdjustFirstParentView()
+--			Hybrid.focusParentSeed()
+--
+--			if i > 1 then
+--				joypadSetHelper(1, {down=1}, 6)
+--				cursor = memory.readbyte(adr_cursor_seed_first)
+--				if cursor == start_cursor then
+--					print("sd1:: not found in this group. changing group")
+--					-- if cursor go round one lap then cahnge group
+--
+--					local prvw2 = memory.readword(adr_parent_view2)
+--					assertTrue(prvw2 == prvw2_seed_view)
+--					group = memory.readword(adr_filter)
+--					--print(string.format("group1 = %4x", group))
+--					while group ~= no_filter do
+--						joypadSetHelper(1, {r1=1}, 6)
+--						group = memory.readword(adr_filter)
+--						--print(string.format("group2 = %4x", group))
+--					end
+--				end
+--			else
+--				cursor = memory.readbyte(adr_cursor_seed_first)
+--				start_cursor = cursor
+--			end
+--
+--			Hybrid.clickParentSeed()
+--
+--			Hybrid.sd1 = Hybrid.readParentProperty(adr_seed_first)
+--			assertFalse(Hybrid.sd1 == nil)
+--			if Hybrid.sd1 == nil then
+--				print("press again readParentProperty")
+--				joypadSetHelper(1, {circle=1}, 7)
+--				Hybrid.sd1 = Hybrid.readParentProperty(adr_seed_first)
+--			end
+--			--print("sd1::"..Hybrid.sd1.info)
+--			
+--			local matched = Hybrid.matchParent(tg, Hybrid.sd1)
+--
+--			if matched then
+--				return true
+--			else
+--				print("sd1:: not found")
+--			end
+--		end
+--	end
+--
+----------
+	Hybrid.preAdjustFirstParentView()
+	Hybrid.focusParentSeed()
 
 	for j=1, 2 do
-		for i=1, row_max do
-			Hybrid.preAdjustFirstParentView()
-			Hybrid.focusParentSeed()
+		cursor = memory.readbyte(adr_cursor_seed_first)
+		start_cursor = cursor
 
-			if i > 1 then
-				joypadSetHelper(1, {down=1}, 6)
-				cursor = memory.readbyte(adr_cursor_seed)
-				if cursor == start_cursor then
-					print("sd1:: not found in this group. changing groups")
-					-- if cursol go round one lap then break
-					 break
-				end
-			else
-				cursor = memory.readbyte(adr_cursor_seed)
-				start_cursor = cursor
-			end
-
-			if j > 1 and i == 1 then
-				local prvw2 = memory.readword(adr_parent_view2)
-				assertTrue(prvw2 == prvw2_seed_view)
-
-				group = memory.readword(adr_filter)
-				--print(string.format("group1 = %4x", group))
-				while group ~= no_filter do
-					joypadSetHelper(1, {r1=1}, 6)
-					group = memory.readword(adr_filter)
-					--print(string.format("group2 = %4x", group))
-				end
-			end
+		repeat
 			Hybrid.clickParentSeed()
-
 			Hybrid.sd1 = Hybrid.readParentProperty(adr_seed_first)
 			assertFalse(Hybrid.sd1 == nil)
-			if Hybrid.sd1 == nil then
-				print("press again readParentProperty")
-				joypadSetHelper(1, {circle=1}, 7)
-				Hybrid.sd1 = Hybrid.readParentProperty(adr_seed_first)
-			end
+
+			--if Hybrid.sd1 == nil then
+			--	print("press again readParentProperty")
+			--	joypadSetHelper(1, {circle=1}, 7)
+			--	Hybrid.sd1 = Hybrid.readParentProperty(adr_seed_first)
+			--end
 			--print("sd1::"..Hybrid.sd1.info)
 			
 			local matched = Hybrid.matchParent(tg, Hybrid.sd1)
@@ -410,9 +468,28 @@ function Hybrid.selectFirstSeed(tg)
 			else
 				print("sd1:: not found")
 			end
+
+			Hybrid.preAdjustFirstParentView()
+			Hybrid.focusParentSeed()
+
+			joypadSetHelper(1, {down=1}, 6)
+			cursor = memory.readbyte(adr_cursor_seed_first)
+		until cursor == start_cursor
+
+		print("sd1:: not found in this group. changing group")
+
+		local prvw2 = memory.readword(adr_parent_view2)
+		assertTrue(prvw2 == prvw2_seed_view)
+
+		-- if cursor go round one lap then cahnge group
+		group = memory.readword(adr_filter)
+		while group ~= no_filter do
+			joypadSetHelper(1, {r1=1}, 6)
+			group = memory.readword(adr_filter)
 		end
 	end
 
+----------
 	return false
 end
 
@@ -423,47 +500,75 @@ function Hybrid.selectSecondSeed(tg)
 	local cursor = 0
 	local start_cursor = 0
 
-	print(">>> selectSecondSeed start >>>, "..targetToString(tg))
+	print(">>> selectSecondSeed start >>>, "..targetChildToString(tg))
 	
+--	for j=1, 2 do
+--		for i=1, row_max do
+--			Hybrid.preAdjustSecondParentView()
+--			Hybrid.focusParentSeed()
+--
+--			if i > 1 then
+--				joypadSetHelper(1, {down=1}, 6)
+--				cursor = memory.readbyte(adr_cursor_seed_second)
+--				if cursor == start_cursor then
+--					print("sd2:: not found in this group. changing group")
+--					-- if cursor go round one lap then cahnge group
+--
+--					local prvw2 = memory.readword(adr_parent_view2)
+--					assertTrue(prvw2 == prvw2_seed_view)
+--					group = memory.readword(adr_filter)
+--					--print(string.format("group3 = %4x", group))
+--					while group ~= no_filter do
+--						joypadSetHelper(1, {r1=1}, 6)
+--						group = memory.readword(adr_filter)
+--						--print(string.format("group4 = %4x", group))
+--					end
+--				end
+--			else
+--				cursor = memory.readbyte(adr_cursor_seed_second)
+--				start_cursor = cursor
+--			end
+--
+--			Hybrid.clickParentSeed()
+--
+--			Hybrid.sd2 = Hybrid.readParentProperty(adr_seed_second)
+--			assertFalse(Hybrid.sd2 == nil)
+--			if Hybrid.sd2 == nil then
+--				print("press again readParentProperty")
+--				Hybrid.clickParentSeed()
+--				Hybrid.sd2 = Hybrid.readParentProperty(adr_seed_second)
+--			end
+--			--print("sd2::"..Hybrid.sd2.info)
+--
+--			local matched = Hybrid.matchParent(tg, Hybrid.sd2)
+--
+--			if matched then
+--				return true
+--			else
+--				print("sd2:: not found")
+--			end
+--		end
+--	end
+--
+----------
+
+	Hybrid.preAdjustSecondParentView()
+	Hybrid.focusParentSeed()
+
 	for j=1, 2 do
-		for i=1, row_max do
-			Hybrid.preAdjustSecondParentView()
-			Hybrid.focusParentSeed()
+		cursor = memory.readbyte(adr_cursor_seed_second)
+		start_cursor = cursor
 
-			if i > 1 then
-				joypadSetHelper(1, {down=1}, 6)
-				cursor = memory.readbyte(adr_cursor_seed)
-				if cursor == start_cursor then
-					print("sd2:: not found in this group. changing groups")
-					-- if cursol go round one lap then break
-					 break
-				end
-			else
-				cursor = memory.readbyte(adr_cursor_seed)
-				start_cursor = cursor
-			end
-
-			if j > 1 and i == 1 then
-				local prvw2 = memory.readword(adr_parent_view2)
-				assertTrue(prvw2 == prvw2_seed_view)
-
-				group = memory.readword(adr_filter)
-				--print(string.format("group3 = %4x", group))
-				while group ~= no_filter do
-					joypadSetHelper(1, {r1=1}, 6)
-					group = memory.readword(adr_filter)
-					--print(string.format("group4 = %4x", group))
-				end
-			end
+		repeat
 			Hybrid.clickParentSeed()
-
 			Hybrid.sd2 = Hybrid.readParentProperty(adr_seed_second)
 			assertFalse(Hybrid.sd2 == nil)
-			if Hybrid.sd2 == nil then
-				print("press again readParentProperty")
-				Hybrid.clickParentSeed()
-				Hybrid.sd2 = Hybrid.readParentProperty(adr_seed_second)
-			end
+
+			--if Hybrid.sd2 == nil then
+			--	print("press again readParentProperty")
+			--	Hybrid.clickParentSeed()
+			--	Hybrid.sd2 = Hybrid.readParentProperty(adr_seed_second)
+			--end
 			--print("sd2::"..Hybrid.sd2.info)
 
 			local matched = Hybrid.matchParent(tg, Hybrid.sd2)
@@ -473,9 +578,28 @@ function Hybrid.selectSecondSeed(tg)
 			else
 				print("sd2:: not found")
 			end
+
+			Hybrid.preAdjustSecondParentView()
+			Hybrid.focusParentSeed()
+
+			joypadSetHelper(1, {down=1}, 6)
+			cursor = memory.readbyte(adr_cursor_seed_second)
+		until cursor == start_cursor
+
+		print("sd2:: not found in this group. changing group")
+
+		local prvw2 = memory.readword(adr_parent_view2)
+		assertTrue(prvw2 == prvw2_seed_view)
+
+		-- if cursor go round one lap then cahnge group
+		group = memory.readword(adr_filter)
+		while group ~= no_filter do
+			joypadSetHelper(1, {r1=1}, 6)
+			group = memory.readword(adr_filter)
 		end
 	end
 
+----------
 	return false
 end
 
@@ -491,11 +615,12 @@ end
 
 function Hybrid.matchExpect(tg, sd)
 	local found1 = false
-	local found2 = false
+	local evolved = false
 	local reached = 0
 	local found4 = false
-	local found5 = false
 	local levelup = 0
+
+	--print("  >>> matchExpect start >>>")
 
 	if tg.kind1 == sd.kind1 then
 		found1 = true
@@ -503,82 +628,97 @@ function Hybrid.matchExpect(tg, sd)
 		return false
 	end
 
+	-- UGLY:: I realy want to use continue!  I hate this code below!
+	-- BUGGY:: I cannot already understand this logic.
 	for k, v in pairs(attrb_table) do
-		print(k, v)
+		evolved = false
+		found4 = false
+		--print(k, v)
 		if tg[v] == nil then
 			-- accepts any
 			reached = reached + 1
-			break
-		end
-
-		if tg[v].value > 0x0C00 and sd[v] > Hybrid.sd1[v] then
-			found2 = true
-		end
-		if tg[v].value < 0x0C00 and sd[v] < Hybrid.sd1[v] then
-			found2 = true
-		end
-
-		if tg[v].value ~= 0 and tg[v].value == sd[v] then
-			-- reached goal
-			reached = reached + 1
-			break
-		elseif tg[v].value ~= 0 and found2 then
-			-- level up
-			levelup = levelup + 1
-			break
-		elseif tg[v].value == 0 then
-			-- need to check rank and bit counts
+			--print("attrb is nil, accepts any")
+			--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+			--continue
 		else
-			return false
-		end
-		
+			-- tv[v] ~= nil means we need to care this attribute, then refer this attribute
 
-		if tg[v].rank >= 0xC and sd[v] > Hybrid.sd1[v] then
-			found5 = true
-		end
-		if tg[v].rank < 0xC and sd[v] < Hybrid.sd1[v] then
-			found5 = true
-		end
 
-		-- if rank is same then true
-		local sd_rank =  bit.rshift(sd[v], 2)  -- same as x >>= 2
-		if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
-			found4 = true
-			-- need to check bit counts
-		elseif tg[v].rank ~= 0 and found5 then
-			-- level up
-			levelup = levelup + 1
-			break
-		elseif tg[v].rank == 0 then
-			-- accepts any
-			reached = reached + 1
-			break
-		else
-			return false
-		end
+			if tg[v].order == nil then evolved = true end
+			if tg[v].order == true and sd[v] > math.max(Hybrid.sd1[v], Hybrid.sd2[v]) then
+				evolved = true
+			end
+			if tg[v].order == false and sd[v] < math.min(Hybrid.sd1[v], Hybrid.sd2[v]) then
+				evolved = true
+			end
+			if tg[v].value ~= 0 and tg[v].value == sd[v] then
+				-- attribute value is matched. it means reached goal
+				reached = reached + 1
+				--print("attrb value is matched")
+				--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+				--continue
+			elseif tg[v].value ~= 0 and evolved then
+				-- attribute is eveloved. it means level up
+				levelup = levelup + 1
+				--print("attrb value is evolved. value is not 0")
+				--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+				--continue
+			elseif tg[v].value == 0 then
+				-- don't care value, but need to care both of rank and bit counts
 
-		-- if bit counts are same then true
-		local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
-		local sd_bit = bitCount8(sd_tmp)
-		if found4 and tg[v].bit == sd_bit then
-			-- reached goal
-			reached = reached + 1
-			break
-		elseif found4 and found5 then
-			-- level up
-			levelup = levelup + 1
-			break
-		else
-			return false
+
+				local sd_rank = bit.rshift(sd[v], 8)  -- same as x >>= 8
+				--print(string.format("tg[v].rank = %x, sd_rank = %x", tg[v].rank, sd_rank))
+				if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
+					found4 = true
+					-- rank is matched, need to refer bit counts
+
+
+					local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
+					local sd_bit = bitCount8(sd_tmp)
+					if found4 and tg[v].bit == sd_bit then
+						-- both of rank and bit counts are matched. it means reached goal
+						reached = reached + 1
+						--print("rank and bit counts are matched")
+						--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+						--continue
+					elseif found4 and evolved then
+						-- attribute is eveloved. it means level up
+						levelup = levelup + 1
+						--print("attrb value is evolved. rank is not 0 and same rank")
+						--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+						--continue
+					else
+						return false
+					end
+
+
+				elseif tg[v].rank ~= 0 and evolved then
+					-- attribute is eveloved. it means level up
+					levelup = levelup + 1
+					--print("attrb value is evolved. rank is not 0 and different rank")
+					--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+					--continue
+				elseif tg[v].rank == 0 then
+					-- accepts any. value == 0 and rank == 0 means accepting any.
+					reached = reached + 1
+					--print("attrb is 0 and rank is 0, accepts any")
+					--print(string.format(", reached = %d, levelup = %d", reached, levelup))
+					--continue
+				else
+					return false
+				end
+			else
+				return false
+			end
 		end
 	end
 
-	assertTrue(#attrb_table == 10)
 	if reached == #attrb_table then
 		goal_flag = true
 		print("goal_flag is true")
 		return true
-	elseif reached + levelup == attrb_table then
+	elseif reached + levelup == #attrb_table then
 		print("level up")
 		return true
 	else
@@ -590,13 +730,17 @@ function Hybrid.expect(tg)
 	local ret = false
 
 	Hybrid.sd3 = Seed.readProperty(adr_seed_hybrid)
-	Hybrid.drawHybrid(Hybrid.sd1, Hybrid.sd2, Hybrid.sd3)
+	Hybrid.drawHybrid(Hybrid.sd1, Hybrid.sd2, Hybrid.sd3, tg)
+	--print("sd3::"..Hybrid.sd3.info)
 
 	local matched = Hybrid.matchExpect(tg, Hybrid.sd3)
 
 	if matched then
-		print("sd3::"..Hybrid.sd3.info)
+		--print("sd3::"..Hybrid.sd3.info)
+		print("sd3:: matched expectation")
 		ret = true
+	else
+		--print("sd3:: not matched expectation")
 	end
 
 
@@ -622,11 +766,12 @@ end
 function Hybrid.check(tg)
 
 	Hybrid.sd4 = Seed.readProperty(adr_seed_hybrid)
+	print("sd4::"..Hybrid.sd4.info)
 
 	local matched = Hybrid.matchExpect(tg, Hybrid.sd4)
 
-	print("sd4::"..Hybrid.sd4.info)
 	if matched then
+		print("sd4:: hybrid is succeeded")
 		success_flag = true
 		Hybrid.postConfirm(true)
 	elseif Hybrid.sd4.kind1 == 0 then
@@ -670,7 +815,7 @@ function Hybrid.postConfirm(produced)
 	end
 end
 
--- deprecated
+-- deprecated. use hybridizeReload()
 function Hybrid.hybridizeSimple(target)
 	Hybrid.confirm(target)
 	Hybrid.check(target)
@@ -683,9 +828,9 @@ function Hybrid.hybridizeReload(tg)
 
 	Hybrid.confirm()
 
-	-- check whether hybrid seed is produced successfully
+	-- check whether the seed is produced successfully
 	if Hybrid.check(tg) then
-		-- pass, like python
+		--pass, like python
 	else
 		-- reload save state for retry
 		savestate.load(state_before)
@@ -701,7 +846,7 @@ end
 
 function Hybrid.autoHybrid(target)
 	local ret = false
-	print(">>> start to autoHybrid >>>, "..targetToString(target.hybrid))
+	print(">>> start to autoHybrid >>>, "..targetChildToString(target.hybrid))
 
 	for j=1, try_cnt2 do
 		success_flag = false
@@ -756,27 +901,33 @@ function Hybrid.autoHybrid(target)
 	return ret
 end
 
-function targetToString(tg)
+function targetChildToString(tg)
 	--local str = string.format(" %2x, %s, %3x, %d", 
 	--		target.kind1, target.attrb, target.goal, target.retry)
 	--return str
-	for k, v in pairs(tg) do
-		--print(k, v)
-	end
 	return tostring(tg)
 end
 
+function targetToSummaryString(target)
+	--local str = string.format(" %2x, %s, %3x, %d", 
+	--		target.kind1, target.attrb, target.goal, target.retry)
+	--return str
+	
+	local str = string.format(" %2x, %d, %d, ", target.hybrid.kind1, target.retry, target.done)
+	str = str .. tostring(target.hybrid)
+	return str
+end
 
 function convertTargetFirst(tg, sd)
 	local fst = {}
 
 	fst.kind1 = sd.kind1
 	for k, v in pairs(attrb_table) do
-		print(k, v)
-		if tg[v].value == nil then
-			break
+		if tg[v] == nil then
+			--pass, like python
 		else
-			fst[v].value = sd[v]
+			fst[v] = {value = sd[v]}
+			--fst[v].value = sd[v] -- error with this style.
 		end
 	end
 	return fst
@@ -1041,15 +1192,18 @@ end
 function switchDrawSeedProperty()
 	local kbd = input.get()
 	if kbd.B then
-		if kflag == 0 then
-			dflag = bit.bnot(dflag)  -- same as dflag = ~dflag
+		if draw_key == 0 then
+			--draw_switch = bit.bnot(draw_switch)  -- same as draw_switch = ~draw_switch
+			draw_switch = draw_switch + 1
+			if draw_switch > 3 then draw_switch = 0 end
 		end
-		kflag = kflag + 1
-	else kflag = 0
+		draw_key = draw_key + 1
+	else
+		draw_key = 0
 	end
 
-	if dflag == 0 then
-		Hybrid.drawHybrid()
+	if draw_switch ~= 0 then
+		Hybrid.drawHybrid(nil, nil, nil, nil, draw_switch)
 	else
 		gui.clearuncommitted()
 	end
@@ -1060,9 +1214,9 @@ end
 ------------------------------------------------------------
 
 try_cnt1 = 1000  -- max retry count each level up
-try_cnt2 = 30    -- max level up count
-kflag = 0
-dflag = 0
+try_cnt2 = 24    -- max level up count
+draw_key = 0
+draw_switch = 0
 goal_flag = false
 success_flag = false
 fail_cnt = 0

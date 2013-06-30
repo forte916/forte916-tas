@@ -31,13 +31,23 @@ require "astronoka_target_vegee"
 -- main
 ------------------------------------------------------------
 
--- overwrite define param
-target_vegee = target_vegee_1115
+-- you can overwrite defined param >>>
+--target_vegee = target_vegee_1115
+--target_vegee = target_vegee_1122
+--target_vegee = target_vegee_1209
+--target_vegee = target_vegee_1305
+--target_vegee = target_vegee_1314
 
+--target_vegee = target_renkon_m100_m100x3_a
+--target_vegee = target_renkon_m100_m100x3_b
+target_vegee = target_otsu
+--target_vegee = target_vegee_test
 try_cnt1 = 1000  -- max retry count each level up
-try_cnt2 = 30    -- max level up count
+try_cnt2 = 24    -- max level up count
+-- <<<
 
 
+total_retry = 0
 initial = 1
 local begin_fc = emu.framecount()
 local begin_date = os.date()
@@ -50,14 +60,15 @@ while true do
 
 	print(string.format("initial = %d", initial))
 	if initial == 0 then
-		--switchDrawSeedProperty()
 		for i=1, #target_vegee, 1 do
 			goal_flag = false
 			Hybrid.autoHybrid(target_vegee[i])
 		end
 		for i=1, #target_vegee, 1 do
-			print("summary::"..targetToString(target_vegee[i]))
+			print("summary:: "..targetToSummaryString(target_vegee[i]))
+			total_retry = total_retry + target_vegee[i].retry
 		end
+		print(string.format("total retry:: %d", total_retry))
 		break
 	end
 
@@ -65,9 +76,9 @@ while true do
 end
 
 local fc = emu.framecount()
-print(string.format("<<< lua bot is finished <<< fc=%d", fc))
-print(string.format("start:: %s,  %d", begin_date, begin_fc))
-print(string.format("  end:: %s,  %d", os.date(), fc))
+print(string.format("<<< lua bot is finished <<<"))
+print(string.format("start:: %s,  fc = %d", begin_date, begin_fc))
+print(string.format("  end:: %s,  fc = %d", os.date(), fc))
 emu.speedmode("normal")
 emu.pause()
 
