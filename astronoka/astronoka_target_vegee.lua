@@ -1,5 +1,7 @@
+-- Astronoka
+--
 -- target_vegee setting
--- rule
+-- [rule]
 -- + If value is set, we don't care rank and bit.
 -- + value == 0 and rank == 0 means we accepts any.
 -- + value == 0 and rank ~= 0 means we don't care value but rank and bit.
