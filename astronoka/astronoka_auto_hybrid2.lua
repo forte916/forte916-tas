@@ -64,7 +64,6 @@ while true do
 		initial = 0
 	end
 
-	print(string.format("initial = %d", initial))
 	if initial == 0 then
 		for i=1, #target_vegee, 1 do
 			Hybrid.autoHybrid(target_vegee[i])
@@ -73,7 +72,6 @@ while true do
 			print("summary:: "..targetToSummaryString(target_vegee[i]))
 			total_retry = total_retry + target_vegee[i].retry
 		end
-		print(string.format("total retry:: %d", total_retry))
 		break
 	end
 
@@ -82,9 +80,10 @@ end
 
 local fc = emu.framecount()
 print(string.format("<<< lua bot is finished <<<"))
+print(string.format("total retry:: %d", total_retry))
 print(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
 print(string.format("    end:: %s,  fc = %d", os.date(), fc))
-print(string.format("elapsed::      fc = %d", fc - begin_fc))
+print(string.format("elapsed:: fc = %d", fc - begin_fc))
 emu.speedmode("normal")
 emu.pause()
 
