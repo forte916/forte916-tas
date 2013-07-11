@@ -9,7 +9,6 @@
 -- + Special Thanks
 --   http://homepage3.nifty.com/game-sfccode/astronoka.html
 --   http://www009.upp.so-net.ne.jp/dreamy/ps/noka.html
---   PirohikoP-san
 
 require "bit"
 
@@ -22,7 +21,7 @@ require "bit"
 adr_seed_first = 0x1CD698
 -- second parent, pointing the address of seed in inventory
 adr_seed_second = 0x1CD69C
--- produced seed, lining up the properties of seed
+-- produced seed, line up the properties of seed
 adr_seed_hybrid = 0x1CD6A8
 
 -- mendel cross
@@ -46,8 +45,7 @@ adr_filter = 0x190288
 no_filter = 0xC000
 -- I don't know this value, but regard as a flag in hierarchy of seed selecting view
 adr_seed_hierarchy = 0x1FFCEE
-sdhr_top1 = 0x0000
-sdhr_top2 = 0x8017
+sdhr_top = 0x0000
 sdhr_second = 0x8016
 
 -- I don't know these values, but regard as a flag in parent selecting view
@@ -64,6 +62,10 @@ prvw2_third1 = 0xA61C
 prvw2_third2 = 0xAB78
 prvw2_kuzu = 0xD778
 adr_parent_view3 = 0x1FFDFC
+
+
+-- cursor of house/main/system menu
+adr_cursor_menu = 0x00143230
 
 
 -- cursor of group in seed inventory
@@ -90,18 +92,14 @@ adr_max_raw_count_second = 0x0018F452
 adr_seed_second2 = 0x0018F454
 
 
--- ##general info
--- cursor of house/main/system menu
-adr_cursor_menu = 0x143230
-
 -- days from game start. 0 origin
 adr_days = 0x166EF8
 -- years from game start. 0 origin
 adr_years = 0x166EF9
 
--- amounts of money. 4byte
+-- amounts of money. 2byte
 adr_amount_money = 0x166F00
--- total feather counts. 2byte
+-- total feather counts
 adr_total_feather = 0x166F04
 -- total seed counts includes stock
 adr_total_seed = 0x166F06
@@ -112,28 +110,7 @@ adr_total_field = 0x166F08
 -- pete rank. 0x00 to 0x04
 adr_pete_rank = 0x166F0A
 -- hybrid machine rank. 0x00 to 0x05. 00 means we don't have machine.
-adr_machine_rank = 0x166F0B
-
--- total reset counts. aka. L-R counts
-adr_total_reset_cnt = 0x166F5C
--- RNG, 4byte
-adr_rng = 0x0BE328
-
--- ##baboo and trap battle
-adr_baboo_today = 0x0EFCA6  -- how many baboos do they come. 0x00 to 0x03
-adr_watched = 0x0EFCA7  -- watched:0x01, not watched:0x00
-adr_baboo1_kind = 0x0EFCA8  -- species of first baboo
-adr_baboo2_kind = 0x0EFCA9  -- species of second baboo
-adr_baboo3_kind = 0x0EFCAA  -- species of third baboo
-
-adr_trap_battle = 0x13D374
-in_trap_battle = 0x0002  -- in the battle field
-out_trap_bttle = 0xFFFF  -- not in the battle field
-adr_reaction1 = 0x13D380  -- some reaction against a trap. I don't know.
-adr_reaction2 = 0x13D384  -- some reaction against a trap. I don't know.
-reaction2_end = 0xFFFF  -- trap battle is finished
-adr_result_internal = 0x13D3B4  -- result of internal?? 4byte, +10h, max 18
-adr_win_count = 0x166F64
+adr_machine_rank = 0x166F0A
 
 
 -- ## Properties of vegee
@@ -263,12 +240,9 @@ end
 function Hybrid.drawRetryCount(cnt, x, y)
 	x = x or 0
 	y = y or 80
-	local rng = memory.readdword(adr_rng)
-	local total_reset = memory.readword(adr_total_reset_cnt)
-	gui.text(x, y+50, string.format(" retry %4d/%d", cnt, total_reset))
+	gui.text(x, y+50, string.format(" retry %4d", cnt))
 	gui.text(x, y+60, string.format(" fail  %4d", fail_cnt))
 	gui.text(x, y+70, string.format(" goal %2d/%2d", goal_cnt, target_total))
-	gui.text(x, y+80, string.format(" rng   %08x", rng))
 end
 
 
@@ -315,8 +289,7 @@ end
 function Hybrid.focusParentSeed()
 	joypadSetHelper(1, {circle=1}, 7)
 	local sdhr = memory.readword(adr_seed_hierarchy)
-	--print(string.format("adr_seed_hierarchy = %x", sdhr))
-	if sdhr == sdhr_top1 or sdhr == sdhr_top2  then
+	if sdhr == sdhr_top then
 		joypadSetHelper(1, {circle=1}, 7)
 	end
 end
@@ -325,26 +298,6 @@ function Hybrid.clickParentSeed()
 	joypadSetHelper(1, {circle=1}, 7)
 end
 
-function Hybrid.moveRow(row, pad)
-	pad = pad or {down=1}
-	for i = 1, row do
-		joypadSetHelper(1, pad, 6)
-	end
-end
-
-function Hybrid.changeGroup(pad)
-	pad = pad or {r1=1}
-	local group
-	local prvw2 = memory.readword(adr_parent_view2)
-	assertTrue(prvw2 == prvw2_seed_view)
-
-	-- if cursor go round one lap then cahnge group
-	group = memory.readword(adr_filter)
-	while group ~= no_filter do
-		joypadSetHelper(1, pad, 6)
-		group = memory.readword(adr_filter)
-	end
-end
 
 function Hybrid.matchParent(tg, sd)
 	local found1 = false
@@ -423,12 +376,12 @@ function Hybrid.matchParent(tg, sd)
 end
 
 
-function Hybrid.selectFirstSeed(tg, pad_row, pad_group)
+function Hybrid.selectFirstSeed(tg)
 	local matched = false
+	local group
+	local row_max = memory.readbyte(adr_total_seed)
 	local cursor = 0
 	local start_cursor = 0
-	local row = 0
-	local state_tmp
 
 	print(">>> selectFirstSeed start >>>, "..targetChildToString(tg))
 
@@ -438,9 +391,6 @@ function Hybrid.selectFirstSeed(tg, pad_row, pad_group)
 	for j=1, 2 do
 		cursor = memory.readbyte(adr_cursor_seed_first)
 		start_cursor = cursor
-		row = 0
-		state_tmp = savestate.create()
-		savestate.save(state_tmp)
 
 		repeat
 			Hybrid.clickParentSeed()
@@ -461,41 +411,44 @@ function Hybrid.selectFirstSeed(tg, pad_row, pad_group)
 				--print("sd1:: not found")
 			end
 
-			--Hybrid.preAdjustFirstParentView()
-			--Hybrid.focusParentSeed()
-			savestate.load(state_tmp)
+			Hybrid.preAdjustFirstParentView()
+			Hybrid.focusParentSeed()
 
-			row = row + 1
-			Hybrid.moveRow(row, pad_row)
+			joypadSetHelper(1, {down=1}, 6)
 			cursor = memory.readbyte(adr_cursor_seed_first)
 		until cursor == start_cursor
 
-		savestate.load(state_tmp)
 		print("sd1:: not found in this group. changing group")
-		Hybrid.changeGroup(pad_group)
+
+		local prvw2 = memory.readword(adr_parent_view2)
+		assertTrue(prvw2 == prvw2_seed_view)
+
+		-- if cursor go round one lap then cahnge group
+		group = memory.readword(adr_filter)
+		while group ~= no_filter do
+			joypadSetHelper(1, {r1=1}, 6)
+			group = memory.readword(adr_filter)
+		end
 	end
 
 	return false
 end
 
-function Hybrid.selectSecondSeed(tg, pad_row, pad_group)
+function Hybrid.selectSecondSeed(tg)
 	local matched = false
+	local group
+	local row_max = memory.readbyte(adr_total_seed)
 	local cursor = 0
 	local start_cursor = 0
-	local row = 0
-	local state_tmp
 
 	print(">>> selectSecondSeed start >>>, "..targetChildToString(tg))
-
+	
 	Hybrid.preAdjustSecondParentView()
 	Hybrid.focusParentSeed()
 
 	for j=1, 2 do
 		cursor = memory.readbyte(adr_cursor_seed_second)
 		start_cursor = cursor
-		row = 0
-		state_tmp = savestate.create()
-		savestate.save(state_tmp)
 
 		repeat
 			Hybrid.clickParentSeed()
@@ -516,18 +469,24 @@ function Hybrid.selectSecondSeed(tg, pad_row, pad_group)
 				--print("sd2:: not found")
 			end
 
-			--Hybrid.preAdjustSecondParentView()
-			--Hybrid.focusParentSeed()
-			savestate.load(state_tmp)
+			Hybrid.preAdjustSecondParentView()
+			Hybrid.focusParentSeed()
 
-			row = row + 1
-			Hybrid.moveRow(row, pad_row)
+			joypadSetHelper(1, {down=1}, 6)
 			cursor = memory.readbyte(adr_cursor_seed_second)
 		until cursor == start_cursor
 
-		savestate.load(state_tmp)
 		print("sd2:: not found in this group. changing group")
-		Hybrid.changeGroup(pad_group)
+
+		local prvw2 = memory.readword(adr_parent_view2)
+		assertTrue(prvw2 == prvw2_seed_view)
+
+		-- if cursor go round one lap then cahnge group
+		group = memory.readword(adr_filter)
+		while group ~= no_filter do
+			joypadSetHelper(1, {r1=1}, 6)
+			group = memory.readword(adr_filter)
+		end
 	end
 
 	return false
@@ -539,7 +498,9 @@ function Hybrid.retry(cnt)
 	else
 		joypadSetHelper(1, {r1=1}, 8)
 	end
+	Hybrid.drawRetryCount(cnt)
 end
+
 
 function Hybrid.matchExpect(tg, sd)
 	local found1 = false
@@ -667,23 +628,15 @@ function Hybrid.matchExpect(tg, sd)
 	end
 end
 
-function Hybrid.expectPete1(tg, sd)
-	Hybrid.sd3 = Seed.readProperty(adr_seed_hybrid)
-	Hybrid.drawHybrid(Hybrid.sd1, Hybrid.sd2, Hybrid.sd3, tg)
-	print("sd3::"..Hybrid.sd3.info)
-	print("sd3:: accepts any expectation for PETE1")
-	return true
-end
-
 function Hybrid.expect(tg)
 	local ret = false
 
 	Hybrid.sd3 = Seed.readProperty(adr_seed_hybrid)
 	Hybrid.drawHybrid(Hybrid.sd1, Hybrid.sd2, Hybrid.sd3, tg)
+	--print("sd3::"..Hybrid.sd3.info)
 
 	local matched = Hybrid.matchExpect(tg, Hybrid.sd3)
 	if matched then
-		print("sd3::"..Hybrid.sd3.info)
 		print("sd3:: matched expectation")
 		ret = true
 	else
@@ -706,11 +659,11 @@ function Hybrid.check(tg)
 	elseif Hybrid.sd4.kind1 == 0 then
 		print("***** failed to produce. kuzu-vegee *****".." <-------------------")
 		fail_cnt = fail_cnt + 1
-		--Hybrid.postConfirm(false)
+		Hybrid.postConfirm(false)
 	else
 		print("***** failed to produce. miss expectation *****".." <-------------------")
 		fail_cnt = fail_cnt + 1
-		--Hybrid.postConfirm(true)
+		Hybrid.postConfirm(true)
 	end
 
 	return success_flag
@@ -729,7 +682,7 @@ function Hybrid.postConfirm(produced)
 	end
 end
 
--- @deprecated use hybridizeReload()
+-- deprecated. use hybridizeReload()
 function Hybrid.hybridizeSimple(target)
 	Hybrid.confirm(target)
 	Hybrid.check(target)
@@ -760,7 +713,6 @@ end
 
 function Hybrid.autoHybrid(target)
 	local ret = false
-	local i = 0
 	print(">>> start to autoHybrid >>>, "..targetChildToString(target.hybrid))
 
 	goal_flag = false
@@ -786,9 +738,11 @@ function Hybrid.autoHybrid(target)
 		Hybrid.postAdjustSecondParentView()
 
 		-- repeat to press l1 or r1 until expected value
-		for i=0, try_cnt1 do
+		for i=1, try_cnt1 do
+			Hybrid.retry(i)
+			target.retry = target.retry + 1
 			switchDrawHybrid()
-			Hybrid.drawRetryCount(i)
+
 			-- if status is better/worse then press circle
 			if Hybrid.expect(target.hybrid) then
 				local fc = emu.framecount()
@@ -799,9 +753,6 @@ function Hybrid.autoHybrid(target)
 					break
 				end
 			end
-
-			Hybrid.retry(i)
-			target.retry = target.retry + 1
 		end
 
 		-- if status reached goal then exit
@@ -814,7 +765,6 @@ function Hybrid.autoHybrid(target)
 		end
 	end
 
-	Hybrid.drawRetryCount(i)
 	print("<<< autoHybrid is finished <<<")
 	return ret
 end
@@ -1023,73 +973,6 @@ function FCrop.drawProperty(prop, x, y)
 	gui.text(x+14, y+110, prop.tone     )
 end
 
-
-------------------------------------------------------------
--- Baboo
-------------------------------------------------------------
-Baboo = {}
-
-function Baboo.drawInfo(x, y)
-	x = x or 0
-	y = y or 80
-	local rng = memory.readdword(adr_rng)
-	local feather = memory.readword(adr_total_feather)
-	local seeds = memory.readword(adr_total_seed)
-	local days = memory.readbyte(adr_days)
-
-	gui.text(x, y   , string.format(" rng   %08x", rng))
-	gui.text(x, y+10, string.format(" feather %d", feather))
-	gui.text(x, y+20, string.format(" seeds   %d", seeds))
-	gui.text(x, y+30, string.format(" days    %d", days))
-end
-
-function Baboo.skipBattle()
-	joypadSetHelper(1, {select=1}, 16)  -- skip battle
-	fadv(18)
-	joypadSetHelper(1, {x=1}, 6)  -- skip sukkari-
-	fadv(26)
-	joypadSetHelper(1, {x=1}, 6)  -- skip art score
-	fadv(20)
-	joypadSetHelper(1, {x=1}, 6)  -- skip feather, if it was dropped
-	fadv(13)
-end
-
-function Baboo.postSkipBattle()
-	fadv(167)
-	joypadSetHelper(1, {x=1}, 10)  -- skip turning off the light
-	fadv(62)
-end
-
-function Baboo.loseBattle()
-	joypadSetHelper(1, {select=1}, 16)  -- skip battle
-	fadv(18)
-	joypadSetHelper(1, {x=1}, 6)  -- skip art score
-	fadv(26)
-end
-
-function Baboo.skipFeed()
-	joypadSetHelper(1, {select=1}, 16)  -- skip feed
-	fadv(18)
-	joypadSetHelper(1, {x=1}, 6)  -- skip satisfaction
-	fadv(20)
-
-	joypadSetHelper(1, {x=1}, 6)  -- skip golden, if it was dropped
-	fadv(20)
-
-	joypadSetHelper(1, {x=1}, 6)  -- for debug
-	fadv(20)  -- for debug
-end
-
-function Baboo.postSkipFeed()
-	fadv(160)
-	joypadSetHelper(1, {x=1}, 10)  -- skip turning off the light
-	fadv(62)
-end
-
-function Baboo.showStatus()
-	-- TODO:: imprement here
-end
-
 ------------------------------------------------------------
 -- utility functions
 ------------------------------------------------------------
@@ -1105,7 +988,7 @@ function joypadSetHelper(port, buttons, wait_frame)
 	joypad.set(port, buttons)
 	fadv(1)
 	joypad.set(port, buttons)
-	fadv(wait_frame - 1)
+	fadv(wait_frame)
 end
 
 function toBinary2(decimal)
