@@ -101,7 +101,7 @@ adr_years = 0x166EF9
 
 -- amounts of money. 4byte
 adr_amount_money = 0x166F00
--- total feather counts
+-- total feather counts. 2byte
 adr_total_feather = 0x166F04
 -- total seed counts includes stock
 adr_total_seed = 0x166F06
@@ -119,12 +119,21 @@ adr_total_reset_cnt = 0x166F5C
 -- RNG, 4byte
 adr_rng = 0x0BE328
 
--- ##baboo
+-- ##baboo and trap battle
 adr_baboo_today = 0x0EFCA6  -- how many baboos do they come. 0x00 to 0x03
 adr_watched = 0x0EFCA7  -- watched:0x01, not watched:0x00
 adr_baboo1_kind = 0x0EFCA8  -- species of first baboo
 adr_baboo2_kind = 0x0EFCA9  -- species of second baboo
 adr_baboo3_kind = 0x0EFCAA  -- species of third baboo
+
+adr_trap_battle = 0x13D374
+in_trap_battle = 0x0002  -- in the battle field
+out_trap_bttle = 0xFFFF  -- not in the battle field
+adr_reaction1 = 0x13D380  -- some reaction against a trap. I don't know.
+adr_reaction2 = 0x13D384  -- some reaction against a trap. I don't know.
+reaction2_end = 0xFFFF  -- trap battle is finished
+adr_result_internal = 0x13D3B4  -- result of internal?? 4byte, +10h, max 18
+adr_win_count = 0x166F64
 
 
 -- ## Properties of vegee
@@ -720,7 +729,7 @@ function Hybrid.postConfirm(produced)
 	end
 end
 
--- deprecated. use hybridizeReload()
+-- @deprecated use hybridizeReload()
 function Hybrid.hybridizeSimple(target)
 	Hybrid.confirm(target)
 	Hybrid.check(target)
@@ -1014,6 +1023,73 @@ function FCrop.drawProperty(prop, x, y)
 	gui.text(x+14, y+110, prop.tone     )
 end
 
+
+------------------------------------------------------------
+-- Baboo
+------------------------------------------------------------
+Baboo = {}
+
+function Baboo.drawInfo(x, y)
+	x = x or 0
+	y = y or 80
+	local rng = memory.readdword(adr_rng)
+	local feather = memory.readword(adr_total_feather)
+	local seeds = memory.readword(adr_total_seed)
+	local days = memory.readbyte(adr_days)
+
+	gui.text(x, y   , string.format(" rng   %08x", rng))
+	gui.text(x, y+10, string.format(" feather %d", feather))
+	gui.text(x, y+20, string.format(" seeds   %d", seeds))
+	gui.text(x, y+30, string.format(" days    %d", days))
+end
+
+function Baboo.skipBattle()
+	joypadSetHelper(1, {select=1}, 16)  -- skip battle
+	fadv(18)
+	joypadSetHelper(1, {x=1}, 6)  -- skip sukkari-
+	fadv(26)
+	joypadSetHelper(1, {x=1}, 6)  -- skip art score
+	fadv(20)
+	joypadSetHelper(1, {x=1}, 6)  -- skip feather, if it was dropped
+	fadv(13)
+end
+
+function Baboo.postSkipBattle()
+	fadv(167)
+	joypadSetHelper(1, {x=1}, 10)  -- skip turning off the light
+	fadv(62)
+end
+
+function Baboo.loseBattle()
+	joypadSetHelper(1, {select=1}, 16)  -- skip battle
+	fadv(18)
+	joypadSetHelper(1, {x=1}, 6)  -- skip art score
+	fadv(26)
+end
+
+function Baboo.skipFeed()
+	joypadSetHelper(1, {select=1}, 16)  -- skip feed
+	fadv(18)
+	joypadSetHelper(1, {x=1}, 6)  -- skip satisfaction
+	fadv(20)
+
+	joypadSetHelper(1, {x=1}, 6)  -- skip golden, if it was dropped
+	fadv(20)
+
+	joypadSetHelper(1, {x=1}, 6)  -- for debug
+	fadv(20)  -- for debug
+end
+
+function Baboo.postSkipFeed()
+	fadv(160)
+	joypadSetHelper(1, {x=1}, 10)  -- skip turning off the light
+	fadv(62)
+end
+
+function Baboo.showStatus()
+	-- TODO:: imprement here
+end
+
 ------------------------------------------------------------
 -- utility functions
 ------------------------------------------------------------
@@ -1029,7 +1105,7 @@ function joypadSetHelper(port, buttons, wait_frame)
 	joypad.set(port, buttons)
 	fadv(1)
 	joypad.set(port, buttons)
-	fadv(wait_frame)
+	fadv(wait_frame - 1)
 end
 
 function toBinary2(decimal)
