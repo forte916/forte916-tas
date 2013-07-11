@@ -28,6 +28,7 @@ while true do
 	if initial == 0 then
 		switchDrawHybrid()
 		Hybrid.drawHybrid()
+		Hybrid.drawRetryCount(0)
 	end
 
 	emu.frameadvance()
