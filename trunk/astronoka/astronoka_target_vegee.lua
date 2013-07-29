@@ -78,6 +78,7 @@ local renkon_any_m100x2 = {
 	kind2 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
+	nutrition = {rank = 0xC, bit = 3, value = 0x0C94, order = nil},
 }
 
 local renkon_bit2_m100x2 = {
@@ -286,9 +287,9 @@ local tamanegi_p200 = {
 }
 
 
--- imodama
-local imodama_any_bit4 = {
-	kind1 = knd_imodama,
+-- imokyu
+local imokyu_any_bit4 = {
+	kind1 = knd_imokyu,
 	kind2 = 0,
 	pattern = {rank = 0xC, bit = 4, value = 0, order = true},
 }
@@ -314,6 +315,18 @@ local hourensou_plain = {
 	kind1 = knd_hourensou,
 	kind2 = knd_plain,
 	pattern = {rank = 0xC, bit = 3, value = 0x0C94, order = nil},
+}
+
+local hourensou_p100bit7 = {
+	kind1 = knd_hourensou,
+	kind2 = 0,
+	pattern = {rank = 0xD, bit = 7, value = 0, order = true},
+}
+
+local hourensou_p200 = {
+	kind1 = knd_hourensou,
+	kind2 = 0,
+	pattern = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
 -- kyuri
@@ -359,7 +372,7 @@ local meron_bit4 = {
 	kind2 = 0,
 	sugar = {rank = 0xC, bit = 4, value = 0, order = true},
 }
-local meron_levelp3 = {
+local meron_plevel3 = {
 	kind1 = knd_meron,
 	kind2 = 0,
 	-- sugar: +101 ~ +130
@@ -371,7 +384,7 @@ local karifura_any = {
 	kind1 = knd_karifura,
 	kind2 = 0,
 }
-local karifura_levelp3 = {
+local karifura_plevel3 = {
 	kind1 = knd_karifura,
 	kind2 = 0,
 	-- sugar: +101 ~ +130
@@ -388,13 +401,13 @@ local corn_bit2 = {
 	kind2 = 0,
 	texture = {rank = 0xC, bit = 2, value = 0, order = false},
 }
-local corn_levelm2 = {
+local corn_mlevel2 = {
 	kind1 = knd_corn,
 	kind2 = 0,
 	-- texture: -30
 	texture = {rank = 0xB, bit = 7, value = 0x0BF7, order = false},
 }
-local corn_levelm3 = {
+local corn_mlevel3 = {
 	kind1 = knd_corn,
 	kind2 = 0,
 	-- texture: -60 ~ -31
@@ -421,7 +434,6 @@ local mame_any = {
 	kind2 = 0,
 }
 
---knd_peach     = 0x1F  -- ñCä€ÉsÅ[É`
 -- peach
 local peach_any = {
 	kind1 = knd_peach,
@@ -451,6 +463,13 @@ local garlic_request = {
 }
 
 
+-- matsutake
+local matsutake_any = {
+	kind1 = knd_matsutake,
+	kind2 = 0,
+	pattern = {rank = 0, bit = 0, value = 0, order = nil},
+	texture = {rank = 0, bit = 0, value = 0, order = nil},
+}
 
 
 
@@ -559,7 +578,7 @@ target_otsu = {
 	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_any            , retry = 0, done = 0},
 	{first = renkon_any            , second = shimaimo_plain, hybrid = ninjin_bit2           , retry = 0, done = 0},
 	{first = ninjin_bit2           , second = shimaimo_plain, hybrid = ninjin_m100           , retry = 0, done = 0},
-	{first = ninjin_m100           , second = kyabetsu_otsu , hybrid = ninjin_otsuA          , retry = 0, done = 0} ,
+	{first = ninjin_m100           , second = kyabetsu_otsu , hybrid = ninjin_otsuA          , retry = 0, done = 0},
 	{first = ninjin_otsuA          , second = renkon_otsuA  , hybrid = gobou_otsuA           , retry = 0, done = 0},
 
 	{first = kabu_plain            , second = kabu_plain    , hybrid = kabu_otsubit7         , retry = 0, done = 0},
@@ -715,16 +734,16 @@ target_tamanegi_p200 = {
 target_kabocha_request = {
 	-- karifura
 	{first = hourensou_plain       , second = renkon_any_m100x2, hybrid = meron_bit4         , retry = 0, done = 0},
-	{first = meron_bit4            , second = renkon_any_m100x2, hybrid = meron_levelp3      , retry = 0, done = 0},
-	{first = meron_levelp3         , second = shimaimo_plain, hybrid = karifura_levelp3      , retry = 0, done = 0},
+	{first = meron_bit4            , second = renkon_any_m100x2, hybrid = meron_plevel3      , retry = 0, done = 0},
+	{first = meron_plevel3         , second = shimaimo_plain, hybrid = karifura_plevel3      , retry = 0, done = 0},
 	-- corn
 	{first = hourensou_plain       , second = shimaimo_plain, hybrid = kyuri_any             , retry = 0, done = 0},
 	{first = kyuri_any             , second = shimaimo_plain, hybrid = kyabetsu_any          , retry = 0, done = 0},
 	{first = kyabetsu_any          , second = kabu_plain    , hybrid = corn_bit2             , retry = 0, done = 0},
-	{first = corn_bit2             , second = kabu_plain    , hybrid = corn_levelm2          , retry = 0, done = 0},
-	{first = corn_levelm2          , second = kabu_plain    , hybrid = corn_levelm3          , retry = 0, done = 0},
+	{first = corn_bit2             , second = kabu_plain    , hybrid = corn_mlevel2          , retry = 0, done = 0},
+	{first = corn_mlevel2          , second = kabu_plain    , hybrid = corn_mlevel3          , retry = 0, done = 0},
 	-- kabocha
-	{first = corn_levelm3          , second = karifura_levelp3, hybrid = kabocha_request     , retry = 0, done = 0},
+	{first = corn_mlevel3          , second = karifura_plevel3, hybrid = kabocha_request     , retry = 0, done = 0},
 }
 
 -- garlic for request
@@ -753,7 +772,7 @@ target_garlic_request = {
 	{first = corn_any              , second = karifura_any  , hybrid = kabocha_any           , retry = 0, done = 0},
 	-- mame
 	{first = kabocha_any           , second = corn_any      , hybrid = mame_any              , retry = 0, done = 0},
-	-- peach 
+	-- peach
 	{first = kabocha_any           , second = karifura_any  , hybrid = peach_any             , retry = 0, done = 0},
 	-- garlic
 	{first = peach_any             , second = mame_any      , hybrid = garlic_any            , retry = 0, done = 0},
@@ -775,7 +794,7 @@ target_vegee_1115 = {
 	{first = kabu_m100             , second = shimaimo_m100 , hybrid = renkon_any_m100x2    , retry = 0, done = 0},
 	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_bit4           , retry = 0, done = 0},
 	{first = renkon_bit4           , second = kabu_plain    , hybrid = tamanegi_any_bit4     , retry = 0, done = 0},
-	{first = tamanegi_any_bit4     , second = shimaimo_plain, hybrid = imodama_any_bit4      , retry = 0, done = 0},
+	{first = tamanegi_any_bit4     , second = shimaimo_plain, hybrid = imokyu_any_bit4      , retry = 0, done = 0},
 }
 
 -- year1 1/22
@@ -790,6 +809,7 @@ target_vegee_1122 = {
 	{first = renkon_m100bit1_m100x2, second = ninjin_m100   , hybrid = renkon_m100_m100x3    , retry = 0, done = 0},
 }
 
+-- year1 2/09
 target_vegee_1209 = {
 	{first = shimaimo_plain        , second = shimaimo_plain, hybrid = shimaimo_p200         , retry = 0, done = 0},
 	{first = shimaimo_plain        , second = kabu_plain    , hybrid = renkon_bit4           , retry = 0, done = 0},
@@ -817,7 +837,850 @@ target_vegee_1314 = {
 target_vegee_1401_part1 = target_kabocha_request
 target_vegee_1401_part2 = target_garlic_request
 
+target_vegee_1401_part3 = {
+	{first = hourensou_plain       , second = renkon_p200   , hybrid = hourensou_p100bit7    , retry = 0, done = 0},
+	{first = hourensou_p100bit7    , second = shimaimo_plain, hybrid = hourensou_p200        , retry = 0, done = 0},
+}
+
 
 target_vegee_test = target_renkon_m100_m100x3_a
 
+------------------------------------------------------------
+-- node setting using binary tree
+------------------------------------------------------------
+-- shimaimo
+shimaimo_plain_leaf = {
+	left = nil,
+	right = nil,
+	property = shimaimo_plain,
+}
+
+shimaimo_m100_node = {
+	left = shimaimo_plain_leaf,
+	right = shimaimo_plain_leaf,
+	property = shimaimo_m100,
+}
+
+shimaimo_p200_node = {
+	left = shimaimo_plain_leaf,
+	right = shimaimo_plain_leaf,
+	property = shimaimo_p200,
+}
+
+shimaimo_p200_leaf = {
+	left = nil,
+	right = nil,
+	property = shimaimo_p200,
+}
+
+-- kabu
+kabu_plain_leaf = {
+	left = nil,
+	right = nil,
+	property = kabu_plain,
+}
+
+kabu_m100_node = {
+	left = kabu_plain_leaf,
+	right = kabu_plain_leaf,
+	property = kabu_m100,
+}
+
+kabu_p200_node = {
+	left = kabu_plain_leaf,
+	right = kabu_plain_leaf,
+	property = kabu_p200,
+}
+
+kabu_p200_leaf = {
+	left = nil,
+	right = nil,
+	property = kabu_p200,
+}
+
+-- renkon
+renkon_any_node = {
+	left = shimaimo_plain_leaf,
+	right = kabu_plain_leaf,
+	property = renkon_any,
+}
+
+renkon_any_leaf = {
+	left = nil,
+	right = nil,
+	property = renkon_any,
+}
+
+renkon_any_m100x2_node = {
+	left = shimaimo_m100_node,
+	right = kabu_m100_node,
+	property = renkon_any_m100x2,
+}
+
+renkon_any_m100x2_leaf = {
+	left = nil,
+	right = nil,
+	property = renkon_any_m100x2,
+}
+
+renkon_any_p200_node = {
+	left = shimaimo_p200_leaf,
+	right = kabu_plain_leaf,
+	property = renkon_any_p200,
+}
+
+renkon_bit2_node = {
+	left = shimaimo_plain_leaf,
+	right = kabu_plain_leaf,
+	property = renkon_bit2,
+}
+
+renkon_m100_node = {
+	left = renkon_any_node,
+	right = shimaimo_plain_leaf,
+	property = renkon_m100,
+}
+
+renkon_m100bit2_node = {
+	left = renkon_bit2_node,
+	right = shimaimo_plain_leaf,
+	property = renkon_m100bit2,
+}
+
+renkon_bit4_node = {
+	left = shimaimo_plain_leaf,
+	right = kabu_plain_leaf,
+	property = renkon_bit4,
+}
+
+renkon_p200_node = {
+	left = renkon_bit4_node,
+	right = shimaimo_plain_leaf,
+	property = renkon_p200,
+}
+
+renkon_p200_leaf = {
+	left = nil,
+	right = nil,
+	property = renkon_p200,
+}
+
+-- ninjin
+ninjin_bit2_node = {
+	left = renkon_any_node,
+	--left = renkon_any_leaf,
+	right = shimaimo_plain_leaf,
+	property = ninjin_bit2,
+}
+
+ninjin_m100_node = {
+	left = ninjin_bit2_node,
+	right = shimaimo_plain_leaf,
+	property = ninjin_m100,
+}
+
+ninjin_any_p200x2_node = {
+	left = shimaimo_p200_leaf,
+	right = renkon_p200_leaf,
+	property = ninjin_any_p200x2,
+}
+
+ninjin_bit4_node = {
+	--left = renkon_any_node,
+	left = renkon_any_leaf,
+	right = shimaimo_plain_leaf,
+	property = ninjin_bit4,
+}
+
+ninjin_p100bit7_node = {
+	left = ninjin_bit4_node,
+	right = shimaimo_plain_leaf,
+	property = ninjin_p100bit7,
+}
+
+ninjin_p200_p200x2_node = {
+	left = ninjin_p100bit7_node,
+	right = ninjin_any_p200x2_node,
+	property = ninjin_p200_p200x2,
+}
+
+
+-- renkon
+renkon_m100bit1_m100x2_node = {
+	left = renkon_m100bit2_node,
+	right = renkon_any_m100x2_leaf,
+	property = renkon_m100bit1_m100x2,
+}
+
+renkon_m100_m100x3_node = {
+	left = renkon_m100bit1_m100x2_node,
+	right = ninjin_m100_node,
+	property = renkon_m100_m100x3,
+}
+
+renkon_m100_m100x3_leaf = {
+	left = nil,
+	right = nil,
+	property = renkon_m100_m100x3,
+}
+
+
+-- tamanegi
+tamanegi_any_bit4_node = {
+	left = renkon_bit4_node,
+	right = kabu_plain_leaf,
+	property = tamanegi_any_bit4,
+}
+
+tamanegi_p100bit7_node = {
+	left = renkon_any_p200_node,
+	right = kabu_plain_leaf,
+	property = tamanegi_p100bit7,
+}
+
+tamanegi_p200_node = {
+	left = tamanegi_p100bit7_node,
+	right = shimaimo_plain_leaf,
+	property = tamanegi_p200,
+}
+
+tamanegi_p200_leaf = {
+	left = nil,
+	right = nil,
+	property = tamanegi_p200,
+}
+
+
+-- imokyu
+imokyu_any_bit4_node = {
+	left = tamanegi_any_bit4_node,
+	right = shimaimo_plain_leaf,
+	property = imokyu_any_bit4,
+}
+
+-- gobou
+gobou_p100bit7_p200_node = {
+	left = kabu_p200_leaf,
+	right = tamanegi_p200_leaf,
+	property = gobou_p100bit7_p200,
+}
+
+gobou_p200_p200_node = {
+	left = gobou_p100bit7_p200_node,
+	right = shimaimo_plain_leaf,
+	property = gobou_p200_p200,
+}
+
+-- hourensou
+hourensou_plain_leaf = {
+	left = nil,
+	right = nil,
+	property = hourensou_plain,
+}
+
+hourensou_p100bit7_node = {
+	left = hourensou_plain_leaf,
+	right = renkon_p200_leaf,
+	property = hourensou_p100bit7,
+}
+
+hourensou_p200_node = {
+	left = hourensou_p100bit7_node,
+	right = shimaimo_plain_leaf,
+	property = hourensou_p200,
+}
+
+
+-- kyuri
+kyuri_any_node = {
+	left = hourensou_plain_leaf,
+	right = shimaimo_plain_leaf,
+	property = kyuri_any,
+}
+
+kyuri_bit2_node = {
+	left = hourensou_plain_leaf,
+	right = shimaimo_plain_leaf,
+	property = kyuri_bit2,
+}
+
+kyuri_m100_node = {
+	left = kyuri_bit2_node,
+	right = shimaimo_plain_leaf,
+	property = kyuri_m100,
+}
+
+
+
+
+-- kyabetsu
+kyabetsu_any_node = {
+	left = kyuri_any_node,
+	right = shimaimo_plain_leaf,
+	property = kyabetsu_any,
+}
+
+kyabetsu_bit2_node = {
+	left = kyuri_any_node,
+	right = shimaimo_plain_leaf,
+	property = kyabetsu_bit2,
+}
+
+kyabetsu_m100_node = {
+	left = kyabetsu_bit2_node,
+	right = shimaimo_plain_leaf,
+	property = kyabetsu_m100,
+}
+
+
+-- renkon
+renkon_any_m100sgr_node = {
+	left = kyabetsu_m100_node,
+	right = renkon_m100_m100x3_leaf,
+	property = renkon_any_m100sgr,
+}
+
+renkon_any_m100txt_node = {
+	left = kyuri_m100_node,
+	right = renkon_m100_m100x3_leaf,
+	property = renkon_any_m100txt,
+}
+
+renkon_m100bit1_m100x4_node = {
+	left = renkon_any_m100txt_node,
+	right = renkon_m100_m100x3_leaf,
+	property = renkon_m100bit1_m100x4,
+}
+
+renkon_m100_m100x5_node = {
+	left = renkon_any_m100sgr_node,
+	right = renkon_m100bit1_m100x4_node,
+	property = renkon_m100_m100x5,
+}
+
+
+
+-- meron
+meron_any_node = {
+	left = hourensou_plain_leaf,
+	right = renkon_any_m100x2_leaf,
+	property = meron_any,
+}
+
+meron_bit4_node = {
+	left = hourensou_plain_leaf,
+	right = renkon_any_m100x2_leaf,
+	property = meron_bit4,
+}
+
+meron_plevel3_node = {
+	left = meron_bit4_node,
+	right = renkon_any_m100x2_leaf,
+	property = meron_plevel3,
+}
+
+
+-- karifura
+karifura_any_node = {
+	left = meron_any_node,
+	right = shimaimo_plain_leaf,
+	property = karifura_any,
+}
+
+karifura_any_leaf = {
+	left = nil,
+	right = nil,
+	property = karifura_any,
+}
+
+karifura_plevel3_node = {
+	left = meron_plevel3_node,
+	right = shimaimo_plain_leaf,
+	property = karifura_plevel3,
+}
+
+
+-- corn
+corn_any_node = {
+	left = kyabetsu_any_node,
+	right = kabu_plain_leaf,
+	property = corn_any,
+}
+
+corn_bit2_node = {
+	left = kyabetsu_any_node,
+	right = kabu_plain_leaf,
+	property = corn_bit2,
+}
+
+corn_mlevel2_node = {
+	left = corn_bit2_node,
+	right = kabu_plain_leaf,
+	property = corn_mlevel2,
+}
+
+corn_mlevel3_node = {
+	left = corn_mlevel2_node,
+	right = kabu_plain_leaf,
+	property = corn_mlevel3,
+}
+
+
+
+
+-- kabocha
+kabocha_any_node = {
+	left = corn_any_node,
+	right = karifura_any_node,
+	property = kabocha_any,
+}
+
+kabocha_request_node = {
+	left = corn_mlevel3_node,
+	right = karifura_plevel3_node,
+	property = kabocha_request,
+}
+
+
+-- ninjin
+ninjin_m100bit1_node = {
+	left = shimaimo_plain_leaf,
+	right = renkon_m100_m100x3_leaf,
+	property = ninjin_m100bit1,
+}
+
+-- mame
+mame_any_node = {
+	left = kabocha_any_node,
+	right = corn_any_node,
+	property = mame_any,
+}
+
+
+-- peach
+peach_any_node = {
+	left = kabocha_any_node,
+	right = karifura_any_node,
+	property = peach_any,
+}
+
+
+
+
+-- garlic
+garlic_any_node = {
+	left = peach_any_node,
+	right = mame_any_node,
+	property = garlic_any,
+}
+
+garlic_any_leaf = {
+	left = nil,
+	right = nil,
+	property = garlic_any,
+}
+
+garlic_p100bit6_node = {
+	left = garlic_any_node,
+	right = shimaimo_plain_leaf,
+	property = garlic_p100bit6,
+}
+
+garlic_request_node = {
+	left = ninjin_m100bit1_node,
+	right = garlic_p100bit6_node,
+
+	--left = garlic_p100bit6_node,
+	--right = ninjin_m100bit1_node,
+	property = garlic_request,
+}
+
+-- knd_mame      = 0x06
+
+
+-- knd_karashi   = 0x07
+karashi_any_node = {
+	left = mame_any_node,
+	right = karifura_any_leaf,
+	property = karashi_any,
+}
+
+
+
+-- knd_ichigo    = 0x20
+
+
+-- knd_konbu     = 0x09
+konbu_any_node = {
+	left = ichigo_any_node,
+	right = garlic_any_leaf,
+	property = konbu_any,
+}
+
+-- knd_suica     = 0x22
+suica_any_node = {
+	left = karashi_any_node,
+	right = garlic_any_leaf,
+	property = suica_any,
+}
+
+
+-- knd_matsutake = 0x17
+matsutake_any_node = {
+	left = konbu_any_node,
+	right = suica_any_node,
+	property = matsutake_any,
+}
+
+
+
+
+
+------------------------------------------------------------
+-- target setting using binary tree
+------------------------------------------------------------
+-- year1 1/15
+target_tree_1115 = {
+	-- need shimaimo_plain 14, kabu_plain 15
+	renkon_any_m100x2_node,
+	imokyu_any_bit4_node,
+}
+
+-- year1 1/22
+target_tree_1122 = {
+	-- need shimaimo_plain 24?, kabu_plain 2?
+	renkon_m100_m100x3_node,
+}
+
+-- year1 2/09
+target_tree_1209 = {
+	shimaimo_p200_node,
+	renkon_p200_node,
+}
+
+-- year1 3/05
+target_tree_1305 = {
+	--kabu_p200_node,
+	--ninjin_p200_p200x2_node,
+	--tamanegi_p200_node,
+
+	kabu_p200_node,
+	tamanegi_p200_node,
+	ninjin_p200_p200x2_node,
+	
+	--ninjin_p200_p200x2_node,
+	--kabu_p200_node,
+	--tamanegi_p200_node,
+	
+	--ninjin_p200_p200x2_node,
+	--tamanegi_p200_node,
+	--kabu_p200_node,
+	
+	--tamanegi_p200_node,
+	--kabu_p200_node,
+	--ninjin_p200_p200x2_node,
+	
+	--tamanegi_p200_node,
+	--ninjin_p200_p200x2_node,
+	--kabu_p200_node,
+}
+
+-- year1 3/14
+target_tree_1314 = {
+	gobou_p200_p200_node,
+}
+
+-- year1 4/01
+target_tree_1401 = {
+	--hourensou_p200_node,
+	--garlic_request_node,
+	--kabocha_request_node,
+	--gobou_p200_p200_node,
+	--renkon_m100_m100x5_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--renkon_m100_m100x5_node,
+	--hourensou_p200_node,
+	--garlic_request_node,
+	--kabocha_request_node,
+	--gobou_p200_p200_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--hourensou_p200_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--kabocha_request_node,
+	--gobou_p200_p200_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--hourensou_p200_node,
+	--garlic_request_node,
+	--renkon_m100_m100x5_node,
+	--kabocha_request_node,
+	--gobou_p200_p200_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--hourensou_p200_node,
+	--garlic_request_node,
+	--kabocha_request_node,
+	--renkon_m100_m100x5_node,
+	--gobou_p200_p200_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--hourensou_p200_node,
+	--garlic_request_node,
+	--kabocha_request_node,
+	--gobou_p200_p200_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--hourensou_p200_node,
+	--garlic_request_node,
+	--kabocha_request_node,
+	--gobou_p200_p200_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--hourensou_p200_node,
+	--garlic_request_node,
+	--kabocha_request_node,
+	--gobou_p200_p200_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--renkon_m100_m100x5_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--# retry 
+	--garlic_request_node,
+	--renkon_m100_m100x5_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--gobou_p200_p200_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--# retry 817
+	--karifura_any_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--corn_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--corn_any_node,
+	--corn_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--kabocha_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+
+	--kabocha_any_node,
+	--kabocha_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--karifura_any_node,
+	--karifura_any_node,
+	--corn_any_node,
+	--corn_any_node,
+
+	--# retry 
+	--karifura_any_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--kabocha_request_node,
+	--hourensou_p200_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--# retry 
+	--karifura_any_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--corn_any_node,
+	--kabocha_request_node,
+	--hourensou_p200_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+
+	--# retry 
+	--karifura_any_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--kabocha_any_node,
+	--kabocha_request_node,
+	--hourensou_p200_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+
+	--# retry 
+	--karifura_any_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+	--kabocha_request_node,
+	--hourensou_p200_node,
+	--corn_any_node,
+	--corn_any_node,
+
+	--# retry 
+	--karifura_any_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--corn_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--kabocha_any_node,
+	--kabocha_request_node,
+
+	--# retry 813
+	karifura_any_node,
+	karifura_any_node,
+	renkon_m100_m100x5_node,
+	garlic_request_node,
+	gobou_p200_p200_node,
+	hourensou_p200_node,
+	kabocha_request_node,
+	kabocha_any_node,
+	kabocha_any_node,
+	corn_any_node,
+	corn_any_node,
+
+	--# retry 
+	--karifura_any_node,
+	--karifura_any_node,
+	--renkon_m100_m100x5_node,
+	--garlic_request_node,
+	--gobou_p200_p200_node,
+	--hourensou_p200_node,
+	--kabocha_request_node,
+	--kabocha_any_node,
+	--corn_any_node,
+	--kabocha_any_node,
+	--corn_any_node,
+
+}
+
+-- year1 4/08
+target_tree_1408 = {
+
+}
 
