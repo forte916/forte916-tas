@@ -46,6 +46,66 @@ function TAS.reapVegee()
 	fadv(30)
 end
 
+function TAS.plantVegee5()
+	local pos = 0
+	joypadSetHelper(1, {circle=1}, 6)
+	TAS.plantVegee()
+
+	for i=1, 4 do
+		pos = memory.readword(adr_field_position)
+		if pos == pos_bottom_left then
+			joypadSetHelper(1, {right=1}, 6)
+			fadv(6)
+		elseif pos == pos_bottom_center then
+			joypadSetHelper(1, {right=1}, 6)
+			fadv(6)
+		elseif pos == pos_bottom_right then
+			joypadSetHelper(1, {up=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_right then
+			joypadSetHelper(1, {left=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_center then
+			joypadSetHelper(1, {left=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_left then
+			joypadSetHelper(1, {down=1}, 6)
+			fadv(6)
+		end
+		joypadSetHelper(1, {circle=1}, 6)
+		TAS.plantVegee()
+	end
+end
+
+function TAS.reapVegee6()
+	local pos = 0
+	TAS.reapVegee()
+
+	for i=1, 5 do
+		pos = memory.readword(adr_field_position)
+		if pos == pos_bottom_left then
+			joypadSetHelper(1, {right=1}, 6)
+			fadv(6)
+		elseif pos == pos_bottom_center then
+			joypadSetHelper(1, {right=1}, 6)
+			fadv(6)
+		elseif pos == pos_bottom_right then
+			joypadSetHelper(1, {up=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_right then
+			joypadSetHelper(1, {left=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_center then
+			joypadSetHelper(1, {left=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_left then
+			joypadSetHelper(1, {down=1}, 6)
+			fadv(6)
+		end
+		TAS.reapVegee()
+	end
+end
+
 function TAS.exitField()
 	joypadSetHelper(1, {x=1}, 6)  -- exit field
 	fadv(8)
@@ -61,6 +121,12 @@ end
 function TAS.removeTrap()
 	joypadSetHelper(1, {x=1}, 8)  -- remove trap
 	fadv(8)
+	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
+end
+
+function TAS.removeAllTrap()
+	joypadSetHelper(1, {start=1}, 6)
+	fadv(2+8)
 	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
 end
 
@@ -86,6 +152,15 @@ function TAS.exitDayBaboo()
 	fadv(100)
 end
 
+function TAS.exitDayNoBaboo()
+	joypadSetHelper(1, {circle=1}, 6)  -- press exit day
+	fadv(4+9)
+	joypadSetHelper(1, {circle=1}, 8)  -- confirm yes
+	fadv(62+8)
+	joypadSetHelper(1, {x=1}, 10)  -- cancel turning off the light
+	fadv(46)
+end
+
 function TAS.skipBattle()
 	joypadSetHelper(1, {select=1}, 16)  -- skip battle
 	fadv(18)
@@ -98,11 +173,66 @@ function TAS.skipBattle()
 end
 
 function TAS.enterHouse()
-	-- TODO:: implrement here
+	joypadSetHelper(1, {circle=1}, 6)  -- press house
+	fadv(92)
+end
+
+function TAS.exitHouse()
+	joypadSetHelper(1, {circle=1}, 6)  -- press back
+	fadv(68)
 end
 
 function TAS.enterHybridMachineRoom()
-	-- TODO:: implrement here
+	joypadSetHelper(1, {circle=1}, 6)  -- press hybrid
+	fadv(54)
+end
+
+function TAS.exitHybridMachineRoom()
+	joypadSetHelper(1, {x=1}, 8)  -- exit hybrid room
+	fadv(8)
+	joypadSetHelper(1, {x=1}, 10)  -- confirm no
+	fadv(26)
+end
+
+function TAS.enterPedro()
+	joypadSetHelper(1, {circle=1}, 6)  -- press pedro
+	fadv(202)
+end
+
+function TAS.exitPedro()
+	joypadSetHelper(1, {circle=1}, 6)  -- press back
+	fadv(30)
+end
+
+function TAS.enterGlasses()
+	joypadSetHelper(1, {circle=1}, 6)  -- press glasses
+	fadv(56)
+end
+
+function TAS.exitGlasses()
+	joypadSetHelper(1, {x=1}, 6)  -- exit glasses
+	fadv(8)
+	joypadSetHelper(1, {x=1}, 10)  -- confirm no
+	fadv(26)
+end
+
+
+function TAS.enterBusStop()
+	joypadSetHelper(1, {circle=1}, 6)  -- press bus stop
+	fadv(88+10)
+	joypadSetHelper(1, {circle=1}, 6)  -- skip msg
+end
+function TAS.gotoTown()
+	joypadSetHelper(1, {circle=1}, 6)  -- press town
+	fadv(8)
+	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
+	fadv(72)
+end
+function TAS.goHome()
+	joypadSetHelper(1, {circle=1}, 6)  -- press town
+	fadv(8)
+	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
+	fadv(52)
 end
 
 
@@ -512,7 +642,47 @@ function TAS.d1110()
 	-- exit day
 end
 	
-	
+macro_table = {
+	{key = "G", func = TAS.enterField},
+	{key = "B", func = TAS.reapVegee6},
+	{key = "V", func = TAS.reapVegee},
+	{key = "C", func = TAS.plantVegee5},
+	{key = "X", func = TAS.plantVegee},
+	{key = "Z", func = TAS.exitField},
+	{key = "T", func = TAS.exitDayNoBaboo},
+	{key = "Y", func = TAS.exitDayBaboo},
+	{key = "U", func = TAS.enterTrapField},
+	{key = "I", func = TAS.exitTrapField},
+	{key = "O", func = TAS.enterPedro},
+	{key = "P", func = TAS.exitPedro},
+	{key = "1", func = TAS.enterHouse},
+	{key = "2", func = TAS.exitHouse},
+	{key = "3", func = TAS.enterHybridMachineRoom},
+	{key = "4", func = TAS.exitHybridMachineRoom},
+	{key = "5", func = TAS.enterBusStop},
+	{key = "6", func = TAS.gotoTown},
+	{key = "7", func = nil},
+	{key = "8", func = TAS.goHome},
+	{key = "9", func = TAS.enterGlasses},
+	{key = "0", func = TAS.exitGlasses},
+}
+
+function doInputMacro()
+	local kbd = input.get()
+
+	for k, v in pairs(macro_table) do
+		if kbd[v.key] then
+			if macro_key == 0 then
+				v.func()
+				emu.pause()
+			end
+			macro_key = macro_key + 1
+		else
+			macro_key = 0
+		end
+	end
+end
+
 ------------------------------------------------------------
 -- main
 ------------------------------------------------------------
@@ -520,6 +690,7 @@ end
 local initial = 1
 local begin_fc = emu.framecount()
 local begin_date = os.date()
+macro_key = 0
 
 while true do
 
@@ -528,7 +699,8 @@ while true do
 	end
 
 	if initial == 0 then
-		TAS.start()
+		doInputMacro()
+		Baboo.drawInfo()
 	end
 
 	emu.frameadvance()
