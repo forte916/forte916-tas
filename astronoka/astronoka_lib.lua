@@ -66,25 +66,25 @@ prvw2_kuzu = 0xD778
 adr_parent_view3 = 0x1FFDFC
 
 
--- cursor of group in seed inventory
-adr_cursor_group_first = 0x0018F435
--- max group counts
+-- cursor of group in seed inventory, 2byte
+adr_cursor_group_first = 0x0018F434
+-- max group counts, 1byte
 adr_max_group_count_first = 0x0018F436
--- cursor of seed inventory
-adr_cursor_seed_first = 0x0018F439
--- max raw counts in current view
+-- cursor of seed inventory, 2byte
+adr_cursor_seed_first = 0x0018F438
+-- max raw counts in current view, 1byte
 adr_max_raw_count_first = 0x0018F43A
 -- first parent, pointing the address of seed in inventory
 adr_seed_first2 = 0x0018F43C
 
 
--- cursor of group in seed inventory
-adr_cursor_group_second = 0x0018F44D
--- max group counts
+-- cursor of group in seed inventory, 2byte
+adr_cursor_group_second = 0x0018F44C
+-- max group counts, 1byte
 adr_max_group_count_second = 0x0018F44E
--- cursor of seed inventory
-adr_cursor_seed_second = 0x0018F451
--- max raw counts in current view
+-- cursor of seed inventory, 2byte
+adr_cursor_seed_second = 0x0018F450
+-- max raw counts in current view, 1byte
 adr_max_raw_count_second = 0x0018F452
 -- second parent, pointing the address of seed in inventory
 adr_seed_second2 = 0x0018F454
@@ -156,7 +156,7 @@ knd_kabu      = 0x0E  -- 星カブ
 knd_renkon    = 0x0F  -- 腰かけレンコン
 knd_ninjin    = 0x10  -- コスモニンジン
 knd_tamanegi  = 0x11  -- タマネギボム
-knd_imodama   = 0x12  -- イモ球
+knd_imokyu    = 0x12  -- イモ球
 knd_gobou     = 0x13  -- ゴボウ玉
 knd_kabocha   = 0x14  -- 火星カボチャ
 knd_garlic    = 0x15  -- トゲガーリック
@@ -181,6 +181,15 @@ knd_plain     = 0x63
 
 attrb_table = {"size", "weight", "pattern", "nutrition", "sugar", "texture", "shape", "flavor", "smell", "tone"}
 
+
+-- ## Crop Field
+adr_field_position = 0x167D6A
+pos_bottom_left   = 0x0000
+pos_bottom_center = 0x0001
+pos_bottom_right  = 0x0002
+pos_top_left      = 0x0100
+pos_top_center    = 0x0101
+pos_top_right     = 0x0102
 
 ------------------------------------------------------------
 -- Hybrid
@@ -376,7 +385,7 @@ function Hybrid.matchParent(tg, sd)
 			--continue
 		else
 			-- tv[v] ~= nil means we need to care this attribute, then refer this attribute
-			
+			local sd_rank, sd_bit = getRankAndBit(sd[v])
 
 			if tg[v].value ~= 0 and tg[v].value == sd[v] then
 				-- attribute value is matched. it means reached
@@ -386,13 +395,13 @@ function Hybrid.matchParent(tg, sd)
 				-- don't care value, but need to care both of rank and bit counts
 
 
-				local sd_rank =  bit.rshift(sd[v], 8)  -- same as x >>= 2
+				--local sd_rank =  bit.rshift(sd[v], 8)  -- same as x >>= 2
 				if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
 					-- rank is matched, need to refer bit counts
 					
 
-					local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
-					local sd_bit = bitCount8(sd_tmp)
+					--local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
+					--local sd_bit = bitCount8(sd_tmp)
 					if tg[v].bit == sd_bit then
 						-- both of rank and bit counts are matched. it means reached
 						reached = reached + 1
@@ -436,7 +445,7 @@ function Hybrid.selectFirstSeed(tg, pad_row, pad_group)
 	Hybrid.focusParentSeed()
 
 	for j=1, 2 do
-		cursor = memory.readbyte(adr_cursor_seed_first)
+		cursor = memory.readword(adr_cursor_seed_first)
 		start_cursor = cursor
 		row = 0
 		state_tmp = savestate.create()
@@ -467,7 +476,7 @@ function Hybrid.selectFirstSeed(tg, pad_row, pad_group)
 
 			row = row + 1
 			Hybrid.moveRow(row, pad_row)
-			cursor = memory.readbyte(adr_cursor_seed_first)
+			cursor = memory.readword(adr_cursor_seed_first)
 		until cursor == start_cursor
 
 		savestate.load(state_tmp)
@@ -491,7 +500,7 @@ function Hybrid.selectSecondSeed(tg, pad_row, pad_group)
 	Hybrid.focusParentSeed()
 
 	for j=1, 2 do
-		cursor = memory.readbyte(adr_cursor_seed_second)
+		cursor = memory.readword(adr_cursor_seed_second)
 		start_cursor = cursor
 		row = 0
 		state_tmp = savestate.create()
@@ -522,7 +531,7 @@ function Hybrid.selectSecondSeed(tg, pad_row, pad_group)
 
 			row = row + 1
 			Hybrid.moveRow(row, pad_row)
-			cursor = memory.readbyte(adr_cursor_seed_second)
+			cursor = memory.readword(adr_cursor_seed_second)
 		until cursor == start_cursor
 
 		savestate.load(state_tmp)
@@ -539,6 +548,56 @@ function Hybrid.retry(cnt)
 	else
 		joypadSetHelper(1, {r1=1}, 8)
 	end
+end
+
+function Hybrid.isEvolved(tg, sd, v)
+	local evolved = false
+	local sd1_rank, sd1_bit = getRankAndBit(Hybrid.sd1[v])
+	local sd2_rank, sd2_bit = getRankAndBit(Hybrid.sd2[v])
+	local sd3_rank, sd3_bit = getRankAndBit(sd[v])
+
+	if tg[v].order == nil then evolved = true end
+	if tg[v].order == true then
+		--if sd3_rank > math.max(sd1_rank, sd2_rank) then
+		--	evolved = true
+		--end
+		if sd1_rank == sd2_rank and sd3_bit > math.max(sd1_bit, sd2_bit) then
+			evolved = true
+		elseif sd[v] > math.max(Hybrid.sd1[v], Hybrid.sd2[v]) then
+			evolved = true
+		--elseif sd1_rank > sd2_rank and (sd3_rank == sd1_rank and sd3_bit > sd1_bit) then
+		--	evolved = true
+		--elseif sd1_rank < sd2_rank and (sd3_rank == sd2_rank and sd3_bit > sd2_bit) then
+		--	evolved = true
+		end
+	end
+
+	if tg[v].order == false then
+		--if sd3_rank < math.min(sd1_rank, sd2_rank) then
+		--	evolved = true
+		--end
+		if sd1_rank == sd2_rank and sd3_bit < math.min(sd1_bit, sd2_bit) then
+			evolved = true
+		elseif sd[v] < math.min(Hybrid.sd1[v], Hybrid.sd2[v]) then
+			evolved = true
+		--elseif sd1_rank < sd2_rank and (sd3_rank == sd1_rank and sd3_bit < sd1_bit) then
+		--	evolved = true
+		--elseif sd1_rank > sd2_rank and (sd3_rank == sd2_rank and sd3_bit < sd2_bit) then
+		--	evolved = true
+		end
+	end
+	return evolved
+end
+
+function Hybrid.isExceeded(tg, sd, v)
+	local exceeded = false
+	if tg[v].order == true and tg[v].value ~= bit.bor(tg[v].value, sd[v]) then
+		exceeded  = true
+	end
+	if tg[v].order == false and tg[v].value ~= bit.band(tg[v].value, sd[v]) then
+		exceeded  = true
+	end
+	return exceeded
 end
 
 function Hybrid.matchExpect(tg, sd)
@@ -558,6 +617,8 @@ function Hybrid.matchExpect(tg, sd)
 
 	-- UGLY:: I realy want to use continue!  I hate this code below!
 	-- BUGGY:: I cannot already understand this logic.
+	
+
 	for k, v in pairs(attrb_table) do
 		evolved = false
 		--print(k, v)
@@ -569,15 +630,18 @@ function Hybrid.matchExpect(tg, sd)
 			--continue
 		else
 			-- tv[v] ~= nil means we need to care this attribute, then refer this attribute
+			
+			--if tg[v].order == true and sd[v] > math.max(Hybrid.sd1[v], Hybrid.sd2[v]) then
+			--	evolved = true
+			--end
+			--if tg[v].order == false and sd[v] < math.min(Hybrid.sd1[v], Hybrid.sd2[v]) then
+			--	evolved = true
+			--end
+			
+			evolved = Hybrid.isEvolved(tg, sd, v)
+			--print(string.format("value = %s, evolved = %s ", v, tostring(evolved)))
+			local sd_rank, sd_bit = getRankAndBit(sd[v])
 
-
-			if tg[v].order == nil then evolved = true end
-			if tg[v].order == true and sd[v] > math.max(Hybrid.sd1[v], Hybrid.sd2[v]) then
-				evolved = true
-			end
-			if tg[v].order == false and sd[v] < math.min(Hybrid.sd1[v], Hybrid.sd2[v]) then
-				evolved = true
-			end
 			if tg[v].value ~= 0 and tg[v].value == sd[v] then
 				-- attribute value is matched. it means reached goal
 				reached = reached + 1
@@ -587,14 +651,11 @@ function Hybrid.matchExpect(tg, sd)
 			elseif tg[v].value ~= 0 and evolved then
 				-- attribute is eveloved. it means level up
 				
-				local sd_rank = bit.rshift(sd[v], 8)  -- same as x >>= 8
+				--local sd_rank = bit.rshift(sd[v], 8)  -- same as x >>= 8
+				-- # if a wrong bit is set then return false
 				if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
 					-- rank is matched
-					if tg[v].order == true and tg[v].value ~= bit.bor(tg[v].value, sd[v]) then
-						--print("attrb value is exceeded")
-						return false
-					end
-					if tg[v].order == false and tg[v].value ~= bit.band(tg[v].value, sd[v]) then
+					if Hybrid.isExceeded(tg, sd, v) then
 						--print("attrb value is exceeded")
 						return false
 					end
@@ -608,14 +669,14 @@ function Hybrid.matchExpect(tg, sd)
 				-- don't care value, but need to care both of rank and bit counts
 
 
-				local sd_rank = bit.rshift(sd[v], 8)  -- same as x >>= 8
+				--local sd_rank = bit.rshift(sd[v], 8)  -- same as x >>= 8
 				--print(string.format("tg[v].rank = %x, sd_rank = %x", tg[v].rank, sd_rank))
 				if tg[v].rank ~= 0 and tg[v].rank == sd_rank then
 					-- rank is matched, need to refer bit counts
 
 
-					local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
-					local sd_bit = bitCount8(sd_tmp)
+					--local sd_tmp = bit.band(sd[v], 0x00FF)  -- same as x & 0x00FF
+					--local sd_bit = bitCount8(sd_tmp)
 					--print(string.format("tg[v].bit = %d, sd_bit = %d", tg[v].bit ,sd_bit))
 					if tg[v].bit == sd_bit then
 						-- both of rank and bit counts are matched. it means reached goal
@@ -848,7 +909,6 @@ function convertTargetFirst(tg, sd)
 	return fst
 end
 
-
 ------------------------------------------------------------
 -- Seed
 ------------------------------------------------------------
@@ -1031,16 +1091,20 @@ Baboo = {}
 
 function Baboo.drawInfo(x, y)
 	x = x or 0
-	y = y or 80
+	y = y or 60
 	local rng = memory.readdword(adr_rng)
 	local feather = memory.readword(adr_total_feather)
 	local seeds = memory.readword(adr_total_seed)
 	local days = memory.readbyte(adr_days)
+	local lr = memory.readword(adr_total_reset_cnt)
+	local win = memory.readword(adr_win_count)
 
 	gui.text(x, y   , string.format(" rng   %08x", rng))
 	gui.text(x, y+10, string.format(" feather %d", feather))
 	gui.text(x, y+20, string.format(" seeds   %d", seeds))
 	gui.text(x, y+30, string.format(" days    %d", days))
+	gui.text(x, y+40, string.format(" lr  %d", lr))
+	gui.text(x, y+50, string.format(" win %d", win))
 end
 
 function Baboo.skipBattle()
@@ -1063,6 +1127,7 @@ end
 function Baboo.loseBattle()
 	joypadSetHelper(1, {select=1}, 16)  -- skip battle
 	fadv(18)
+	fadv(10)  -- in case of lag
 	joypadSetHelper(1, {x=1}, 6)  -- skip art score
 	fadv(26)
 end
@@ -1070,14 +1135,15 @@ end
 function Baboo.skipFeed()
 	joypadSetHelper(1, {select=1}, 16)  -- skip feed
 	fadv(18)
+	fadv(10)  -- in case of lag
 	joypadSetHelper(1, {x=1}, 6)  -- skip satisfaction
 	fadv(20)
 
 	joypadSetHelper(1, {x=1}, 6)  -- skip golden, if it was dropped
 	fadv(20)
 
-	joypadSetHelper(1, {x=1}, 6)  -- for debug
-	fadv(20)  -- for debug
+	joypadSetHelper(1, {x=1}, 6)  -- in case of lag
+	fadv(20)  -- in case of lag
 end
 
 function Baboo.postSkipFeed()
@@ -1147,6 +1213,18 @@ function bitCount8(b8)
 
 	--print(string.format("bit counts are %d", b8))
 	return b8
+end
+
+
+function getRankAndBit(value)
+	local sd_rank
+	local sd_bit
+	local bit_tmp
+
+	sd_rank = bit.rshift(value, 8)  -- same as x >>= 8
+	bit_tmp = bit.band(value, 0x00FF)  -- same as x & 0x00FF
+	sd_bit = bitCount8(bit_tmp)
+	return sd_rank, sd_bit
 end
 
 function assertTrue(value, message)

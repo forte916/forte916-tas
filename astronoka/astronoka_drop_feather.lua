@@ -31,7 +31,7 @@ emu.speedmode("turbo")       -- drops some frames
 -- + Baboo is defined at astronoka_lib
 ------------------------------------------------------------
 
-function Baboo.attemptReload(afunc)
+function Baboo.attemptReload(func)
 	-- read rng
 	local crr_rng = memory.readdword(adr_rng)
 	-- check whether the rng is changed
@@ -45,12 +45,11 @@ function Baboo.attemptReload(afunc)
 
 	-- if the baboo droped a feather then return true
 	-- else reload savestate and return false.
-	if afunc() then
+	if func() then
 		return true
 	else
 		pre_rng = crr_rng
 		savestate.load(pre_state)
-		print("***** reload savestate *****".." <--------------------")
 		return false
 	end
 end
@@ -80,11 +79,11 @@ function Baboo.dropGoldenSeedActual()
 end
 
 function Baboo.dropGoldenSeed()
-	local retry_cnt = 1400
+	local retry_frm = 1500  -- range of frames: 1400 ~ 1600
 	local result = false
 	Baboo.loseBattle()
 
-	for i=0, retry_cnt do
+	for i=0, retry_frm do
 
 		result = Baboo.attemptReload(Baboo.dropGoldenSeedActual)
 		if result == true then
@@ -105,7 +104,6 @@ local result = false
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 pre_rng = 0
-pre_rng2 = 0
 pre_feather = memory.readword(adr_total_feather)
 pre_total_seed = memory.readword(adr_total_seed)
 
