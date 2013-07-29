@@ -555,6 +555,17 @@ function Hybrid.isEvolved(tg, sd, v)
 	local sd1_rank, sd1_bit = getRankAndBit(Hybrid.sd1[v])
 	local sd2_rank, sd2_bit = getRankAndBit(Hybrid.sd2[v])
 	local sd3_rank, sd3_bit = getRankAndBit(sd[v])
+	local sd1_value, sd2_value
+	if Hybrid.sd1[v] == 0x494 then
+		sd1_value = 0xC94
+	else
+		sd1_value = Hybrid.sd1[v]
+	end
+	if Hybrid.sd2[v] == 0x494 then
+		sd2_value = 0xC94
+	else
+		sd2_value = Hybrid.sd2[v]
+	end
 
 	if tg[v].order == nil then evolved = true end
 	if tg[v].order == true then
@@ -563,7 +574,7 @@ function Hybrid.isEvolved(tg, sd, v)
 		--end
 		if sd1_rank == sd2_rank and sd3_bit > math.max(sd1_bit, sd2_bit) then
 			evolved = true
-		elseif sd[v] > math.max(Hybrid.sd1[v], Hybrid.sd2[v]) then
+		elseif sd[v] > math.max(sd1_value, sd2_value) then
 			evolved = true
 		--elseif sd1_rank > sd2_rank and (sd3_rank == sd1_rank and sd3_bit > sd1_bit) then
 		--	evolved = true
@@ -578,7 +589,7 @@ function Hybrid.isEvolved(tg, sd, v)
 		--end
 		if sd1_rank == sd2_rank and sd3_bit < math.min(sd1_bit, sd2_bit) then
 			evolved = true
-		elseif sd[v] < math.min(Hybrid.sd1[v], Hybrid.sd2[v]) then
+		elseif sd[v] < math.min(sd1_value, sd2_value) then
 			evolved = true
 		--elseif sd1_rank < sd2_rank and (sd3_rank == sd1_rank and sd3_bit < sd1_bit) then
 		--	evolved = true
