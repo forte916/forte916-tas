@@ -93,9 +93,10 @@ target_vegee = target_vegee_1305
 --target_tree = target_tree_1209
 --target_tree = target_tree_1305
 --target_tree = target_tree_1314
-target_tree = target_tree_1401
+--target_tree = target_tree_1401
+--target_tree = target_tree_1401_typeB
 --target_tree = target_tree_1408
-
+target_tree = target_tree_1416
 
 try_cnt1 = 1000  -- max retry count each level up
 try_cnt2 = 24    -- max level up count
