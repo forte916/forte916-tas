@@ -176,20 +176,58 @@ knd_suica     = 0x22  -- スイカタワー
 knd_dorian    = 0x23  -- 銀河ドリアン
 knd_astro     = 0x24  -- アストロキング
 
--- kind2
+-- eponym1
+knd_any_golden = 0x00
+knd_size      = 0x01
+knd_weight    = 0x02
+knd_pattern   = 0x03
+knd_nutrition = 0x04
+knd_sugar     = 0x05
+knd_texture   = 0x06
+knd_shape     = 0x07
+knd_flavor    = 0x08
+knd_smell     = 0x09
+knd_tone      = 0x0A
 knd_plain     = 0x63
+knd_plain_golden = 0x64
+
+
+-- eponym2
+knd_final     = 0x16
+knd_great     = 0x12
+knd_good      = 0x0e
+knd_lv3       = 0x0c
+knd_lv0       = 0x0b
+knd_mlv1      = 0x0a
+knd_bad       = 0x09
+knd_devil     = 0x05
+knd_tend      = 0x01
+
 
 attrb_table = {"size", "weight", "pattern", "nutrition", "sugar", "texture", "shape", "flavor", "smell", "tone"}
+attrb_header = "   siz wgt ptr ntr sgr txt shp flv sml ton"
 
 
 -- ## Crop Field
-adr_field_position = 0x167D6A
+adr_field_no = 0x167D69  -- 1byte
+field_no1 = 0x00
+field_no2 = 0x01
+field_no3 = 0x02
+field_no4 = 0x03
+
+-- a cursor position in the field
+adr_field_position = 0x167D6A  -- 2byte
 pos_bottom_left   = 0x0000
 pos_bottom_center = 0x0001
 pos_bottom_right  = 0x0002
 pos_top_left      = 0x0100
 pos_top_center    = 0x0101
 pos_top_right     = 0x0102
+
+-- pointing the address of crop on the cursor
+adr_crop_adr = 0x167D6C  -- 4byte
+
+
 
 ------------------------------------------------------------
 -- Hybrid
@@ -199,6 +237,7 @@ Hybrid.sd1 = {}
 Hybrid.sd2 = {}
 Hybrid.sd3 = {}
 Hybrid.sd4 = {}
+Hybrid.keepedSeed = {}
 
 function Hybrid.readParentProperty(off_parent)
 	local prop = nil
@@ -227,7 +266,6 @@ function Hybrid.drawHybrid(sd1, sd2, sd3, tg, x, y)
 	if sd1 == nil or sd2 == nil then return end
 	tg = tg or {kind1 = 0}
 
-	local header = "   siz wgt ptr ntr sgr txt shp flv sml ton"
 	local sd1_str = string.format("%2x", sd1.kind1)
 	local sd2_str = string.format("%2x", sd2.kind1)
 	local sd3_str = string.format("%2x", sd3.kind1)
@@ -262,7 +300,7 @@ function Hybrid.drawHybrid(sd1, sd2, sd3, tg, x, y)
 		end
 	end
 
-	gui.text(x, y, header)
+	gui.text(x, y, attrb_header)
 	gui.text(x, y+10, sd1_str)
 	gui.text(x, y+20, sd2_str)
 	gui.text(x, y+30, sd3_str)
@@ -355,6 +393,54 @@ function Hybrid.changeGroup(pad)
 	end
 end
 
+function Hybrid.matchSeed(sd1, sd2)
+	local found1 = false
+	local reached = 0
+
+	--print("  >>> matchParent start >>>")
+
+	if sd1.kind1 == sd2.kind1 then
+		found1 = true
+	else
+		return false
+	end
+
+	for k, v in pairs(attrb_table) do
+		if sd1[v] == nil then
+			-- accepts any
+			reached = reached + 1
+		else
+			-- sd1[v] ~= nil means we need to care this attribute, then refer this attribute
+
+			if sd1[v] == sd2[v] then
+				-- attribute value is matched. it means reached
+				reached = reached + 1
+			else
+				return false
+			end
+		end
+	end
+
+	if reached == #attrb_table then
+		return true
+	else
+		return false
+	end
+end
+
+function Hybrid.isKeepedSeed(sd)
+	--print(">>> isKeepedSeed start >>>")
+
+	for k, v in pairs(Hybrid.keepedSeed) do
+		--print("k = "..tostring(k)..", v = "..tostring(v))
+		matched = Hybrid.matchSeed(v, sd)
+		if matched == true then
+			return true
+		end
+	end
+	return false
+end
+
 function Hybrid.matchParent(tg, sd)
 	local found1 = false
 	local found2 = false
@@ -368,7 +454,7 @@ function Hybrid.matchParent(tg, sd)
 		return false
 	end
 
-	if tg.kind2 == sd.kind2 and tg.kind2 == knd_plain then
+	if tg.eponym1 == sd.eponym1 and tg.eponym1 == knd_plain then
 		found2 = true
 	end
 
@@ -384,7 +470,7 @@ function Hybrid.matchParent(tg, sd)
 			reached = reached + 1
 			--continue
 		else
-			-- tv[v] ~= nil means we need to care this attribute, then refer this attribute
+			-- tg[v] ~= nil means we need to care this attribute, then refer this attribute
 			local sd_rank, sd_bit = getRankAndBit(sd[v])
 
 			if tg[v].value ~= 0 and tg[v].value == sd[v] then
@@ -431,9 +517,7 @@ function Hybrid.matchParent(tg, sd)
 	end
 end
 
-
 function Hybrid.selectFirstSeed(tg, pad_row, pad_group)
-	local matched = false
 	local cursor = 0
 	local start_cursor = 0
 	local row = 0
@@ -462,10 +546,16 @@ function Hybrid.selectFirstSeed(tg, pad_row, pad_group)
 			--	Hybrid.sd1 = Hybrid.readParentProperty(adr_seed_first)
 			--end
 			--print("sd1::"..Hybrid.sd1.info)
-			
+
 			local matched = Hybrid.matchParent(tg, Hybrid.sd1)
 			if matched then
-				return true
+				-- check whether a slected seed is a keeped seed
+				local keeped = Hybrid.isKeepedSeed(Hybrid.sd1)
+				if keeped == true then
+					print("sd1:: keeped seed ********** ********** **********")
+				else
+					return true
+				end
 			else
 				--print("sd1:: not found")
 			end
@@ -488,7 +578,6 @@ function Hybrid.selectFirstSeed(tg, pad_row, pad_group)
 end
 
 function Hybrid.selectSecondSeed(tg, pad_row, pad_group)
-	local matched = false
 	local cursor = 0
 	local start_cursor = 0
 	local row = 0
@@ -520,7 +609,13 @@ function Hybrid.selectSecondSeed(tg, pad_row, pad_group)
 
 			local matched = Hybrid.matchParent(tg, Hybrid.sd2)
 			if matched then
-				return true
+				-- check whether a slected seed is a keeped seed
+				local keeped = Hybrid.isKeepedSeed(Hybrid.sd2)
+				if keeped == true then
+					print("sd2:: keeped seed ********** ********** **********")
+				else
+					return true
+				end
 			else
 				--print("sd2:: not found")
 			end
@@ -640,7 +735,7 @@ function Hybrid.matchExpect(tg, sd)
 			--print(str..", attrb is nil, accepts any")
 			--continue
 		else
-			-- tv[v] ~= nil means we need to care this attribute, then refer this attribute
+			-- tg[v] ~= nil means we need to care this attribute, then refer this attribute
 			
 			--if tg[v].order == true and sd[v] > math.max(Hybrid.sd1[v], Hybrid.sd2[v]) then
 			--	evolved = true
@@ -931,8 +1026,9 @@ function Seed.readProperty(off_seed)
 
 	-- property of seed (+28h)
 	local off_kind1     = off_seed         -- 0x167E80
-	local off_kind2     = off_seed + 0x01  -- 0x167E81
-	local off_boost     = off_seed + 0x03  -- 0x167E83
+	local off_eponym1   = off_seed + 0x01  -- 0x167E81  -- syoki, golden or each attributes
+	local off_eponym2   = off_seed + 0x02  -- 0x167E82  -- level of eponym1 ex) micro, tyo-keiryo
+	local off_postnum   = off_seed + 0x03  -- 0x167E83  -- postnum ex) yaya-omo shimaimo3
 	local off_count     = off_seed + 0x04  -- 0x167E84
 	local off_stock     = off_seed + 0x05  -- 0x167E85
 	local off_price     = off_seed + 0x06  -- 0x167E86
@@ -950,8 +1046,9 @@ function Seed.readProperty(off_seed)
 
 	-- Read the property
 	prop.kind1     = memory.readbyte(off_kind1    )
-	prop.kind2     = memory.readbyte(off_kind2    )
-	prop.boost     = memory.readbyte(off_boost    )
+	prop.eponym1   = memory.readbyte(off_eponym1  )
+	prop.eponym2   = memory.readbyte(off_eponym2  )
+	prop.postnum   = memory.readbyte(off_postnum  )
 	prop.count     = memory.readbyte(off_count    )
 	prop.stock     = memory.readbyte(off_stock    )
 	prop.price     = memory.readword(off_price    )
@@ -975,7 +1072,7 @@ end
 function Seed.toString(prop)
 	local str = string.format("seed:: %2x %2x %2x %2d %2d, "
 			.."%5d %3x %3x %3x %3x %3x %3x %3x %3x %3x %3x, ",
-			prop.kind1, prop.kind2, prop.boost, prop.count, prop.stock,
+			prop.kind1, prop.eponym1, prop.postnum, prop.count, prop.stock,
 			prop.price, prop.size, prop.weight, prop.pattern, prop.nutrition,
 			prop.sugar, prop.texture, prop.shape, prop.flavor, prop.smell, prop.tone)
 	str = str .. string.format(" %08x", prop.adr)
@@ -1008,8 +1105,9 @@ function FCrop.readProperty(off_crop)
 
 	-- property of crop in the field (+34h)
 	local off_kind1     = off_crop         -- 0x168E20
-	local off_kind2     = off_crop + 0x01  -- 0x168E21
-	local off_boost     = off_crop + 0x03  -- 0x168E23
+	local off_eponym1   = off_crop + 0x01  -- 0x168E21
+	local off_eponym2   = off_seed + 0x02  -- 0x167E82
+	local off_postnum   = off_crop + 0x03  -- 0x168E23
 	local off_price     = off_crop + 0x06  -- 0x168E26
 	local off_size      = off_crop + 0x08  -- 0x168E28
 	local off_weight    = off_crop + 0x0A  -- 0x168E2A
@@ -1027,8 +1125,9 @@ function FCrop.readProperty(off_crop)
 	local off_condition = off_crop + 0x2B  -- 0x168E4B
 
 	prop.kind1     = memory.readbyte(off_kind1    )
-	prop.kind2     = memory.readbyte(off_kind2    )
-	prop.boost     = memory.readbyte(off_boost    )
+	prop.eponym1   = memory.readbyte(off_eponym1  )
+	prop.eponym2   = memory.readbyte(off_eponym2  )
+	prop.postnum   = memory.readbyte(off_postnum  )
 	prop.price     = memory.readword(off_price    )
 	prop.size      = memory.readword(off_size     )
 	prop.weight    = memory.readword(off_weight   )
@@ -1054,7 +1153,7 @@ function FCrop.toString(prop)
 	local str = string.format("fcrop:: %2x %2x %2x, "
 			.."%5d %3x %3x %3x %3x %3x %3x %3x %3x %3x %3x, "
 			.."%2x %2d %2x %2x",
-			prop.kind1, prop.kind2, prop.boost,
+			prop.kind1, prop.eponym1, prop.postnum,
 			prop.price, prop.size, prop.weight, prop.pattern, prop.nutrition,
 			prop.sugar, prop.texture, prop.shape, prop.flavor, prop.smell, prop.tone,
 			prop.stage, prop.days, prop.baboo, prop.condition)

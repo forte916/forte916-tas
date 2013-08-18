@@ -46,6 +46,39 @@ function TAS.reapVegee()
 	fadv(30)
 end
 
+function TAS.reapPlantVegee5()
+	local pos = 0
+	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)
+	TAS.plantVegee()
+
+	for i=1, 4 do
+		pos = memory.readword(adr_field_position)
+		if pos == pos_bottom_left then
+			joypadSetHelper(1, {right=1}, 6)
+			fadv(6)
+		elseif pos == pos_bottom_center then
+			joypadSetHelper(1, {right=1}, 6)
+			fadv(6)
+		elseif pos == pos_bottom_right then
+			joypadSetHelper(1, {up=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_right then
+			joypadSetHelper(1, {left=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_center then
+			joypadSetHelper(1, {left=1}, 6)
+			fadv(6)
+		elseif pos == pos_top_left then
+			joypadSetHelper(1, {down=1}, 6)
+			fadv(6)
+		end
+		TAS.reapVegee()
+		joypadSetHelper(1, {circle=1}, 6)
+		TAS.plantVegee()
+	end
+end
+
 function TAS.plantVegee5()
 	local pos = 0
 	joypadSetHelper(1, {circle=1}, 6)
@@ -106,6 +139,16 @@ function TAS.reapVegee6()
 	end
 end
 
+function TAS.leftField()
+	joypadSetHelper(1, {l1=1}, 10)  -- left
+	fadv(42)
+end
+
+function TAS.rightField()
+	joypadSetHelper(1, {r1=1}, 10)  -- right
+	fadv(42)
+end
+
 function TAS.exitField()
 	joypadSetHelper(1, {x=1}, 6)  -- exit field
 	fadv(8)
@@ -139,7 +182,7 @@ end
 
 function TAS.exitDay()
 	joypadSetHelper(1, {circle=1}, 6)  -- press exit day
-	fadv(4+9)
+	fadv(4+8)
 	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
 	fadv(8)
 	joypadSetHelper(1, {x=1}, 10)  -- cancel turning off the light
@@ -147,7 +190,7 @@ end
 
 function TAS.exitDayBaboo()
 	joypadSetHelper(1, {circle=1}, 6)  -- press exit day
-	fadv(4+9)
+	fadv(4+8)
 	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
 	fadv(100)
 end
@@ -178,7 +221,7 @@ function TAS.enterHouse()
 end
 
 function TAS.exitHouse()
-	joypadSetHelper(1, {circle=1}, 6)  -- press back
+	joypadSetHelper(1, {x=1}, 6)  -- press back
 	fadv(68)
 end
 
@@ -200,7 +243,7 @@ function TAS.enterPedro()
 end
 
 function TAS.exitPedro()
-	joypadSetHelper(1, {circle=1}, 6)  -- press back
+	joypadSetHelper(1, {x=1}, 6)  -- press back
 	fadv(30)
 end
 
@@ -219,7 +262,7 @@ end
 
 function TAS.enterBusStop()
 	joypadSetHelper(1, {circle=1}, 6)  -- press bus stop
-	fadv(88+10)
+	fadv(88+8)
 	joypadSetHelper(1, {circle=1}, 6)  -- skip msg
 end
 function TAS.gotoTown()
@@ -228,13 +271,26 @@ function TAS.gotoTown()
 	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
 	fadv(72)
 end
-function TAS.goHome()
+function TAS.leaveTown()
+	joypadSetHelper(1, {x=1}, 6)  -- press back
+	fadv(99+8)
+end
+
+function TAS.returnHome()
 	joypadSetHelper(1, {circle=1}, 6)  -- press town
 	fadv(8)
 	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
 	fadv(52)
 end
 
+function TAS.enterLabo()
+	joypadSetHelper(1, {circle=1}, 6)  -- press labo
+	fadv(60)
+end
+
+function TAS.skipMsg()
+	fadv(19)
+end
 
 function TAS.start()
 	fadv(767)  -- opening
@@ -655,16 +711,25 @@ macro_table = {
 	{key = "I", func = TAS.exitTrapField},
 	{key = "O", func = TAS.enterPedro},
 	{key = "P", func = TAS.exitPedro},
+	{key = "leftbracket", func = TAS.skipMsg},
+
+	{key = "left", func = TAS.leftField},
+	{key = "right", func = TAS.rightField},
+	{key = "up", func = TAS.reapPlantVegee5},
+	{key = "down", func = nil},
+	{key = "home", func = TAS.enterGlasses},
+	{key = "end", func = TAS.exitGlasses},
+
 	{key = "1", func = TAS.enterHouse},
 	{key = "2", func = TAS.exitHouse},
 	{key = "3", func = TAS.enterHybridMachineRoom},
 	{key = "4", func = TAS.exitHybridMachineRoom},
 	{key = "5", func = TAS.enterBusStop},
 	{key = "6", func = TAS.gotoTown},
-	{key = "7", func = nil},
-	{key = "8", func = TAS.goHome},
-	{key = "9", func = TAS.enterGlasses},
-	{key = "0", func = TAS.exitGlasses},
+	{key = "7", func = TAS.leaveTown},
+	{key = "8", func = TAS.returnHome},
+	{key = "9", func = TAS.enterLabo},
+	{key = "0", func = nil},
 }
 
 function doInputMacro()
@@ -699,6 +764,8 @@ while true do
 	end
 
 	if initial == 0 then
+		-- This input macro starts at next frame which you press the button at,
+		-- not starts at current frame.
 		doInputMacro()
 		Baboo.drawInfo()
 	end

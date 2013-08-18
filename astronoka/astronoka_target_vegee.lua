@@ -16,19 +16,25 @@ require "astronoka_lib"
 -- shimaimo
 local shimaimo_plain = {
 	kind1 = knd_shimaimo,
-	kind2 = knd_plain,
+	eponym1 = knd_plain,
 	weight = {rank = 0xC, bit = 3, value = 0x0C94, order = nil},
+}
+
+local shimaimo_mlevel2 = {
+	kind1 = knd_shimaimo,
+	eponym1 = 0,
+	weight = {rank = 0xB, bit = 7, value = 0, order = false},
 }
 
 local shimaimo_m100 = {
 	kind1 = knd_shimaimo,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 
 local shimaimo_m100_m100x2 = {
 	kind1 = knd_shimaimo,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xB, bit = 0, value = 0xB00, order = false},
 	nutrition = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
@@ -36,7 +42,7 @@ local shimaimo_m100_m100x2 = {
 
 local shimaimo_p200 = {
 	kind1 = knd_shimaimo,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
@@ -44,46 +50,46 @@ local shimaimo_p200 = {
 -- kabu
 local kabu_plain = {
 	kind1 = knd_kabu,
-	kind2 = knd_plain,
+	eponym1 = knd_plain,
 	size = {rank = 0xC, bit = 3, value = 0x0C94, order = nil},
 }
 
 local kabu_m100 = {
 	kind1 = knd_kabu,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 
 local kabu_p200 = {
 	kind1 = knd_kabu,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
 -- renkon
 local renkon_any = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 local renkon_bit2 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xC, bit = 2, value = 0, order = false},
 }
 
 local renkon_any_m100x2 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
-	nutrition = {rank = 0xC, bit = 3, value = 0x0C94, order = nil}, -- enable only year1 4/1
+	--nutrition = {rank = 0xC, bit = 3, value = 0x0C94, order = nil}, -- TODO:: enable only year1 4/1
 }
 
 local renkon_bit2_m100x2 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xC, bit = 2, value = 0, order = false},
@@ -91,26 +97,26 @@ local renkon_bit2_m100x2 = {
 
 local renkon_m100bit1 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xB, bit = 1, value = 0, order = false},
 }
 
 local renkon_m100 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xB, bit = 0, value = 0xB00, order = false},
 }
 
 local renkon_m100bit1_m100 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xB, bit = 1, value = 0, order = false},
 }
 
 local renkon_m100_m100x2 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
@@ -118,26 +124,26 @@ local renkon_m100_m100x2 = {
 
 local renkon_m100bit3 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xB, bit = 3, value = 0, order = false},
 }
 
 local renkon_m100bit2 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xB, bit = 2, value = 0, order = false},
 }
 
 local renkon_m100bit2_m100 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xB, bit = 2, value = 0, order = false},
 }
 
 local renkon_m100bit1_m100x2 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xB, bit = 1, value = 0, order = false},
@@ -145,7 +151,7 @@ local renkon_m100bit1_m100x2 = {
 
 local renkon_m100_m100x3 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
@@ -154,24 +160,24 @@ local renkon_m100_m100x3 = {
 
 local renkon_m100_m100 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	nutrition = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 local renkon_any_m100txt = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 local renkon_any_m100sgr = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 
 local renkon_m100bit1_m100x4 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xB, bit = 1, value = 0, order = false},
@@ -180,7 +186,7 @@ local renkon_m100bit1_m100x4 = {
 }
 local renkon_m100_m100x5 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 	pattern = {rank = 0xB, bit = 0, value = 0xB00, order = false},
@@ -191,19 +197,19 @@ local renkon_m100_m100x5 = {
 
 local renkon_bit4 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xC, bit = 4, value = 0, order = true},
 }
 
 local renkon_p200 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
 local renkon_any_p200 = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
@@ -212,55 +218,55 @@ local renkon_any_p200 = {
 -- ninjin
 local ninjin_any = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 local ninjin_bit2 = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0xC, bit = 2, value = 0, order = false},
 }
 
 local ninjin_m100bit1 = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0xB, bit = 1, value = 0, order = false},
 }
 local ninjin_m100 = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 
 local ninjin_bit4 = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0xC, bit = 4, value = 0, order = true},
 }
 
 local ninjin_any_p200x2 = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 	pattern = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
 local ninjin_p100bit7 = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0xD, bit = 7, value = 0, order = true},
 }
 
 local ninjin_p200 = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
 local ninjin_p200_p200x2 = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 	pattern = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 	nutrition = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
@@ -270,19 +276,19 @@ local ninjin_p200_p200x2 = {
 -- tamanegi
 local tamanegi_any_bit4 = {
 	kind1 = knd_tamanegi,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xC, bit = 4, value = 0, order = true},
 }
 
 local tamanegi_p100bit7 = {
 	kind1 = knd_tamanegi,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xD, bit = 7, value = 0, order = true},
 }
 
 local tamanegi_p200 = {
 	kind1 = knd_tamanegi,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
@@ -290,21 +296,21 @@ local tamanegi_p200 = {
 -- imokyu
 local imokyu_any_bit4 = {
 	kind1 = knd_imokyu,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xC, bit = 4, value = 0, order = true},
 }
 
 -- gobou
 local gobou_p100bit7_p200 = {
 	kind1 = knd_gobou,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xD, bit = 7, value = 0, order = true},
 	weight = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
 local gobou_p200_p200 = {
 	kind1 = knd_gobou,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 	weight = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
@@ -313,54 +319,54 @@ local gobou_p200_p200 = {
 -- hourensou
 local hourensou_plain = {
 	kind1 = knd_hourensou,
-	kind2 = knd_plain,
+	eponym1 = knd_plain,
 	pattern = {rank = 0xC, bit = 3, value = 0x0C94, order = nil},
 }
 
 local hourensou_p100bit7 = {
 	kind1 = knd_hourensou,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xD, bit = 7, value = 0, order = true},
 }
 
 local hourensou_p200 = {
 	kind1 = knd_hourensou,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
 -- knd_tomato    = 0x19
 local tomato_plain = {
 	kind1 = knd_tomato,
-	kind2 = knd_plain,
+	eponym1 = knd_plain,
 	nutrition = {rank = 0xC, bit = 3, value = 0x0C94, order = nil},
 }
 
 -- kyuri
 local kyuri_any = {
 	kind1 = knd_kyuri,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0, bit = 0, value = 0, order = nil},
 }
 local kyuri_bit2 = {
 	kind1 = knd_kyuri,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0xC, bit = 2, value = 0, order = false},
 }
 local kyuri_m100 = {
 	kind1 = knd_kyuri,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 local kyuri_bit4 = {
 	kind1 = knd_kyuri,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0xC, bit = 4, value = 0, order = true},
 }
 
 local kyuri_p200 = {
 	kind1 = knd_kyuri,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
@@ -368,28 +374,28 @@ local kyuri_p200 = {
 -- kyabetsu
 local kyabetsu_any = {
 	kind1 = knd_kyabetsu,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0, bit = 0, value = 0, order = nil},
 }
 local kyabetsu_bit2 = {
 	kind1 = knd_kyabetsu,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0xC, bit = 2, value = 0, order = false},
 }
 local kyabetsu_m100 = {
 	kind1 = knd_kyabetsu,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 local kyabetsu_bit4 = {
 	kind1 = knd_kyabetsu,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0xC, bit = 4, value = 0, order = true},
 }
 
 local kyabetsu_p200 = {
 	kind1 = knd_kyabetsu,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 }
 
@@ -397,16 +403,16 @@ local kyabetsu_p200 = {
 -- meron
 local meron_any = {
 	kind1 = knd_meron,
-	kind2 = 0,
+	eponym1 = 0,
 }
 local meron_bit4 = {
 	kind1 = knd_meron,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0xC, bit = 4, value = 0, order = true},
 }
 local meron_plevel3 = {
 	kind1 = knd_meron,
-	kind2 = 0,
+	eponym1 = 0,
 	-- sugar: +101 ~ +130
 	sugar = {rank = 0xD, bit = 1, value = 0, order = true},
 }
@@ -415,28 +421,28 @@ local meron_plevel3 = {
 -- knd_remon     = 0x1D
 local remon_any = {
 	kind1 = knd_remon,
-	kind2 = 0,
+	eponym1 = 0,
 	smell = {rank = 0, bit = 0, value = 0, order = nil},
 }
 local remon_any_m100 = {
 	kind1 = knd_remon,
-	kind2 = 0,
+	eponym1 = 0,
 	smell = {rank = 0, bit = 0, value = 0, order = nil},
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 local remon_bit2 = {
 	kind1 = knd_remon,
-	kind2 = 0,
+	eponym1 = 0,
 	smell = {rank = 0xC, bit = 2, value = 0, order = false},
 }
 local remon_m100 = {
 	kind1 = knd_remon,
-	kind2 = 0,
+	eponym1 = 0,
 	smell = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 local remon_p200_m100 = {
 	kind1 = knd_remon,
-	kind2 = 0,
+	eponym1 = 0,
 	smell = {rank = 0xD, bit = 8, value = 0x0DFF, order = true},
 	size = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
@@ -445,11 +451,11 @@ local remon_p200_m100 = {
 -- karifura
 local karifura_any = {
 	kind1 = knd_karifura,
-	kind2 = 0,
+	eponym1 = 0,
 }
 local karifura_plevel3 = {
 	kind1 = knd_karifura,
-	kind2 = 0,
+	eponym1 = 0,
 	-- sugar: +101 ~ +130
 	sugar = {rank = 0xD, bit = 1, value = 0, order = true},
 }
@@ -457,22 +463,22 @@ local karifura_plevel3 = {
 -- corn
 local corn_any = {
 	kind1 = knd_corn,
-	kind2 = 0,
+	eponym1 = 0,
 }
 local corn_bit2 = {
 	kind1 = knd_corn,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0xC, bit = 2, value = 0, order = false},
 }
 local corn_mlevel2 = {
 	kind1 = knd_corn,
-	kind2 = 0,
+	eponym1 = 0,
 	-- texture: -30
 	texture = {rank = 0xB, bit = 7, value = 0x0BF7, order = false},
 }
 local corn_mlevel3 = {
 	kind1 = knd_corn,
-	kind2 = 0,
+	eponym1 = 0,
 	-- texture: -60 ~ -31
 	texture = {rank = 0xB, bit = 6, value = 0, order = false},
 }
@@ -480,11 +486,11 @@ local corn_mlevel3 = {
 -- kabocha
 local kabocha_any = {
 	kind1 = knd_kabocha,
-	kind2 = 0,
+	eponym1 = 0,
 }
 local kabocha_request = {
 	kind1 = knd_kabocha,
-	kind2 = 0,
+	eponym1 = 0,
 	-- sugar: +101 ~ +130
 	sugar = {rank = 0xD, bit = 1, value = 0, order = true},
 	-- texture: -60 ~ -31
@@ -494,28 +500,28 @@ local kabocha_request = {
 -- knd_mame      = 0x06
 local mame_any = {
 	kind1 = knd_mame,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 -- knd_peach     = 0x1F
 local peach_any = {
 	kind1 = knd_peach,
-	kind2 = 0,
+	eponym1 = 0,
 	smell = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 -- knd_karashi   = 0x07
 local karashi_any = {
 	kind1 = knd_karashi,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 -- knd_ichigo    = 0x20
 local ichigo_any = {
 	kind1 = knd_ichigo,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
@@ -525,17 +531,17 @@ local ichigo_any = {
 -- garlic
 local garlic_any = {
 	kind1 = knd_garlic,
-	kind2 = 0,
+	eponym1 = 0,
 	smell = {rank = 0, bit = 0, value = 0, order = nil},
 }
 local garlic_p100bit6 = {
 	kind1 = knd_garlic,
-	kind2 = 0,
+	eponym1 = 0,
 	smell = {rank = 0xD, bit = 6, value = 0, order = true},
 }
 local garlic_request = {
 	kind1 = knd_garlic,
-	kind2 = 0,
+	eponym1 = 0,
 	-- smell: +161 ~ +199
 	smell = {rank = 0xD, bit = 7, value = 0, order = true},
 	-- nutrition: -99 ~ -61
@@ -543,99 +549,330 @@ local garlic_request = {
 }
 local garlic_p300 = {
 	kind1 = knd_garlic,
-	kind2 = 0,
-	smell = {rank = 0xE, bit = 8, value = 0xEFF, order = true},
+	eponym1 = 0,
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
 }
 
 -- knd_wakame    = 0x08
 local wakame_any = {
 	kind1 = knd_wakame,
-	kind2 = 0,
+	eponym1 = 0,
 	shape = {rank = 0, bit = 0, value = 0, order = nil},
 }
 local wakame_m100 = {
 	kind1 = knd_wakame,
-	kind2 = 0,
-	shape = {rank = 0xA, bit = 8, value = 0xAFF, order = false},
-}
-local wakame_p200bit7 = {
-	kind1 = knd_wakame,
-	kind2 = 0,
-	shape = {rank = 0xE, bit = 7, value = 0, order = true},
+	eponym1 = 0,
+	shape = {rank = 0xA, bit = 8, value = 0x0AFF, order = false},
 }
 local wakame_m200 = {
 	kind1 = knd_wakame,
-	kind2 = 0,
-	shape = {rank = 0xA, bit = 0, value = 0xA00, order = false},
+	eponym1 = 0,
+	shape = {rank = 0xA, bit = 0, value = 0x0A00, order = false},
+}
+local wakame_bit4 = {
+	kind1 = knd_wakame,
+	eponym1 = 0,
+	shape = {rank = 0xC, bit = 4, value = 0, order = true},
+}
+local wakame_p200bit7 = {
+	kind1 = knd_wakame,
+	eponym1 = 0,
+	shape = {rank = 0xE, bit = 7, value = 0, order = true},
 }
 
 -- knd_pine      = 0x21
 local pine_any = {
 	kind1 = knd_pine,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0, bit = 0, value = 0, order = nil},
 	tone = {rank = 0, bit = 0, value = 0, order = nil},
 }
-local pine_p100bit7 = {
+local pine_p100bit7ton = {
 	kind1 = knd_pine,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0, bit = 0, value = 0, order = nil},
 	tone = {rank = 0xD, bit = 7, value = 0, order = true},
+}
+local pine_p200bit7ton = {
+	kind1 = knd_pine,
+	eponym1 = 0,
+	size = {rank = 0, bit = 0, value = 0, order = nil},
+	tone = {rank = 0xE, bit = 7, value = 0, order = true},
+}
+local pine_p200bit1siz = {
+	kind1 = knd_pine,
+	eponym1 = 0,
+	size = {rank = 0xE, bit = 1, value = 0, order = true},
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
+}
+local pine_p200bit7siz = {
+	kind1 = knd_pine,
+	eponym1 = 0,
+	size = {rank = 0xE, bit = 7, value = 0, order = true},
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
+}
+local pine_p300_p300 = {
+	kind1 = knd_pine,
+	eponym1 = 0,
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+local pine_m200bit7siz = {
+	kind1 = knd_pine,
+	eponym1 = 0,
+	size = {rank = 0xA, bit = 7, value = 0, order = false},
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
+}
+local pine_m200siz = {
+	kind1 = knd_pine,
+	eponym1 = 0,
+	size = {rank = 0xA, bit = 0, value = 0x0A00, order = false},
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 
 -- knd_konbu     = 0x09
 local konbu_any = {
 	kind1 = knd_konbu,
-	kind2 = 0,
+	eponym1 = 0,
 	flavor = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 -- knd_suica     = 0x22
 local suica_any = {
 	kind1 = knd_suica,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0, bit = 0, value = 0, order = nil},
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local suica_p200bit1sgr = {
+	kind1 = knd_suica,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 1, value = 0, order = true},
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local suica_p300sgr = {
+	kind1 = knd_suica,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
 	tone = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 -- knd_matsutake = 0x17
 local matsutake_any = {
 	kind1 = knd_matsutake,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0, bit = 0, value = 0, order = nil},
+	texture = {rank = 0, bit = 0, value = 0, order = nil},
+}
+local matsutake_any_416 = {
+	kind1 = knd_matsutake,
+	eponym1 = 0,
+	pattern = {rank = 0, bit = 0, value = 0, order = nil},
+	texture = {rank = 0, bit = 0, value = 0, order = nil},
+	-- TODO:: These attributes should be suited in year1 4/16
+	sugar = {rank = 0xC, bit = 4, value = 0, order = true},
+}
+local matsutake_m200bit7ptn = {
+	kind1 = knd_matsutake,
+	eponym1 = 0,
+	pattern = {rank = 0xA, bit = 7, value = 0, order = false},
 	texture = {rank = 0, bit = 0, value = 0, order = nil},
 }
 local matsutake_m200bit1ptn = {
 	kind1 = knd_matsutake,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xA, bit = 1, value = 0, order = false},
 	texture = {rank = 0, bit = 0, value = 0, order = nil},
 }
+local matsutake_p200bit1txt = {
+	kind1 = knd_matsutake,
+	eponym1 = 0,
+	pattern = {rank = 0, bit = 0, value = 0, order = nil},
+	texture = {rank = 0xE, bit = 1, value = 0, order = true},
+}
 local matsutake_p200bit7txt = {
 	kind1 = knd_matsutake,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0, bit = 0, value = 0, order = nil},
 	texture = {rank = 0xE, bit = 7, value = 0, order = true},
+}
+local matsutake_p200bit1ptn = {
+	kind1 = knd_matsutake,
+	eponym1 = 0,
+	pattern = {rank = 0xE, bit = 1, value = 0, order = true},
+	texture = {rank = 0, bit = 0, value = 0, order = nil},
+}
+local matsutake_m200ptn_p300txt = {
+	kind1 = knd_matsutake,
+	eponym1 = 0,
+	pattern = {rank = 0xA, bit = 0, value = 0x0A00, order = false},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local matsutake_p300ptn = {
+	kind1 = knd_matsutake,
+	eponym1 = 0,
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
 
 -- knd_takenoko  = 0x16
 local takenoko_any = {
 	kind1 = knd_takenoko,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0, bit = 0, value = 0, order = nil},
 	shape = {rank = 0, bit = 0, value = 0, order = nil},
 }
+
+local takenoko_any_426 = {
+	kind1 = knd_takenoko,
+	eponym1 = 0,
+	-- TODO:: These attributes should be suited in year1 4/26
+	weight = {rank = 0xC, bit = 5, value = 0, order = nil},
+	shape = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local takenoko_p200bit1wgt = {
+	kind1 = knd_takenoko,
+	eponym1 = 0,
+	weight = {rank = 0xE, bit = 1, value = 0, order = true},
+	shape = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local takenoko_p200bit7wgt = {
+	kind1 = knd_takenoko,
+	eponym1 = 0,
+	weight = {rank = 0xE, bit = 7, value = 0, order = true},
+	shape = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local takenoko_m200bit7shp = {
+	kind1 = knd_takenoko,
+	eponym1 = 0,
+	weight = {rank = 0, bit = 0, value = 0, order = nil},
+	shape = {rank = 0xA, bit = 7, value = 0, order = false},
+}
+
+local takenoko_m200bit1shp = {
+	kind1 = knd_takenoko,
+	eponym1 = 0,
+	weight = {rank = 0, bit = 0, value = 0, order = nil},
+	shape = {rank = 0xA, bit = 1, value = 0, order = false},
+}
+local takenoko_p300wgt_m200shp = {
+	kind1 = knd_takenoko,
+	eponym1 = 0,
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	shape = {rank = 0xA, bit = 0, value = 0x0A00, order = false},
+}
+
 
 
 -- knd_chingen   = 0x0A
 local chingen_any = {
 	kind1 = knd_chingen,
-	kind2 = 0,
+	eponym1 = 0,
 	shape = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
+local chingen_any_p100bit7 = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	shape = {rank = 0, bit = 0, value = 0, order = nil},
+	tone = {rank = 0xD, bit = 7, value = 0, order = true},
+}
+
+local chingen_m200bit7_p100bit7 = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	shape = {rank = 0xA, bit = 7, value = 0, order = false},
+	tone = {rank = 0xD, bit = 7, value = 0, order = true},
+}
+
+-- knd_dorian    = 0x23
+local dorian_any = {
+	kind1 = knd_dorian,
+	eponym1 = 0,
+	nutrition = {rank = 0, bit = 0, value = 0, order = nil},
+	smell = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local dorian_p200bit1 = {
+	kind1 = knd_dorian,
+	eponym1 = 0,
+	nutrition = {rank = 0xE, bit = 1, value = 0, order = true},
+	smell = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local dorian_p300 = {
+	kind1 = knd_dorian,
+	eponym1 = 0,
+	nutrition = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	smell = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+
+-- knd_piman     = 0x0B
+local piman_any = {
+	kind1 = knd_piman,
+	eponym1 = 0,
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local piman_m100bit2 = {
+	kind1 = knd_piman,
+	eponym1 = 0,
+	tone = {rank = 0xB, bit = 2, value = 0, order = false},
+}
+
+local piman_m100bit1_mlevel2 = {
+	kind1 = knd_piman,
+	eponym1 = 0,
+	tone = {rank = 0xB, bit = 1, value = 0, order = false},
+	weight = {rank = 0xB, bit = 7, value = 0, order = false},
+}
+
+-- knd_herb      = 0x0C
+local herb_any = {
+	kind1 = knd_herb,
+	eponym1 = 0,
+	smell = {rank = 0, bit = 0, value = 0, order = nil},
+	flavor = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local herb_p300 = {
+	kind1 = knd_herb,
+	eponym1 = 0,
+	smell = {rank = 0, bit = 0, value = 0, order = nil},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+
+-- knd_kifujin   = 0x18
+local kifujin_any = {
+	kind1 = knd_kifujin,
+	eponym1 = 0,
+	shape = {rank = 0, bit = 0, value = 0, order = nil},
+	flavor = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local kifujin_p300_p300 = {
+	kind1 = knd_kifujin,
+	eponym1 = 0,
+	shape = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local kifujin_p300flv = {
+	kind1 = knd_kifujin,
+	eponym1 = 0,
+	shape = {rank = 0, bit = 0, value = 0, order = nil},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
 
 
 
@@ -644,56 +881,56 @@ local chingen_any = {
 ------------------------------------------------------------
 local kabu_otsu = {
 	kind1 = knd_kabu,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 5, value = 0x0B7C, order = false},
 }
 local shimaimo_otsu = {
 	kind1 = knd_shimaimo,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xB, bit = 1, value = 0x0B08, order = false},
 }
 local renkon_otsu = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xB, bit = 1, value = 0x0B10, order = false},
 }
 local ninjin_otsu = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0xB, bit = 1, value = 0x0B20, order = false},
 }
 local kyuri_otsu = {
 	kind1 = knd_kyuri,
-	kind2 = 0,
+	eponym1 = 0,
 	texture = {rank = 0xB, bit = 5, value = 0x0B7C, order = false},
 }
 local kyabetsu_otsu = {
 	kind1 = knd_kyabetsu,
-	kind2 = 0,
+	eponym1 = 0,
 	sugar = {rank = 0xB, bit = 2, value = 0x0B44, order = false},
 }
 
 local kabu_otsubit7 = {
 	kind1 = knd_kabu,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 7, value = 0x0BFE, order = false},
 }
 
 local ninjin_otsuA = {
 	kind1 = knd_ninjin,
-	kind2 = 0,
+	eponym1 = 0,
 	nutrition = {rank = 0xB, bit = 1, value = 0x0B20, order = false},
 	sugar = {rank = 0xB, bit = 2, value = 0x0B44, order = false},
 }
 local renkon_otsuA = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xB, bit = 1, value = 0x0B10, order = false},
 	texture = {rank = 0xB, bit = 5, value = 0x0B7C, order = false},
 }
 local gobou_otsuA = {
 	kind1 = knd_gobou,
-	kind2 = 0,
+	eponym1 = 0,
 	pattern = {rank = 0xB, bit = 1, value = 0x0B10, order = false},
 	nutrition = {rank = 0xB, bit = 1, value = 0x0B20, order = false},
 	sugar = {rank = 0xB, bit = 2, value = 0x0B44, order = false},
@@ -702,24 +939,24 @@ local gobou_otsuA = {
 
 local renkon_otsuB = {
 	kind1 = knd_renkon,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
 local tamanegi_otsuB = {
 	kind1 = knd_tamanegi,
-	kind2 = 0,
+	eponym1 = 0,
 	weight = {rank = 0xB, bit = 1, value = 0x0B08, order = false},
 }
 local gobou_otsuB = {
 	kind1 = knd_gobou,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 6, value = 0x0BFC, order = false},
 	weight = {rank = 0xB, bit = 1, value = 0x0B08, order = false},
 }
 
 local gobou_otsu = {
 	kind1 = knd_gobou,
-	kind2 = 0,
+	eponym1 = 0,
 	size = {rank = 0xB, bit = 5, value = 0x0B7C, order = false},
 	weight = {rank = 0xB, bit = 1, value = 0x0B08, order = false},
 	pattern = {rank = 0xB, bit = 1, value = 0x0B10, order = false},
@@ -1019,6 +1256,13 @@ shimaimo_plain_leaf = {
 	property = shimaimo_plain,
 }
 
+shimaimo_mlevel2_node = {
+	left = shimaimo_plain_leaf,
+	right = shimaimo_plain_leaf,
+	property = shimaimo_mlevel2,
+}
+
+
 shimaimo_m100_node = {
 	left = shimaimo_plain_leaf,
 	right = shimaimo_plain_leaf,
@@ -1168,6 +1412,12 @@ ninjin_p200_p200x2_node = {
 	property = ninjin_p200_p200x2,
 }
 
+ninjin_p200_p200x2_leaf = {
+	left = nil,
+	right = nil,
+	property = ninjin_p200_p200x2,
+}
+
 
 -- renkon
 renkon_m100bit1_m100x2_node = {
@@ -1254,6 +1504,12 @@ hourensou_p200_node = {
 	property = hourensou_p200,
 }
 
+hourensou_p200_leaf = {
+	left = nil,
+	right = nil,
+	property = hourensou_p200,
+}
+
 -- knd_tomato    = 0x19
 tomato_plain_leaf = {
 	left = nil,
@@ -1293,6 +1549,12 @@ kyuri_p200_node = {
 	property = kyuri_p200,
 }
 
+kyuri_p200_leaf = {
+	left = nil,
+	right = nil,
+	property = kyuri_p200,
+}
+
 
 
 
@@ -1327,6 +1589,12 @@ kyabetsu_p200_node = {
 	property = kyabetsu_p200,
 }
 
+kyabetsu_p200_leaf = {
+	left = nil,
+	right = nil,
+	property = kyabetsu_p200,
+}
+
 
 -- renkon
 renkon_any_m100sgr_node = {
@@ -1350,6 +1618,12 @@ renkon_m100bit1_m100x4_node = {
 renkon_m100_m100x5_node = {
 	left = renkon_any_m100sgr_node,
 	right = renkon_m100bit1_m100x4_node,
+	property = renkon_m100_m100x5,
+}
+
+renkon_m100_m100x5_leaf = {
+	left = nil,
+	right = nil,
 	property = renkon_m100_m100x5,
 }
 
@@ -1603,6 +1877,12 @@ wakame_any_node_half = {
 	property = wakame_any,
 }
 
+wakame_any_leaf = {
+	left = nil,
+	right = nil,
+	property = wakame_any,
+}
+
 wakame_m100_node_half = {
 	left = wakame_any_node_half,
 	right = kabu_plain_leaf,
@@ -1615,17 +1895,36 @@ wakame_m100_leaf = {
 	property = wakame_m100,
 }
 
-wakame_p200bit7_node = {
-	left = wakame_m100_leaf,
-	right = shimaimo_plain_leaf,
-	property = wakame_p200bit7,
-}
-
 wakame_m200_node = {
 	left = wakame_m100_leaf,
 	right = shimaimo_plain_leaf,
 	property = wakame_m200,
 }
+
+wakame_m200_leaf = {
+	left = nil,
+	right = nil,
+	property = wakame_m200,
+}
+
+wakame_bit4_node = {
+	left = wakame_any_leaf,
+	right = shimaimo_plain_leaf,
+	property = wakame_bit4,
+}
+
+wakame_p200bit7_node = {
+	left = wakame_bit4_node,
+	right = shimaimo_plain_leaf,
+	property = wakame_p200bit7,
+}
+
+wakame_p200bit7_leaf = {
+	left = nil,
+	right = nil,
+	property = wakame_p200bit7,
+}
+
 
 -- knd_pine      = 0x21
 pine_any_node_half = {
@@ -1640,11 +1939,74 @@ pine_any_node_half2 = {
 	property = pine_any,
 }
 
-pine_p100bit7_node_half = {
+pine_p100bit7ton_node_half = {
 	left = pine_any_node_half,
 	right = kabu_plain_leaf,
-	property = pine_p100bit7,
+	property = pine_p100bit7ton,
 }
+
+pine_p100bit7ton_leaf = {
+	left = nil,
+	right = nil,
+	property = pine_p100bit7ton,
+}
+
+pine_p200bit7ton_node = {
+	left = pine_p100bit7ton_leaf,
+	right = shimaimo_plain_leaf,
+	property = pine_p200bit7ton,
+}
+
+pine_p200bit7ton_leaf = {
+	left = nil,
+	right = nil,
+	property = pine_p200bit7ton,
+}
+
+pine_p200bit1siz_node = {
+	left = pine_p100bit7ton_leaf,
+	right = kabu_p200_leaf,
+	property = pine_p200bit1siz,
+}
+
+pine_p200bit7siz_node = {
+	left = pine_p200bit1siz_node,
+	right = shimaimo_plain_leaf,
+	property = pine_p200bit7siz,
+}
+
+pine_p200bit7siz_leaf = {
+	left = nil,
+	right = nil,
+	property = pine_p200bit7siz,
+}
+
+pine_p300_p300_node = {
+	--left = pine_p200bit7ton_node,
+	--right = pine_p200bit7siz_node,
+	left = pine_p200bit7siz_node,
+	right = pine_p200bit7ton_node,
+	property = pine_p300_p300,
+}
+
+pine_p300_p300_leaf = {
+	left = nil,
+	right = nil,
+	property = pine_p300_p300,
+}
+
+pine_m200bit7siz_node = {
+	left = pine_p300_p300_leaf,
+	right = renkon_m100_m100x5_leaf,
+	property = pine_m200bit7siz,
+}
+
+pine_m200siz_node = {
+	left = pine_m200bit7siz_node,
+	right = kabu_plain_leaf,
+	property = pine_m200siz,
+}
+
 
 
 
@@ -1658,6 +2020,18 @@ konbu_any_node = {
 konbu_any_node_half = {
 	left = ichigo_any_node_half,
 	right = garlic_any_leaf,
+	property = konbu_any,
+}
+
+konbu_any_node_half2 = {
+	left = karashi_any_leaf,
+	right = wakame_any_leaf,
+	property = konbu_any,
+}
+
+konbu_any_node_half3 = {
+	left = karashi_any_node_half,
+	right = wakame_m100_leaf,
 	property = konbu_any,
 }
 
@@ -1679,6 +2053,18 @@ suica_any_node_half2 = {
 	right = garlic_any_leaf,
 	property = suica_any,
 }
+suica_p200bit1sgr_node = {
+	left = suica_any_node_half2,
+	right = kyabetsu_p200_leaf,
+	property = suica_p200bit1sgr,
+}
+
+suica_p300sgr_node = {
+	left = suica_p200bit1sgr_node,
+	right = kabu_plain_leaf,
+	property = suica_p300sgr,
+}
+
 
 
 -- knd_matsutake = 0x17
@@ -1701,17 +2087,65 @@ matsutake_any_leaf = {
 	property = matsutake_any,
 }
 
+matsutake_any_leaf_416 = {
+	left = nil,
+	right = nil,
+	property = matsutake_any_416,
+}
+
+matsutake_m200bit7ptn_node = {
+	left = matsutake_any_leaf_416,
+	right = renkon_m100_m100x5_leaf,
+	property = matsutake_m200bit7ptn,
+}
+
 matsutake_m200bit1ptn_node = {
-	left = matsutake_any_leaf,
+	left = matsutake_m200bit7ptn_node,
 	right = shimaimo_plain_leaf,
 	property = matsutake_m200bit1ptn,
 }
 
+matsutake_m200bit1ptn_leaf = {
+	left = nil,
+	right = nil,
+	property = matsutake_m200bit1ptn,
+}
+
+matsutake_p200bit1txt_node = {
+	left = matsutake_any_leaf_416,
+	right = kyuri_p200_leaf,
+	property = matsutake_p200bit1txt,
+}
 matsutake_p200bit7txt_node = {
-	left = matsutake_any_leaf,
+	left = matsutake_p200bit1txt_node,
 	right = shimaimo_plain_leaf,
 	property = matsutake_p200bit7txt,
 }
+
+matsutake_p200bit7txt_leaf = {
+	left = nil,
+	right = nil,
+	property = matsutake_p200bit7txt,
+}
+
+matsutake_m200ptn_p300txt_node = {
+	left = matsutake_m200bit1ptn_leaf,
+	right = matsutake_p200bit7txt_leaf,
+	property = matsutake_m200ptn_p300txt
+}
+
+matsutake_p200bit1ptn_node = {
+	left = matsutake_m200bit1ptn_leaf,
+	right = ninjin_p200_p200x2_leaf,
+	--right = hourensou_p200_leaf,
+	property = matsutake_p200bit1ptn,
+}
+matsutake_p300ptn_node = {
+	left = matsutake_p200bit1ptn_node,
+	right = shimaimo_plain_leaf,
+	property = matsutake_p300ptn,
+}
+
 
 
 -- knd_takenoko  = 0x16
@@ -1721,6 +2155,69 @@ takenoko_any_node_half = {
 	property = takenoko_any,
 }
 
+takenoko_any_leaf = {
+	left = nil,
+	right = nil,
+	property = takenoko_any,
+}
+
+takenoko_any_leaf_426 = {
+	left = nil,
+	right = nil,
+	property = takenoko_any_426,
+}
+
+takenoko_p200bit1wgt_node = {
+	left = takenoko_any_leaf_426,
+	right = ninjin_p200_p200x2_leaf,
+	--right = shimaimo_p200_leaf,
+	property = takenoko_p200bit1wgt,
+}
+takenoko_p200bit7wgt_node = {
+	left = takenoko_p200bit1wgt_node,
+	right = shimaimo_plain_leaf,
+	property = takenoko_p200bit7wgt,
+}
+
+takenoko_p200bit7wgt_leaf = {
+	left = nil,
+	right = nil,
+	property = takenoko_p200bit7wgt,
+}
+
+--takenoko_m200bit7shp_node = {
+--	left = takenoko_any_leaf_426,
+--	right = wakame_m100_leaf,
+--	property = takenoko_m200bit7shp,
+--}
+
+takenoko_m200bit1shp_node = {
+	left = takenoko_any_leaf_426,
+	right = wakame_m200_leaf,
+	property = takenoko_m200bit1shp,
+}
+
+takenoko_m200bit1shp_leaf = {
+	left = nil,
+	right = nil,
+	property = takenoko_m200bit1shp,
+}
+
+takenoko_p300wgt_m200shp_node = {
+	left = takenoko_p200bit7wgt_node,
+	right = takenoko_m200bit1shp_node,
+	--left = takenoko_m200bit1shp_node,
+	--right = takenoko_p200bit7wgt_node,
+	property = takenoko_p300wgt_m200shp,
+}
+
+takenoko_p300wgt_m200shp_node_half = {
+	left = takenoko_p200bit7wgt_leaf,
+	right = takenoko_m200bit1shp_leaf,
+	property = takenoko_p300wgt_m200shp,
+}
+
+
 
 -- knd_chingen   = 0x0A
 chingen_any_node_half = {
@@ -1728,6 +2225,112 @@ chingen_any_node_half = {
 	right = matsutake_any_leaf,
 	property = chingen_any,
 }
+
+chingen_any_node_half2 = {
+	left = suica_any_node_half2,
+	right = matsutake_m200bit1ptn_leaf,
+	property = chingen_any,
+}
+
+chingen_any_leaf = {
+	left = nil,
+	right = nil,
+	property = chingen_any,
+}
+
+chingen_any_p100bit7_node = {
+	left = chingen_any_node_half2,
+	right = pine_p100bit7ton_leaf,
+	property = chingen_any_p100bit7,
+}
+
+chingen_m200bit7_p100bit7_node = {
+	left = chingen_any_p100bit7_node,
+	right = wakame_m100_leaf,
+	property = chingen_m200bit7_p100bit7,
+}
+
+
+-- knd_dorian    = 0x23
+dorian_any_node_half = {
+	left = konbu_any_node_half2,
+	right = matsutake_p200bit7txt_leaf,
+	property = dorian_any,
+}
+
+dorian_any_node_half2 = {
+	left = konbu_any_node_half3,
+	right = matsutake_p200bit7txt_leaf,
+	property = dorian_any,
+}
+
+dorian_p200bit1_node = {
+	left = dorian_any_node_half,
+	right = ninjin_p200_p200x2_leaf,
+	property = dorian_p200bit1,
+}
+
+dorian_p300_node = {
+	left = dorian_p200bit1_node,
+	right = kabu_plain_leaf,
+	property = dorian_p300,
+}
+
+
+
+-- knd_piman     = 0x0B
+piman_any_node_half = {
+	left = konbu_any_node_half2,
+	right = chingen_any_leaf,
+	property = piman_any,
+}
+
+piman_m100bit2_node = {
+	left = piman_any_node_half,
+	right = kabu_plain_leaf,
+	property = piman_m100bit2,
+}
+
+piman_m100bit1_mlevel2_node = {
+	left = piman_m100bit2_node,
+	right = shimaimo_mlevel2_node,
+	property = piman_m100bit1_mlevel2,
+}
+
+-- knd_herb      = 0x0C
+herb_any_node_half = {
+	left = piman_any_node_half,
+	right = chingen_any_leaf,
+	property = herb_any,
+}
+
+herb_p300_node = {
+	left = herb_any_node_half,
+	right = kabu_plain_leaf,
+	property = herb_p300,
+}
+
+
+-- knd_kifujin   = 0x18
+kifujin_any_node_half = {
+	left = konbu_any_node_half2,
+	right = dorian_any_node_half,
+	property = kifujin_any,
+}
+
+kifujin_any_node_half2 = {
+	left = konbu_any_node_half3,
+	right = dorian_any_node_half2,
+	property = kifujin_any,
+}
+
+kifujin_p300flv_node = {
+	left = kifujin_any_node_half2,
+	right = kabu_plain_leaf,
+	property = kifujin_p300flv,
+}
+
+
 
 
 
@@ -2089,30 +2692,219 @@ target_tree_1401_typeB = {
 target_tree_1408 = {
 	-- seed: simaimo 27, kabu 22, hourensou 2, renkon any 0
 	-- seed: karifra 5, corn 5, kabocha 7, garlic 2
+	
+	-- it is better to hybrid one more karashi.
+	--karashi_any_node_half,
 
+	-- #retry
+	--kyuri_p200_node,
+	--kyabetsu_p200_node,
+	--matsutake_any_node_half,
+	--karashi_any_node_half,
+	--wakame_m100_node_half,
+	--pine_p100bit7ton_node_half,
+
+	-- #retry
+	--kyabetsu_p200_node,
+	--kyuri_p200_node,
+	--matsutake_any_node_half,
+	--karashi_any_node_half,
+	--wakame_m100_node_half,
+	--pine_p100bit7ton_node_half,
+
+	-- #retry
+	--matsutake_any_node_half,
+	--kyuri_p200_node,
+	--kyabetsu_p200_node,
+	--karashi_any_node_half,
+	--wakame_m100_node_half,
+	--pine_p100bit7ton_node_half,
+
+	-- #retry
+	--matsutake_any_node_half,
+	--karashi_any_node_half,
+	--kyuri_p200_node,
+	--kyabetsu_p200_node,
+	--wakame_m100_node_half,
+	--pine_p100bit7ton_node_half,
+
+	-- #retry
+	--wakame_m100_node_half,
+	--matsutake_any_node_half,
+	--karashi_any_node_half,
+	--kyuri_p200_node,
+	--kyabetsu_p200_node,
+	--pine_p100bit7ton_node_half,
+
+	-- #retry 506
+	wakame_m100_node_half,
 	kyuri_p200_node,
-	kyabetsu_p200_node,
 	matsutake_any_node_half,
 	karashi_any_node_half,
-	wakame_m100_node_half,
-	pine_p100bit7_node_half,
+	kyabetsu_p200_node,
+	pine_p100bit7ton_node_half,
+
+	-- #retry
+	--wakame_m100_node_half,
+	--kyabetsu_p200_node,
+	--matsutake_any_node_half,
+	--karashi_any_node_half,
+	--kyuri_p200_node,
+	--pine_p100bit7ton_node_half,
+
+	-- #retry 585
+	--wakame_m100_node_half,
+	--kyuri_p200_node,
+	--kyabetsu_p200_node,
+	--matsutake_any_node_half,
+	--karashi_any_node_half,
+	--pine_p100bit7ton_node_half,
+
+	-- #retry 523
+	--wakame_m100_node_half,
+	--kyuri_p200_node,
+	--matsutake_any_node_half,
+	--kyabetsu_p200_node,
+	--karashi_any_node_half,
+	--pine_p100bit7ton_node_half,
+
+	-- #retry
+	--wakame_m100_node_half,
+	--kyuri_p200_node,
+	--matsutake_any_node_half,
+	--karashi_any_node_half,
+	--pine_p100bit7ton_node_half,
+	--kyabetsu_p200_node,
+
+	-- #retry
+	--karashi_any_node_half,
+	--kyuri_p200_node,
+	--matsutake_any_node_half,
+	--wakame_m100_node_half,
+	--pine_p100bit7ton_node_half,
+	--kyabetsu_p200_node,
+
+	-- #retry
+	--pine_p100bit7ton_node_half,
+	--kyuri_p200_node,
+	--matsutake_any_node_half,
+	--wakame_m100_node_half,
+	--karashi_any_node_half,
+	--kyabetsu_p200_node,
+
+	-- #retry
+	--matsutake_any_node_half,
+	--pine_p100bit7ton_node_half,
+	--kyuri_p200_node,
+	--wakame_m100_node_half,
+	--karashi_any_node_half,
+	--kyabetsu_p200_node,
+
+	-- #retry
+	--matsutake_any_node_half,
+	--kyabetsu_p200_node,
+	--pine_p100bit7ton_node_half,
+	--kyuri_p200_node,
+	--wakame_m100_node_half,
+	--karashi_any_node_half,
+
+	-- #retry
+	--matsutake_any_node_half,
+	--wakame_m100_node_half,
+	--kyabetsu_p200_node,
+	--pine_p100bit7ton_node_half,
+	--kyuri_p200_node,
+	--karashi_any_node_half,
+
+
 }
 
 -- year1 4/16
 target_tree_1416 = {
-	takenoko_any_node_half,
+	-- seed:: simaimo plain 49, kabu plain 0
+	-- seed:: renkon -600, kyuri +200, garlic p100bit7,
+	
+	--karashi_any_node_half,
+	
+	--takenoko_any_node_half,
+	--chingen_any_node_half,
+	--matsutake_m200bit1ptn_node,  -- TODO::Don't select matsutake_p200bit7txt_node as a first parent
+	--matsutake_p200bit7txt_node,  -- TODO::Don't select matsutake_m200bit1ptn_node as a first parent
+	--wakame_p200bit7_node,
+	--wakame_m200_node,
+	--garlic_p300_node,
+	
+
+	--# retry 244, fc = 14102
 	chingen_any_node_half,
-	matsutake_m200bit1ptn_node,  -- TODO::Don't select matsutake_p200bit7txt_node as a first parent
 	matsutake_p200bit7txt_node,  -- TODO::Don't select matsutake_m200bit1ptn_node as a first parent
 	wakame_p200bit7_node,
 	wakame_m200_node,
+	matsutake_m200bit1ptn_node,  -- TODO::Don't select matsutake_p200bit7txt_node as a first parent
 	garlic_p300_node,
+	takenoko_any_node_half,
+
+	--# retry 238, fc = 15311
+	--chingen_any_node_half,
+	--wakame_m200_node,
+	--matsutake_p200bit7txt_node,  -- TODO::Don't select matsutake_m200bit1ptn_node as a first parent
+	--wakame_p200bit7_node,
+	--matsutake_m200bit1ptn_node,  -- TODO::Don't select matsutake_p200bit7txt_node as a first parent
+	--garlic_p300_node,
+	--takenoko_any_node_half,
 }
 
+-- year1 4/22
+target_tree_1422 = {
+	-- seed:: kabu +200, simaimo plain 14, kabu plain 23
+	pine_p300_p300_node,
+	kifujin_p300flv_node,
+}
+
+
+-- year1 4/26
+target_tree_1426 = {
+	-- seed:: kyabetsu +200, simaimo plain 26, kabu plain 46  -- (include herb and kifujin)
+	-- seed:: kyabetsu +200, simaimo plain 18, kabu plain 23
+	-- and
+	-- seed:: ninjin +200 x3, or (ninjin +200 x1, shimaimo +200 x1, hourensou +200 x1)
+
+	--herb_p300_node,   -- TODO::Don't select piman_m100bit1_mlevel2_node as a first parent
+	--kifujin_any_node_half,   -- TODO::Don't select dorian_p300_node as a first parent
+
+	--piman_m100bit1_mlevel2_node,
+	--chingen_m200bit7_p100bit7_node,
+	--dorian_p300_node,
+	--matsutake_m200ptn_p300txt_node,   -- TODO::Don't select matsutake_p300ptn_node as a first parent
+	--matsutake_p300ptn_node,   -- TODO::Don't select matsutake_m200ptn_p300txt_node as a first parent
+	--takenoko_p300wgt_m200shp_node,
+	--suica_p300sgr_node,
+	
+
+	--# retry 310, fc = 15786
+	chingen_m200bit7_p100bit7_node,
+	dorian_p300_node,
+	matsutake_p300ptn_node,   -- TODO::Don't select matsutake_m200ptn_p300txt_node as a first parent
+	takenoko_p300wgt_m200shp_node,
+	matsutake_m200ptn_p300txt_node,   -- TODO::Don't select matsutake_p300ptn_node as a first parent
+	suica_p300sgr_node,
+	piman_m100bit1_mlevel2_node,
+
+	--# retry 312, fc = 15936
+	--matsutake_p300ptn_node,   -- TODO::Don't select matsutake_m200ptn_p300txt_node as a first parent
+	--dorian_p300_node,
+	--chingen_m200bit7_p100bit7_node,
+	--takenoko_p300wgt_m200shp_node,
+	--matsutake_m200ptn_p300txt_node,   -- TODO::Don't select matsutake_p300ptn_node as a first parent
+	--suica_p300sgr_node,
+	--piman_m100bit1_mlevel2_node,
+}
 
 
 -- year1 5/xx
 target_tree_15xx = {
 	remon_p200_m100_node,
+	pine_m200siz_node,
 }
+
 
