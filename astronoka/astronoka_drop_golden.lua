@@ -1,15 +1,15 @@
 -- Astronoka
--- This script manipulate a drop of baboo feather.
+-- This script manipulate a drop of golden seed.
 --
 -- + Emulater: psxjin v2.0.2
 --
 -- + Usage
---   1. Start this script in a trap battle
+--   1. Start this script in a field.
 --
 -- + This script can
---     ++ manipulate a drop of baboo feather
+--     ++ manipulate a drop of golden seed.
 
-require "astronoka_lib"
+require "astronoka_input_macro_lib"
 
 ------------------------------------------------------------
 -- initialize
@@ -27,9 +27,13 @@ emu.speedmode("turbo")       -- drops some frames
 
 
 ------------------------------------------------------------
+-- functions
+------------------------------------------------------------
+
+------------------------------------------------------------
 -- Baboo
 -- + Baboo is defined at astronoka_lib
-------------------------------------------------------------
+-----------------------------------------------------------
 
 function Baboo.attemptReload(func)
 	-- read rng
@@ -56,44 +60,35 @@ function Baboo.attemptReload(func)
 	end
 end
 
-function Baboo.dropFeather()
-	-- press select to skip battle
-	Baboo.skipBattle()
-	local crr_feather = memory.readword(adr_total_feather)
+function Baboo.dropGoldenSeed2()
+	local result = false
 
-	if crr_feather > pre_feather then
-		Baboo.postSkipBattle()
-		return true
+	TAS.exitBinocular()  -- enable this func if manipulare rng in binocular.
+	joypadSetHelper(1, {up=1}, 6)  -- move cursor
+	joypadSetHelper(1, {up=1}, 6)  -- move cursor
+
+	--TAS.exitField()
+	--joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	--joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	--joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	TAS.exitDayBaboo()
+
+	local baboos = memory.readbyte(adr_baboo_today)
+
+	-- trap battle
+	for i=0, baboos do
+		fadv(262)
+		TAS.loseBattle()
+		TAS.skipFeed()
 	end
-	return false
-end
 
-function Baboo.dropGoldenSeedActual()
-	-- press select to skip feed
-	Baboo.skipFeed()
+	TAS.postSkipFeed()
 	local crr_total_seed = memory.readword(adr_total_seed)
 
 	if crr_total_seed > pre_total_seed then
-		Baboo.postSkipFeed()
 		return true
 	end
-	return false
-end
 
-function Baboo.dropGoldenSeed()
-	local retry_frm = 1500  -- range of frames: 1400 ~ 1600
-	local result = false
-	Baboo.loseBattle()
-
-	for i=0, retry_frm do
-
-		result = Baboo.attemptReload(Baboo.dropGoldenSeedActual)
-		if result == true then
-			return true
-		end
-
-		emu.frameadvance()
-	end
 	return false
 end
 
@@ -114,32 +109,23 @@ while true do
 
 	if initial == 1 then
 		--Baboo.showStatus()
+		TAS.enterBinocular()  -- enable this func if manipulare rng in binocular.
 		initial = 0
 	end
 
 	if initial == 0 then
 		Baboo.drawInfo()
-
-		local done = memory.readword(adr_trap_battle)
-		if done == in_trap_battle then
-			result = Baboo.attemptReload(Baboo.dropFeather)  -- disable if you want a golden seed
-			--result = Baboo.attemptReload(Baboo.dropGoldenSeed)  -- enable if you want a golden seed
-			if result then
-				break
-			end
-		end
-
-		local done2 = memory.readword(adr_reaction2)
-		if done2 == reaction2_end then
-			Baboo.dropFeather()  -- disable if you want a golden seed
-			--Baboo.dropGoldenSeed()  -- enable if you want a golden seed
+		result = Baboo.attemptReload(Baboo.dropGoldenSeed2)  -- enable if you want a golden seed
+		if result then
 			break
 		end
+		TAS.lookBinocular()  -- enable this func if manipulare rng in binocular.
 	end
 
 	emu.frameadvance()
 end
 
+Baboo.drawInfo()
 local fc = emu.framecount()
 print(string.format("<<< lua bot is finished <<<"))
 print(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
