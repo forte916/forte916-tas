@@ -1,30 +1,16 @@
 -- Astronoka
--- This is a key inputs for speed run
+-- This is a key inputs for speed run.
 --
 -- + Emulater: psxjin v2.0.2
 --
 -- + Usage
---   1. Start this script from power-on
+--   1. require "astronoka_key_macro_lib"
 
 require "astronoka_lib"
 
-------------------------------------------------------------
--- initialize
-------------------------------------------------------------
--- If set to true, no rerecords done by Lua are counted in the rerecord total.
--- If set to false, rerecords done by Lua count. By default, rerecords count.
-movie.rerecordcounting(false)
-
--- maximum is fastest, if you need not render
---emu.speedmode("maximum")     -- screen rendering is disabled
---emu.speedmode("turbo")       -- drops some frames
---emu.speedmode("nothrottle")  -- max spped without frameskip
-emu.speedmode("normal")      -- normal speed (test use)
-
-
 
 ------------------------------------------------------------
--- functions
+-- key macros
 ------------------------------------------------------------
 TAS = {}
 
@@ -158,7 +144,7 @@ end
 
 function TAS.enterTrapField()
 	joypadSetHelper(1, {circle=1}, 6)  -- press trap field
-	fadv(54)  -- press trap field
+	fadv(54)
 end
 
 function TAS.removeTrap()
@@ -168,8 +154,8 @@ function TAS.removeTrap()
 end
 
 function TAS.removeAllTrap()
-	joypadSetHelper(1, {start=1}, 6)
-	fadv(2+8)
+	joypadSetHelper(1, {start=1}, 8)
+	fadv(8)
 	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
 end
 
@@ -197,7 +183,7 @@ end
 
 function TAS.exitDayNoBaboo()
 	joypadSetHelper(1, {circle=1}, 6)  -- press exit day
-	fadv(4+9)
+	fadv(4+8)
 	joypadSetHelper(1, {circle=1}, 8)  -- confirm yes
 	fadv(62+8)
 	joypadSetHelper(1, {x=1}, 10)  -- cancel turning off the light
@@ -213,6 +199,54 @@ function TAS.skipBattle()
 	fadv(20)
 	joypadSetHelper(1, {x=1}, 6)  -- skip feather, if it was dropped
 	fadv(13)
+end
+
+function TAS.postSkipBattle()
+	fadv(167)
+	joypadSetHelper(1, {x=1}, 10)  -- skip turning off the light
+	fadv(62)
+end
+
+function TAS.loseBattle()
+	joypadSetHelper(1, {select=1}, 16)  -- skip battle
+	fadv(18)
+	joypadSetHelper(1, {x=1}, 6)  -- skip art score
+	fadv(6)
+end
+
+function TAS.skipFeed()
+	fadv(26)
+	joypadSetHelper(1, {select=1}, 16)  -- skip feed
+	fadv(18)
+	joypadSetHelper(1, {x=1}, 6)  -- skip satisfaction
+	fadv(20)
+end
+
+function TAS.postSkipFeed()
+	fadv(160)
+	joypadSetHelper(1, {x=1}, 10)  -- skip turning off the light
+	fadv(73)
+
+	joypadSetHelper(1, {x=1}, 26)  -- next day
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
+	joypadSetHelper(1, {x=1}, 26)  -- skip msg
 end
 
 function TAS.enterHouse()
@@ -247,18 +281,21 @@ function TAS.exitPedro()
 	fadv(30)
 end
 
-function TAS.enterGlasses()
-	joypadSetHelper(1, {circle=1}, 6)  -- press glasses
+function TAS.enterBinocular()
+	joypadSetHelper(1, {circle=1}, 6)  -- press binocular
 	fadv(56)
 end
 
-function TAS.exitGlasses()
-	joypadSetHelper(1, {x=1}, 6)  -- exit glasses
+function TAS.exitBinocular()
+	joypadSetHelper(1, {x=1}, 6)  -- exit binocular
 	fadv(8)
 	joypadSetHelper(1, {x=1}, 10)  -- confirm no
 	fadv(26)
 end
 
+function TAS.lookBinocular()
+	joypadSetHelper(1, {circle=1}, 6)  -- look to baboo
+end
 
 function TAS.enterBusStop()
 	joypadSetHelper(1, {circle=1}, 6)  -- press bus stop
@@ -292,6 +329,41 @@ function TAS.skipMsg()
 	fadv(19)
 end
 
+function TAS.removeJumpGuruRGuruL()
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	TAS.removeTrap()  -- remove jump-dai
+
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	TAS.removeTrap()  -- remove guru-r
+
+	joypadSetHelper(1, {right=1}, 6)  -- move cursor
+	joypadSetHelper(1, {right=1}, 6)  -- move cursor
+	TAS.removeTrap()  -- remove guru-l
+end
+
+function TAS.removeKakashiJumpGuruL()
+	TAS.removeTrap()  -- remove kakashi
+
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	TAS.removeTrap()  -- remove jump-dai
+
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	--TAS.removeTrap()  -- remove guru-r
+
+	joypadSetHelper(1, {right=1}, 6)  -- move cursor
+	joypadSetHelper(1, {right=1}, 6)  -- move cursor
+	TAS.removeTrap()  -- remove guru-l
+end
+
+
+
+--------------------------------------------------
+-- game start
+--------------------------------------------------
 function TAS.start()
 	fadv(767)  -- opening
 	-- 0x0406D8 == 0x025E
@@ -300,27 +372,42 @@ function TAS.start()
 
 	joypadSetHelper(1, {start=1}, 44)  -- game start
 	joypadSetHelper(1, {circle=1}, 10)  -- confirm
+end
 
+function TAS.inputName()
 	-- input user name, "TAS"
-	joypadSetHelper(1, {left=1}, 8)
-	joypadSetHelper(1, {circle=1}, 6)
-	joypadSetHelper(1, {circle=1}, 6)
-	joypadSetHelper(1, {down=1}, 8)
-	joypadSetHelper(1, {down=1}, 8)
-	joypadSetHelper(1, {left=1}, 8)
-	joypadSetHelper(1, {circle=1}, 6)  -- press T
-	joypadSetHelper(1, {up=1}, 8)
-	joypadSetHelper(1, {right=1}, 8)
-	joypadSetHelper(1, {right=1}, 8)
-	joypadSetHelper(1, {circle=1}, 6)  -- press A
-	joypadSetHelper(1, {down=1}, 8)
-	joypadSetHelper(1, {left=1}, 8)
-	joypadSetHelper(1, {left=1}, 8)
-	joypadSetHelper(1, {left=1}, 8)
-	joypadSetHelper(1, {circle=1}, 6)  -- press S
+	--joypadSetHelper(1, {left=1}, 8)
+	--joypadSetHelper(1, {circle=1}, 6)
+	--joypadSetHelper(1, {circle=1}, 6)
+	--joypadSetHelper(1, {down=1}, 8)
+	--joypadSetHelper(1, {down=1}, 8)
+	--joypadSetHelper(1, {left=1}, 8)
+	--joypadSetHelper(1, {circle=1}, 6)  -- press T
+	--joypadSetHelper(1, {up=1}, 8)
+	--joypadSetHelper(1, {right=1}, 8)
+	--joypadSetHelper(1, {right=1}, 8)
+	--joypadSetHelper(1, {circle=1}, 6)  -- press A
+	--joypadSetHelper(1, {down=1}, 8)
+	--joypadSetHelper(1, {left=1}, 8)
+	--joypadSetHelper(1, {left=1}, 8)
+	--joypadSetHelper(1, {left=1}, 8)
+	--joypadSetHelper(1, {circle=1}, 6)  -- press S
 
+	-- input user name, "É^ÉX"
+	joypadSetHelper(1, {right=1}, 8)
+	joypadSetHelper(1, {right=1}, 8)
+	joypadSetHelper(1, {right=1}, 8)
+	joypadSetHelper(1, {circle=1}, 6)
+	joypadSetHelper(1, {down=1}, 8)
+	joypadSetHelper(1, {down=1}, 8)
+	joypadSetHelper(1, {left=1}, 8)
+	joypadSetHelper(1, {circle=1}, 6)
+	
 	joypadSetHelper(1, {start=1}, 12)  -- determin
 	joypadSetHelper(1, {circle=1}, 10)  -- confirm
+
+	local rng = memory.readdword(adr_rng)
+	print(string.format("fc = %d, rng = %08x", emu.framecount(), rng))
 
 	-- immigration
 	joypadSetHelper(1, {circle=1}, 10)  -- skip
@@ -399,11 +486,11 @@ function TAS.d1101()
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
+	joypadSetHelper(1, {right=1}, 6)  -- move cursor
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
+	joypadSetHelper(1, {right=1}, 6)  -- move cursor
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
@@ -411,7 +498,7 @@ function TAS.d1101()
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
-	joypadSetHelper(1, {right=1}, 6)  -- move cursor
+	joypadSetHelper(1, {left=1}, 6)  -- move cursor
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 	
@@ -461,46 +548,36 @@ function TAS.d1104()
 	-- field
 	fadv(66)
 	TAS.reapVegee()
-
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {up=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {right=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {right=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	fadv(1)
-	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	TAS.plantVegee()
-
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
 	joypadSetHelper(1, {left=1}, 6)  -- move cursor
+	TAS.reapVegee()
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
 	joypadSetHelper(1, {up=1}, 6)  -- move cursor
+	TAS.reapVegee()
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
 	joypadSetHelper(1, {right=1}, 6)  -- move cursor
+	TAS.reapVegee()
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
 	joypadSetHelper(1, {right=1}, 6)  -- move cursor
+	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	TAS.plantVegee()
+
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	TAS.reapVegee()
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
+
+	--fadv(1)
 
 	TAS.exitField()
 
@@ -513,12 +590,12 @@ end
 
 function TAS.d1105()
 	TAS.exitDay()
-	fadv(49)
+	fadv(49+2)
 end
 
 function TAS.d1106()
 	TAS.exitDay()
-	fadv(49)
+	fadv(49+2)
 end
 
 function TAS.d1107()
@@ -530,39 +607,31 @@ function TAS.d1107()
 	-- field
 	fadv(66)
 	TAS.reapVegee()
-
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
-	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
 
 	joypadSetHelper(1, {left=1}, 6)  -- move cursor
 	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
+
+	joypadSetHelper(1, {left=1}, 6)  -- move cursor
+	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
 
 	joypadSetHelper(1, {up=1}, 6)  -- move cursor
 	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
 
 	joypadSetHelper(1, {right=1}, 6)  -- move cursor
 	TAS.reapVegee()
-
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
 	TAS.plantVegee()
 
 	joypadSetHelper(1, {right=1}, 6)  -- move cursor
-	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
-	TAS.plantVegee()
-
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
-	TAS.plantVegee()
-
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
-	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
-	TAS.plantVegee()
-
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
+	TAS.reapVegee()
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	TAS.plantVegee()
 
@@ -575,7 +644,7 @@ function TAS.d1107()
 	fadv(47)
 end
 
-function TAS.d1108()
+function TAS.d1108_1st()
 	joypadSetHelper(1, {x=1}, 26)  -- enter
 	joypadSetHelper(1, {x=1}, 26)  -- skip dannna-
 	joypadSetHelper(1, {x=1}, 6)  -- skip mazuha-
@@ -603,38 +672,30 @@ function TAS.d1108()
 	joypadSetHelper(1, {x=1}, 6)  -- skip kitagawa-
 	
 	joypadSetHelper(1, {up=1}, 6)  -- move cursor
-	joypadSetHelper(1, {circle=1}, 6)  -- press
+	joypadSetHelper(1, {circle=1}, 6)  -- press  -- trap wo oitemiru
 	fadv(20)
 	joypadSetHelper(1, {x=1}, 6)  -- skip yoroshii-
 	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	joypadSetHelper(1, {circle=1}, 6)  -- press
+	joypadSetHelper(1, {circle=1}, 6)  -- press  -- setti siyou
 	fadv(20)
 	joypadSetHelper(1, {x=1}, 6)  -- skip deha-
 	fadv(207)
 	fadv(20)
 	joypadSetHelper(1, {x=1}, 26)  -- skip kono-
 	joypadSetHelper(1, {x=1}, 26)  -- skip bokuno-
-	joypadSetHelper(1, {x=1}, 6)  -- skip danna-
+	joypadSetHelper(1, {x=1}, 26)  -- skip danna-
+	joypadSetHelper(1, {x=1}, 6)   -- skip danna-
 	joypadSetHelper(1, {up=1}, 6)  -- move cursor
-	joypadSetHelper(1, {circle=1}, 6)  -- press
+	joypadSetHelper(1, {circle=1}, 6)  -- press  -- mou iiyo
 	fadv(20)
 	joypadSetHelper(1, {x=1}, 26)  -- skip soudesuka-
 	joypadSetHelper(1, {x=1}, 26)  -- skip nanishiro-
 	joypadSetHelper(1, {x=1}, 26)  -- skip souda-
 	joypadSetHelper(1, {x=1}, 6)  -- skip nanishiro-
+end
 
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	TAS.removeTrap()
-
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	TAS.removeTrap()
-
-	joypadSetHelper(1, {right=1}, 6)  -- move cursor
-	joypadSetHelper(1, {right=1}, 6)  -- move cursor
-	TAS.removeTrap()
-
+function TAS.d1108_2nd_win()
+	TAS.removeJumpGuruRGuruL()  -- remove trap
 	TAS.exitTrapField()
 
 	-- main menu
@@ -643,11 +704,32 @@ function TAS.d1108()
 	TAS.exitDayBaboo()
 
 	-- trap battle
-	fadv(262)
+	fadv(262+10)
 	TAS.skipBattle()
 	fadv(167)
 	joypadSetHelper(1, {x=1}, 10)  -- cancel turning off the light
 	fadv(72)
+end
+
+function TAS.d1108_2nd_lose()
+	TAS.removeAllTrap()  -- remove all trap
+	TAS.exitTrapField()
+
+	-- main menu
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	TAS.exitDayBaboo()
+
+	local baboos = memory.readbyte(adr_baboo_today)
+
+	-- trap battle
+	for i=0, baboos do
+		fadv(262)
+		TAS.loseBattle()
+		TAS.skipFeed()
+	end
+
+	TAS.postSkipFeed()
 end
 
 function TAS.d1109()
@@ -717,8 +799,8 @@ macro_table = {
 	{key = "right", func = TAS.rightField},
 	{key = "up", func = TAS.reapPlantVegee5},
 	{key = "down", func = nil},
-	{key = "home", func = TAS.enterGlasses},
-	{key = "end", func = TAS.exitGlasses},
+	{key = "home", func = TAS.enterBinocular},
+	{key = "end", func = TAS.exitBinocular},
 
 	{key = "1", func = TAS.enterHouse},
 	{key = "2", func = TAS.exitHouse},
@@ -748,36 +830,4 @@ function doInputMacro()
 	end
 end
 
-------------------------------------------------------------
--- main
-------------------------------------------------------------
-
-local initial = 1
-local begin_fc = emu.framecount()
-local begin_date = os.date()
-macro_key = 0
-
-while true do
-
-	if initial == 1 then
-		initial = 0
-	end
-
-	if initial == 0 then
-		-- This input macro starts at next frame which you press the button at,
-		-- not starts at current frame.
-		doInputMacro()
-		Baboo.drawInfo()
-	end
-
-	emu.frameadvance()
-end
-
-local fc = emu.framecount()
-print(string.format("<<< lua bot is finished <<<"))
-print(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
-print(string.format("    end:: %s,  fc = %d", os.date(), fc))
-print(string.format("elapsed:: fc = %d", fc - begin_fc))
-emu.speedmode("normal")
-emu.pause()
 
