@@ -4,7 +4,7 @@
 -- + Emulater: psxjin v2.0.2
 --
 -- + Usage
---   1. call this file
+--   1. require "astronoka_lib"
 --
 -- + Special Thanks
 --   http://homepage3.nifty.com/game-sfccode/astronoka.html
@@ -16,6 +16,9 @@ require "bit"
 ------------------------------------------------------------
 -- address
 ------------------------------------------------------------
+
+-- RNG, 4byte
+adr_rng = 0x0BE328
 
 -- ##hybrid machine
 -- first parent, pointing the address of seed in inventory
@@ -116,8 +119,6 @@ adr_machine_rank = 0x166F0B
 
 -- total reset counts. aka. L-R counts
 adr_total_reset_cnt = 0x166F5C
--- RNG, 4byte
-adr_rng = 0x0BE328
 
 -- ##baboo and trap battle
 adr_baboo_today = 0x0EFCA6  -- how many baboos do they come. 0x00 to 0x03
@@ -138,6 +139,7 @@ adr_win_count = 0x166F64
 
 -- ## Properties of vegee
 -- kind1
+knd_kyouka    = 0x00  -- golden kyouka-shu, other kyouka-shu
 knd_kuzu      = 0x00  -- くず野菜
 knd_hourensou = 0x01  -- 穴ホウレン草
 knd_nira      = 0x02  -- ニラクラウン
@@ -189,7 +191,7 @@ knd_flavor    = 0x08
 knd_smell     = 0x09
 knd_tone      = 0x0A
 knd_plain     = 0x63
-knd_plain_golden = 0x64
+knd_golden    = 0x64
 
 
 -- eponym2
@@ -1204,7 +1206,7 @@ function Baboo.drawInfo(x, y)
 	y = y or 60
 	local rng = memory.readdword(adr_rng)
 	local feather = memory.readword(adr_total_feather)
-	local seeds = memory.readword(adr_total_seed)
+	local seeds = memory.readbyte(adr_total_seed)
 	local days = memory.readbyte(adr_days)
 	local lr = memory.readword(adr_total_reset_cnt)
 	local win = memory.readword(adr_win_count)
@@ -1215,51 +1217,6 @@ function Baboo.drawInfo(x, y)
 	gui.text(x, y+30, string.format(" days    %d", days))
 	gui.text(x, y+40, string.format(" lr  %d", lr))
 	gui.text(x, y+50, string.format(" win %d", win))
-end
-
-function Baboo.skipBattle()
-	joypadSetHelper(1, {select=1}, 16)  -- skip battle
-	fadv(18)
-	joypadSetHelper(1, {x=1}, 6)  -- skip sukkari-
-	fadv(26)
-	joypadSetHelper(1, {x=1}, 6)  -- skip art score
-	fadv(20)
-	joypadSetHelper(1, {x=1}, 6)  -- skip feather, if it was dropped
-	fadv(13)
-end
-
-function Baboo.postSkipBattle()
-	fadv(167)
-	joypadSetHelper(1, {x=1}, 10)  -- skip turning off the light
-	fadv(62)
-end
-
-function Baboo.loseBattle()
-	joypadSetHelper(1, {select=1}, 16)  -- skip battle
-	fadv(18)
-	fadv(10)  -- in case of lag
-	joypadSetHelper(1, {x=1}, 6)  -- skip art score
-	fadv(26)
-end
-
-function Baboo.skipFeed()
-	joypadSetHelper(1, {select=1}, 16)  -- skip feed
-	fadv(18)
-	fadv(10)  -- in case of lag
-	joypadSetHelper(1, {x=1}, 6)  -- skip satisfaction
-	fadv(20)
-
-	joypadSetHelper(1, {x=1}, 6)  -- skip golden, if it was dropped
-	fadv(20)
-
-	joypadSetHelper(1, {x=1}, 6)  -- in case of lag
-	fadv(20)  -- in case of lag
-end
-
-function Baboo.postSkipFeed()
-	fadv(160)
-	joypadSetHelper(1, {x=1}, 10)  -- skip turning off the light
-	fadv(62)
 end
 
 function Baboo.showStatus()

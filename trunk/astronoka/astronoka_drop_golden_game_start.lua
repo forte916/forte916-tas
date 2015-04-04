@@ -1,15 +1,15 @@
 -- Astronoka
--- This script manipulate a drop of baboo feather.
+-- This script manipulate a drop of golden seed.
 --
 -- + Emulater: psxjin v2.0.2
 --
 -- + Usage
---   1. Start this script in a trap battle
+--   1. Start this script in a field.
 --
 -- + This script can
---     ++ manipulate a drop of baboo feather
+--     ++ manipulate a drop of golden seed.
 
-require "astronoka_lib"
+require "astronoka_input_macro_lib"
 
 ------------------------------------------------------------
 -- initialize
@@ -27,73 +27,45 @@ emu.speedmode("turbo")       -- drops some frames
 
 
 ------------------------------------------------------------
--- Baboo
--- + Baboo is defined at astronoka_lib
+-- functions
 ------------------------------------------------------------
 
-function Baboo.attemptReload(func)
-	-- read rng
-	local crr_rng = memory.readdword(adr_rng)
-	-- check whether the rng is changed
-	if crr_rng == pre_rng then
-		return false
-	end
-	
+function attemptReload(func)
 	-- create save state for repeat
 	local pre_state = savestate.create()
 	savestate.save(pre_state)
-
-	Baboo.drawInfo()
 
 	-- if the baboo droped a feather then return true
 	-- else reload savestate and return false.
 	if func() then
 		return true
 	else
-		pre_rng = crr_rng
 		savestate.load(pre_state)
 		return false
 	end
 end
 
-function Baboo.dropFeather()
-	-- press select to skip battle
-	Baboo.skipBattle()
-	local crr_feather = memory.readword(adr_total_feather)
+function game_start_golden()
+	TAS.inputName()
+	TAS.d1101()  -- plant
+	TAS.d1102()
+	TAS.d1103()
+	TAS.d1104()  -- plant
+	TAS.d1105()
+	TAS.d1106()
+	TAS.d1107()  -- plant, sunday
+	TAS.d1108_1st()  -- first baboo
+	local pre_total_seed = memory.readword(adr_total_seed)
+	Baboo.drawInfo()
+	TAS.d1108_2nd_lose()  -- first baboo
+	Baboo.drawInfo()
 
-	if crr_feather > pre_feather then
-		Baboo.postSkipBattle()
-		return true
-	end
-	return false
-end
-
-function Baboo.dropGoldenSeedActual()
-	-- press select to skip feed
-	Baboo.skipFeed()
 	local crr_total_seed = memory.readword(adr_total_seed)
 
 	if crr_total_seed > pre_total_seed then
-		Baboo.postSkipFeed()
 		return true
 	end
-	return false
-end
 
-function Baboo.dropGoldenSeed()
-	local retry_frm = 1500  -- range of frames: 1400 ~ 1600
-	local result = false
-	Baboo.loseBattle()
-
-	for i=0, retry_frm do
-
-		result = Baboo.attemptReload(Baboo.dropGoldenSeedActual)
-		if result == true then
-			return true
-		end
-
-		emu.frameadvance()
-	end
 	return false
 end
 
@@ -105,41 +77,35 @@ local initial = 1
 local result = false
 local begin_fc = emu.framecount()
 local begin_date = os.date()
-pre_rng = 0
-pre_feather = memory.readword(adr_total_feather)
-pre_total_seed = memory.readword(adr_total_seed)
+local retry = 0
 
+TAS.start()
 
 while true do
 
 	if initial == 1 then
-		--Baboo.showStatus()
 		initial = 0
 	end
 
 	if initial == 0 then
-		Baboo.drawInfo()
-
-		local done = memory.readword(adr_trap_battle)
-		if done == in_trap_battle then
-			result = Baboo.attemptReload(Baboo.dropFeather)  -- disable if you want a golden seed
-			--result = Baboo.attemptReload(Baboo.dropGoldenSeed)  -- enable if you want a golden seed
-			if result then
-				break
-			end
+		print(string.format("-- retry = %d", retry))
+		result = attemptReload(game_start_golden)  -- enable if you want a golden seed
+		if result then
+			print(string.format("-- retry = %d, found golden!!!!!", retry))
+			break
 		end
 
-		local done2 = memory.readword(adr_reaction2)
-		if done2 == reaction2_end then
-			Baboo.dropFeather()  -- disable if you want a golden seed
-			--Baboo.dropGoldenSeed()  -- enable if you want a golden seed
+		if retry > 1000 then
+			print(string.format("-- retry = %d, no golden", retry))
 			break
 		end
 	end
 
+	retry = retry + 1
 	emu.frameadvance()
 end
 
+Baboo.drawInfo()
 local fc = emu.framecount()
 print(string.format("<<< lua bot is finished <<<"))
 print(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
