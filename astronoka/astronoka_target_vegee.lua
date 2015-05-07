@@ -1325,6 +1325,12 @@ renkon_any_m100x2_node = {
 	property = renkon_any_m100x2,
 }
 
+renkon_any_m100x2_node_2 = {
+	left = kabu_m100_node,
+	right = shimaimo_m100_node,
+	property = renkon_any_m100x2,
+}
+
 renkon_any_m100x2_leaf = {
 	left = nil,
 	right = nil,
@@ -2342,6 +2348,7 @@ kifujin_p300flv_node = {
 target_tree_1115 = {
 	-- need shimaimo_plain 14, kabu_plain 15
 	renkon_any_m100x2_node,
+	--renkon_any_m100x2_node_2,
 	imokyu_any_bit4_node,
 }
 

@@ -1,5 +1,5 @@
 -- Astronoka
--- This script manipulate a drop of golden seed.
+-- This script manipulate a baboo appearance.
 --
 -- + Emulater: psxjin v2.0.2
 --
@@ -36,20 +36,26 @@ emu.speedmode("turbo")       -- drops some frames
 -----------------------------------------------------------
 
 function Baboo.attemptReload(func)
-	-- read rng
-	local crr_rng = memory.readdword(adr_rng)
-	-- check whether the rng is changed
-	if crr_rng == pre_rng then
-		return false
-	end
-	
 	-- create save state for repeat
 	local pre_state = savestate.create()
 	savestate.save(pre_state)
 
+	local crr_rng1 = memory.readdword(adr_rng)
+	--print(string.format("-------------------- fc = %d, rng = %08x", emu.framecount(), crr_rng1))
+	TAS.exitField()
+
+	-- read rng
+	local crr_rng = memory.readdword(adr_rng)
+	-- check whether the rng is changed
+	print(string.format("fc = %d, rng = %08x", emu.framecount(), crr_rng))
+	if crr_rng == pre_rng then
+		savestate.load(pre_state)
+		return false
+	end
+
 	Baboo.drawInfo()
 
-	-- if the baboo droped a feather then return true
+	-- if no baboo then return true
 	-- else reload savestate and return false.
 	if func() then
 		return true
@@ -60,30 +66,15 @@ function Baboo.attemptReload(func)
 	end
 end
 
-function Baboo.dropGoldenSeed2()
-	TAS.exitBinocular()  -- enable this func if manipulare rng in binocular.
+function Baboo.keepNoBaboo()
 	joypadSetHelper(1, {up=1}, 6)  -- move cursor
-	joypadSetHelper(1, {up=1}, 6)  -- move cursor
+	TAS.enterBinocular()  -- enable this func if manipulare rng in binocular.
 
-	--TAS.exitField()
-	--joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	--joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	--joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	TAS.exitDayBaboo()
-
+	local rng = memory.readdword(adr_rng)
 	local baboos = memory.readbyte(adr_baboo_today)
+	print(string.format("fc = %d, rng = %08x, baboos = %d", emu.framecount(), rng, baboos))
 
-	-- trap battle
-	for i=0, baboos do
-		fadv(262)
-		TAS.loseBattle()
-		TAS.skipFeed()
-	end
-
-	TAS.postSkipFeed()
-	local crr_total_seed = memory.readword(adr_total_seed)
-
-	if crr_total_seed > pre_total_seed then
+	if 0 == baboos then
 		return true
 	end
 
@@ -107,21 +98,24 @@ while true do
 
 	if initial == 1 then
 		--Baboo.showStatus()
-		TAS.enterBinocular()  -- enable this func if manipulare rng in binocular.
 		initial = 0
 	end
 
 	if initial == 0 then
 		Baboo.drawInfo()
-		result = Baboo.attemptReload(Baboo.dropGoldenSeed2)  -- enable if you want a golden seed
+		result = Baboo.attemptReload(Baboo.keepNoBaboo)
 		if result then
 			break
 		end
-		TAS.lookBinocular()  -- enable this func if manipulare rng in binocular.
 	end
 
 	emu.frameadvance()
 end
+
+TAS.exitBinocular()  -- enable this func if manipulare rng in binocular.
+joypadSetHelper(1, {up=1}, 6)  -- move cursor
+joypadSetHelper(1, {up=1}, 6)  -- move cursor
+TAS.exitDayNoBaboo()
 
 Baboo.drawInfo()
 local fc = emu.framecount()
