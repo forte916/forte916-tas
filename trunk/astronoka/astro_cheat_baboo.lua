@@ -1,64 +1,35 @@
--- @author pirohiko
---psxCounters.cpp内 psxUpdateVSyncRate()をリフレッシュレート59.94、走査線数262.5本に変更してビルドすると超ラグが減る。
--- バブーのGA仕様話 http://www.1101.com/morikawa/1999-04-10.html
--- マッチ箱の能 http://www.1101.com/morikawa/index_AI.html
+-- Astronoka
+-- This script .
+--
+-- + Emulater: psxjin v2.0.2
+--
+-- + Usage
+--   1. Start this script in a field.
+--
+-- + This script can
+--     ++ .
 
---	チート代わり
---	memory.writedword(0x00EFCA7,0x0001) --バブーが出ない
---	memory.writedword(0x0166F02,0x3000) --ゼニー
---	memory.writedword(0x00BE328,0x00000000)
---	memory.writebyte(0x00F18FA,0x63) -- ワンダフルな塀
---	memory.writebyte(0x00F16D2,0x63) -- ただの塀
---	memory.writebyte(0x00F2DD2,0x63) -- 怪光線マシン
---	memory.writebyte(0x00F2812,0x63) -- ピートのカカシ
---	memory.writebyte(0x00F2252,0x63) -- 冷水ぶっかけ
---	memory.writebyte(0x00F23C2,0x63) -- パンチング
---	memory.writebyte(0x00F2532,0x63) -- ビリビリマシン
---	memory.writebyte(0x00F1112,0x63) -- 2マス扇風機
---	memory.writebyte(0x00F11CA,0x63) -- 高級2マス扇風機
---	memory.writebyte(0x00F13F2,0x63) -- 基本餌
---	memory.writebyte(0x00F14AA,0x63) -- 良質餌
---	memory.writebyte(0x00F0D7A,0x63) -- 浅底落とし穴
---	memory.writebyte(0x00F0FA2,0x63) -- フタ付き落とし穴
---	memory.writebyte(0x00F219A,0x63) -- おめでとう装置
---	memory.writebyte(0x00F2C62,0x63) -- とりもち
---	memory.writebyte(0x00F19B2,0x63) -- ジャンプ台
---	memory.writebyte(0x00F26A2,0x63) -- 風船サービス装置
---	memory.writebyte(0x00F2AF2,0x63) -- 大型オリ
+require "astronoka_lib"
+
+------------------------------------------------------------
+-- initialize
+------------------------------------------------------------
+-- If set to true, no rerecords done by Lua are counted in the rerecord total.
+-- If set to false, rerecords done by Lua count. By default, rerecords count.
+movie.rerecordcounting(false)
+
+-- maximum is fastest, if you need not render
+--emu.speedmode("maximum")     -- screen rendering is disabled
+emu.speedmode("turbo")       -- drops some frames
+--emu.speedmode("nothrottle")  -- max spped without frameskip
+--emu.speedmode("normal")      -- normal speed (test use)
 
 
--- pure 32-bit multiplier
-function mul32(a, b)
-        -- separate the value into two 8-bit values to prevent type casting
-        local x, y, z = {}, {}, {}
-        x[1] = bit.band(a, 0xff)
-        x[2] = bit.band(bit.rshift(a, 8), 0xff)
-        x[3] = bit.band(bit.rshift(a, 16), 0xff)
-        x[4] = bit.band(bit.rshift(a, 24), 0xff)
-        y[1] = bit.band(b, 0xff)
-        y[2] = bit.band(bit.rshift(b, 8), 0xff)
-        y[3] = bit.band(bit.rshift(b, 16), 0xff)
-        y[4] = bit.band(bit.rshift(b, 24), 0xff)
-        -- calculate for each bytes
-        local v, c
-        v = x[1] * y[1]
-        z[1], c = bit.band(v, 0xff), bit.rshift(v, 8)
-        v = c + x[2] * y[1] + x[1] * y[2]
-        z[2], c = bit.band(v, 0xff), bit.rshift(v, 8)
-        v = c + x[3] * y[1] + x[2] * y[2] + x[1] * y[3]
-        z[3], c = bit.band(v, 0xff), bit.rshift(v, 8)
-        v = c + x[4] * y[1] + x[3] * y[2] + x[2] * y[3] + x[1] * y[4]
-        z[4], c = bit.band(v, 0xff), bit.rshift(v, 8)
-        v = c + x[4] * y[2] + x[3] * y[3] + x[2] * y[4]
-        z[5], c = bit.band(v, 0xff), bit.rshift(v, 8)
-        v = c + x[4] * y[3] + x[3] * y[4]
-        z[6], c = bit.band(v, 0xff), bit.rshift(v, 8)
-        v = c + x[4] * y[4]
-        z[7], z[8] = bit.band(v, 0xff), bit.rshift(v, 8)
-        -- compose them and return it
-        return bit.bor(z[1], bit.lshift(z[2], 8), bit.lshift(z[3], 16), bit.lshift(z[4], 24)),
-               bit.bor(z[5], bit.lshift(z[6], 8), bit.lshift(z[7], 16), bit.lshift(z[8], 24))
-end
+
+------------------------------------------------------------
+-- functions
+------------------------------------------------------------
+
 
 function BabooStatus(x,y)
 	-- 20個体66要素を表示
@@ -73,38 +44,6 @@ function BabooStatus(x,y)
 	end
 end
 
-
---gui.register( function()
---	local RNG = memory.readdword(0x00BE328) --乱数
---	local text = string.format("%08X",RNG )
---
---
-----	先の乱数予測
-----	RNG = mul32(RNG,1103515245)+12345
-----	text = text..string.format("\n%08X",RNG )
-----	RNG = mul32(RNG,1103515245)+12345
-----	text = text..string.format("\n%08X",RNG )
-----	RNG = mul32(RNG,1103515245)+12345
-----	text = text..string.format("\n%08X",RNG )
-----	RNG = mul32(RNG,1103515245)+12345
-----	text = text..string.format("\n%08X",RNG )
-----	RNG = mul32(RNG,1103515245)+12345
-----	text = text..string.format("\n%08X",RNG )
-----	RNG = mul32(RNG,1103515245)+12345
-----	text = text..string.format("\n%08X",RNG )
-----	RNG = mul32(RNG,1103515245)+12345
-----	text = text..string.format("\n%08X",RNG )
-----	RNG = mul32(RNG,1103515245)+12345
-----	text = text..string.format("\n%08X",RNG )
---
---
---	gui.text(40,40, memory.readword(0x166F5C)) --LR回数
---	gui.text(40,48, text) --乱数
---
---
---	BabooStatus(100,8)
---
---end)
 
 DNA ={	
 	-- ゲーム内データにJISで書かれていたネーム。
@@ -139,7 +78,7 @@ DNA ={
 	"Shokuryo" ,	--150944 食量		28
 	"Shokusen" ,	--150948 作選		29
 	"Tabekata" ,	--15094C 食方		30
-	"YarukiP" ,	--150950 やる気(滞在)	31
+	"YarukiP" ,	--150950 やる気(滞在)	31 -- lesser value, give up earlier
 	"Movement" ,	--150954 移量		32
 	"Favo A" ,	--150958 好Ａ		33
 	"Favo B" ,	--15095C 好Ｂ		34
@@ -174,10 +113,9 @@ DNA ={
 	"Obj-J" ,	--1509D0 他飛		63
 	"Obj-A" ,	--1509D4 他壊		64
 	"Obj-P" ,	--1509D8 他押		65
-	"Drop"  	--1509DC 落物		66
+	"Drop"  	--1509DC 落物		66 -- greater value, inclese drop rate.
 }
 
--- >>> forte916 customize >>>
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
@@ -240,6 +178,31 @@ function drawRNG(x, y)
 	gui.text(x, y+16, string.format(" rng:%08X", rng))
 end
 
+function Baboo.cheatGene(param, element)
+	param = param or 0
+	j = element or 24;  -- 24 means HP
+
+	local value
+	value = (param * 0x03000000 / 100) + 0x40000000
+
+	print(string.format("param = %3d, value = 0x%08x", param, value))
+
+	for i=0,19 do
+		memory.writedword(0x1508D8+j*4+66*4*i, value) -- cheat
+	end
+
+end
+
+function Baboo.cheatBabooHP(param)
+	param = param or 0
+	Baboo.cheatGene(param, 24)
+end
+
+function Baboo.cheatBabooYarukiP(param)
+	param = param or 0
+	Baboo.cheatGene(param, 30)
+end
+
 ------------------------------------------------------------
 -- main
 ------------------------------------------------------------
@@ -252,13 +215,12 @@ ini_st = {}
 pre_st = {}
 crr_st = {}
 
-f = io.open("baboo_status.log", "a")
+f = io.open("baboo_cheat.log", "a")
 if f == nil then print("error: Could not open file") end
 
 while true do
 	local crr_days
 	local yy, mm, dd, fc
-	local st = {}
 
 	if initial == 1 then
 		ini_st = readBabooStatus()
@@ -275,6 +237,34 @@ while true do
 			fc = emu.framecount()
 
 			f:write(string.format("----- year%d %d/%d , fc = %d -----".."\n", yy, mm, dd, fc))
+			-- white baboo
+			-- It is relevance of total amount of HP, YarukiP Movement and Drop
+			Baboo.cheatBabooHP(31)
+			Baboo.cheatBabooYarukiP(31)
+			--Baboo.cheatGene(9, 31)  -- Movement, lesser is better
+			Baboo.cheatGene(1, 65)  -- Drop, lesser is better
+
+			-- no relevant of white baboo
+			--Baboo.cheatGene(90, 0)   -- YuuA
+			--Baboo.cheatGene(90, 1)   -- YuuB
+			--Baboo.cheatGene(91, 2)   -- Weight
+			--Baboo.cheatGene(91, 3)   -- Height
+			--Baboo.cheatGene(91, 4)   -- Ude
+			--Baboo.cheatGene(91, 5)   -- Ashi
+			--Baboo.cheatGene(91, 6)   -- Ago
+			--Baboo.cheatGene(91, 7)   -- Wing
+			--Baboo.cheatGene(91, 22)  -- Like
+			--Baboo.cheatGene(91, 23)  -- DisLike
+			--Baboo.cheatGene(91, 25)  -- Seikaku
+			--Baboo.cheatGene(91, 26)  -- Kuuhuku
+			--Baboo.cheatGene(91, 27)  -- Shokuryo
+			--Baboo.cheatGene(91, 28)  -- Sakusen
+			--Baboo.cheatGene(91, 29)  -- Tabekata
+			--Baboo.cheatGene(91, 32)  -- Favo A
+			--Baboo.cheatGene(91, 33)  -- Favo B
+			--Baboo.cheatGene(91, 34)  -- Favo C
+			--Baboo.cheatGene(91, 35)  -- Favo S
+
 			outputBabooStatus(f)
 
 			pre_st = crr_st
@@ -284,14 +274,10 @@ while true do
 			f:flush()
 		end
 
-		drawRNG()
-		--drawBabooStatus(ini_st, 50, 10, "green")
-		--drawBabooStatus(pre_st, 50, 11, "blue")
-		--drawBabooStatus(crr_st, 50, 12, "orange")
 	end
+	drawRNG()
 
 	emu.frameadvance()
 end
 
 f:close()
--- <<< forte916 customize <<<

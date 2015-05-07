@@ -22,7 +22,7 @@ adr_rng = 0x0BE328
 
 -- ##hybrid machine
 -- first parent, pointing the address of seed in inventory
-adr_seed_first = 0x1CD698
+adr_seed_first  = 0x1CD698
 -- second parent, pointing the address of seed in inventory
 adr_seed_second = 0x1CD69C
 -- produced seed, lining up the properties of seed
@@ -38,7 +38,7 @@ adr_seed_hybrid = 0x1CD6A8
 
 -- ##inventory
 -- address of first seed in inventory, next +28h, max 100
-adr_seed = 0x167E80
+adr_seed  = 0x167E80
 -- address of first crops in the field, next +34h, max 24
 adr_fcrop = 0x168E20
 -- address of first crops in inventory, next +30h, max 100
@@ -69,72 +69,69 @@ prvw2_kuzu = 0xD778
 adr_parent_view3 = 0x1FFDFC
 
 
--- cursor of group in seed inventory, 2byte
-adr_cursor_group_first = 0x0018F434
--- max group counts, 1byte
-adr_max_group_count_first = 0x0018F436
--- cursor of seed inventory, 2byte
-adr_cursor_seed_first = 0x0018F438
--- max raw counts in current view, 1byte
-adr_max_raw_count_first = 0x0018F43A
--- first parent, pointing the address of seed in inventory
-adr_seed_first2 = 0x0018F43C
+adr_cursor_group_first     = 0x0018F434 -- cursor of group in seed inventory, 2byte
+adr_max_group_count_first  = 0x0018F436 -- max group counts, 1byte
+adr_cursor_seed_first      = 0x0018F438 -- cursor of seed inventory, 2byte
+adr_max_raw_count_first    = 0x0018F43A -- max raw counts in current view, 1byte
+adr_seed_first2            = 0x0018F43C -- first parent, pointing the address of seed in inventory
 
+adr_cursor_group_second    = 0x0018F44C -- cursor of group in seed inventory, 2byte
+adr_max_group_count_second = 0x0018F44E -- max group counts, 1byte
+adr_cursor_seed_second     = 0x0018F450 -- cursor of seed inventory, 2byte
+adr_max_raw_count_second   = 0x0018F452 -- max raw counts in current view, 1byte
+adr_seed_second2           = 0x0018F454 -- second parent, pointing the address of seed in inventory
 
--- cursor of group in seed inventory, 2byte
-adr_cursor_group_second = 0x0018F44C
--- max group counts, 1byte
-adr_max_group_count_second = 0x0018F44E
--- cursor of seed inventory, 2byte
-adr_cursor_seed_second = 0x0018F450
--- max raw counts in current view, 1byte
-adr_max_raw_count_second = 0x0018F452
--- second parent, pointing the address of seed in inventory
-adr_seed_second2 = 0x0018F454
-
+adr_cursor_lr = 0x14322E -- cursor of [left, right, circle]
+adr_cursor_ud = 0x143230 -- cursor of [up, down] in house/main/system menu
 
 -- ##general info
--- cursor of house/main/system menu
-adr_cursor_menu = 0x143230
+adr_player_name   = 0x166EEA -- player name. SJIS big endian
+adr_days          = 0x166EF8 -- days  from game start. 0 origin. 1byte
+adr_years         = 0x166EF9 -- years from game start. 0 origin. 1byte
+adr_amount_money  = 0x166F00 -- amounts of money. 4byte
+adr_total_feather = 0x166F04 -- total feather counts. 2byte
+adr_total_seed    = 0x166F06 -- total seed counts includes stock. 1byte
+adr_total_vegee   = 0x166F07 -- total vegee counts includes stock and field. 1byte
+adr_total_field   = 0x166F08 -- total field counts. 1byte
+adr_pete_rank     = 0x166F0A -- pete rank. 0x00 to 0x04. 1byte
+adr_machine_rank  = 0x166F0B -- hybrid machine rank. 0x00 to 0x05. 00 means we don't have machine. 1byte
+adr_bus_stop      = 0x166F0C -- bus. 0x03 reveals all bus stop. 1byte
 
--- days from game start. 0 origin
-adr_days = 0x166EF8
--- years from game start. 0 origin
-adr_years = 0x166EF9
+adr_total_reset_cnt = 0x166F5C -- total reset counts. aka. L-R counts
 
--- amounts of money. 4byte
-adr_amount_money = 0x166F00
--- total feather counts. 2byte
-adr_total_feather = 0x166F04
--- total seed counts includes stock
-adr_total_seed = 0x166F06
--- total vegee counts includes stock and field
-adr_total_vegee = 0x166F07
--- total field counts
-adr_total_field = 0x166F08
--- pete rank. 0x00 to 0x04
-adr_pete_rank = 0x166F0A
--- hybrid machine rank. 0x00 to 0x05. 00 means we don't have machine.
-adr_machine_rank = 0x166F0B
+adr_art_score     = 0x166F60  -- art score. set just after msg skip.
+adr_win_count     = 0x166F64  -- win  count. 2byte
+adr_lose_count    = 0x166F66  -- lose count. 2byte
 
--- total reset counts. aka. L-R counts
-adr_total_reset_cnt = 0x166F5C
+adr_baboo_collection = 0x166F70 -- 0x166F70 to 0x166F8D. bit flag.
+adr_my_baboo         = 0x166F8F -- my baboo
+
+adr_tropy_collection = 0x166FFA -- 0x166FFA to 0x1670AE. flag. 2byte.
+adr_astronet_contest = 0x167108 -- 0x167108 to 0x1671C0. flag. 2byte. +800h means unread.
+adr_astronet_vegee   = 0x1671F8 -- 0x1671F8 to 0x1672C0. flag. 2byte. +800h means unread.
+adr_astronet_box     = 0x1672E8 -- 0x1672E8 to 0x1673B6. flag. 2byte. +800h means unread.
+adr_astronet_trap    = 0x1673E8 -- 0x1673E8 to 0x16752E. flag. 2byte. +800h means unread.
 
 -- ##baboo and trap battle
-adr_baboo_today = 0x0EFCA6  -- how many baboos do they come. 0x00 to 0x03
-adr_watched = 0x0EFCA7  -- watched:0x01, not watched:0x00
-adr_baboo1_kind = 0x0EFCA8  -- species of first baboo
-adr_baboo2_kind = 0x0EFCA9  -- species of second baboo
-adr_baboo3_kind = 0x0EFCAA  -- species of third baboo
+adr_rest_power   = 0x1617F4  -- rest of power.
+adr_baboo_today  = 0x0EFCA6  -- how many baboos do they come. 0x00 to 0x03
+adr_watched      = 0x0EFCA7  -- watched:0x01, not watched:0x00
+adr_baboo1_kind  = 0x0EFCA8  -- species of 1st baboo
+adr_baboo2_kind  = 0x0EFCA9  -- species of 2nd baboo
+adr_baboo3_kind  = 0x0EFCAA  -- species of 3rd baboo
+adr_baboo1_shape = 0x0EFCAC  -- shape of 1st baboo. 0x00 to 0x02
+adr_baboo1_color = 0x0EFC80  -- color of 1st baboo. 0x00 to 0x04
 
 adr_trap_battle = 0x13D374
-in_trap_battle = 0x0002  -- in the battle field
-out_trap_bttle = 0xFFFF  -- not in the battle field
-adr_reaction1 = 0x13D380  -- some reaction against a trap. I don't know.
-adr_reaction2 = 0x13D384  -- some reaction against a trap. I don't know.
-reaction2_end = 0xFFFF  -- trap battle is finished
+in_trap_battle  = 0x0002  -- in the battle field
+out_trap_bttle  = 0xFFFF  -- not in the battle field
+adr_reaction1   = 0x13D380  -- some reaction against a trap. I don't know.
+adr_reaction2   = 0x13D384  -- some reaction against a trap. I don't know.
+reaction2_end   = 0xFFFF  -- trap battle is finished
 adr_result_internal = 0x13D3B4  -- result of internal?? 4byte, +10h, max 18
-adr_win_count = 0x166F64
+
+adr_art_score1 = 0x1FFDF0  -- art score. same value as score2
+adr_art_score2 = 0x1FFE20  -- art score. same value as score1
 
 
 -- ## Properties of vegee
@@ -229,6 +226,26 @@ pos_top_right     = 0x0102
 -- pointing the address of crop on the cursor
 adr_crop_adr = 0x167D6C  -- 4byte
 
+
+
+-- ## Properties of baboo
+-- kind
+knd_babbaboo  = 0x00  --
+knd_babny     = 0x01  --
+knd_babchaka  = 0x02  --
+knd_babool    = 0x03  --
+knd_babron    = 0x04  --
+knd_babbone   = 0x05  --
+knd_babtot    = 0x06  --
+knd_babchil   = 0x07  --
+knd_babooks   = 0x08  --
+knd_babpeli   = 0x09  --
+knd_babtene   = 0x0A  --
+knd_babmol    = 0x0B  --
+knd_babrock   = 0x0C  --
+knd_babooshka = 0x0D  --
+knd_baboob    = 0x0E  --
+knd_babtron   = 0x0F  --
 
 
 ------------------------------------------------------------
@@ -960,6 +977,7 @@ function Hybrid.autoHybrid(target)
 			Hybrid.drawRetryCount(i)
 			-- if status is better/worse then press circle
 			if Hybrid.expect(target.hybrid) then
+			--if Hybrid.expectPete1(target.hybrid) then
 				local fc = emu.framecount()
 				print(string.format("j=%d, i=%d, fc=%d", j, i, fc))
 				Hybrid.hybridize(target.hybrid)
@@ -1201,6 +1219,77 @@ end
 ------------------------------------------------------------
 Baboo = {}
 
+Baboo.DNA ={
+	-- ゲーム内データにJISで書かれていたネーム。
+	-- 優Ａ等の項目の意味は把握していません。
+	"YuuA" ,	--1508D8 優Ａ		01 -- greater value, greater baboo.
+	"YuuB" ,	--1508DC 優Ｂ		02
+	"Weight" ,	--1508E0 体重		03
+	"High" ,	--1508E4 身長		04
+	"Ude" , 	--1508E8 腕力		05
+	"Ashi" , 	--1508EC 脚力		06
+	"Ago" , 	--1508F0 アゴ		07
+	"Wing" ,	--1508F4 羽値		08
+	"Pit" , 	--1508F8 耐穴		09
+	"Fan" , 	--1508FC 耐扇風機	10
+	"Jump" ,	--150900 耐ジャンプ	11
+	"Guru" ,	--150904 耐グルグル	12
+	"Water" ,	--150908 耐冷水		13
+	"Punch" ,	--15090C 耐パンチ	14
+	"Biri" ,	--150910 耐ビリビリ	15
+	"Balloon" ,	--150914 耐風船		16
+	"Tawara" ,	--150918 耐米		17
+	"Omedeto" ,	--15091C 耐おめでとう	18
+	"NiseEsa" ,	--150920 耐エサ		19
+	"Kakashi" ,	--150924 耐カカシ	20
+	"Mochi" ,	--150928 耐とりもち	21
+	"Kousen" ,	--15092C 耐怪光線	22
+	"Like" ,	--150930 快		23
+	"DisLike" ,	--150934 不快		24
+	"HP" ,		--150938 スタミナ（HP）	25
+	"Seikaku" ,	--15093C 性Ｃ		26
+	"Kuufuku" ,	--150940 空腹		27
+	"Shokuryo" ,	--150944 食量		28
+	"Shokusen" ,	--150948 作選		29
+	"Tabekata" ,	--15094C 食方		30
+	"YarukiP" ,	--150950 やる気(滞在)	31
+	"Movement" ,	--150954 移量		32
+	"Favo A" ,	--150958 好Ａ		33
+	"Favo B" ,	--15095C 好Ｂ		34
+	"Favo C" ,	--150960 好Ｃ		35
+	"Favo S" ,	--150964 好Ｓ		36
+	"Pit-D" ,	--150968 落直		37
+	"Pit-U" ,	--15096C 落迂		38
+	"Pit-J" ,	--150970 落飛		39
+	"Jump-D" ,	--150974 ジ直		40
+	"Jump-U" ,	--150978 ジ迂		41
+	"Jump-J" ,	--15097C ジ飛		42
+	"Guru-D" ,	--150980 回直		43
+	"Guru-U" ,	--150984 回迂		44
+	"Guru-J" ,	--150988 回飛		45
+	"Mochi-D" ,	--15098C も直		46
+	"Mochi-U" ,	--150990 も迂		47
+	"Mochi-J" ,	--150994 も飛		48
+	"Ray-D" ,	--150998 光直		49
+	"Ray-U" ,	--15099C 光迂		50
+	"Ray-J" ,	--1509A0 光飛		51
+	"Punch-D" ,	--1509A4 殴直		52
+	"Punch-U" ,	--1509A8 殴迂		53
+	"Punch-J" ,	--1509AC 殴飛		54
+	"Punch-A" ,	--1509B0 殴壊		55
+	"Punch-P" ,	--1509B4 殴押		56
+	"Biri-D" ,	--1509B8 ビ直		57
+	"Biri-U" ,	--1509BC ビ迂		58
+	"Biri-J" ,	--1509C0 ビ飛		59
+	"Biri-A" ,	--1509C4 ビ壊		60
+	"Biri-P" ,	--1509C8 ビ押		61
+	"Obj-U" ,	--1509CC 他迂		62
+	"Obj-J" ,	--1509D0 他飛		63
+	"Obj-A" ,	--1509D4 他壊		64
+	"Obj-P" ,	--1509D8 他押		65
+	"Drop"  	--1509DC 落物		66
+}
+
 function Baboo.drawInfo(x, y)
 	x = x or 0
 	y = y or 60
@@ -1220,7 +1309,80 @@ function Baboo.drawInfo(x, y)
 end
 
 function Baboo.showStatus()
-	-- TODO:: imprement here
+	-- 20個体66要素を出力
+
+	for j=0,65 do
+		text = string.format("%02d,%8s", j+1, Baboo.DNA[j+1])
+		for i=0,19 do
+			value = math.max(0,(memory.readdword(0x1508D8+j*4+66*4*i)-0x40000000)/0x03000000*100)
+			text = text..","..string.format("%3d", value)
+		end
+		debugPrint(text)
+	end
+end
+
+
+function Baboo.readGene(element)
+	j = element or 24;  -- 24 means HP
+
+	local result = { min=0, max=0, avg=0 }
+	local line = {}
+	local sum = 0
+
+	for i=0,19 do
+		value = math.max(0,(memory.readdword(0x1508D8+j*4+66*4*i)-0x40000000)/0x03000000*100)
+		line[i] = math.floor(value)
+		sum = sum + value
+	end
+	result.min = math.min(unpack(line))
+	result.max = math.max(unpack(line))
+	result.avg = math.floor(sum / 20)
+	debugPrint(string.format("result : ele = %d, min = %3d, max = %3d, avg = %3d", element, result.min, result.max, result.avg))
+
+	return result
+end
+
+function Baboo.evolveWhite(pre_gene_HP, pre_gene_YarukiP, pre_gene_Movement, pre_gene_Drop)
+	debugPrint(string.format("<<<< crr <<<<"))
+	local crr_gene_HP       = Baboo.readGene(24)
+	local crr_gene_YarukiP  = Baboo.readGene(30)
+	local crr_gene_Movement = Baboo.readGene(31)
+	local crr_gene_Drop     = Baboo.readGene(65)
+	local weaken_cnt = 0
+	local weaken_val = 0
+	local come = memory.readbyte(adr_baboo_today)
+
+	weaken_val = weaken_val + pre_gene_HP.avg      - crr_gene_HP.avg
+	weaken_val = weaken_val + pre_gene_YarukiP.avg - crr_gene_YarukiP.avg
+	weaken_val = weaken_val + pre_gene_Movement.avg - crr_gene_Movement.avg
+	weaken_val = weaken_val + pre_gene_Drop.avg    - crr_gene_Drop.avg
+	debugPrint(string.format("    weaken_val %d ", weaken_val))
+
+	if crr_gene_HP.avg < pre_gene_HP.avg then
+		debugPrint(string.format("    weaken HP: crr_avg = %3d, pre_avg = %3d", crr_gene_HP.avg, pre_gene_HP.avg))
+		weaken_cnt = weaken_cnt + 1
+	end
+
+	if crr_gene_YarukiP.avg < pre_gene_YarukiP.avg then
+		debugPrint(string.format("    weaken YarukiP: crr_avg = %3d, pre_avg = %3d", crr_gene_YarukiP.avg, pre_gene_YarukiP.avg))
+		weaken_cnt = weaken_cnt + 1
+	end
+
+	if crr_gene_Movement.avg < pre_gene_Movement.avg then
+		debugPrint(string.format("    weaken Movement: crr_avg = %3d, pre_avg = %3d", crr_gene_Movement.avg, pre_gene_Movement.avg))
+		weaken_cnt = weaken_cnt + 1
+	end
+
+	if crr_gene_Drop.avg < pre_gene_Drop.avg then
+		debugPrint(string.format("    weaken Drop: crr_avg = %3d, pre_avg = %3d", crr_gene_Drop.avg, pre_gene_Drop.avg))
+		weaken_cnt = weaken_cnt + 1
+	end
+
+	if weaken_cnt >= 0 and weaken_val >= 0 then
+		debugPrint(string.format("    weaken!!! weaken_cnt = %d, weaken_val %d, come = %d", weaken_cnt, weaken_val, come))
+		return true
+	end
+	return false
 end
 
 ------------------------------------------------------------
@@ -1329,6 +1491,15 @@ function switchDrawHybrid()
 		draw_key = 0
 	end
 end
+
+function debugPrint(str)
+	if f == nil then
+		print(str)
+	else
+		f:write(str.."\n")
+	end
+end
+
 
 ------------------------------------------------------------
 -- define
