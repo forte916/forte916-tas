@@ -21,8 +21,14 @@ end
 
 function TAS.plantVegee()
 	joypadSetHelper(1, {circle=1}, 6)  -- plant seed
-	fadv(16+9)
-	joypadSetHelper(1, {circle=1}, 9+1)  -- confirm yes
+	fadv(16+8)
+	joypadSetHelper(1, {circle=1}, 10)  -- confirm yes
+end
+
+function TAS.soilCancel()
+	joypadSetHelper(1, {circle=1}, 6)  -- soil
+	fadv(8)
+	joypadSetHelper(1, {x=1}, 10)  -- cancel soil
 end
 
 function TAS.reapVegee()
@@ -215,7 +221,7 @@ function TAS.loseBattle()
 end
 
 function TAS.skipFeed()
-	fadv(26)
+	fadv(24+2)
 	joypadSetHelper(1, {select=1}, 16)  -- skip feed
 	fadv(18)
 	joypadSetHelper(1, {x=1}, 6)  -- skip satisfaction
@@ -749,34 +755,43 @@ function TAS.d1110()
 	joypadSetHelper(1, {x=1}, 6)  -- skip astro net-
 
 	-- main menu
-	joypadSetHelper(1, {up=1}, 6)  -- move cursor
-	joypadSetHelper(1, {up=1}, 6)  -- move cursor
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
 	joypadSetHelper(1, {circle=1}, 6)  -- press field
 	
 	-- field
 	fadv(66)
 	TAS.reapVegee()
-
-	joypadSetHelper(1, {right=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {right=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {down=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
-	joypadSetHelper(1, {left=1}, 6)  -- move cursor
-	TAS.reapVegee()
-
 	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
 	joypadSetHelper(1, {down=1}, 6)  -- move cursor
 	TAS.plantVegee()
 
-	-- plant vegee
+	joypadSetHelper(1, {down=1}, 6)  -- move cursor
+	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
+
+	joypadSetHelper(1, {left=1}, 6)  -- move cursor
+	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
+
+	joypadSetHelper(1, {left=1}, 6)  -- move cursor
+	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
+
+	joypadSetHelper(1, {up=1}, 6)  -- move cursor
+	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
+
+	joypadSetHelper(1, {right=1}, 6)  -- move cursor
+	TAS.reapVegee()
+	joypadSetHelper(1, {circle=1}, 6)  -- show inventory
+	TAS.plantVegee()
+
 	-- exit day
 end
 	
@@ -784,7 +799,7 @@ macro_table = {
 	{key = "G", func = TAS.enterField},
 	{key = "B", func = TAS.reapVegee6},
 	{key = "V", func = TAS.reapVegee},
-	{key = "C", func = TAS.plantVegee5},
+	{key = "C", func = TAS.reapPlantVegee5},
 	{key = "X", func = TAS.plantVegee},
 	{key = "Z", func = TAS.exitField},
 	{key = "T", func = TAS.exitDayNoBaboo},
@@ -797,7 +812,7 @@ macro_table = {
 
 	{key = "left", func = TAS.leftField},
 	{key = "right", func = TAS.rightField},
-	{key = "up", func = TAS.reapPlantVegee5},
+	{key = "up", func = TAS.plantVegee5},
 	{key = "down", func = nil},
 	{key = "home", func = TAS.enterBinocular},
 	{key = "end", func = TAS.exitBinocular},
