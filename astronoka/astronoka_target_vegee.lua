@@ -440,6 +440,11 @@ local remon_m100 = {
 	eponym1 = 0,
 	smell = {rank = 0xB, bit = 0, value = 0x0B00, order = false},
 }
+local remon_p100bit7 = {
+	kind1 = knd_remon,
+	eponym1 = 0,
+	smell = {rank = 0xD, bit = 7, value = 0, order = true},
+}
 local remon_p200_m100 = {
 	kind1 = knd_remon,
 	eponym1 = 0,
@@ -579,6 +584,11 @@ local wakame_p200bit7 = {
 	eponym1 = 0,
 	shape = {rank = 0xE, bit = 7, value = 0, order = true},
 }
+local wakame_p200bit6 = {
+	kind1 = knd_wakame,
+	eponym1 = 0,
+	shape = {rank = 0xE, bit = 6, value = 0, order = true},
+}
 
 -- knd_pine      = 0x21
 local pine_any = {
@@ -638,6 +648,12 @@ local konbu_any = {
 	flavor = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
+local konbu_m200 = {
+	kind1 = knd_konbu,
+	eponym1 = 0,
+	flavor = {rank = 0xA, bit = 0, value = 0x0A00, order = false},
+}
+
 -- knd_suica     = 0x22
 local suica_any = {
 	kind1 = knd_suica,
@@ -652,11 +668,23 @@ local suica_p200bit1sgr = {
 	sugar = {rank = 0xE, bit = 1, value = 0, order = true},
 	tone = {rank = 0, bit = 0, value = 0, order = nil},
 }
-
 local suica_p300sgr = {
 	kind1 = knd_suica,
 	eponym1 = 0,
 	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
+local suica_m200bit7sgr = {
+	kind1 = knd_suica,
+	eponym1 = 0,
+	sugar = {rank = 0xA, bit = 7, value = 0, order = false},
+	tone = {rank = 0, bit = 0, value = 0, order = nil},
+}
+local suica_m200sgr = {
+	kind1 = knd_suica,
+	eponym1 = 0,
+	sugar = {rank = 0xA, bit = 0, value = 0x0A00, order = false},
 	tone = {rank = 0, bit = 0, value = 0, order = nil},
 }
 
@@ -770,6 +798,19 @@ local takenoko_p300wgt_m200shp = {
 	shape = {rank = 0xA, bit = 0, value = 0x0A00, order = false},
 }
 
+local takenoko_m200bit7wgt = {
+	kind1 = knd_takenoko,
+	eponym1 = 0,
+	weight = {rank = 0xA, bit = 7, value = 0, order = false},
+	shape = {rank = 0, bit = 0, value = 0, order = nil},
+}
+local takenoko_m200wgt = {
+	kind1 = knd_takenoko,
+	eponym1 = 0,
+	weight = {rank = 0xA, bit = 0, value = 0x0A00, order = false},
+	shape = {rank = 0, bit = 0, value = 0, order = nil},
+}
+
 
 
 -- knd_chingen   = 0x0A
@@ -792,6 +833,170 @@ local chingen_m200bit7_p100bit7 = {
 	shape = {rank = 0xA, bit = 7, value = 0, order = false},
 	tone = {rank = 0xD, bit = 7, value = 0, order = true},
 }
+
+local chingen_any_p100bit7sml = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	smell = {rank = 0xD, bit = 7, value = 0, order = true},
+}
+
+local chingen_any_p300x2_typeA = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_any_p300x2_typeB = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_any_p300x3_typeA = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_any_p300x4_typeA = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_any_p300x6_typeA = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_any_p300x7_typeA = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	nutrition = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_any_p300x8_typeA = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	nutrition = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_any_p300x9_typeA = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	nutrition = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_any_p300_typeC = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+local chingen_any_p300x2_typeC = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+local chingen_any_p300x3_typeC = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+local chingen_any_p300x4_typeC = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+local chingen_any_p300x6_typeC = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+local chingen_any_p300x7_typeC = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	nutrition = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_p200bit7_p300x7_typeC = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	shape = {rank = 0xE, bit = 7, value = 0, order = true},
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	nutrition = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
+local chingen_p300_p300x9 = {
+	kind1 = knd_chingen,
+	eponym1 = 0,
+	sugar = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	texture = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	pattern = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	flavor = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	size = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	tone = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	nutrition = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	smell = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	weight = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+	shape = {rank = 0xE, bit = 8, value = 0x0EFF, order = true},
+}
+
 
 -- knd_dorian    = 0x23
 local dorian_any = {
@@ -1524,7 +1729,11 @@ kyuri_any_node = {
 	right = shimaimo_plain_leaf,
 	property = kyuri_any,
 }
-
+kyuri_any_leaf = {
+	left = nil,
+	right = nil,
+	property = kyuri_any,
+}
 kyuri_bit2_node = {
 	left = hourensou_plain_leaf,
 	right = shimaimo_plain_leaf,
@@ -1656,8 +1865,19 @@ remon_any_node = {
 	property = remon_any,
 }
 
+remon_any_node_half = {
+	left = kyuri_any_leaf,
+	right = tomato_plain_leaf,
+	property = remon_any,
+}
+
 remon_any_m100_node = {
 	left = remon_any_node,
+	right = renkon_any_m100x2_leaf,
+	property = remon_any_m100,
+}
+remon_any_m100_node_half = {
+	left = remon_any_node_half,
 	right = renkon_any_m100x2_leaf,
 	property = remon_any_m100,
 }
@@ -1860,12 +2080,42 @@ garlic_p300_node = {
 	right = shimaimo_plain_leaf,
 	property = garlic_p300,
 }
+garlic_p300_leaf = {
+	left = nil,
+	right = nil,
+	property = garlic_p300,
+}
+
+-- knd_chingen   = 0x0A
+chingen_any_p100bit7sml_leaf = {
+	left = nil,
+	right = nil,
+	property = chingen_any_p100bit7sml,
+}
 
 
 -- knd_remon     = 0x1D
 remon_p200_m100_node = {
 	left = remon_any_m100_node,
 	right = garlic_request_leaf,
+	property = remon_p200_m100,
+}
+
+remon_p200_m100_typeB_node = {
+	left = remon_any_m100_node_half,
+	right = chingen_any_p100bit7sml_leaf,
+	property = remon_p200_m100,
+}
+
+remon_p100bit7_node = {
+	left = remon_any_node_half,
+	right = garlic_p300_leaf,
+	property = remon_p100bit7,
+}
+
+remon_p200_m100_typeC_node = {
+	left = remon_p100bit7_node,
+	right = renkon_any_m100x2_leaf,
 	property = remon_p200_m100,
 }
 
@@ -1923,6 +2173,12 @@ wakame_p200bit7_leaf = {
 	left = nil,
 	right = nil,
 	property = wakame_p200bit7,
+}
+
+wakame_p200bit6_node = {
+	left = wakame_p200bit7_leaf,
+	right = wakame_p200bit7_leaf,
+	property = wakame_p200bit6,
 }
 
 
@@ -2035,6 +2291,18 @@ konbu_any_node_half3 = {
 	property = konbu_any,
 }
 
+konbu_any_node_half4 = {
+	left = karashi_any_leaf,
+	right = wakame_p200bit7_leaf,
+	property = konbu_any,
+}
+
+konbu_m200_node = {
+	left = konbu_any_node_half4,
+	right = shimaimo_plain_leaf,
+	property = konbu_m200,
+}
+
 -- knd_suica     = 0x22
 suica_any_node = {
 	left = karashi_any_node,
@@ -2063,6 +2331,23 @@ suica_p300sgr_node = {
 	left = suica_p200bit1sgr_node,
 	right = kabu_plain_leaf,
 	property = suica_p300sgr,
+}
+suica_p300sgr_leaf = {
+	left = nil,
+	right = nil,
+	property = suica_p300sgr,
+}
+
+suica_m200bit7sgr_node = {
+	left = suica_any_node_half2,
+	right = renkon_m100_m100x5_leaf,
+	property = suica_m200bit7sgr,
+}
+
+suica_m200sgr_node = {
+	left = suica_m200bit7sgr_node,
+	right = kabu_plain_leaf,
+	property = suica_m200sgr,
 }
 
 
@@ -2133,6 +2418,11 @@ matsutake_m200ptn_p300txt_node = {
 	right = matsutake_p200bit7txt_leaf,
 	property = matsutake_m200ptn_p300txt
 }
+matsutake_m200ptn_p300txt_leaf = {
+	left = nil,
+	right = nil,
+	property = matsutake_m200ptn_p300txt
+}
 
 matsutake_p200bit1ptn_node = {
 	left = matsutake_m200bit1ptn_leaf,
@@ -2143,6 +2433,11 @@ matsutake_p200bit1ptn_node = {
 matsutake_p300ptn_node = {
 	left = matsutake_p200bit1ptn_node,
 	right = shimaimo_plain_leaf,
+	property = matsutake_p300ptn,
+}
+matsutake_p300ptn_leaf = {
+	left = nil,
+	right = nil,
 	property = matsutake_p300ptn,
 }
 
@@ -2210,13 +2505,29 @@ takenoko_p300wgt_m200shp_node = {
 	--right = takenoko_p200bit7wgt_node,
 	property = takenoko_p300wgt_m200shp,
 }
-
 takenoko_p300wgt_m200shp_node_half = {
 	left = takenoko_p200bit7wgt_leaf,
 	right = takenoko_m200bit1shp_leaf,
 	property = takenoko_p300wgt_m200shp,
 }
+takenoko_p300wgt_m200shp_leaf = {
+	left = nil,
+	right = nil,
+	property = takenoko_p300wgt_m200shp,
+}
 
+
+takenoko_m200bit7wgt_node = {
+	left = takenoko_any_leaf_426,
+	right = renkon_m100_m100x5_leaf,
+	property = takenoko_m200bit7wgt,
+}
+
+takenoko_m200wgt_node = {
+	left = takenoko_m200bit7wgt_node,
+	right = kabu_plain_leaf,
+	property = takenoko_m200wgt,
+}
 
 
 -- knd_chingen   = 0x0A
@@ -2275,6 +2586,11 @@ dorian_p300_node = {
 	right = kabu_plain_leaf,
 	property = dorian_p300,
 }
+dorian_p300_leaf = {
+	left = nil,
+	right = nil,
+	property = dorian_p300,
+}
 
 
 
@@ -2329,9 +2645,160 @@ kifujin_p300flv_node = {
 	right = kabu_plain_leaf,
 	property = kifujin_p300flv,
 }
+kifujin_p300flv_leaf = {
+	left = nil,
+	right = nil,
+	property = kifujin_p300flv,
+}
 
 
 
+-- knd_chingen   = 0x0A
+chingen_any_p300x2_typeA_node = {  -- sugar, texture
+	left = suica_p300sgr_leaf,
+	right = matsutake_m200ptn_p300txt_leaf,
+	property = chingen_any_p300x2_typeA,
+}
+
+chingen_any_p300x2_typeB_node = { -- sugar, pattern
+	left = suica_p300sgr_leaf,
+	right = matsutake_p300ptn_leaf,
+	property = chingen_any_p300x2_typeB,
+}
+
+chingen_any_p300x3_typeA_node = {  -- sugar, texture, pattern
+	left = chingen_any_p300x2_typeA_node,
+	right = matsutake_p300ptn_leaf,
+	property = chingen_any_p300x3_typeA,
+}
+
+chingen_any_p300x3_typeB_node = { -- sugar, pattern, texture
+	left = chingen_any_p300x2_typeB_node,
+	right = matsutake_m200ptn_p300txt_leaf,
+	property = chingen_any_p300x3_typeA,
+}
+
+chingen_any_p300x4_typeA_node = {  -- sugar, texture, pattern, flavor
+	left = chingen_any_p300x3_typeA_node,
+	right = kifujin_p300flv_leaf,
+	property = chingen_any_p300x4_typeA,
+}
+chingen_any_p300x4_typeB_node = {  -- sugar, texture, pattern, flavor
+	left = chingen_any_p300x3_typeB_node,
+	right = kifujin_p300flv_leaf,
+	property = chingen_any_p300x4_typeA,
+}
+
+chingen_any_p300x6_typeA_node = {  -- sugar, texture, pattern, flavor, size, tone
+	left = chingen_any_p300x4_typeA_node,
+	right = pine_p300_p300_leaf,
+	property = chingen_any_p300x6_typeA,
+}
+chingen_any_p300x6_typeB_node = {  -- sugar, texture, pattern, flavor, size, tone
+	left = chingen_any_p300x4_typeB_node,
+	right = pine_p300_p300_leaf,
+	property = chingen_any_p300x6_typeA,
+}
+
+chingen_any_p300x7_typeA_node = {  -- sugar, texture, pattern, flavor, size, tone, nutrition
+	left = chingen_any_p300x6_typeA_node,
+	right = dorian_p300_leaf,
+	property = chingen_any_p300x7_typeA,
+}
+chingen_any_p300x7_typeB_node = {  -- sugar, texture, pattern, flavor, size, tone, nutrition
+	left = chingen_any_p300x6_typeB_node,
+	right = dorian_p300_leaf,
+	property = chingen_any_p300x7_typeA,
+}
+
+chingen_any_p300x8_typeA_node = {  -- sugar, texture, pattern, flavor, size, tone, nutrition, weight
+	left = chingen_any_p300x7_typeA_node,
+	right = takenoko_p300wgt_m200shp_leaf,
+	property = chingen_any_p300x8_typeA,
+}
+chingen_any_p300x8_typeB_node = {  -- sugar, texture, pattern, flavor, size, tone, nutrition, weight
+	left = chingen_any_p300x7_typeB_node,
+	right = takenoko_p300wgt_m200shp_leaf,
+	property = chingen_any_p300x8_typeA,
+}
+
+chingen_any_p300x9_typeA_node = {  -- sugar, texture, pattern, flavor, size, tone, nutrition, weight, smell
+	left = chingen_any_p300x8_typeA_node,
+	right = garlic_p300_leaf,
+	property = chingen_any_p300x9_typeA,
+}
+chingen_any_p300x9_typeB_node = {  -- sugar, texture, pattern, flavor, size, tone, nutrition, weight, smell
+	left = chingen_any_p300x8_typeB_node,
+	right = garlic_p300_leaf,
+	property = chingen_any_p300x9_typeA,
+}
+
+chingen_p300_p300x9_typeA_node = {
+	left = chingen_any_p300x9_typeA_node,
+	right = wakame_p200bit7_leaf,
+	property = chingen_p300_p300x9,
+}
+chingen_p300_p300x9_typeB_node = {
+	left = chingen_any_p300x9_typeB_node,
+	right = wakame_p200bit7_leaf,
+	property = chingen_p300_p300x9,
+}
+
+
+chingen_any_p300_typeC_node = {  -- smell
+	left = chingen_any_leaf,
+	right = garlic_p300_leaf,
+	property = chingen_any_p300_typeC,
+}
+
+chingen_any_p300x2_typeC_node = {  -- smell, weight
+	left = chingen_any_p300_typeC_node,
+	right = takenoko_p300wgt_m200shp_leaf,
+	property = chingen_any_p300x2_typeC,
+}
+
+chingen_any_p300x3_typeC_node = {  -- smell, weight, texture
+	left = chingen_any_p300x2_typeC_node,
+	right = matsutake_m200ptn_p300txt_leaf,
+	property = chingen_any_p300x3_typeC,
+}
+
+chingen_any_p300x4_typeC_node = {  -- smell, weight, texture, pattern
+	left = chingen_any_p300x3_typeC_node,
+	right = matsutake_p300ptn_leaf,
+	property = chingen_any_p300x4_typeC,
+}
+
+chingen_any_p300x6_typeC_node = {  -- smell, weight, texture, pattern, size, tone
+	left = chingen_any_p300x4_typeC_node,
+	right = pine_p300_p300_leaf,
+	property = chingen_any_p300x6_typeC,
+}
+
+chingen_any_p300x7_typeC_node = {  -- smell, weight, texture, pattern, size, tone, nutrition
+	left = chingen_any_p300x6_typeC_node,
+	right = dorian_p300_leaf,
+	property = chingen_any_p300x7_typeC,
+}
+
+chingen_p200bit7_p300x7_typeC_node = {  -- smell, weight, texture, pattern, size, tone, nutrition, shape
+	--left = chingen_any_p300x4_typeC_node,
+	--right = wakame_p200bit6_node,
+	left = wakame_p200bit6_node,
+	right = chingen_any_p300x7_typeC_node,
+	property = chingen_p200bit7_p300x7_typeC,
+}
+
+chingen_p300_p300x9_typeC_node = {
+	left = chingen_any_p300x8_typeA_node,
+	right = chingen_p200bit7_p300x7_typeC_node,
+	property = chingen_p300_p300x9,
+}
+chingen_p300_p300x9_typeD_node = {
+	left = chingen_any_p300x8_typeB_node,
+	right = chingen_p200bit7_p300x7_typeC_node,
+	property = chingen_p300_p300x9,
+}
 
 
 
@@ -2359,29 +2826,9 @@ target_tree_1209 = {
 
 -- year1 3/05
 target_tree_1305 = {
-	--kabu_p200_node,
-	--ninjin_p200_p200x2_node,
-	--tamanegi_p200_node,
-
 	kabu_p200_node,
 	tamanegi_p200_node,
 	ninjin_p200_p200x2_node,
-	
-	--ninjin_p200_p200x2_node,
-	--kabu_p200_node,
-	--tamanegi_p200_node,
-	
-	--ninjin_p200_p200x2_node,
-	--tamanegi_p200_node,
-	--kabu_p200_node,
-	
-	--tamanegi_p200_node,
-	--kabu_p200_node,
-	--ninjin_p200_p200x2_node,
-	
-	--tamanegi_p200_node,
-	--ninjin_p200_p200x2_node,
-	--kabu_p200_node,
 }
 
 -- year1 3/14
@@ -2405,127 +2852,6 @@ target_tree_1401 = {
 	--kabocha_any_node,
 	--kabocha_any_node,
 
-	--renkon_m100_m100x5_node,
-	--hourensou_p200_node,
-	--garlic_request_node,
-	--kabocha_request_node,
-	--gobou_p200_p200_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--hourensou_p200_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--kabocha_request_node,
-	--gobou_p200_p200_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--hourensou_p200_node,
-	--garlic_request_node,
-	--renkon_m100_m100x5_node,
-	--kabocha_request_node,
-	--gobou_p200_p200_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--hourensou_p200_node,
-	--garlic_request_node,
-	--kabocha_request_node,
-	--renkon_m100_m100x5_node,
-	--gobou_p200_p200_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--hourensou_p200_node,
-	--garlic_request_node,
-	--kabocha_request_node,
-	--gobou_p200_p200_node,
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--hourensou_p200_node,
-	--garlic_request_node,
-	--kabocha_request_node,
-	--gobou_p200_p200_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--hourensou_p200_node,
-	--garlic_request_node,
-	--kabocha_request_node,
-	--gobou_p200_p200_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--renkon_m100_m100x5_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--# retry 
-	--garlic_request_node,
-	--renkon_m100_m100x5_node,
-	--gobou_p200_p200_node,
-	--hourensou_p200_node,
-	--kabocha_request_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--gobou_p200_p200_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--hourensou_p200_node,
-	--kabocha_request_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--hourensou_p200_node,
-	--kabocha_request_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
 	--# retry 817
 	--karifura_any_node,
 	--karifura_any_node,
@@ -2539,119 +2865,6 @@ target_tree_1401 = {
 	--kabocha_any_node,
 	--kabocha_any_node,
 
-	--corn_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--hourensou_p200_node,
-	--kabocha_request_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--corn_any_node,
-	--corn_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--hourensou_p200_node,
-	--kabocha_request_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--kabocha_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--hourensou_p200_node,
-	--kabocha_request_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-
-	--kabocha_any_node,
-	--kabocha_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--hourensou_p200_node,
-	--kabocha_request_node,
-	--karifura_any_node,
-	--karifura_any_node,
-	--corn_any_node,
-	--corn_any_node,
-
-	--# retry 
-	--karifura_any_node,
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--kabocha_request_node,
-	--hourensou_p200_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--# retry 
-	--karifura_any_node,
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--corn_any_node,
-	--kabocha_request_node,
-	--hourensou_p200_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-
-	--# retry 
-	--karifura_any_node,
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--kabocha_any_node,
-	--kabocha_request_node,
-	--hourensou_p200_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-
-	--# retry 
-	--karifura_any_node,
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-	--kabocha_request_node,
-	--hourensou_p200_node,
-	--corn_any_node,
-	--corn_any_node,
-
-	--# retry 
-	--karifura_any_node,
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--hourensou_p200_node,
-	--corn_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--kabocha_any_node,
-	--kabocha_request_node,
-
 	--# retry 813
 	karifura_any_node,
 	karifura_any_node,
@@ -2664,20 +2877,6 @@ target_tree_1401 = {
 	kabocha_any_node,
 	corn_any_node,
 	corn_any_node,
-
-	--# retry 
-	--karifura_any_node,
-	--karifura_any_node,
-	--renkon_m100_m100x5_node,
-	--garlic_request_node,
-	--gobou_p200_p200_node,
-	--hourensou_p200_node,
-	--kabocha_request_node,
-	--kabocha_any_node,
-	--corn_any_node,
-	--kabocha_any_node,
-	--corn_any_node,
-
 }
 
 -- year1 4/01
@@ -2704,38 +2903,6 @@ target_tree_1408 = {
 	--wakame_m100_node_half,
 	--pine_p100bit7ton_node_half,
 
-	-- #retry
-	--kyabetsu_p200_node,
-	--kyuri_p200_node,
-	--matsutake_any_node_half,
-	--karashi_any_node_half,
-	--wakame_m100_node_half,
-	--pine_p100bit7ton_node_half,
-
-	-- #retry
-	--matsutake_any_node_half,
-	--kyuri_p200_node,
-	--kyabetsu_p200_node,
-	--karashi_any_node_half,
-	--wakame_m100_node_half,
-	--pine_p100bit7ton_node_half,
-
-	-- #retry
-	--matsutake_any_node_half,
-	--karashi_any_node_half,
-	--kyuri_p200_node,
-	--kyabetsu_p200_node,
-	--wakame_m100_node_half,
-	--pine_p100bit7ton_node_half,
-
-	-- #retry
-	--wakame_m100_node_half,
-	--matsutake_any_node_half,
-	--karashi_any_node_half,
-	--kyuri_p200_node,
-	--kyabetsu_p200_node,
-	--pine_p100bit7ton_node_half,
-
 	-- #retry 506
 	wakame_m100_node_half,
 	kyuri_p200_node,
@@ -2744,22 +2911,6 @@ target_tree_1408 = {
 	kyabetsu_p200_node,
 	pine_p100bit7ton_node_half,
 
-	-- #retry
-	--wakame_m100_node_half,
-	--kyabetsu_p200_node,
-	--matsutake_any_node_half,
-	--karashi_any_node_half,
-	--kyuri_p200_node,
-	--pine_p100bit7ton_node_half,
-
-	-- #retry 585
-	--wakame_m100_node_half,
-	--kyuri_p200_node,
-	--kyabetsu_p200_node,
-	--matsutake_any_node_half,
-	--karashi_any_node_half,
-	--pine_p100bit7ton_node_half,
-
 	-- #retry 523
 	--wakame_m100_node_half,
 	--kyuri_p200_node,
@@ -2767,56 +2918,6 @@ target_tree_1408 = {
 	--kyabetsu_p200_node,
 	--karashi_any_node_half,
 	--pine_p100bit7ton_node_half,
-
-	-- #retry
-	--wakame_m100_node_half,
-	--kyuri_p200_node,
-	--matsutake_any_node_half,
-	--karashi_any_node_half,
-	--pine_p100bit7ton_node_half,
-	--kyabetsu_p200_node,
-
-	-- #retry
-	--karashi_any_node_half,
-	--kyuri_p200_node,
-	--matsutake_any_node_half,
-	--wakame_m100_node_half,
-	--pine_p100bit7ton_node_half,
-	--kyabetsu_p200_node,
-
-	-- #retry
-	--pine_p100bit7ton_node_half,
-	--kyuri_p200_node,
-	--matsutake_any_node_half,
-	--wakame_m100_node_half,
-	--karashi_any_node_half,
-	--kyabetsu_p200_node,
-
-	-- #retry
-	--matsutake_any_node_half,
-	--pine_p100bit7ton_node_half,
-	--kyuri_p200_node,
-	--wakame_m100_node_half,
-	--karashi_any_node_half,
-	--kyabetsu_p200_node,
-
-	-- #retry
-	--matsutake_any_node_half,
-	--kyabetsu_p200_node,
-	--pine_p100bit7ton_node_half,
-	--kyuri_p200_node,
-	--wakame_m100_node_half,
-	--karashi_any_node_half,
-
-	-- #retry
-	--matsutake_any_node_half,
-	--wakame_m100_node_half,
-	--kyabetsu_p200_node,
-	--pine_p100bit7ton_node_half,
-	--kyuri_p200_node,
-	--karashi_any_node_half,
-
-
 }
 
 -- year1 4/16
@@ -2901,10 +3002,38 @@ target_tree_1426 = {
 }
 
 
--- year1 5/xx
-target_tree_15xx = {
-	remon_p200_m100_node,
-	pine_m200siz_node,
+-- year1 5/08
+target_tree_1508 = {
+	--chingen_p300_p300x9_typeA_node,
+	--chingen_p300_p300x9_typeB_node,
+	--chingen_p300_p300x9_typeC_node,
+	--chingen_p300_p300x9_typeD_node,
+	
+	---------- m200 ----------
+	--matsutake_m200ptn_p300txt_leaf,  -- pattern
+	--takenoko_p300wgt_m200shp_leaf,  -- shape  -- leave one seed for planting one more crop
+	--wakame_m200_leaf,  -- shape
+	
+	--pine_m200siz_node,
+	suica_m200sgr_node,  -- sugar
+	konbu_m200_node,  -- flavor
+	takenoko_m200wgt_node,  -- weight
+
+	--piman, -- tone
+	--garlic, -- smell
+	--matsutake,  -- texture
+	--dorian,  -- nutrition
+	
+	---------- for contest ----------
+	--remon_p200_m100_typeC_node,
+	--remon_p200_m100_typeB_node,
+	
+	--peach  -- smell +200 from chingen, weight +200 from shimaimo in 4/7
+	--karifura  -- weight +200, size +200 from gobou
+	--mame  -- texture -100, pattern +200
+	
+	
+	
 }
 
 

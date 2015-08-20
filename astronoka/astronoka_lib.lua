@@ -1028,7 +1028,7 @@ function Seed.readProperty(off_seed)
 	local off_kind1     = off_seed         -- 0x167E80
 	local off_eponym1   = off_seed + 0x01  -- 0x167E81  -- syoki, golden or each attributes
 	local off_eponym2   = off_seed + 0x02  -- 0x167E82  -- level of eponym1 ex) micro, tyo-keiryo
-	local off_postnum   = off_seed + 0x03  -- 0x167E83  -- postnum ex) yaya-omo shimaimo3
+	local off_postnum   = off_seed + 0x03  -- 0x167E83  -- postnum ex) xxx1, xxx2, xxx3
 	local off_count     = off_seed + 0x04  -- 0x167E84
 	local off_stock     = off_seed + 0x05  -- 0x167E85
 	local off_price     = off_seed + 0x06  -- 0x167E86
