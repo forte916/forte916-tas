@@ -668,6 +668,7 @@ local suica_p200bit1sgr = {
 	sugar = {rank = 0xE, bit = 1, value = 0, order = true},
 	tone = {rank = 0, bit = 0, value = 0, order = nil},
 }
+
 local suica_p300sgr = {
 	kind1 = knd_suica,
 	eponym1 = 0,
@@ -1527,6 +1528,12 @@ renkon_any_leaf = {
 renkon_any_m100x2_node = {
 	left = shimaimo_m100_node,
 	right = kabu_m100_node,
+	property = renkon_any_m100x2,
+}
+
+renkon_any_m100x2_node_2 = {
+	left = kabu_m100_node,
+	right = shimaimo_m100_node,
 	property = renkon_any_m100x2,
 }
 
@@ -2505,6 +2512,7 @@ takenoko_p300wgt_m200shp_node = {
 	--right = takenoko_p200bit7wgt_node,
 	property = takenoko_p300wgt_m200shp,
 }
+
 takenoko_p300wgt_m200shp_node_half = {
 	left = takenoko_p200bit7wgt_leaf,
 	right = takenoko_m200bit1shp_leaf,
@@ -2809,6 +2817,7 @@ chingen_p300_p300x9_typeD_node = {
 target_tree_1115 = {
 	-- need shimaimo_plain 14, kabu_plain 15
 	renkon_any_m100x2_node,
+	--renkon_any_m100x2_node_2,
 	imokyu_any_bit4_node,
 }
 

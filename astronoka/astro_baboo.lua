@@ -107,8 +107,10 @@ end
 --end)
 
 DNA ={	
-	"YuuA" ,	--1508D8 —D‚`		01 -- ƒQ[ƒ€“àƒf[ƒ^‚ÉJIS‚Å‘‚©‚ê‚Ä‚¢‚½ƒl[ƒ€B
-	"YuuB" ,	--1508DC —D‚a		02 -- —D‚`“™‚Ì€–Ú‚ÌˆÓ–¡‚Í”cˆ¬‚µ‚Ä‚¢‚Ü‚¹‚ñB
+	-- ƒQ[ƒ€“àƒf[ƒ^‚ÉJIS‚Å‘‚©‚ê‚Ä‚¢‚½ƒl[ƒ€B
+	-- —D‚`“™‚Ì€–Ú‚ÌˆÓ–¡‚Í”cˆ¬‚µ‚Ä‚¢‚Ü‚¹‚ñB
+	"YuuA" ,	--1508D8 —D‚`		01 -- greater value, greater baboo.
+	"YuuB" ,	--1508DC —D‚a		02
 	"Weight" ,	--1508E0 ‘Ìd		03
 	"High" ,	--1508E4 g’·		04
 	"Ude" , 	--1508E8 ˜r—Í		05
@@ -283,9 +285,9 @@ while true do
 		end
 
 		drawRNG()
-		drawBabooStatus(ini_st, 50, 10, "green")
-		drawBabooStatus(pre_st, 50, 11, "blue")
-		drawBabooStatus(crr_st, 50, 12, "orange")
+		--drawBabooStatus(ini_st, 50, 10, "green")
+		--drawBabooStatus(pre_st, 50, 11, "blue")
+		--drawBabooStatus(crr_st, 50, 12, "orange")
 	end
 
 	emu.frameadvance()

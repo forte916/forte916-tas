@@ -187,7 +187,7 @@ end
 --target_vegee = target_vegee_1115
 --target_vegee = target_vegee_1122
 --target_vegee = target_vegee_1209
-target_vegee = target_vegee_1305
+--target_vegee = target_vegee_1305
 --target_vegee = target_vegee_1314
 --target_vegee = target_vegee_1401_part1
 --target_vegee = target_vegee_1401_part2
@@ -200,7 +200,7 @@ target_vegee = target_vegee_1305
 
 
 -- # target setting using binary tree
---target_tree = target_tree_1115
+target_tree = target_tree_1115
 --target_tree = target_tree_1122
 --target_tree = target_tree_1209
 --target_tree = target_tree_1305
@@ -250,11 +250,11 @@ while true do
 		--end
 
 		-- # use binary tree
-		hybridizeTree(target_tree)
-		printSummary(init_total_reset, init_date, init_fc)
+		--hybridizeTree(target_tree)
+		--printSummary(init_total_reset, init_date, init_fc)
 
 		-- # permutate target_tree
-		--hybridizeTreePerm(target_tree)
+		hybridizeTreePerm(target_tree)
 		
 		break
 	end
