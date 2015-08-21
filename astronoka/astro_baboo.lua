@@ -227,24 +227,32 @@ function drawBabooStatus(st, x, y, color)
 	end
 end
 
-
 function drawRNG(x, y)
 	x = x or 0
 	y = y or 60
 
-	local lr = memory.readword(0x166F5C) -- total reset counts. aka. L-R counts
-	local win = memory.readword(0x166F64) -- win count
-	local rng = memory.readdword(0x00BE328) -- RNG
-	gui.text(x, y   , string.format(" lr :%d", lr))
+	local rng = memory.readdword(adr_rng)
+	local win = memory.readword(adr_win_count)
+	local how = memory.readbyte(adr_baboo_today)
+	local lr  = memory.readword(adr_total_reset_cnt)
+	gui.text(x, y   , string.format(" rng:%08X", rng))
 	gui.text(x, y+8 , string.format(" win:%d", win))
-	gui.text(x, y+16, string.format(" rng:%08X", rng))
+	gui.text(x, y+16, string.format(" how:%d", how))
+	gui.text(x, y+24, string.format(" lr :%d", lr))
 end
+
+
 
 ------------------------------------------------------------
 -- main
 ------------------------------------------------------------
-adr_days = 0x166EF8
+adr_rng   = 0x0BE328
+adr_days  = 0x166EF8
 adr_years = 0x166EF9
+adr_total_reset_cnt = 0x166F5C -- total reset counts. aka. L-R counts
+adr_win_count       = 0x166F64  -- win  count. 2byte
+adr_lose_count      = 0x166F66  -- lose count. 2byte
+adr_baboo_today     = 0x0EFCA6  -- how many baboos do they come. 0x00 to 0x03
 
 local initial = 1
 pre_days = 0
@@ -284,12 +292,12 @@ while true do
 			f:flush()
 		end
 
-		drawRNG()
 		--drawBabooStatus(ini_st, 50, 10, "green")
 		--drawBabooStatus(pre_st, 50, 11, "blue")
 		--drawBabooStatus(crr_st, 50, 12, "orange")
 	end
 
+	drawRNG()
 	emu.frameadvance()
 end
 

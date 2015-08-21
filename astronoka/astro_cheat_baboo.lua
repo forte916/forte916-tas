@@ -170,12 +170,12 @@ function drawRNG(x, y)
 	x = x or 0
 	y = y or 60
 
-	local lr = memory.readword(0x166F5C) -- total reset counts. aka. L-R counts
-	local win = memory.readword(0x166F64) -- win count
-	local rng = memory.readdword(0x00BE328) -- RNG
-	gui.text(x, y   , string.format(" lr :%d", lr))
+	local rng = memory.readdword(adr_rng)
+	local win = memory.readword(adr_win_count)
+	local how = memory.readbyte(adr_baboo_today)
+	gui.text(x, y   , string.format(" rng:%08X", rng))
 	gui.text(x, y+8 , string.format(" win:%d", win))
-	gui.text(x, y+16, string.format(" rng:%08X", rng))
+	gui.text(x, y+16, string.format(" how:%d", how))
 end
 
 function Baboo.cheatGene(param, element)
@@ -206,8 +206,6 @@ end
 ------------------------------------------------------------
 -- main
 ------------------------------------------------------------
-adr_days = 0x166EF8
-adr_years = 0x166EF9
 
 local initial = 1
 pre_days = 0
