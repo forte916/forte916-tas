@@ -1,0 +1,44 @@
+
+42
+00000	000BE328	d	h	0	rng
+00001	00000000	S	S	0	----------------------------
+00002	00166F04	b	s	0	feather total
+00003	00166F06	b	s	0	seed total
+00004	00166F07	b	s	0	vegee total
+00005	00166F64	w	s	0	win
+00006	000EFCA6	b	s	0	coming baboo
+00007	000EFCA7	b	s	0	grass watched
+00008	00166EF8	b	s	0	days
+00009	00000000	S	S	0	----------------------------
+0000A	0013D374	w	h	0	in battle
+0000B	0013D384	w	h	0	is battle finished
+0000C	0013D3B4	w	h	0	trap result??
+0000D	00000000	S	S	0	----------------------------
+0000E	0014322E	w	h	0	unknown
+0000F	001432DE	w	h	0	feeding
+00010	00148D82	w	h	0	calc_baboo1
+00011	00148E02	w	h	0	calc_baboo2
+00012	0014B462	w	h	0	feeding
+00013	0014FBF4	w	h	0	calc_battle
+00014	0014FBF8	w	h	0	calc_battle2
+00015	0014FBFC	w	h	0	battle_start
+00016	000BE2D8	w	h	0	feeding
+00017	000BE304	w	h	0	show message
+00018	000BE24A	w	h	0	unknown
+00019	000BE24C	w	h	0	unknown
+0001A	000BE250	w	h	0	unknown
+0001B	000BE2C4	w	h	0	unknown
+0001C	00000000	S	S	0	----------------------------
+0001D	00167E80	d	h	0	1st seed
+0001E	00167EA8	d	h	0	2nd seed
+0001F	00167ED0	d	h	0	3rd seed
+00020	00167EF8	d	h	0	4th seed
+00021	00167F20	d	h	0	5th seed
+00022	00167F48	d	h	0	6th seed
+00023	00167F70	d	h	0	7th seed
+00024	00000000	S	S	0	----------------------------
+00025	001508D8	d	h	0	YuuA
+00026	00150938	d	h	0	HP
+00027	00150950	d	h	0	YarukiP
+00028	00150954	d	h	0	Movement
+00029	001509DC	d	h	0	Drop
