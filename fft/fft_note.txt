@@ -1,0 +1,116 @@
+
+game start
+----------
+
+* 706f : start , skip title
+* 742f : start , new game
+* 935f : start , skip message
+
+  * after 324f, determined ramza status
+  * after 25f, show input view.
+
+* input name
+  * skip 3f
+  * press [], delete 1st letter
+  * skip 10f
+
+  * skip 3f
+  * press [], delete 2nd letter
+  * skip 10f
+
+  * skip 3f
+  * press start
+  * skip xx
+
+* input birthday
+
+
+
+ramza 初期ステータス
+--------------------
+
+* High starting
+  * Squire JP
+  * Chemist JP
+  * ch1-1 終了後に rng を変えても変化なし
+  * ch1-1 の前に決定されている??
+  * new game 押下後 アラズラムのセリフスキップ後に決定される
+  * ラムザの名前入力画面ではすでに決定後
+  * Arazlam で 13f 待つと Squire JP = 199, Chemist JP = 199
+
+
+lv1 chemist 初期ステータス
+--------------------------
+
+* High starting
+  * Chemist JP
+  * Faith
+  * ch1-1 終了後に randam で変化
+
+
+ch1-1
+-----
+
+* turn1
+  * change option
+    **  2.カーソルのリピート速度  ->速い
+	**  4.指カーソルの速度  ->すごく速い
+	**  5.メッセージの表示速度  ->速い
+	**  6.ナビゲーションメッセージの有無  ->OFF
+	**  7.アビリティ名の表示  ->OFF
+	**  8.効果メッセージの表示  ->OFF
+	**  9.経験値Jp取得の表示  ->OFF
+	** 11.ジョブ別装備付加アイテムの表示  ->OFF
+	** 12.ジョブチェンジ時の最強装備  ->OFF
+  * 4マス進む
+  * 敵弓使いの中に「磨褐宮」のユニットが居た場合は
+    最優先で攻撃すること
+
+
+ch1-2
+-----
+
+* 配置
+
+* ramza
+  * Squire JP 250 for gained JP UP 250jp or Yell 200jp
+  * Chemist JP 200 for wizard
+
+* chemist
+  * Chemist JP 200 for wizard
+
+
+* formation
+  * ramza, Yell
+  * chemist
+    ** job change:  wizard
+	** learn:  Bolt 50jp, MagicAttackUP 400jp
+	** set: MagicAttackUP
+  * 不要なユニット削除
+
+
+ch1-3
+-----
+
+* ramza
+  * ためる 300jpと取得JpUP 200jp の 550JP を稼ぐ
+  * ex1) エールを覚えてエールで稼ぐ
+  * ex2) 取得JP UP を覚えて普通の行動で稼ぐ
+  * エールの方が全体で見ると早いらしい
+
+* 配置
+  * ramza と黒魔道士
+
+* turn1
+  * ramza, Yell
+  * 黒魔道士, Bolt, 敵1体倒す
+
+* turn2
+  * ramza, Yell
+  * 黒魔道士, Bolt2, アルガスを巻き込んで敵3体倒す
+
+* turn3
+  * redpanther だけになるので稼ぐ
+
+
+
