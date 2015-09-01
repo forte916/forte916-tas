@@ -54,15 +54,15 @@ function rand(adr_rng)
 	if adr_rng == nil then return end
 
 	local seed = memory.readdword(adr_rng)
-	local rng
+	local random
 
 	seed = mul32(seed, 1103515245) + 12345
-	rng = bit.rshift(seed, 16)   -- same as x >>= 16
-	rng = bit.band(rng, 0x7FFF)  -- same as x & 0x7FFF
-	return rng
+	random = bit.rshift(seed, 16)   -- same as x >>= 16
+	random = bit.band(random, 0x7FFF)  -- same as x & 0x7FFF
+	return random
 end
 
-function next_seed(seed)
+function next_rng(seed)
 	seed = mul32(seed, 1103515245) + 12345
 	return seed
 end

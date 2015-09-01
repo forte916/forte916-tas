@@ -27,8 +27,16 @@ adr_formation_unit8  = 0x0559F8  -- 8th unit
 adr_formation_unit9  = 0x055AF8  -- 9th unit
 
 
-adr_battle_unit   = 0x18E898 -- 1st unit in battle. next, add 0x1C0
-adr_battle_unit2  = 0x18EA58 -- 2nd unit
+adr_battle_unit   = 0x18E898 --  1st unit in battle. next, add 0x1C0
+adr_battle_unit2  = 0x18EA58 --  2nd unit
+adr_battle_unit3  = 0x18EC18 --  3rd unit
+adr_battle_unit4  = 0x18EDD8 --  4th unit
+adr_battle_unit5  = 0x18EF98 --  5th unit
+adr_battle_unit6  = 0x18F158 --  6th unit
+adr_battle_unit7  = 0x18F318 --  7th unit
+adr_battle_unit8  = 0x18F4D8 --  8th unit
+adr_battle_unit9  = 0x18F698 --  9th unit
+adr_battle_unit10 = 0x18F858 -- 10th unit
 adr_battle_unit17 = 0x190498 -- 17th unit. 17th and older units are our party.
 adr_battle_unit18 = 0x190658 -- 18th unit
 adr_battle_unit19 = 0x190818 -- 19th unit
@@ -195,7 +203,7 @@ function Funit.showAll()
 	local prpt = {}
 	local ofs_unit = adr_formation_unit
 
-	print(string.format("-- unit --"))
+	print(string.format("-- Funit --"))
 	for i=1, 20 do
 		prpt = Funit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x100
@@ -247,6 +255,7 @@ function Bunit.readProperty(ofs_unit)
 	local ofs_brave   = 0x24  -- 1byte
 	local ofs_faith_org = 0x25  -- 1byte
 	local ofs_faith   = 0x26  -- 1byte
+	local ofs_ofs27   = 0x27  -- 2byte
 	local ofs_hp      = 0x28  -- 2byte
 	local ofs_max_hp  = 0x2A  -- 2byte
 	local ofs_mp      = 0x2C  -- 2byte
@@ -327,7 +336,9 @@ function Bunit.readProperty(ofs_unit)
 	local ofs_cur_turn  = 0x186  -- 1byte
 	local ofs_moved     = 0x187  -- 1byte
 	local ofs_actioned  = 0x188  -- 1byte
-	-- snip --
+	local ofs_ofs189    = 0x189  -- 1byte
+	local ofs_ofs18A    = 0x18A  -- 1byte
+	local ofs_ofs18B    = 0x18B  -- 1byte
 	local ofs_hit_miss  = 0x18C  -- 1byte, 0x01: hit, 0x00: miss
 	local ofs_critical  = 0x18D  -- 1byte, 0x01: critical, 0x00: regular
 	local ofs_miss_type = 0x18E  -- 1byte, 0x00: hit, 0x01: guarded, 0x02: guarded, 0x06: miss
@@ -350,6 +361,7 @@ function Bunit.readProperty(ofs_unit)
 	prpt.lv        = memory.readbyte(ofs_unit + ofs_lv      )
 	prpt.brave     = memory.readbyte(ofs_unit + ofs_brave   )
 	prpt.faith     = memory.readbyte(ofs_unit + ofs_faith   )
+	prpt.ofs27     = memory.readbyte(ofs_unit + ofs_ofs27   )
 	prpt.hp        = memory.readword(ofs_unit + ofs_hp      )
 	prpt.max_hp    = memory.readword(ofs_unit + ofs_max_hp  )
 	prpt.mp        = memory.readword(ofs_unit + ofs_mp      )
@@ -377,7 +389,9 @@ function Bunit.readProperty(ofs_unit)
 	prpt.cur_turn  = memory.readbyte(ofs_unit + ofs_cur_turn  )
 	prpt.moved     = memory.readbyte(ofs_unit + ofs_moved     )
 	prpt.actioned  = memory.readbyte(ofs_unit + ofs_actioned  )
-	-- snip --
+	prpt.ofs189    = memory.readbyte(ofs_unit + ofs_ofs189    )
+	prpt.ofs18A    = memory.readbyte(ofs_unit + ofs_ofs18A    )
+	prpt.ofs18B    = memory.readbyte(ofs_unit + ofs_ofs18B    )
 	prpt.hit_miss  = memory.readbyte(ofs_unit + ofs_hit_miss  )
 	prpt.critical  = memory.readbyte(ofs_unit + ofs_critical  )
 	prpt.miss_type = memory.readbyte(ofs_unit + ofs_miss_type )
@@ -385,6 +399,7 @@ function Bunit.readProperty(ofs_unit)
 
 
 
+	--prpt.info = Bunit.toString(prpt)
 	prpt.info = Bunit.toString2(prpt)
 	--print(prpt.info)
 	return prpt
@@ -425,7 +440,7 @@ end
 function Bunit.toString2(prpt)
 	local str = string.format("%2x %2x %2x %2x %2x:"
 			.."%3d %2d:"
-			.."%2x %2x %2x %2x %2x %2x %2x:",
+			.."%2x %2x %2x:%2x %2x %2x:%2x %2x %2x %2x:",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -438,6 +453,9 @@ function Bunit.toString2(prpt)
 			prpt.cur_turn    ,
 			prpt.moved       ,
 			prpt.actioned    ,
+			prpt.ofs189      ,
+			prpt.ofs18A      ,
+			prpt.ofs18B      ,
 			prpt.hit_miss    ,
 			prpt.critical    ,
 			prpt.miss_type   ,
@@ -450,7 +468,7 @@ function Bunit.showAll()
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
 
-	print(string.format("-- unit --"))
+	print(string.format("-- Bunit --"))
 	for i=1, 21 do
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0

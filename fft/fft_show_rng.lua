@@ -19,13 +19,13 @@ function drawRNG(x, y)
 	y = y or 0
 
 	local seed = memory.readdword(adr_rng)
-	local rng = rand(adr_rng)
+	local random = rand(adr_rng)
 
 	gui.text(x, y   , string.format(" seed:%08x", seed))
-	gui.text(x, y+8 , string.format(" rng :%d", rng))
+	gui.text(x, y+8 , string.format(" rand:%d", random))
 end
 
-function drawSeeds(x, y)
+function drawNextRNG(x, y)
 	x = x or 120
 	y = y or 0
 
@@ -53,16 +53,16 @@ while true do
 
 	if initial == 1 then
 		-- do initial setup
-		--Funit.showAll()
-		Bunit.showAll()
+		Funit.showAll()
+		--Bunit.showAll()
 		initial = 0
 	end
 
 	if initial == 0 then
 		drawRNG()
-		--drawSeeds()
-		--Funit.drawAll()
-		Bunit.drawAll()
+		--drawNextRNG()
+		Funit.drawAll()
+		--Bunit.drawAll()
 	end
 
 	emu.frameadvance()

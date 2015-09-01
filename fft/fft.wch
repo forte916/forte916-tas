@@ -1,3 +1,16 @@
 
-1
+14
 00000	00009010	d	h	0	RNG
+00001	00000000	S	S	0	----------------------------
+00002	000552F8	b	h	0	1st f ch
+00003	000552FE	b	h	0	1st f zodiac
+00004	0005538E	w	u	0	1st f total_jp_squire
+00005	00055390	w	u	0	1st f total_jp_chemist
+00006	0005539A	w	u	0	1st f total_jp_wizard
+00007	00000000	S	S	0	----------------------------
+00008	0018E898	b	h	0	1st b ch
+00009	0018E8A1	b	h	0	1st b zodiac
+0000A	0018E99C	w	u	0	1st b total_jp_squire
+0000B	0018E99E	w	u	0	1st b total_jp_chemist
+0000C	0018E9A8	w	u	0	1st b total_jp_wizard
+0000D	0018EA58	b	h	0	2nd b ch

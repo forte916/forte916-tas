@@ -1,3 +1,11 @@
+RNG
+----
+
+* BIOS ‚É‚æ‚Á‚Ä initial RNG value ‚ªˆÙ‚È‚é
+* SCPH7502.BIN ‚Å‚Í 14f ‘Ò‚Â‚Æ 199/199 ‚¾‚Á‚½
+* SCPH1000.BIN ‚Å‚Í 9f  ‘Ò‚Â‚Æ 199/199
+* SCPH1001.BIN ‚Å‚Í ??
+
 
 game start
 ----------

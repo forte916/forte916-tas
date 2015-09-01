@@ -126,16 +126,17 @@ for i=0, retry do
 		initial = 0
 	end
 
-	debugPrint(string.format("----- retry = %d -----", i))
-
 	pre_attempt()
 	fadv(i)
 	local fc = emu.framecount()
+	local rng = memory.readdword(adr_rng)
+	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
+
 	attempt()
 
 	-- check status
 	if success() then
-		debugPrint(string.format("***** best state. fc = %d, %s, *****", fc, format_st(best_st)))
+		debugPrint(string.format("***** best state. fc = %d, %s, rng = %08X *****", fc, format_st(best_st), rng))
 
 		post_attempt()
 	end
