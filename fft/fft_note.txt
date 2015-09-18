@@ -54,31 +54,44 @@ lv1 chemist 初期ステータス
   * Chemist JP
   * Faith
   * ch1-1 終了後に randam で変化
+  * 最後の ramza のセリフで味方ステータスが決定
 
 
 ch1-1
 -----
 
+* オーボンヌ中の最後の ovelia のセリフで敵星座が決定
+
 * turn1
   * change option
-    **  2.カーソルのリピート速度  ->速い
-	**  4.指カーソルの速度  ->すごく速い
-	**  5.メッセージの表示速度  ->速い
-	**  6.ナビゲーションメッセージの有無  ->OFF
-	**  7.アビリティ名の表示  ->OFF
-	**  8.効果メッセージの表示  ->OFF
-	**  9.経験値Jp取得の表示  ->OFF
-	** 11.ジョブ別装備付加アイテムの表示  ->OFF
-	** 12.ジョブチェンジ時の最強装備  ->OFF
+    *  2.カーソルのリピート速度  ->速い
+	*  4.指カーソルの速度  ->すごく速い
+	*  5.メッセージの表示速度  ->速い
+	*  6.ナビゲーションメッセージの有無  -> OFF
+	*  7.アビリティ名の表示  -> OFF
+	*  8.効果メッセージの表示  -> OFF
+	*  9.経験値Jp取得の表示  -> OFF
+	* 11.ジョブ別装備付加アイテムの表示  -> OFF
+	* 12.ジョブチェンジ時の最強装備  -> OFF
   * 4マス進む
   * 敵弓使いの中に「磨褐宮」のユニットが居た場合は
     最優先で攻撃すること
+
+  * カメラ移動があると数フレーム遅くなる
+  * 戦闘後んの最後のramza のセリフで味方ステータスが決定
 
 
 ch1-2
 -----
 
+* セーブ画面の入力後に敵星座が決定
+
 * 配置
+
+* turn1
+  * カメラ移動があると数フレーム遅くなる
+  * 敵移動中にカメラ移動する
+
 
 * ramza
   * Squire JP 250 for gained JP UP 250jp or Yell 200jp
@@ -86,15 +99,15 @@ ch1-2
 
 * chemist
   * Chemist JP 200 for wizard
+  * Lv2 (recomend because of boosting MP)
 
-
-* formation
-  * ramza, Yell
+* after battle, formation
+  * ramza, learn Yell 200JP
   * chemist
-    ** job change:  wizard
-	** learn:  Bolt 50jp, MagicAttackUP 400jp
-	** set: MagicAttackUP
-  * 不要なユニット削除
+    * job change:  wizard
+	* learn:  Bolt 50JP, MagicAttackUP 400JP
+	* set: MagicAttackUP
+  * chemist 以外のユニット除名
 
 
 ch1-3
@@ -108,6 +121,9 @@ ch1-3
 
 * 配置
   * ramza と黒魔道士
+  * redpanther が 2撃で倒せるよう敵ステータス調整
+    * 相性良 (24 damage となる)
+	* 相性普通 and HP40以下
 
 * turn1
   * ramza, Yell
@@ -115,10 +131,21 @@ ch1-3
 
 * turn2
   * ramza, Yell
-  * 黒魔道士, Bolt2, アルガスを巻き込んで敵3体倒す
+  * 黒魔道士, Bolt, アルガスを巻き込んで敵3体倒す
 
 * turn3
   * redpanther だけになるので稼ぐ
+  * wizard, Bolt で dilita 巻き込んで自殺
 
+* turnN
+  * algus の死体の奥の安全地帯で稼ぐ
+
+
+* after battle, formation
+  * ramza, learn Yell 200JP
+  * ramza
+    * job change:  priest
+	* learn:  Accumulates 300JP, gained JP UP 250JP
+	* set: guts, gained JP UP
 
 

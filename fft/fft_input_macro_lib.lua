@@ -606,58 +606,510 @@ end
 
 function TAS.skipAcademy()
 	fadv(5466)
-	-- squire, 26643f
+	-- squire1, 26650f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- squire2, 26706f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- ramza, 26856f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- dilita, 26894f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- ramza, 26918f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- dilita, 26972f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- ramza, 26702f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- dilita, 27022f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- ramza, 27050f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- dilita, 27116f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+	fadv(6)
+	-- dilita, 27140f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- ramza, 27168f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- knight, 27228f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 2)
+
+	-- knight, 27755f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+
+	-- knight, 28330f
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+end
+
+
+function TAS.enterFormation()
+	pressBtn({triangle=1}, 5)
+	pressBtn({down=1}, 4)
+  -- 43872f
+	pressBtn({circle=1}, 2)
+	fadv(48)
+  -- 43922f
+end
+
+function TAS.selectRight()
+	pressBtn({right=1}, 5)  -- select member
+end
+
+function TAS.dismiss()
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 4)
+	pressBtn({circle=1}, 6)
+	pressBtn({circle=1}, 3)
+	-- 43947f
+	pressBtn({circle=1}, 2)
+	fadv(53)
+	-- 44002f
+end
+
+function TAS.dismissRepeat()
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({circle=1}, 6)
+	pressBtn({circle=1}, 3)
+	pressBtn({circle=1}, 2)
+	fadv(53)
+end
+
+function TAS.cancelMenu()
+	pressBtn({x=1}, 5)
+end
+
+function TAS.jobChangeDilita()
+	pressBtn({up=1}, 4)
+	-- 44279
+	pressBtn({circle=1}, 2)
+	fadv(44)
+	-- 44325f
+	pressBtn({right=1}, 15-2)
+	pressBtn({circle=1}, 5)
+	-- 44344f
+	pressBtn({circle=1}, 2)
+	fadv(56-2)
+	-- 44402f
+end
+
+function TAS.jobChangeWizard()
+	pressBtn({l1=1}, 5)
+	fadv(37)
+	pressBtn({left=1}, 15-2)
+	pressBtn({circle=1}, 5)
+	pressBtn({circle=1}, 2)
+	fadv(59-2)
+end
+
+function TAS.cancelJobChange()
+	-- 44517f
+	pressBtn({x=1}, 2)
+	fadv(45)
+	-- 44564f
+end
+
+function TAS.learnWizard()
+	pressBtn({up=1}, 4)
+	pressBtn({circle=1}, 2)
+	fadv(26)
+	pressBtn({up=1}, 4)
+	pressBtn({circle=1}, 10)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 10)
+	pressBtn({square=1, down=1}, 4)
+	pressBtn({up=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 4)
+	pressBtn({square=1, down=1}, 4)
+	pressBtn({circle=1}, 2)
+	fadv(11+1)
+	pressBtn({square=1, up=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 8)
+	pressBtn({circle=1}, 10)
+	pressBtn({right=1}, 6)
+	pressBtn({right=1}, 6)
+	pressBtn({circle=1}, 8)
+	pressBtn({circle=1}, 10)
+	pressBtn({x=1}, 10)
+	pressBtn({x=1}, 4)
+end
+
+function TAS.setWizard()
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({down=1}, 3)
+	pressBtn({down=1}, 3)
+	fadv(2)
+	pressBtn({circle=1}, 10)
+	pressBtn({circle=1}, 4)
+	fadv(2)
+	pressBtn({x=1}, 4)
+	fadv(1)
+end
+
+function TAS.learnRamzaYell()
+	pressBtn({l1=1}, 2)
+	pressBtn({up=1}, 3)
+	pressBtn({circle=1}, 10)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 8)
+	pressBtn({circle=1}, 10)
+	pressBtn({x=1}, 10)
+	pressBtn({x=1}, 4)
+	-- 44877f
+	pressBtn({x=1}, 2)
+	fadv(29-2)
+	-- 44907f
 
 end
 
---macro_table = {
---	{key = "G", func = TAS.enterField},
---	{key = "B", func = TAS.reapVegee6},
---	{key = "V", func = TAS.reapVegee},
---	{key = "C", func = TAS.reapPlantVegee5},
---	{key = "X", func = TAS.plantVegee},
---	{key = "Z", func = TAS.exitField},
---	{key = "T", func = TAS.exitDayNoBaboo},
---	{key = "Y", func = TAS.exitDayBaboo},
---	{key = "U", func = TAS.enterTrapField},
---	{key = "I", func = TAS.exitTrapField},
---	{key = "O", func = TAS.enterPedro},
---	{key = "P", func = TAS.exitPedro},
---	{key = "leftbracket", func = TAS.skipMsg},
---
---	{key = "left", func = TAS.leftField},
---	{key = "right", func = TAS.rightField},
---	{key = "up", func = TAS.plantVegee5},
---	{key = "down", func = nil},
---	{key = "home", func = TAS.enterBinocular},
---	{key = "end", func = TAS.exitBinocular},
---
---	{key = "1", func = TAS.enterHouse},
---	{key = "2", func = TAS.exitHouse},
---	{key = "3", func = TAS.enterHybridMachineRoom},
---	{key = "4", func = TAS.exitHybridMachineRoom},
---	{key = "5", func = TAS.enterBusStop},
---	{key = "6", func = TAS.gotoTown},
---	{key = "7", func = TAS.leaveTown},
---	{key = "8", func = TAS.returnHome},
---	{key = "9", func = TAS.enterLabo},
---	{key = "0", func = nil},
---}
---
---function doInputMacro()
---	local kbd = input.get()
---
---	for k, v in pairs(macro_table) do
---		if kbd[v.key] then
---			if macro_key == 0 then
---				v.func()
---				emu.pause()
---			end
---			macro_key = macro_key + 1
---		else
---			macro_key = 0
---		end
---	end
---end
+function TAS.exitFormation()
+	-- 44905f
+	pressBtn({x=1}, 2)
+	fadv(42)
+	-- 44949f
+end
+
+function TAS.moveMandariaFromFormationForEvent()
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 3)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(100)
+end
+
+function TAS.moveMandariaFromFormation()
+	pressBtn({triangle=1}, 5)
+	pressBtn({circle=1}, 3)
+	pressBtn({down=1}, 2)
+	-- if wait here, change enemy status.
+	pressBtn({circle=1}, 2)
+end
+
+function TAS.ch1_3_mandalia_deploy()
+	pressBtn({left=1}, 3)
+	pressBtn({left=1}, 3)
+	pressBtn({left=1}, 3)
+	pressBtn({left=1}, 3)
+	pressBtn({up=1}, 3)
+	pressBtn({circle=1}, 2)
+	pressBtn({l1=1, down=1}, 3)
+	pressBtn({circle=1}, 2)
+	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 2)
+	fadv(100)
+end
+
+function TAS.ch1_3_turn1_wizard()
+end
+
+function TAS.ch1_3_turn1_ramza()
+	-- arrowed
+	fadv(9)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 5)
+	pressBtn({left=1}, 4)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(9)
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 10)  -- attack
+	pressBtn({down=1}, 4)
+	pressBtn({circle=1}, 10)  -- guts
+	pressBtn({circle=1}, 11)  -- Yell
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 6)  -- confirm target
+	-- 57138f
+	pressBtn({circle=1}, 10)  -- execute attack
+	fadv(176)
+	-- 57424f, arrowed
+	-- arrowed
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+end
+
+function TAS.ch1_3_turn1_ramza()
+	-- arrowed
+	fadv(9)
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 10)  -- attack
+	pressBtn({down=1}, 4)
+	pressBtn({circle=1}, 10)  -- guts
+	pressBtn({circle=1}, 11)  -- Yell
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 6)  -- confirm target
+	pressBtn({circle=1}, 10)  -- execute attack
+	--fadv(xx)
+	-- arrowed
+	fadv(9)
+	pressBtn({circle=1}, 18)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 2)
+end
+
+function TAS.ch1_3_turnN_ramza_Yell()
+	-- arrowed and shown AT
+	fadv(7)
+	pressBtn({down=1}, 4)
+	pressBtn({circle=1}, 10)  -- attack
+	pressBtn({down=1}, 4)
+	pressBtn({circle=1}, 10)  -- guts
+	pressBtn({circle=1}, 11)  -- Yell
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 6)  -- confirm target
+	pressBtn({circle=1}, 10)  -- execute attack
+	fadv(284)  -- Yell animation
+	-- arrowed and shown AT
+	fadv(6)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 2)
+end
+
+macro_table = {
+	{key = "G", func = TAS.ch1_3_turnN_ramza_Yell},
+	{key = "B", func = TAS.enterFormation},
+	{key = "V", func = TAS.exitFormation},
+	{key = "C", func = nil},
+	{key = "X", func = nil},
+	{key = "Z", func = nil},
+	{key = "T", func = nil},
+	{key = "Y", func = nil},
+	{key = "U", func = nil},
+	{key = "I", func = nil},
+	{key = "O", func = nil},
+	{key = "P", func = nil},
+	{key = "leftbracket", func = nil},
+
+	{key = "left" , func = nil},
+	{key = "right", func = TAS.selectRight},
+	{key = "up"   , func = nil},
+	{key = "down" , func = nil},
+	{key = "home" , func = nil},
+	{key = "end"  , func = nil},
+
+	{key = "1", func = nil},
+	{key = "2", func = nil},
+	{key = "3", func = nil},
+	{key = "4", func = nil},
+	{key = "5", func = nil},
+	{key = "6", func = nil},
+	{key = "7", func = nil},
+	{key = "8", func = nil},
+	{key = "9", func = nil},
+	{key = "0", func = nil},
+}
+
+function doInputMacro()
+	local kbd = input.get()
+
+	for k, v in pairs(macro_table) do
+		if kbd[v.key] then
+			if macro_key == 0 then
+				v.func()
+				emu.pause()
+			end
+			macro_key = macro_key + 1
+		else
+			macro_key = 0
+		end
+	end
+end
 
 

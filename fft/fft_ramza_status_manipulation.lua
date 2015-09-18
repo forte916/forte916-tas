@@ -153,4 +153,5 @@ debugPrint(string.format("    end:: %s,  fc = %d", os.date(), fc))
 debugPrint(string.format("elapsed:: fc = %d", fc - begin_fc))
 emu.speedmode("normal")
 emu.pause()
+f:close()
 

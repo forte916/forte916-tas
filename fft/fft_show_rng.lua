@@ -34,12 +34,32 @@ function drawNextRNG(x, y)
 
 	for i=0, 20 do
 		seeds[i] = seed
-		seed = next_seed(seed)
+		seed = next_rng(seed)
 	end
 
 	for i=0, 20 do
 		gui.text(x, y+(8*i) , string.format("%08x", seeds[i]))
 	end
+end
+
+function outputNextRNG()
+	local seeds = {}
+	local seed = memory.readdword(adr_rng)
+
+	f = io.open("next_rng.log", "a")
+	if f == nil then debugPrint("error: Could not open file") end
+
+	for i=0, 100 do
+		seeds[i] = seed
+		seed = next_rng(seed)
+	end
+
+	for i=0, 100 do
+		debugPrint(string.format("%08x", seeds[i]))
+	end
+
+	f:flush()
+	f:close()
 end
 
 
@@ -52,8 +72,8 @@ initial = 1
 while true do
 
 	if initial == 1 then
-		-- do initial setup
-		Funit.showAll()
+		--outputNextRNG()
+		--Funit.showAll()
 		--Bunit.showAll()
 		initial = 0
 	end
@@ -61,7 +81,7 @@ while true do
 	if initial == 0 then
 		drawRNG()
 		--drawNextRNG()
-		Funit.drawAll()
+		--Funit.drawAll()
 		--Bunit.drawAll()
 	end
 

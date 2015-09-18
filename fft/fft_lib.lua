@@ -58,7 +58,7 @@ function Funit.readProperty(ofs_unit)
 	local ofs_no       = 0x01  -- 1byte
 	local ofs_job      = 0x02  -- 1byte
 	local ofs_palette  = 0x03  -- 1byte
-	local ofs_species  = 0x04  -- 1byte, 0x10:JoinAfterEvent 0x20:monster, 0x40: female, 0x80:male, 0x04:egg??
+	local ofs_species  = 0x04  -- 1byte, 0x10:JoinAfterEvent 0x20:monster, 0x40:female, 0x80:male, 0x04:egg??
 	local ofs_birthday = 0x05  -- 1byte
 	local ofs_zodiac   = 0x06  -- 1byte, high bit(4-7bit)
 	-- offset 0x07 to 0x0C is set abilyties
@@ -166,19 +166,17 @@ function Funit.readProperty(ofs_unit)
 	prpt.total_JP_calculator = memory.readword(ofs_unit + ofs_total_JP_calculator )
 
 	prpt.info = Funit.toString(prpt)
-	--print(prpt.info)
 	return prpt
 end
 
 function Funit.toString(prpt)
-	local str = string.format("%2x %2x %2x %2x %2x %2x %2x:" 
-			.."%2d %2d %2d %2d %2d %2d %2d:"
-			.." %d %d %d:"
+	local str = string.format("%2x %2x %2x %2x %2x %2x:" 
+			.."%2d %2d %2d %2d:"
+			.." %d %d:"
 			.." %d:",
 			prpt.ch      ,
 			prpt.no      ,
 			prpt.job     ,
-			prpt.palette ,
 			prpt.species ,
 			prpt.birthday,
 			prpt.zodiac  ,
@@ -187,13 +185,9 @@ function Funit.toString(prpt)
 			prpt.lv      ,
 			prpt.brave   ,
 			prpt.faith   ,
-			prpt.hp      ,
-			prpt.mp      ,
-			prpt.speed   ,
 
 			prpt.total_JP_squire    ,
 			prpt.total_JP_chemist   ,
-			prpt.total_JP_wizard    ,
 
 			prpt.JP_squire    )
 	return str
@@ -332,6 +326,7 @@ function Bunit.readProperty(ofs_unit)
 	-- offset 0x13C to 0x149 is job strings
 	-- offset 0x161 is Unit ID
 	-- offset 0x167 is AI/Autobattle setting
+	local ofs_prioritized_target  = 0x168  -- 1byte
 	
 	local ofs_cur_turn  = 0x186  -- 1byte
 	local ofs_moved     = 0x187  -- 1byte
@@ -339,10 +334,13 @@ function Bunit.readProperty(ofs_unit)
 	local ofs_ofs189    = 0x189  -- 1byte
 	local ofs_ofs18A    = 0x18A  -- 1byte
 	local ofs_ofs18B    = 0x18B  -- 1byte
-	local ofs_hit_miss  = 0x18C  -- 1byte, 0x01: hit, 0x00: miss
-	local ofs_critical  = 0x18D  -- 1byte, 0x01: critical, 0x00: regular
-	local ofs_miss_type = 0x18E  -- 1byte, 0x00: hit, 0x01: guarded, 0x02: guarded, 0x06: miss
+	local ofs_hit_miss  = 0x18C  -- 1byte, 0x01:hit, 0x00:miss
+	local ofs_critical  = 0x18D  -- 1byte, 0x01:critical, 0x00:regular
+	local ofs_miss_type = 0x18E  -- 1byte, 0x00:hit, 0x01:guarded, 0x02:guarded, 0x05:nullified, 0x06:miss, 0x07:catch
 	local ofs_item_lost = 0x18F  -- 1byte
+
+	local ofs_attack_accuracy = 0x1B6  -- 1byte, Attack accuracy
+	local ofs_main_target     = 0x1B9  -- 1byte, Main target ID??
 
 
 	-- Read the property
@@ -386,6 +384,8 @@ function Bunit.readProperty(ofs_unit)
 	prpt.total_JP_oracle     = memory.readword(ofs_unit + ofs_total_JP_oracle     )
 	prpt.total_JP_calculator = memory.readword(ofs_unit + ofs_total_JP_calculator )
 
+	prpt.prioritized_target  = memory.readbyte(ofs_unit + ofs_prioritized_target  )
+
 	prpt.cur_turn  = memory.readbyte(ofs_unit + ofs_cur_turn  )
 	prpt.moved     = memory.readbyte(ofs_unit + ofs_moved     )
 	prpt.actioned  = memory.readbyte(ofs_unit + ofs_actioned  )
@@ -397,27 +397,24 @@ function Bunit.readProperty(ofs_unit)
 	prpt.miss_type = memory.readbyte(ofs_unit + ofs_miss_type )
 	prpt.item_lost = memory.readbyte(ofs_unit + ofs_item_lost )
 
+	prpt.attack_accuracy = memory.readbyte(ofs_unit + ofs_attack_accuracy )
+	prpt.main_target     = memory.readbyte(ofs_unit + ofs_main_target     )
 
 
 	--prpt.info = Bunit.toString(prpt)
 	prpt.info = Bunit.toString2(prpt)
-	--print(prpt.info)
 	return prpt
 end
 
 function Bunit.toString(prpt)
-	local str = string.format("%2x %2x %2x %2x %2x %2x %2x %2x %2x:" 
-			.."%2d %2d %2d %2d %2d:"
-			.."%3d:"
-			.." %d %d %d:"
+	local str = string.format("%2x %2x %2x %2x %2x:" 
+			.."%2d %2d %2d %2d %d:"
+			.." %d %d:"
+			.." %2d %2d:"
 			.." %d:",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
-			prpt.palette,
-			prpt.side   ,
-			prpt.species,
-			prpt.deathct,
 			prpt.ofs08  ,
 			prpt.zodiac ,
 
@@ -427,24 +424,24 @@ function Bunit.toString(prpt)
 			prpt.faith  ,
 			prpt.ofs27  ,
 
-			prpt.ct     ,
+			prpt.hp     ,
+			prpt.mp     ,
 
 			prpt.total_JP_squire    ,
 			prpt.total_JP_chemist   ,
-			prpt.total_JP_wizard    ,
 
 			prpt.JP_squire    )
 	return str
 end
 
 function Bunit.toString2(prpt)
-	local str = string.format("%2x %2x %2x %2x %2x:"
+	local str = string.format("%2x %2x %2x %2x:"
 			.."%3d %2d:"
-			.."%2x %2x %2x:%2x %2x %2x:%2x %2x %2x %2x:",
+			.."%2x %2x %2x:%2x %2x %2x:%2x %2x %2x:"
+			.."%2d %2x %2x:",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
-			prpt.side   ,
 			prpt.zodiac ,
 
 			prpt.ct     ,
@@ -459,7 +456,10 @@ function Bunit.toString2(prpt)
 			prpt.hit_miss    ,
 			prpt.critical    ,
 			prpt.miss_type   ,
-			prpt.item_lost   )
+
+			prpt.attack_accuracy ,
+			prpt.main_target     ,
+			prpt.prioritized_target  )
 
 	return str
 end
