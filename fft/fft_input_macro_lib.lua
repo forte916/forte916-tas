@@ -909,12 +909,12 @@ function TAS.learnWizard()
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	fadv(2)
-	pressBtn({circle=1}, 8)
-	pressBtn({circle=1}, 10)
+	pressBtn({circle=1}, 8)   -- select bolt
+	pressBtn({circle=1}, 10)  -- select yes
 	pressBtn({right=1}, 6)
 	pressBtn({right=1}, 6)
-	pressBtn({circle=1}, 8)
-	pressBtn({circle=1}, 10)
+	pressBtn({circle=1}, 8)   -- select magic attack up
+	pressBtn({circle=1}, 10)  -- select yes
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 4)
 end
@@ -925,8 +925,8 @@ function TAS.setWizard()
 	pressBtn({down=1}, 3)
 	pressBtn({down=1}, 3)
 	fadv(2)
-	pressBtn({circle=1}, 10)
-	pressBtn({circle=1}, 4)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({circle=1}, 4)   -- select magic attack up
 	fadv(2)
 	pressBtn({x=1}, 4)
 	fadv(1)
@@ -935,14 +935,14 @@ end
 function TAS.learnRamzaYell()
 	pressBtn({l1=1}, 2)
 	pressBtn({up=1}, 3)
-	pressBtn({circle=1}, 10)
+	pressBtn({circle=1}, 10)  -- select squire
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	fadv(2)
-	pressBtn({circle=1}, 8)
-	pressBtn({circle=1}, 10)
+	pressBtn({circle=1}, 8)   -- select yell
+	pressBtn({circle=1}, 10)  -- select yes
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 4)
 	-- 44877f
@@ -964,15 +964,16 @@ function TAS.moveMandariaFromFormationForEvent()
 	pressBtn({circle=1}, 3)
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 2)
-	fadv(100)
+	fadv(49)
 end
 
-function TAS.moveMandariaFromFormation()
+function TAS.moveMandariaFromGariland()
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
 	pressBtn({down=1}, 2)
 	-- if wait here, change enemy status.
 	pressBtn({circle=1}, 2)
+	fadv(49)
 end
 
 function TAS.ch1_3_mandalia_deploy()
@@ -1060,6 +1061,82 @@ function TAS.ch1_3_turnN_ramza_Yell()
 	pressBtn({down=1}, 4)
 	pressBtn({circle=1}, 9)  -- stand by
 	pressBtn({circle=1}, 2)
+end
+
+
+function TAS.enterFormation2()
+	pressBtn({triangle=1}, 5)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(49)
+end
+
+function TAS.jobChangeRamza()
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({circle=1}, 2)
+	fadv(45)
+	pressBtn({left=1}, 15-2)
+	pressBtn({left=1}, 15-2)
+	pressBtn({circle=1}, 5)
+	pressBtn({circle=1}, 2)
+	fadv(57-2)
+	pressBtn({x=1}, 2)  -- cancel job change
+	fadv(46)
+end
+
+function TAS.learnRamzaAccumulate()
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 2)
+	fadv(26)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 10)  -- select learn
+	pressBtn({circle=1}, 10)  -- select squire
+	pressBtn({circle=1}, 8)   -- select accumulate
+	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({right=1}, 6)
+	pressBtn({right=1}, 6)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 8)   -- select gained jp up
+	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({x=1}, 10)
+	pressBtn({x=1}, 4)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 5)   -- select set
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({circle=1}, 4)   -- select guts
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)
+	fadv(2)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({circle=1}, 4)   -- select gained jp jp
+	fadv(2)
+	pressBtn({x=1}, 5)
+	pressBtn({x=1}, 2)
+	fadv(29-2)
+	TAS.exitFormation()
+end
+
+function TAS.moveGarilandFromFormation()
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 3)
+	pressBtn({up=1}, 2)
+	-- if wait here, change rng.
+	pressBtn({circle=1}, 2)
+	fadv(49)
+end
+
+function TAS.moveGarilandFromMandaria()
+	pressBtn({triangle=1}, 5)
+	pressBtn({circle=1}, 3)
+	pressBtn({up=1}, 2)
+	-- if wait here, change enemy status.
+	pressBtn({circle=1}, 2)
+	fadv(49)
 end
 
 macro_table = {

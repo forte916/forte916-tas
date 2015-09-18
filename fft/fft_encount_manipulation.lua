@@ -31,12 +31,20 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 function pre_attempt()
+	-- moveGarilandFromFormation()
+	fadv(2)
+	--pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 3)
+	pressBtn({up=1}, 2)
+	-- if wait here, change rng.
+	pressBtn({circle=1}, 2)
+	fadv(51)
 end
 
 function attempt()
-	--pressBtn({triangle=1}, 6)
+	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 3)
+	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 2)
 	fadv(900)
 end
@@ -87,7 +95,7 @@ local begin_fc = emu.framecount()
 local begin_date = os.date()
 
 
-f = io.open("ch1_random_encount1.log", "a")
+f = io.open("ch1_random_encount2.log", "a")
 if f == nil then debugPrint("error: Could not open file") end
 
 -- create original state
