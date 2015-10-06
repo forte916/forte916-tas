@@ -819,10 +819,8 @@ end
 function TAS.enterFormation()
 	pressBtn({triangle=1}, 5)
 	pressBtn({down=1}, 2)
-  -- 43872f
 	pressBtn({circle=1}, 1)
 	fadv(49)
-  -- 43922f
 end
 
 function TAS.selectRight()
@@ -836,8 +834,8 @@ function TAS.dismiss()
 	pressBtn({circle=1}, 6)
 	pressBtn({circle=1}, 3)
 	-- 43947f
-	pressBtn({circle=1}, 2)
-	fadv(53)
+	pressBtn({circle=1}, 1)
+	fadv(54)
 	-- 44002f
 end
 
@@ -1064,14 +1062,6 @@ function TAS.ch1_3_turnN_ramza_Yell()
 	pressBtn({circle=1}, 2)
 end
 
-
-function TAS.enterFormation2()
-	pressBtn({triangle=1}, 5)
-	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(49)
-end
-
 function TAS.jobChangeRamza()
 	pressBtn({triangle=1}, 2)  -- show menu
 	pressBtn({down=1}, 4)
@@ -1195,6 +1185,35 @@ function TAS.ch1_random_battle_left_move_ramza()
 	pressBtn({circle=1}, 1)
 end
 
+function TAS.ch1_random_battle_left_move_bolt3_ramza()
+	-- arrowed and shown AT
+	fadv(7)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({left=1}, 4)
+	pressBtn({circle=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(7)
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 10)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 10)  -- magic
+	pressBtn({circle=1}, 8)   -- Bolt3
+	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 2)   -- select target
+	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	fadv(19)  -- spell cast
+
+	-- arrowed
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+end
+
 function TAS.ch1_random_battle_Accumulate_ramza()
 	-- arrowed and shown AT
 	fadv(6+1)
@@ -1214,7 +1233,7 @@ function TAS.ch1_random_battle_Accumulate_ramza()
 	pressBtn({circle=1}, 1)
 	fadv(8)
 
-	-- about 100f at goblin turn.
+	-- about 110f at goblin turn.
 end
 
 function TAS.skip_battle_congratulations()

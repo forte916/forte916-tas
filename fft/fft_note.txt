@@ -155,13 +155,28 @@ ch1-random
 priest   , Lv5, 1100JP
 oracle   , Lv4,  700JP
 wizard   , Lv5, 1100JP
-time mage, Lv4,  700JP
+time mage, Lv4,  700JP , 2450JP
+calclator, Lvx, xxxxJP , 2700JP
 
 * learn
   * priest - Holy
   * wizard - Bolt3, Death, Flare, Counter Magic, Magic Attack UP
-  * time mage - Quick, Demi2, MP Switch, Teleport
-  * calculator - All except Exp, Gained Exp UP
+    use jp scroll glith, 
+  * time mage - Quick(900jp), Demi2(550jp), MP Switch(400jp), Teleport(600jp)
+    use jp scroll glitch, stop ->quick
+  * calculator - All except Exp(2350jp), Gained Exp UP(350jp)
+
+* job change
+  * wizrd
+
+* set ability
+  * math
+  * mp switch
+  * gained exp up or magic attack up
+
+* ramza's level
+  * 算術士の JP稼ぎが終了時点で lv20 が目安
+  * ch2 Golgorand の前までに lv23 必須. lv23 priest + green beret = speed 9
 
 * holy を覚えるための経過 frame = 167f
 

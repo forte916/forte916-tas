@@ -97,7 +97,7 @@ local begin_fc = emu.framecount()
 local begin_date = os.date()
 
 
-f = io.open("ch1_random_encount4.log", "a")
+f = io.open("ch1_random_encount5.log", "a")
 if f == nil then debugPrint("error: Could not open file") end
 
 -- create original state
