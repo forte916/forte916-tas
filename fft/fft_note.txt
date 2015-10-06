@@ -149,3 +149,19 @@ ch1-3
 	* set: guts, gained JP UP
 
 
+ch1-random
+-----
+
+priest   , Lv5, 1100JP
+oracle   , Lv4,  700JP
+wizard   , Lv5, 1100JP
+time mage, Lv4,  700JP
+
+* learn
+  * priest - Holy
+  * wizard - Bolt3, Death, Flare, Counter Magic, Magic Attack UP
+  * time mage - Quick, Demi2, MP Switch, Teleport
+  * calculator - All except Exp, Gained Exp UP
+
+* holy ‚ðŠo‚¦‚é‚½‚ß‚ÌŒo‰ß frame = 167f
+

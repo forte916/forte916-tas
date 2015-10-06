@@ -31,21 +31,23 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 function pre_attempt()
-	-- moveGarilandFromFormation()
-	fadv(2)
-	--pressBtn({up=1}, 2)
+--	-- move Gariland From Formation
+	fadv(6)
+	pressBtn({up=1}, 2)
+	
 	pressBtn({circle=1}, 3)
 	pressBtn({up=1}, 2)
-	-- if wait here, change rng.
-	pressBtn({circle=1}, 2)
-	fadv(51)
+	pressBtn({circle=1}, 1)
+	fadv(52)
 end
 
 function attempt()
+	-- move Mandalia From Gariland
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 2)
+	pressBtn({down=1}, 2)  -- select Mandalia
+	--pressBtn({up=1}, 2)  -- select igros
+	pressBtn({circle=1}, 1)
 	fadv(900)
 end
 
@@ -90,12 +92,12 @@ end
 ------------------------------------------------------------
 
 local initial = 1
-local retry = 300
+local retry = 400
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 
 
-f = io.open("ch1_random_encount2.log", "a")
+f = io.open("ch1_random_encount4.log", "a")
 if f == nil then debugPrint("error: Could not open file") end
 
 -- create original state

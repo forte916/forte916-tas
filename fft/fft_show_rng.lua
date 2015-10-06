@@ -81,18 +81,18 @@ if f == nil then debugPrint("error: Could not open file") end
 while true do
 
 	if initial == 1 then
-		outputNextRNG()
+		--outputNextRNG()
 		--Funit.showAll()
-		--Bunit.showAll()
+		Bunit.showAll()
 		initial = 0
 	end
 
 	if initial == 0 then
 		drawRNG()
-		outputRNG()
+		--outputRNG()
 		--drawNextRNG()
 		--Funit.drawAll()
-		--Bunit.drawAll()
+		Bunit.drawAll()
 	end
 
 	f:flush()

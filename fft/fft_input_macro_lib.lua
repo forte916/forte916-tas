@@ -818,10 +818,10 @@ end
 
 function TAS.enterFormation()
 	pressBtn({triangle=1}, 5)
-	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
   -- 43872f
-	pressBtn({circle=1}, 2)
-	fadv(48)
+	pressBtn({circle=1}, 1)
+	fadv(49)
   -- 43922f
 end
 
@@ -832,7 +832,7 @@ end
 function TAS.dismiss()
 	pressBtn({triangle=1}, 2)  -- show menu
 	pressBtn({up=1}, 4)
-	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 6)
 	pressBtn({circle=1}, 3)
 	-- 43947f
@@ -854,7 +854,7 @@ function TAS.cancelMenu()
 end
 
 function TAS.jobChangeDilita()
-	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 2)
 	-- 44279
 	pressBtn({circle=1}, 2)
 	fadv(44)
@@ -884,10 +884,10 @@ function TAS.cancelJobChange()
 end
 
 function TAS.learnWizard()
-	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 2)
 	fadv(26)
-	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 10)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
@@ -954,26 +954,26 @@ end
 
 function TAS.exitFormation()
 	-- 44905f
-	pressBtn({x=1}, 2)
-	fadv(42)
+	pressBtn({x=1}, 1)
+	fadv(43)
 	-- 44949f
 end
 
-function TAS.moveMandariaFromFormationForEvent()
+function TAS.moveMandaliaFromFormationForEvent()
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 3)
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(49)
+	pressBtn({circle=1}, 1)
+	fadv(50)
 end
 
-function TAS.moveMandariaFromGariland()
+function TAS.moveMandaliaFromGariland()
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
 	pressBtn({down=1}, 2)
 	-- if wait here, change enemy status.
-	pressBtn({circle=1}, 2)
-	fadv(49)
+	pressBtn({circle=1}, 1)
+	fadv(50)
 end
 
 function TAS.ch1_3_mandalia_deploy()
@@ -986,7 +986,7 @@ function TAS.ch1_3_mandalia_deploy()
 	pressBtn({l1=1, down=1}, 3)
 	pressBtn({circle=1}, 2)
 	pressBtn({start=1}, 3)
-	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
 	fadv(100)
 end
 
@@ -1002,20 +1002,21 @@ function TAS.ch1_3_turn1_ramza()
 	pressBtn({left=1}, 4)
 	pressBtn({left=1}, 5)
 	pressBtn({left=1}, 4)
+	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
 	-- arrowed
 	fadv(9)
 	pressBtn({circle=1}, 18)
-	pressBtn({circle=1}, 10)  -- attack
+	pressBtn({circle=1}, 10)  -- action
 	pressBtn({down=1}, 4)
 	pressBtn({circle=1}, 10)  -- guts
 	pressBtn({circle=1}, 11)  -- Yell
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 6)  -- confirm target
 	-- 57138f
-	pressBtn({circle=1}, 10)  -- execute attack
-	fadv(176)
+	pressBtn({circle=1}, 1)  -- execute attack
+	fadv(185)
 	-- 57424f, arrowed
 	-- arrowed
 	pressBtn({circle=1}, 2)
@@ -1026,13 +1027,13 @@ function TAS.ch1_3_turn1_ramza()
 	-- arrowed
 	fadv(9)
 	pressBtn({circle=1}, 18)
-	pressBtn({circle=1}, 10)  -- attack
+	pressBtn({circle=1}, 10)  -- action
 	pressBtn({down=1}, 4)
 	pressBtn({circle=1}, 10)  -- guts
 	pressBtn({circle=1}, 11)  -- Yell
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 6)  -- confirm target
-	pressBtn({circle=1}, 10)  -- execute attack
+	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)
 	-- arrowed
 	fadv(9)
@@ -1046,19 +1047,19 @@ end
 function TAS.ch1_3_turnN_ramza_Yell()
 	-- arrowed and shown AT
 	fadv(7)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)  -- attack
-	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 10)  -- action
+	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 10)  -- guts
 	pressBtn({circle=1}, 11)  -- Yell
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 6)  -- confirm target
-	pressBtn({circle=1}, 10)  -- execute attack
+	pressBtn({circle=1}, 1)  -- execute attack
 	fadv(284)  -- Yell animation
 	-- arrowed and shown AT
 	fadv(6)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 9)  -- stand by
 	pressBtn({circle=1}, 2)
 end
@@ -1074,23 +1075,23 @@ end
 function TAS.jobChangeRamza()
 	pressBtn({triangle=1}, 2)  -- show menu
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 2)
-	fadv(45)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)
+	fadv(46)
 	pressBtn({left=1}, 15-2)
 	pressBtn({left=1}, 15-2)
 	pressBtn({circle=1}, 5)
-	pressBtn({circle=1}, 2)
-	fadv(57-2)
-	pressBtn({x=1}, 2)  -- cancel job change
-	fadv(46)
+	pressBtn({circle=1}, 1)
+	fadv(58-2)
+	pressBtn({x=1}, 1)  -- cancel job change
+	fadv(47-2)
 end
 
 function TAS.learnRamzaAccumulate()
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 2)
 	fadv(26)
-	pressBtn({up=1}, 1)
+	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 10)  -- select learn
 	pressBtn({circle=1}, 10)  -- select squire
 	pressBtn({circle=1}, 8)   -- select accumulate
@@ -1126,18 +1127,106 @@ function TAS.moveGarilandFromFormation()
 	pressBtn({circle=1}, 3)
 	pressBtn({up=1}, 2)
 	-- if wait here, change rng.
-	pressBtn({circle=1}, 2)
-	fadv(49)
+	pressBtn({circle=1}, 1)
+	fadv(50)
 end
 
-function TAS.moveGarilandFromMandaria()
+function TAS.moveGarilandFromMandalia()
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
 	pressBtn({up=1}, 2)
 	-- if wait here, change enemy status.
-	pressBtn({circle=1}, 2)
-	fadv(49)
+	pressBtn({circle=1}, 1)
+	fadv(50)
 end
+
+function TAS.ch1_random_battle_mandalia_deploy()
+	pressBtn({right=1}, 3)
+	pressBtn({right=1}, 3)
+	pressBtn({up=1}, 3)
+	pressBtn({circle=1}, 2)
+	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 1)
+	fadv(100)
+end
+
+function TAS.ch1_random_battle_Yell_ramza()
+	-- arrowed and shown AT
+	fadv(7)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 10)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 10)  -- guts
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 11)  -- Yell
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 6)  -- confirm target
+	pressBtn({circle=1}, 1)  -- execute attack
+	fadv(284)  -- Yell animation
+	-- arrowed and shown AT
+	fadv(6)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 1)
+end
+
+function TAS.ch1_random_battle_left_move_ramza()
+	-- arrowed and shown AT
+	fadv(7)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({left=1}, 4)
+	pressBtn({circle=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(7)
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 10)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 10)  -- guts
+	pressBtn({circle=1}, 4)   -- Accumulate
+	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	fadv(64+4)  -- Accumulate animation
+
+	-- arrowed
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+end
+
+function TAS.ch1_random_battle_Accumulate_ramza()
+	-- arrowed and shown AT
+	fadv(6+1)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 10)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 10)  -- guts
+	pressBtn({circle=1}, 4)   -- Accumulate
+	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	fadv(63+1)  -- Accumulate animation
+	-- arrowed and shown AT
+	fadv(6)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 1)
+	fadv(8)
+
+	-- about 100f at goblin turn.
+end
+
+function TAS.skip_battle_congratulations()
+	--fadv(xx)
+	pressBtn({circle=1}, 4)   -- show "This operation is completed"
+	pressBtn({circle=1}, 1)   -- skip congratulations
+	fadv(21)
+	pressBtn({circle=1}, 4)   -- show "bonus money"
+	pressBtn({circle=1}, 4)   -- skip counting
+	pressBtn({circle=1}, 1)   -- skip bonus money
+end
+
 
 macro_table = {
 	{key = "G", func = TAS.ch1_3_turnN_ramza_Yell},
