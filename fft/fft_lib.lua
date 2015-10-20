@@ -401,8 +401,8 @@ function Bunit.readProperty(ofs_unit)
 	prpt.main_target     = memory.readbyte(ofs_unit + ofs_main_target     )
 
 
-	--prpt.info = Bunit.toString(prpt)
-	prpt.info = Bunit.toString2(prpt)
+	prpt.info = Bunit.toString(prpt)
+	--prpt.info = Bunit.toString2(prpt)
 	return prpt
 end
 
@@ -410,8 +410,7 @@ function Bunit.toString(prpt)
 	local str = string.format("%2x %2x %2x %2x %2x:" 
 			.."%2d %2d %2d %2d %d:"
 			.." %d %d:"
-			.." %2d %2d:"
-			.." %d:",
+			.." %2d %2d:",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -428,9 +427,8 @@ function Bunit.toString(prpt)
 			prpt.mp     ,
 
 			prpt.total_JP_squire    ,
-			prpt.total_JP_chemist   ,
+			prpt.total_JP_chemist   )
 
-			prpt.JP_squire    )
 	return str
 end
 

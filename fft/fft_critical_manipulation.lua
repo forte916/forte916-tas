@@ -31,14 +31,15 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 function pre_attempt()
-	fadv(3)
-	pressBtn({circle=1}, 2)  -- select target
+	--pressBtn({circle=1}, 2)  -- select target
+
+	pressBtn({circle=1}, 4)  -- select Death of math at Zirekile_Falls
 	pressBtn({circle=1}, 6)  -- confirm target
 end
 
 function attempt()
-	pressBtn({circle=1}, 10)  -- execute attack
-	fadv(20)
+	pressBtn({circle=1}, 1)  -- execute attack
+	fadv(150)
 end
 
 function post_attempt()
@@ -50,7 +51,7 @@ function success()
 	local ret = false
 
 	local cur_prpt = {}
-	cur_prpt = Bunit.readProperty(adr_battle_unit8)
+	cur_prpt = Bunit.readProperty(adr_battle_unit)
 	debugPrint(cur_prpt.info)
 
 	if cur_prpt.critical ~= 0 then
@@ -70,17 +71,44 @@ function success()
 	return ret
 end
 
+function success_Death_Zirekile_Falls()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit5
+	local enemy = 0
+
+	debugPrint(string.format("-- Bunit --"))
+	for i=1, 5 do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		debugPrint(prpt.info)
+
+		if prpt.hp == 0 then
+			enemy = enemy + 1
+		end
+	end
+
+	debugPrint(string.format("-- enemy = %2d", enemy))
+	if enemy == 5 then
+		print(string.format("-- enemy = %2d", enemy))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
 
 ------------------------------------------------------------
 -- main
 ------------------------------------------------------------
 
 local initial = 1
-local retry = 100
+local retry = 200
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 
-f = io.open("ramza_critical_ch2_turnN.log", "a")
+f = io.open("ramza_death_ch2_zirekile.log", "a")
 if f == nil then debugPrint("error: Could not open file") end
 
 -- create original state
@@ -89,11 +117,11 @@ savestate.save(state)
 savestate.load(state)
 
 --debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
-debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
---debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
+debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
-for i=0, retry do
+for i=100, retry do
 	if initial == 1 then
 		initial = 0
 	end
@@ -107,7 +135,8 @@ for i=0, retry do
 	attempt()
 
 	-- check status
-	if success() then
+	--if success() then
+	if success_Death_Zirekile_Falls() then
 		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
 		post_attempt()
 	end

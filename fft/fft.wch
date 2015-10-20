@@ -1,5 +1,5 @@
 
-21
+22
 00000	00009010	d	h	0	RNG
 00001	00000000	S	S	0	----------------------------
 00002	000552F8	b	h	0	1st f ch
@@ -21,3 +21,4 @@
 00012	001905A8	w	u	0	17th b total_jp_wizard
 00013	001905AA	w	u	0	17th b total_jp_time_mage
 00014	001905B2	w	u	0	17th b total_jp_oracle
+00015	001905BC	w	u	0	17th b total_jp_calculator

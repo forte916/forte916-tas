@@ -1,10 +1,10 @@
 -- ROM: Final Fantasy Tactics (J) (v1.1) [SLPS-00770]
 -- Emulater: psxjin v2.0.2
 --
--- This scripts manipulates the number of enemy.
+-- This script manipulates the number of enemy.
 --
 -- Usage
---   1. Start this script at gariland.
+--   1. Start this script at gariland or mandalia.
 --
 
 require "psx_lib"
@@ -38,7 +38,7 @@ function pre_attempt()
 	pressBtn({circle=1}, 3)
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 1)
-	fadv(52)
+	fadv(50+2)
 end
 
 function attempt()
@@ -97,7 +97,7 @@ local begin_fc = emu.framecount()
 local begin_date = os.date()
 
 
-f = io.open("ch1_random_encount5.log", "a")
+f = io.open("ch1_random_encount6.log", "a")
 if f == nil then debugPrint("error: Could not open file") end
 
 -- create original state

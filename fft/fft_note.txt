@@ -94,7 +94,7 @@ ch1-2
 
 
 * ramza
-  * Squire JP 250 for gained JP UP 250jp or Yell 200jp
+  * Squire JP 300 for gained JP UP 250jp or Yell 200jp
   * Chemist JP 200 for wizard
 
 * chemist
@@ -121,7 +121,7 @@ ch1-3
 
 * 配置
   * ramza と黒魔道士
-  * redpanther が 2撃で倒せるよう敵ステータス調整
+  * redpanther が 2撃で倒せるよう敵HP調整
     * 相性良 (24 damage となる)
 	* 相性普通 and HP40以下
 
@@ -135,14 +135,13 @@ ch1-3
 
 * turn3
   * redpanther だけになるので稼ぐ
-  * wizard, Bolt で dilita 巻き込んで自殺
+  * wizard, Bolt で Delita 巻き込んで自殺
 
 * turnN
   * algus の死体の奥の安全地帯で稼ぐ
 
 
 * after battle, formation
-  * ramza, learn Yell 200JP
   * ramza
     * job change:  priest
 	* learn:  Accumulates 300JP, gained JP UP 250JP
@@ -156,15 +155,16 @@ priest   , Lv5, 1100JP
 oracle   , Lv4,  700JP
 wizard   , Lv5, 1100JP
 time mage, Lv4,  700JP , 2450JP
-calclator, Lvx, xxxxJP , 2700JP
+calclator, Lvx, xxxxJP , 2350JP
 
 * learn
   * priest - Holy
   * wizard - Bolt3, Death, Flare, Counter Magic, Magic Attack UP
-    use jp scroll glith, 
+    use jp scroll glith,
   * time mage - Quick(900jp), Demi2(550jp), MP Switch(400jp), Teleport(600jp)
-    use jp scroll glitch, stop ->quick
-  * calculator - All except Exp(2350jp), Gained Exp UP(350jp)
+    use jp scroll glitch, stop -> quick, reflec -> slowja
+  * calculator - All except Exp(2350jp), 
+    Gained Exp UP(350jp) is not nedded
 
 * job change
   * wizrd
@@ -172,11 +172,103 @@ calclator, Lvx, xxxxJP , 2700JP
 * set ability
   * math
   * mp switch
-  * gained exp up or magic attack up
+  * magic attack up
+  * teleport
 
 * ramza's level
   * 算術士の JP稼ぎが終了時点で lv20 が目安
   * ch2 Golgorand の前までに lv23 必須. lv23 priest + green beret = speed 9
 
 * holy を覚えるための経過 frame = 167f
+
+
+ch1-Sand Rat
+------------
+* After battle, Buy Thunder rod to increase MA at Gariland
+
+
+ch1-Thieves Fort
+----------------
+
+
+ch2-Dorter
+----------
+* Before battle, change Gafgarion's job Chemist to remove equipment and reduce speed to 6
+* speed 7 の Theif には投石させない方が早い
+
+
+ch2-Zirekile Falls
+------------------
+* Delita が 北斗骨砕打(Crus Punch) を覚えていない(30%)、または 無双稲妻突き を覚えていると
+  1 ターン目で Gafgarion を倒すので、その後の会話が一切発生しない
+* Delita が 1ターン目で Gafgarion を倒せば CT3 Death で終了
+
+
+Holy Knight / White Knight
+--------------------------
+Stasis Sword	不動無明剣		Stop				100
+Split Punch		乱命割殺打		Doom (死の宣告)		400
+Crush Punch		北斗骨砕打		K.O. (デス)			500
+Lightning Stab	無双稲妻突き	Silence				700
+Holy Explosion	聖光爆裂破		Confuse				800
+
+
+ch2-Zaland
+----------
+* After battle, change Mustadio's job Chemist to remove equipment and reduce speed to 6
+* After battle, remove equipment of Ovelia,
+* equip Traiangle Hat and Wizard Robe, Ovelia equiped, by 最強装備
+
+
+ch2-Zigolis Swamp
+----------
+* Uribo は早いので出ないように
+
+ch2-Goug
+-----------
+* Mustadio は Engineer に戻っている. speed 7 となる
+* speed 7 Thieves に、先に動かれるので、リアクションアビリティを発動させないように
+
+ch2-Warjilis
+------------
+* Before Barius Valley, Buy green beret
+
+
+ch2-Barius Valley
+-----------------
+* Agrias には Bolt3 をガードしてもらう
+
+ch2-Golgorand
+-------------
+* ch2 Golgorand の前までに lv23 必須. lv23 priest + green beret = speed 9
+* Change job Priest, Equip green beret, make sure speed 9
+* Priest になって MA が下がるので CT Bolt3 でダメージが足りなければ Flare
+
+
+ch3
+---
+* Buy Wizard stuff and Magic Gauntlet at fitting room
+
+
+chN-Grog
+--------
+
+* after battle, buy 108 Gems to boost Holy damage in  Bed Desert to North Wall
+
+chN-Yuguo
+---------
+
+
+
+
+
+コメ返し
+--------
+
+Q. 密漁バグは?
+A. 使いません。理由は英語版ではできないから。
+
+Q. 
+A. 
+
 
