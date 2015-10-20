@@ -32,12 +32,14 @@ emu.speedmode("turbo")       -- drops some frames
 
 function pre_attempt()
 	--pressBtn({circle=1}, 2)  -- select target
+	--pressBtn({circle=1}, 4)  -- select Death of math at Zirekile_Falls
 
-	pressBtn({circle=1}, 4)  -- select Death of math at Zirekile_Falls
-	pressBtn({circle=1}, 6)  -- confirm target
+
 end
 
 function attempt()
+	pressBtn({circle=1}, 4)  -- select Bolt3 of math at Barius_Valley
+	pressBtn({circle=1}, 6)  -- confirm target
 	pressBtn({circle=1}, 1)  -- execute attack
 	fadv(150)
 end
@@ -99,6 +101,41 @@ function success_Death_Zirekile_Falls()
 	return ret
 end
 
+function success_Barius_Valley()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit2
+	local enemy = 0
+
+	debugPrint(string.format("-- Bunit --"))
+
+	prpt = Bunit.readProperty(adr_battle_unit)
+	if prpt.hp == 0 then
+		debugPrint(string.format("-- agrius.hp = %2d", prpt.hp))
+		return false
+	end
+
+	for i=1, 6 do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		debugPrint(prpt.info)
+
+		if prpt.hp == 0 then
+			enemy = enemy + 1
+		end
+	end
+
+	debugPrint(string.format("-- enemy = %2d", enemy))
+	if enemy == 6 then
+		print(string.format("-- enemy = %2d", enemy))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
+
 ------------------------------------------------------------
 -- main
 ------------------------------------------------------------
@@ -108,7 +145,7 @@ local retry = 200
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 
-f = io.open("ramza_death_ch2_zirekile.log", "a")
+f = io.open("agrius_ch2_barius.log", "a")
 if f == nil then debugPrint("error: Could not open file") end
 
 -- create original state
@@ -116,12 +153,12 @@ local state = savestate.create()
 savestate.save(state)
 savestate.load(state)
 
---debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
+debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
-debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
-for i=100, retry do
+for i=0, retry do
 	if initial == 1 then
 		initial = 0
 	end
@@ -136,7 +173,8 @@ for i=100, retry do
 
 	-- check status
 	--if success() then
-	if success_Death_Zirekile_Falls() then
+	--if success_Death_Zirekile_Falls() then
+	if success_Barius_Valley() then
 		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
 		post_attempt()
 	end

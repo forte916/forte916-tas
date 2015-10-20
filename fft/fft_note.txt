@@ -189,6 +189,7 @@ ch1-Sand Rat
 
 ch1-Thieves Fort
 ----------------
+* 初期配置を左上にすると視点移動なく戦闘終了
 
 
 ch2-Dorter
@@ -215,9 +216,9 @@ Holy Explosion	聖光爆裂破		Confuse				800
 
 ch2-Zaland
 ----------
-* After battle, change Mustadio's job Chemist to remove equipment and reduce speed to 6
 * After battle, remove equipment of Ovelia,
 * equip Traiangle Hat and Wizard Robe, Ovelia equiped, by 最強装備
+* After battle, change Mustadio's job Chemist to reduce speed to 6
 
 
 ch2-Zigolis Swamp
@@ -231,7 +232,11 @@ ch2-Goug
 
 ch2-Warjilis
 ------------
-* Before Barius Valley, Buy green beret
+* Before Barius Valley, Buy Green Beret
+* 魔道士のマント(MA+1)を買うかどうか
+  --> 買わなくてもよいかも
+      Bolt3 ではなく Flare を使うようになるのと
+	  3章冒頭で Magic Gauntlet(MA+2) を買うため
 
 
 ch2-Barius Valley
