@@ -57,7 +57,7 @@ lv1 chemist 初期ステータス
   * 最後の ramza のセリフで味方ステータスが決定
 
 
-ch1-1
+ch1-Orbonne
 -----
 
 * オーボンヌ中の最後の ovelia のセリフで敵星座が決定
@@ -81,7 +81,7 @@ ch1-1
   * 戦闘後んの最後のramza のセリフで味方ステータスが決定
 
 
-ch1-2
+ch1-Gariland
 -----
 
 * セーブ画面の入力後に敵星座が決定
@@ -95,6 +95,7 @@ ch1-2
 
 * ramza
   * Squire JP 300 for gained JP UP 250jp or Yell 200jp
+    * 実際は 300JP 貯まらない
   * Chemist JP 200 for wizard
 
 * chemist
@@ -109,8 +110,17 @@ ch1-2
 	* set: MagicAttackUP
   * chemist 以外のユニット除名
 
+* 改善案
+  * 配置
+    * Ramza は左下に配置
+  * turn1
+    * Ramza 右の屋根の上の敵を critical で一撃
+  * turn2
+    * Ramza 5歩でぎりぎり届く位置に敵が来てたら、critical で一撃
+    * この敵は投石を覚えていない方が早い
 
-ch1-3
+
+ch1-Mandalia
 -----
 
 * ramza
@@ -123,7 +133,8 @@ ch1-3
   * ramza と黒魔道士
   * redpanther が 2撃で倒せるよう敵HP調整
     * 相性良 (24 damage となる)
-	* 相性普通 and HP40以下
+	* 相性普通 (20 damage) and HP40以下
+	* 稼ぎ終了後に Ramza の Lv が nn になっている想定
 
 * turn1
   * ramza, Yell
@@ -173,7 +184,7 @@ calclator, Lvx, xxxxJP , 2350JP
   * math
   * mp switch
   * magic attack up
-  * teleport
+  * teleport は付けない (wiegraf 戦での移動で遅くなるから)
 
 * ramza's level
   * 算術士の JP稼ぎが終了時点で lv20 が目安
@@ -195,7 +206,7 @@ ch1-Thieves Fort
 ch2-Dorter
 ----------
 * Before battle, change Gafgarion's job Chemist to remove equipment and reduce speed to 6
-* speed 7 の Theif には投石させない方が早い
+* speed 7 の Theif には投石(覚えていない)させない方が早い
 
 
 ch2-Zirekile Falls
@@ -203,6 +214,7 @@ ch2-Zirekile Falls
 * Delita が 北斗骨砕打(Crus Punch) を覚えていない(30%)、または 無双稲妻突き を覚えていると
   1 ターン目で Gafgarion を倒すので、その後の会話が一切発生しない
 * Delita が 1ターン目で Gafgarion を倒せば CT3 Death で終了
+* Gafgarion はアイテム士で裸なので HP は nn しかない。一撃余裕
 
 
 Holy Knight / White Knight
@@ -217,7 +229,7 @@ Holy Explosion	聖光爆裂破		Confuse				800
 ch2-Zaland
 ----------
 * After battle, remove equipment of Ovelia,
-* equip Traiangle Hat and Wizard Robe, Ovelia equiped, by 最強装備
+* equip Traiangle Hat and Wizard Robe, Ovelia equiped, by best fit's.
 * After battle, change Mustadio's job Chemist to reduce speed to 6
 
 
@@ -234,7 +246,7 @@ ch2-Warjilis
 ------------
 * Before Barius Valley, Buy Green Beret
 * 魔道士のマント(MA+1)を買うかどうか
-  --> 買わなくてもよいかも
+  --> 買わなくてもよい
       Bolt3 ではなく Flare を使うようになるのと
 	  3章冒頭で Magic Gauntlet(MA+2) を買うため
 
@@ -245,14 +257,382 @@ ch2-Barius Valley
 
 ch2-Golgorand
 -------------
-* ch2 Golgorand の前までに lv23 必須. lv23 priest + green beret = speed 9
-* Change job Priest, Equip green beret, make sure speed 9
+* ch2 Golgorand の前までに lv23 必須. lv23 Priest + Green beret = speed 9
+* Change job Priest, Equip Green Beret for speed 9
 * Priest になって MA が下がるので CT Bolt3 でダメージが足りなければ Flare
+* Ramza speed 9, MA 10
 
 
 ch3
 ---
-* Buy Wizard stuff and Magic Gauntlet at fitting room
+* Buy Wizard stuff (MA+1) and Magic Gauntlet (MA+2) at fitting room
+* Ramza speed 9, MA 13
+
+ch3-Goland
+----------
+* Olan は、星天停止の方が、辞書攻撃より早い
+* Olan は、辞書攻撃で critical を出すと、ノックバックして死ぬので
+  Flare のターゲットが一つ減る
+
+
+ch3-Orbonne 2nd Floor
+-----------
+* 編成画面を抜けるときに敵の相性が決定
+* 竜騎士は相性が悪いと Flare 一撃で倒せない
+
+
+
+ch3-Orbonne 3rd Floor
+-----------
+* remove Green Beret for speed 8
+* 初期配置を 2マス後ろ
+* Izlude が 移動するので Hight 3 Flare
+
+ch3-Orbonne 1st Floor
+-----------
+* equip Green Beret for speed 9
+
+
+ch3-Yardow
+----------
+* After battle, Change job to Wizard
+* Buy Wizard Rod (MA+2), Sprint Shoes (SP+1) in fitting room for speed 9
+* <del>Buy also 108 Gems here or get from Malark at end of ch3</del>
+* 108 gems は無くてもよい. 108 gems の代わりに Magic Gauntlet で OK
+* Ramza speed 9, MA 15
+
+
+ch3-Riovanes (outside)
+------------
+* 編成画面閉じるときに敵の相性が決定
+
+ch3-Riovanes (inside)
+------------
+* Move and Height prime flare. (Wiegraf)
+* Level prime flare x2 (Velius)
+
+ch3-Riovanes (rooftop)
+------------
+* Height prime flare.
+
+ch4
+---
+* Malark 加入のロス 約80f (108 gems は必要ないので Malark の加入の必要はない)
+
+
+ch4-Bervenia
+------------
+* 忍者が出現しないように
+* (忍者が必ず出るのか未確認だが、出現した場合は先に行動されるので、何もさせな
+  いようにする)
+* Level 5 flare.
+* Ramza が Lv25 or Lv30 になっていない方が早い
+
+ch4-Finath
+----------
+* speed 9 の敵が出現しないように
+* CT3 Bolt3.
+
+ch4-Zeltennia
+------------
+* Level 5 flare.
+* Ramza と Delita が Lv25 or Lv30 になっていない方が早い
+
+
+ch4-Bed Dsert
+-------------
+* 108 gems は無くてもよい. 108 gems の代わりに Magic Gauntlet で OK
+* Equip Magic Gauntlet from Sprint Shoes
+* Set Counter Magic from MP Switch
+* Ramza speed 8, MA 17
+* CT prime flare. Flare is enough to kill, since MA is 17.
+
+
+ch4-Besra North Wall
+---------
+* Equip Sprint Shoes
+* ability のセットはここではしない
+* Select North Wall, since there are enemies who has speed 9 at the south wall.
+* Ramza speed 9, MA 15
+
+
+ch4-Sluice
+----------
+* RTA 動画では
+  * Ramza speed 12, move 4. auto-haste. 見習い戦士
+  * Ramza は初期配置, ラヴィアンを 左1 上2
+  * Orlandu 加入後は 3人の speed を 12
+
+* TA 動画では
+  * Change job of Squire.
+  * Set ability of Time Magic
+  * Set Teleport
+  * MP Switch は付け直さない( Counter Magic のまま)
+  * Best fit's equipment (最強装備)
+  * Equip Red shoes, if needed. 最強装備後 Red shoes に変更
+  * Ramza speed 7, move 5.
+  * Ramza 初期配置 右1 上1
+
+
+* Orlandu Lv27 以上かつ Lightning Stab を覚えている
+
+ch4-Zarghidas
+-------------
+* Make use of item duplicatin glich to get a second Excalibur.
+* Buy Aegis Shield(MA+1) for Ramza
+* Buy Twist Headband(PA+2), Power Sleeve(PA+2) for Orlandu
+
+* Formation
+* Ramza equip Exbalibur, Holy Miter(MA+1), Wizard Robe(MA+2), Magic Gauntlet(MA+2)
+* Set Math Skill, MP Switch
+* Remove Teleport
+
+* Ramza, speed 8, MA 13, Excalibur (speed 12)
+* Orlandu, speed 8, PA 16, Excalibur (speed 12)
+
+
+
+ch4-Limberry (outside)
+------------
+* RTA では
+  * Ramza が Lv32 なので Level prime flare で Ledy を倒す
+  * Apanda の Level はランダムなので prime にならないように調整する
+
+* TA では
+  * Ramza 初期配置 上1, Orlandu 初期配置 左4
+  * こうすることで Orlandu が Ramza より早く行動する
+  * Orlandu 剣技
+
+
+ch4-Limberry (inside)
+------------
+* RTA では
+  * Ramza speed 11, MA 14, 黒魔道士
+  * Elmdore HP 583, Lv41, speed 10.
+  * Level prime flare.
+
+* TA では
+  * Ramza 初期配置
+  * Level prime holy.
+
+
+
+ch4-Zarela
+----------
+* RTA では
+  * Ramza speed 12, MA 12, 黒魔道士
+  * Ramza 初期配置, Orlandu ラムザの上1, ラヴィアン ラムザの 上1 左1
+  * この配置でカメラの回転 1回少なくなる
+  * Zalela HP 1171, Lv44, speed 11.
+  * Height prime Demi2.
+  * Orlandu が剣技. 足りない場合は ラヴィアン.
+
+* TA では
+  * Ramza 初期配置, Orlandu Ramza の左1
+  * この配置だとカメラ移動する. Ramza の 上1 がよい
+  * Height prime Demi2.
+  * Orlandu が剣技(Lightning Stab) critical.
+
+
+* Height prime Demi2.
+* Orlandu が剣技(Lightning Stab). 足りない場合は critical.
+
+
+
+ch4-Adramelk
+------------
+* RTA では
+  * Ramza 初期配置 の左1, Orlandu 初期配置
+  * この配置で Orlandu が先に行動する
+  * この配置で Orlandu が ダイスダークに届く
+  * (Lightning Stab があれば配置変更の必要はない??)
+  * Dycedarg HP 462, Lv43, speed 10
+  * Orlandu, 移動して剣技
+  * Ramza, 移動しないで Height 4 Bolt3.
+  * 移動すると会話イベントが発生する
+  * Adramelk HP 1525, Lv46, speed 10
+  * Height 4 Demi2
+  * Orlandu が 6マス以上離れる (喪失を喰らわないため)
+  * Height 5 Demi2
+
+* TA では
+  * Buy Thief Hat(SP+2) for Ramza at Gariland
+  * Buy Flash Hat(SP+1) for Orlandu at Gariland
+
+  * Ramza, speed 10, MA 12, Excalibur (speed 15)
+  * Orlandu, speed 9, PA 14, Excalibur (speed 13.5)
+
+  * Ramza 初期配置, Orlandu Ramza 左1
+  * Ramza CT3 Holy
+  * Orlandu, 移動して剣技
+
+  * Height 4 Demi2
+  * Orlandu 待機
+  * Height 4 Demi2
+
+
+
+ch4-Murond (outside)
+----------
+* TA では
+  * Ramza equip Holy Miter(MA+1) from Thief Hat
+  * Ramza, speed 8, MA 13, Excalibur (speed 12)
+  * Ramza 初期配置  (1st Squad)
+  * Orlandu 初期配置 上1 (2nd Squad)
+
+  * Orlandu Lightning Stab to kill 2 Mediators
+  * Ramza CT3 flare
+  * Orlandu で 2体倒す方が Flare で 2体倒すより早いのかも
+
+* CT3 flare
+
+
+ch4-Murond (inside)
+----------
+* RTA では
+  * Ramza 初期配置から 上1, Orlandu 初期配置から 左2
+  * この配置で Orlandu が先に行動する
+  * Orlandu 剣技
+
+* TA では
+  * Orlandu equip Twist Headband(PA+2)
+  * Orlandu, speed 8, PA 16, Excalibur (speed 12)
+  * Ramza 初期配置から 上1, Orlandu 初期配置から 左2
+  * この配置で Orlandu が先に行動する
+  * Orlandu 剣技
+
+
+
+ch4-Murond (Zalbag)
+----------
+* RTA では
+  * Orlandu, speed 10, PA 15
+  * PA を上げて 1撃で倒す
+  * Ramza 初期配置, Orlandu Ramza の左1
+  * Zalbag, HP 562, Lv54, speed 11.
+  * Ramza の speed を 8以下にすれば、会話を防げるかも??
+  * Zalbag は Ramza に マジックルーイン
+  * Orlandu が charge 中に剣技
+
+* TA では
+  * Ramza 初期配置 上1, Orlandu 初期配置 の左2
+  * Orlandu 剣技 (Lightning Stab) critical
+  * Orlandu が Zalbag より先に行動するので会話を skip 可能
+
+
+
+ch4-Orbonne (UBS 4)
+-----------
+* RTA では
+  * Ramza speed 11, MA 14, Wizard
+  * Orlandu speed 11, PA 12
+  * Ramza 初期配置 左1, Orlandu Ramza の左2
+  * カメラの回転を減らすため
+  * CT5 flare
+  * Ramza の Lv35 になっていれば speed が 1上昇する
+
+* TA では
+  * Ramza 初期配置 左1, Orlandu 出撃しない
+  * カメラの回転を減らすため
+  * CT3 holy
+
+
+ch4-Orbonne (UBS 5)
+-----------
+* RTA では
+  * speed 11 に先制される
+  * Level 3 flare
+  * Rofal, HP 509, Lv54, speed 10
+
+* TA では
+  * Ramza 初期配置, Orlandu 出撃しない
+  * Level 3 holy
+  * Ramza の Lv30 なので hit する (Excalibur が 聖吸収??)
+
+
+
+ch4-Murond (Kletian)
+----------
+* RTA では
+  * Ramza 初期配置, Orlandu Ramza の上1, ラヴィアン Orlandu の上1
+  * Kletian, HP420, Lv54, speed 10
+  * 敵忍者のターンで、R2 で視点変更するとカメラ移動がない??
+  * Orlandu の剣技
+
+* TA では
+  * Ramza 初期配置 上1, Orlandu 初期配置
+  * この配置で Orlandu が先に行動する
+  * Orlandu の剣技
+
+
+ch4-Murond (Balk)
+----------
+* RTA では
+  * Ramza 初期配置, Orlandu Ramza の左1, ラヴィアン Ramza の左2, 上2
+  * Balk, HP 488, Lv 55, speed 13
+  * Balk を味方近くに誘導
+  * Ramza が移動して Lv 5 flare or Lv 5 Bolt3
+  * Ramza が移動しないと会話が発生する
+  * Orlandu で剣技
+
+* TA では
+  * Ramza 初期配置, Orlandu Ramza の左1
+  * Balk を味方近くに誘導. Ramza に銃攻撃
+  * Ramza が移動して CT prime holy
+  * Orlandu で剣技
+
+
+ch4-Murond (Hashmalum)
+-----------
+* RTA では
+  * Ramza 初期配置, Orlandu Ramza の左2, 上1, ラヴィアン Orlandu の上1
+  * Hashmalum, HP 1450, Lv59, speed 13
+  * Hashmalum に次元魔法 を使わせる (Orlandu に呪縛が来ないようにするため)
+  * Ramza, Lv prime Demi2
+  * Orlandu 剣技
+
+* TA では
+  * Ramza equip Thief Hat, Sprint Shees
+  * Ramza, speed 11, MA 11, Excalibur (speed 16.5)
+  * Ramza 初期配置, Orlandu 出撃しない
+  * Level prime Demi2
+  * Altima が魔法
+  * Altima の chage 中に Level prime Demi2
+
+
+
+ch4-Murond (Altima)
+-----------
+* RTA では
+  * Ramza 初期配置, Orlandu Ramza の左1, ラヴィアン Orlandu の左3
+  * Altima, HP 1391, Lv56, speed 9
+  * Ramza height prime holy
+  * Alma マバリア
+  * Orlandu 移動 + 剣技
+  * 第二形態, HP 3281, Lv66, speed 11
+  * Ramza height prime slow
+  * ラヴィアン 銃撃
+  * Orlandu 剣技
+  * Ramza height prime demi2
+  * Ramza height prime demi2
+  * Orlandu 剣技
+
+* TA では
+  * Orlandu equip Ragnarok
+  * Orlandu, speed 8, PA 17
+  * Ramza 初期配置, Orlandu Ramza の左1
+  * Altima, HP 1370, Lv56, speed 9
+  * Ramza height prime demi2
+  * Ramza height prime demi2
+  * 第二形態
+  * Orlandu 移動 + 剣技
+  * Ramza height prime demi2
+  * Altima が Ramza を攻撃
+  * Ramza height prime demi2
+  * Orlandu 待機
+  * Ramza height prime demi2
+
+
 
 
 chN-Grog
@@ -273,7 +653,37 @@ chN-Yuguo
 Q. 密漁バグは?
 A. 使いません。理由は英語版ではできないから。
 
-Q. 
-A. 
+Q. 音質ひどい
+A. 少し設定を変えてみました
+
+Q. タイマーは?
+A. 各パートの終了時点の時間を記載するようにします
+
+CT
+----
+* 3の倍数の tick(clock) で CT100 になる場合、敵の CT は 3の倍数となる
+* SP7, SP9, SP12 が相当
+
+SP   tick
+ 6 * 17 = 102
+ 7 * 15 = 105
+ 8 * 13 = 104
+ 9 * 12 = 108
+10 * 10 = 100
+11 * 10 = 110
+12 *  9 = 108
+
+
+
+Play Movie
+----------
+
+* FFT NA Any% PB - 3:58:26
+* http://www.twitch.tv/claude/c/5920172
+
+
+* FFT RTA - 4:20:54 Part 1
+* http://www.twitch.tv/tideruglia/c/6013890
+
 
 

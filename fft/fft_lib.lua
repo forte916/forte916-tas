@@ -365,6 +365,10 @@ function Bunit.readProperty(ofs_unit)
 	prpt.mp        = memory.readword(ofs_unit + ofs_mp      )
 	prpt.max_mp    = memory.readword(ofs_unit + ofs_max_mp  )
 
+	prpt.ph_at     = memory.readbyte(ofs_unit + ofs_ph_at   )
+	prpt.mg_at     = memory.readbyte(ofs_unit + ofs_mg_at   )
+	prpt.speed     = memory.readbyte(ofs_unit + ofs_speed   )
+
 	prpt.ct        = memory.readbyte(ofs_unit + ofs_ct      )
 	prpt.hight     = memory.readbyte(ofs_unit + ofs_hight   )
 
@@ -401,16 +405,16 @@ function Bunit.readProperty(ofs_unit)
 	prpt.main_target     = memory.readbyte(ofs_unit + ofs_main_target     )
 
 
-	prpt.info = Bunit.toString(prpt)
-	--prpt.info = Bunit.toString2(prpt)
+	--prpt.info = Bunit.toString(prpt)
+	prpt.info = Bunit.toString2(prpt)
 	return prpt
 end
 
 function Bunit.toString(prpt)
 	local str = string.format("%2x %2x %2x %2x %2x:" 
 			.."%2d %2d %2d %2d %d:"
-			.." %d %d:"
-			.." %2d %2d:",
+			.." %3d %3d %2d:"
+			.." %3d %3d:",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -425,6 +429,7 @@ function Bunit.toString(prpt)
 
 			prpt.hp     ,
 			prpt.mp     ,
+			prpt.speed  ,
 
 			prpt.total_JP_squire    ,
 			prpt.total_JP_chemist   )
@@ -434,7 +439,7 @@ end
 
 function Bunit.toString2(prpt)
 	local str = string.format("%2x %2x %2x %2x:"
-			.."%3d %2d:"
+			.."%3d %2d %2d:"
 			.."%2x %2x %2x:%2x %2x %2x:%2x %2x %2x:"
 			.."%2d %2x %2x:",
 			prpt.ch     ,
@@ -443,6 +448,7 @@ function Bunit.toString2(prpt)
 			prpt.zodiac ,
 
 			prpt.ct     ,
+			prpt.speed  ,
 			prpt.hight  ,
 
 			prpt.cur_turn    ,

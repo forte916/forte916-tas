@@ -466,7 +466,7 @@ function TAS.Ch1_1_ramza1()
 	pressBtn({left=1}, 4)
 	pressBtn({left=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 6)
 	--fadv(xx)
 
@@ -491,7 +491,7 @@ function TAS.Ch1_1_ramza2()
 	pressBtn({circle=1}, 10)
 	pressBtn({down=1}, 4)
 	pressBtn({right=1}, 4)
-	pressBtn({right=1}, 4)
+	pressBtn({right=1}, 2)
 	pressBtn({circle=1}, 6)
 	--fadv(xx)
 	
@@ -998,8 +998,8 @@ function TAS.ch1_3_turn1_ramza()
 	pressBtn({left=1}, 4)
 	pressBtn({left=1}, 4)
 	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 5)
-	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4+1)
+	pressBtn({left=1}, 2)
 	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
@@ -1166,7 +1166,7 @@ function TAS.ch1_random_battle_left_move_ramza()
 	-- arrowed and shown AT
 	fadv(7)
 	pressBtn({circle=1}, 10)  -- move
-	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 2)
 	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
@@ -1190,7 +1190,7 @@ function TAS.ch1_random_battle_left_move_bolt3_ramza()
 	-- arrowed and shown AT
 	fadv(7)
 	pressBtn({circle=1}, 10)  -- move
-	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 2)
 	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
@@ -1250,19 +1250,18 @@ function TAS.ch1_random_battle_attack_ramza()
 	fadv(100)
 end
 
-function TAS.jobChangeWizardRamza()
+function TAS.jobChangeWizardRamza_learnMagic()
 	-- change wizard
 	pressBtn({triangle=1}, 2)  -- show menu
 	pressBtn({down=1}, 2)
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 1)  -- select job change
 	fadv(46)
-	pressBtn({left=1}, 15-2)
-	pressBtn({left=1}, 15-2)
-	pressBtn({left=1}, 15-2)
-	pressBtn({left=1}, 15-2)
-	pressBtn({left=1}, 15-2)
-	pressBtn({left=1}, 15-2)  -- wizard
+	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)  -- wizard
 	pressBtn({circle=1}, 5)
 	pressBtn({circle=1}, 1)
 	fadv(58-2)
@@ -1551,7 +1550,7 @@ function TAS.jobChangePriest_equipGreenBeret()
 	pressBtn({right=1}, 15-2)
 	pressBtn({right=1}, 15-2)
 	pressBtn({right=1}, 15-2)
-	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)  -- priest
 	pressBtn({circle=1}, 5)
 	pressBtn({circle=1}, 1)
 	fadv(58-2)
@@ -1560,7 +1559,7 @@ function TAS.jobChangePriest_equipGreenBeret()
 	pressBtn({up=1}, 2)
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 1)  -- item
-	fadv(27)
+	fadv(27+1)
 	pressBtn({circle=1}, 1)  -- equip
 	fadv(2)
 	pressBtn({down=1}, 2)
@@ -1582,7 +1581,7 @@ function TAS.buyWizardStuff_MagicGauntret()
 	fadv(21)
 	pressBtn({down=1}, 7)
 	pressBtn({circle=1}, 1)  -- shop
-	fadv(55)
+	fadv(53+2)
 	pressBtn({down=1}, 2)
 	pressBtn({down=1}, 2)  -- fitting room
 	pressBtn({circle=1}, 1)
@@ -1621,6 +1620,69 @@ function TAS.buyWizardStuff_MagicGauntret()
 	pressBtn({triangle=1}, 5)  -- show menu
 end
 
+function TAS.jobChangeWizard()
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)  -- select job change
+	fadv(46)
+	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)
+	pressBtn({right=1}, 15-2)  -- wizard
+	pressBtn({circle=1}, 5)
+	pressBtn({circle=1}, 1)
+	fadv(58-2)
+	pressBtn({x=1}, 1)  -- cancel job change
+	fadv(47)
+	pressBtn({x=1}, 1)  -- cancel
+	fadv(4)
+	TAS.exitFormation()
+end
+function TAS.buyWizardRod_SprintShoes()
+	pressBtn({x=1}, 1)  -- exit city
+	fadv(5)
+	pressBtn({circle=1}, 1)
+	fadv(21)
+	pressBtn({down=1}, 7)
+	pressBtn({circle=1}, 1)  -- shop
+	fadv(53+2)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)  -- fitting room
+	pressBtn({circle=1}, 1)
+	fadv(7+2)
+	pressBtn({circle=1}, 1)  -- cancel message
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select ramza
+	fadv(19+1)
+	pressBtn({circle=1}, 1)  -- select fit
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select right hand
+	fadv(10)
+	pressBtn({circle=1}, 1)  -- Wizard Rod
+	fadv(1)
+	pressBtn({up=1}, 2)
+	fadv(3)
+	pressBtn({circle=1}, 1)  -- select accessary
+	fadv(10)
+	pressBtn({circle=1}, 1)  -- Sprint Shoes
+	fadv(5)
+	pressBtn({x=1}, 2)
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 1)  -- exit fitting room
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- yes
+	fadv(4)
+	pressBtn({x=1}, 1)  -- exit shop
+	fadv(4+1)
+	pressBtn({x=1}, 1)  -- cancel message
+	fadv(47)
+	pressBtn({x=1}, 1)  -- exit city
+	fadv(4)
+	pressBtn({triangle=1}, 5)  -- show menu
+end
+
 function TAS.ch1_battle_deploy()
 	-- -before 3f from reverse triangle
 	pressBtn({start=1}, 3)
@@ -1632,7 +1694,7 @@ function TAS.math_CT5_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 9)  -- action
+	pressBtn({circle=1}, 8+1)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({circle=1}, 8)   -- CT
@@ -1646,11 +1708,31 @@ function TAS.math_CT5_Flare()
 	--fadv(xx)
 end
 
+function TAS.math_Level4_Flare()
+	-- arrowed and shown AT
+	fadv(6+1)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 8)  -- math
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 8)   -- Level
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 8)   -- 4
+	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 4)   -- Flare
+	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	--fadv(xx)
+end
+
 function TAS.math_CT3_Bolt3()
 	-- arrowed and shown AT
 	fadv(6+1)
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 9)  -- action
+	pressBtn({circle=1}, 8+1)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({circle=1}, 8)   -- CT
@@ -1667,7 +1749,7 @@ function TAS.math_CT3_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 9)  -- action
+	pressBtn({circle=1}, 8+1)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({circle=1}, 8)   -- CT
