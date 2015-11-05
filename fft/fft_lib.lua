@@ -405,8 +405,8 @@ function Bunit.readProperty(ofs_unit)
 	prpt.main_target     = memory.readbyte(ofs_unit + ofs_main_target     )
 
 
-	--prpt.info = Bunit.toString(prpt)
-	prpt.info = Bunit.toString2(prpt)
+	prpt.info = Bunit.toString(prpt)
+	--prpt.info = Bunit.toString2(prpt)
 	return prpt
 end
 
@@ -421,8 +421,8 @@ function Bunit.toString(prpt)
 			prpt.ofs08  ,
 			prpt.zodiac ,
 
-			prpt.exp    ,
 			prpt.lv     ,
+			prpt.exp    ,
 			prpt.brave  ,
 			prpt.faith  ,
 			prpt.ofs27  ,
@@ -447,8 +447,8 @@ function Bunit.toString2(prpt)
 			prpt.job    ,
 			prpt.zodiac ,
 
-			prpt.ct     ,
 			prpt.speed  ,
+			prpt.ct     ,
 			prpt.hight  ,
 
 			prpt.cur_turn    ,

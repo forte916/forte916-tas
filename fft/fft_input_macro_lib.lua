@@ -975,6 +975,7 @@ function TAS.moveMandaliaFromGariland()
 end
 
 function TAS.ch1_3_mandalia_deploy()
+	-- -before 3f from reverse triangle
 	pressBtn({left=1}, 3)
 	pressBtn({left=1}, 3)
 	pressBtn({left=1}, 3)
@@ -1079,7 +1080,7 @@ end
 
 function TAS.learnRamzaAccumulate()
 	pressBtn({up=1}, 2)
-	pressBtn({circle=1}, 1)
+	pressBtn({circle=1}, 1)  -- ability
 	fadv(27)
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 10)  -- select learn
@@ -1104,11 +1105,12 @@ function TAS.learnRamzaAccumulate()
 	pressBtn({down=1}, 2)
 	fadv(2)
 	pressBtn({circle=1}, 10)  -- select slot
-	pressBtn({circle=1}, 4)   -- select gained jp jp
-	fadv(2)
-	pressBtn({x=1}, 5)
-	pressBtn({x=1}, 2)
-	fadv(29-2)
+	pressBtn({circle=1}, 1)   -- select gained jp jp
+	fadv(5)
+	pressBtn({x=1}, 1)
+	fadv(1)
+	pressBtn({x=1}, 1)
+	fadv(30-2)
 	TAS.exitFormation()
 end
 
@@ -1137,6 +1139,16 @@ function TAS.ch1_random_battle_mandalia_deploy()
 	pressBtn({up=1}, 3)
 	pressBtn({circle=1}, 2)
 	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 1)
+	fadv(100)
+end
+
+function TAS.skip_term_of_win()
+	-- -before 7f from term of win
+	pressBtn({circle=1}, 1)
+	-- fadv(66-3)
+	-- fadv(8-3)
+	-- -before 3f from READY
 	pressBtn({circle=1}, 1)
 	fadv(100)
 end
@@ -1683,6 +1695,133 @@ function TAS.buyWizardRod_SprintShoes()
 	pressBtn({triangle=1}, 5)  -- show menu
 end
 
+function TAS.equipMagicGauntlet_setCounterMagic()
+	-- item
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({circle=1}, 1)  -- item
+	fadv(27+1)
+	pressBtn({circle=1}, 1)  -- equip
+	fadv(1+1)
+	pressBtn({up=1}, 2)
+	fadv(3)
+	pressBtn({circle=1}, 1)  -- accesarry
+	fadv(10)
+	pressBtn({square=1, down=1}, 3)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- Magic Gauntlet
+	fadv(5)
+	pressBtn({x=1}, 1)  -- cancel equip
+	fadv(2)
+	pressBtn({x=1}, 1)  -- cancel item
+	fadv(30)
+	-- ability
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)  -- ability
+	fadv(27+1)
+	pressBtn({circle=1}, 1)   -- set
+	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- counter ability
+	fadv(9)
+	pressBtn({circle=1}, 1)  -- Counter Magic
+	fadv(5)
+	pressBtn({x=1}, 1)  -- cancel set
+	fadv(1)
+	pressBtn({x=1}, 1)  -- cancel ability
+	fadv(30-2)
+	TAS.exitFormation()
+end
+
+function TAS.jobChangeSquire_setTimeMagic()
+	-- job change
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)  -- job change
+	fadv(46)
+	pressBtn({circle=1}, 5)
+	pressBtn({circle=1}, 1)
+	fadv(58-2)
+	pressBtn({x=1}, 1)  -- cancel job change
+	fadv(47)
+	-- ability
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 1)  -- ability
+	fadv(27+1)
+	pressBtn({circle=1}, 1)   -- set
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select slot
+	fadv(9)
+	pressBtn({right=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 1)  -- Time Magic
+	fadv(5)
+	pressBtn({x=1}, 1)  -- cancel set
+	fadv(1)
+	pressBtn({x=1}, 1)  -- cancel ability
+	fadv(30)
+	-- item
+	pressBtn({circle=1}, 1)  -- item
+	fadv(27+1)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)  -- best equip
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- OK
+	fadv(4)
+	pressBtn({x=1}, 1)  -- cancel equip
+	fadv(30-2)
+	TAS.exitFormation()
+end
+
+function TAS.ch4_Sluice_turn1()
+	-- arrowed and shown AT
+	fadv(6+1)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 2)
+	pressBtn({circle=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(6)
+	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 8)  -- time magic
+	pressBtn({circle=1}, 9)   -- Quick
+	pressBtn({circle=1}, 3)   -- confirm target
+	pressBtn({circle=1}, 4)   -- show menu
+	pressBtn({circle=1}, 1)   -- select unit
+	fadv(22)
+
+	-- arrowed
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+end
+
+function TAS.ch4_Sluice_turn2()
+	-- arrowed and shown AT
+	fadv(6+1)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 2)
+	pressBtn({circle=1}, 1)
+	--fadv(xx)
+end
+
+
 function TAS.ch1_battle_deploy()
 	-- -before 3f from reverse triangle
 	pressBtn({start=1}, 3)
@@ -1693,6 +1832,7 @@ end
 function TAS.math_CT5_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
+	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 8+1)  -- action
 	pressBtn({up=1}, 2)
@@ -1711,6 +1851,7 @@ end
 function TAS.math_Level4_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
+	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 8+1)  -- action
 	pressBtn({up=1}, 2)
@@ -1731,6 +1872,7 @@ end
 function TAS.math_CT3_Bolt3()
 	-- arrowed and shown AT
 	fadv(6+1)
+	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 8+1)  -- action
 	pressBtn({up=1}, 2)
@@ -1748,6 +1890,7 @@ end
 function TAS.math_CT3_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
+	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 8+1)  -- action
 	pressBtn({up=1}, 2)

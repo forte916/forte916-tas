@@ -30,7 +30,54 @@ emu.speedmode("turbo")       -- drops some frames
 -- functions
 ------------------------------------------------------------
 
-function pre_attempt()
+Speed9 = {}
+Speed9.logname = "ch4_Finath_speed9.log"
+
+function Speed9.pre_attempt()
+	fadv(1)
+end
+
+function Speed9.attempt()
+	pressBtn({circle=1}, 1)
+	fadv(900)
+end
+
+function Speed9.post_attempt()
+	-- pass
+end
+
+function Speed9.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit
+	local enemy = 0
+
+	debugPrint(string.format("-- Bunit --"))
+	for i=1, 12 do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		debugPrint(prpt.info)
+
+		if prpt.no ~= 0xFF and prpt.speed > 8 then
+			enemy = enemy + 1
+		end
+	end
+
+	debugPrint(string.format("-- enemy = %2d", enemy))
+	if enemy < 1 then
+		print(string.format("-- enemy = %2d", enemy))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
+
+Mandalia = {}
+Mandalia.logname = "ch1_random_encount6.log"
+
+function Mandalia.pre_attempt()
 --	-- move Gariland From Formation
 	fadv(6)
 	pressBtn({up=1}, 2)
@@ -41,7 +88,7 @@ function pre_attempt()
 	fadv(50+2)
 end
 
-function attempt()
+function Mandalia.attempt()
 	-- move Mandalia From Gariland
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
@@ -51,14 +98,11 @@ function attempt()
 	fadv(900)
 end
 
-function post_attempt()
+function Mandalia.post_attempt()
 	-- pass
 end
 
-function compareStatus()
-end
-
-function success()
+function Mandalia.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
@@ -92,12 +136,13 @@ end
 ------------------------------------------------------------
 
 local initial = 1
-local retry = 400
+local retry = 100
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 
+interface = Speed9
 
-f = io.open("ch1_random_encount6.log", "a")
+f = io.open(interface.logname, "a")
 if f == nil then debugPrint("error: Could not open file") end
 
 -- create original state
@@ -111,20 +156,20 @@ for i=0, retry do
 		initial = 0
 	end
 
-	pre_attempt()
+	interface.pre_attempt()
 	fadv(i)
 	local fc = emu.framecount()
 	local rng = memory.readdword(adr_rng)
 	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
 
-	attempt()
+	interface.attempt()
 
 	-- check status
-	if success() then
+	if interface.success() then
 		debugPrint(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
 		print(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
 
-		post_attempt()
+		interface.post_attempt()
 	end
 
 	f:flush()

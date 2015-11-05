@@ -78,7 +78,7 @@ ch1-Orbonne
     最優先で攻撃すること
 
   * カメラ移動があると数フレーム遅くなる
-  * 戦闘後んの最後のramza のセリフで味方ステータスが決定
+  * 戦闘後の最後のramza のセリフで味方ステータスが決定
 
 
 ch1-Gariland
@@ -320,9 +320,14 @@ ch4
 * Malark 加入のロス 約80f (108 gems は必要ないので Malark の加入の必要はない)
 
 
+ch4-Doguola
+------------
+* リオファネス城からドグーラ峠までのエンカウント率は 5/10
+
+
 ch4-Bervenia
 ------------
-* 忍者が出現しないように
+* 忍者は必ず出現するっぽい
 * (忍者が必ず出るのか未確認だが、出現した場合は先に行動されるので、何もさせな
   いようにする)
 * Level 5 flare.
@@ -346,14 +351,17 @@ ch4-Bed Dsert
 * Set Counter Magic from MP Switch
 * Ramza speed 8, MA 17
 * CT prime flare. Flare is enough to kill, since MA is 17.
+* ブリザドとブリザラと発動するが、ブリザドのほうがエフェクトが短い
 
 
 ch4-Besra North Wall
 ---------
 * Equip Sprint Shoes
+* **NOT** Set MP Switch
 * ability のセットはここではしない
 * Select North Wall, since there are enemies who has speed 9 at the south wall.
 * Ramza speed 9, MA 15
+* 北か南かの選択で敵の相性が決定
 
 
 ch4-Sluice
@@ -373,8 +381,10 @@ ch4-Sluice
   * Ramza speed 7, move 5.
   * Ramza 初期配置 右1 上1
 
-
-* Orlandu Lv27 以上かつ Lightning Stab を覚えている
+* Wizard は時魔法等の行動をさせない
+  * Quick を使う場合はヘイストをさせない
+  * Quick を使わない場合は敵のヘイストを自分も受ける
+* Orlandu Lv27 以上かつ Lightning Stab を覚えている. Lv29 だと PA +1 なのでベター
 
 ch4-Zarghidas
 -------------
@@ -390,6 +400,21 @@ ch4-Zarghidas
 * Ramza, speed 8, MA 13, Excalibur (speed 12)
 * Orlandu, speed 8, PA 16, Excalibur (speed 12)
 
+* TA 動画では
+  * shop
+  * dupe Excalibur
+  * buy aegis shield for Ramza
+  * buy twist headband, power sleeve for Orlandu
+  * formation
+  * equip Excalibur, Holy Miter, Wizard Robe, Magic Gauntlet for Ramza
+  * set Math Skill, MP Switch, remove Teleport
+  * Ramza speed 8, MA 13
+
+ch4-Germinas
+------------
+* TA 動画では
+  * Ramza 初期配置, Orlandu Ramza 左1
+  * 2部隊編成なので Orlandu も出す
 
 
 ch4-Limberry (outside)
@@ -412,9 +437,8 @@ ch4-Limberry (inside)
   * Level prime flare.
 
 * TA では
-  * Ramza 初期配置
+  * Ramza 初期配置, Orlandu 出ない
   * Level prime holy.
-
 
 
 ch4-Zarela
@@ -428,8 +452,8 @@ ch4-Zarela
   * Orlandu が剣技. 足りない場合は ラヴィアン.
 
 * TA では
-  * Ramza 初期配置, Orlandu Ramza の左1
-  * この配置だとカメラ移動する. Ramza の 上1 がよい
+  * Ramza 初期配置, Orlandu Ramza 左1
+  * この配置だとカメラ回転が増える. Ramza の 上1 がよい
   * Height prime Demi2.
   * Orlandu が剣技(Lightning Stab) critical.
 
@@ -459,12 +483,12 @@ ch4-Adramelk
   * Buy Thief Hat(SP+2) for Ramza at Gariland
   * Buy Flash Hat(SP+1) for Orlandu at Gariland
 
-  * Ramza, speed 10, MA 12, Excalibur (speed 15)
-  * Orlandu, speed 9, PA 14, Excalibur (speed 13.5)
+  * Ramza,   Lv28, speed 10, MA 12, Excalibur (speed 15)
+  * Orlandu, Lv27, speed  9, PA 14, Excalibur (speed 13.5)
 
   * Ramza 初期配置, Orlandu Ramza 左1
   * Ramza CT3 Holy
-  * Orlandu, 移動して剣技
+  * Orlandu, 移動して Lightning stab
 
   * Height 4 Demi2
   * Orlandu 待機
@@ -476,7 +500,7 @@ ch4-Murond (outside)
 ----------
 * TA では
   * Ramza equip Holy Miter(MA+1) from Thief Hat
-  * Ramza, speed 8, MA 13, Excalibur (speed 12)
+  * Ramza, Lv29, speed 8, MA 13, Excalibur (speed 12)
   * Ramza 初期配置  (1st Squad)
   * Orlandu 初期配置 上1 (2nd Squad)
 
@@ -485,6 +509,8 @@ ch4-Murond (outside)
   * Orlandu で 2体倒す方が Flare で 2体倒すより早いのかも
 
 * CT3 flare
+
+
 
 
 ch4-Murond (inside)
@@ -496,10 +522,10 @@ ch4-Murond (inside)
 
 * TA では
   * Orlandu equip Twist Headband(PA+2)
-  * Orlandu, speed 8, PA 16, Excalibur (speed 12)
+  * Orlandu, Lv28, speed 8, PA 16, Excalibur (speed 12)
   * Ramza 初期配置から 上1, Orlandu 初期配置から 左2
   * この配置で Orlandu が先に行動する
-  * Orlandu 剣技
+  * Orlandu Lightning stab
 
 
 
@@ -515,7 +541,7 @@ ch4-Murond (Zalbag)
   * Orlandu が charge 中に剣技
 
 * TA では
-  * Ramza 初期配置 上1, Orlandu 初期配置 の左2
+  * Ramza 初期配置 上1, Orlandu 初期配置 左2
   * Orlandu 剣技 (Lightning Stab) critical
   * Orlandu が Zalbag より先に行動するので会話を skip 可能
 
@@ -673,7 +699,18 @@ SP   tick
 11 * 10 = 110
 12 *  9 = 108
 
+Encount research in random battle
+----------------------------------
 
+
+Frame counts of casting spell
+-----------------------------
+
+* Holy   6375 - 5736 = 639f
+* Bolt3  6033 - 5738 = 295f
+* Deth   6106 - 5744 = 362f
+* Flare  6160 - 5746 = 414f
+* Demi2  6089 - 5750 = 339f
 
 Play Movie
 ----------
@@ -684,6 +721,11 @@ Play Movie
 
 * FFT RTA - 4:20:54 Part 1
 * http://www.twitch.tv/tideruglia/c/6013890
+
+
+
+
+
 
 
 
