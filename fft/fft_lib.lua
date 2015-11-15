@@ -40,7 +40,7 @@ adr_battle_unit10 = 0x18F858 -- 10th unit
 adr_battle_unit17 = 0x190498 -- 17th unit. 17th and older units are our party.
 adr_battle_unit18 = 0x190658 -- 18th unit
 adr_battle_unit19 = 0x190818 -- 19th unit
-adr_battle_unit20 = 0x1909D0 -- 20th unit
+adr_battle_unit20 = 0x1909D8 -- 20th unit
 
 
 
@@ -67,16 +67,21 @@ function Funit.readProperty(ofs_unit)
 	local ofs_lv       = 0x16  -- 1byte
 	local ofs_brave    = 0x17  -- 1byte
 	local ofs_faith    = 0x18  -- 1byte
-	local ofs_hp_hi    = 0x19  -- 3byte??, high bit
-	local ofs_hp       = 0x20  -- 2byte
-	local ofs_mp_hi    = 0x1C  -- 3byte??, high bit
-	local ofs_mp       = 0x1D  -- 2byte
-	local ofs_speed_hi = 0x1F  -- 3byte??
-	local ofs_speed    = 0x20  -- 2byte
-	local ofs_ph_at_hi = 0x22  -- 3byte??
-	local ofs_ph_at    = 0x23  -- 2byte
-	local ofs_mg_at_hi = 0x25  -- 3byte??
-	local ofs_mg_at    = 0x26  -- 2byte
+	local ofs_hpp1     = 0x19  -- 1byte, hp point1
+	local ofs_hpp2     = 0x1A  -- 1byte, hp point2
+	local ofs_hpp3     = 0x1B  -- 1byte, hp point3
+	local ofs_mpp1     = 0x1C  -- 1byte, mp point1
+	local ofs_mpp2     = 0x1D  -- 1byte, mp point2
+	local ofs_mpp3     = 0x1E  -- 1byte, mp point3
+	local ofs_spp1     = 0x1F  -- 1byte, speed point1
+	local ofs_spp2     = 0x20  -- 1byte, speed point2
+	local ofs_spp3     = 0x21  -- 1byte, speed point3
+	local ofs_ph_atp1  = 0x22  -- 1byte, ph_at point1
+	local ofs_ph_atp2  = 0x23  -- 1byte, ph_at point2
+	local ofs_ph_atp3  = 0x24  -- 1byte, ph_at point3
+	local ofs_mg_atp1  = 0x25  -- 1byte, mg_at point1
+	local ofs_mg_atp2  = 0x26  -- 1byte, mg_at point2
+	local ofs_mg_atp3  = 0x27  -- 1byte, mg_at point3
 
 	-- offset 0x28 to 0x63 is abilyties learned
 	-- offset 0x64 to 0x6D is job level
@@ -269,12 +274,39 @@ function Bunit.readProperty(ofs_unit)
 	-- offset 0x3C to 0x46 is Wep.Power, A-EV, S-EV, C-EV
 	local ofs_X_crd   = 0x47  -- 1byte
 	local ofs_Y_crd   = 0x48  -- 1byte
-	local ofs_hight   = 0x49  -- 1byte, 0x80: higher elevation, 0x03: facing direction
+	local ofs_direct  = 0x49  -- 1byte, 0x80: higher elevation, 0x03: facing direction
 	-- offset 0x4A to 0x5C is good/bad status flags.
 	-- offset 0x5D to 0x6C is CT of each skills.
 	-- offset 0x6D to 0x71 is elemental compatibility
-	-- offset 0x8B to 0x95 is abilities
-	-- offset 0x96 to 0xD1 is jobs and abilities
+	--
+	-- offset 0x8B to 0x8E is reaction abilities
+	local ofs_reaction_affected1 = 0x8B  -- 1byte
+	local ofs_reaction_affected2 = 0x8C  -- 1byte
+	local ofs_reaction_affected3 = 0x8D  -- 1byte
+	local ofs_reaction_affected4 = 0x8E  -- 1byte
+
+	-- offset 0x8F to 0x92 is support  abilities
+	local ofs_support_affected1  = 0x8F  -- 1byte
+	local ofs_support_affected2  = 0x90  -- 1byte
+		-- 0x40 Gained JP-UP
+	local ofs_support_affected3  = 0x91  -- 1byte
+	local ofs_support_affected4  = 0x92  -- 1byte
+
+	-- offset 0x93 to 0x95 is movement abilities
+	local ofs_movement_affected1 = 0x93  -- 1byte
+	local ofs_movement_affected2 = 0x94  -- 1byte
+	local ofs_movement_affected3 = 0x95  -- 1byte
+
+	-- offset 0x96 to 0xD1 is action   abilities
+	local ofs_base_action_learned1 = 0x99  -- 1byte
+		-- 0x10:Heal, 0x20:Throw Stone, 0x40:Dash,
+		-- 0x04:Wish, 0x08:Yell
+	local ofs_base_action_learned2 = 0x9A  -- 1byte
+	local ofs_base_r_s_m_learned3  = 0x9B  -- 1byte
+		-- 0x04:Move+1, 0x08:Gained JP UP,
+		-- 0x10:Defend, 0x20:Monster Skill, 0x40:Equip Axe, 0x80:Counter Tackle
+
+	
 	-- offset 0xD2 to 0xDB is job level
 	-- job level includes 2 jobs in 1byte. split high 4bit and low 4bit.
 
@@ -370,7 +402,23 @@ function Bunit.readProperty(ofs_unit)
 	prpt.speed     = memory.readbyte(ofs_unit + ofs_speed   )
 
 	prpt.ct        = memory.readbyte(ofs_unit + ofs_ct      )
-	prpt.hight     = memory.readbyte(ofs_unit + ofs_hight   )
+	prpt.direct    = memory.readbyte(ofs_unit + ofs_direct  )
+
+	prpt.reaction_affected1 = memory.readbyte(ofs_unit + ofs_reaction_affected1 )
+	prpt.reaction_affected2 = memory.readbyte(ofs_unit + ofs_reaction_affected2 )
+	prpt.reaction_affected3 = memory.readbyte(ofs_unit + ofs_reaction_affected3 )
+	prpt.reaction_affected4 = memory.readbyte(ofs_unit + ofs_reaction_affected4 )
+	prpt.support_affected1  = memory.readbyte(ofs_unit + ofs_support_affected1  )
+	prpt.support_affected2  = memory.readbyte(ofs_unit + ofs_support_affected2  )
+	prpt.support_affected3  = memory.readbyte(ofs_unit + ofs_support_affected3  )
+	prpt.support_affected4  = memory.readbyte(ofs_unit + ofs_support_affected4  )
+	prpt.movement_affected1 = memory.readbyte(ofs_unit + ofs_movement_affected1 )
+	prpt.movement_affected2 = memory.readbyte(ofs_unit + ofs_movement_affected2 )
+	prpt.movement_affected3 = memory.readbyte(ofs_unit + ofs_movement_affected3 )
+
+	prpt.base_action_learned1 = memory.readbyte(ofs_unit + ofs_base_action_learned1 )
+	prpt.base_action_learned2 = memory.readbyte(ofs_unit + ofs_base_action_learned2 )
+	prpt.base_r_s_m_learned3  = memory.readbyte(ofs_unit + ofs_base_r_s_m_learned3  )
 
 	prpt.JP_squire     = memory.readword(ofs_unit + ofs_JP_squire     )
 	prpt.JP_chemist    = memory.readword(ofs_unit + ofs_JP_chemist    )
@@ -407,29 +455,30 @@ function Bunit.readProperty(ofs_unit)
 
 	prpt.info = Bunit.toString(prpt)
 	--prpt.info = Bunit.toString2(prpt)
+	--prpt.info = Bunit.toString3(prpt)
 	return prpt
 end
 
 function Bunit.toString(prpt)
-	local str = string.format("%2x %2x %2x %2x %2x:" 
-			.."%2d %2d %2d %2d %d:"
-			.." %3d %3d %2d:"
-			.." %3d %3d:",
+	local str = string.format("%2x %2x %2x %2x:"
+			.."%2d %2d %2d:"
+			.."%2d %2d:"
+			.."%3d %3d:",
+			.."%3d %3d:",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
-			prpt.ofs08  ,
 			prpt.zodiac ,
 
 			prpt.lv     ,
 			prpt.exp    ,
+			prpt.speed  ,
+
 			prpt.brave  ,
 			prpt.faith  ,
-			prpt.ofs27  ,
 
 			prpt.hp     ,
 			prpt.mp     ,
-			prpt.speed  ,
 
 			prpt.total_JP_squire    ,
 			prpt.total_JP_chemist   )
@@ -439,7 +488,7 @@ end
 
 function Bunit.toString2(prpt)
 	local str = string.format("%2x %2x %2x %2x:"
-			.."%3d %2d %2d:"
+			.."%2d %2d:"
 			.."%2x %2x %2x:%2x %2x %2x:%2x %2x %2x:"
 			.."%2d %2x %2x:",
 			prpt.ch     ,
@@ -449,7 +498,6 @@ function Bunit.toString2(prpt)
 
 			prpt.speed  ,
 			prpt.ct     ,
-			prpt.hight  ,
 
 			prpt.cur_turn    ,
 			prpt.moved       ,
@@ -464,6 +512,44 @@ function Bunit.toString2(prpt)
 			prpt.attack_accuracy ,
 			prpt.main_target     ,
 			prpt.prioritized_target  )
+
+	return str
+end
+
+function Bunit.toString3(prpt)
+	local str = string.format("%2x %2x %2x %2x:" 
+			.." %2d %2d:"
+			.." %3d %3d:"
+			--.." %2x %2x %2x %2x:"
+			.." %2x %2x %2x %2x:"
+			.." %2x %2x %2x:"
+			.." %2x %2x %2x:",
+			prpt.ch     ,
+			prpt.no     ,
+			prpt.job    ,
+			prpt.zodiac ,
+
+			prpt.lv     ,
+			prpt.exp    ,
+
+			prpt.total_JP_squire    ,
+			prpt.JP_squire    ,
+
+			--prpt.reaction_affected1 ,
+			--prpt.reaction_affected2 ,
+			--prpt.reaction_affected3 ,
+			--prpt.reaction_affected4 ,
+			prpt.support_affected1  ,
+			prpt.support_affected2  ,
+			prpt.support_affected3  ,
+			prpt.support_affected4  ,
+			prpt.movement_affected1 ,
+			prpt.movement_affected2 ,
+			prpt.movement_affected3 ,
+
+			prpt.base_action_learned1 ,
+			prpt.base_action_learned2 ,
+			prpt.base_r_s_m_learned3  )
 
 	return str
 end

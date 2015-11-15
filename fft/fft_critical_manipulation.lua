@@ -30,57 +30,6 @@ emu.speedmode("turbo")       -- drops some frames
 -- functions
 ------------------------------------------------------------
 
-Bed_Desert = {}
-Bed_Desert.logname = " ch2_barius_agrius.log"
-
-function Bed_Desert.pre_attempt()
-	pressBtn({circle=1}, 4)  -- select Death of math at Bed_Desert
-	pressBtn({circle=1}, 6)  -- confirm target
-end
-
-function Bed_Desert.attempt()
-	pressBtn({circle=1}, 1)  -- execute attack
-	fadv(150)
-end
-
-function Bed_Desert.post_attempt()
-	-- pass
-end
-
-function Bed_Desert.success()
-	local ret = false
-	local prpt = {}
-	local ofs_unit = adr_battle_unit2
-	local enemy = 0
-
-	debugPrint(string.format("-- Bunit --"))
-
-	prpt = Bunit.readProperty(adr_battle_unit)
-	if prpt.hp == 0 then
-		debugPrint(string.format("-- agrius.hp = %2d", prpt.hp))
-		return false
-	end
-
-	for i=1, 6 do
-		prpt = Bunit.readProperty(ofs_unit)
-		ofs_unit = ofs_unit + 0x1C0
-		debugPrint(prpt.info)
-
-		if prpt.hp == 0 then
-			enemy = enemy + 1
-		end
-	end
-
-	debugPrint(string.format("-- enemy = %2d", enemy))
-	if enemy == 6 then
-		print(string.format("-- enemy = %2d", enemy))
-		ret = true
-	else
-		ret = false
-	end
-
-	return ret
-end
 
 Zirekile_Falls = {}
 Zirekile_Falls.logname = " ch2_zirekile_death.log"
@@ -105,7 +54,6 @@ function Zirekile_Falls.success()
 	local ofs_unit = adr_battle_unit5
 	local enemy = 0
 
-	debugPrint(string.format("-- Bunit --"))
 	for i=1, 5 do
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
@@ -149,8 +97,6 @@ function Barius_Valley.success()
 	local prpt = {}
 	local ofs_unit = adr_battle_unit2
 	local enemy = 0
-
-	debugPrint(string.format("-- Bunit --"))
 
 	prpt = Bunit.readProperty(adr_battle_unit)
 	if prpt.hp == 0 then

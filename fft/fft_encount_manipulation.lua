@@ -52,7 +52,6 @@ function Speed9.success()
 	local ofs_unit = adr_battle_unit
 	local enemy = 0
 
-	debugPrint(string.format("-- Bunit --"))
 	for i=1, 12 do
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
@@ -75,17 +74,28 @@ function Speed9.success()
 end
 
 Mandalia = {}
-Mandalia.logname = "ch1_random_encount6.log"
+Mandalia.logname = "ch1_random_encount8.log"
 
 function Mandalia.pre_attempt()
---	-- move Gariland From Formation
-	fadv(6)
-	pressBtn({up=1}, 2)
-	
+	-- move Gariland From Formation
+--	fadv(4)
+--	pressBtn({up=1}, 2)
+
+--	pressBtn({circle=1}, 3)
+--	pressBtn({up=1}, 2)
+--	pressBtn({circle=1}, 1)
+--	fadv(50+1)
+end
+
+function Mandalia.pre_attempt2()
+	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 1)
-	fadv(50+2)
+	fadv(50+1)
+
+	local fc = emu.framecount()
+	fadv(82362 - fc)
 end
 
 function Mandalia.attempt()
@@ -93,7 +103,6 @@ function Mandalia.attempt()
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
 	pressBtn({down=1}, 2)  -- select Mandalia
-	--pressBtn({up=1}, 2)  -- select igros
 	pressBtn({circle=1}, 1)
 	fadv(900)
 end
@@ -108,7 +117,6 @@ function Mandalia.success()
 	local ofs_unit = adr_battle_unit
 	local enemy = 0
 
-	debugPrint(string.format("-- Bunit --"))
 	for i=1, 10 do
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
@@ -131,6 +139,47 @@ function Mandalia.success()
 end
 
 
+GainedJpUP = {}
+GainedJpUP.logname = "ch1_gained_jp_up.log"
+
+function GainedJpUP.pre_attempt()
+	fadv(3)
+end
+
+function GainedJpUP.attempt()
+	-- move Mandalia From Gariland
+	pressBtn({triangle=1}, 5)
+	pressBtn({circle=1}, 3)
+	pressBtn({down=1}, 2)  -- select Mandalia
+	pressBtn({circle=1}, 1)
+	fadv(900)
+end
+
+function GainedJpUP.post_attempt()
+	-- pass
+end
+
+function GainedJpUP.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit3
+	local gained = 0
+
+	prpt = Bunit.readProperty(ofs_unit)
+	debugPrint(prpt.info)
+
+	gained = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
+	if gained ~= 0 then
+		print(string.format("-- gained = %2d", gained))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
+
+
 ------------------------------------------------------------
 -- main
 ------------------------------------------------------------
@@ -140,7 +189,7 @@ local retry = 100
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 
-interface = Speed9
+interface = Mandalia
 
 f = io.open(interface.logname, "a")
 if f == nil then debugPrint("error: Could not open file") end
@@ -158,6 +207,7 @@ for i=0, retry do
 
 	interface.pre_attempt()
 	fadv(i)
+	--interface.pre_attempt2()
 	local fc = emu.framecount()
 	local rng = memory.readdword(adr_rng)
 	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))

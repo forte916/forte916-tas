@@ -33,33 +33,20 @@ game start
 * input birthday
 
 
-
-ramza 初期ステータス
+Ramza 初期ステータス
 --------------------
-
 * High starting
   * Squire JP
   * Chemist JP
-  * ch1-1 終了後に rng を変えても変化なし
-  * ch1-1 の前に決定されている??
-  * new game 押下後 アラズラムのセリフスキップ後に決定される
-  * ラムザの名前入力画面ではすでに決定後
+  * new game 押下後 アラズラムのセリフスキップ後にステータスが決定される
   * Arazlam で 13f 待つと Squire JP = 199, Chemist JP = 199
-
-
-lv1 chemist 初期ステータス
---------------------------
-
-* High starting
-  * Chemist JP
-  * Faith
-  * ch1-1 終了後に randam で変化
-  * 最後の ramza のセリフで味方ステータスが決定
+  * Squire と Chemist 以外のジョブの JP も高いバランス型が理想
+  * Must:   Wizard, Priest, Calculator
+  * Should: Time Mage, Oracle
 
 
 ch1-Orbonne
 -----
-
 * オーボンヌ中の最後の ovelia のセリフで敵星座が決定
 
 * turn1
@@ -78,13 +65,36 @@ ch1-Orbonne
     最優先で攻撃すること
 
   * カメラ移動があると数フレーム遅くなる
-  * 戦闘後の最後のramza のセリフで味方ステータスが決定
+  * カメラ移動で敵や味方の行動開始フレームがずれるので、乱数調整が可能
+  * 戦闘後の最後の Ramza のセリフで味方ステータスが決定
+
+
+Lv1 Chemist 初期ステータス
+--------------------------
+* High starting
+  * Chemist JP
+  * Faith
+  * ch1-1 バトル後の Ramza の最後のセリフで味方ステータスが決定
+  * Chemist JP 190以上, Faith 70以上が理想
+  * Gariland で稼いで Lv2 になるのが理想
+  * Female の方が MA が +1 高い
+
+
+Lv1 Squire 初期ステータス
+------------------------
+* High starting
+  * Squire JP
+  * 味方見習い戦士で Totalでない残り Jp が 100以上
+  * Gariland で稼いで 取得 Jp UP を覚えるため
+  * その後クリスタル化して継承
+  * もしくは Mandaria で取得 Jp UP を覚えている敵を探す
+  * Gariland の敵は Lv1 のため取得Jp UP は覚えていない
 
 
 ch1-Gariland
 -----
-
 * セーブ画面の入力後に敵星座が決定
+  * 屋根の上に来る Female Squire と相性良
 
 * 配置
 
@@ -103,6 +113,7 @@ ch1-Gariland
   * Lv2 (recomend because of boosting MP)
 
 * after battle, formation
+  * world map に出たら x で説明をキャンセル
   * ramza, learn Yell 200JP
   * chemist
     * job change:  wizard
@@ -118,11 +129,12 @@ ch1-Gariland
   * turn2
     * Ramza 5歩でぎりぎり届く位置に敵が来てたら、critical で一撃
     * この敵は投石を覚えていない方が早い
+  * 味方 Squire に取得Jp UP 覚えさせるため 250jp 稼ぐ
+  * Gariland の敵は Lv1 のため取得Jp UP は覚えていない
 
 
 ch1-Mandalia
 -----
-
 * ramza
   * ためる 300jpと取得JpUP 200jp の 550JP を稼ぐ
   * ex1) エールを覚えてエールで稼ぐ
@@ -158,15 +170,32 @@ ch1-Mandalia
 	* learn:  Accumulates 300JP, gained JP UP 250JP
 	* set: guts, gained JP UP
 
+* 改善案
+  * ramza ためる 300jp 稼ぐ
+  * 取得Jp UP を敵か味方からクリスタル継承
+  * 敵シーフのみ Lv2 なので取得Jp UP を覚えている可能性がある
+  * Lv3 の敵が出ないので ためる(300jp)を覚えている敵はいない
+
 
 ch1-random
 -----
+* 改善案
+  * time mage と calculator は味方 wizard を出す
+  * 2体目のゴブリンは wizard が倒す
+  * time mage の稼ぎは haste (100jp) 覚えると早いのでは?
+  * oracle の稼ぎは不変不動 (100jp) を覚えると早いのでは?
+  * ゴブリンは Lv14 で speed 6 になる模様
+  * time mage のときに goblin が Lv13 以下になるように調整が必要
+  * keep ramza's Lv under 14
+  * Ramza speed 12, goblin speed 5 のとき, Ramza 2回行動, goblin 1回待機 となる
 
-priest   , Lv5, 1100JP
-oracle   , Lv4,  700JP
-wizard   , Lv5, 1100JP
-time mage, Lv4,  700JP , 2450JP
-calclator, Lvx, xxxxJP , 2350JP
+
+* grinding
+	priest    , Lv5, 1100JP
+	oracle    , Lv4,  700JP
+	wizard    , Lv5, 1100JP
+	time mage , Lv4,  700JP , 2450JP
+	calculator, Lvx, xxxxJP , 2350JP
 
 * learn
   * priest - Holy
@@ -196,7 +225,8 @@ calclator, Lvx, xxxxJP , 2350JP
 ch1-Sand Rat
 ------------
 * After battle, Buy Thunder rod to increase MA at Gariland
-
+  * Thunder rod は ch2 ゴーグのスラム街で戦利品でもらえる
+  * もしそれまで damage が十分ならここで買う必要はなし
 
 ch1-Thieves Fort
 ----------------
@@ -206,7 +236,9 @@ ch1-Thieves Fort
 ch2-Dorter
 ----------
 * Before battle, change Gafgarion's job Chemist to remove equipment and reduce speed to 6
-* speed 7 の Theif には投石(覚えていない)させない方が早い
+* speed 7 の Theif には基本技をセットしていないか投石を覚えていない方が早い
+* 密漁バグを使うなら、このシーフが密漁を覚えているのが条件
+* 密漁を覚えている敵シーフを勧誘する
 
 
 ch2-Zirekile Falls
@@ -241,6 +273,7 @@ ch2-Goug
 -----------
 * Mustadio は Engineer に戻っている. speed 7 となる
 * speed 7 Thieves に、先に動かれるので、リアクションアビリティを発動させないように
+* 戦利品で Thunder rod
 
 ch2-Warjilis
 ------------
@@ -254,6 +287,8 @@ ch2-Warjilis
 ch2-Barius Valley
 -----------------
 * Agrias には Bolt3 をガードしてもらう
+* Agrias は Death 無効っぽいので Death でもよいが Bolt3 の方が早い
+
 
 ch2-Golgorand
 -------------
@@ -261,6 +296,18 @@ ch2-Golgorand
 * Change job Priest, Equip Green Beret for speed 9
 * Priest になって MA が下がるので CT Bolt3 でダメージが足りなければ Flare
 * Ramza speed 9, MA 10
+
+ch2-Lionel (inside)
+---------------
+* Queklain
+| name     |Lv|HP        |MP        |SP|PA|MA|
+| Queklain |20| 480～ 511|  343～368| 9|10| 8|
+| Zarela   |44|1098～1171|  687～736|11|15|10|
+| Velius   |31|1041～1131|  253～285| 8|12～14|11～13|
+| Adramelk |46|1405～1525|  386～435|10|14～16|10～12|
+| Hashmalum|59|1359～1450|  764～818|13|17|11|
+| Altima   |56|1281～1391|  432～485| 9|13～15|13～15|
+| Altima2  |66|3022～3281|  405～455|12|16～19|15～18|
 
 
 ch3
@@ -706,11 +753,33 @@ Encount research in random battle
 Frame counts of casting spell
 -----------------------------
 
-* Holy   6375 - 5736 = 639f
 * Bolt3  6033 - 5738 = 295f
+* Demi2  6089 - 5750 = 339f
 * Deth   6106 - 5744 = 362f
 * Flare  6160 - 5746 = 414f
-* Demi2  6089 - 5750 = 339f
+* Holy   6375 - 5736 = 639f
+
+* Yell         284f
+* Accumulate    64f
+* Goblin wait  110f
+
+* Goblin Tackle  miss
+	2622 - 2295 = 327f
+	3777 - 3475 = 302f
+	1573 - 1246 = 327f
+
+* Goblin Tackle  hit
+	1638 - 1311 = 327f
+	3804 - 3477 = 327f
+
+
+* 2nd Goblin takes about 1000f frames for his moves.
+	1st turn  7039 - 6785 = 254f
+	2nd turn  7541 - 7301 = 240f
+	3rd turn  8452 - 8215 = 237f
+	4th turn  9359 - 9108 = 251f
+	total                   982f
+
 
 Play Movie
 ----------
@@ -727,5 +796,25 @@ Play Movie
 
 
 
+Zodiac sign
+-----------
+0x00 = 白羊 = Aries
+0x10 = 金牛 = Taurus
+0x20 = 双子 = Gemini
+0x30 = 巨蟹 = Cancer
+0x40 = 獅子 = Leo
+0x50 = 処女 = Virgo
+0x60 = 天秤 = Libra
+0x70 = 天蝎 = Scorpio
+0x80 = 人馬 = Sagittarius
+0x90 = 磨羯 = Capricorn
+0xA0 = 宝瓶 = Aquarius
+0xB0 = 双魚 = Pisces
+0xC0 = 蛇遣 = Serpentarius (neutral to all signs)
 
+* Ramza 0x90
+  * very good	0x30		female Cancer
+  * good		0x10, 0x50	Taurus, Virgo
+  * bad			0x00, 0x60	Aries, Scorpio
+  * very bad	0x30		male Cancer
 
