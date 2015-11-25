@@ -1,3 +1,6 @@
+FFT note
+========
+
 RNG
 ----
 
@@ -221,21 +224,64 @@ ch1-random
 
 * holy を覚えるための経過 frame = 167f
 
+ch1-Sweegy
+----------
+* Ramza Lv25, speed 7, MA 11
+* speed 7 の敵に先制されるので CT5 Flare
+* 敵Lv は ramaza と同じなので Bolt3 ではなく Flare が必要
+* 改善案
+  * CT5 Death の方が早い
+  * L2 押したほうがカメラ移動が減るかも
+
+
+ch1-Dorter
+----------
+* CT3 Bolt3
 
 ch1-Sand Rat
 ------------
-* After battle, Buy Thunder rod to increase MA at Gariland
+* CT3 Bolt3
+
+* After battle, Buy Thunder rod in Gariland to increase Bolt3
   * Thunder rod は ch2 ゴーグのスラム街で戦利品でもらえる
   * もしそれまで damage が十分ならここで買う必要はなし
 
 ch1-Thieves Fort
 ----------------
 * 初期配置を左上にすると視点移動なく戦闘終了
+* Height 3 Bolt3
+
+ch1-Lenalia
+-----------
+* Lv4 Bolt3
+* Ramza が Lv20 なら hit
+
+ch1-Windmill
+------------
+* Height 5 Bolt3
+
+ch1-Zeakden
+-----------
+* Height 4 Bolt3
+* Lv5 Bolt3 is fater, if Ramza is not Lv20 or Lv25
+
+
+ch1-save time at the end of ch1
+---------------
+* 利用する者される者の表示が消えた直後のタイム
+* 1:13:44 in TAS
+* 1:12:08 in 30 segment TA (save time 1:11:08 の約1分後とみなす)
+* 1:18:14 in Claude RTA
+* 1:35:20 in さぼてん RTA
+
 
 
 ch2-Dorter
 ----------
 * Before battle, change Gafgarion's job Chemist to remove equipment and reduce speed to 6
+
+* Ramza 初期配置 右1上1 in TA, この位置だと投石が届かない??
+* Ramza 一番左上 in RTA, この位置だと投石が届かない??
 * speed 7 の Theif には基本技をセットしていないか投石を覚えていない方が早い
 * 密漁バグを使うなら、このシーフが密漁を覚えているのが条件
 * 密漁を覚えている敵シーフを勧誘する
@@ -817,4 +863,12 @@ Zodiac sign
   * good		0x10, 0x50	Taurus, Virgo
   * bad			0x00, 0x60	Aries, Scorpio
   * very bad	0x30		male Cancer
+
+
+note
+----
+
+No Random Battles
+WLDCORE.BIN
+0x2770A change 0x40 to 0x00
 
