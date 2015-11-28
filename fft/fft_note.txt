@@ -3,66 +3,38 @@ FFT note
 
 RNG
 ----
-
-* BIOS によって initial RNG value が異なる
-* SCPH7502.BIN では 14f 待つと 199/199 だった
-* SCPH1000.BIN では 9f  待つと 199/199
+* BIOS によって initial RNG が異なる
+* SCPH7502.BIN では 14f 待つと 199/199
+* SCPH1000.BIN では  9f 待つと 199/199
 * SCPH1001.BIN では ??
-
-
-game start
-----------
-
-* 706f : start , skip title
-* 742f : start , new game
-* 935f : start , skip message
-
-  * after 324f, determined ramza status
-  * after 25f, show input view.
-
-* input name
-  * skip 3f
-  * press [], delete 1st letter
-  * skip 10f
-
-  * skip 3f
-  * press [], delete 2nd letter
-  * skip 10f
-
-  * skip 3f
-  * press start
-  * skip xx
-
-* input birthday
+* ちなみに SCPH7502 だと戦闘時にフリーズする
 
 
 Ramza 初期ステータス
 --------------------
+* new game 押下後 Arazlam のセリフスキップ後にステータスが決定される
 * High starting
-  * Squire JP
-  * Chemist JP
-  * new game 押下後 アラズラムのセリフスキップ後にステータスが決定される
-  * Arazlam で 13f 待つと Squire JP = 199, Chemist JP = 199
   * Squire と Chemist 以外のジョブの JP も高いバランス型が理想
-  * Must:   Wizard, Priest, Calculator
-  * Should: Time Mage, Oracle
+  * Must  : Squire JP, Chemist JP
+  * Should: Wizard JP, Priest JP, Calculator JP
+  * May   : Time mage JP, Oracle JP
 
 
 ch1-Orbonne
 -----
-* オーボンヌ中の最後の ovelia のセリフで敵星座が決定
+* オーボンヌ内の最後の ovelia のセリフで敵星座が決定
 
 * turn1
   * change option
     *  2.カーソルのリピート速度  ->速い
-	*  4.指カーソルの速度  ->すごく速い
-	*  5.メッセージの表示速度  ->速い
-	*  6.ナビゲーションメッセージの有無  -> OFF
-	*  7.アビリティ名の表示  -> OFF
-	*  8.効果メッセージの表示  -> OFF
-	*  9.経験値Jp取得の表示  -> OFF
-	* 11.ジョブ別装備付加アイテムの表示  -> OFF
-	* 12.ジョブチェンジ時の最強装備  -> OFF
+    *  4.指カーソルの速度  ->すごく速い
+    *  5.メッセージの表示速度  ->速い
+    *  6.ナビゲーションメッセージの有無  -> OFF
+    *  7.アビリティ名の表示  -> OFF
+    *  8.効果メッセージの表示  -> OFF
+    *  9.経験値Jp取得の表示  -> OFF
+    * 11.ジョブ別装備付加アイテムの表示  -> OFF
+    * 12.ジョブチェンジ時の最強装備  -> OFF
   * 4マス進む
   * 敵弓使いの中に「磨褐宮」のユニットが居た場合は
     最優先で攻撃すること
@@ -77,7 +49,6 @@ Lv1 Chemist 初期ステータス
 * High starting
   * Chemist JP
   * Faith
-  * ch1-1 バトル後の Ramza の最後のセリフで味方ステータスが決定
   * Chemist JP 190以上, Faith 70以上が理想
   * Gariland で稼いで Lv2 になるのが理想
   * Female の方が MA が +1 高い
@@ -87,10 +58,10 @@ Lv1 Squire 初期ステータス
 ------------------------
 * High starting
   * Squire JP
-  * 味方見習い戦士で Totalでない残り Jp が 100以上
+  * 味方見習い戦士で残り JP が 100以上
   * Gariland で稼いで 取得 Jp UP を覚えるため
   * その後クリスタル化して継承
-  * もしくは Mandaria で取得 Jp UP を覚えている敵を探す
+  * もしくは Mandalia で取得 Jp UP を覚えている敵を探す
   * Gariland の敵は Lv1 のため取得Jp UP は覚えていない
 
 
@@ -106,23 +77,23 @@ ch1-Gariland
   * 敵移動中にカメラ移動する
 
 
-* ramza
-  * Squire JP 300 for gained JP UP 250jp or Yell 200jp
+* Ramza
+  * Squire JP 250 for Gained JP UP(250) or Yell(200)
     * 実際は 300JP 貯まらない
-  * Chemist JP 200 for wizard
+  * Chemist JP 200 for Wizard
 
-* chemist
-  * Chemist JP 200 for wizard
+* Chemist
+  * Chemist JP 200 for Wizard
   * Lv2 (recomend because of boosting MP)
 
 * after battle, formation
   * world map に出たら x で説明をキャンセル
-  * ramza, learn Yell 200JP
-  * chemist
-    * job change:  wizard
-	* learn:  Bolt 50JP, MagicAttackUP 400JP
-	* set: MagicAttackUP
-  * chemist 以外のユニット除名
+  * Ramza, learn Yell 200JP
+  * Chemist
+    * job change:  Wizard
+    * learn:  Bolt 50JP, MagicAttackUP 400JP
+    * set: MagicAttackUP
+  * Chemist 以外のユニット除名
 
 * 改善案
   * 配置
@@ -134,83 +105,93 @@ ch1-Gariland
     * この敵は投石を覚えていない方が早い
   * 味方 Squire に取得Jp UP 覚えさせるため 250jp 稼ぐ
   * Gariland の敵は Lv1 のため取得Jp UP は覚えていない
+  * L2 押したほうがカメラ移動が減るかも
 
 
 ch1-Mandalia
 -----
-* ramza
+* Ramza
   * ためる 300jpと取得JpUP 200jp の 550JP を稼ぐ
   * ex1) エールを覚えてエールで稼ぐ
   * ex2) 取得JP UP を覚えて普通の行動で稼ぐ
   * エールの方が全体で見ると早いらしい
 
 * 配置
-  * ramza と黒魔道士
+  * Ramza と黒魔道士
   * redpanther が 2撃で倒せるよう敵HP調整
     * 相性良 (24 damage となる)
-	* 相性普通 (20 damage) and HP40以下
-	* 稼ぎ終了後に Ramza の Lv が nn になっている想定
+    * 相性普通 (20 damage) and HP40以下
+    * 稼ぎ終了後に Ramza の Lv が nn になっている想定
 
 * turn1
-  * ramza, Yell
+  * Ramza, Yell
   * 黒魔道士, Bolt, 敵1体倒す
 
 * turn2
-  * ramza, Yell
+  * Ramza, Yell
   * 黒魔道士, Bolt, アルガスを巻き込んで敵3体倒す
 
 * turn3
   * redpanther だけになるので稼ぐ
-  * wizard, Bolt で Delita 巻き込んで自殺
+  * Wizard, Bolt で Delita 巻き込んで自殺
 
 * turnN
   * algus の死体の奥の安全地帯で稼ぐ
 
 
 * after battle, formation
-  * ramza
-    * job change:  priest
-	* learn:  Accumulates 300JP, gained JP UP 250JP
-	* set: guts, gained JP UP
+  * Ramza
+    * job change:  Priest
+    * learn:  Accumulates 300JP, Gained JP UP 250JP
+    * set: guts, Gained JP UP
 
 * 改善案
-  * ramza ためる 300jp 稼ぐ
+  * Ramza ためる 300jp 稼ぐ
   * 取得Jp UP を敵か味方からクリスタル継承
   * 敵シーフのみ Lv2 なので取得Jp UP を覚えている可能性がある
   * Lv3 の敵が出ないので ためる(300jp)を覚えている敵はいない
+  * L2 押したほうがカメラ移動が減るかも
 
 
 ch1-random
 -----
 * 改善案
-  * time mage と calculator は味方 wizard を出す
-  * 2体目のゴブリンは wizard が倒す
-  * time mage の稼ぎは haste (100jp) 覚えると早いのでは?
-  * oracle の稼ぎは不変不動 (100jp) を覚えると早いのでは?
+  * 敵1体のみ編成を 1000f 程度探索
+  * 2体目が Ramza に近づくまで 4 turn かかり、それが約 1000f
+  * よって 1000f 待った方が結果的に早くなる
+  * calcurator のときに 味方 Time mage を出せれば haste をかけれる
+  * L2 押したほうがカメラ移動が減るかも
+
+* 改善案
+  * Time mage と Calculator は味方 Wizard を出す
+  * 2体目のゴブリンは Wizard が倒す
+  * Time mage の稼ぎは Haste (100jp) 覚えると早いのでは?
+    * 魔法をたくさん覚えると menu がスクロールしてしまい loop 選択できなくなる
+  * Oracle の稼ぎは不変不動 (100jp) を覚えると早いのでは?
+    * 不変不動はすぐ切れる
   * ゴブリンは Lv14 で speed 6 になる模様
-  * time mage のときに goblin が Lv13 以下になるように調整が必要
-  * keep ramza's Lv under 14
+  * Time mage のときに goblin が Lv13 以下になるように調整が必要
+    * Keep Ramza's Lv under 14
   * Ramza speed 12, goblin speed 5 のとき, Ramza 2回行動, goblin 1回待機 となる
 
-
 * grinding
-	priest    , Lv5, 1100JP
-	oracle    , Lv4,  700JP
-	wizard    , Lv5, 1100JP
-	time mage , Lv4,  700JP , 2450JP
-	calculator, Lvx, xxxxJP , 2350JP
+    Priest    , Lv5, 1100JP
+    Oracle    , Lv4,  700JP
+    Wizard    , Lv5, 1100JP
+    Time mage , Lv4,  700JP , 2450JP
+    Calculator, Lvx, xxxxJP , 2350JP
 
 * learn
-  * priest - Holy
-  * wizard - Bolt3, Death, Flare, Counter Magic, Magic Attack UP
-    use jp scroll glith,
-  * time mage - Quick(900jp), Demi2(550jp), MP Switch(400jp), Teleport(600jp)
+  * Priest - Holy
+  * Wizard - Bolt3, Death, Flare, Counter Magic, Magic Attack UP
+    use jp scroll glith, Ice -> Ice2
+  * Time mage - Quick(900jp), Demi2(550jp), MP Switch(400jp), Teleport(600jp)
     use jp scroll glitch, stop -> quick, reflec -> slowja
-  * calculator - All except Exp(2350jp), 
+  * Calculator - All except Exp(2350jp)
     Gained Exp UP(350jp) is not nedded
 
 * job change
-  * wizrd
+  * Wizard
 
 * set ability
   * math
@@ -218,11 +199,12 @@ ch1-random
   * magic attack up
   * teleport は付けない (wiegraf 戦での移動で遅くなるから)
 
-* ramza's level
-  * 算術士の JP稼ぎが終了時点で lv20 が目安
-  * ch2 Golgorand の前までに lv23 必須. lv23 priest + green beret = speed 9
+* Ramza's level
+  * 算術士の JP稼ぎが終了時点で lv21 が目安
+  * ch2 Golgorand の前までに lv23 必須. lv23 Priest + Green Beret = speed 9
 
 * holy を覚えるための経過 frame = 167f
+
 
 ch1-Sweegy
 ----------
@@ -232,7 +214,6 @@ ch1-Sweegy
 * 改善案
   * CT5 Death の方が早い
   * L2 押したほうがカメラ移動が減るかも
-
 
 ch1-Dorter
 ----------
@@ -259,6 +240,7 @@ ch1-Lenalia
 ch1-Windmill
 ------------
 * Height 5 Bolt3
+* 移動したほうがカメラ移動が減るかも
 
 ch1-Zeakden
 -----------
@@ -282,26 +264,17 @@ ch2-Dorter
 
 * Ramza 初期配置 右1上1 in TA, この位置だと投石が届かない??
 * Ramza 一番左上 in RTA, この位置だと投石が届かない??
-* speed 7 の Theif には基本技をセットしていないか投石を覚えていない方が早い
+* speed 7 の Theif には基本技をセットしていないか投石を覚えていない方が早い??
 * 密漁バグを使うなら、このシーフが密漁を覚えているのが条件
 * 密漁を覚えている敵シーフを勧誘する
 
 
 ch2-Zirekile Falls
 ------------------
-* Delita が 北斗骨砕打(Crus Punch) を覚えていない(30%)、または 無双稲妻突き を覚えていると
+* Delita が 北斗骨砕打(Crus Punch) を覚えていない(30%??)、または 無双稲妻突き を覚えていると
   1 ターン目で Gafgarion を倒すので、その後の会話が一切発生しない
 * Delita が 1ターン目で Gafgarion を倒せば CT3 Death で終了
-* Gafgarion はアイテム士で裸なので HP は nn しかない。一撃余裕
-
-
-Holy Knight / White Knight
---------------------------
-Stasis Sword	不動無明剣		Stop				100
-Split Punch		乱命割殺打		Doom (死の宣告)		400
-Crush Punch		北斗骨砕打		K.O. (デス)			500
-Lightning Stab	無双稲妻突き	Silence				700
-Holy Explosion	聖光爆裂破		Confuse				800
+* Gafgarion はアイテム士で裸なので HP は少ない
 
 
 ch2-Zaland
@@ -318,16 +291,16 @@ ch2-Zigolis Swamp
 ch2-Goug
 -----------
 * Mustadio は Engineer に戻っている. speed 7 となる
-* speed 7 Thieves に、先に動かれるので、リアクションアビリティを発動させないように
+* speed 7 Thieves に、先に動かれるので、Mustadio のリアクションアビリティを発動させないように
 * 戦利品で Thunder rod
 
 ch2-Warjilis
 ------------
 * Before Barius Valley, Buy Green Beret
 * 魔道士のマント(MA+1)を買うかどうか
-  --> 買わなくてもよい
+  * --> 買わなくてもよい
       Bolt3 ではなく Flare を使うようになるのと
-	  3章冒頭で Magic Gauntlet(MA+2) を買うため
+      3章冒頭で Magic Gauntlet(MA+2) を買うため
 
 
 ch2-Barius Valley
@@ -338,22 +311,14 @@ ch2-Barius Valley
 
 ch2-Golgorand
 -------------
-* ch2 Golgorand の前までに lv23 必須. lv23 Priest + Green beret = speed 9
+* ch2 Golgorand の前までに lv23 必須. lv23 Priest + Green Beret = speed 9
 * Change job Priest, Equip Green Beret for speed 9
 * Priest になって MA が下がるので CT Bolt3 でダメージが足りなければ Flare
 * Ramza speed 9, MA 10
 
 ch2-Lionel (inside)
 ---------------
-* Queklain
-| name     |Lv|HP        |MP        |SP|PA|MA|
-| Queklain |20| 480～ 511|  343～368| 9|10| 8|
-| Zarela   |44|1098～1171|  687～736|11|15|10|
-| Velius   |31|1041～1131|  253～285| 8|12～14|11～13|
-| Adramelk |46|1405～1525|  386～435|10|14～16|10～12|
-| Hashmalum|59|1359～1450|  764～818|13|17|11|
-| Altima   |56|1281～1391|  432～485| 9|13～15|13～15|
-| Altima2  |66|3022～3281|  405～455|12|16～19|15～18|
+* Bolt2 x2 で倒せなければ Demi2 x2 (Queklain)
 
 
 ch3
@@ -364,16 +329,13 @@ ch3
 ch3-Goland
 ----------
 * Olan は、星天停止の方が、辞書攻撃より早い
-* Olan は、辞書攻撃で critical を出すと、ノックバックして死ぬので
+* Olan は、辞書攻撃で critical を出すと、ノックバックして倒せるので
   Flare のターゲットが一つ減る
-
 
 ch3-Orbonne 2nd Floor
 -----------
 * 編成画面を抜けるときに敵の相性が決定
 * 竜騎士は相性が悪いと Flare 一撃で倒せない
-
-
 
 ch3-Orbonne 3rd Floor
 -----------
@@ -402,7 +364,7 @@ ch3-Riovanes (outside)
 ch3-Riovanes (inside)
 ------------
 * Move and Height prime flare. (Wiegraf)
-* Level prime flare x2 (Velius)
+* Level prime Demi2 x2 (Velius)
 
 ch3-Riovanes (rooftop)
 ------------
@@ -410,7 +372,6 @@ ch3-Riovanes (rooftop)
 
 ch4
 ---
-* Malark 加入のロス 約80f (108 gems は必要ないので Malark の加入の必要はない)
 
 
 ch4-Doguola
@@ -420,9 +381,7 @@ ch4-Doguola
 
 ch4-Bervenia
 ------------
-* 忍者は必ず出現するっぽい
-* (忍者が必ず出るのか未確認だが、出現した場合は先に行動されるので、何もさせな
-  いようにする)
+* 忍者に先制されるので何もさせないようにする
 * Level 5 flare.
 * Ramza が Lv25 or Lv30 になっていない方が早い
 
@@ -752,32 +711,6 @@ ch4-Murond (Altima)
   * Ramza height prime demi2
 
 
-
-
-chN-Grog
---------
-
-* after battle, buy 108 Gems to boost Holy damage in  Bed Desert to North Wall
-
-chN-Yuguo
----------
-
-
-
-
-
-コメ返し
---------
-
-Q. 密漁バグは?
-A. 使いません。理由は英語版ではできないから。
-
-Q. 音質ひどい
-A. 少し設定を変えてみました
-
-Q. タイマーは?
-A. 各パートの終了時点の時間を記載するようにします
-
 CT
 ----
 * 3の倍数の tick(clock) で CT100 になる場合、敵の CT は 3の倍数となる
@@ -792,13 +725,9 @@ SP   tick
 11 * 10 = 110
 12 *  9 = 108
 
-Encount research in random battle
-----------------------------------
-
 
 Frame counts of casting spell
 -----------------------------
-
 * Bolt3  6033 - 5738 = 295f
 * Demi2  6089 - 5750 = 339f
 * Deth   6106 - 5744 = 362f
@@ -810,36 +739,29 @@ Frame counts of casting spell
 * Goblin wait  110f
 
 * Goblin Tackle  miss
-	2622 - 2295 = 327f
-	3777 - 3475 = 302f
-	1573 - 1246 = 327f
+    2622 - 2295 = 327f
+    3777 - 3475 = 302f
+    1573 - 1246 = 327f
 
 * Goblin Tackle  hit
-	1638 - 1311 = 327f
-	3804 - 3477 = 327f
-
+    1638 - 1311 = 327f
+    3804 - 3477 = 327f
 
 * 2nd Goblin takes about 1000f frames for his moves.
-	1st turn  7039 - 6785 = 254f
-	2nd turn  7541 - 7301 = 240f
-	3rd turn  8452 - 8215 = 237f
-	4th turn  9359 - 9108 = 251f
-	total                   982f
+    1st turn  7039 - 6785 = 254f
+    2nd turn  7541 - 7301 = 240f
+    3rd turn  8452 - 8215 = 237f
+    4th turn  9359 - 9108 = 251f
+    total                   982f
 
 
-Play Movie
-----------
-
-* FFT NA Any% PB - 3:58:26
-* http://www.twitch.tv/claude/c/5920172
-
-
-* FFT RTA - 4:20:54 Part 1
-* http://www.twitch.tv/tideruglia/c/6013890
-
-
-
-
+Holy Knight / White Knight
+--------------------------
+Stasis Sword    不動無明剣        Stop                100
+Split Punch     乱命割殺打        Doom (死の宣告)     400
+Crush Punch     北斗骨砕打        K.O. (デス)         500
+Lightning Stab  無双稲妻突き      Silence             700
+Holy Explosion  聖光爆裂破        Confuse             800
 
 
 Zodiac sign
@@ -859,16 +781,63 @@ Zodiac sign
 0xC0 = 蛇遣 = Serpentarius (neutral to all signs)
 
 * Ramza 0x90
-  * very good	0x30		female Cancer
-  * good		0x10, 0x50	Taurus, Virgo
-  * bad			0x00, 0x60	Aries, Scorpio
-  * very bad	0x30		male Cancer
+  * very good    0x30         female Cancer
+  * good         0x10, 0x50   Taurus, Virgo
+  * bad          0x00, 0x60   Aries, Scorpio
+  * very bad     0x30         male Cancer
+
+Lucavi
+--------
+| name     |Lv|HP        |MP        |SP|PA|MA|
+|----------|--|----------|----------|--|--|--|
+| Queklain |20| 480～ 511|  343～368| 9|10| 8|
+| Velius   |31|1041～1131|  253～285| 8|12～14|11～13|
+| Zarela   |44|1098～1171|  687～736|11|15|10|
+| Adramelk |46|1405～1525|  386～435|10|14～16|10～12|
+| Hashmalum|59|1359～1450|  764～818|13|17|11|
+| Altima   |56|1281～1391|  432～485| 9|13～15|13～15|
+| Altima2  |66|3022～3281|  405～455|12|16～19|15～18|
 
 
-note
-----
+Play Movie
+----------
+* FFT NA Any% PB - 3:58:26
+* http://www.twitch.tv/claude/c/5920172
 
-No Random Battles
-WLDCORE.BIN
-0x2770A change 0x40 to 0x00
+* FFT RTA - 4:20:54 Part 1
+* http://www.twitch.tv/tideruglia/c/6013890
+
+
+Encount research of random battle
+----------------------------------
+* lua で検証できたこと
+  * frame数が同じなら乱数を変えてもエンカウントする・しないの判定は変化しない
+  * frame数が同じなら乱数を変えても出撃する・しないの判定は変化しない
+
+* エンカウントするかどうかの判定
+  * http://ffhacktics.com/wiki/0008f08c_-_0008f280
+  * 0008f08c - 0008f280
+    * 戻り値が 0 ならエンカウント. 1 なら無し
+    * 乱数call (jal 0x0002230c) が 2ヶ所にあるがどちらも最終的に
+      15bit 右シフトしているので 50% chance
+    * コード上は乱数が影響しているように見えるが lua の検証結果と矛盾する
+
+
+* 出撃するかどうかの判定
+  * http://ffhacktics.com/wiki/Big_ENTD_unit_loading_routine
+  * 0017F8A0 - 0017FBE8: Big ENTD unit loading routine
+    <code>
+    0017fa2c: 0c0088c3 jal 0x0002230c
+    0017fa30: 00000000 nop
+    0017fa34: 30420001 andi r2,r2,0x0001               r2 = 1 o 0. which means 50% chance to exist.
+    0017fa38: 1040000a beq r2,r0,0x0017fa64            branch if unit can exist?
+    </code>
+  * コード上は乱数が影響しているように見えるが lua の検証結果と矛盾する
+
+
+ROM hack
+--------
+* No Random Battles
+  WLDCORE.BIN
+  0x2770A change 0x40 to 0x00
 
