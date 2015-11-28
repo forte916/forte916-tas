@@ -1,0 +1,42 @@
+
+40
+00000	000BE328	d	h	0	RNG
+00001	0013D3B4	d	h	0	result of battle
+00002	0013D374	w	h	0	in battle
+00003	00166F64	w	h	0	win cnt
+00004	00166F04	w	u	0	feather cnt
+00005	00166F06	b	s	0	total seed cnt
+00006	00000000	S	S	0	----------------------------
+00007	00167E80	d	h	0	seed1 kind
+00008	00167EA8	d	h	0	seed2 kind
+00009	00167ED0	d	h	0	seed3 kind
+0000A	00167EF8	d	h	0	seed4 kind
+0000B	00167F20	d	h	0	seed5 kind
+0000C	00167F48	d	h	0	seed6 kind
+0000D	00167F70	d	h	0	seed7 kind
+0000E	00167F98	d	h	0	seed8 kind
+0000F	00167FC0	d	h	0	seed9 kind
+00010	00167FE8	d	h	0	seed10 kind
+00011	00000000	S	S	0	----------------------------
+00012	00168010	d	h	0	seed11 kind
+00013	00168038	d	h	0	seed12 kind
+00014	00168060	d	h	0	seed13 kind
+00015	00168088	d	h	0	seed14 kind
+00016	001680B0	d	h	0	seed15 kind
+00017	001680D8	d	h	0	seed16 kind
+00018	00168100	d	h	0	seed17 kind
+00019	00168128	d	h	0	seed18 kind
+0001A	00168150	d	h	0	seed19 kind
+0001B	00168178	d	h	0	seed20 kind
+0001C	00000000	S	S	0	----------------------------
+0001D	001681A0	d	h	0	seed21 kind
+0001E	001681C8	d	h	0	seed22 kind
+0001F	001681F0	d	h	0	seed23 kind
+00020	00168218	d	h	0	seed24 kind
+00021	00168240	d	h	0	seed25 kind
+00022	00168268	d	h	0	seed26 kind
+00023	00168290	d	h	0	seed27 kind
+00024	001682B8	d	h	0	seed28 kind
+00025	001682E0	d	h	0	seed29 kind
+00026	00168308	d	h	0	seed30 kind
+00027	00000000	S	S	0	----------------------------

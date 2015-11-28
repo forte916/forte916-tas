@@ -1,0 +1,45 @@
+
+43
+00000	00009010	d	h	0	RNG
+00001	00000000	S	S	0	----------------------------
+00002	00097F80	w	h	0	encount param
+00003	000A076C	w	h	0	encount param
+00004	000D105C	w	h	0	encount param
+00005	000D10A0	w	h	0	on_location
+00006	000D10B4	w	h	0	dest location
+00007	00000000	S	S	0	----------------------------
+00008	000447EC	w	h	0	milsecs
+00009	0004BE78	w	h	0	session_param
+0000A	00054A9C	w	h	0	cur_session
+0000B	00054B64	w	h	0	current location
+0000C	00054B68	w	h	0	enemy set to be loaded
+0000D	0006358C	w	h	0	current ENTD pointer
+0000E	00044778	w	h	0	pad input battle
+0000F	00000000	w	h	0	pad input world
+00010	00054B44	w	h	0	locks input
+00011	00000000	S	S	0	----------------------------
+00012	0018E899	b	h	0	1st b unit id
+00013	0018EA59	b	h	0	2nd b unit id
+00014	0018EC19	b	h	0	3rd b unit id
+00015	0018EDD9	b	h	0	4th b unit id
+00016	00000000	S	S	0	----------------------------
+00017	0018E898	b	h	0	1st b ch
+00018	0018E8A1	b	h	0	1st b zodiac
+00019	0018E99C	w	u	0	1st b total_jp_squire
+0001A	0018E99E	w	u	0	1st b total_jp_chemist
+0001B	0018E9A8	w	u	0	1st b total_jp_wizard
+0001C	00190498	b	h	0	17th b ch
+0001D	001904A1	b	h	0	17th b zodiac
+0001E	0019059C	w	u	0	17th b total_jp_squire
+0001F	0019059E	w	u	0	17th b total_jp_chemist
+00020	001905A6	w	u	0	17th b total_jp_priest
+00021	001905A8	w	u	0	17th b total_jp_wizard
+00022	001905AA	w	u	0	17th b total_jp_time_mage
+00023	001905B2	w	u	0	17th b total_jp_oracle
+00024	001905BC	w	u	0	17th b total_jp_calculator
+00025	00000000	S	S	0	----------------------------
+00026	000552F8	b	h	0	1st f ch
+00027	000552FE	b	h	0	1st f zodiac
+00028	0005538E	w	u	0	1st f total_jp_squire
+00029	00055390	w	u	0	1st f total_jp_chemist
+00030	0005539A	w	u	0	1st f total_jp_wizard
