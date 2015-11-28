@@ -15,9 +15,9 @@
 -- RNG, 4byte
 adr_rng = 0x9010
 
-adr_formation_unit   = 0x054FE4  --  1st unit in JP v1.0,  -314h,    +0h
+--adr_formation_unit   = 0x054FE4  --  1st unit in JP v1.0,  -314h,    +0h
 adr_formation_unit   = 0x0552F8  --  1st unit in JP v1.1,    +0h,  +314h
-adr_formation_unit   = 0x057F74  --  1st unit in US     , +2C7Ch, +2F90h
+--adr_formation_unit   = 0x057F74  --  1st unit in US     , +2C7Ch, +2F90h
 
 adr_formation_unit1  = adr_battle_unit                   -- 1st unit 0x0552F8
 adr_formation_unit2  = adr_formation_unit + (0x100 * 1)  -- 2nd unit 0x0553F8
@@ -54,16 +54,18 @@ adr_battle_unit21 = adr_battle_unit + (0x1C0 * 20)  -- 21th unit 0x190B98
 
 
 
-adr_04EAF4        = 0xFFFFFF -- US:0x04EAF4, JP1.0:0xFFFFFF, 4byte, ???
+adr_pad_input_battle = 0x044778 -- US:0x045944, JP1.0:0xFFFFFF, 4byte, controller input in battle/event
+adr_pad_input_world  = 0xFFFFFF -- US:0x19A204, JP1.0:0xFFFFFF, 4byte, controller input in world map/formation
 
-adr_milsecs       = 0x0447EC -- US:0x0459B8, JP1.0:0x0444D8, 4byte
-adr_seconds       = 0x0447F0 -- US:0x0459BC, JP1.0:0x0444DC, 4byte
-adr_minutes       = 0x0447F4 -- US:0x0459C0, JP1.0:0x0444E0, 4byte
-adr_hours         = 0x0447F8 -- US:0x0459C4, JP1.0:0x0444E4, 4byte
+adr_milsecs        = 0x0447EC -- US:0x0459B8, JP1.0:0x0444D8, 4byte
+adr_seconds        = 0x0447F0 -- US:0x0459BC, JP1.0:0x0444DC, 4byte
+adr_minutes        = 0x0447F4 -- US:0x0459C0, JP1.0:0x0444E0, 4byte
+adr_hours          = 0x0447F8 -- US:0x0459C4, JP1.0:0x0444E4, 4byte
 
-adr_time_played   = 0x054A9C -- US:0x057718, JP1.0:0x054788, 4byte
+adr_session_param  = 0x04BE78 -- US:0x04EAF4, JP1.0:0x04BB64, 4byte, ???
+adr_cur_session    = 0x054A9C -- US:0x057718, JP1.0:0x054788, 4byte
 
-adr_locks_input   = 0x054B44 -- US:0x0577C0, JP1.0:0x054830, ?byte, locks controller input
+adr_locks_input    = 0x054B44 -- US:0x0577C0, JP1.0:0x054830, ?byte, locks controller input
 	--0x0001 - L2
 	--0x0002 - R2
 	--0x0004 - L1
@@ -81,20 +83,30 @@ adr_locks_input   = 0x054B44 -- US:0x0577C0, JP1.0:0x054830, ?byte, locks contro
 	--0x4000 - Down
 	--0x8000 - Left
 
-adr_wheather      = 0x054B2C -- US:0x0577A8, JP1.0:0x544818, ?byte, Wheather
-adr_gil_lo        = 0x054B50 -- US:0x0577CC, JP1.0:0x05483C, 2byte, Gil
-adr_gil_hi        = 0x054B52 -- US:0x0577CE, JP1.0:0x05483E, 2byte, Gil
-adr_month         = 0x054B58 -- US:0x0577D4, JP1.0:0x054844, ?byte, Month
-adr_day           = 0x054B5C -- US:0x0577D8, JP1.0:0x054848, ?byte, Day
+adr_wheather       = 0x054B2C -- US:0x0577A8, JP1.0:0x544818, ?byte, Wheather
+adr_gil_lo         = 0x054B50 -- US:0x0577CC, JP1.0:0x05483C, 2byte, Gil
+adr_gil_hi         = 0x054B52 -- US:0x0577CE, JP1.0:0x05483E, 2byte, Gil
+adr_month          = 0x054B58 -- US:0x0577D4, JP1.0:0x054844, 4byte, Month
+adr_day            = 0x054B5C -- US:0x0577D8, JP1.0:0x054848, 4byte, Day
 
-adr_cur_location  = 0x054B64 -- US:0x0577E0, JP1.0:0x054850, ?byte, Current Location
-adr_entd_data_id  = 0x054B68 -- US:0x0577E4, JP1.0:0x054854, 4byte, enemy set to be loaded
+adr_cur_location   = 0x054B64 -- US:0x0577E0, JP1.0:0x054850, ?byte, Current Location
+adr_entd_data_id   = 0x054B68 -- US:0x0577E4, JP1.0:0x054854, 4byte, enemy set to be loaded
 
-adr_current_entd  = 0x06358C -- US:0x066238, JP1.0:0xFFFFFF, ?byte, Current ENTD Pointer
-adr_highest_lv    = 0x06365C -- US:0x066308, JP1.0:0xFFFFFF, ?byte, Highest Party Level
+-- BATTLE.bin
+adr_current_entd   = 0x06358C -- US:0x066238, JP1.0:0x063278, 4byte, Current ENTD Pointer
+adr_highest_lv     = 0x06365C -- US:0x066308, JP1.0:0x063348, 1byte, Highest Party Level
 
-adr_debug_menu    = 0x18E708 -- set 5, 6, 7, 8, then open menu in world map. debug mode??
-adr_goto_test     = 0x18E708 -- goto test map??
+adr_debug_menu     = 0x18E708 -- set 5, 6, 7, 8, then open menu in world map. debug mode??
+adr_goto_test      = 0x18E708 -- goto test map??
+
+
+-- WLDCORE.bin
+adr_encount_param1 = 0x097F80 -- US:0x096A40, JP1.0:0x097F80, 4byte, ???
+adr_encount_param2 = 0x0A076C -- US:0x09F248, JP1.0:0x0A076C, 4byte, ???
+adr_encount_param3 = 0x0D105C -- US:0x0D0B38, JP1.0:0x0D105C, 4byte, ???
+adr_on_location    = 0x0D10A0 -- US:0x0D0B7C, JP1.0:0x0D10A0, 4byte, 1:on the location 0:on may way
+adr_src_loc        = 0x0D10B0 -- US:0x0D0B8C, JP1.0:0x0D10B0, 4byte, src location
+adr_dest_loc       = 0x0D10B4 -- US:0x0D0B90, JP1.0:0x0D10B4, 4byte, dest location
 
 
 ------------------------------------------------------------
@@ -598,10 +610,10 @@ end
 
 function Bunit.toString(prpt)
 	local str = string.format("%2x %2x %2x %2x:"
-			.."%2x %2x %2x %2x:",
+			.."%2x %2x %2x %2x:"
 			.."%2d %2d %2d:"
 			.."%2d %2d:"
-			.."%3d %3d:",
+			.."%3d %3d:"
 			.."%3d %3d %3d:",
 			prpt.ch     ,
 			prpt.no     ,

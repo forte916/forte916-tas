@@ -74,7 +74,7 @@ function Speed9.success()
 end
 
 Mandalia = {}
-Mandalia.logname = "ch1_random_encount8.log"
+Mandalia.logname = "ch1_random_encount10.log"
 
 function Mandalia.pre_attempt()
 	-- move Gariland From Formation
@@ -88,14 +88,25 @@ function Mandalia.pre_attempt()
 end
 
 function Mandalia.pre_attempt2()
-	pressBtn({triangle=1}, 5)
-	pressBtn({circle=1}, 3)
-	pressBtn({up=1}, 2)
+	-- move Gariland From Mandalia
+	--pressBtn({triangle=1}, 5)
+	--pressBtn({circle=1}, 3)
+	--pressBtn({up=1}, 2)
+	--pressBtn({circle=1}, 1)
+	--fadv(50+1)
+
 	pressBtn({circle=1}, 1)
-	fadv(50+1)
+	fadv(21)
+	pressBtn({down=1}, 7)
+	pressBtn({circle=1}, 1)  -- shop
+	fadv(67)
+	pressBtn({circle=1}, 1)  -- cancel message
+	fadv(47)
+	pressBtn({x=1}, 1)  -- exit city
+	fadv(4)
 
 	local fc = emu.framecount()
-	fadv(82362 - fc)
+	fadv(81105 - fc)
 end
 
 function Mandalia.attempt()
@@ -207,10 +218,13 @@ for i=0, retry do
 
 	interface.pre_attempt()
 	fadv(i)
-	--interface.pre_attempt2()
+	interface.pre_attempt2()
 	local fc = emu.framecount()
 	local rng = memory.readdword(adr_rng)
-	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
+	local cur_session = memory.readdword(adr_cur_session)
+	local milsecs = memory.readdword(adr_milsecs)
+
+	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X, cur_session = %d, milsecs = %d -----", i, fc, rng, cur_session, milsecs))
 
 	interface.attempt()
 
