@@ -841,3 +841,13 @@ ROM hack
   WLDCORE.BIN
   0x2770A change 0x40 to 0x00
 
+* Main Data Locations:
+  * RAM -> File
+  *  -0x67000 -> Battle.bin
+  *  -0xE0000 -> World.bin
+  *   -0xF800 -> SCUS
+  * -0x1BF000 -> REQUIRE.OUT
+  * -0x1BF000 -> EQUIP.OUT
+  * -0x1BF000 -> ATTACK.OUT??
+
+* ATTACK.out psdis展開アドレス +1BF000h

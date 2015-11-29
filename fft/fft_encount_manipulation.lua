@@ -174,14 +174,52 @@ function GainedJpUP.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit3
-	local gained = 0
+	local skill = 0
 
 	prpt = Bunit.readProperty(ofs_unit)
 	debugPrint(prpt.info)
 
-	gained = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
-	if gained ~= 0 then
-		print(string.format("-- gained = %2d", gained))
+	skill = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
+	if skill ~= 0 then
+		print(string.format("-- skill = %x", skill))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
+
+
+Orlandu = {}
+Orlandu.logname = "ch4_orlandu_join.log"
+
+function Orlandu.pre_attempt()
+	fadv(2)
+end
+
+function Orlandu.attempt()
+	pressBtn({circle=1}, 1)   -- skip bonus money
+	fadv(740)
+end
+
+function Orlandu.post_attempt()
+	-- pass
+end
+
+function Orlandu.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit
+	local skill = 0
+	local lv = 0
+
+	prpt = Bunit.readProperty(ofs_unit)
+	debugPrint(prpt.info)
+
+	skill = bit.band(prpt.base_action_learned1, 0x10)  -- 0x10 means Lightning Stab
+	if skill ~= 0 and prpt.lv > 26 then
+		print(string.format("-- skill = %x, lv = %2d", skill, prpt.lv))
 		ret = true
 	else
 		ret = false

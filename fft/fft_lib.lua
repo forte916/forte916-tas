@@ -370,27 +370,38 @@ Bunit.direct      = 0x49  -- 1byte, 0x80: higher elevation, 0x03: facing directi
 -- offset 0x6D to 0x71 is elemental compatibility
 --
 -- offset 0x8B to 0x8E is reaction abilities
-Bunit.reaction_affected1 = 0x8B  -- 1byte
-Bunit.reaction_affected2 = 0x8C  -- 1byte
-Bunit.reaction_affected3 = 0x8D  -- 1byte
-Bunit.reaction_affected4 = 0x8E  -- 1byte
+Bunit.reaction_affected1   = 0x8B  -- 1byte
+Bunit.reaction_affected2   = 0x8C  -- 1byte
+Bunit.reaction_affected3   = 0x8D  -- 1byte
+Bunit.reaction_affected4   = 0x8E  -- 1byte
 
 -- offset 0x8F to 0x92 is support  abilities
-Bunit.support_affected1  = 0x8F  -- 1byte
-Bunit.support_affected2  = 0x90  -- 1byte
+Bunit.support_affected1    = 0x8F  -- 1byte
+Bunit.support_affected2    = 0x90  -- 1byte
 	-- 0x40:Gained JP-UP
-Bunit.support_affected3  = 0x91  -- 1byte
-Bunit.support_affected4  = 0x92  -- 1byte
+Bunit.support_affected3    = 0x91  -- 1byte
+Bunit.support_affected4    = 0x92  -- 1byte
 
 -- offset 0x93 to 0x95 is movement abilities
-Bunit.movement_affected1 = 0x93  -- 1byte
-Bunit.movement_affected2 = 0x94  -- 1byte
-Bunit.movement_affected3 = 0x95  -- 1byte
+Bunit.movement_affected1   = 0x93  -- 1byte
+Bunit.movement_affected2   = 0x94  -- 1byte
+Bunit.movement_affected3   = 0x95  -- 1byte
 
--- offset 0x96 to 0xD1 is action   abilities
+-- offset 0x96 to 0x98 is movement abilities
+Bunit.unlocked_jobs1_8     = 0x96  -- 1byte
+Bunit.unlocked_jobs9_16    = 0x97  -- 1byte
+Bunit.unlocked_jobs17_20   = 0x98  -- 1byte
+
+-- offset 0x99 to 0xD1 is action   abilities
 Bunit.base_action_learned1 = 0x99  -- 1byte
-	-- 0x80:Accumulate, 0x40:Dash, 0x20:Throw Stone, 0x10:Heal
-	-- 0x08:Yell, 0x04:Wish,
+	-- 0x80:Accumulate / Stasis Sword
+	-- 0x40:Dash / Split Punch
+	-- 0x20:Throw Stone / Crus Punch
+	-- 0x10:Heal / Lightning Stab
+	-- 0x08:Yell / Holy Explosion
+	-- 0x04:Wish
+	-- 0x02:Cheer Up
+	-- 0x01:Scream
 Bunit.base_action_learned2 = 0x9A  -- 1byte
 Bunit.base_r_s_m_learned3  = 0x9B  -- 1byte
 	-- 0x80:Counter Tackle, 0x40:Equip Axe, 0x20:Monster Skill, 0x10:Defend
@@ -552,17 +563,20 @@ function Bunit.readProperty(ofs_unit)
 	prpt.ct        = memory.readbyte(ofs_unit + Bunit.ct        )
 	prpt.direct    = memory.readbyte(ofs_unit + Bunit.direct    )
 
-	prpt.reaction_affected1 = memory.readbyte(ofs_unit + Bunit.reaction_affected1 )
-	prpt.reaction_affected2 = memory.readbyte(ofs_unit + Bunit.reaction_affected2 )
-	prpt.reaction_affected3 = memory.readbyte(ofs_unit + Bunit.reaction_affected3 )
-	prpt.reaction_affected4 = memory.readbyte(ofs_unit + Bunit.reaction_affected4 )
-	prpt.support_affected1  = memory.readbyte(ofs_unit + Bunit.support_affected1  )
-	prpt.support_affected2  = memory.readbyte(ofs_unit + Bunit.support_affected2  )
-	prpt.support_affected3  = memory.readbyte(ofs_unit + Bunit.support_affected3  )
-	prpt.support_affected4  = memory.readbyte(ofs_unit + Bunit.support_affected4  )
-	prpt.movement_affected1 = memory.readbyte(ofs_unit + Bunit.movement_affected1 )
-	prpt.movement_affected2 = memory.readbyte(ofs_unit + Bunit.movement_affected2 )
-	prpt.movement_affected3 = memory.readbyte(ofs_unit + Bunit.movement_affected3 )
+	prpt.reaction_affected1   = memory.readbyte(ofs_unit + Bunit.reaction_affected1   )
+	prpt.reaction_affected2   = memory.readbyte(ofs_unit + Bunit.reaction_affected2   )
+	prpt.reaction_affected3   = memory.readbyte(ofs_unit + Bunit.reaction_affected3   )
+	prpt.reaction_affected4   = memory.readbyte(ofs_unit + Bunit.reaction_affected4   )
+	prpt.support_affected1    = memory.readbyte(ofs_unit + Bunit.support_affected1    )
+	prpt.support_affected2    = memory.readbyte(ofs_unit + Bunit.support_affected2    )
+	prpt.support_affected3    = memory.readbyte(ofs_unit + Bunit.support_affected3    )
+	prpt.support_affected4    = memory.readbyte(ofs_unit + Bunit.support_affected4    )
+	prpt.movement_affected1   = memory.readbyte(ofs_unit + Bunit.movement_affected1   )
+	prpt.movement_affected2   = memory.readbyte(ofs_unit + Bunit.movement_affected2   )
+	prpt.movement_affected3   = memory.readbyte(ofs_unit + Bunit.movement_affected3   )
+	prpt.unlocked_jobs1_8     = memory.readbyte(ofs_unit + Bunit.unlocked_jobs1_8     )
+	prpt.unlocked_jobs9_16    = memory.readbyte(ofs_unit + Bunit.unlocked_jobs9_16    )
+	prpt.unlocked_jobs17_20   = memory.readbyte(ofs_unit + Bunit.unlocked_jobs17_20   )
 
 	prpt.base_action_learned1 = memory.readbyte(ofs_unit + Bunit.base_action_learned1 )
 	prpt.base_action_learned2 = memory.readbyte(ofs_unit + Bunit.base_action_learned2 )
@@ -602,9 +616,9 @@ function Bunit.readProperty(ofs_unit)
 	prpt.attack_accuracy = memory.readbyte(ofs_unit + Bunit.attack_accuracy )
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
-	prpt.info = Bunit.toString(prpt)
+	--prpt.info = Bunit.toString(prpt)
 	--prpt.info = Bunit.toString2(prpt)
-	--prpt.info = Bunit.toString3(prpt)
+	prpt.info = Bunit.toString3(prpt)
 	return prpt
 end
 
