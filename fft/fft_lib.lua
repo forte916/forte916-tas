@@ -63,8 +63,9 @@ adr_minutes        = 0x0447F4 -- US:0x0459C0, JP1.0:0x0444E0, 4byte
 adr_hours          = 0x0447F8 -- US:0x0459C4, JP1.0:0x0444E4, 4byte
 
 adr_session_param  = 0x04BE78 -- US:0x04EAF4, JP1.0:0x04BB64, 4byte, ???
-adr_cur_session    = 0x054A9C -- US:0x057718, JP1.0:0x054788, 4byte
+adr_cur_session    = 0x054A9C -- US:0x057718, JP1.0:0x054788, 4byte, session frame counter
 
+adr_wheather       = 0x054B2C -- US:0x0577A8, JP1.0:0x544818, ?byte, Wheather
 adr_locks_input    = 0x054B44 -- US:0x0577C0, JP1.0:0x054830, ?byte, locks controller input
 	--0x0001 - L2
 	--0x0002 - R2
@@ -83,14 +84,13 @@ adr_locks_input    = 0x054B44 -- US:0x0577C0, JP1.0:0x054830, ?byte, locks contr
 	--0x4000 - Down
 	--0x8000 - Left
 
-adr_wheather       = 0x054B2C -- US:0x0577A8, JP1.0:0x544818, ?byte, Wheather
 adr_gil_lo         = 0x054B50 -- US:0x0577CC, JP1.0:0x05483C, 2byte, Gil
 adr_gil_hi         = 0x054B52 -- US:0x0577CE, JP1.0:0x05483E, 2byte, Gil
 adr_month          = 0x054B58 -- US:0x0577D4, JP1.0:0x054844, 4byte, Month
 adr_day            = 0x054B5C -- US:0x0577D8, JP1.0:0x054848, 4byte, Day
-
 adr_cur_location   = 0x054B64 -- US:0x0577E0, JP1.0:0x054850, ?byte, Current Location
 adr_entd_data_id   = 0x054B68 -- US:0x0577E4, JP1.0:0x054854, 4byte, enemy set to be loaded
+adr_event_bytes    = 0x054BFC -- US:0x057878, JP1.0:0xFFFFFF, 4byte, Event Byte Counter? (maybe just text?)
 
 -- BATTLE.bin
 adr_current_entd   = 0x06358C -- US:0x066238, JP1.0:0x063278, 4byte, Current ENTD Pointer
@@ -107,6 +107,7 @@ adr_encount_param3 = 0x0D105C -- US:0x0D0B38, JP1.0:0x0D105C, 4byte, ???
 adr_on_location    = 0x0D10A0 -- US:0x0D0B7C, JP1.0:0x0D10A0, 4byte, 1:on the location 0:on may way
 adr_src_loc        = 0x0D10B0 -- US:0x0D0B8C, JP1.0:0x0D10B0, 4byte, src location
 adr_dest_loc       = 0x0D10B4 -- US:0x0D0B90, JP1.0:0x0D10B4, 4byte, dest location
+
 
 
 ------------------------------------------------------------
@@ -616,9 +617,9 @@ function Bunit.readProperty(ofs_unit)
 	prpt.attack_accuracy = memory.readbyte(ofs_unit + Bunit.attack_accuracy )
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
-	--prpt.info = Bunit.toString(prpt)
+	prpt.info = Bunit.toString(prpt)
 	--prpt.info = Bunit.toString2(prpt)
-	prpt.info = Bunit.toString3(prpt)
+	--prpt.info = Bunit.toString3(prpt)
 	return prpt
 end
 
@@ -750,5 +751,43 @@ function Bunit.drawAll(x, y)
 
 		gui.text(x, y+(8*i) , prpt.info)
 	end
+end
+
+
+------------------------------------------------------------
+-- Zodiac sign
+------------------------------------------------------------
+Zodiac = {}
+
+Zodiac.Aries         = 0x00 -- îíór = Aries
+Zodiac.Taurus        = 0x10 -- ã‡ãç = Taurus
+Zodiac.Gemini        = 0x20 -- ëoéq = Gemini
+Zodiac.Cancer        = 0x30 -- ãêäI = Cancer
+Zodiac.Leo           = 0x40 -- éÇéq = Leo
+Zodiac.Virgo         = 0x50 -- èàèó = Virgo
+Zodiac.Libra         = 0x60 -- ìVîâ = Libra
+Zodiac.Scorpio       = 0x70 -- ìVÂô = Scorpio
+Zodiac.Sagittarius   = 0x80 -- êlîn = Sagittarius
+Zodiac.Capricorn     = 0x90 -- ñÅ„π = Capricorn
+Zodiac.Aquarius      = 0xA0 -- ïÛïr = Aquarius
+Zodiac.Pisces        = 0xB0 -- ëoãõ = Pisces
+Zodiac.Serpentarius  = 0xC0 -- é÷å≠ = Serpentarius (neutral to all signs)
+
+function Zodiac.isBadWithCapricorn(sign, gender)
+	local opposit = 0
+	local masked_sign
+
+	masked_sign = bit.band(sign, 0xF0)
+	opposit = bit.band(gender, 0x80)  -- 0x80 is male.
+
+	if masked_sign == Zodiac.Aries then
+		return true
+	elseif masked_sign == Zodiac.Libra then
+		return true
+	elseif masked_sign == Zodiac.Cancer and opposit ~= 0 then
+		return true
+	end
+
+	return false
 end
 

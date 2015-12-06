@@ -30,49 +30,6 @@ emu.speedmode("turbo")       -- drops some frames
 -- functions
 ------------------------------------------------------------
 
-Speed9 = {}
-Speed9.logname = "ch4_Finath_speed9.log"
-
-function Speed9.pre_attempt()
-	fadv(1)
-end
-
-function Speed9.attempt()
-	pressBtn({circle=1}, 1)
-	fadv(900)
-end
-
-function Speed9.post_attempt()
-	-- pass
-end
-
-function Speed9.success()
-	local ret = false
-	local prpt = {}
-	local ofs_unit = adr_battle_unit
-	local enemy = 0
-
-	for i=1, 12 do
-		prpt = Bunit.readProperty(ofs_unit)
-		ofs_unit = ofs_unit + 0x1C0
-		debugPrint(prpt.info)
-
-		if prpt.no ~= 0xFF and prpt.speed > 8 then
-			enemy = enemy + 1
-		end
-	end
-
-	debugPrint(string.format("-- enemy = %2d", enemy))
-	if enemy < 1 then
-		print(string.format("-- enemy = %2d", enemy))
-		ret = true
-	else
-		ret = false
-	end
-
-	return ret
-end
-
 Mandalia = {}
 Mandalia.logname = "ch1_random_encount10.log"
 
@@ -191,6 +148,147 @@ function GainedJpUP.success()
 end
 
 
+Speed9 = {}
+Speed9.logname = "ch4_Finath_speed9.log"
+
+function Speed9.pre_attempt()
+	fadv(1)
+end
+
+function Speed9.attempt()
+	pressBtn({circle=1}, 1)
+	fadv(900)
+end
+
+function Speed9.post_attempt()
+	-- pass
+end
+
+function Speed9.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit
+	local enemy = 0
+
+	for i=1, 12 do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		debugPrint(prpt.info)
+
+		if prpt.no ~= 0xFF and prpt.speed > 8 then
+			enemy = enemy + 1
+		end
+	end
+
+	debugPrint(string.format("-- enemy = %2d", enemy))
+	if enemy < 1 then
+		print(string.format("-- enemy = %2d", enemy))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
+
+
+RouteEncount = {}
+RouteEncount.logname = "encount_bethla_zarghidas.log"
+
+function RouteEncount.logHeader()
+	debugPrint(string.format("Route: Bethla to Zarghidas. How many often are there encounts."))
+end
+
+function RouteEncount.pre_attempt()
+	fadv(3)
+end
+
+function RouteEncount.attempt()
+	pressBtn({circle=1}, 1)
+	fadv(900)
+end
+
+function RouteEncount.post_attempt()
+	-- pass
+end
+
+function RouteEncount.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit
+	local enemy = 0
+	local entd_flag = 0
+
+	for i=1, 12 do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		debugPrint(prpt.info)
+
+		entd_flag = bit.band(prpt.entd_flag, 0x50)  -- 0x50 Random enemy
+		if entd_flag ~= 0 then
+			enemy = enemy + 1
+		end
+	end
+
+	debugPrint(string.format("-- enemy = %2d", enemy))
+	if enemy > 1 then
+		print(string.format("-- enemy = %2d", enemy))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
+
+
+CheckBadZodiac = {}
+CheckBadZodiac.logname = "ch4_check_zodiac_germinas1.log"
+
+function CheckBadZodiac.pre_attempt()
+	fadv(1)
+end
+
+function CheckBadZodiac.attempt()
+	pressBtn({circle=1}, 1)
+	fadv(900)
+end
+
+function CheckBadZodiac.post_attempt()
+	-- pass
+end
+
+function CheckBadZodiac.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit
+	local enemy = 0
+	local compatibility = 0
+	local total_enemy = 6
+
+	for i=1, total_enemy do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		debugPrint(prpt.info)
+
+		compatibility = Zodiac.isBadWithCapricorn(prpt.zodiac, prpt.gender)
+		if compatibility then
+			enemy = enemy + 1
+		end
+	end
+
+	debugPrint(string.format("-- bad zodiac enemy = %2d", enemy))
+	if enemy == 0 then
+		print(string.format("-- bad zodiac enemy = %2d", enemy))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
+
+
 Orlandu = {}
 Orlandu.logname = "ch4_orlandu_join.log"
 
@@ -234,14 +332,15 @@ end
 ------------------------------------------------------------
 
 local initial = 1
-local retry = 100
+local retry = 50
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 
-interface = Mandalia
+interface = CheckBadZodiac
 
 f = io.open(interface.logname, "a")
 if f == nil then debugPrint("error: Could not open file") end
+if interface.logHeader ~= nil then interface.logHeader() end
 
 -- create original state
 local state = savestate.create()
@@ -256,7 +355,7 @@ for i=0, retry do
 
 	interface.pre_attempt()
 	fadv(i)
-	interface.pre_attempt2()
+	if interface.pre_attempt2 ~= nil then interface.pre_attempt2() end
 	local fc = emu.framecount()
 	local rng = memory.readdword(adr_rng)
 	local cur_session = memory.readdword(adr_cur_session)

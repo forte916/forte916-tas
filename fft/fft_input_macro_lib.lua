@@ -1143,16 +1143,6 @@ function TAS.ch1_random_battle_mandalia_deploy()
 	fadv(100)
 end
 
-function TAS.skip_term_of_win()
-	-- -before 7f from term of win
-	pressBtn({circle=1}, 1)
-	-- fadv(66-3)
-	-- fadv(8-3)
-	-- -before 3f from READY
-	pressBtn({circle=1}, 1)
-	fadv(100)
-end
-
 function TAS.ch1_random_battle_Yell_ramza()
 	-- arrowed and shown AT
 	fadv(7)
@@ -1435,7 +1425,7 @@ function TAS.buyThunderRod()
 	pressBtn({circle=1}, 1)  -- select ramza
 	fadv(19)
 	pressBtn({circle=1}, 1)  -- select fit
-	fadv(4)
+	fadv(3)
 	pressBtn({circle=1}, 1)  -- select right hand
 	fadv(10)
 	pressBtn({down=1}, 4)
@@ -1596,20 +1586,20 @@ function TAS.buyWizardStuff_MagicGauntret()
 	fadv(53+2)
 	pressBtn({down=1}, 2)
 	pressBtn({down=1}, 2)  -- fitting room
-	pressBtn({circle=1}, 1)
+	pressBtn({circle=1}, 1)  -- select fitting room
 	fadv(7+2)
 	pressBtn({circle=1}, 1)  -- cancel message
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- select ramza
 	fadv(19+1)
 	pressBtn({circle=1}, 1)  -- select fit
-	fadv(4)
+	fadv(3)
 	pressBtn({circle=1}, 1)  -- select right hand
 	fadv(10)
 	pressBtn({circle=1}, 1)  -- Wizard Stuff
 	fadv(1)
-	pressBtn({up=1}, 2)
-	fadv(3)
+	pressBtn({up=1}, 1)
+	fadv(4)
 	pressBtn({circle=1}, 1)  -- select accessary
 	fadv(10)
 	pressBtn({square=1, down=1}, 3)
@@ -1652,6 +1642,7 @@ function TAS.jobChangeWizard()
 	fadv(4)
 	TAS.exitFormation()
 end
+
 function TAS.buyWizardRod_SprintShoes()
 	pressBtn({x=1}, 1)  -- exit city
 	fadv(5)
@@ -1662,14 +1653,14 @@ function TAS.buyWizardRod_SprintShoes()
 	fadv(53+2)
 	pressBtn({down=1}, 2)
 	pressBtn({down=1}, 2)  -- fitting room
-	pressBtn({circle=1}, 1)
+	pressBtn({circle=1}, 1)  -- select fitting room
 	fadv(7+2)
 	pressBtn({circle=1}, 1)  -- cancel message
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- select ramza
 	fadv(19+1)
 	pressBtn({circle=1}, 1)  -- select fit
-	fadv(4)
+	fadv(3)
 	pressBtn({circle=1}, 1)  -- select right hand
 	fadv(10)
 	pressBtn({circle=1}, 1)  -- Wizard Rod
@@ -1702,8 +1693,8 @@ function TAS.equipMagicGauntlet_setCounterMagic()
 	fadv(27+1)
 	pressBtn({circle=1}, 1)  -- equip
 	fadv(1+1)
-	pressBtn({up=1}, 2)
-	fadv(3)
+	pressBtn({up=1}, 1)
+	fadv(4)
 	pressBtn({circle=1}, 1)  -- accesarry
 	fadv(10)
 	pressBtn({square=1, down=1}, 3)
@@ -1821,10 +1812,204 @@ function TAS.ch4_Sluice_turn2()
 	--fadv(xx)
 end
 
+function TAS.ch4_join_member()
+	-- before 1f from getting to center
+	pressBtn({circle=1}, 4)
+	pressBtn({circle=1}, 1)
+	fadv(250)
+end
+
+function TAS.duplicateExcalibur_buyItems()
+	-- Item duplication glich
+	pressBtn({circle=1}, 1)
+	fadv(21)
+	pressBtn({down=1}, 7)
+	pressBtn({circle=1}, 1)  -- shop
+	fadv(53+2)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)  -- fitting room
+	pressBtn({circle=1}, 1)  -- select fitting room
+	fadv(7+2)
+	pressBtn({circle=1}, 1)  -- cancel message
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select ramza
+	fadv(19+1)
+	pressBtn({r1=1}, 2)  -- select orlandu
+	pressBtn({circle=1}, 1)  -- select fit
+	fadv(3)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select left hand
+	fadv(10)
+	pressBtn({circle=1}, 1)  -- sword
+	fadv(5)
+	pressBtn({x=1}, 2)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)  -- select best fit
+	fadv(6)
+	pressBtn({circle=1}, 1)  -- select OK
+	fadv(5)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 1)  -- exit fitting room
+	fadv(4+1)
+
+	-- Buy Aegis Shield(MA+1), Flash hat(MA+1, Speed+1) for Ramza
+	pressBtn({circle=1}, 1)  -- select fitting room
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- cancel message
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select ramza
+	fadv(19+1)
+	pressBtn({circle=1}, 1)  -- select fit
+	fadv(3)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select left hand
+	fadv(10)
+	pressBtn({square=1, down=1}, 3)
+	pressBtn({down=1}, 2)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- Aegis Shield
+	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select head
+	fadv(10)
+	pressBtn({circle=1}, 1)  -- Flash Hat
+	fadv(5)
+	pressBtn({x=1}, 4)
+
+	-- Buy Twist Headband(PA+2), Power Sleeve(PA+2) for Orlandu
+	pressBtn({r1=1}, 2)  -- select orlandu
+	pressBtn({circle=1}, 1)  -- select fit
+	fadv(3)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select head
+	fadv(10)
+	pressBtn({square=1, down=1}, 3)
+	pressBtn({up=1}, 2)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- Twist Headband
+	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select body
+	fadv(10)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(4+1)
+	pressBtn({circle=1}, 1)  -- Power Sleeve
+	pressBtn({x=1}, 2)
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 1)  -- exit fitting room
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- yes
+	fadv(4)
+	pressBtn({x=1}, 1)  -- exit shop
+	fadv(4+1)
+	pressBtn({x=1}, 1)  -- cancel message
+	fadv(47)
+	pressBtn({x=1}, 1)  -- exit city
+	fadv(4)
+	pressBtn({triangle=1}, 5)  -- show menu
+end
+
+function TAS.equipExcalibur_setMath()
+	-- item
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({circle=1}, 1)  -- item
+	fadv(27+1)
+	pressBtn({circle=1}, 1)  -- equip
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- right hand
+	fadv(10)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- Excalibur
+	fadv(1)
+	pressBtn({up=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- accesarry
+	fadv(10)
+	pressBtn({square=1, down=1}, 3)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- Magic Gauntlet
+	fadv(1)
+	pressBtn({up=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- body
+	fadv(10)
+	pressBtn({square=1, down=1}, 3)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- Wizard Robe
+	fadv(5)
+	pressBtn({x=1}, 1)  -- cancel equip
+	fadv(2)
+	pressBtn({x=1}, 1)  -- cancel item
+	fadv(30)
+	-- ability
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)  -- ability
+	fadv(27+1)
+	pressBtn({circle=1}, 1)   -- set
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- counter ability
+	fadv(9)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({right=1}, 4)  -- math
+	fadv(2)
+	pressBtn({circle=1}, 1)   -- select math
+	fadv(5)
+	pressBtn({x=1}, 1)  -- cancel set
+	fadv(1)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)   -- remove
+	fadv(1)
+	pressBtn({up=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- move ability
+	fadv(5)
+	pressBtn({x=1}, 1)  -- cancel remove
+	fadv(1)
+	pressBtn({x=1}, 1)  -- cancel ability
+	fadv(30-2)
+	TAS.exitFormation()
+end
+
+
+function TAS.ch4_Germinas_deploy()
+	-- -before 3f from reverse triangle
+	pressBtn({r1=1, left=1}, 2)
+	pressBtn({circle=1}, 1)
+	pressBtn({start=1}, 3)
+	pressBtn({start=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(100)
+end
 
 function TAS.ch1_battle_deploy()
 	-- -before 3f from reverse triangle
 	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 1)
+	fadv(100)
+end
+
+function TAS.skip_term_of_win()
+	-- -before 7f from term of win
+	pressBtn({circle=1}, 1)
+	-- fadv(66-3)
+	-- fadv(8-3)
+	-- -before 3f from READY
 	pressBtn({circle=1}, 1)
 	fadv(100)
 end

@@ -32,7 +32,7 @@ emu.speedmode("turbo")       -- drops some frames
 
 
 Zirekile_Falls = {}
-Zirekile_Falls.logname = " ch2_zirekile_death.log"
+Zirekile_Falls.logname = "ch2_zirekile_death.log"
 
 function Zirekile_Falls.pre_attempt()
 	pressBtn({circle=1}, 4)  -- select Death of math at Zirekile_Falls
@@ -76,7 +76,7 @@ function Zirekile_Falls.success()
 end
 
 Barius_Valley = {}
-Barius_Valley.logname = " ch2_barius_agrius.log"
+Barius_Valley.logname = "ch2_barius_agrius.log"
 
 function Barius_Valley.pre_attempt()
 	pressBtn({circle=1}, 4)  -- select Bolt3 of math at Barius_Valley
@@ -125,8 +125,53 @@ function Barius_Valley.success()
 	return ret
 end
 
+Death_All = {}
+Death_All.logname = "ch4_death_all_germinas2.log"
+
+function Death_All.pre_attempt()
+end
+
+function Death_All.attempt()
+	pressBtn({circle=1}, 4)  -- select Death of math
+	pressBtn({circle=1}, 6)  -- confirm target
+	pressBtn({circle=1}, 1)  -- execute attack
+	fadv(150)
+end
+
+function Death_All.post_attempt()
+	-- pass
+end
+
+function Death_All.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit
+	local enemy = 0
+	local total_enemy = 6
+
+	for i=1, total_enemy do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		debugPrint(prpt.info)
+
+		if prpt.hp == 0 then
+			enemy = enemy + 1
+		end
+	end
+
+	debugPrint(string.format("-- enemy = %2d", enemy))
+	if enemy == total_enemy then
+		print(string.format("-- enemy = %2d", enemy))
+		ret = true
+	else
+		ret = false
+	end
+
+	return ret
+end
+
 Critical = {}
-Critical.logname = " critical_chN_turnN.log"
+Critical.logname = "critical_chN_turnN.log"
 
 function Critical.pre_attempt()
 	pressBtn({circle=1}, 2)  -- select target
@@ -171,26 +216,27 @@ end
 ------------------------------------------------------------
 
 local initial = 1
-local retry = 200
+local retry = 400
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 
-interface = Critical
+interface = Death_All
 
 f = io.open(interface.logname, "a")
 if f == nil then debugPrint("error: Could not open file") end
+
+debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
 -- create original state
 local state = savestate.create()
 savestate.save(state)
 savestate.load(state)
 
---debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
---debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
-debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
---debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
-for i=0, retry do
+for i=100, retry do
 	if initial == 1 then
 		initial = 0
 	end

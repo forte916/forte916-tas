@@ -437,20 +437,21 @@ ch4-Sluice
   * Quick を使う場合はヘイストをさせない
   * Quick を使わない場合は敵のヘイストを自分も受ける
 * Orlandu Lv27 以上かつ Lightning Stab を覚えている. Lv29 だと PA +1 なのでベター
+* Encount odds is 6/10 from Bethla to Zarghidas
 
 ch4-Zarghidas
 -------------
-* Make use of item duplicatin glich to get a second Excalibur.
-* Buy Aegis Shield(MA+1) for Ramza
+* Make use of item duplication glich to get a second Excalibur.
+* Buy Aegis Shield(MA+1), Flash hat(MA+1, Speed+1) for Ramza
 * Buy Twist Headband(PA+2), Power Sleeve(PA+2) for Orlandu
 
 * Formation
-* Ramza equip Exbalibur, Holy Miter(MA+1), Wizard Robe(MA+2), Magic Gauntlet(MA+2)
+* Ramza equip Exbalibur, Wizard Robe(MA+2), Magic Gauntlet(MA+2)
 * Set Math Skill, MP Switch
 * Remove Teleport
 
-* Ramza, speed 8, MA 13, Excalibur (speed 12)
-* Orlandu, speed 8, PA 16, Excalibur (speed 12)
+* Ramza, Lv30, speed 8, MA 13, Excalibur (speed 12)
+* Orlandu, Lv30, speed 8, PA 17, Excalibur (speed 12)
 
 * TA 動画では
   * shop
@@ -462,11 +463,16 @@ ch4-Zarghidas
   * set Math Skill, MP Switch, remove Teleport
   * Ramza speed 8, MA 13
 
+
 ch4-Germinas
 ------------
 * TA 動画では
   * Ramza 初期配置, Orlandu Ramza 左1
   * 2部隊編成なので Orlandu も出す
+
+* Note
+  * Flare 629877 - 631321 = 1444f
+  * Death 629877 - 630841 =  964f (-480f)
 
 
 ch4-Limberry (outside)
@@ -848,6 +854,5 @@ ROM hack
   *   -0xF800 -> SCUS
   * -0x1BF000 -> REQUIRE.OUT
   * -0x1BF000 -> EQUIP.OUT
-  * -0x1BF000 -> ATTACK.OUT??
+  * -0x1BF000 -> ATTACK.OUT
 
-* ATTACK.out psdis展開アドレス +1BF000h
