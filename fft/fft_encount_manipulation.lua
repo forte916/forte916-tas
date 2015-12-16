@@ -1,10 +1,11 @@
 -- ROM: Final Fantasy Tactics (J) (v1.1) [SLPS-00770]
 -- Emulater: psxjin v2.0.2
 --
--- This script manipulates the number of enemy.
+-- This script manipulates encounts and enemy status.
 --
 -- Usage
---   1. Start this script at gariland or mandalia.
+--   1. Set interface as proper clsss.
+--   1. Start this script properlly.
 --
 
 require "psx_lib"
@@ -83,21 +84,25 @@ function Mandalia.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
+	local total_enemy = 10
 	local enemy = 0
+	local str
 
-	for i=1, 10 do
+	for i=1, total_enemy do
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
-		debugPrint(prpt.info)
+		str = prpt.info
 
 		if prpt.no ~= 0xFF then
 			enemy = enemy + 1
+			str = str.." , exists"
 		end
+		debugPrint(str)
 	end
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy < 3 then
-		print(string.format("-- enemy = %2d", enemy))
+		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
 		ret = true
 	else
 		ret = false
@@ -132,18 +137,21 @@ function GainedJpUP.success()
 	local prpt = {}
 	local ofs_unit = adr_battle_unit3
 	local skill = 0
+	local str
 
 	prpt = Bunit.readProperty(ofs_unit)
-	debugPrint(prpt.info)
+	str = prpt.info
 
 	skill = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
 	if skill ~= 0 then
-		print(string.format("-- skill = %x", skill))
+		print(string.format("-- skill = %x, retry = %d", skill, retry))
+		str = str.." , Gained Jp UP"
 		ret = true
 	else
 		ret = false
 	end
 
+	debugPrint(str)
 	return ret
 end
 
@@ -168,21 +176,25 @@ function Speed9.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
+	local total_enemy = 12
 	local enemy = 0
+	local str
 
-	for i=1, 12 do
+	for i=1, total_enemy do
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
-		debugPrint(prpt.info)
+		str = prpt.info
 
 		if prpt.no ~= 0xFF and prpt.speed > 8 then
 			enemy = enemy + 1
+			str = str.." , speed 9"
 		end
+		debugPrint(str)
 	end
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy < 1 then
-		print(string.format("-- enemy = %2d", enemy))
+		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
 		ret = true
 	else
 		ret = false
@@ -216,23 +228,27 @@ function RouteEncount.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
+	local total_enemy = 12
 	local enemy = 0
 	local entd_flag = 0
+	local str
 
-	for i=1, 12 do
+	for i=1, total_enemy do
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
-		debugPrint(prpt.info)
+		str = prpt.info
 
 		entd_flag = bit.band(prpt.entd_flag, 0x50)  -- 0x50 Random enemy
 		if entd_flag ~= 0 then
 			enemy = enemy + 1
+			str = str.." , random enemy"
 		end
+		debugPrint(str)
 	end
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy > 1 then
-		print(string.format("-- enemy = %2d", enemy))
+		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
 		ret = true
 	else
 		ret = false
@@ -262,24 +278,31 @@ function CheckBadZodiac.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
+	local total_enemy = 6
 	local enemy = 0
 	local compatibility = 0
-	local total_enemy = 6
+	local str
 
 	for i=1, total_enemy do
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
-		debugPrint(prpt.info)
+		str = prpt.info
 
 		compatibility = Zodiac.isBadWithCapricorn(prpt.zodiac, prpt.gender)
 		if compatibility then
 			enemy = enemy + 1
+			str = str.." , bad"
+		elseif prpt.faith < 50 then
+			enemy = enemy + 1
+			str = str.." , unfaith"
 		end
+
+		debugPrint(str)
 	end
 
-	debugPrint(string.format("-- bad zodiac enemy = %2d", enemy))
+	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy == 0 then
-		print(string.format("-- bad zodiac enemy = %2d", enemy))
+		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
 		ret = true
 	else
 		ret = false
@@ -311,18 +334,21 @@ function Orlandu.success()
 	local ofs_unit = adr_battle_unit
 	local skill = 0
 	local lv = 0
+	local str
 
 	prpt = Bunit.readProperty(ofs_unit)
-	debugPrint(prpt.info)
+	str = prpt.info
 
 	skill = bit.band(prpt.base_action_learned1, 0x10)  -- 0x10 means Lightning Stab
 	if skill ~= 0 and prpt.lv > 26 then
-		print(string.format("-- skill = %x, lv = %2d", skill, prpt.lv))
+		print(string.format("-- skill = %x, lv = %2d, retry = %d", skill, prpt.lv, retry))
+		str = str.." , Lightning Stab"
 		ret = true
 	else
 		ret = false
 	end
 
+	debugPrint(str)
 	return ret
 end
 
@@ -331,22 +357,25 @@ end
 -- main
 ------------------------------------------------------------
 
-local initial = 1
-local retry = 50
-local begin_fc = emu.framecount()
-local begin_date = os.date()
-
-interface = CheckBadZodiac
-
-f = io.open(interface.logname, "a")
-if f == nil then debugPrint("error: Could not open file") end
-if interface.logHeader ~= nil then interface.logHeader() end
-
 -- create original state
 local state = savestate.create()
 savestate.save(state)
 savestate.load(state)
 
+local initial = 1
+local begin_fc = emu.framecount()
+local begin_date = os.date()
+local fc = emu.framecount()
+local rng = memory.readdword(adr_rng)
+
+local interface = CheckBadZodiac
+
+f = io.open(interface.logname, "a")
+if f == nil then print("error: Could not open file") end
+if interface.logHeader ~= nil then interface.logHeader() end
+
+
+retry = 50
 
 for i=0, retry do
 	if initial == 1 then
@@ -356,8 +385,8 @@ for i=0, retry do
 	interface.pre_attempt()
 	fadv(i)
 	if interface.pre_attempt2 ~= nil then interface.pre_attempt2() end
-	local fc = emu.framecount()
-	local rng = memory.readdword(adr_rng)
+	fc = emu.framecount()
+	rng = memory.readdword(adr_rng)
 	local cur_session = memory.readdword(adr_cur_session)
 	local milsecs = memory.readdword(adr_milsecs)
 
@@ -378,7 +407,7 @@ for i=0, retry do
 end
 
 
-local fc = emu.framecount()
+fc = emu.framecount()
 debugPrint(string.format("<<< lua bot is finished <<<"))
 debugPrint(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
 debugPrint(string.format("    end:: %s,  fc = %d", os.date(), fc))

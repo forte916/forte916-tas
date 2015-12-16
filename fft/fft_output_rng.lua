@@ -1,7 +1,7 @@
 -- ROM: Final Fantasy Tactics (J) (v1.1) [SLPS-00770]
 -- Emulater: psxjin v2.0.2
 --
--- This script shows rng.
+-- This script outputs rng.
 --
 -- Usage
 --   1. Start this script
@@ -14,32 +14,32 @@ require "fft_lib"
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
-function drawRNG(x, y)
-	x = x or 80
-	y = y or 0
 
+function outputRNG()
 	local rng = memory.readdword(adr_rng)
-	local random = rand(adr_rng)
+	local fc = emu.framecount()
 
-	gui.text(x, y   , string.format(" rng:%08X", rng))
-	gui.text(x, y+8 , string.format(" rand:%d", random))
+	debugPrint(string.format("%d, %08X", fc, rng))
 end
 
-function drawNextRNG(x, y)
-	x = x or 140
-	y = y or 0
-
+function outputNextRNG()
 	local rnglist = {}
 	local rng = memory.readdword(adr_rng)
+	local fc = emu.framecount()
+	local retry = 500
 
-	for i=0, 20 do
+	debugPrint(string.format("----- fc = %d, rng = %08X -----", fc, rng))
+
+	for i=0, retry do
 		rnglist[i] = rng
 		rng = next_rng(rng)
 	end
 
-	for i=0, 20 do
-		gui.text(x, y+(8*i) , string.format("%08X", rnglist[i]))
+	for i=0, retry do
+		debugPrint(string.format("%08X", rnglist[i]))
 	end
+
+	debugPrint(string.format("----- -----"))
 end
 
 
@@ -47,26 +47,19 @@ end
 -- main
 ------------------------------------------------------------
 
-initial = 1
+f = io.open("next_rng.log", "a")
+if f == nil then print("error: Could not open file") end
 
-while true do
+--while true do
+--	outputRNG()
+--	emu.frameadvance()
+--end
 
-	if initial == 1 then
-		--Funit.showAll()
-		Bunit.showAll()
-		initial = 0
-	end
+outputNextRNG()
+f:flush()
 
-	if initial == 0 then
-		drawRNG()
-		--drawNextRNG()
-		--Funit.drawAll()
-		Bunit.drawAll()
-	end
-
-	emu.frameadvance()
-end
 
 print(string.format("<<< lua bot is finished <<<"))
 emu.pause()
+f:close()
 

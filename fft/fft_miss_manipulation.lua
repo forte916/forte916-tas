@@ -72,19 +72,21 @@ end
 -- main
 ------------------------------------------------------------
 
-local initial = 1
-local retry = 100
-local begin_fc = emu.framecount()
-local begin_date = os.date()
-
-f = io.open("ramza_miss_ch1_random6_1.log", "a")
-if f == nil then debugPrint("error: Could not open file") end
-
 -- create original state
 local state = savestate.create()
 savestate.save(state)
 savestate.load(state)
 
+local initial = 1
+local begin_fc = emu.framecount()
+local begin_date = os.date()
+local fc = emu.framecount()
+local rng = memory.readdword(adr_rng)
+
+f = io.open("ramza_miss_ch1_random6_1.log", "a")
+if f == nil then print("error: Could not open file") end
+
+retry = 100
 
 for i=0, retry do
 	if initial == 1 then
@@ -93,8 +95,8 @@ for i=0, retry do
 
 	pre_attempt()
 	fadv(i)
-	local fc = emu.framecount()
-	local rng = memory.readdword(adr_rng)
+	fc = emu.framecount()
+	rng = memory.readdword(adr_rng)
 	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
 
 	attempt()
@@ -110,7 +112,7 @@ for i=0, retry do
 end
 
 
-local fc = emu.framecount()
+fc = emu.framecount()
 debugPrint(string.format("<<< lua bot is finished <<<"))
 debugPrint(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
 debugPrint(string.format("    end:: %s,  fc = %d", os.date(), fc))

@@ -215,36 +215,39 @@ end
 -- main
 ------------------------------------------------------------
 
-local initial = 1
-local retry = 400
-local begin_fc = emu.framecount()
-local begin_date = os.date()
-
-interface = Death_All
-
-f = io.open(interface.logname, "a")
-if f == nil then debugPrint("error: Could not open file") end
-
-debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
---debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
---debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
---debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
-
 -- create original state
 local state = savestate.create()
 savestate.save(state)
 savestate.load(state)
 
+local initial = 1
+local begin_fc = emu.framecount()
+local begin_date = os.date()
+local fc = emu.framecount()
+local rng = memory.readdword(adr_rng)
 
-for i=100, retry do
+local interface = Death_All
+
+f = io.open(interface.logname, "a")
+if f == nil then print("error: Could not open file") end
+
+--debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
+debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
+
+
+retry = 400
+
+for i=0, retry do
 	if initial == 1 then
 		initial = 0
 	end
 
 	interface.pre_attempt()
 	fadv(i)
-	local fc = emu.framecount()
-	local rng = memory.readdword(adr_rng)
+	fc = emu.framecount()
+	rng = memory.readdword(adr_rng)
 	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
 
 	interface.attempt()
@@ -260,7 +263,7 @@ for i=100, retry do
 end
 
 
-local fc = emu.framecount()
+fc = emu.framecount()
 debugPrint(string.format("<<< lua bot is finished <<<"))
 debugPrint(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
 debugPrint(string.format("    end:: %s,  fc = %d", os.date(), fc))
