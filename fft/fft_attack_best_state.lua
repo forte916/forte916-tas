@@ -4,7 +4,8 @@
 -- This script takes best action.
 --
 -- Usage
---   1. Start this script.
+--   1. Set interface class properly.
+--   2. Start this script properly.
 --
 
 require "fft_input_macro_lib"

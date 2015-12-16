@@ -5,8 +5,8 @@
 -- ex.) critical, death all and survive someone.
 --
 -- Usage
---   1. Set interface as proper clsss.
---   1. Start this script properlly.
+--   1. Set interface class properly.
+--   2. Start this script properly.
 --
 
 require "fft_attack_lib"
