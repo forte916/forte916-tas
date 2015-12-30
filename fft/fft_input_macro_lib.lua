@@ -939,7 +939,7 @@ function TAS.learnRamzaYell()
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	fadv(2)
-	pressBtn({circle=1}, 8)   -- select yell
+	pressBtn({circle=1}, 8)   -- Yell
 	pressBtn({circle=1}, 10)  -- select yes
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 4)
@@ -976,14 +976,14 @@ end
 
 function TAS.ch1_3_mandalia_deploy()
 	-- -before 3f from reverse triangle
-	pressBtn({left=1}, 3)
-	pressBtn({left=1}, 3)
-	pressBtn({left=1}, 3)
-	pressBtn({left=1}, 3)
-	pressBtn({up=1}, 3)
-	pressBtn({circle=1}, 2)
-	pressBtn({l1=1, down=1}, 3)
-	pressBtn({circle=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({l1=1, down=1}, 2)
+	pressBtn({circle=1}, 1)
 	pressBtn({start=1}, 3)
 	pressBtn({circle=1}, 1)
 	fadv(100)
@@ -1079,10 +1079,10 @@ function TAS.jobChangeRamza()
 end
 
 function TAS.learnRamzaAccumulate()
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)  -- ability
 	fadv(27)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 10)  -- select learn
 	pressBtn({circle=1}, 10)  -- select squire
 	pressBtn({circle=1}, 8)   -- select accumulate
@@ -1107,8 +1107,7 @@ function TAS.learnRamzaAccumulate()
 	pressBtn({circle=1}, 10)  -- select slot
 	pressBtn({circle=1}, 1)   -- select gained jp jp
 	fadv(5)
-	pressBtn({x=1}, 1)
-	fadv(1)
+	pressBtn({x=1}, 2)
 	pressBtn({x=1}, 1)
 	fadv(30-2)
 	TAS.exitFormation()
@@ -1134,10 +1133,10 @@ end
 
 function TAS.ch1_random_battle_mandalia_deploy()
 	-- -before 3f from reverse triangle
-	pressBtn({right=1}, 3)
-	pressBtn({right=1}, 3)
-	pressBtn({up=1}, 3)
-	pressBtn({circle=1}, 2)
+	pressBtn({right=1}, 2)
+	pressBtn({right=1}, 2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)
 	pressBtn({start=1}, 3)
 	pressBtn({circle=1}, 1)
 	fadv(100)
@@ -1417,7 +1416,7 @@ function TAS.buyThunderRod()
 	pressBtn({circle=1}, 1)  -- shop
 	fadv(55)
 	pressBtn({down=1}, 2)
-	pressBtn({down=1}, 2)  -- fitting room
+	pressBtn({down=1}, 1)  -- fitting room
 	pressBtn({circle=1}, 1)
 	fadv(7)
 	pressBtn({circle=1}, 1)  -- cancel message
@@ -1434,7 +1433,7 @@ function TAS.buyThunderRod()
 	pressBtn({circle=1}, 1)  -- thunder rod
 	fadv(5)
 	pressBtn({x=1}, 2)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)  -- exit fitting room
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- yes
@@ -1479,7 +1478,7 @@ end
 
 function TAS.equipRamza_jobChangeMustadio()
 	-- remove Ovelia
-	pressBtn({r1=1}, 2)  -- select ovelia
+	pressBtn({r1=1}, 1)  -- select ovelia
 	pressBtn({triangle=1}, 2)  -- show menu
 	pressBtn({circle=1}, 1)  -- item
 	fadv(27)
@@ -1530,9 +1529,9 @@ function TAS.buyGreenBeret()
 	pressBtn({circle=1}, 2)  -- How many
 	pressBtn({circle=1}, 1)  -- yes
 	fadv(4)
-	pressBtn({x=1}, 1)  -- exit buy
-	fadv(4)
 	pressBtn({x=1}, 1)  -- cancel message
+	fadv(4)
+	pressBtn({x=1}, 1)  -- exit buy
 	fadv(1)
 	pressBtn({x=1}, 1)  -- exit shop
 	fadv(3)
@@ -1585,9 +1584,9 @@ function TAS.buyWizardStuff_MagicGauntret()
 	pressBtn({circle=1}, 1)  -- shop
 	fadv(53+2)
 	pressBtn({down=1}, 2)
-	pressBtn({down=1}, 2)  -- fitting room
+	pressBtn({down=1}, 1)  -- fitting room
 	pressBtn({circle=1}, 1)  -- select fitting room
-	fadv(7+2)
+	fadv(7+3)
 	pressBtn({circle=1}, 1)  -- cancel message
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- select ramza
@@ -1608,7 +1607,7 @@ function TAS.buyWizardStuff_MagicGauntret()
 	pressBtn({circle=1}, 1)  -- Magic Gauntret
 	fadv(5)
 	pressBtn({x=1}, 2)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)  -- exit fitting room
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- yes
@@ -1652,9 +1651,9 @@ function TAS.buyWizardRod_SprintShoes()
 	pressBtn({circle=1}, 1)  -- shop
 	fadv(53+2)
 	pressBtn({down=1}, 2)
-	pressBtn({down=1}, 2)  -- fitting room
+	pressBtn({down=1}, 1)  -- fitting room
 	pressBtn({circle=1}, 1)  -- select fitting room
-	fadv(7+2)
+	fadv(7+3)
 	pressBtn({circle=1}, 1)  -- cancel message
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- select ramza
@@ -1672,7 +1671,7 @@ function TAS.buyWizardRod_SprintShoes()
 	pressBtn({circle=1}, 1)  -- Sprint Shoes
 	fadv(5)
 	pressBtn({x=1}, 2)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)  -- exit fitting room
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- yes
@@ -1827,9 +1826,9 @@ function TAS.duplicateExcalibur_buyItems()
 	pressBtn({circle=1}, 1)  -- shop
 	fadv(53+2)
 	pressBtn({down=1}, 2)
-	pressBtn({down=1}, 2)  -- fitting room
+	pressBtn({down=1}, 1)  -- fitting room
 	pressBtn({circle=1}, 1)  -- select fitting room
-	fadv(7+2)
+	fadv(7+3)
 	pressBtn({circle=1}, 1)  -- cancel message
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- select ramza
@@ -1850,7 +1849,7 @@ function TAS.duplicateExcalibur_buyItems()
 	pressBtn({circle=1}, 1)  -- select OK
 	fadv(5)
 	pressBtn({up=1}, 2)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)  -- exit fitting room
 	fadv(4+1)
 
@@ -1903,7 +1902,7 @@ function TAS.duplicateExcalibur_buyItems()
 	fadv(4+1)
 	pressBtn({circle=1}, 1)  -- Power Sleeve
 	pressBtn({x=1}, 2)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)  -- exit fitting room
 	fadv(4)
 	pressBtn({circle=1}, 1)  -- yes
@@ -1989,13 +1988,207 @@ end
 
 function TAS.ch4_Germinas_deploy()
 	-- -before 3f from reverse triangle
-	pressBtn({r1=1, left=1}, 2)
+	pressBtn({r1=1, left=1}, 1)
 	pressBtn({circle=1}, 1)
 	pressBtn({start=1}, 3)
-	pressBtn({start=1}, 1)
+	--pressBtn({start=1}, 1)
 	pressBtn({circle=1}, 1)
 	fadv(100)
 end
+
+function TAS.ch4_Limberry_outside_deploy()
+	-- -before 3f from reverse triangle
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({r1=1, left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 1)
+	fadv(100)
+end
+
+function TAS.ch4_Limberry_outside_turn1()
+	-- arrowed
+	fadv(7)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
+	pressBtn({circle=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(1)
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- Sword skill
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- Lightning Stab
+	pressBtn({left=1}, 3)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 16+1)  -- confirm target
+	pressBtn({circle=1}, 1)  -- execute attack
+	--fadv(xx)
+end
+
+function TAS.learnMove1_Orlandu()
+	-- learn Move+1
+	pressBtn({r1=1}, 1)  -- select Orlandu
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)  -- ability
+	fadv(27)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 10)  -- learn
+	pressBtn({circle=1}, 10+1)  -- sword master
+	pressBtn({left=1}, 6)
+	pressBtn({circle=1}, 8)   -- Move+1
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({x=1}, 10)
+	pressBtn({x=1}, 3)
+	-- set Move+1
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 2)  -- set
+	pressBtn({up=1}, 3)
+	fadv(2)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({circle=1}, 1)   -- Move+1
+	fadv(5)
+	pressBtn({x=1}, 2)
+	pressBtn({x=1}, 1)
+	fadv(30-2)
+end
+
+function TAS.ch4_Limberry_inside_deploy()
+	-- -before 3f from reverse triangle
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({r1=1, left=1}, 2)
+	pressBtn({left=1}, 1)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 1)
+	fadv(100)
+end
+
+function TAS.ch4_Limberry_zarela_deploy()
+	-- -before 3f from reverse triangle
+	pressBtn({r1=1, up=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 1)
+	fadv(100)
+end
+
+
+function TAS.buyThiefHat_RefrectRing()
+	-- Fit Thief Hat for Orlandu
+	pressBtn({circle=1}, 1)
+	fadv(21)
+	pressBtn({down=1}, 7)
+	pressBtn({circle=1}, 1)  -- shop
+	fadv(53+2)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)  -- fitting room
+	pressBtn({circle=1}, 1)  -- select fitting room
+	fadv(7+3)
+	pressBtn({circle=1}, 1)  -- cancel message
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select ramza
+	fadv(19+1)
+	pressBtn({r1=1}, 2)  -- select orlandu
+	pressBtn({circle=1}, 1)  -- select fit
+	fadv(3)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- select head
+	fadv(10)
+	pressBtn({circle=1}, 1)  -- Thief Hat
+	fadv(5)
+	pressBtn({x=1}, 2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)  -- exit fitting room
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- yes
+
+	-- Buy Thief Hat, Reflect Ring
+	fadv(4)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)  -- buy
+	fadv(11)
+	pressBtn({right=1}, 6)
+	pressBtn({circle=1}, 2)  -- Thief Hat
+	pressBtn({circle=1}, 2)  -- How many
+	pressBtn({circle=1}, 1)  -- yes
+	fadv(2)
+	pressBtn({x=1}, 1)  -- cancel message
+	pressBtn({right=1}, 4)
+	pressBtn({right=1}, 6)
+	pressBtn({square=1, down=1}, 4)
+	pressBtn({square=1, down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 2)  -- Thief Hat
+	pressBtn({circle=1}, 2)  -- How many
+	pressBtn({circle=1}, 1)  -- yes
+	fadv(2)
+	pressBtn({x=1}, 1)  -- cancel message
+	fadv(6)
+	pressBtn({x=1}, 1)  -- exit buy
+	fadv(1)
+	pressBtn({x=1}, 1)  -- exit shop
+	fadv(3)
+	pressBtn({x=1}, 1)  -- cancel message
+	fadv(47)
+	pressBtn({x=1}, 1)  -- exit city
+	fadv(4)
+	pressBtn({triangle=1}, 5)  -- show menu
+end
+
+function TAS.ch4_Murond_outside_turn1()
+	-- after 2f, showing status from left side.
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- Sword skill
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- Lightning Stab
+	pressBtn({up=1}, 3)
+	pressBtn({up=1}, 1)
+	pressBtn({right=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 8)  -- confirm target
+	pressBtn({circle=1}, 1)  -- execute attack
+	--fadv(xx)
+	
+	-- arrowed
+	fadv(6)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 1)
+	
+end
+
+
+
+
+
+
+
 
 function TAS.ch1_battle_deploy()
 	-- -before 3f from reverse triangle
@@ -2013,6 +2206,19 @@ function TAS.skip_term_of_win()
 	pressBtn({circle=1}, 1)
 	fadv(100)
 end
+
+
+function TAS.zoomout()
+	pressBtn({x=1}, 5)  -- cancel menu
+	pressBtn({l2=1}, 1)  -- zoom out
+	pressBtn({circle=1}, 1)
+	fadv(23)
+	-- available to input menu again, then losts 30f
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 8+1)  -- action
+
+end
+
 
 function TAS.math_CT5_Flare()
 	-- arrowed and shown AT
@@ -2072,6 +2278,24 @@ function TAS.math_CT3_Bolt3()
 	--fadv(xx)
 end
 
+function TAS.math_Height_Prime_Demi2()
+	-- arrowed and shown AT
+	fadv(6+1)
+	-- before 2f from showing up status window in the left.
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 8)  -- math
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 8)   -- Height
+	pressBtn({circle=1}, 8)   -- Prime
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 4)   -- Demi2
+	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	--fadv(xx)
+end
+
 function TAS.math_CT3_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
@@ -2086,6 +2310,25 @@ function TAS.math_CT3_Flare()
 	pressBtn({up=1}, 4)
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 4)   -- Flare
+	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	--fadv(xx)
+end
+
+function TAS.math_CT3_Death()
+	-- arrowed and shown AT
+	fadv(6+1)
+	-- before 2f from showing up status window in the left.
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 8)  -- math
+	pressBtn({circle=1}, 8)   -- CT
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 8)   -- 3
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 4)   -- Death
 	pressBtn({circle=1}, 6)   -- confirm target
 	pressBtn({circle=1}, 1)   -- execute attack
 	--fadv(xx)

@@ -52,7 +52,7 @@ function Zirekile_Falls.success()
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy == total_enemy then
-		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
+		print(string.format("-- enemy = %2d", enemy))
 		ret = true
 	else
 		ret = false
@@ -109,7 +109,7 @@ function Barius_Valley.success()
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy == total_enemy then
-		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
+		print(string.format("-- enemy = %2d", enemy))
 		ret = true
 	else
 		ret = false
@@ -122,14 +122,14 @@ end
 -- Death_All
 ------------------------------------------------------------
 Death_All = {}
-Death_All.logname = "ch4_death_all_germinas3.log"
+Death_All.logname = "ch4_death_all_murond1.log"
 
 function Death_All.pre_attempt()
-	pressBtn({circle=1}, 4)  -- select Death of math
-	pressBtn({circle=1}, 6)  -- confirm target
 end
 
 function Death_All.attempt()
+	pressBtn({circle=1}, 4)  -- select Death of math
+	pressBtn({circle=1}, 6)  -- confirm target
 	pressBtn({circle=1}, 1)  -- execute attack
 	fadv(150)
 end
@@ -160,7 +160,7 @@ function Death_All.success()
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy == total_enemy then
-		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
+		print(string.format("-- enemy = %2d", enemy))
 		ret = true
 	else
 		ret = false
@@ -185,46 +185,139 @@ function Death_All.waitForBest()
 end
 
 ------------------------------------------------------------
--- Critical
+-- CriticalHit
 ------------------------------------------------------------
-Critical = {}
-Critical.logname = "critical_chN_turnN.log"
+CriticalHit = {}
+CriticalHit.logname = "ch4_critical_dycedarg2.log"
 
-function Critical.pre_attempt()
+function CriticalHit.pre_attempt()
 	pressBtn({circle=1}, 2)  -- select target
-	pressBtn({circle=1}, 6)  -- confirm target
+	pressBtn({circle=1}, 12)  -- confirm target
+	
+	--pressBtn({circle=1}, 2)  -- select target
+	--pressBtn({circle=1}, 6)  -- confirm target
+	
+	--pressBtn({circle=1}, 4)  -- select target
+	--pressBtn({circle=1}, 5)  -- confirm target
 end
 
-function Critical.attempt()
+function CriticalHit.attempt()
 	pressBtn({circle=1}, 1)  -- execute attack
 	fadv(150)
 end
 
-function Critical.post_attempt()
+function CriticalHit.post_attempt()
 	-- pass
 end
 
-function Critical.success()
+function CriticalHit.success()
 	local ret = false
+	local prpt = {}
 
-	local cur_prpt = {}
-	cur_prpt = Bunit.readProperty(adr_battle_unit)
-	debugPrint(cur_prpt.info)
+	prpt = Bunit.readProperty(adr_battle_unit2)
+	debugPrint(prpt.info)
 
-	if cur_prpt.critical ~= 0 then
+	if prpt.critical ~= 0 then
+		print("  critical, hp=%d", prpt.hp)
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
 		ret = true
-		print("  critical, hp=%d, retry = %d", cur_prpt.hp, retry)
-		debugPrint(string.format("  critical, hp=%d", cur_prpt.hp))
-	elseif cur_prpt.hp == 0 then
+	elseif prpt.hp == 0 then
+		print("  take down, hp=%d", prpt.hp)
+		debugPrint(string.format("  take down, hp=%d", prpt.hp))
 		ret = true
-		print("  take down, hp=%d, retry = %d", cur_prpt.hp, retry)
-		debugPrint(string.format("  take down, hp=%d", cur_prpt.hp))
 	else
-		print("  normal, hp="..cur_prpt.hp)
-		debugPrint(string.format("  normal, hp=%d", cur_prpt.hp))
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
 		ret = false
 	end
 
 	return ret
+end
+
+function CriticalHit.waitForBest()
+	local retry = 120
+	local best_rng = 0x9D11A82F
+
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
+end
+
+
+------------------------------------------------------------
+-- CriticalInjured
+------------------------------------------------------------
+CriticalInjured = {}
+CriticalInjured.logname = "ch4_critical_elmdor1.log"
+
+function CriticalInjured.pre_attempt()
+	--pressBtn({circle=1}, 3)  -- select target
+	--pressBtn({circle=1}, 7)  -- confirm target
+
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 6)  -- confirm target
+	
+	--pressBtn({circle=1}, 4)  -- select target
+	--pressBtn({circle=1}, 5)  -- confirm target
+end
+
+function CriticalInjured.attempt()
+	pressBtn({circle=1}, 1)  -- execute attack
+	fadv(150)
+end
+
+function CriticalInjured.post_attempt()
+	-- pass
+end
+
+function CriticalInjured.success()
+	local ret = false
+	local prpt = {}
+	local injured = 0
+
+	prpt = Bunit.readProperty(adr_battle_unit)
+	debugPrint(prpt.info)
+
+	injured = bit.band(prpt.status_5A, 0x01)  -- 0x01 Critical injured
+
+	if prpt.critical ~= 0 then
+		print("  critical, hp=%d", prpt.hp)
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+	end
+
+	if prpt.hp == 0 then
+		print("  take down, hp=%d", prpt.hp)
+		debugPrint(string.format("  take down, hp=%d", prpt.hp))
+		ret = true
+	elseif injured ~= 0 then
+		print("  critical injured, hp=%d", prpt.hp)
+		debugPrint(string.format("  critical injured, hp=%d", prpt.hp))
+		ret = true
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = false
+	end
+
+	return ret
+end
+
+function CriticalInjured.waitForBest()
+	local retry = 120
+	local best_rng = 0xEB9A1D08
+
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
 end
 

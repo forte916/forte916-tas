@@ -8,8 +8,7 @@
 --   2. Start this script properly.
 --
 
-require "fft_input_macro_lib"
-require "fft_lib"
+require "fft_attack_lib"
 
 ------------------------------------------------------------
 -- initialize
@@ -47,7 +46,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = Death_All
+local interface = CriticalHit
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
@@ -61,6 +60,7 @@ for i=0, retry do
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
 	debugPrint(string.format("----- fc = %d, rng = %08X -----", fc, rng))
+
 	interface.attempt()
 
 	if interface.success() then

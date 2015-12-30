@@ -366,7 +366,18 @@ Bunit.jump        = 0x3B  -- 1byte
 Bunit.X_crd       = 0x47  -- 1byte
 Bunit.Y_crd       = 0x48  -- 1byte
 Bunit.direct      = 0x49  -- 1byte, 0x80: higher elevation, 0x03: facing direction
+
 -- offset 0x4A to 0x5C is good/bad status flags.
+Bunit.status_5A   = 0x5A  -- 1byte
+	-- 0x80 Oil
+	-- 0x40 Float
+	-- 0x20 Reraise
+	-- 0x10 Transparent
+	-- 0x08 Berserk
+	-- 0x04 Chicken
+	-- 0x02 Frog
+	-- 0x01 Critical
+
 -- offset 0x5D to 0x6C is CT of each skills.
 -- offset 0x6D to 0x71 is elemental compatibility
 --
@@ -563,6 +574,7 @@ function Bunit.readProperty(ofs_unit)
 
 	prpt.ct        = memory.readbyte(ofs_unit + Bunit.ct        )
 	prpt.direct    = memory.readbyte(ofs_unit + Bunit.direct    )
+	prpt.status_5A = memory.readbyte(ofs_unit + Bunit.status_5A )
 
 	prpt.reaction_affected1   = memory.readbyte(ofs_unit + Bunit.reaction_affected1   )
 	prpt.reaction_affected2   = memory.readbyte(ofs_unit + Bunit.reaction_affected2   )

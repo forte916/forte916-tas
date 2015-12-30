@@ -52,9 +52,9 @@ local interface = Death_All
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 
---debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
+debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
-debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
 retry = 400
@@ -67,8 +67,9 @@ for i=0, retry do
 		fadv(i)
 		rng = memory.readdword(adr_rng)
 	else
-		memory.writedword(adr_rng, rng)
 		rng =  next_rng(rng)
+		memory.writedword(adr_rng, rng)
+		--rng =  next_rng(rng)
 	end
 
 	fc = emu.framecount()
@@ -79,6 +80,7 @@ for i=0, retry do
 	-- check results
 	if interface.success() then
 		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
+		print(string.format("  ***** best state. retry = %d, rng = %08X *****", i, rng))
 		interface.post_attempt()
 	end
 

@@ -31,16 +31,19 @@ emu.speedmode("turbo")       -- drops some frames
 -- functions
 ------------------------------------------------------------
 
+------------------------------------------------------------
+-- Mandalia
+------------------------------------------------------------
 Mandalia = {}
 Mandalia.logname = "ch1_random_encount10.log"
 
 function Mandalia.pre_attempt()
 	-- move Gariland From Formation
 --	fadv(4)
---	pressBtn({up=1}, 2)
+--	pressBtn({up=1}, 1)
 
 --	pressBtn({circle=1}, 3)
---	pressBtn({up=1}, 2)
+--	pressBtn({up=1}, 1)
 --	pressBtn({circle=1}, 1)
 --	fadv(50+1)
 end
@@ -49,7 +52,7 @@ function Mandalia.pre_attempt2()
 	-- move Gariland From Mandalia
 	--pressBtn({triangle=1}, 5)
 	--pressBtn({circle=1}, 3)
-	--pressBtn({up=1}, 2)
+	--pressBtn({up=1}, 1)
 	--pressBtn({circle=1}, 1)
 	--fadv(50+1)
 
@@ -71,7 +74,7 @@ function Mandalia.attempt()
 	-- move Mandalia From Gariland
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 2)  -- select Mandalia
+	pressBtn({down=1}, 1)  -- select Mandalia
 	pressBtn({circle=1}, 1)
 	fadv(900)
 end
@@ -102,7 +105,7 @@ function Mandalia.success()
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy < 3 then
-		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
+		print(string.format("-- enemy = %2d", enemy))
 		ret = true
 	else
 		ret = false
@@ -112,6 +115,9 @@ function Mandalia.success()
 end
 
 
+------------------------------------------------------------
+-- GainedJpUP
+------------------------------------------------------------
 GainedJpUP = {}
 GainedJpUP.logname = "ch1_gained_jp_up.log"
 
@@ -123,7 +129,7 @@ function GainedJpUP.attempt()
 	-- move Mandalia From Gariland
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 2)  -- select Mandalia
+	pressBtn({down=1}, 1)  -- select Mandalia
 	pressBtn({circle=1}, 1)
 	fadv(900)
 end
@@ -144,7 +150,7 @@ function GainedJpUP.success()
 
 	skill = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
 	if skill ~= 0 then
-		print(string.format("-- skill = %x, retry = %d", skill, retry))
+		print(string.format("-- skill = %x", skill))
 		str = str.." , Gained Jp UP"
 		ret = true
 	else
@@ -156,6 +162,9 @@ function GainedJpUP.success()
 end
 
 
+------------------------------------------------------------
+-- Speed9
+------------------------------------------------------------
 Speed9 = {}
 Speed9.logname = "ch4_Finath_speed9.log"
 
@@ -194,7 +203,7 @@ function Speed9.success()
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy < 1 then
-		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
+		print(string.format("-- enemy = %2d", enemy))
 		ret = true
 	else
 		ret = false
@@ -204,15 +213,22 @@ function Speed9.success()
 end
 
 
+------------------------------------------------------------
+-- RouteEncount
+------------------------------------------------------------
 RouteEncount = {}
-RouteEncount.logname = "encount_bethla_zarghidas.log"
+RouteEncount.logname = "encount_limberry_igros.log"
 
 function RouteEncount.logHeader()
-	debugPrint(string.format("Route: Bethla to Zarghidas. How many often are there encounts."))
+	debugPrint(string.format("Route: Limberry to Igros. How many often are there encounts."))
 end
 
 function RouteEncount.pre_attempt()
-	fadv(3)
+	fadv(5)
+	pressBtn({triangle=1}, 5)
+	pressBtn({circle=1}, 3)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 3)
 end
 
 function RouteEncount.attempt()
@@ -248,7 +264,7 @@ function RouteEncount.success()
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy > 1 then
-		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
+		print(string.format("-- enemy = %2d", enemy))
 		ret = true
 	else
 		ret = false
@@ -258,16 +274,25 @@ function RouteEncount.success()
 end
 
 
+------------------------------------------------------------
+-- CheckBadZodiac
+------------------------------------------------------------
 CheckBadZodiac = {}
-CheckBadZodiac.logname = "ch4_check_zodiac_germinas1.log"
+CheckBadZodiac.logname = "ch4_check_zodiac_murond1.log"
+
+function CheckBadZodiac.logHeader()
+	debugPrint(string.format("bad : 0x00, 0x60, very bad : 0x30"))
+	debugPrint(string.format("good: 0x10, 0x50, very good: 0x30"))
+end
 
 function CheckBadZodiac.pre_attempt()
-	fadv(1)
+	--fadv(1)
 end
 
 function CheckBadZodiac.attempt()
 	pressBtn({circle=1}, 1)
-	fadv(900)
+	--fadv(900)
+	fadv(1050)
 end
 
 function CheckBadZodiac.post_attempt()
@@ -292,7 +317,7 @@ function CheckBadZodiac.success()
 		if compatibility then
 			enemy = enemy + 1
 			str = str.." , bad"
-		elseif prpt.faith < 50 then
+		elseif prpt.faith < 55 then
 			enemy = enemy + 1
 			str = str.." , unfaith"
 		end
@@ -302,7 +327,7 @@ function CheckBadZodiac.success()
 
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy == 0 then
-		print(string.format("-- enemy = %2d, retry = %d", enemy, retry))
+		print(string.format("-- enemy = %2d", enemy))
 		ret = true
 	else
 		ret = false
@@ -312,6 +337,9 @@ function CheckBadZodiac.success()
 end
 
 
+------------------------------------------------------------
+-- Orlandu
+------------------------------------------------------------
 Orlandu = {}
 Orlandu.logname = "ch4_orlandu_join.log"
 
@@ -339,9 +367,10 @@ function Orlandu.success()
 	prpt = Bunit.readProperty(ofs_unit)
 	str = prpt.info
 
+	-- TODO: Move+1 or rest of JP is higher than 200JP
 	skill = bit.band(prpt.base_action_learned1, 0x10)  -- 0x10 means Lightning Stab
 	if skill ~= 0 and prpt.lv > 26 then
-		print(string.format("-- skill = %x, lv = %2d, retry = %d", skill, prpt.lv, retry))
+		print(string.format("-- skill = %x, lv = %2d", skill, prpt.lv))
 		str = str.." , Lightning Stab"
 		ret = true
 	else
@@ -375,7 +404,7 @@ if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
 
-retry = 50
+retry = 100
 
 for i=0, retry do
 	if initial == 1 then
@@ -397,7 +426,7 @@ for i=0, retry do
 	-- check status
 	if interface.success() then
 		debugPrint(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
-		print(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
+		print(string.format("***** best state. retry = %d, rng = %08X *****", i, rng))
 
 		interface.post_attempt()
 	end
