@@ -10,7 +10,6 @@
 
 require "psx_lib"
 require "fft_lib"
-require "fft_input_macro_lib"
 
 ------------------------------------------------------------
 -- initialize
@@ -31,39 +30,47 @@ emu.speedmode("turbo")       -- drops some frames
 -- functions
 ------------------------------------------------------------
 
-function pre_attempt()
-	fadv(10)
-end
+Ramza = {}
+Ramza.logname = "ramza_status1.log"
+Ramza.best_st = {}
+Ramza.cur_st = {}
 
-function post_attempt()
+function Ramza.logHeader()
 	-- pass
 end
 
-function attempt()
-	TAS.skipArazlam()
+function Ramza.pre_attempt()
+	fadv(3)
 end
 
-function compareStatus()
+function Ramza.attempt()
+	pressBtn({start=1}, 1)  -- skip Arazlam
+	fadv(350)
+end
+
+function Ramza.post_attempt()
+	Ramza.format_st(Ramza.best_st)
+end
+
+
+function Ramza.compareStatus(cur_sum)
 	local ret = false
 	local best_sum = 0
-	local cur_sum = 0
 
-	debugPrint(string.format("--1 best_st:: %s", format_st(best_st)))
-	debugPrint(string.format("--1 cur_st :: %s", format_st(cur_st )))
+	if not next(Ramza.best_st) then
+		Ramza.best_st = shallowcopy(Ramza.cur_st)
+		print(Ramza.best_st)
+		return true
+	end
 
-	for key, value in pairs(best_st) do
+	for key, value in pairs(Ramza.best_st) do
 		best_sum = best_sum + value
 	end
 
-	for key, value in pairs(cur_st) do
-		cur_sum = cur_sum + value
-	end
-
-
 	if (best_sum < cur_sum) then
-		best_st = shallowcopy(cur_st)
+		Ramza.best_st = shallowcopy(Ramza.cur_st)
+		print(Ramza.best_st)
 		ret = true
-		print(best_st)
 	else
 		ret = false
 	end
@@ -71,22 +78,34 @@ function compareStatus()
 	return ret
 end
 
-function success()
+function Ramza.success()
 	local ret = false
-
+	local str
 	local cur_prpt = {}
+	local cur_sum = 0
+
 	cur_prpt = Funit.readProperty(adr_formation_unit)
-	debugPrint(cur_prpt.info)
+	str = cur_prpt.info
 
-	cur_st.squireJP  = cur_prpt.total_JP_squire
-	cur_st.chemistJP = cur_prpt.total_JP_chemist
+	Ramza.cur_st.togal_JP_squire     = cur_prpt.total_JP_squire
+	Ramza.cur_st.togal_JP_chemist    = cur_prpt.total_JP_chemist
+	Ramza.cur_st.total_JP_priest     = cur_prpt.total_JP_priest
+	Ramza.cur_st.total_JP_wizard     = cur_prpt.total_JP_wizard
+	Ramza.cur_st.total_JP_time_mage  = cur_prpt.total_JP_time_mage
+	Ramza.cur_st.total_JP_oracle     = cur_prpt.total_JP_oracle
+	Ramza.cur_st.total_JP_calculator = cur_prpt.total_JP_calculator
 
-	ret = compareStatus()
+	for key, value in pairs(Ramza.cur_st) do
+		cur_sum = cur_sum + value
+	end
+
+	debugPrint(string.format("%s, %d", str, cur_sum))
+	ret = Ramza.compareStatus(cur_sum)
 
 	return ret
 end
 
-function format_st(st)
+function Ramza.format_st(st)
 	local st_info
 	local st_sum = 0
 
@@ -94,8 +113,9 @@ function format_st(st)
 		st_sum = st_sum + value
 	end
 
-	st_info = string.format("sq_jp = %d, ch_jp = %d, sum = %d", st.squireJP, st.chemistJP, st_sum)
-	return st_info
+	st_info = string.format("sum = %d", st_sum)
+	debugPrint(st_info)
+	print(st_info)
 end
 
 ------------------------------------------------------------
@@ -113,34 +133,34 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-best_st = {}
-cur_st = {}
+local interface = Ramza
 
-f = io.open("ramza_status.log", "a")
+f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
+if interface.logHeader ~= nil then interface.logHeader() end
 
-retry = 100
 
-for i=0, retry do
+retry = 900
+
+for i=800, retry do
 	if initial == 1 then
-		best_st.squireJP  = 0
-		best_st.chemistJP = 0
 		initial = 0
 	end
 
-	pre_attempt()
+	interface.pre_attempt()
 	fadv(i)
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
 	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
 
-	attempt()
+	interface.attempt()
 
 	-- check status
-	if success() then
-		debugPrint(string.format("***** best state. fc = %d, %s, rng = %08X *****", fc, format_st(best_st), rng))
+	if interface.success() then
+		debugPrint(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
+		print(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
 
-		post_attempt()
+		interface.post_attempt()
 	end
 
 	f:flush()

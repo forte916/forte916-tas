@@ -15,6 +15,10 @@ require "fft_lib"
 -- functions
 ------------------------------------------------------------
 
+function logHeader()
+	debugPrint(string.format("fc, rng"))
+end
+
 function outputRNG()
 	local rng = memory.readdword(adr_rng)
 	local fc = emu.framecount()
@@ -22,11 +26,12 @@ function outputRNG()
 	debugPrint(string.format("%d, %08X", fc, rng))
 end
 
-function outputNextRNG()
+function outputNextRNG(retry , rng)
 	local rnglist = {}
-	local rng = memory.readdword(adr_rng)
 	local fc = emu.framecount()
-	local retry = 500
+
+	if retry == nil then retry = 500 end
+	if rng == nil then rng = memory.readdword(adr_rng) end
 
 	debugPrint(string.format("----- fc = %d, rng = %08X -----", fc, rng))
 
@@ -47,15 +52,16 @@ end
 -- main
 ------------------------------------------------------------
 
-f = io.open("next_rng.log", "a")
+f = io.open("next_rng_seed_0xAC20CC00.log", "a")
 if f == nil then print("error: Could not open file") end
 
+--logHeader()
+--emu.registerafter(outputRNG)
 --while true do
---	outputRNG()
 --	emu.frameadvance()
 --end
 
-outputNextRNG()
+outputNextRNG(500, 0xAC20CC00)
 f:flush()
 
 

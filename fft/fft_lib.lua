@@ -216,9 +216,10 @@ function Funit.readProperty(ofs_unit)
 	prpt.lv        = memory.readbyte(ofs_unit + Funit.lv       )
 	prpt.brave     = memory.readbyte(ofs_unit + Funit.brave    )
 	prpt.faith     = memory.readbyte(ofs_unit + Funit.faith    )
-	prpt.hp        = memory.readword(ofs_unit + Funit.hp       )
-	prpt.mp        = memory.readword(ofs_unit + Funit.mp       )
-	prpt.speed     = memory.readword(ofs_unit + Funit.speed    )
+
+	prpt.hpp1      = bit.band(memory.readdword(ofs_unit + Funit.hpp1), 0xFFFFFF)  -- use 3byte
+	prpt.mpp1      = bit.band(memory.readdword(ofs_unit + Funit.mpp1), 0xFFFFFF)  -- use 3byte
+	prpt.spp1      = bit.band(memory.readdword(ofs_unit + Funit.spp1), 0xFFFFFF)  -- use 3byte
 
 	prpt.JP_squire     = memory.readword(ofs_unit + Funit.JP_squire     )
 	prpt.JP_chemist    = memory.readword(ofs_unit + Funit.JP_chemist    )
@@ -241,26 +242,29 @@ function Funit.readProperty(ofs_unit)
 end
 
 function Funit.toString(prpt)
-	local str = string.format("%2x %2x %2x %2x %2x %2x:" 
-			.."%2d %2d %2d %2d:"
-			.." %d %d:"
-			.." %d:",
+	local str = string.format("%2x,%2x,%2x,%2x," 
+			.." %2d,%2d,%2d,%2d,"
+			.." %d,%d,%d,%d,%d,%d,%d,"
+			.." %d",
 			prpt.ch      ,
 			prpt.no      ,
 			prpt.job     ,
-			prpt.gender  ,
-			prpt.birthday,
 			prpt.zodiac  ,
 
-			prpt.exp     ,
 			prpt.lv      ,
+			prpt.exp     ,
 			prpt.brave   ,
 			prpt.faith   ,
 
-			prpt.total_JP_squire    ,
-			prpt.total_JP_chemist   ,
+			prpt.total_JP_squire     ,
+			prpt.total_JP_chemist    ,
+			prpt.total_JP_priest     ,
+			prpt.total_JP_wizard     ,
+			prpt.total_JP_time_mage  ,
+			prpt.total_JP_oracle     ,
+			prpt.total_JP_calculator ,
 
-			prpt.JP_squire    )
+			prpt.spp1    )
 	return str
 end
 
