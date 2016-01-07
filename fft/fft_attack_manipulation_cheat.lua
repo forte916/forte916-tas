@@ -52,9 +52,9 @@ local interface = Death_All
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 
-debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
---debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
+debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
 retry = 400

@@ -267,6 +267,7 @@ ch2-Dorter
 * Thief Lv11 speed 7
 * Thief Lv9  speed 7
 * Thief に先制される
+* L2
 * CT5 Bolt3
 
 * Ramza 初期配置 右1上1 in TA, この位置だと投石が届かない??
@@ -283,6 +284,7 @@ ch2-Zirekile Falls
 ------------------
 * Delita Lv11, speed 7
 * Delita が先制する
+* L2
 * Delita が 北斗骨砕打(Crus Punch) を覚えていない(30%??)、または 無双稲妻突き を覚えていると
   1 ターン目で Gafgarion を倒すので、その後の会話が一切発生しない
 * Delita が 1ターン目で Gafgarion を倒せば CT3 Death で終了
@@ -293,6 +295,7 @@ ch2-Zaland
 ----------
 * Mustadio Lv10, speed 7
 * Mustadio が先制する
+* L2
 * CT3 Bolt3
 * After battle, remove equipment of Ovelia,
 * equip Traiangle Hat and Wizard Robe, Ovelia equiped, by best fit's.
@@ -310,6 +313,7 @@ ch2-Zigolis Swamp
 ch2-Goug
 -----------
 * Mustadio Lv12, speed 7
+* L2
 * Thief Lv15, speed 7
 * Thief Lv13, speed 7
 * CT5 Bolt3
@@ -368,6 +372,7 @@ ch2-Lionel (inside)
 ---------------
 * Queklain Lv20, HP 511, speed 9
 * Queklain に先制される. Sleep is bad, but Death Sentence is good.
+* L2
 * Height Prime Demi2/Height Prime Demi2
 * Height Prime の方が Lv5 より 2f 早い
 * Bolt3 は MA12 でも 180-190 のダメージ. MA を上げるより Demi2 が better??
@@ -383,6 +388,7 @@ ch3-Goland
 ----------
 * Olan Lv18, speed 9
 * Olan に先制される
+* L2
 * CT3 Flare
 
 * Olan は、星天停止の方が、辞書攻撃より早い

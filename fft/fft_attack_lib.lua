@@ -125,11 +125,11 @@ Death_All = {}
 Death_All.logname = "ch4_death_all_murond1.log"
 
 function Death_All.pre_attempt()
+	pressBtn({circle=1}, 4)  -- select Death of math
+	pressBtn({circle=1}, 6)  -- confirm target
 end
 
 function Death_All.attempt()
-	pressBtn({circle=1}, 4)  -- select Death of math
-	pressBtn({circle=1}, 6)  -- confirm target
 	pressBtn({circle=1}, 1)  -- execute attack
 	fadv(150)
 end
