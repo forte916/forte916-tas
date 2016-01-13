@@ -31,7 +31,7 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 Ramza = {}
-Ramza.logname = "ramza_status1.log"
+Ramza.logname = "ramza_status2.log"
 Ramza.best_st = {}
 Ramza.cur_st = {}
 
@@ -40,7 +40,8 @@ function Ramza.logHeader()
 end
 
 function Ramza.pre_attempt()
-	fadv(3)
+	--fadv(3)
+	fadv(8)
 end
 
 function Ramza.attempt()
@@ -140,9 +141,9 @@ if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
 
-retry = 2000
+retry = 1000
 
-for i=900, retry do
+for i=0, retry do
 	if initial == 1 then
 		initial = 0
 	end

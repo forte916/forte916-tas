@@ -15,6 +15,13 @@ RNG
   * ガフガリオンの最初のターンでフリーズ現象は tasvideos にも報告あり
   * BIOS の変更や disable coord check を checked で改善するらしい
 
+FurShop glitch
+-------------
+* furshop glitch takes 1474f
+* 1638f is fastest at soft rest
+* soft rest しても rng seed の初期化は発生しない
+* furshop inventory 0x80056818 (JPv1.1)
+* furshop inventory 0x80059494 (US)
 
 Ramza 初期ステータス
 --------------------

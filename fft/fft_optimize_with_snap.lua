@@ -37,7 +37,7 @@ end
 
 function Optimize.attempt()
 	pressBtn({start=1}, 1)  -- skip opening
-	fadv(260)
+	fadv(360)
 end
 
 function Optimize.post_attempt()

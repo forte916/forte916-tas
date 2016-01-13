@@ -52,7 +52,7 @@ end
 -- main
 ------------------------------------------------------------
 
-f = io.open("next_rng_seed_0xAC20CC00.log", "a")
+f = io.open("next_rng_seed_0xF930D9E0_1639f.log", "a")
 if f == nil then print("error: Could not open file") end
 
 --logHeader()
@@ -61,7 +61,7 @@ if f == nil then print("error: Could not open file") end
 --	emu.frameadvance()
 --end
 
-outputNextRNG(500, 0xAC20CC00)
+outputNextRNG(1000, 0xF930D9E0)
 f:flush()
 
 

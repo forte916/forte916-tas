@@ -92,6 +92,9 @@ adr_cur_location   = 0x054B64 -- US:0x0577E0, JP1.0:0x054850, ?byte, Current Loc
 adr_entd_data_id   = 0x054B68 -- US:0x0577E4, JP1.0:0x054854, 4byte, enemy set to be loaded
 adr_event_bytes    = 0x054BFC -- US:0x057878, JP1.0:0xFFFFFF, 4byte, Event Byte Counter? (maybe just text?)
 
+adr_furshop_inventory = 0x056818 -- US:0x059494, JP1.0:0xFFFFFF, byte[256]
+adr_item_inventory    = 0x056A44 -- US:0x0596E0, JP1.0:0xFFFFFF, byte[256]
+
 -- BATTLE.bin
 adr_current_entd   = 0x06358C -- US:0x066238, JP1.0:0x063278, 4byte, Current ENTD Pointer
 adr_highest_lv     = 0x06365C -- US:0x066308, JP1.0:0x063348, 1byte, Highest Party Level
@@ -264,7 +267,7 @@ function Funit.toString(prpt)
 			prpt.total_JP_oracle     ,
 			prpt.total_JP_calculator ,
 
-			prpt.spp1    )
+			prpt.mpp1    )
 	return str
 end
 
