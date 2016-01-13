@@ -22,17 +22,17 @@ function TAS.start()
 	fc = emu.framecount()
 	print(string.format("start: fc = %d", fc))
 
-	fadv(705)               -- title
+	fadv(666)               -- title
 	fc = emu.framecount()
 
 	print(string.format("skip title: fc = %d", fc))
-	pressBtn({start=1}, 1)  -- skip title, 706f
+	pressBtn({start=1}, 1)  -- skip title, 666f
 
 	fadv(36)
 	fc = emu.framecount()
 
 	print(string.format("game start: fc = %d", fc))
-	pressBtn({start=1}, 1)  -- game start, 743f
+	pressBtn({start=1}, 1)  -- game start, 702f
 
 	fadv(192)
 end
@@ -41,7 +41,7 @@ function TAS.skipArazlam()
 	--fc = emu.framecount()
 	--print(string.format("skipArazlam: fc = %d", fc))
 
-	pressBtn({start=1}, 1)  -- skip message, 935f is fastest.
+	pressBtn({start=1}, 1)  -- skip message, 855f is fastest.
 	fadv(323)
 	-- determined ramza's status, 1259f
 	fadv(25)
@@ -960,7 +960,7 @@ end
 function TAS.moveMandaliaFromFormationForEvent()
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
 	pressBtn({circle=1}, 1)
 	fadv(50)
 end
@@ -968,7 +968,7 @@ end
 function TAS.moveMandaliaFromGariland()
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
 	-- if wait here, change enemy status.
 	pressBtn({circle=1}, 1)
 	fadv(50)
@@ -979,10 +979,10 @@ function TAS.ch1_3_mandalia_deploy()
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 2)
-	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
 	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)
-	pressBtn({l1=1, down=1}, 2)
+	pressBtn({l1=1, down=1}, 1)
 	pressBtn({circle=1}, 1)
 	pressBtn({start=1}, 3)
 	pressBtn({circle=1}, 1)
@@ -1116,7 +1116,7 @@ end
 function TAS.moveGarilandFromFormation()
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 3)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	-- if wait here, change rng.
 	pressBtn({circle=1}, 1)
 	fadv(50)
@@ -1125,7 +1125,7 @@ end
 function TAS.moveGarilandFromMandalia()
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	-- if wait here, change enemy status.
 	pressBtn({circle=1}, 1)
 	fadv(50)
@@ -1133,10 +1133,9 @@ end
 
 function TAS.ch1_random_battle_mandalia_deploy()
 	-- -before 3f from reverse triangle
-	pressBtn({right=1}, 2)
-	pressBtn({right=1}, 2)
+	pressBtn({right=1}, 1)
 	pressBtn({up=1}, 1)
-	pressBtn({circle=1}, 1)
+	pressBtn({right=1, circle=1}, 1)
 	pressBtn({start=1}, 3)
 	pressBtn({circle=1}, 1)
 	fadv(100)
@@ -1998,14 +1997,12 @@ end
 
 function TAS.ch4_Limberry_outside_deploy()
 	-- -before 3f from reverse triangle
-	pressBtn({up=1}, 1)
-	pressBtn({circle=1}, 1)
+	pressBtn({up=1, circle=1}, 1)
 	pressBtn({r1=1, left=1}, 2)
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 1)
-	pressBtn({down=1}, 1)
-	pressBtn({circle=1}, 1)
+	pressBtn({down=1, circle=1}, 1)
 	pressBtn({start=1}, 3)
 	pressBtn({circle=1}, 1)
 	fadv(100)
@@ -2018,6 +2015,8 @@ function TAS.ch4_Limberry_outside_turn1()
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 1)
 	pressBtn({circle=1}, 1)
+	fadv(8)
+	pressBtn({l2=1}, 1)
 	--fadv(xx)
 
 	-- arrowed
@@ -2067,14 +2066,13 @@ function TAS.learnMove1_Orlandu()
 	fadv(30-2)
 end
 
+-- also, ch4_Murond_inside, ch4_Murond_zalbag
 function TAS.ch4_Limberry_inside_deploy()
 	-- -before 3f from reverse triangle
-	pressBtn({up=1}, 1)
-	pressBtn({circle=1}, 1)
-	pressBtn({r1=1, left=1}, 2)
-	pressBtn({left=1}, 1)
+	pressBtn({up=1, circle=1}, 1)
+	pressBtn({r1=1, left=1}, 1)
 	pressBtn({down=1}, 1)
-	pressBtn({circle=1}, 1)
+	pressBtn({left=1, circle=1}, 1)
 	pressBtn({start=1}, 3)
 	pressBtn({circle=1}, 1)
 	fadv(100)
@@ -2082,6 +2080,7 @@ end
 
 function TAS.ch4_Limberry_zarela_deploy()
 	-- -before 3f from reverse triangle
+	pressBtn({circle=1}, 1)  --??
 	pressBtn({r1=1, up=1}, 1)
 	pressBtn({circle=1}, 1)
 	pressBtn({start=1}, 3)
@@ -2165,9 +2164,9 @@ function TAS.ch4_Murond_outside_turn1()
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 9)  -- Lightning Stab
-	pressBtn({up=1}, 3)
-	pressBtn({up=1}, 1)
+	pressBtn({up=1}, 2)
 	pressBtn({right=1}, 1)
+	pressBtn({up=1}, 1)
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 8)  -- confirm target
@@ -2183,22 +2182,84 @@ function TAS.ch4_Murond_outside_turn1()
 	
 end
 
+function TAS.equipTwistHeadband_Orlandu()
+	pressBtn({r1=1}, 1)  -- select Orlandu
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({circle=1}, 1)  -- item
+	fadv(27+1)
+	pressBtn({circle=1}, 1)  -- equip
+	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- head
+	fadv(10)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- Twist Headband
+	fadv(5)
+	pressBtn({x=1}, 1)  -- cancel equip
+	fadv(2)
+	pressBtn({x=1}, 1)  -- cancel item
+	fadv(30-2)
+	TAS.exitFormation()
+end
+
+function TAS.ch4_Murond_inside_turn1()
+	-- arrowed
+	fadv(7)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(8)
+	pressBtn({l2=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(1)
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- Sword skill
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- Lightning Stab
+	pressBtn({up=1}, 3)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 16+1)  -- confirm target, before 5f shown "Menu"
+	pressBtn({circle=1}, 1)  -- execute attack
+	--fadv(xx)
+end
 
 
 
 
 
+function TAS.skip_intermediate_save()
+	-- -before 2f from shown "check"
+	pressBtn({x=1}, 1)
+	fadv(100)
+end
 
 
-function TAS.ch1_battle_deploy()
-	-- -before 3f from reverse triangle
+
+function TAS.battle_deploy()
+	-- -before 3f from shown reverse triangle
 	pressBtn({start=1}, 3)
 	pressBtn({circle=1}, 1)
 	fadv(100)
 end
 
 function TAS.skip_term_of_win()
-	-- -before 7f from term of win
+	-- -before 7f from shown term of win
 	pressBtn({circle=1}, 1)
 	-- fadv(66-3)
 	-- fadv(8-3)
@@ -2225,7 +2286,7 @@ function TAS.math_CT5_Flare()
 	fadv(6+1)
 	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({circle=1}, 8)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({circle=1}, 8)   -- CT
@@ -2244,7 +2305,7 @@ function TAS.math_Level4_Flare()
 	fadv(6+1)
 	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({circle=1}, 8)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({down=1}, 2)
@@ -2265,7 +2326,7 @@ function TAS.math_CT3_Bolt3()
 	fadv(6+1)
 	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({circle=1}, 8)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({circle=1}, 8)   -- CT
@@ -2283,7 +2344,7 @@ function TAS.math_Height_Prime_Demi2()
 	fadv(6+1)
 	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({circle=1}, 8)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({up=1}, 2)
@@ -2301,7 +2362,7 @@ function TAS.math_CT3_Flare()
 	fadv(6+1)
 	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({circle=1}, 8)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({circle=1}, 8)   -- CT
@@ -2320,7 +2381,7 @@ function TAS.math_CT3_Death()
 	fadv(6+1)
 	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({circle=1}, 8)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- math
 	pressBtn({circle=1}, 8)   -- CT

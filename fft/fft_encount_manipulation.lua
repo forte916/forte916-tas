@@ -278,7 +278,7 @@ end
 -- CheckBadZodiac
 ------------------------------------------------------------
 CheckBadZodiac = {}
-CheckBadZodiac.logname = "ch4_check_zodiac_murond1.log"
+CheckBadZodiac.logname = "ch4_check_zodiac_ubs_4th_floor1.log"
 
 function CheckBadZodiac.logHeader()
 	debugPrint(string.format("bad : 0x00, 0x60, very bad : 0x30"))
@@ -286,13 +286,13 @@ function CheckBadZodiac.logHeader()
 end
 
 function CheckBadZodiac.pre_attempt()
-	--fadv(1)
+	fadv(3)
 end
 
 function CheckBadZodiac.attempt()
 	pressBtn({circle=1}, 1)
 	--fadv(900)
-	fadv(1050)
+	fadv(600)
 end
 
 function CheckBadZodiac.post_attempt()
@@ -303,7 +303,7 @@ function CheckBadZodiac.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
-	local total_enemy = 6
+	local total_enemy = 7
 	local enemy = 0
 	local compatibility = 0
 	local str
@@ -404,9 +404,9 @@ if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
 
-retry = 100
+retry = 500
 
-for i=0, retry do
+for i=100, retry do
 	if initial == 1 then
 		initial = 0
 	end

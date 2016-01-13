@@ -122,7 +122,7 @@ end
 -- Death_All
 ------------------------------------------------------------
 Death_All = {}
-Death_All.logname = "ch4_death_all_murond1.log"
+Death_All.logname = "ch4_death_all_ubs_4th_retry270.log"
 
 function Death_All.pre_attempt()
 	pressBtn({circle=1}, 4)  -- select Death of math
@@ -141,7 +141,7 @@ end
 function Death_All.success()
 	local ret = false
 	local prpt = {}
-	local ofs_unit = adr_battle_unit
+	local ofs_unit = adr_battle_unit2
 	local total_enemy = 6
 	local enemy = 0
 	local str
@@ -188,11 +188,12 @@ end
 -- CriticalHit
 ------------------------------------------------------------
 CriticalHit = {}
-CriticalHit.logname = "ch4_critical_dycedarg2.log"
+CriticalHit.logname = "ch4_critical_ubs_4th_1.log"
 
 function CriticalHit.pre_attempt()
 	pressBtn({circle=1}, 2)  -- select target
-	pressBtn({circle=1}, 12)  -- confirm target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(16)
 	
 	--pressBtn({circle=1}, 2)  -- select target
 	--pressBtn({circle=1}, 6)  -- confirm target
@@ -214,15 +215,15 @@ function CriticalHit.success()
 	local ret = false
 	local prpt = {}
 
-	prpt = Bunit.readProperty(adr_battle_unit2)
+	prpt = Bunit.readProperty(adr_battle_unit3)
 	debugPrint(prpt.info)
 
 	if prpt.critical ~= 0 then
-		print("  critical, hp=%d", prpt.hp)
+		print(string.format("  critical, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical, hp=%d", prpt.hp))
 		ret = true
 	elseif prpt.hp == 0 then
-		print("  take down, hp=%d", prpt.hp)
+		print(string.format("  take down, hp=%d", prpt.hp))
 		debugPrint(string.format("  take down, hp=%d", prpt.hp))
 		ret = true
 	else
@@ -234,8 +235,8 @@ function CriticalHit.success()
 end
 
 function CriticalHit.waitForBest()
-	local retry = 120
-	local best_rng = 0x9D11A82F
+	local retry = 20
+	local best_rng = 0x442B008C
 
 	for i=0, retry do
 		local rng = memory.readdword(adr_rng)
@@ -286,16 +287,16 @@ function CriticalInjured.success()
 	injured = bit.band(prpt.status_5A, 0x01)  -- 0x01 Critical injured
 
 	if prpt.critical ~= 0 then
-		print("  critical, hp=%d", prpt.hp)
+		print(string.format("  critical, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical, hp=%d", prpt.hp))
 	end
 
 	if prpt.hp == 0 then
-		print("  take down, hp=%d", prpt.hp)
+		print(string.format("  take down, hp=%d", prpt.hp))
 		debugPrint(string.format("  take down, hp=%d", prpt.hp))
 		ret = true
 	elseif injured ~= 0 then
-		print("  critical injured, hp=%d", prpt.hp)
+		print(string.format("  critical injured, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical injured, hp=%d", prpt.hp))
 		ret = true
 	else

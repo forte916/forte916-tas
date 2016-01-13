@@ -47,7 +47,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = Death_All
+local interface = CriticalHit
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
@@ -57,7 +57,7 @@ if f == nil then print("error: Could not open file") end
 debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
-retry = 400
+retry = 800
 
 for i=0, retry do
 	interface.pre_attempt()
@@ -69,7 +69,7 @@ for i=0, retry do
 	else
 		rng =  next_rng(rng)
 		memory.writedword(adr_rng, rng)
-		--rng =  next_rng(rng)
+		--rng =  next_rng(rng)  -- ?? enable Death_All, disable otherwise
 	end
 
 	fc = emu.framecount()

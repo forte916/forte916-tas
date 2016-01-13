@@ -140,9 +140,9 @@ if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
 
-retry = 900
+retry = 2000
 
-for i=800, retry do
+for i=900, retry do
 	if initial == 1 then
 		initial = 0
 	end

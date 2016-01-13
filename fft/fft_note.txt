@@ -4,10 +4,16 @@ FFT note
 RNG
 ----
 * BIOS によって initial RNG が異なる
+  --> 間違い
+  * どの ROM も seed = 1 で初期化される
+  * JP v1.1 では 474f に seed = 1 で初期化される
+  * 0f 時の rng値は単にゴミと思われる
 * SCPH7502.BIN では 14f 待つと 199/199
 * SCPH1000.BIN では  9f 待つと 199/199
 * SCPH1001.BIN では ??
 * ちなみに SCPH7502 だと戦闘時にフリーズする
+  * ガフガリオンの最初のターンでフリーズ現象は tasvideos にも報告あり
+  * BIOS の変更や disable coord check を checked で改善するらしい
 
 
 Ramza 初期ステータス
@@ -707,15 +713,18 @@ ch4-Gariland
 
 * Ramza,   Lv31, speed  8, MA 13, Excalibur (speed 12)
 * Orlandu, Lv31, speed 10, PA 15, Excalibur (speed 15)
+* Orlandu で 2体倒すために Orlandu の speed を Ramza より大きくする
 
 
 
 ch4-Murond (outside)
 ----------
-* Orlandu で 2体倒すために Orlandu の speed を Ramza より大きくする
+* Ramza 初期配置  (1st Squad)
+* Orlandu 初期配置 下1 (2nd Squad)
 * Orlandu Lightning Stab
 * CT3 Death
 
+* zoom out test
   * Orlandu 待機時に L2 なし
      * ramza ct3 death 697841
      * ramza arrowed   698655
@@ -737,7 +746,7 @@ ch4-Murond (outside)
   * Ramza equip Holy Miter(MA+1) from Thief Hat
   * Ramza, Lv29, speed 8, MA 13, Excalibur (speed 12)
   * Ramza 初期配置  (1st Squad)
-  * Orlandu 初期配置 上1 (2nd Squad)
+  * Orlandu 初期配置 下1 (2nd Squad)
 
   * Orlandu Lightning Stab to kill 2 Mediators
   * Ramza CT3 flare
@@ -753,7 +762,11 @@ ch4-Murond (inside)
 * Volmalf  Lv46, HP 520, speed 9
 * Rofal    Lv45, HP 419, speed 9
 * Kletian  Lv44, HP 361, speed 8
-* Orlandu Lightning Stab
+
+* Ramza 初期配置から 上1, Orlandu 初期配置から 左2
+* Orlandu move up 4th and L2, then Lightning Stab
+* L2 zoomout した方が 2f 早い
+
 
 * RTA では
   * Ramza 初期配置から 上1, Orlandu 初期配置から 左2
@@ -772,7 +785,10 @@ ch4-Murond (inside)
 ch4-Murond (Zalbag)
 ----------
 * Zalbag Lv54, HP 562, speed 11
-* Orlandu Lightning Stab **critical**
+
+* Ramza 初期配置から 上1, Orlandu 初期配置から 左2
+* Orlandu move up 4th and L2, then Lightning Stab **critical**
+
 
 * RTA では
   * Orlandu, speed 10, PA 15
@@ -794,6 +810,7 @@ ch4-Orbonne (UBS 4)
 * ラスダン. ここからは戻れない
 * 検証用に Reflect Ring と Reflect Mail を買う
 
+* Ramza 初期配置 左1, Orlandu 出撃しない
 * CT3 Death
 
 * RTA では
@@ -816,6 +833,8 @@ ch4-Orbonne (Rolfal)
 * Rofal は Defence UP 所有なので Orlandu の剣技の damage は 200以下
 * Ramza の Flare では 390 damage, Holy では 520 damage. Holy しかない??
 
+* Ramza 初期配置, Orlandu 出撃しない
+* Level 3 Holy
 
 * RTA では
   * speed 11 に先制される
@@ -823,7 +842,7 @@ ch4-Orbonne (Rolfal)
 
 * TA では
   * Ramza 初期配置, Orlandu 出撃しない
-  * Level 3 holy
+  * Level 3 Holy
   * Ramza の Lv30 なので hit する (Excalibur が 聖吸収)
 
 
@@ -859,10 +878,12 @@ ch4-Murond (Balk)
 * Orlandu equip Twist Headband(PA+2) from Thief Hat(SP+2)
 * Orlandu, Lv33, speed 8, PA 17, Excalibur (speed 12)
 
-
 * Balk Lv55, HP 488, speed 13
+
+* Ramza 初期配置 上1, Orlandu 初期配置 左1
 * Balk に先制される. 味方近くに誘導
 * Orlandu Lightning Stab **critical**
+
 
 * RTA では
   * Ramza 初期配置, Orlandu Ramza の左1, ラヴィアン Ramza の左2, 上2
@@ -881,6 +902,7 @@ ch4-Murond (Balk)
 ch4-Murond (Hashmalum)
 -----------
 * Hashmalum Lv59, HP 1450, speed 13
+
 * Ramza は Demi2 しか使わないので speed 重視装備
 * Ramza equip Thief Hat, Sprint Shees
 * Ramza, speed 10, MA 11, Excalibur (speed 15)
@@ -913,7 +935,8 @@ ch4-Murond (Altima)
 * Learn Demi, Short Charge
 * Set Time Magic, Short Charge
 * Ramza, Equip White Robe
-* Orlandu, Equip Thief Hat, Refrect Mail
+* Orlandu, Equip Thief Hat, Refrect Ring
+
   * READY 表示 (825251f, 手動テスト)
   * Ramza 初期配置 左1, Orlandu 初期配置
   * Orlandu 移動
@@ -1044,6 +1067,28 @@ Zodiac sign
   * good         0x10, 0x50   Taurus, Virgo
   * bad          0x00, 0x60   Aries, Scorpio
   * very bad     0x30         male Cancer
+
+Magic Formula
+-------------
+* Bolt
+  * Damage = [CFa/100 * TFa/100 * MA * 14]
+* Bolt2
+  * Damage = [CFa/100 * TFa/100 * MA * 18]
+* Bolt3
+  * Damage = [CFa/100 * TFa/100 * MA * 24]
+* Death
+  * Success% = [CFa/100 * TFa/100 * (MA + 100)]
+  * If target is immune to Dead status, then success% = 0.
+* Flare
+  * Damage = [CFa/100 * TFa/100 * MA * 46]
+* Holy
+  * Damage = [CFa/100 * TFa/100 * MA * 50]
+* Demi
+  * Success% = [CFa/100 * TFa/100 * (MA + 190)]
+* Demi2
+  * Success% = [CFa/100 * TFa/100 * (MA + 120)]
+
+
 
 Lucavi
 --------
