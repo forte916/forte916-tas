@@ -66,6 +66,7 @@ adr_session_param  = 0x04BE78 -- US:0x04EAF4, JP1.0:0x04BB64, 4byte, ???
 adr_cur_session    = 0x054A9C -- US:0x057718, JP1.0:0x054788, 4byte, session frame counter
 
 adr_wheather       = 0x054B2C -- US:0x0577A8, JP1.0:0x544818, ?byte, Wheather
+adr_event_id       = 0x054B3C -- US:0xFFFFFF, JP1.0:0xFFFFFF, 1byte, EventID
 adr_locks_input    = 0x054B44 -- US:0x0577C0, JP1.0:0x054830, ?byte, locks controller input
 	--0x0001 - L2
 	--0x0002 - R2
