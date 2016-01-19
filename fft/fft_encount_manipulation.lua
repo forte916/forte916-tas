@@ -309,17 +309,22 @@ function CheckBadZodiac.success()
 	local str
 
 	for i=1, total_enemy do
+		local bad = 0
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
 
-		compatibility = Zodiac.isBadWithCapricorn(prpt.zodiac, prpt.gender)
-		if compatibility then
-			enemy = enemy + 1
-			str = str.." , bad"
-		elseif prpt.faith < 55 then
-			enemy = enemy + 1
+		compatibility = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
+		str = string.format("%s, %s", str, Zodiac.notation[compatibility])
+		if compatibility < 3 then
+			bad = bad + 1
+		end
+		if prpt.faith < 55 then
+			bad = bad + 1
 			str = str.." , unfaith"
+		end
+		if bad > 0 then
+			enemy = enemy + 1
 		end
 
 		debugPrint(str)

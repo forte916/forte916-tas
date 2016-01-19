@@ -31,7 +31,7 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 Ramza = {}
-Ramza.logname = "ramza_status2.log"
+Ramza.logname = "ramza_status1a.log"
 Ramza.best_st = {}
 Ramza.cur_st = {}
 
@@ -40,8 +40,8 @@ function Ramza.logHeader()
 end
 
 function Ramza.pre_attempt()
-	--fadv(3)
-	fadv(8)
+	fadv(3)
+	--fadv(8)
 end
 
 function Ramza.attempt()
@@ -55,13 +55,13 @@ end
 
 
 function Ramza.compareStatus(cur_sum)
-	local ret = false
+	local ret = nil
 	local best_sum = 0
 
 	if not next(Ramza.best_st) then
 		Ramza.best_st = shallowcopy(Ramza.cur_st)
 		print(Ramza.best_st)
-		return true
+		return "best"
 	end
 
 	for key, value in pairs(Ramza.best_st) do
@@ -71,16 +71,19 @@ function Ramza.compareStatus(cur_sum)
 	if (best_sum < cur_sum) then
 		Ramza.best_st = shallowcopy(Ramza.cur_st)
 		print(Ramza.best_st)
-		ret = true
+		ret = "best"
+	elseif cur_sum > 1200 then
+		print(Ramza.cur_st)
+		ret = "good"
 	else
-		ret = false
+		ret = nil
 	end
 
 	return ret
 end
 
 function Ramza.success()
-	local ret = false
+	local ret = nil
 	local str
 	local cur_prpt = {}
 	local cur_sum = 0
@@ -100,8 +103,8 @@ function Ramza.success()
 		cur_sum = cur_sum + value
 	end
 
-	debugPrint(string.format("%s, %d", str, cur_sum))
 	ret = Ramza.compareStatus(cur_sum)
+	debugPrint(string.format("%s, %d, %s", str, cur_sum, ret))
 
 	return ret
 end
@@ -141,7 +144,7 @@ if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
 
-retry = 1000
+retry = 1600
 
 for i=0, retry do
 	if initial == 1 then
@@ -156,10 +159,11 @@ for i=0, retry do
 
 	interface.attempt()
 
-	-- check status
-	if interface.success() then
-		debugPrint(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
-		print(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
+	-- check result
+	local result =  interface.success()
+	if result then
+		debugPrint(string.format("***** %s state. fc = %d, rng = %08X *****", result, fc, rng))
+		print(string.format("***** %s state. fc = %d, rng = %08X *****", result, fc, rng))
 
 		interface.post_attempt()
 	end

@@ -792,21 +792,35 @@ Zodiac.Aquarius      = 0xA0 -- •ó•r = Aquarius
 Zodiac.Pisces        = 0xB0 -- ‘o‹› = Pisces
 Zodiac.Serpentarius  = 0xC0 -- ŽÖŒ­ = Serpentarius (neutral to all signs)
 
-function Zodiac.isBadWithCapricorn(sign, gender)
+Zodiac.notation = {"worst", "bad", "normal", "good", "best"}
+
+
+-- @brief check zodiac sign compatibility with Ramza as Capricorn
+--        "bad : 0x00, 0x60, very bad : 0x30"
+--        "good: 0x10, 0x50, very good: 0x30"
+-- @return 1:worst, 2:bad, 3:normal, 4:good, 5:best
+function Zodiac.checkCompatibilityRamza(sign, gender)
 	local opposit = 0
 	local masked_sign
 
 	masked_sign = bit.band(sign, 0xF0)
-	opposit = bit.band(gender, 0x80)  -- 0x80 is male.
+	opposit = bit.band(gender, 0x80)  -- 0x80 is male., 0x40 is female
 
 	if masked_sign == Zodiac.Aries then
-		return true
+		return 2
 	elseif masked_sign == Zodiac.Libra then
-		return true
+		return 2
 	elseif masked_sign == Zodiac.Cancer and opposit ~= 0 then
-		return true
+		return 1
+	elseif masked_sign == Zodiac.Cancer and opposit == 0 then
+		-- BUG:: monster is regarded as best, unfortunately
+		return 5
+	elseif masked_sign == Zodiac.Taurus then
+		return 4
+	elseif masked_sign == Zodiac.Virgo then
+		return 4
 	end
 
-	return false
+	return 3
 end
 

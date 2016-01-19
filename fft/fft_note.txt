@@ -22,6 +22,8 @@ FurShop glitch
 * soft rest しても rng seed の初期化は発生しない
 * furshop inventory 0x80056818 (JPv1.1)
 * furshop inventory 0x80059494 (US)
+* 編成画面が表示されたら soft reset でOK. ダーラボンのセリフは表示前で OK.
+
 
 Ramza 初期ステータス
 --------------------
@@ -126,7 +128,7 @@ ch1-Gariland
 ch1-Mandalia
 -----
 * Ramza
-  * ためる 300jpと取得JpUP 200jp の 550JP を稼ぐ
+  * ためる 300jpと取得JpUP 250jp の 550JP を稼ぐ
   * ex1) エールを覚えてエールで稼ぐ
   * ex2) 取得JP UP を覚えて普通の行動で稼ぐ
   * エールの方が全体で見ると早いらしい
@@ -174,11 +176,19 @@ ch1-random
   * 敵1体のみ編成を 1000f 程度探索
   * 2体目が Ramza に近づくまで 4 turn かかり、それが約 1000f
   * よって 1000f 待った方が結果的に早くなる
-  * calcurator のときに 味方 Time mage を出せれば haste をかけれる
   * L2 押したほうがカメラ移動が減るかも
 
 * 改善案
+  * Yell (200JP) より Speed Break (250JP) の方が効果が高いかも??
+  * 敵の speed が低い序盤は 自分の speed を上げるより敵の speed を下げるほうが効果が高い
+
+  * ガッツではなく話術はどうか
+  * ためるより遅いかもだが、ドーピング, Sleep, CT reset 等が可能
+
+
+* 改善案
   * Time mage と Calculator は味方 Wizard を出す
+    * calcurator のときに 味方 Time mage を出せれば haste をかけれる
   * 2体目のゴブリンは Wizard が倒す
   * Time mage の稼ぎは Haste (100jp) 覚えると早いのでは?
     * 魔法をたくさん覚えると menu がスクロールしてしまい loop 選択できなくなる
@@ -283,6 +293,7 @@ ch2-Dorter
 * L2
 * CT5 Bolt3
 
+* Ramza Lv25, speed 7, MA 11
 * Ramza 初期配置 右1上1 in TA, この位置だと投石が届かない??
 * Ramza 一番左上 in RTA, この位置だと投石が届かない??
 * speed 7 の Theif には基本技をセットしていないか投石を覚えていない方が早い??
@@ -310,9 +321,12 @@ ch2-Zaland
 * Mustadio が先制する
 * L2
 * CT3 Bolt3
-* After battle, remove equipment of Ovelia,
-* equip Traiangle Hat and Wizard Robe, Ovelia equiped, by best fit's.
-* After battle, change Mustadio's job Chemist to reduce speed to 6
+
+* After battle
+  * Ovelia, remove all equipments
+  * Ramza, equip Traiangle Hat and Wizard Robe by best fit's.
+  * Mustadio, change job Chemist to reduce speed to 6
+* Ramza Lv26, speed 7, MA 14
 
 ch2-Barius Hill
 ---------------
@@ -355,26 +369,28 @@ ch2-Barius Valley
 * Agrias には Bolt3 をガードしてもらう
 * Agrias は Death 無効っぽいので Death でもよいが Bolt3 の方が早い
 
-* Change job Priest
-* ここで 魔術師の杖 が shop に追加される
-* 白魔道士にチェンジしてから 一度 Warjilis に戻って買い物
+* 改善案
+  * ここで 魔術師の杖 が shop に追加される
+  * 白魔道士にチェンジしてから 一度 Warjilis に戻って買い物
   * Green Beret(speed +1), 魔術師の杖(MA+1), 魔道士のマント(MA+1) in Fitting room
-* Ramza speed 9, MA 12
+  * Ramza Lv26, speed 9, MA 12
   * MA 12 だと Golgrand と Lionel (outside) が Bolt3 で倒せる
-  * Flare と Bolt3 は 100f 差. 敵が xx体なので nn x 100f = nnf
-  * Barius Valley と Warjilis の往復や shop のロスは nnf
-  * 恐らく MA を上げて Bolt3 の方が早い
+  * Flare と Bolt3 は 120f 差. 敵が 15体なので 15 x 120f = 1800f
+  * Barius Valley と Warjilis の往復や shop のロスは xxf
+  * バリアスの谷の後にウォージリスに戻って買い物する方が早くなると思います
 
 
 
 ch2-Golgorand
 -------------
 * Gafgarion Lv17, speed 8
+
 * ch2 Golgorand の前までに lv23 必須. lv23 Priest + Green Beret = speed 9
 * Change job Priest, Equip Green Beret for speed 9
 * Priest になって MA が下がるので CT Bolt3 でダメージが足りなければ Flare
-* Ramza speed 9, MA 10
+* Ramza Lv26, speed 9, MA 10
 * CT3 Flare
+
 
 ch2-Lionel (outside)
 ---------------
@@ -384,6 +400,8 @@ ch2-Lionel (outside)
 ch2-Lionel (inside)
 ---------------
 * Queklain Lv20, HP 511, speed 9
+
+* 後ろに配置して敵を手前に誘導させる。その方が敵の歩数が短そう
 * Queklain に先制される. Sleep is bad, but Death Sentence is good.
 * L2
 * Height Prime Demi2/Height Prime Demi2
@@ -395,11 +413,13 @@ ch2-Lionel (inside)
 ch3
 ---
 * Buy Wizard stuff (MA+1) and Magic Gauntlet (MA+2) at fitting room
-* Ramza speed 9, MA 13
+* Ramza Lv26, speed 9, MA 13
 
 ch3-Goland
 ----------
 * Olan Lv18, speed 9
+* max speed 9
+
 * Olan に先制される
 * L2
 * CT3 Flare
@@ -408,39 +428,56 @@ ch3-Goland
 * Olan は、辞書攻撃で critical を出すと、ノックバックして倒せるので
   Flare のターゲットが一つ減る
 
+
 ch3-Lesalia
 -----------
 * Zalmo Lv24, HP 248, speed 7
+* max speed 7
+
 * Lv4 Flare
 * hits an Knight as well.
 
 
 ch3-Orbonne 2nd Floor
 -----------
+* max speed 7
+
 * CT3 Flare
 * 編成画面を抜けるときに敵の相性が決定
 * 竜騎士は相性が悪いと Flare 一撃で倒せない
 
+
 ch3-Orbonne 3rd Floor
 -----------
 * Izlude Lv26, HP 342, speed 8
+* max speed 8
+
 * remove Green Beret for speed 8
 * 初期配置を 2マス後ろ
 * Izlude が 移動するので Hight 3 Flare
 
+
 ch3-Orbonne 1st Floor
 -----------
-* Equip Green Beret for speed 9
 * Wiegraf Lv27, HP 425, speed 10
+* max speed 10
+
+* Equip Green Beret for speed 9
 * Wiegraf には先制される
 * Hight 5 Flare
 
+
 ch3-Grog
 --------
+* max speed 8
+* weather: rain , but some enemy has Rubber Shoes
+
 * CT3 Flare
+
 
 ch3-Yardow
 ----------
+* max speed 9
 * Ninja Lv26 speed 9
 * Ninja Lv25 speed 9
 * Ninja Lv24 speed 9
