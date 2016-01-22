@@ -10,6 +10,314 @@
 require "psx_lib"
 require "fft_lib"
 
+adr_text_flag_1FFE88 = 0x1FFE88
+
+
+------------------------------------------------------------
+-- ObonneGafgarionTurn1
+------------------------------------------------------------
+ObonneGafgarionTurn1 = {}
+ObonneGafgarionTurn1.logname = "ch1_obonne_gaf_turn1_2.log"
+
+function ObonneGafgarionTurn1.pre_attempt()
+	pressBtn({circle=1}, 1)  -- skip msg
+	fadv(1)
+	pressBtn({circle=1}, 1)  -- skip msg
+end
+
+function ObonneGafgarionTurn1.attempt()
+	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+
+	pressBtn({x=1}, 1)  -- skip msg
+
+	while flag_1FFE88 ~= 0x04 do
+		fadv(1)
+		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	end
+	fadv(9)
+	pressBtn({r1=1, l2=1}, 1)  -- camera and zoom out in moving
+	fadv(470)
+end
+
+function ObonneGafgarionTurn1.post_attempt()
+	-- pass
+end
+
+function ObonneGafgarionTurn1.success()
+	local ret = false
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit7)
+	debugPrint(prpt.info)
+
+	if prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = true
+	elseif prpt.hp == 0 then
+		print(string.format("  take down, hp=%d", prpt.hp))
+		debugPrint(string.format("  take down, hp=%d", prpt.hp))
+		ret = true
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = false
+	end
+
+	return ret
+end
+
+function ObonneGafgarionTurn1.waitForBest()
+	local retry = 20
+	local best_rng = 0x442B008C
+
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
+end
+
+
+------------------------------------------------------------
+-- ObonneAgriasTurn1
+------------------------------------------------------------
+ObonneAgriasTurn1 = {}
+ObonneAgriasTurn1.logname = "ch1_obonne_agrias_turn1_1.log"
+
+function ObonneAgriasTurn1.pre_attempt()
+	--pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)
+end
+
+function ObonneAgriasTurn1.attempt()
+	pressBtn({circle=1}, 1)
+	fadv(400)
+end
+
+function ObonneAgriasTurn1.post_attempt()
+	-- pass
+end
+
+function ObonneAgriasTurn1.success()
+	local ret = false
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit8)
+	debugPrint(prpt.info)
+
+	if prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = true
+	elseif prpt.hp == 0 then
+		print(string.format("  take down, hp=%d", prpt.hp))
+		debugPrint(string.format("  take down, hp=%d", prpt.hp))
+		ret = true
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = false
+	end
+
+	return ret
+end
+
+function ObonneAgriasTurn1.waitForBest()
+	local retry = 20
+	local best_rng = 0x442B008C
+
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
+end
+
+
+------------------------------------------------------------
+-- ObonneRamzaTurn2
+------------------------------------------------------------
+ObonneRamzaTurn2 = {}
+ObonneRamzaTurn2.logname = "ch1_obonne_ramza_turn2_3.log"
+
+function ObonneRamzaTurn2.pre_attempt()
+	fadv(1)  -- for odd number retry
+	pressBtn({circle=1}, 2)   -- select target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+end
+
+function ObonneRamzaTurn2.attempt()
+	pressBtn({circle=1}, 1)   -- execute attack
+	fadv(100)
+end
+
+function ObonneRamzaTurn2.post_attempt()
+	-- pass
+end
+
+function ObonneRamzaTurn2.success()
+	local ret = false
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit6)
+	debugPrint(prpt.info)
+
+	if prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = true
+	elseif prpt.hp < 31 then
+		print(string.format("  take down, hp=%d", prpt.hp))
+		debugPrint(string.format("  take down, hp=%d", prpt.hp))
+		ret = true
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = false
+	end
+
+	return ret
+end
+
+function ObonneRamzaTurn2.waitForBest()
+	local retry = 20
+	local best_rng = 0x442B008C
+
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
+end
+
+------------------------------------------------------------
+-- ObonneAliciaTurn2
+------------------------------------------------------------
+ObonneAliciaTurn2 = {}
+ObonneAliciaTurn2.logname = "ch1_obonne_alicia_turn2_1.log"
+
+function ObonneAliciaTurn2.pre_attempt()
+	fadv(7)
+end
+
+function ObonneAliciaTurn2.attempt()
+	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+
+	pressBtn({circle=1}, 1)   -- execute attack
+
+	while flag_1FFE88 ~= 0x04 do
+		fadv(1)
+		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	end
+	fadv(2)
+	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	while flag_1FFE88 ~= 0x04 do
+		fadv(1)
+		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	end
+	fadv(8)
+	pressBtn({r2=1}, 1)  -- camera in moving
+	fadv(220)
+end
+
+function ObonneAliciaTurn2.post_attempt()
+	-- pass
+end
+
+function ObonneAliciaTurn2.success()
+	local ret = false
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit6)
+	debugPrint(prpt.info)
+
+	if prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = true
+	elseif prpt.hp == 0 then
+		print(string.format("  take down, hp=%d", prpt.hp))
+		debugPrint(string.format("  take down, hp=%d", prpt.hp))
+		ret = true
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = false
+	end
+
+	return ret
+end
+
+------------------------------------------------------------
+-- ObonneAgriasTurn3
+------------------------------------------------------------
+ObonneAgriasTurn3 = {}
+ObonneAgriasTurn3.logname = "ch1_obonne_agrias_turn3_1.log"
+
+function ObonneAgriasTurn3.pre_attempt()
+	fadv(7)
+end
+
+function ObonneAgriasTurn3.attempt()
+	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+
+	pressBtn({circle=1}, 1)   -- execute attack
+
+	while flag_1FFE88 ~= 0x04 do
+		fadv(1)
+		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	end
+	fadv(2)
+	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	while flag_1FFE88 ~= 0x04 do
+		fadv(1)
+		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	end
+	fadv(8)
+	pressBtn({r2=1}, 1)  -- camera in moving
+	fadv(1200)  -- 16168f - 15286f
+end
+
+function ObonneAgriasTurn3.post_attempt()
+	-- pass
+end
+
+function ObonneAgriasTurn3.success()
+	local ret = false
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit9)
+	debugPrint(prpt.info)
+
+	if prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = true
+	elseif prpt.hp == 0 then
+		print(string.format("  take down, hp=%d", prpt.hp))
+		debugPrint(string.format("  take down, hp=%d", prpt.hp))
+		ret = true
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = false
+	end
+
+	return ret
+end
+
+
+
+
 ------------------------------------------------------------
 -- Zirekile_Falls
 ------------------------------------------------------------
@@ -65,7 +373,7 @@ end
 -- Barius_Valley
 ------------------------------------------------------------
 Barius_Valley = {}
-Barius_Valley.logname = "ch2_barius_agrius.log"
+Barius_Valley.logname = "ch2_barius_agrias.log"
 
 function Barius_Valley.pre_attempt()
 	pressBtn({circle=1}, 4)  -- select Bolt3 of math at Barius_Valley
@@ -91,7 +399,7 @@ function Barius_Valley.success()
 
 	prpt = Bunit.readProperty(adr_battle_unit)
 	if prpt.hp == 0 then
-		debugPrint(string.format("-- agrius.hp = %2d", prpt.hp))
+		debugPrint(string.format("-- agrias.hp = %2d", prpt.hp))
 		return false
 	end
 
@@ -188,13 +496,14 @@ end
 -- CriticalHit
 ------------------------------------------------------------
 CriticalHit = {}
-CriticalHit.logname = "ch4_critical_ubs_4th_1.log"
+CriticalHit.logname = "ch4_critical_balk_1.log"
 
 function CriticalHit.pre_attempt()
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(16)
-	
+	fadv(23)
+	-- wait until 0x164908 = 0x001B
+
 	--pressBtn({circle=1}, 2)  -- select target
 	--pressBtn({circle=1}, 6)  -- confirm target
 	
@@ -215,7 +524,7 @@ function CriticalHit.success()
 	local ret = false
 	local prpt = {}
 
-	prpt = Bunit.readProperty(adr_battle_unit3)
+	prpt = Bunit.readProperty(adr_battle_unit)
 	debugPrint(prpt.info)
 
 	if prpt.critical ~= 0 then

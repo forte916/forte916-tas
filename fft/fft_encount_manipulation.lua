@@ -32,6 +32,58 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 ------------------------------------------------------------
+-- Obonne
+------------------------------------------------------------
+Obonne = {}
+Obonne.logname = "ch1_obonne_party1.log"
+
+Obonne.name = {"ramza", "agrias", "gaf", "alicia", "lavian", "kinght", "archer", "archer", "archer", "chemist", "rad"}
+
+function Obonne.logHeader()
+	debugPrint(string.format("Agrias = 0x30 = Canser"))
+	debugPrint(string.format(" * good: 0x70, 0xB0, very good: 0x90"))
+	debugPrint(string.format(" * bad : 0x00, 0x60, very bad : 0x90"))
+	debugPrint(string.format(""))
+	debugPrint(string.format("Gafgar = 0x50 = Virgo"))
+	debugPrint(string.format(" * good: 0x10, 0x90, very good: 0xB0"))
+	debugPrint(string.format(" * bad : 0x20, 0x80, very bad : 0xB0"))
+	debugPrint(string.format(""))
+end
+
+function Obonne.pre_attempt()
+	pressBtn({circle=1}, 1)
+end
+
+function Obonne.attempt()
+	pressBtn({x=1}, 1)
+	fadv(360)
+end
+
+function Obonne.post_attempt()
+	-- pass
+end
+
+function Obonne.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit
+	local total_enemy = 11
+	local str
+
+	for i=1, total_enemy do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		str = prpt.info
+
+		str = string.format("%s, %s", str, Obonne.name[i])
+		debugPrint(str)
+	end
+
+	return false  -- always false
+end
+
+
+------------------------------------------------------------
 -- Mandalia
 ------------------------------------------------------------
 Mandalia = {}
@@ -402,16 +454,16 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = CheckBadZodiac
+local interface = Obonne
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
 
-retry = 500
+retry = 100
 
-for i=100, retry do
+for i=1, retry do
 	if initial == 1 then
 		initial = 0
 	end

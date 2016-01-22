@@ -61,6 +61,14 @@ ch1-Orbonne
   * 戦闘後の最後の Ramza のセリフで味方ステータスが決定
 
 
+* testrun_tas = 19406f,  5:23, "Let go of me" said Ovelia
+* optimze_tas = 16619f,  4:37, "Let go of me" said Ovelia
+* youtube_tas =       ,  4:25, "Let go of me" said Ovelia
+
+* Obonne 戦闘終了の会話は 手動と text_skip.lua とで同じ結果
+* text_skip.lua を信用してもよさそう
+
+
 Lv1 Chemist 初期ステータス
 --------------------------
 * High starting
@@ -780,7 +788,6 @@ ch4-Murond (outside)
      * ramza ct3 death 697866
      * ramza arrowed   698677
 
-  * LvUp effect は 24f??
 
 * after battle,
 * Orlandu equip Twist Headband(PA+2) from Thief Hat(SP+2)
@@ -855,7 +862,10 @@ ch4-Orbonne (UBS 4)
 * ラスダン. ここからは戻れない
 * 検証用に Reflect Ring と Reflect Mail を買う
 
-* Ramza 初期配置 左1, Orlandu 出撃しない
+* Ramza,   Lv32, speed  8, MA 14, Excalibur (speed 12)
+* Ramza 初期配置 左1, Orlandu Ramza の左3
+* Ramza の Death や Flare で一掃できる乱数がなかったので一人残す
+  Orlandu で残った一人を倒す
 * CT3 Death
 
 * RTA では
@@ -875,7 +885,7 @@ ch4-Orbonne (UBS 4)
 ch4-Orbonne (Rolfal)
 -----------
 * Rofal Lv54, HP 509, speed 10
-* Rofal は Defence UP 所有なので Orlandu の剣技の damage は 200以下
+* Rofal は Defence UP, auto Protess 所有なので Orlandu の剣技の damage は 200以下
 * Ramza の Flare では 390 damage, Holy では 520 damage. Holy しかない??
 
 * Ramza 初期配置, Orlandu 出撃しない
@@ -926,8 +936,15 @@ ch4-Murond (Balk)
 * Balk Lv55, HP 488, speed 13
 
 * Ramza 初期配置 上1, Orlandu 初期配置 左1
-* Balk に先制される. 味方近くに誘導
+* Balk に先制される. 味方近くに誘導, L2
+* Balk はブレイズガンより狙撃が早い
 * Orlandu Lightning Stab **critical**
+
+* Balk
+  * Braze gun (Bolt2??) 395f = 2436f - 2041f
+  * Snipe               280f = 2319f - 2039f
+  * Snipe L2 zoom       265f = 2304f - 2039f  (15f faster)
+  * L2 がある、なしでスクロール距離が変わるためか、乱数がずれ結果が変わる
 
 
 * RTA では
@@ -948,13 +965,23 @@ ch4-Murond (Hashmalum)
 -----------
 * Hashmalum Lv59, HP 1450, speed 13
 
-* Ramza は Demi2 しか使わないので speed 重視装備
-* Ramza equip Thief Hat, Sprint Shees
-* Ramza, speed 10, MA 11, Excalibur (speed 15)
-  * Ramza 初期配置, Orlandu 出撃しない
-  * Level prime Demi2
-  * Hashmalum が魔法
-  * Hashmalum の chage 中に Level prime Demi2
+* before battle,
+* Ramza は今後 Demi2 しか使わないので speed 重視装備
+* Ramza equip Thief Hat, Sprint Shees, White Robe
+* Orlandu, Equip Thief Hat, Refrect Ring
+
+* Ramza,   Lv32, speed 10, MA  9, Excalibur (speed 15)
+* Orlandu, Lv33, speed 10, PA 12, Excalibur (speed 15)
+
+* Ramza 初期配置, Orlandu 出撃しない
+  * Orlandu が出撃して Ramza の近くにいると高確率で呪縛(stop)を使ってくる
+  * 呪文を使わせたほうが effect が短いため Orlandu は出撃しない
+  * 2撃目が Demi2 か chage中に Orlandu の critical かどっちが早いかは微妙
+  * 調整のしやすさは Demi2
+
+* Level prime Demi2
+* Hashmalum が魔法
+* Hashmalum の chage 中に Level prime Demi2
 
 * RTA では
   * Ramza 初期配置, Orlandu Ramza の左2, 上1, ラヴィアン Orlandu の上1
@@ -977,19 +1004,39 @@ ch4-Murond (Altima)
 * Altima   Lv56, HP 1391, speed 9
 * 第二形態 Lv66, HP 3281, speed 12
 
-* Learn Demi, Short Charge
-* Set Time Magic, Short Charge
-* Ramza, Equip White Robe
-* Orlandu, Equip Thief Hat, Refrect Ring
+* before battle,
+* Ramza, Learn Demi, Short Charge, MP回復移動
+* Ramza, Set Time Magic, Short Charge, MP回復移動
+  * Lv33 だと White Robe だと MP97, Demi2(MP50), Demi(MP24) = MP98 で MP1 足りない
+  * 光のローブやローブオブロードが必要
+  * 今回は MP回復移動で乗り切った
+
+* Ramza,   Lv33, speed 10, MA  9, Excalibur (speed 15)
+* Orlandu, Lv33, speed 10, PA 12, Excalibur (speed 15)
+
+
+* Ramza 初期配置 上1, Orlandu 初期配置 左1
+* READY 表示 (762196f)
+* Orlandu 移動
+* Ramza Demi2, reflect
+  * 時魔法は reaction が発動するので発動させないよう調整
+  * face up, 239f = 8114f - 7875f
+  * 算術だと reaction が発動しないらしい??
+* 第二形態, HP 3281, Lv66, speed 11
+* Ramza Demi, reflect
+* Ramza move, Demi, reflect. ここで L2 押さないほうが 2f 早かった. zoom in が影響??
+* Congratulations! 表示 (770518f)
+* elapsed 8322f = 139sec
+
 
   * READY 表示 (825251f, 手動テスト)
   * Ramza 初期配置 左1, Orlandu 初期配置
   * Orlandu 移動
-  * Ramza Height Prime Demi2, reflect
+  * Ramza Demi2, reflect
   * 第二形態, HP 3281, Lv66, speed 11
-  * Ramza Height Prime Demi, reflect
-  * Ramza Height Prime Demi, reflect
-  * Congratulations! 表示 (835093, 手動テスト)
+  * Ramza Demi, reflect
+  * Ramza Demi, reflect
+  * Congratulations! 表示 (835093f, 手動テスト)
   * elapsed 9842f = 164sec
 
 
@@ -1004,11 +1051,13 @@ ch4-Murond (Altima)
   * 第二形態, HP 3281, Lv66, speed 11
   * Ramza height prime slow
   * ラヴィアン 銃撃
+  * Alma マバリア to Ramza
   * Orlandu 剣技
   * Ramza height prime demi2
   * Ramza height prime demi2
   * Orlandu 剣技
   * Congratulations! 表示 4:18:46
+  * elapsed 191sec
 
 * TA では
   * Orlandu equip Ragnarok
@@ -1029,6 +1078,14 @@ ch4-Murond (Altima)
   * Orlandu 待機
   * Ramza height prime demi2
   * Congratulations! 表示 4:51
+  * elapsed 149sec
+
+
+Ending
+------
+* Last key frame = 803365f
+* "The end"      = 803979f (after 30f, 0x1FFE88 = 0x801FFF48) = 3:43:19
+* rerecord-count = 59430
 
 
 CT
@@ -1065,6 +1122,7 @@ Frame counts of casting spell
 * Deth   6106 - 5744 = 362f
 * Flare  6160 - 5746 = 414f
 * Holy   6375 - 5736 = 639f
+* Holy   6875 - 6243 = 632f
 
 * Lightning Stab
 	455 - 240 = 215f
@@ -1096,7 +1154,10 @@ Frame counts of casting spell
     4th turn  9359 - 9108 = 251f
     total                   982f
 
-* 17f to move 1 grid
+* 17f (約20f) to move 1 grid (約20f)
+* LvUp effect は 24f??
+* LvUp effect は 40f?? Lv effect 中は 0x1FFE88 が 0x0137 になる
+
 
 
 Holy Knight / White Knight

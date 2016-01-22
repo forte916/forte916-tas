@@ -1,5 +1,5 @@
 
-91
+92
 00000	00009010	d	h	0	RNG
 00001	00000000	S	S	0	----------------------------
 00002	00037808	d	h	0	text param
@@ -47,47 +47,48 @@
 0002C	00053E9C	d	h	0	code pointers?
 0002D	00054A9C	d	h	0	cur_session
 0002E	00054AA0	d	h	0	Map Data?
-0002F	00054B44	d	h	0	locks controller input
-00030	00054B64	d	h	0	Current Location
-00031	00054B68	d	h	0	ENTD Data ID (ENTD to load)
-00032	0006358C	d	h	0	current ENTD pointer
-00033	00044778	d	h	0	pad input battle
-00034	00000000	d	h	0	pad input world
-00035	001678B0	d	h	0	pad input 1f delay
-00036	0016BA80	d	h	0	pad input 1f delay
-00037	0016BA84	d	h	0	pad input 2f delay
-00038	0016BA88	d	h	0	pad input param?
-00039	0016BA8C	d	h	0	pad input param?
-0003A	0016BA90	d	h	0	pad input param?
-0003B	00000000	S	S	0	----------------------------
-0003C	00097F80	d	h	0	encount param
-0003D	000A076C	d	h	0	encount param
-0003E	000D105C	d	h	0	encount param
-0003F	000D10A0	d	h	0	on location/on may way
-00040	000D10B4	d	h	0	dest location
-00041	00000000	S	S	0	----------------------------
-00042	0018E899	b	h	0	1st b unit id
-00043	0018EA59	b	h	0	2nd b unit id
-00044	0018EC19	b	h	0	3rd b unit id
-00045	0018EDD9	b	h	0	4th b unit id
-00046	00000000	S	S	0	----------------------------
-00047	0018E898	b	h	0	1st b ch
-00048	0018E8A1	b	h	0	1st b zodiac
-00049	0018E99C	w	u	0	1st b total_jp_squire
-0004A	0018E99E	w	u	0	1st b total_jp_chemist
-0004B	0018E9A8	w	u	0	1st b total_jp_wizard
-0004C	00190498	b	h	0	17th b ch
-0004D	001904A1	b	h	0	17th b zodiac
-0004E	0019059C	w	u	0	17th b total_jp_squire
-0004F	0019059E	w	u	0	17th b total_jp_chemist
-00050	001905A6	w	u	0	17th b total_jp_priest
-00051	001905A8	w	u	0	17th b total_jp_wizard
-00052	001905AA	w	u	0	17th b total_jp_time_mage
-00053	001905B2	w	u	0	17th b total_jp_oracle
-00054	001905BC	w	u	0	17th b total_jp_calculator
-00045	00000000	S	S	0	----------------------------
-00056	000552F8	b	h	0	1st f ch
-00057	000552FE	b	h	0	1st f zodiac
-00058	0005538E	w	u	0	1st f total_jp_squire
-00059	00055390	w	u	0	1st f total_jp_chemist
-0005A	0005539A	w	u	0	1st f total_jp_wizard
+0002F	00054B2C	d	h	0	Wheather
+00030	00054B44	d	h	0	locks controller input
+00031	00054B64	d	h	0	Current Location
+00032	00054B68	d	h	0	ENTD Data ID (ENTD to load)
+00033	0006358C	d	h	0	current ENTD pointer
+00034	00044778	d	h	0	pad input battle
+00035	00000000	d	h	0	pad input world
+00036	001678B0	d	h	0	pad input 1f delay
+00037	0016BA80	d	h	0	pad input 1f delay
+00038	0016BA84	d	h	0	pad input 2f delay
+00039	0016BA88	d	h	0	pad input param?
+0003A	0016BA8C	d	h	0	pad input param?
+0003B	0016BA90	d	h	0	pad input param?
+0003C	00000000	S	S	0	----------------------------
+0003D	00097F80	d	h	0	encount param
+0003E	000A076C	d	h	0	encount param
+0003F	000D105C	d	h	0	encount param
+00040	000D10A0	d	h	0	on location/on may way
+00041	000D10B4	d	h	0	dest location
+00042	00000000	S	S	0	----------------------------
+00043	0018E899	b	h	0	1st b unit id
+00044	0018EA59	b	h	0	2nd b unit id
+00045	0018EC19	b	h	0	3rd b unit id
+00046	0018EDD9	b	h	0	4th b unit id
+00047	00000000	S	S	0	----------------------------
+00048	0018E898	b	h	0	1st b ch
+00049	0018E8A1	b	h	0	1st b zodiac
+0004A	0018E99C	w	u	0	1st b total_jp_squire
+0004B	0018E99E	w	u	0	1st b total_jp_chemist
+0004C	0018E9A8	w	u	0	1st b total_jp_wizard
+0004D	00190498	b	h	0	17th b ch
+0004E	001904A1	b	h	0	17th b zodiac
+0004F	0019059C	w	u	0	17th b total_jp_squire
+00050	0019059E	w	u	0	17th b total_jp_chemist
+00051	001905A6	w	u	0	17th b total_jp_priest
+00052	001905A8	w	u	0	17th b total_jp_wizard
+00053	001905AA	w	u	0	17th b total_jp_time_mage
+00054	001905B2	w	u	0	17th b total_jp_oracle
+00045	001905BC	w	u	0	17th b total_jp_calculator
+00056	00000000	S	S	0	----------------------------
+00057	000552F8	b	h	0	1st f ch
+00058	000552FE	b	h	0	1st f zodiac
+00059	0005538E	w	u	0	1st f total_jp_squire
+0005A	00055390	w	u	0	1st f total_jp_chemist
+0005B	0005539A	w	u	0	1st f total_jp_wizard

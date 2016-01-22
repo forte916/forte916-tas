@@ -37,7 +37,8 @@ end
 
 function Optimize.attempt()
 	pressBtn({start=1}, 1)  -- skip opening
-	fadv(360)
+	fadv(500)
+	--fadv(360)
 end
 
 function Optimize.post_attempt()
@@ -69,7 +70,7 @@ local fc = emu.framecount()
 local interface = Optimize
 
 
-retry = 100
+retry = 200
 
 for i=0, retry do
 	if initial == 1 then
@@ -90,7 +91,7 @@ for i=0, retry do
 
 		-- make dest directory in advance
 		local gdstr = gui.gdscreenshot()
-		gd.createFromGdStr(gdstr):png(string.format("snap/arazlam_%df.png", fc))
+		gd.createFromGdStr(gdstr):png(string.format("snap/obonne_movie_%df.png", fc))
 	end
 
 	savestate.load(state)

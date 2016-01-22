@@ -605,6 +605,7 @@ function Bunit.readProperty(ofs_unit)
 
 	prpt.JP_squire     = memory.readword(ofs_unit + Bunit.JP_squire     )
 	prpt.JP_chemist    = memory.readword(ofs_unit + Bunit.JP_chemist    )
+	prpt.JP_knight     = memory.readword(ofs_unit + Bunit.JP_knight     )
 	prpt.JP_priest     = memory.readword(ofs_unit + Bunit.JP_priest     )
 	prpt.JP_wizard     = memory.readword(ofs_unit + Bunit.JP_wizard     )
 	prpt.JP_time_mage  = memory.readword(ofs_unit + Bunit.JP_time_mage  )
@@ -613,6 +614,7 @@ function Bunit.readProperty(ofs_unit)
 
 	prpt.total_JP_squire     = memory.readword(ofs_unit + Bunit.total_JP_squire     )
 	prpt.total_JP_chemist    = memory.readword(ofs_unit + Bunit.total_JP_chemist    )
+	prpt.total_JP_knight     = memory.readword(ofs_unit + Bunit.total_JP_knight     )
 	prpt.total_JP_priest     = memory.readword(ofs_unit + Bunit.total_JP_priest     )
 	prpt.total_JP_wizard     = memory.readword(ofs_unit + Bunit.total_JP_wizard     )
 	prpt.total_JP_time_mage  = memory.readword(ofs_unit + Bunit.total_JP_time_mage  )
@@ -637,9 +639,10 @@ function Bunit.readProperty(ofs_unit)
 	prpt.attack_accuracy = memory.readbyte(ofs_unit + Bunit.attack_accuracy )
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
-	prpt.info = Bunit.toString(prpt)
+	--prpt.info = Bunit.toString(prpt)
 	--prpt.info = Bunit.toString2(prpt)
 	--prpt.info = Bunit.toString3(prpt)
+	prpt.info = Bunit.toString4(prpt)
 	return prpt
 end
 
@@ -741,6 +744,37 @@ function Bunit.toString3(prpt)
 			prpt.base_action_learned1 ,
 			prpt.base_action_learned2 ,
 			prpt.base_r_s_m_learned3  )
+
+	return str
+end
+
+function Bunit.toString4(prpt)
+	local str = string.format("%2x %2x %2x %2x:"
+			.."%2d %2d %2d:"
+			.."%2d %2d:"
+			.."%3d %3d:"
+			.."%3d %3d %3d:"
+			.."%3d %3d:",
+			prpt.ch     ,
+			prpt.no     ,
+			prpt.job    ,
+			prpt.zodiac ,
+
+			prpt.lv     ,
+			prpt.exp    ,
+			prpt.speed  ,
+
+			prpt.brave  ,
+			prpt.faith  ,
+
+			prpt.hp     ,
+			prpt.mp     ,
+
+			prpt.total_JP_squire    ,
+			prpt.total_JP_chemist   ,
+			prpt.total_JP_wizard    ,
+			prpt.total_JP_knight    ,
+			prpt.JP_squire )
 
 	return str
 end

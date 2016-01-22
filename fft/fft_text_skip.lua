@@ -237,7 +237,6 @@ function Text.skipDirection()
 			and kind == 0x00BB then
 		print(string.format("direction = 0x%04X, kind = 0x%04X, DIRECT_BONUS_MONEY", direction, kind))
 		Text.direction = Text.DIRECT_BONUS_MONEY
-		pressBtn({circle=1}, 4)   -- show "bonus money"
 		pressBtn({circle=1}, 4)   -- skip counting
 		pressBtn({circle=1}, 1)   -- skip bonus money
 	elseif Text.direction == Text.DIRECT_BONUS_MONEY
@@ -281,7 +280,8 @@ local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 
 emu.registerbefore(Text.drawFlags)
 
-while event_id > 0 and flag_1FFE88 ~= 0x02 do
+--while event_id > 0 and flag_1FFE88 ~= 0x02 do
+while event_id > 0 do
 
 	if initial == 1 then
 		initial = 0

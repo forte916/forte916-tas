@@ -47,7 +47,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = CriticalHit
+local interface = ObonneAgriasTurn3
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
@@ -76,6 +76,7 @@ for i=0, retry do
 	-- check status
 	if interface.success() then
 		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
+		print(string.format("  ***** best state. retry = %d, rng = %08X *****", i, rng))
 		interface.post_attempt()
 	end
 

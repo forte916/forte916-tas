@@ -47,7 +47,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = CriticalHit
+local interface = ObonneRamzaTurn2
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
@@ -57,7 +57,7 @@ if f == nil then print("error: Could not open file") end
 debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
-retry = 800
+retry = 400
 
 for i=0, retry do
 	interface.pre_attempt()

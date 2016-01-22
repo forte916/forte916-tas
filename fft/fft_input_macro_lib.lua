@@ -67,26 +67,23 @@ function TAS.inputName()
 	fc = emu.framecount()
 	print(string.format("inputName: fc = %d", fc))
 
-	-- 1290f
+	-- shown input name
 	fadv(3)
-	pressBtn({circle=1}, 11)  -- delete 1st letter
-
+	pressBtn({square=1}, 1)  -- delete 1st letter
+	fadv(5)
+	pressBtn({square=1}, 1)  -- delete 2nd letter
+	fadv(5)
+	pressBtn({start=1},  1)  -- determin
 	fadv(3)
-	pressBtn({circle=1}, 11)  -- delete 2nd letter
-
-	fadv(3)
-	pressBtn({start=1}, 11)  -- determin
-
-	fadv(1)
-	pressBtn({circle=1}, 11)  -- confirm
-	fadv(4)
+	pressBtn({circle=1}, 1)  -- confirm
+	fadv(12)
 end
 
 function TAS.inputBirthday()
 	fc = emu.framecount()
 	print(string.format("inputBirthday: fc = %d", fc))
 
-	-- 1348f
+	-- input birthday
 	fadv(5)
 	pressBtn({start=1}, 1)  -- determin
 	pressBtn({circle=1}, 1)  -- confirm
@@ -97,24 +94,25 @@ function TAS.skipOpeningMovie()
 	fc = emu.framecount()
 	print(string.format("skipOpeningMovie: fc = %d", fc))
 
-	-- 1389f
+	-- starting moveie
 	fadv(11)
 	pressBtn({start=1}, 1)  -- skip opening movie
 	fadv(324)
 end
 
+-- @deplecated
 function TAS.skipObonne()
 	fc = emu.framecount()
 	print(string.format("skipObonne: fc = %d", fc))
 
 	-- 1725f
 	fadv(1430)
-	-- aglias, 3155f
+	-- agrias, 3155f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	-- aglias, 3163f
+	-- agrias, 3163f
 	fadv(94)
 
 	-- ovelia, 3257f
@@ -125,7 +123,7 @@ function TAS.skipObonne()
 	pressBtn({circle=1}, 2)
 	--fadv(xx)
 	
-	-- aglias, 3414f
+	-- agrias, 3414f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -151,7 +149,7 @@ function TAS.skipObonne()
 	fadv(4)
 	pressBtn({circle=1}, 2)
 
-	-- aglias, 3888f
+	-- agrias, 3888f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -178,7 +176,7 @@ function TAS.skipObonne()
 	fadv(4)
 	pressBtn({circle=1}, 2)
 
-	-- aglias, 4190f
+	-- agrias, 4190f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -212,7 +210,7 @@ function TAS.skipObonne()
 	fadv(4)
 	pressBtn({circle=1}, 2)
 
-	-- aglias, 4312f
+	-- agrias, 4312f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -290,8 +288,9 @@ function TAS.skipObonne()
 	pressBtn({circle=1}, 2)
 end
 
+-- @deplecated
 function TAS.skipObonneEntrance()
-	-- aglias, 6762f
+	-- agrias, 6762f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -333,7 +332,7 @@ function TAS.skipObonneEntrance()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 
-	-- aglias, 7232f
+	-- agrias, 7232f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -353,6 +352,7 @@ function TAS.skipObonneEntrance()
 	pressBtn({circle=1}, 2)
 end
 
+-- @deplecated
 function TAS.Ch1_1_skipOpening()
 	-- gafgarion, 8239f
 	pressBtn({circle=1}, 2)
@@ -362,7 +362,7 @@ function TAS.Ch1_1_skipOpening()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 
-	-- aglias, 8430f
+	-- agrias, 8430f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -387,103 +387,113 @@ function TAS.Ch1_1_skipOpening()
 
 end
 
-function TAS.Ch1_1_ramza1()
-	-- ramza arrowed, 9580f
-	fadv(9)
+function TAS.Ch1_1_ramza_turn1()
+	-- ramza arrowed
+	fadv(7)
 	pressBtn({x=1}, 6)
-	pressBtn({triangle=1}, 6)
-	fadv(3)
-	pressBtn({up=1}, 4)
-	pressBtn({circle=1}, 2)
-	fadv(54)
-
-	-- change option2
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
-	pressBtn({up=1}, 4)
-	pressBtn({circle=1}, 4)
-
-	-- change option4
-	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
+	pressBtn({triangle=1}, 1)
+	fadv(2)
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 1)
+	fadv(45)
+	fadv(2)
+	pressBtn({square=1, down=1}, 2)
 	pressBtn({up=1}, 4)
 	pressBtn({up=1}, 4)
-	pressBtn({up=1}, 4)
-	pressBtn({circle=1}, 4)
 
 	-- change option5
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
-	pressBtn({up=1}, 4)
-	pressBtn({circle=1}, 4)
+	pressBtn({circle=1}, 6)
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 2)
 
 	-- change option6
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
 
 	-- change option7
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
 
 	-- change option8
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
 
 	-- change option9
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
 
 	-- change option11
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
 
 	-- change option12
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 2)
 
 	pressBtn({x=1}, 6)
-	pressBtn({x=1}, 6)
-	fadv(1)
+	pressBtn({x=1}, 1)
+	fadv(6)
 
 	-- move
 	pressBtn({circle=1}, 6)
 	pressBtn({circle=1}, 10)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 6)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
+	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
 	-- ramza arrowed, 10012f
-	fadv(9)
+	fadv(1)  -- wait until 0x164908 = 0x001C
 	pressBtn({circle=1}, 18)
-	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
 	-- ramza standby, 10043f
 	pressBtn({circle=1}, 9)
-	-- wait here for luck manipulation
-	fadv(2)
-	pressBtn({circle=1}, 2)
+	--fadv(xx) -- wait here for luck manipulation
+	pressBtn({circle=1}, 1)
 	--fadv(xx)
-
 end
 
-function TAS.Ch1_1_ramza2()
+function TAS.Ch1_1_ramza_turn2()
+	-- ramza arrowed
+	fadv(7)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({circle=1}, 9)  -- attack
+	pressBtn({right=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)   -- select target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+
+	-- wait here for luck manipulation
+	pressBtn({circle=1}, 1)   -- execute attack
+	--fadv(xx)
+	
+	-- arrowed
+	fadv(7)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)
+	pressBtn({circle=1}, 1)
+end
+
+
+-- @deplecated
+function TAS.Ch1_1_ramza_turn2_old()
 	-- ramza arrowed, 14694f
 	--fadv(xx)
 
@@ -510,7 +520,8 @@ function TAS.Ch1_1_ramza2()
 	
 end
 
-function TAS.Ch1_1_ramza2()
+-- @deplecated
+function TAS.Ch1_1_ramza_turn3()
 	-- ramza arrowed, 18487f
 	--fadv(xx)
 	pressBtn({circle=1}, 18)
@@ -542,7 +553,7 @@ function TAS.Ch1_1_skipEnding()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 
-	-- aglias, 19512f
+	-- agrias, 19512f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -567,7 +578,7 @@ function TAS.Ch1_1_skipEnding()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 
-	-- aglias, 20468f
+	-- agrias, 20468f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -579,7 +590,7 @@ function TAS.Ch1_1_skipEnding()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 
-	-- aglias, 20910f
+	-- agrias, 20910f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -891,13 +902,13 @@ function TAS.learnWizard()
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- wizard
-	fadv(2)
+	pressBtn({down=1}, 1)  -- wizard
+	fadv(5)
 	pressBtn({circle=1}, 10)
 	pressBtn({square=1, down=1}, 4)
 	pressBtn({up=1}, 4)
-	pressBtn({down=1}, 4)
-	fadv(2)
+	pressBtn({down=1}, 1)
+	fadv(5)
 	pressBtn({circle=1}, 4)
 	pressBtn({square=1, down=1}, 4)
 	pressBtn({circle=1}, 2)
@@ -905,14 +916,14 @@ function TAS.learnWizard()
 	pressBtn({square=1, up=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select bolt
-	pressBtn({circle=1}, 10)  -- select yes
-	pressBtn({right=1}, 6)
-	pressBtn({right=1}, 6)
-	pressBtn({circle=1}, 8)   -- select magic attack up
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select bolt
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({right=1}, 4)
+	pressBtn({right=1}, 4)
+	pressBtn({circle=1}, 4)   -- select magic attack up
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 4)
 end
@@ -937,10 +948,10 @@ function TAS.learnRamzaYell()
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- Yell
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Yell
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 4)
 	-- 44877f
@@ -996,11 +1007,11 @@ function TAS.ch1_3_turn1_ramza()
 	-- arrowed
 	fadv(9)
 	pressBtn({circle=1}, 10)  -- move
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4+1)
 	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
 	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
@@ -1038,9 +1049,9 @@ function TAS.ch1_3_turn1_ramza()
 	fadv(9)
 	pressBtn({circle=1}, 18)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 9)  -- stand by
-	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
 end
 
 function TAS.ch1_3_turnN_ramza_Yell()
@@ -1085,16 +1096,16 @@ function TAS.learnRamzaAccumulate()
 	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 10)  -- select learn
 	pressBtn({circle=1}, 10)  -- select squire
-	pressBtn({circle=1}, 8)   -- select accumulate
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({circle=1}, 4)   -- select accumulate
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({right=1}, 6)
 	pressBtn({right=1}, 6)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select gained jp up
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select gained jp up
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 4)
 	pressBtn({down=1}, 1)
@@ -1102,8 +1113,8 @@ function TAS.learnRamzaAccumulate()
 	pressBtn({circle=1}, 10)  -- select slot
 	pressBtn({circle=1}, 4)   -- select guts
 	pressBtn({down=1}, 2)
-	pressBtn({down=1}, 2)
-	fadv(2)
+	pressBtn({down=1}, 1)
+	fadv(3)
 	pressBtn({circle=1}, 10)  -- select slot
 	pressBtn({circle=1}, 1)   -- select gained jp jp
 	fadv(5)
@@ -1254,7 +1265,7 @@ function TAS.jobChangeWizardRamza_learnMagic()
 	-- change wizard
 	pressBtn({triangle=1}, 2)  -- show menu
 	pressBtn({down=1}, 2)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
 	pressBtn({circle=1}, 1)  -- select job change
 	fadv(46)
 	pressBtn({right=1}, 15-2)
@@ -1268,44 +1279,45 @@ function TAS.jobChangeWizardRamza_learnMagic()
 	pressBtn({x=1}, 1)  -- cancel job change
 	fadv(47)
     -- learn ability
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)  -- select ability
 	fadv(27)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 10)  -- select learn
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- priest
+	pressBtn({down=1}, 1)  -- priest
+	fadv(5)
+	pressBtn({circle=1}, 1)  -- priest
 	fadv(2)
-	pressBtn({circle=1}, 10)
-	pressBtn({square=1, down=1}, 4)
+	pressBtn({square=1, down=1}, 9)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- holy
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select holy
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({down=1}, 1)  -- holy
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select holy
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({x=1}, 10+1)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- time mage
-	fadv(2)
+	pressBtn({down=1}, 1)  -- time mage
+	fadv(4)
 	pressBtn({circle=1}, 10)
-	pressBtn({right=1}, 6)
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select switch mp
-	pressBtn({circle=1}, 10)  -- select yes
-	pressBtn({left=1}, 6)
+	pressBtn({right=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select switch mp
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({left=1}, 4)
 	pressBtn({square=1, down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- reflect
-	fadv(2)
+	pressBtn({down=1}, 1)  -- reflect
+	fadv(5)
 	pressBtn({circle=1}, 4)  -- select reflect
 	pressBtn({square=1, down=1}, 4)
 	pressBtn({circle=1}, 1)
@@ -1318,65 +1330,66 @@ function TAS.jobChangeWizardRamza_learnMagic()
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- time mage
+	pressBtn({down=1}, 1)  -- time mage
+	fadv(5)
+	pressBtn({circle=1}, 1)  -- time mage
 	fadv(2)
-	pressBtn({circle=1}, 10)
-	pressBtn({square=1, down=1}, 4)
+	pressBtn({square=1, down=1}, 9)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- quick
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select quick
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({down=1}, 1)  -- quick
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select quick
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- demi2
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select demi2
-	pressBtn({circle=1}, 10)  -- select yes
-	pressBtn({left=1}, 6)
-	pressBtn({circle=1}, 8)   -- select teleport
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({down=1}, 1)  -- demi2
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select demi2
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({left=1}, 4)
+	pressBtn({circle=1}, 4)   -- select teleport
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({x=1}, 10+1)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)  -- calculator
-	fadv(2)
+	pressBtn({down=1}, 1)  -- calculator
+	fadv(5)
 	pressBtn({circle=1}, 10)
-	pressBtn({right=1}, 6)
-	pressBtn({circle=1}, 8)   -- select CT
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({right=1}, 4)
+	pressBtn({circle=1}, 4)   -- select CT
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select Level
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select Level
-	pressBtn({circle=1}, 10)  -- select yes
-	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select Hight
-	pressBtn({circle=1}, 10)  -- select yes
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select prime number
-	pressBtn({circle=1}, 10)  -- select yes
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select 5
-	pressBtn({circle=1}, 10)  -- select yes
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select 4
-	pressBtn({circle=1}, 10)  -- select yes
-	pressBtn({down=1}, 4)
-	fadv(2)
-	pressBtn({circle=1}, 8)   -- select 3
-	pressBtn({circle=1}, 10)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select Hight
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select prime number
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select 5
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select 4
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select 3
+	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({x=1}, 10+1)
 	pressBtn({x=1}, 4)
     -- set ability
-	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 4)   -- select set
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 4+1)   -- select set
 	pressBtn({circle=1}, 10)  -- select slot
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
@@ -1385,23 +1398,23 @@ function TAS.jobChangeWizardRamza_learnMagic()
 	pressBtn({right=1}, 4)  -- math
 	fadv(2)
 	pressBtn({circle=1}, 2)   -- select math
-	pressBtn({down=1}, 4)
-	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(4)
 	pressBtn({circle=1}, 10)  -- select slot
-	pressBtn({down=1}, 4)
-	fadv(2)
+	pressBtn({down=1}, 1)
+	fadv(5)
 	pressBtn({circle=1}, 2)   -- select mp switch
-	pressBtn({down=1}, 4)
-	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(4)
 	pressBtn({circle=1}, 10)  -- select slot
-	pressBtn({down=1}, 4)
-	fadv(2)
+	pressBtn({down=1}, 1)
+	fadv(5)
 	pressBtn({circle=1}, 2)   -- select magic attack up
-	pressBtn({down=1}, 4)
-	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(4)
 	pressBtn({circle=1}, 10)  -- select slot
-	pressBtn({circle=1}, 2)   -- select teleport
-	fadv(3)
+	pressBtn({circle=1}, 1)   -- select teleport
+	fadv(4)
 	pressBtn({x=1}, 2)
 	pressBtn({x=1}, 2)
 	fadv(29-2)
@@ -1801,11 +1814,11 @@ function TAS.ch4_Sluice_turn2()
 	-- arrowed and shown AT
 	fadv(6+1)
 	pressBtn({circle=1}, 10)  -- move
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
 	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
 	pressBtn({circle=1}, 1)
 	--fadv(xx)
 end
@@ -2033,7 +2046,8 @@ function TAS.ch4_Limberry_outside_turn1()
 	pressBtn({left=1}, 1)
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
-	pressBtn({circle=1}, 16+1)  -- confirm target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(16)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)
 end
@@ -2048,16 +2062,16 @@ function TAS.learnMove1_Orlandu()
 	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 10)  -- learn
 	pressBtn({circle=1}, 10+1)  -- sword master
-	pressBtn({left=1}, 6)
-	pressBtn({circle=1}, 8)   -- Move+1
+	pressBtn({left=1}, 4)
+	pressBtn({circle=1}, 4)   -- Move+1
 	pressBtn({circle=1}, 6)  -- select yes
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 3)
 	-- set Move+1
 	pressBtn({down=1}, 1)
 	pressBtn({circle=1}, 2)  -- set
-	pressBtn({up=1}, 3)
-	fadv(2)
+	pressBtn({up=1}, 1)
+	fadv(4)
 	pressBtn({circle=1}, 10)  -- select slot
 	pressBtn({circle=1}, 1)   -- Move+1
 	fadv(5)
@@ -2169,7 +2183,8 @@ function TAS.ch4_Murond_outside_turn1()
 	pressBtn({up=1}, 1)
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
-	pressBtn({circle=1}, 8)  -- confirm target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(7)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)
 	
@@ -2179,7 +2194,6 @@ function TAS.ch4_Murond_outside_turn1()
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 9)  -- stand by
 	pressBtn({circle=1}, 1)
-	
 end
 
 function TAS.equipTwistHeadband_Orlandu()
@@ -2216,12 +2230,12 @@ function TAS.ch4_Murond_inside_turn1()
 	pressBtn({up=1}, 2)
 	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)
-	fadv(8)
+	fadv(5)
 	pressBtn({l2=1}, 1)
 	--fadv(xx)
 
 	-- arrowed
-	fadv(1)
+	fadv(1)  -- wait until 0x164908 = 0x001C
 	pressBtn({circle=1}, 18)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({down=1}, 2)
@@ -2234,13 +2248,269 @@ function TAS.ch4_Murond_inside_turn1()
 	pressBtn({up=1}, 1)
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
-	pressBtn({circle=1}, 16+1)  -- confirm target, before 5f shown "Menu"
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(16)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)
 end
 
+function TAS.ch4_Kletian_turn1()
+	-- arrowed
+	fadv(7)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({right=1}, 1)
+	pressBtn({circle=1}, 1)
+	-- if L2, 5f delay
+	--fadv(xx)
 
+	-- arrowed
+	fadv(1)
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- Sword skill
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- Lightning Stab
+	pressBtn({right=1}, 3)
+	pressBtn({right=1}, 2)
+	pressBtn({right=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	pressBtn({circle=1}, 1)  -- execute attack
+	--fadv(xx)
+end
 
+function TAS.ch4_Balk_deploy()
+	-- also last battle.
+	-- before 3f from reverse triangle
+	pressBtn({up=1, circle=1}, 1)
+	pressBtn({r1=1, left=1}, 1)
+	pressBtn({down=1, circle=1}, 1)
+	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 1)
+	fadv(100)
+end
+
+function TAS.ch4_Balk_turn1()
+	-- arrowed
+	fadv(7)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({right=1}, 1)
+	pressBtn({down=1}, 1)
+	pressBtn({right=2}, 1)
+	pressBtn({right=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(6)
+	pressBtn({l2=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(3)  -- wait until 0x164908 = 001C
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- Sword skill
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- Lightning Stab
+	pressBtn({right=1}, 3)
+	pressBtn({right=1}, 2)
+	pressBtn({right=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(23)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	pressBtn({circle=1}, 1)  -- execute attack
+	--fadv(xx)
+end
+
+function TAS.equipThiefHat_SprintShoes_Ramza()
+	-- Ramza, equip Thief Hat, Sprint Shoes, White Robe
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({circle=1}, 1)  -- item
+	fadv(27+1)
+	pressBtn({circle=1}, 1)  -- equip
+	fadv(1)
+	pressBtn({up=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- accessory
+	fadv(10)
+	pressBtn({square=1, down=1}, 4)
+	pressBtn({down=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- Sprint Shoes
+	fadv(1)
+	pressBtn({up=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- body
+	fadv(10)
+	pressBtn({square=1, down=1}, 4)
+	pressBtn({up=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- White Robe
+	fadv(1)
+	pressBtn({up=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- head
+	fadv(10)
+	pressBtn({circle=1}, 1)  -- Thief Hat
+	fadv(5)
+	-- Orlandu, equip Thief Hat, Reflect Ring
+	pressBtn({r1=1}, 1)  -- select Orlandu
+	fadv(5)
+	pressBtn({circle=1}, 1)  -- head
+	fadv(10)
+	pressBtn({circle=1}, 1)  -- Thief Hat
+	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(1)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 1)  -- accessory
+	fadv(10)
+	pressBtn({square=1, up=1}, 4+1)
+	pressBtn({up=1}, 4)
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- Reflect Ring
+	fadv(5)
+	pressBtn({x=1}, 1)  -- cancel equip
+	fadv(2)
+	pressBtn({x=1}, 1)  -- cancel item
+	fadv(30-2)
+	TAS.exitFormation()
+end
+
+function TAS.learnShortCharge_Ramza()
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)  -- ability
+	fadv(27)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 10)  -- learn
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)  -- time mage
+	fadv(5)
+	pressBtn({circle=1}, 1)  -- time mage
+	fadv(2)
+	pressBtn({square=1, down=1}, 9)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)  -- Demi
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select Demi
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({right=1}, 4)
+	pressBtn({right=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select Short Charge
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({x=1}, 10+1)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)  -- Oracle
+	fadv(5)
+	pressBtn({circle=1}, 1)  -- Oracle
+	fadv(1)
+	pressBtn({right=1}, 2)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- select mp walk
+	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({x=1}, 10+1)
+	pressBtn({x=1}, 4)
+    -- set ability
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 4+1)  -- set
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({down=1}, 2)
+	pressBtn({right=1}, 2)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 2)   -- Time Magic
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 2)   -- Short Charge
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({circle=1}, 1)   -- mp walk
+	fadv(5)
+	pressBtn({x=1}, 2)
+	pressBtn({x=1}, 1)
+	fadv(30-2)
+end
+
+function TAS.ch4_altima_turn1()
+	-- arrowed and shown AT
+	fadv(6+1)
+	-- before 2f from showing up status window in the left.
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 6)  -- time magic
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 9)   -- Demi2
+	pressBtn({left=1}, 3)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)   -- select target
+	pressBtn({circle=1}, 4)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	fadv(19)
+	-- arrowed
+	fadv(6+1)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 1)
+end
+
+function TAS.ch4_altima_turn3()
+	-- arrowed and shown AT
+	fadv(6+1)
+	-- before 2f from showing up status window in the left.
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(6)
+	pressBtn({l2=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(3)  -- wait until 0x164908 = 001C
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 6)  -- time magic
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)   -- Demi
+	pressBtn({left=1}, 3)
+	pressBtn({left=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)   -- select target
+	pressBtn({circle=1}, 4)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	fadv(21)
+	-- arrowed
+	pressBtn({circle=1}, 2)  -- stand by
+	pressBtn({circle=1}, 1)
+end
 
 
 function TAS.skip_intermediate_save()
@@ -2316,6 +2586,24 @@ function TAS.math_Level4_Flare()
 	pressBtn({up=1}, 4)
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 4)   -- Flare
+	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 1)   -- execute attack
+	--fadv(xx)
+end
+
+function TAS.math_Level3_Holy()
+	-- arrowed and shown AT
+	fadv(6+1)
+	-- before 2f from showing up status window in the left.
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 8)  -- action
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 8)  -- math
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 8)   -- Level
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 8)   -- 3
+	pressBtn({circle=1}, 4)   -- Holy
 	pressBtn({circle=1}, 6)   -- confirm target
 	pressBtn({circle=1}, 1)   -- execute attack
 	--fadv(xx)
@@ -2399,8 +2687,7 @@ function TAS.skip_battle_congratulations()
 	-- before 3f shown "Congratulations"
 	pressBtn({circle=1}, 4)   -- show "This operation is completed"
 	pressBtn({circle=1}, 1)   -- skip congratulations
-	fadv(21)
-	pressBtn({circle=1}, 4)   -- show "bonus money"
+	fadv(25)
 	pressBtn({circle=1}, 4)   -- skip counting
 	pressBtn({circle=1}, 1)   -- skip bonus money
 	fadv(23)
