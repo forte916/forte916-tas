@@ -37,7 +37,7 @@ adr_text_flag_037968 = 0x037968
   -- 0x0000: the end of text (pad input is available before 3f to change 0x0054)
 
 adr_text_flag_03780C = 0x03780C
-adr_text_flag_03796C = 0x03780C
+adr_text_flag_03796C = 0x03796C
   -- 0x01FF: before 1f shown text
   -- 0x0054: the end of text (pad input is available before 3f to change 0x0054)
 
@@ -52,7 +52,12 @@ adr_text_flag_1FFE80 = 0x1FFE80  -- 2byte??
   -- 0x0000: otherwise
 
 adr_text_flag_1FFE88 = 0x1FFE88
+  -- 0x0001: current turn
+  -- 0x0002: before 1f arrowed at current turn
   -- 0xFFFF: text end
+
+adr_text_flag_1FFE8C = 0x1FFE8C
+  -- 0x0002: before 1f arrowed at current turn
 
 adr_text_flag_1FFE98 = 0x1FFE98
   -- 0x00C0: before 1f shown text
@@ -151,7 +156,7 @@ function Text.skipTextRewind()
 		print(string.format("fc = %d, end_fc = %d", fc, Text.text_end_fc))
 
 		fadv(Text.text_end_fc - fc - Text.condition)
-    	local flag = memory.readword(adr_text_flag_037808)
+    	local flag = Text.getTextFlag()
 		local flag_hi = bit.band(flag, 0x0500) -- 0x0500 is approval pad input??
 
 		if flag == 0x0409 or flag == 0x0189 then
@@ -272,10 +277,11 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 local event_id = memory.readbyte(adr_event_id)
+local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 
 emu.registerbefore(Text.drawFlags)
 
-while event_id > 0 do
+while event_id > 0 and flag_1FFE88 ~= 0x02 do
 
 	if initial == 1 then
 		initial = 0
@@ -294,6 +300,7 @@ while event_id > 0 do
 
 	emu.frameadvance()
 	event_id = memory.readbyte(adr_event_id)
+	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 end
 
 

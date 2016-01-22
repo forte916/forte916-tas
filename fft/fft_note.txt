@@ -183,7 +183,8 @@ ch1-random
   * 敵の speed が低い序盤は 自分の speed を上げるより敵の speed を下げるほうが効果が高い
 
   * ガッツではなく話術はどうか
-  * ためるより遅いかもだが、ドーピング, Sleep, CT reset 等が可能
+    * ためるより遅いかもだが、ドーピング, Sleep, CT reset 等が可能
+    * モンスターはまじゅう語をセットしないと効かないので、実質ドーピングのみ
 
 
 * 改善案
@@ -200,11 +201,11 @@ ch1-random
   * Ramza speed 12, goblin speed 5 のとき, Ramza 2回行動, goblin 1回待機 となる
 
 * grinding
-    Priest    , Lv5, 1100JP
-    Oracle    , Lv4,  700JP
-    Wizard    , Lv5, 1100JP
-    Time mage , Lv4,  700JP , 2450JP
-    Calculator, Lvx, xxxxJP , 2350JP
+    Priest    , Lv5, 1100JP, need 40 times action
+    Oracle    , Lv4,  700JP, need 20 times action
+    Wizard    , Lv5, 1100JP, need 40 times action
+    Time mage , Lv4,  700JP, need 20 times action
+    Calculator, Lvx, xxxxJP, 2350JP
 
 * learn
   * Priest - Holy
@@ -1036,13 +1037,25 @@ CT
 * SP7, SP9, SP12 が相当
 
 SP   tick
+ 1 * 100 = 100
+ 2 * 50 = 100
+ 3 * 34 = 102
+ 4 * 25 = 100  (Quick)
+ 5 * 20 = 100
  6 * 17 = 102
  7 * 15 = 105
  8 * 13 = 104
  9 * 12 = 108
-10 * 10 = 100
+10 * 10 = 100  (Demi2, JP??)
 11 * 10 = 110
-12 *  9 = 108
+12 *  9 = 108  (Demi2, US??)
+13 *  8 = 104
+15 *  7 = 105
+17 *  6 = 102  (Demi)
+20 *  5 = 100  (Demi2, short charge, JP??)
+25 *  4 = 100
+34 *  3 = 102  (Demi, short charge)
+50 *  2 = 100
 
 
 Frame counts of casting spell
@@ -1058,9 +1071,14 @@ Frame counts of casting spell
 	766 - 550 = 216f
 	939 - 730 = 209f
 
-* Yell         284f
-* Accumulate    64f
-* Goblin wait  110f
+* Yell           284f
+* Accumulate      64f
+* Goblin wait    110f
+
+* Invitation     300f  (15f は画面スクロール分かも)
+* Persuade(CT0)  300f  (15f は画面スクロール分かも)
+* Preach(fa+4)   285f
+* Critical Quick 250f
 
 * Goblin Tackle  miss
     2622 - 2295 = 327f
