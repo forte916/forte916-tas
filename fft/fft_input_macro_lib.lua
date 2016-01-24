@@ -101,9 +101,9 @@ function TAS.skipOpeningMovie()
 end
 
 -- @deplecated
-function TAS.skipObonne()
+function TAS.skipOrbonne()
 	fc = emu.framecount()
-	print(string.format("skipObonne: fc = %d", fc))
+	print(string.format("skipOrbonne: fc = %d", fc))
 
 	-- 1725f
 	fadv(1430)
@@ -289,7 +289,7 @@ function TAS.skipObonne()
 end
 
 -- @deplecated
-function TAS.skipObonneEntrance()
+function TAS.skipOrbonneEntrance()
 	-- agrias, 6762f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)

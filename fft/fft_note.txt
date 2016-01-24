@@ -65,7 +65,7 @@ ch1-Orbonne
 * optimze_tas = 16619f,  4:37, "Let go of me" said Ovelia
 * youtube_tas =       ,  4:25, "Let go of me" said Ovelia
 
-* Obonne 戦闘終了の会話は 手動と text_skip.lua とで同じ結果
+* Orbonne 戦闘終了の会話は 手動と text_skip.lua とで同じ結果
 * text_skip.lua を信用してもよさそう
 
 
@@ -184,18 +184,17 @@ ch1-random
   * 敵1体のみ編成を 1000f 程度探索
   * 2体目が Ramza に近づくまで 4 turn かかり、それが約 1000f
   * よって 1000f 待った方が結果的に早くなる
+  * エンカ率 3/10 * 敵1体のみ 1/256 = 3/2560 = 約1/853
   * L2 押したほうがカメラ移動が減るかも
 
-* 改善案
-  * Yell (200JP) より Speed Break (250JP) の方が効果が高いかも??
-  * 敵の speed が低い序盤は 自分の speed を上げるより敵の speed を下げるほうが効果が高い
-
+* ボツ案
   * ガッツではなく話術はどうか
-    * ためるより遅いかもだが、ドーピング, Sleep, CT reset 等が可能
+    * ためるより遅いが、ドーピング, Sleep, CT reset 等が可能
+    * 話術は Yell と同じエフェクトの長さ 約284f
     * モンスターはまじゅう語をセットしないと効かないので、実質ドーピングのみ
+    * まじゅう語をセットすると取得JP UP がセットできないのでボツ
 
-
-* 改善案
+* ボツ案
   * Time mage と Calculator は味方 Wizard を出す
     * calcurator のときに 味方 Time mage を出せれば haste をかけれる
   * 2体目のゴブリンは Wizard が倒す
@@ -207,6 +206,20 @@ ch1-random
   * Time mage のときに goblin が Lv13 以下になるように調整が必要
     * Keep Ramza's Lv under 14
   * Ramza speed 12, goblin speed 5 のとき, Ramza 2回行動, goblin 1回待機 となる
+
+* 改善案
+  * Yell (200JP) より Speed Break (250JP) の方が効果が高いかも??
+  * 敵の speed が低い序盤は 自分の speed を上げるより敵の speed を下げるほうが効果が高い
+    * sp6 と sp1 では goblin 行動と移動だと ramza 6回 に goblin 1回行動
+    * sp6 と sp1 では goblin 待機だと ramza 5回 or 4回に goblin 1回行動
+    * sp3 と sp1 では goblin 待機だと ramza x回 or x回に goblin 1回行動
+
+* griding
+  * ラムザ エール 4回で Speed 10/ゴブリン Speed 5
+  * sp10 と sp5 では goblin 待機だと ramza 2回 or 1回に goblin 1回行動
+  * ラムザ エール 15回で Speed 18/ゴブリン Speed 6
+  * sp18 と sp6 では goblin 待機だと ramza 3回 or 2回に goblin 1回行動
+
 
 * grinding
     Priest    , Lv5, 1100JP, need 40 times action
@@ -463,7 +476,7 @@ ch3-Orbonne 3rd Floor
 
 * remove Green Beret for speed 8
 * 初期配置を 2マス後ろ
-* Izlude が 移動するので Hight 3 Flare
+* Izlude が 移動するので Height 3 Flare
 
 
 ch3-Orbonne 1st Floor
@@ -473,7 +486,7 @@ ch3-Orbonne 1st Floor
 
 * Equip Green Beret for speed 9
 * Wiegraf には先制される
-* Hight 5 Flare
+* Height 5 Flare
 
 
 ch3-Grog
@@ -491,7 +504,7 @@ ch3-Yardow
 * Ninja Lv25 speed 9
 * Ninja Lv24 speed 9
 * Ninja には先制される. Rafa が倒されないように調整
-* Hight prime Flare
+* Height prime Flare
 
 * After battle, Change job to Wizard
 * Buy Wizard Rod (MA+2), Sprint Shoes (SP+1) in fitting room for speed 9
@@ -511,8 +524,8 @@ ch3-Riovanes (inside)
 * Move and Height prime flare. (Wiegraf)
 
 * Velius Lv31, HP 1131, speed 8
-* Level prime Demi2 x2 (Velius)
-* hists an enemy as well
+* Lv prime Demi2 x2 (Velius)
+* hits an enemy as well
 
 ch3-Riovanes (rooftop)
 ------------
@@ -520,7 +533,7 @@ ch3-Riovanes (rooftop)
 * Celia  Lv29, HP 359, speed 8
 * Lede   Lv28, HP 334, speed 8
 * Elmdor には先制される
-* Height prime Flare.
+* Height prime Flare
 
 
 ch4
@@ -536,7 +549,7 @@ ch4-Bervenia
 * Meliadoul Lv35, HP 343, speed 8
 * Ninja Lv31, speed 9
 * 忍者に先制されるので何もさせないようにする
-* Lv 5 Flare.
+* Lv 5 Flare
 * Ramza が Lv25 or Lv30 になっていない方が早い
 
 ch4-Finath
@@ -594,8 +607,9 @@ ch4-Sluice
 * Wizard は時魔法等の行動をさせない
   * Quick を使う場合はヘイストをさせない
   * Quick を使わない場合は敵のヘイストを自分も受ける
-* Orlandu Lv27 以上かつ Lightning Stab を覚えている. Lv29 だと PA +1 なのでベター
-* エルムドア戦で Move+1 があるとよいので  Move+1 or rest of JP is higher than 200JP
+* Orlandu status
+  * Orlandu Lv27 以上かつ Lightning Stab を覚えている. Lv29 だと PA +1 なのでベター
+  * エルムドア戦で Move+1 があるとよいので  Move+1 or rest of JP is higher than 200JP
 
 * Encount odds is 6/10 from Bethla to Zarghidas
 
@@ -688,7 +702,7 @@ ch4-Limberry (inside)
 ch4-Zarela
 ----------
 * Zarela Lv44, HP 1171, speed 11
-* Height prime Demi2.
+* Height prime Demi2
 * hits an enemy as well
 * Orlandu が剣技(Lightning Stab). 足りない場合は critical.
 
@@ -696,13 +710,13 @@ ch4-Zarela
   * Ramza speed 12, MA 12, 黒魔道士
   * Ramza 初期配置, Orlandu ラムザの上1, ラヴィアン ラムザの 上1 左1
   * この配置でカメラの回転 1回少なくなる
-  * Height prime Demi2.
+  * Height prime Demi2
   * Orlandu が剣技. 足りない場合は ラヴィアン.
 
 * TA では
   * Ramza 初期配置, Orlandu Ramza 左1
   * この配置だとカメラ回転が増える. Ramza の 上1 がよい
-  * Height prime Demi2.
+  * Height prime Demi2
   * Orlandu が剣技(Lightning Stab) critical.
 
 * Limberry to Igros
@@ -889,15 +903,15 @@ ch4-Orbonne (Rolfal)
 * Ramza の Flare では 390 damage, Holy では 520 damage. Holy しかない??
 
 * Ramza 初期配置, Orlandu 出撃しない
-* Level 3 Holy
+* Lv 3 Holy
 
 * RTA では
   * speed 11 に先制される
-  * Level 3 flare
+  * Lv 3 flare
 
 * TA では
   * Ramza 初期配置, Orlandu 出撃しない
-  * Level 3 Holy
+  * Lv 3 Holy
   * Ramza の Lv30 なので hit する (Excalibur が 聖吸収)
 
 
@@ -979,7 +993,7 @@ ch4-Murond (Hashmalum)
   * 2撃目が Demi2 か chage中に Orlandu の critical かどっちが早いかは微妙
   * 調整のしやすさは Demi2
 
-* Level prime Demi2
+* Lv prime Demi2
 * Hashmalum が魔法
 * Hashmalum の chage 中に Level prime Demi2
 
@@ -993,7 +1007,7 @@ ch4-Murond (Hashmalum)
   * Ramza equip Thief Hat, Sprint Shoes
   * Ramza, speed 11, MA 11, Excalibur (speed 16.5)
   * Ramza 初期配置, Orlandu 出撃しない
-  * Level prime Demi2
+  * Lv prime Demi2
   * Hashmalum が魔法
   * Hashmalum の chage 中に Level prime Demi2
 
@@ -1086,6 +1100,34 @@ Ending
 * Last key frame = 803365f
 * "The end"      = 803979f (after 30f, 0x1FFE88 = 0x801FFF48) = 3:43:19
 * rerecord-count = 59430
+
+
+Mathable by Lv
+--------------
+* ch1-Lenalia, Lv4 Bolt3
+* ch1-Zeakden, Height 4 Bolt3 or Lv5 Bolt3
+* ch2-Lionel (inside),  Height Prime Demi2 or Lv5 Demi2
+* ch3-Lesalia,  Lv4 Flare, hits an Knight as well.
+* ch3-Riovanes (inside), Lv prime Demi2 x2 (Velius), hits an enemy as well
+* ch4-Bervenia, Lv 5 Flare
+* ch4-Zeltennia, Lv 5 Flare
+* ch4-Orbonne (Rolfal), Level 3 Holy
+* ch4-Murond (Hashmalum), Lv prime Demi2
+
+Mathable by  Height
+-------------------
+* ch1-Thieves Fort, Height 3 Bolt3, hits another 2 enemies as well.
+* ch1-Windmill, Height 5 Bolt3
+* ch1-Zeakden, Height 4 Bolt3 or Lv5 Bolt3
+* ch2-Lionel (inside),  Height Prime Demi2 or Lv5 Demi2
+* ch3-Orbonne 3rd Floor, Izlude が 移動するので Height 3 Flare
+* ch3-Orbonne 1st Floor, Height 5 Flare
+* ch3-Yardow,  Height prime Flare
+* ch3-Riovanes (inside), Move and Height prime flare. (Wiegraf)
+* ch3-Riovanes (rooftop), Height prime Flare
+* ch4-Zarela, Height prime Demi2, hits an enemy as well
+* ch4-Adramelk, Height 4 Demi2
+* ch4-Murond (Altima), Height prime Demi2
 
 
 CT

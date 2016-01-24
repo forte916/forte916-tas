@@ -14,18 +14,18 @@ adr_text_flag_1FFE88 = 0x1FFE88
 
 
 ------------------------------------------------------------
--- ObonneGafgarionTurn1
+-- OrbonneGafgarionTurn1
 ------------------------------------------------------------
-ObonneGafgarionTurn1 = {}
-ObonneGafgarionTurn1.logname = "ch1_obonne_gaf_turn1_2.log"
+OrbonneGafgarionTurn1 = {}
+OrbonneGafgarionTurn1.logname = "ch1_orbonne_gaf_turn1_2.log"
 
-function ObonneGafgarionTurn1.pre_attempt()
+function OrbonneGafgarionTurn1.pre_attempt()
 	pressBtn({circle=1}, 1)  -- skip msg
 	fadv(1)
 	pressBtn({circle=1}, 1)  -- skip msg
 end
 
-function ObonneGafgarionTurn1.attempt()
+function OrbonneGafgarionTurn1.attempt()
 	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 
 	pressBtn({x=1}, 1)  -- skip msg
@@ -39,11 +39,11 @@ function ObonneGafgarionTurn1.attempt()
 	fadv(470)
 end
 
-function ObonneGafgarionTurn1.post_attempt()
+function OrbonneGafgarionTurn1.post_attempt()
 	-- pass
 end
 
-function ObonneGafgarionTurn1.success()
+function OrbonneGafgarionTurn1.success()
 	local ret = false
 	local prpt = {}
 
@@ -66,7 +66,7 @@ function ObonneGafgarionTurn1.success()
 	return ret
 end
 
-function ObonneGafgarionTurn1.waitForBest()
+function OrbonneGafgarionTurn1.waitForBest()
 	local retry = 20
 	local best_rng = 0x442B008C
 
@@ -83,26 +83,26 @@ end
 
 
 ------------------------------------------------------------
--- ObonneAgriasTurn1
+-- OrbonneAgriasTurn1
 ------------------------------------------------------------
-ObonneAgriasTurn1 = {}
-ObonneAgriasTurn1.logname = "ch1_obonne_agrias_turn1_1.log"
+OrbonneAgriasTurn1 = {}
+OrbonneAgriasTurn1.logname = "ch1_orbonne_agrias_turn1_1.log"
 
-function ObonneAgriasTurn1.pre_attempt()
+function OrbonneAgriasTurn1.pre_attempt()
 	--pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 9)
 end
 
-function ObonneAgriasTurn1.attempt()
+function OrbonneAgriasTurn1.attempt()
 	pressBtn({circle=1}, 1)
 	fadv(400)
 end
 
-function ObonneAgriasTurn1.post_attempt()
+function OrbonneAgriasTurn1.post_attempt()
 	-- pass
 end
 
-function ObonneAgriasTurn1.success()
+function OrbonneAgriasTurn1.success()
 	local ret = false
 	local prpt = {}
 
@@ -125,7 +125,7 @@ function ObonneAgriasTurn1.success()
 	return ret
 end
 
-function ObonneAgriasTurn1.waitForBest()
+function OrbonneAgriasTurn1.waitForBest()
 	local retry = 20
 	local best_rng = 0x442B008C
 
@@ -142,28 +142,28 @@ end
 
 
 ------------------------------------------------------------
--- ObonneRamzaTurn2
+-- OrbonneRamzaTurn2
 ------------------------------------------------------------
-ObonneRamzaTurn2 = {}
-ObonneRamzaTurn2.logname = "ch1_obonne_ramza_turn2_3.log"
+OrbonneRamzaTurn2 = {}
+OrbonneRamzaTurn2.logname = "ch1_orbonne_ramza_turn2_3.log"
 
-function ObonneRamzaTurn2.pre_attempt()
+function OrbonneRamzaTurn2.pre_attempt()
 	fadv(1)  -- for odd number retry
 	pressBtn({circle=1}, 2)   -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
 	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
 end
 
-function ObonneRamzaTurn2.attempt()
+function OrbonneRamzaTurn2.attempt()
 	pressBtn({circle=1}, 1)   -- execute attack
 	fadv(100)
 end
 
-function ObonneRamzaTurn2.post_attempt()
+function OrbonneRamzaTurn2.post_attempt()
 	-- pass
 end
 
-function ObonneRamzaTurn2.success()
+function OrbonneRamzaTurn2.success()
 	local ret = false
 	local prpt = {}
 
@@ -186,7 +186,7 @@ function ObonneRamzaTurn2.success()
 	return ret
 end
 
-function ObonneRamzaTurn2.waitForBest()
+function OrbonneRamzaTurn2.waitForBest()
 	local retry = 20
 	local best_rng = 0x442B008C
 
@@ -202,16 +202,16 @@ function ObonneRamzaTurn2.waitForBest()
 end
 
 ------------------------------------------------------------
--- ObonneAliciaTurn2
+-- OrbonneAliciaTurn2
 ------------------------------------------------------------
-ObonneAliciaTurn2 = {}
-ObonneAliciaTurn2.logname = "ch1_obonne_alicia_turn2_1.log"
+OrbonneAliciaTurn2 = {}
+OrbonneAliciaTurn2.logname = "ch1_orbonne_alicia_turn2_1.log"
 
-function ObonneAliciaTurn2.pre_attempt()
+function OrbonneAliciaTurn2.pre_attempt()
 	fadv(7)
 end
 
-function ObonneAliciaTurn2.attempt()
+function OrbonneAliciaTurn2.attempt()
 	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 
 	pressBtn({circle=1}, 1)   -- execute attack
@@ -231,11 +231,11 @@ function ObonneAliciaTurn2.attempt()
 	fadv(220)
 end
 
-function ObonneAliciaTurn2.post_attempt()
+function OrbonneAliciaTurn2.post_attempt()
 	-- pass
 end
 
-function ObonneAliciaTurn2.success()
+function OrbonneAliciaTurn2.success()
 	local ret = false
 	local prpt = {}
 
@@ -259,16 +259,16 @@ function ObonneAliciaTurn2.success()
 end
 
 ------------------------------------------------------------
--- ObonneAgriasTurn3
+-- OrbonneAgriasTurn3
 ------------------------------------------------------------
-ObonneAgriasTurn3 = {}
-ObonneAgriasTurn3.logname = "ch1_obonne_agrias_turn3_1.log"
+OrbonneAgriasTurn3 = {}
+OrbonneAgriasTurn3.logname = "ch1_orbonne_agrias_turn3_1.log"
 
-function ObonneAgriasTurn3.pre_attempt()
+function OrbonneAgriasTurn3.pre_attempt()
 	fadv(7)
 end
 
-function ObonneAgriasTurn3.attempt()
+function OrbonneAgriasTurn3.attempt()
 	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 
 	pressBtn({circle=1}, 1)   -- execute attack
@@ -288,11 +288,11 @@ function ObonneAgriasTurn3.attempt()
 	fadv(1200)  -- 16168f - 15286f
 end
 
-function ObonneAgriasTurn3.post_attempt()
+function OrbonneAgriasTurn3.post_attempt()
 	-- pass
 end
 
-function ObonneAgriasTurn3.success()
+function OrbonneAgriasTurn3.success()
 	local ret = false
 	local prpt = {}
 

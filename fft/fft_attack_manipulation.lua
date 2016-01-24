@@ -47,7 +47,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = ObonneAgriasTurn3
+local interface = OrbonneAgriasTurn3
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
