@@ -5,7 +5,7 @@
 -- Ramza needs high starting Squire JP and Chemist JP.
 --
 -- Usage
---   1. Start this script at the end of Obonne battle.
+--   1. Start this script at the end of Orbonne battle.
 --
 
 require "psx_lib"
@@ -36,7 +36,7 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 GarilandParty = {}
-GarilandParty.logname = "ch1_gariland_party1.log"
+GarilandParty.logname = "ch1_gariland_party2.log"
 
 
 GarilandParty.best_st = {}
@@ -60,6 +60,31 @@ function GarilandParty.post_attempt()
 	-- pass
 end
 
+
+function GarilandParty.checkCalcGrind(prpt)
+	local calc_st = {}
+	local calc_sum = 0
+
+	calc_st.togal_JP_squire     = prpt.total_JP_squire
+	calc_st.togal_JP_chemist    = prpt.total_JP_chemist
+	calc_st.total_JP_priest     = prpt.total_JP_priest
+	calc_st.total_JP_wizard     = prpt.total_JP_wizard
+	calc_st.total_JP_time_mage  = prpt.total_JP_time_mage
+	calc_st.total_JP_oracle     = prpt.total_JP_oracle
+	calc_st.total_JP_calculator = prpt.total_JP_calculator
+
+	for key, value in pairs(calc_st) do
+		calc_sum = calc_sum + value
+	end
+
+	if calc_sum > 1999 then
+		debugPrint(string.format("calc_st = %s", calc_st))
+		print(string.format("calc_st = %s", calc_st))
+	end
+
+	return calc_sum
+end
+
 function GarilandParty.success()
 	local ret = false
 	local prpt = {}
@@ -74,12 +99,21 @@ function GarilandParty.success()
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
 
-		if prpt.faith > 69 then
+		if prpt.faith > 67 then
 			good = good + 1
 			str = string.format("%s, faith", str)
 		end
 
-		if prpt.total_JP_chemist > 179 then
+		if prpt.total_JP_squire > 119 and bit.band(prpt.job, 0x4A) ~= 0 then
+			str = string.format("%s, squireTotal", str)
+		elseif prpt.total_JP_squire > 159 and bit.band(prpt.job, 0x4B) ~= 0 then
+			str = string.format("%s, squireTotal", str)
+		end
+
+		if prpt.total_JP_chemist > 179 and bit.band(prpt.job, 0x4A) ~= 0 then
+			good = good + 1
+			str = string.format("%s, chemist", str)
+		elseif prpt.total_JP_chemist > 139 and bit.band(prpt.job, 0x4B) ~= 0 then
 			good = good + 1
 			str = string.format("%s, chemist", str)
 		end
@@ -88,17 +122,23 @@ function GarilandParty.success()
 			str = string.format("%s, wizard", str)
 		end
 
-		if prpt.total_JP_knight > 179 then
+		if prpt.total_JP_knight > 169 then
 			str = string.format("%s, knight", str)
 		end
 
-		if prpt.JP_squire > 99 then
+		if prpt.JP_squire > 119 then
 			str = string.format("%s, squireJP", str)
+		end
+
+		local math  = GarilandParty.checkCalcGrind(prpt)
+		if math > 1999 then
+			str = string.format("%s, math(%d)", str, math)
 		end
 
 		if good > 1 then
 			candidate = candidate + 1
 		end
+
 
 		debugPrint(str)
 	end
@@ -193,7 +233,7 @@ if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
 
-retry = 100
+retry = 200
 
 for i=0, retry do
 	if initial == 1 then

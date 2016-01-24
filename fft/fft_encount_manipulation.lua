@@ -32,14 +32,14 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 ------------------------------------------------------------
--- Obonne
+-- Orbonne
 ------------------------------------------------------------
-Obonne = {}
-Obonne.logname = "ch1_obonne_party1.log"
+Orbonne = {}
+Orbonne.logname = "ch1_orbonne_party1.log"
 
-Obonne.name = {"ramza", "agrias", "gaf", "alicia", "lavian", "kinght", "archer", "archer", "archer", "chemist", "rad"}
+Orbonne.name = {"ramza", "agrias", "gaf", "alicia", "lavian", "kinght", "archer", "archer", "archer", "chemist", "rad"}
 
-function Obonne.logHeader()
+function Orbonne.logHeader()
 	debugPrint(string.format("Agrias = 0x30 = Canser"))
 	debugPrint(string.format(" * good: 0x70, 0xB0, very good: 0x90"))
 	debugPrint(string.format(" * bad : 0x00, 0x60, very bad : 0x90"))
@@ -50,20 +50,20 @@ function Obonne.logHeader()
 	debugPrint(string.format(""))
 end
 
-function Obonne.pre_attempt()
+function Orbonne.pre_attempt()
 	pressBtn({circle=1}, 1)
 end
 
-function Obonne.attempt()
+function Orbonne.attempt()
 	pressBtn({x=1}, 1)
 	fadv(360)
 end
 
-function Obonne.post_attempt()
+function Orbonne.post_attempt()
 	-- pass
 end
 
-function Obonne.success()
+function Orbonne.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
@@ -75,7 +75,7 @@ function Obonne.success()
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
 
-		str = string.format("%s, %s", str, Obonne.name[i])
+		str = string.format("%s, %s", str, Orbonne.name[i])
 		debugPrint(str)
 	end
 
@@ -172,6 +172,16 @@ end
 ------------------------------------------------------------
 GainedJpUP = {}
 GainedJpUP.logname = "ch1_gained_jp_up.log"
+function GainedJpUP.logHeader()
+	debugPrint(string.format("the most right item is base_r_s_m_learned3"))
+	debugPrint(string.format("    0x80:Counter Tackle"))
+	debugPrint(string.format("    0x40:Equip Axe"))
+	debugPrint(string.format("    0x20:Monster Skill"))
+	debugPrint(string.format("    0x10:Defend"))
+	debugPrint(string.format("    0x08:Gained JP-UP"))
+	debugPrint(string.format("    0x04:Move+1"))
+end
+
 
 function GainedJpUP.pre_attempt()
 	fadv(3)
@@ -202,7 +212,7 @@ function GainedJpUP.success()
 
 	skill = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
 	if skill ~= 0 then
-		print(string.format("-- skill = %x", skill))
+		print(string.format("-- skill = %x, Gained Jp UP", prpt.base_r_s_m_learned3))
 		str = str.." , Gained Jp UP"
 		ret = true
 	else
@@ -210,6 +220,72 @@ function GainedJpUP.success()
 	end
 
 	debugPrint(str)
+	return ret
+end
+
+------------------------------------------------------------
+-- Mathable
+------------------------------------------------------------
+Mathable = {}
+Mathable.logname = "chX-mathable.log"
+Mathable.prime = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97}
+
+function Mathable.logHeader()
+	-- pass
+end
+
+function Mathable.pre_attempt()
+	fadv(3)
+end
+
+function Mathable.attempt()
+	pressBtn({circle=1}, 1)
+	fadv(900)
+end
+
+function Mathable.post_attempt()
+	-- pass
+end
+
+function Mathable.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit
+	local total_enemy = 6
+	local enemy = 0
+	local str
+
+	for i=1, total_enemy do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		str = prpt.info
+
+		if math.fmod(prpt.exp, 3) == 0 then
+			str = str.." , 3"
+		elseif math.fmod(prpt.exp, 4) == 0 then
+			str = str.." , 4"
+		elseif math.fmod(prpt.exp, 5) == 0 then
+			str = str.." , 5"
+		else
+			for i, v in ipairs(Mathable.prime) do
+				if prpt.exp == v then
+					str = str.." , prime"
+					break
+				end
+			end
+		end
+
+		debugPrint(str)
+	end
+
+	debugPrint(string.format("-- enemy = %2d", enemy))
+	if enemy > 0 then
+		print(string.format("-- enemy = %2d", enemy))
+		ret = true
+	else
+		ret = false
+	end
+
 	return ret
 end
 
@@ -454,7 +530,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = Obonne
+local interface = Orbonne
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
@@ -463,7 +539,7 @@ if interface.logHeader ~= nil then interface.logHeader() end
 
 retry = 100
 
-for i=1, retry do
+for i=0, retry do
 	if initial == 1 then
 		initial = 0
 	end

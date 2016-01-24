@@ -674,8 +674,8 @@ function Bunit.toString(prpt)
 			prpt.mp     ,
 
 			prpt.total_JP_squire    ,
-			prpt.total_JP_chemist   ,
-			prpt.JP_squire   )
+			prpt.JP_squire          ,
+			prpt.total_JP_chemist   )
 
 	return str
 end
@@ -771,10 +771,10 @@ function Bunit.toString4(prpt)
 			prpt.mp     ,
 
 			prpt.total_JP_squire    ,
+			prpt.JP_squire          ,
 			prpt.total_JP_chemist   ,
 			prpt.total_JP_wizard    ,
-			prpt.total_JP_knight    ,
-			prpt.JP_squire )
+			prpt.total_JP_knight    )
 
 	return str
 end
