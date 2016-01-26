@@ -36,7 +36,7 @@ Ramza 初期ステータス
 
 
 ch1-Orbonne
------
+-----------
 * オーボンヌ内の最後の ovelia のセリフで敵星座が決定
 
 * turn1
@@ -91,7 +91,7 @@ Lv1 Squire 初期ステータス
 
 
 ch1-Gariland
------
+------------
 * セーブ画面の入力後に敵星座が決定
   * 屋根の上に来る Female Squire と相性良
 
@@ -492,7 +492,7 @@ ch3-Orbonne 1st Floor
 ch3-Grog
 --------
 * max speed 8
-* weather: rain , but some enemy has Rubber Shoes
+* weather: rain , but an chemist has Rubber Shoes
 
 * CT3 Flare
 
@@ -505,6 +505,9 @@ ch3-Yardow
 * Ninja Lv24 speed 9
 * Ninja には先制される. Rafa が倒されないように調整
 * Height prime Flare
+
+* Rafa equips Elf's mant (魔法回避25%)
+  * 算術で Height を取得しない場合は Rafa は回避が必要
 
 * After battle, Change job to Wizard
 * Buy Wizard Rod (MA+2), Sprint Shoes (SP+1) in fitting room for speed 9
@@ -1104,29 +1107,29 @@ Ending
 
 Mathable by Lv
 --------------
-* ch1-Lenalia, Lv4 Bolt3
-* ch1-Zeakden, Height 4 Bolt3 or Lv5 Bolt3
-* ch2-Lionel (inside),  Height Prime Demi2 or Lv5 Demi2
-* ch3-Lesalia,  Lv4 Flare, hits an Knight as well.
-* ch3-Riovanes (inside), Lv prime Demi2 x2 (Velius), hits an enemy as well
-* ch4-Bervenia, Lv 5 Flare
-* ch4-Zeltennia, Lv 5 Flare
+* ch1-Lenalia, Lv4 Bolt3, Miluda
+* ch1-Zeakden, Height 4 Bolt3 or Lv5 Bolt3, Algus
+* ch2-Lionel (inside),  Height Prime Demi2 or Lv5 Demi2, Queklain
+* ch3-Lesalia,  Lv4 Flare, hits an Knight as well. Zalmo
+* ch3-Riovanes (inside), Lv prime Demi2 x2, hits an enemy as well. Velius
+* ch4-Bervenia, Lv 5 Flare, Meliadoul
+* ch4-Zeltennia, Lv 5 Flare, Zalmo
 * ch4-Orbonne (Rolfal), Level 3 Holy
 * ch4-Murond (Hashmalum), Lv prime Demi2
 
 Mathable by  Height
 -------------------
-* ch1-Thieves Fort, Height 3 Bolt3, hits another 2 enemies as well.
-* ch1-Windmill, Height 5 Bolt3
-* ch1-Zeakden, Height 4 Bolt3 or Lv5 Bolt3
-* ch2-Lionel (inside),  Height Prime Demi2 or Lv5 Demi2
-* ch3-Orbonne 3rd Floor, Izlude が 移動するので Height 3 Flare
-* ch3-Orbonne 1st Floor, Height 5 Flare
-* ch3-Yardow,  Height prime Flare
-* ch3-Riovanes (inside), Move and Height prime flare. (Wiegraf)
-* ch3-Riovanes (rooftop), Height prime Flare
-* ch4-Zarela, Height prime Demi2, hits an enemy as well
-* ch4-Adramelk, Height 4 Demi2
+* ch1-Thieves Fort, Height 3 Bolt3, hits another 2 enemies as well. Miluda
+* ch1-Windmill, Height 5 Bolt3, Wiegraf
+* ch1-Zeakden, Height 4 Bolt3 or Lv5 Bolt3, Algus
+* ch2-Lionel (inside),  Height Prime Demi2 or Lv5 Demi2, Queklain
+* ch3-Orbonne 3rd Floor, Izlude が 移動するので Height 3 Flare. Izlude
+* ch3-Orbonne 1st Floor, Height 5 Flare, Wiegraf
+* ch3-Yardow,  Height prime Flare, **Defeat All**
+* ch3-Riovanes (inside), Move and Height prime flare. Wiegraf
+* ch3-Riovanes (rooftop), Height prime Flare. Selia/Lede
+* ch4-Zarela, Height prime Demi2, hits an enemy as well. Zarela
+* ch4-Adramelk, Height 4 Demi2. Adramelk
 * ch4-Murond (Altima), Height prime Demi2
 
 
@@ -1302,6 +1305,10 @@ Encount research of random battle
     0017fa38: 1040000a beq r2,r0,0x0017fa64            branch if unit can exist?
     </code>
   * コード上は乱数が影響しているように見えるが lua の検証結果と矛盾する
+
+* バトル中の Critical Hit で乱数が 6個飛ぶ模様. 飛ぶのは行動決定後
+* 戦士斡旋所(Soldier office) で 乱数が 28個飛ぶ
+
 
 
 ROM hack

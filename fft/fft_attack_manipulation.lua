@@ -29,7 +29,12 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
+function drawRetry(count, x, y)
+	x = x or 0
+	y = y or 30
 
+	gui.text(x, y   , string.format(" retry:%d", count))
+end
 
 
 ------------------------------------------------------------
@@ -47,7 +52,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = OrbonneAgriasTurn3
+local interface = CriticalHit
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
@@ -58,13 +63,14 @@ debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute ---
 --debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
 
-retry = 400
+retry = 200
 
-for i=0, retry do
+for i=100, retry do
 	if initial == 1 then
 		initial = 0
 	end
 
+	drawRetry(i, x, y)
 	interface.pre_attempt()
 	fadv(i)
 	fc = emu.framecount()

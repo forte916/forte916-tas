@@ -52,16 +52,17 @@ end
 -- main
 ------------------------------------------------------------
 
-f = io.open("next_rng_seed_0xF930D9E0_1639f.log", "a")
+f = io.open("next_rng_seed_0x714FCFD9_44246f_2_soldier.log", "a")
 if f == nil then print("error: Could not open file") end
 
---logHeader()
---emu.registerafter(outputRNG)
---while true do
---	emu.frameadvance()
---end
+logHeader()
+emu.registerafter(outputRNG)
+while true do
+	emu.frameadvance()
+end
 
-outputNextRNG(1000, 0xF930D9E0)
+--outputNextRNG(1000, 0xFA073EF7)
+--outputNextRNG()
 f:flush()
 
 

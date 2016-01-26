@@ -4,7 +4,7 @@
 -- This is a library for attack manipulation.
 --
 -- Usage
---   1. require "fft_lib"
+--   1. require "fft_attack_lib"
 --
 
 require "psx_lib"
@@ -496,19 +496,18 @@ end
 -- CriticalHit
 ------------------------------------------------------------
 CriticalHit = {}
-CriticalHit.logname = "ch4_critical_balk_1.log"
+CriticalHit.logname = "ch1_gariland_squire_turn3_1.log"
 
 function CriticalHit.pre_attempt()
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(23)
+	fadv(3)
 	-- wait until 0x164908 = 0x001B
 
-	--pressBtn({circle=1}, 2)  -- select target
-	--pressBtn({circle=1}, 6)  -- confirm target
-	
-	--pressBtn({circle=1}, 4)  -- select target
-	--pressBtn({circle=1}, 5)  -- confirm target
+	--pressBtn({circle=1}, 3)  -- select target
+	--pressBtn({circle=1}, 1)  -- confirm target
+	--fadv(3)
+	-- wait until 0x164908 = 0x001B
 end
 
 function CriticalHit.attempt()
@@ -524,7 +523,7 @@ function CriticalHit.success()
 	local ret = false
 	local prpt = {}
 
-	prpt = Bunit.readProperty(adr_battle_unit)
+	prpt = Bunit.readProperty(adr_battle_unit4)
 	debugPrint(prpt.info)
 
 	if prpt.critical ~= 0 then

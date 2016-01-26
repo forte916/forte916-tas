@@ -448,7 +448,7 @@ function TAS.Ch1_1_ramza_turn1()
 	fadv(6)
 
 	-- move
-	pressBtn({circle=1}, 6)
+	pressBtn({circle=1}, 6)  -- maybe 4f?? not 6f
 	pressBtn({circle=1}, 10)
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 2)
@@ -470,6 +470,7 @@ end
 function TAS.Ch1_1_ramza_turn2()
 	-- ramza arrowed
 	fadv(7)
+	-- after 8f when 0x1FFE80 = 01FC
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({circle=1}, 9)  -- attack
@@ -484,7 +485,36 @@ function TAS.Ch1_1_ramza_turn2()
 	--fadv(xx)
 	
 	-- arrowed
+	fadv(6+1)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)
+	pressBtn({circle=1}, 1)
+end
+
+function TAS.Ch1_chemist_potion()
+	-- arrowed
 	fadv(7)
+	-- after 8f when 0x1FFE80 = 01FC
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- item
+	pressBtn({circle=1}, 9)  -- potion
+	pressBtn({up=1}, 3)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)   -- select target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	pressBtn({circle=1}, 1)   -- execute attack
+	fadv(9)  -- wait until 0x164908 = 0x001C
+	pressBtn({circle=1}, 1)   -- skip "potion" msg
+	--fadv(xx)
+	
+	-- arrowed
+	fadv(6+1)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 9)
@@ -499,10 +529,10 @@ function TAS.Ch1_1_ramza_turn2_old()
 
 	-- ramza move, 14756f
 	pressBtn({circle=1}, 10)
-	pressBtn({down=1}, 4)
-	pressBtn({right=1}, 4)
+	pressBtn({down=1}, 2)
 	pressBtn({right=1}, 2)
-	pressBtn({circle=1}, 6)
+	pressBtn({right=1}, 1)
+	pressBtn({circle=1}, 1)
 	--fadv(xx)
 	
 	-- ramza arrowed, 14838f
@@ -525,18 +555,18 @@ function TAS.Ch1_1_ramza_turn3()
 	-- ramza arrowed, 18487f
 	--fadv(xx)
 	pressBtn({circle=1}, 18)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({up=1}, 4)
-	pressBtn({up=1}, 4)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	--fadv(xx)
 
 	-- ramza arrowed, 18651f
 	fadv(9)
 	pressBtn({circle=1}, 18)
-	pressBtn({circle=1}, 10)  -- action
+	pressBtn({circle=1}, 4)  -- action
 	pressBtn({circle=1}, 9)  -- attack
-	pressBtn({right=1}, 4)
+	pressBtn({right=1}, 1)
 	-- wait here for luck manipulation
 	pressBtn({circle=1}, 2)  -- select target, 18701f
 	pressBtn({circle=1}, 6)  -- confirm target
@@ -547,6 +577,7 @@ function TAS.Ch1_1_ramza_turn3()
 	pressBtn({circle=1}, 10)
 end
 
+-- @deplecated
 function TAS.Ch1_1_skipEnding()
 	-- ovelia, 19403f
 	pressBtn({circle=1}, 2)
@@ -615,6 +646,7 @@ function TAS.Ch1_1_skipEnding()
 	pressBtn({circle=1}, 2)
 end
 
+-- @deplecated
 function TAS.skipAcademy()
 	fadv(5466)
 	-- squire1, 26650f
@@ -827,6 +859,33 @@ function TAS.skipAcademy()
 end
 
 
+function TAS.enterSoldierOffice()
+	pressBtn({circle=1}, 1)
+	fadv(21)
+	pressBtn({up=1}, 7)
+	pressBtn({circle=1}, 1)  -- Soldier office
+	fadv(55)
+
+	for i=1, 10 do
+		pressBtn({circle=1}, 1)  -- male soldier
+		fadv(13)
+		pressBtn({x=1}, 1)  -- skip msg
+		fadv(25)
+		pressBtn({x=1}, 1)  -- skip status
+		fadv(1)
+		pressBtn({x=1}, 1)  -- cancel menu
+		fadv(4)
+	end
+
+	pressBtn({x=1}, 1)  -- exit Soldier office
+	fadv(4)
+	pressBtn({x=1}, 1)  -- cancel message
+	fadv(47)
+	pressBtn({x=1}, 1)  -- exit city
+	fadv(4)
+	pressBtn({triangle=1}, 5)  -- show menu
+end
+
 function TAS.enterFormation()
 	pressBtn({triangle=1}, 5)
 	pressBtn({down=1}, 2)
@@ -958,7 +1017,6 @@ function TAS.learnRamzaYell()
 	pressBtn({x=1}, 2)
 	fadv(29-2)
 	-- 44907f
-
 end
 
 function TAS.exitFormation()
@@ -1252,9 +1310,9 @@ function TAS.ch1_random_battle_attack_ramza()
 	-- arrowed and shown AT
 	fadv(6+1)
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 10)  -- action
+	pressBtn({circle=1}, 4)  -- action
 	pressBtn({circle=1}, 9)  -- attack
-	pressBtn({left=1}, 2)    -- move cursol
+	pressBtn({left=1}, 1)    -- move cursol
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 6)  -- confirm target
 	pressBtn({circle=1}, 1)  -- execute attack
@@ -1784,19 +1842,19 @@ function TAS.ch4_Sluice_turn1()
 	-- arrowed and shown AT
 	fadv(6+1)
 	pressBtn({circle=1}, 10)  -- move
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
-	pressBtn({left=1}, 4)
 	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
 	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
 	-- arrowed
 	fadv(6)
-	pressBtn({circle=1}, 8+1)  -- action
+	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 8)  -- time magic
 	pressBtn({circle=1}, 9)   -- Quick
@@ -2300,7 +2358,7 @@ function TAS.ch4_Balk_turn1()
 	pressBtn({circle=1}, 10)  -- move
 	pressBtn({right=1}, 1)
 	pressBtn({down=1}, 1)
-	pressBtn({right=2}, 1)
+	pressBtn({right=1}, 2)
 	pressBtn({right=1}, 1)
 	pressBtn({circle=1}, 1)
 	fadv(6)
@@ -2308,7 +2366,7 @@ function TAS.ch4_Balk_turn1()
 	--fadv(xx)
 
 	-- arrowed
-	fadv(3)  -- wait until 0x164908 = 001C
+	fadv(3)  -- wait until 0x164908 = 0x001C
 	pressBtn({circle=1}, 18)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({down=1}, 2)
@@ -2493,7 +2551,7 @@ function TAS.ch4_altima_turn3()
 	--fadv(xx)
 
 	-- arrowed
-	fadv(3)  -- wait until 0x164908 = 001C
+	fadv(3)  -- wait until 0x164908 = 0x001C
 	pressBtn({circle=1}, 18)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -2685,15 +2743,20 @@ end
 
 function TAS.skip_battle_congratulations()
 	-- before 3f shown "Congratulations"
+	-- when 0x1D6500 = 0x00BB
 	pressBtn({circle=1}, 4)   -- show "This operation is completed"
 	pressBtn({circle=1}, 1)   -- skip congratulations
 	fadv(25)
+	-- when 0x1D6500 = 0x008E
 	pressBtn({circle=1}, 4)   -- skip counting
 	pressBtn({circle=1}, 1)   -- skip bonus money
-	fadv(23)
+	fadv(17)
+	-- when 0x1D6500 = 0x00A7
+	fadv(6)
 	pressBtn({circle=1}, 6)   -- show "War Trophies"
 	pressBtn({circle=1}, 6)   -- item1
 	pressBtn({circle=1}, 6)   -- item2
+	pressBtn({circle=1}, 6)   -- item3
 end
 
 

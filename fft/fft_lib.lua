@@ -57,6 +57,8 @@ adr_battle_unit21 = adr_battle_unit + (0x1C0 * 20)  -- 21th unit 0x190B98
 adr_pad_input_battle = 0x044778 -- US:0x045944, JP1.0:0xFFFFFF, 4byte, controller input in battle/event
 adr_pad_input_world  = 0xFFFFFF -- US:0x19A204, JP1.0:0xFFFFFF, 4byte, controller input in world map/formation
 
+adr_game_fc        = 0x0315E8 -- US:0x0317B8, JP1.0:0xFFFFFF, 4byte, game frame counter
+
 adr_milsecs        = 0x0447EC -- US:0x0459B8, JP1.0:0x0444D8, 4byte
 adr_seconds        = 0x0447F0 -- US:0x0459BC, JP1.0:0x0444DC, 4byte
 adr_minutes        = 0x0447F4 -- US:0x0459C0, JP1.0:0x0444E0, 4byte
@@ -641,18 +643,18 @@ function Bunit.readProperty(ofs_unit)
 
 	--prpt.info = Bunit.toString(prpt)
 	--prpt.info = Bunit.toString2(prpt)
-	--prpt.info = Bunit.toString3(prpt)
-	prpt.info = Bunit.toString4(prpt)
+	prpt.info = Bunit.toString3(prpt)
+	--prpt.info = Bunit.toString4(prpt)
 	return prpt
 end
 
 function Bunit.toString(prpt)
-	local str = string.format("%2x %2x %2x %2x:"
-			.."%2x %2x %2x %2x:"
-			.."%2d %2d %2d:"
-			.."%2d %2d:"
-			.."%3d %3d:"
-			.."%3d %3d %3d:",
+	local str = string.format("%2x,%2x,%2x,%2x/"
+			.."%2x,%2x,%2x,%2x/"
+			.."%2d,%2d,%2d/"
+			.."%2d,%2d/"
+			.."%3d,%3d/"
+			.."%3d,%3d,%3d/",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -681,10 +683,10 @@ function Bunit.toString(prpt)
 end
 
 function Bunit.toString2(prpt)
-	local str = string.format("%2x %2x %2x %2x:"
-			.."%2d %2d:"
-			.."%2x %2x %2x:%2x %2x %2x:%2x %2x %2x:"
-			.."%2d %2x %2x:",
+	local str = string.format("%2x,%2x,%2x,%2x/"
+			.."%2d,%2d/"
+			.."%2x,%2x,%2x/%2x,%2x,%2x/%2x,%2x,%2x/"
+			.."%2d,%2x,%2x/",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -711,13 +713,15 @@ function Bunit.toString2(prpt)
 end
 
 function Bunit.toString3(prpt)
-	local str = string.format("%2x %2x %2x %2x:" 
-			.." %2d %2d:"
-			.." %3d %3d:"
-			--.." %2x %2x %2x %2x:"
-			.." %2x %2x %2x %2x:"
-			.." %2x %2x %2x:"
-			.." %2x %2x %2x:",
+	local str = string.format("%2x,%2x,%2x,%2x/"
+			.."%2d,%2d/"
+			.."%2d,%2d/"
+			.."%3d,%3d/"
+			.."%3d,%3d/"
+			--.."%2x,%2x,%2x,%2x/"
+			.."%2x,%2x,%2x,%2x/"
+			.."%2x,%2x,%2x/"
+			.."%2x,%2x,%2x/",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -725,6 +729,12 @@ function Bunit.toString3(prpt)
 
 			prpt.lv     ,
 			prpt.exp    ,
+
+			prpt.brave  ,
+			prpt.faith  ,
+
+			prpt.hp     ,
+			prpt.mp     ,
 
 			prpt.total_JP_squire    ,
 			prpt.JP_squire    ,
@@ -749,12 +759,12 @@ function Bunit.toString3(prpt)
 end
 
 function Bunit.toString4(prpt)
-	local str = string.format("%2x %2x %2x %2x:"
-			.."%2d %2d %2d:"
-			.."%2d %2d:"
-			.."%3d %3d:"
-			.."%3d %3d %3d:"
-			.."%3d %3d:",
+	local str = string.format("%2x,%2x,%2x,%2x/"
+			.."%2d,%2d,%2d/"
+			.."%2d,%2d/"
+			.."%3d,%3d/"
+			.."%3d,%3d,%3d/"
+			.."%3d,%3d/",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,

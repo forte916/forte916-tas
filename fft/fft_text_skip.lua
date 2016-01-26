@@ -92,6 +92,11 @@ adr_direction_1D6500 = 0x1D6500
 
 ------------------------------------------------------------
 -- functions
+-- @note 
+--   * TODO: イベント『士官候補生たち』の最後のセリフ送りは
+--           最速は 0x164938 が 0x0030 になったとき
+--           このスクリプトでは対応していないので手動で対応が必要
+--
 ------------------------------------------------------------
 Text = {}
 
@@ -147,6 +152,10 @@ function Text.skipTextNoRewind()
 	end
 end
 
+-- @note
+--   + 0x037808 が 0x0000 になってから 3f 戻るより
+--   + 0x164908 が 0xFFFF になってから 2f 戻るほうが正確かも
+--   + 0x037808 が 0x0000 になってから 3f前 or 2f前 の二通りあるため
 function Text.skipTextRewind()
 	if Text.text_end_fc then
 		-- rewind here
@@ -165,7 +174,8 @@ function Text.skipTextRewind()
 		elseif flag_hi == 0 then
 			print(string.format("flag = 0x%04X, flag_hi = %d, no fadv", flag, flag_hi))
 		end
-		pressBtn({circle=1}, 3)
+		pressBtn({circle=1}, 1)
+		pressBtn({x=1}, 2)
 		Text.setTextCondition(Text.getTextFlag())
 		Text.text_end_fc = nil
 		Text.state = savestate.create()
