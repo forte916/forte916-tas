@@ -429,6 +429,36 @@ Bunit.base_r_s_m_learned3  = 0x9B  -- 1byte
 	-- 0x80:Counter Tackle, 0x40:Equip Axe, 0x20:Monster Skill, 0x10:Defend
 	-- 0x08:Gained JP-UP, 0x04:Move+1
 
+Bunit.chemist_action_learned1   = 0x9C  -- 1byte
+Bunit.chemist_action_learned2   = 0x9D  -- 1byte
+Bunit.chemist_r_s_m_learned3    = 0x9E  -- 1byte
+Bunit.knight_action_learned1    = 0x9F  -- 1byte
+Bunit.knight_action_learned2    = 0xA0  -- 1byte
+Bunit.knight_r_s_m_learned3     = 0xA1  -- 1byte
+Bunit.archer_action_learned1    = 0xA2  -- 1byte
+Bunit.archer_action_learned2    = 0xA3  -- 1byte
+Bunit.archer_r_s_m_learned3     = 0xA4  -- 1byte
+Bunit.monk_action_learned1      = 0xA5  -- 1byte
+Bunit.monk_action_learned2      = 0xA6  -- 1byte
+Bunit.monk_r_s_m_learned3       = 0xA7  -- 1byte
+Bunit.priest_action_learned1    = 0xA8  -- 1byte
+Bunit.priest_action_learned2    = 0xA9  -- 1byte
+Bunit.priest_r_s_m_learned3     = 0xAA  -- 1byte
+Bunit.wizard_action_learned1    = 0xAB  -- 1byte
+Bunit.wizard_action_learned2    = 0xAC  -- 1byte
+Bunit.wizard_r_s_m_learned3     = 0xAD  -- 1byte
+Bunit.time_mage_action_learned1 = 0xAE  -- 1byte
+Bunit.time_mage_action_learned2 = 0xAF  -- 1byte
+Bunit.time_mage_r_s_m_learned3  = 0xB0  -- 1byte
+Bunit.summoner_action_learned1  = 0xB1  -- 1byte
+Bunit.summoner_action_learned2  = 0xB2  -- 1byte
+Bunit.summoner_r_s_m_learned3   = 0xB3  -- 1byte
+Bunit.thief_action_learned1     = 0xB4  -- 1byte
+Bunit.thief_action_learned2     = 0xB5  -- 1byte
+Bunit.thief_r_s_m_learned3      = 0xB6  -- 1byte
+
+
+
 
 -- offset 0xD2 to 0xDB is job level
 -- job level includes 2 jobs in 1byte. split high 4bit and low 4bit.
@@ -601,25 +631,60 @@ function Bunit.readProperty(ofs_unit)
 	prpt.unlocked_jobs9_16    = memory.readbyte(ofs_unit + Bunit.unlocked_jobs9_16    )
 	prpt.unlocked_jobs17_20   = memory.readbyte(ofs_unit + Bunit.unlocked_jobs17_20   )
 
-	prpt.base_action_learned1 = memory.readbyte(ofs_unit + Bunit.base_action_learned1 )
-	prpt.base_action_learned2 = memory.readbyte(ofs_unit + Bunit.base_action_learned2 )
-	prpt.base_r_s_m_learned3  = memory.readbyte(ofs_unit + Bunit.base_r_s_m_learned3  )
+	prpt.base_action_learned1      = memory.readbyte(ofs_unit + Bunit.base_action_learned1      )
+	prpt.base_action_learned2      = memory.readbyte(ofs_unit + Bunit.base_action_learned2      )
+	prpt.base_r_s_m_learned3       = memory.readbyte(ofs_unit + Bunit.base_r_s_m_learned3       )
+	prpt.chemist_action_learned1   = memory.readbyte(ofs_unit + Bunit.chemist_action_learned1   )
+	prpt.chemist_action_learned2   = memory.readbyte(ofs_unit + Bunit.chemist_action_learned2   )
+	prpt.chemist_r_s_m_learned3    = memory.readbyte(ofs_unit + Bunit.chemist_r_s_m_learned3    )
+	prpt.knight_action_learned1    = memory.readbyte(ofs_unit + Bunit.knight_action_learned1    )
+	prpt.knight_action_learned2    = memory.readbyte(ofs_unit + Bunit.knight_action_learned2    )
+	prpt.knight_r_s_m_learned3     = memory.readbyte(ofs_unit + Bunit.knight_r_s_m_learned3     )
+	prpt.archer_action_learned1    = memory.readbyte(ofs_unit + Bunit.archer_action_learned1    )
+	prpt.archer_action_learned2    = memory.readbyte(ofs_unit + Bunit.archer_action_learned2    )
+	prpt.archer_r_s_m_learned3     = memory.readbyte(ofs_unit + Bunit.archer_r_s_m_learned3     )
+	prpt.monk_action_learned1      = memory.readbyte(ofs_unit + Bunit.monk_action_learned1      )
+	prpt.monk_action_learned2      = memory.readbyte(ofs_unit + Bunit.monk_action_learned2      )
+	prpt.monk_r_s_m_learned3       = memory.readbyte(ofs_unit + Bunit.monk_r_s_m_learned3       )
+	prpt.priest_action_learned1    = memory.readbyte(ofs_unit + Bunit.priest_action_learned1    )
+	prpt.priest_action_learned2    = memory.readbyte(ofs_unit + Bunit.priest_action_learned2    )
+	prpt.priest_r_s_m_learned3     = memory.readbyte(ofs_unit + Bunit.priest_r_s_m_learned3     )
+	prpt.wizard_action_learned1    = memory.readbyte(ofs_unit + Bunit.wizard_action_learned1    )
+	prpt.wizard_action_learned2    = memory.readbyte(ofs_unit + Bunit.wizard_action_learned2    )
+	prpt.wizard_r_s_m_learned3     = memory.readbyte(ofs_unit + Bunit.wizard_r_s_m_learned3     )
+	prpt.time_mage_action_learned1 = memory.readbyte(ofs_unit + Bunit.time_mage_action_learned1 )
+	prpt.time_mage_action_learned2 = memory.readbyte(ofs_unit + Bunit.time_mage_action_learned2 )
+	prpt.time_mage_r_s_m_learned3  = memory.readbyte(ofs_unit + Bunit.time_mage_r_s_m_learned3  )
+	prpt.summoner_action_learned1  = memory.readbyte(ofs_unit + Bunit.summoner_action_learned1  )
+	prpt.summoner_action_learned2  = memory.readbyte(ofs_unit + Bunit.summoner_action_learned2  )
+	prpt.summoner_r_s_m_learned3   = memory.readbyte(ofs_unit + Bunit.summoner_r_s_m_learned3   )
+	prpt.thief_action_learned1     = memory.readbyte(ofs_unit + Bunit.thief_action_learned1     )
+	prpt.thief_action_learned2     = memory.readbyte(ofs_unit + Bunit.thief_action_learned2     )
+	prpt.thief_r_s_m_learned3      = memory.readbyte(ofs_unit + Bunit.thief_r_s_m_learned3      )
 
 	prpt.JP_squire     = memory.readword(ofs_unit + Bunit.JP_squire     )
 	prpt.JP_chemist    = memory.readword(ofs_unit + Bunit.JP_chemist    )
 	prpt.JP_knight     = memory.readword(ofs_unit + Bunit.JP_knight     )
+	prpt.JP_archer     = memory.readword(ofs_unit + Bunit.JP_archer     )
+	prpt.JP_monk       = memory.readword(ofs_unit + Bunit.JP_monk       )
 	prpt.JP_priest     = memory.readword(ofs_unit + Bunit.JP_priest     )
 	prpt.JP_wizard     = memory.readword(ofs_unit + Bunit.JP_wizard     )
 	prpt.JP_time_mage  = memory.readword(ofs_unit + Bunit.JP_time_mage  )
+	prpt.JP_summoner   = memory.readword(ofs_unit + Bunit.JP_summoner   )
+	prpt.JP_thief      = memory.readword(ofs_unit + Bunit.JP_thief      )
 	prpt.JP_oracle     = memory.readword(ofs_unit + Bunit.JP_oracle     )
 	prpt.JP_calculator = memory.readword(ofs_unit + Bunit.JP_calculator )
 
 	prpt.total_JP_squire     = memory.readword(ofs_unit + Bunit.total_JP_squire     )
 	prpt.total_JP_chemist    = memory.readword(ofs_unit + Bunit.total_JP_chemist    )
 	prpt.total_JP_knight     = memory.readword(ofs_unit + Bunit.total_JP_knight     )
+	prpt.total_JP_archer     = memory.readword(ofs_unit + Bunit.total_JP_archer     )
+	prpt.total_JP_monk       = memory.readword(ofs_unit + Bunit.total_JP_monk       )
 	prpt.total_JP_priest     = memory.readword(ofs_unit + Bunit.total_JP_priest     )
 	prpt.total_JP_wizard     = memory.readword(ofs_unit + Bunit.total_JP_wizard     )
 	prpt.total_JP_time_mage  = memory.readword(ofs_unit + Bunit.total_JP_time_mage  )
+	prpt.total_JP_summoner   = memory.readword(ofs_unit + Bunit.total_JP_summoner   )
+	prpt.total_JP_thief      = memory.readword(ofs_unit + Bunit.total_JP_thief      )
 	prpt.total_JP_oracle     = memory.readword(ofs_unit + Bunit.total_JP_oracle     )
 	prpt.total_JP_calculator = memory.readword(ofs_unit + Bunit.total_JP_calculator )
 
@@ -717,10 +782,12 @@ function Bunit.toString3(prpt)
 			.."%2d,%2d/"
 			.."%2d,%2d/"
 			.."%3d,%3d/"
-			.."%3d,%3d/"
-			--.."%2x,%2x,%2x,%2x/"
+			.."squire-%3d,%3d-%2x,%2x,%2x/"
+			.."chemist-%3d,%3d-%2x,%2x,%2x/"
+			.."archer-%3d,%3d-%2x,%2x,%2x/"
+			.."thief-%3d,%3d-%2x,%2x,%2x/"
 			.."%2x,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x/"
+			.."%2x,%2x,%2x,%2x/"
 			.."%2x,%2x,%2x/",
 			prpt.ch     ,
 			prpt.no     ,
@@ -738,22 +805,39 @@ function Bunit.toString3(prpt)
 
 			prpt.total_JP_squire    ,
 			prpt.JP_squire    ,
+			prpt.base_action_learned1 ,
+			prpt.base_action_learned2 ,
+			prpt.base_r_s_m_learned3  ,
 
-			--prpt.reaction_affected1 ,
-			--prpt.reaction_affected2 ,
-			--prpt.reaction_affected3 ,
-			--prpt.reaction_affected4 ,
+			prpt.total_JP_chemist    ,
+			prpt.JP_chemist    ,
+			prpt.chemist_action_learned1 ,
+			prpt.chemist_action_learned2 ,
+			prpt.chemist_r_s_m_learned3  ,
+
+			prpt.total_JP_archer    ,
+			prpt.JP_archer    ,
+			prpt.archer_action_learned1 ,
+			prpt.archer_action_learned2 ,
+			prpt.archer_r_s_m_learned3  ,
+
+			prpt.total_JP_thief    ,
+			prpt.JP_thief    ,
+			prpt.thief_action_learned1 ,
+			prpt.thief_action_learned2 ,
+			prpt.thief_r_s_m_learned3  ,
+
+			prpt.reaction_affected1 ,
+			prpt.reaction_affected2 ,
+			prpt.reaction_affected3 ,
+			prpt.reaction_affected4 ,
 			prpt.support_affected1  ,
 			prpt.support_affected2  ,
 			prpt.support_affected3  ,
 			prpt.support_affected4  ,
 			prpt.movement_affected1 ,
 			prpt.movement_affected2 ,
-			prpt.movement_affected3 ,
-
-			prpt.base_action_learned1 ,
-			prpt.base_action_learned2 ,
-			prpt.base_r_s_m_learned3  )
+			prpt.movement_affected3 )
 
 	return str
 end

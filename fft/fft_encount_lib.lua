@@ -131,7 +131,7 @@ end
 -- GainedJpUP
 ------------------------------------------------------------
 GainedJpUP = {}
-GainedJpUP.logname = "ch1_mandalia_gained_jp_up3.log"
+GainedJpUP.logname = "ch1_mandalia_gained_jp_up_cheat3.log"
 function GainedJpUP.logHeader()
 	debugPrint(string.format("the most right culumn is base_r_s_m_learned3"))
 	debugPrint(string.format("    0x80:Counter Tackle"))
@@ -145,15 +145,18 @@ end
 
 
 function GainedJpUP.pre_attempt()
-	fadv(4)
+	--fadv(4)
 	--fadv(3)
 end
 
-function GainedJpUP.attempt()
+function GainedJpUP.pre_attempt2()
 	-- move Mandalia From Gariland
-	pressBtn({triangle=1}, 5)
+	--pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
 	pressBtn({down=1}, 1)  -- select Mandalia
+end
+
+function GainedJpUP.attempt()
 	pressBtn({circle=1}, 1)
 	fadv(900)
 end

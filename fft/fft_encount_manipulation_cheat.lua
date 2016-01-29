@@ -97,9 +97,9 @@ f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
-retry = 5000
+retry = 3000
 
-for i=2000, retry do
+for i=0, retry do
 	if initial == 1 then
 		initial = 0
 		fadv(i)

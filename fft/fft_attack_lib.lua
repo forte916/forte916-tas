@@ -522,23 +522,24 @@ end
 function CriticalHit.success()
 	local ret = false
 	local prpt = {}
+	local str
 
 	prpt = Bunit.readProperty(adr_battle_unit4)
-	debugPrint(prpt.info)
+	str = prpt.info
 
 	if prpt.critical ~= 0 then
-		print(string.format("  critical, hp=%d", prpt.hp))
-		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		str = string.format("%s, critical, hp=%d", str, prpt.hp)
+		print(str)
 		ret = true
 	elseif prpt.hp == 0 then
-		print(string.format("  take down, hp=%d", prpt.hp))
-		debugPrint(string.format("  take down, hp=%d", prpt.hp))
+		str = string.format("%s, KO, hp=%d", str, prpt.hp)
+		print(str)
 		ret = true
 	else
-		debugPrint(string.format("  normal, hp=%d", prpt.hp))
 		ret = false
 	end
 
+	debugPrint(str)
 	return ret
 end
 
@@ -588,30 +589,31 @@ function CriticalInjured.success()
 	local ret = false
 	local prpt = {}
 	local injured = 0
+	local str
 
 	prpt = Bunit.readProperty(adr_battle_unit)
-	debugPrint(prpt.info)
+	str = prpt.info
 
 	injured = bit.band(prpt.status_5A, 0x01)  -- 0x01 Critical injured
 
 	if prpt.critical ~= 0 then
-		print(string.format("  critical, hp=%d", prpt.hp))
-		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		str = string.format("%s, hp=%d, critical hit", str, prpt.hp)
+		print(str)
 	end
 
 	if prpt.hp == 0 then
-		print(string.format("  take down, hp=%d", prpt.hp))
-		debugPrint(string.format("  take down, hp=%d", prpt.hp))
+		str = string.format("%s, hp=%d, KO", str, prpt.hp)
+		print(str)
 		ret = true
 	elseif injured ~= 0 then
-		print(string.format("  critical injured, hp=%d", prpt.hp))
-		debugPrint(string.format("  critical injured, hp=%d", prpt.hp))
+		str = string.format("%s, hp=%d, critical injured", str, prpt.hp)
+		print(str)
 		ret = true
 	else
-		debugPrint(string.format("  normal, hp=%d", prpt.hp))
 		ret = false
 	end
 
+	debugPrint(str)
 	return ret
 end
 

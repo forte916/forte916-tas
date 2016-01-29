@@ -1285,6 +1285,14 @@ Encount research of random battle
 * lua で検証できたこと
   * frame数が同じなら乱数を変えてもエンカウントする・しないの判定は変化しない
   * frame数が同じなら乱数を変えても出撃する・しないの判定は変化しない
+  * ゲーム内の milsec, sec, min, hour を書き換えれば結果が変わる
+
+* disassemble
+  * milsec等を参照する関数としては sub_80125A04 (US) sub_801254F8(JPv1.1)が関係してそう
+  * http://ffhacktics.com/wiki/00125a04_-_00125cf8
+  * sub_8008E540(US) から sub_80125A04(US) と下記の sub_8008F08C(US) が call されている
+  * この辺がエンカ判定と出撃判定と(出撃ユニットのステータス決定)だと推測される
+
 
 * エンカウントするかどうかの判定
   * http://ffhacktics.com/wiki/0008f08c_-_0008f280
