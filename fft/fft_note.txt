@@ -100,6 +100,7 @@ ch1-Gariland
 * turn1
   * カメラ移動があると数フレーム遅くなる
   * 敵移動中にカメラ移動する
+  * Ramza セリフ後 再度 L2, R2
 
 
 * Ramza
@@ -111,14 +112,6 @@ ch1-Gariland
   * Chemist JP 200 for Wizard
   * Lv2 (recomend because of boosting MP)
 
-* after battle, formation
-  * world map に出たら x で説明をキャンセル
-  * Ramza, learn Yell 200JP
-  * Chemist
-    * job change:  Wizard
-    * learn:  Bolt 50JP, MagicAttackUP 400JP
-    * set: MagicAttackUP
-  * Chemist 以外のユニット除名
 
 * 改善案
   * 配置
@@ -131,6 +124,39 @@ ch1-Gariland
   * 味方 Squire に取得Jp UP 覚えさせるため 250jp 稼ぐ
   * Gariland の敵は Lv1 のため取得Jp UP は覚えていない
   * L2 押したほうがカメラ移動が減るかも
+
+
+* after battle
+  * world map に出たら x で説明をキャンセル
+  * Ramza, learn Yell 200JP
+  * Chemist
+    * job change:  Wizard
+    * learn:  Bolt 50JP, MagicAttackUP 400JP
+    * set: MagicAttackUP
+  * Chemist 以外のユニット除名
+
+* after battle 改善案
+  * world map に出たら x で説明をキャンセル
+  * 編成はバルバネスのイベント見たあと
+  * ここでは除名しない
+  * Ramza
+    * learn Gained JP-UP, Bolt2, Bolt3, Death, Flare, Magic attack up
+       * use jp scroll glith, Ice -> Ice2
+    * Counter Magic は必要ない. Balk は Face rod で OK
+    * set Gained JP-UP, Black Magic
+    * remove Battle Shoes
+  * Delita
+    * change Chemist
+  * Female Chemist
+    * change Wizard
+    * learn Bolt, Toad, Magic attack up
+       * use jp scroll glith, Ice -> Ice2
+    * set Magic attack up
+    * equip Battle Shoes
+  * Male Squire x2
+    * change Knight
+    * set Item
+
 
 
 ch1-Mandalia
@@ -155,6 +181,7 @@ ch1-Mandalia
 * turn2
   * Ramza, Yell
   * 黒魔道士, Bolt, アルガスを巻き込んで敵3体倒す
+  * Algus セリフ後 再度 L2, R2
 
 * turn3
   * redpanther だけになるので稼ぐ
@@ -164,18 +191,46 @@ ch1-Mandalia
   * algus の死体の奥の安全地帯で稼ぐ
 
 
+* 改善案
+  * Ramza,  300jp for Accumulates
+  * Knight, 250jp for Speed Break
+  * Delita の turn, L2, R2
+  * Algus セリフ後 再度 L2, R2
+  * 敵シーフのみ Lv2 なので Gained JP-UP を覚えている可能性がある
+    しかし Ramza(jobid=0x01) は 見習い(jobid=0x4A) のクリスタル継承不可
+
+* 検証
+  * Accumulates で 250jp 稼ぐ
+    * 22回行動 (1回 12jp or 14jp)
+  * Gained JP-UP で 300jp 稼ぐ
+    * 15回行動 (1回 18jp or 21jp)
+  * 味方が KO からクリスタルになるまでに Ramza 3回行動可能
+    * Ramza 237jp 超えたら 味方を KO してよい
+    * 4回行動可能なときもあるが、 redpanser を倒す前に cristal となってしまう
+
+
+* Gained JP-UP を覚えているか検証
+  * バルバネスイベント後約 2700f 後に Geined JP-UP を覚えている敵がいる
+  * game time が同じなら乱数は異なってもよい
+  * ただし game time が同じでも編成画面の表示回数??(world mapの表示回数??) 
+    が異なると、覚えているスキルが異なる
+
+* Gained JP-UP の Cristal
+  * Job が同じでないとスキル継承不可
+  * Ramza(0x01) と Male Squire(0x4A) や job が異なるので見習いスキルを継承不可
+  * 疑問点として Female Squire も Male Squire のスキル継承不可
+    * これにより Famale Calculator もボツ案
+  * http://www.gamefaqs.com/ps/197339-final-fantasy-tactics/faqs/3876
+    [6.1] Cristal
+
+
 * after battle, formation
   * Ramza
     * job change:  Priest
     * learn:  Accumulates 300JP, Gained JP UP 250JP
     * set: guts, Gained JP UP
-
-* 改善案
-  * Ramza ためる 300jp 稼ぐ
-  * 取得Jp UP を敵か味方からクリスタル継承
-  * 敵シーフのみ Lv2 なので取得Jp UP を覚えている可能性がある
-  * Lv3 の敵が出ないので ためる(300jp)を覚えている敵はいない
-  * L2 押したほうがカメラ移動が減るかも
+  * Knight 
+    * learn Speed Break
 
 
 ch1-random
@@ -529,6 +584,8 @@ ch3-Riovanes (inside)
 * Velius Lv31, HP 1131, speed 8
 * Lv prime Demi2 x2 (Velius)
 * hits an enemy as well
+* Demi2 x4 より Flare x3 の方が早い
+  * ダメージが足りれば Flare --> Demi2 としたほうがよいかも
 
 ch3-Riovanes (rooftop)
 ------------
@@ -1162,12 +1219,26 @@ SP   tick
 
 Frame counts of casting spell
 -----------------------------
+* Bolt3  2105 - 1813 = 292f
 * Bolt3  6033 - 5738 = 295f
+* Bolt2  2624 - 2326 = 298f
+* Bolt   1583 - 1269 = 314f
+* Demi2  2634 - 2302 = 332f
 * Demi2  6089 - 5750 = 339f
+* Deth   2414 - 2049 = 365f
 * Deth   6106 - 5744 = 362f
+* Flare  2639 - 2224 = 415f
 * Flare  6160 - 5746 = 414f
+* Holy   2840 - 2206 = 634f
 * Holy   6375 - 5736 = 639f
 * Holy   6875 - 6243 = 632f
+
+* Ice    5645 - 5319 = 326f
+* Ice    6553 - 6227 = 326f
+* Ice2   5700 - 5330 = 370f
+* Ice2   6747 - 6378 = 369f
+* Ice3   5719 - 5373 = 346f
+* Ice3   6869 - 6526 = 343f
 
 * Lightning Stab
 	455 - 240 = 215f

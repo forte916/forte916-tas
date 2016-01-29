@@ -62,20 +62,20 @@ function Optimize.success()
 end
 
 ------------------------------------------------------------
--- Cristal
+-- Cristal1
 ------------------------------------------------------------
-Cristal = {}
+Cristal1 = {}
 
-function Cristal.pre_attempt()
+function Cristal1.pre_attempt()
 	fadv(7)
 end
 
-function Cristal.attempt()
+function Cristal1.attempt()
 	pressBtn({circle=1}, 1)  -- stand by
 	fadv(10)
 end
 
-function Cristal.post_attempt()
+function Cristal1.post_attempt()
 	local male_turn = memory.readword(adr_battle_unit17 + Bunit.cur_turn)
 
 	while male_turn ~= 0x01 do
@@ -108,7 +108,93 @@ function Cristal.post_attempt()
 	fadv(30)
 end
 
-function Cristal.success()
+function Cristal1.success()
+	return true -- always true
+end
+
+
+------------------------------------------------------------
+-- Cristal2
+------------------------------------------------------------
+Cristal2 = {}
+
+function Cristal2.pre_attempt()
+	fadv(7)
+end
+
+function Cristal2.attempt()
+	pressBtn({circle=1}, 1)  -- stand by
+	fadv(10)
+end
+
+function Cristal2.post_attempt()
+	local ofs_unit = adr_battle_unit20
+	local wiz_turn = memory.readword(ofs_unit + Bunit.cur_turn)
+
+	while wiz_turn ~= 0x01 do
+		fadv(1)
+		wiz_turn = memory.readword(ofs_unit + Bunit.cur_turn)
+	end
+	fadv(7+7)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 1)
+	fadv(8+7)
+
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({right=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(39+7)
+	pressBtn({circle=1}, 3)
+	pressBtn({circle=1}, 3)
+	fadv(70)
+	pressBtn({circle=1}, 3)
+	pressBtn({circle=1}, 3)
+	fadv(30)
+end
+
+function Cristal2.success()
+	return true -- always true
+end
+
+------------------------------------------------------------
+-- Cristal3
+------------------------------------------------------------
+Cristal3 = {}
+
+function Cristal3.pre_attempt()
+	fadv(7)
+end
+
+function Cristal3.attempt()
+	pressBtn({circle=1}, 1)  -- stand by
+	fadv(10)
+end
+
+function Cristal3.post_attempt()
+	local ofs_unit = adr_battle_unit20
+	local wiz_turn = memory.readword(ofs_unit + Bunit.cur_turn)
+
+	while wiz_turn ~= 0x01 do
+		fadv(1)
+		wiz_turn = memory.readword(ofs_unit + Bunit.cur_turn)
+	end
+	fadv(7+7)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({down=1}, 1)
+	pressBtn({right=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(41)
+	pressBtn({circle=1}, 3)
+	pressBtn({circle=1}, 3)
+	fadv(70)
+	pressBtn({circle=1}, 3)
+	pressBtn({circle=1}, 3)
+	fadv(30)
+end
+
+function Cristal3.success()
 	return true -- always true
 end
 
@@ -128,7 +214,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 --local rng = memory.readdword(adr_rng)
 
-local interface = Cristal
+local interface = Cristal3
 
 
 retry = 200
@@ -153,7 +239,7 @@ for i=0, retry do
 
 		-- make dest directory in advance
 		local gdstr = gui.gdscreenshot()
-		gd.createFromGdStr(gdstr):png(string.format("snap/cristal_ability_%df.png", fc))
+		gd.createFromGdStr(gdstr):png(string.format("snap/cristal_ability3_%df.png", fc))
 	end
 
 	savestate.load(state)

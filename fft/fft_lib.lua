@@ -714,18 +714,21 @@ function Bunit.readProperty(ofs_unit)
 end
 
 function Bunit.toString(prpt)
-	local str = string.format("%2x,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x,%2x/"
+	local str = string.format("%2x,%2x,%2x,%2x,%2x,%2x,%2x,%2x/"
+			.."%2x,%2x,%2x/"
 			.."%2d,%2d,%2d/"
 			.."%2d,%2d/"
-			.."%3d,%3d/"
-			.."%3d,%3d,%3d/",
+			.."%3d,%2d/"
+			.."%3d-%3d,%3d/",
 			prpt.ch     ,
 			prpt.no     ,
+			prpt.party  ,
 			prpt.job    ,
+			prpt.palette,
+			prpt.entd_flag   ,
+			prpt.gender ,
 			prpt.zodiac ,
 
-			prpt.entd_flag   ,
 			prpt.entd_id     ,
 			prpt.unit_exist  ,
 			prpt.unit_id_ff  ,
@@ -781,11 +784,11 @@ function Bunit.toString3(prpt)
 	local str = string.format("%2x,%2x,%2x,%2x/"
 			.."%2d,%2d/"
 			.."%2d,%2d/"
-			.."%3d,%3d/"
-			.."squire-%3d,%3d-%2x,%2x,%2x/"
-			.."chemist-%3d,%3d-%2x,%2x,%2x/"
-			.."archer-%3d,%3d-%2x,%2x,%2x/"
-			.."thief-%3d,%3d-%2x,%2x,%2x/"
+			.."%3d,%2d/"
+			.."squire-%3d-%3d/%2x,%2x,%2x/"
+			.."chemist-%3d-%3d,%2x,%2x,%2x/"
+			.."archer-%3d-%3d,%2x,%2x,%2x/"
+			.."thief-%3d-%3d,%2x,%2x,%2x/"
 			.."%2x,%2x,%2x,%2x/"
 			.."%2x,%2x,%2x,%2x/"
 			.."%2x,%2x,%2x/",
@@ -846,8 +849,8 @@ function Bunit.toString4(prpt)
 	local str = string.format("%2x,%2x,%2x,%2x/"
 			.."%2d,%2d,%2d/"
 			.."%2d,%2d/"
-			.."%3d,%3d/"
-			.."%3d,%3d,%3d/"
+			.."%3d,%2d/"
+			.."%3d-%3d,%3d/"
 			.."%3d,%3d/",
 			prpt.ch     ,
 			prpt.no     ,

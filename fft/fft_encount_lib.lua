@@ -76,12 +76,12 @@ function Gariland.logHeader()
 	debugPrint(string.format(" * bad : 0x00, 0x60, very bad : 0x30"))
 	debugPrint(string.format(""))
 	debugPrint(string.format("-- Bunit Legend --"))
-	debugPrint(string.format(" 4  0  4 81: 1 94  6:71 55: 50  14:104  24 142:130 137:, delita"))
-	debugPrint(string.format("80  1 4a 10: 1 90  6:51 58: 44  10:159  29 197:131 142:, 真珠の4, broad"))
-	debugPrint(string.format("80  2 4a 20: 1 19  6:47 68: 43  10:180  90 117:131 139:, 真珠の1, dagger, beaten by ramza"))
-	debugPrint(string.format("80  3 4a 81: 1 66  6:69 60: 36  10:101  21 107:166 131:, 真珠の3, dagger"))
-	debugPrint(string.format("80  4 4b 51: 1 21  6:38 66: 38  10:147  17 146:197 155:, 真珠の5, item"))
-	debugPrint(string.format("81  5 4a 20: 1 26  6:70 51: 33  11:135  55 148:197 148:, 真珠の2, female"))
+	debugPrint(string.format(" 4  0  4 81: 1 94  6:71 55: 50  14:104- 24 142:130 137:, delita"))
+	debugPrint(string.format("80  1 4a 10: 1 90  6:51 58: 44  10:159- 29 197:131 142:, 真珠の4, broad"))
+	debugPrint(string.format("80  2 4a 20: 1 19  6:47 68: 43  10:180- 90 117:131 139:, 真珠の1, dagger, beaten by ramza"))
+	debugPrint(string.format("80  3 4a 81: 1 66  6:69 60: 36  10:101- 21 107:166 131:, 真珠の3, dagger"))
+	debugPrint(string.format("80  4 4b 51: 1 21  6:38 66: 38  10:147- 17 146:197 155:, 真珠の5, item"))
+	debugPrint(string.format("81  5 4a 20: 1 26  6:70 51: 33  11:135- 55 148:197 148:, 真珠の2, female"))
 	debugPrint(string.format(""))
 
 end
@@ -118,6 +118,89 @@ function Gariland.success()
 		if prpt.no == 2 and compatibility > 3 then
 			str = str.." , matched"
 			ret = true
+		end
+
+		debugPrint(str)
+	end
+
+	return ret
+end
+
+
+------------------------------------------------------------
+-- Mandalia
+------------------------------------------------------------
+Mandalia = {}
+Mandalia.logname = "ch1_mandalia_enemy1.log"
+
+
+function Mandalia.logHeader()
+	debugPrint(string.format("Ramza = 0x90 = Capricorn"))
+	debugPrint(string.format(" * good: 0x10, 0x50, very good: 0x30"))
+	debugPrint(string.format(" * bad : 0x00, 0x60, very bad : 0x30"))
+	debugPrint(string.format(""))
+	debugPrint(string.format("-- Bunit Legend --"))
+	debugPrint(string.format(" 4, 0,4b,81/ 2, 0, 6/81,55/ 32,11/125- 45,144/130,137/ , Delita"))
+	debugPrint(string.format(" 7, 1, 7,50/ 3, 0, 6/83,59/ 38,15/125- 45,179/104,103/ , Algus"))
+	debugPrint(string.format("80, 2,53,61/ 2,31, 6/53,53/ 42, 7/289- 69,110/157,142/ , 真珠の5, thief"))
+	debugPrint(string.format("80, 3,4a,50/ 1,91, 6/61,68/ 10,10/127- 47,116/153,199/ , 真珠の6"))
+	debugPrint(string.format("80, 4,4a,40/ 1,96, 6/67,68/ 36,10/172- 42,156/106,154/ , 真珠の2"))
+	debugPrint(string.format("80, 5,4a,81/ 2, 0, 6/70,70/ 35,10/193- 23,117/131,151/ , 真珠の3, throw stone recomended, beaten by ramza bolt2, "))
+	debugPrint(string.format("80, 6,4a,20/ 1,23, 6/67,72/ 36,11/144- 14,112/191,148/ , 真珠の4"))
+	debugPrint(string.format("82, 7,67,a0/ 1, 8, 5/40,50/ 42, 4/  0-  0,  0/  0,  0/ , 真珠の1, redpancer"))
+	debugPrint(string.format(""))
+end
+
+function Mandalia.pre_attempt()
+	fadv(2)
+end
+
+function Mandalia.attempt()
+	pressBtn({x=1}, 1)
+	fadv(400)
+end
+
+function Mandalia.post_attempt()
+	-- pass
+end
+
+function Mandalia.success()
+	local ret = false
+	local prpt = {}
+	local ofs_unit = adr_battle_unit3
+	local total_enemy = 6
+	local compatibility = 0
+	local skill = 0
+	local matched = 0
+	local str
+
+	for i=1, total_enemy do
+		prpt = Bunit.readProperty(ofs_unit)
+		ofs_unit = ofs_unit + 0x1C0
+		str = prpt.info
+
+		if prpt.no == 5 then
+			compatibility = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-ramza", str, Zodiac.notation[compatibility])
+
+			if compatibility > 3 or (compatibility == 3 and prpt.faith > 57) then
+				matched = matched + 1
+			end
+
+			skill = bit.band(prpt.base_action_learned1, 0x20)  -- 0x08 means Throw Stone
+			if skill ~= 0 then
+				print(string.format("-- base_action_learned1 = %x, Throw Stone", prpt.base_action_learned1))
+				str = str.." , throw stone"
+				matched = matched + 1
+			end
+
+			if matched > 1 then
+				ret = true
+			end
+		end
+
+		if prpt.faith < 50 then
+			str = string.format("%s, low faith", str)
 		end
 
 		debugPrint(str)
@@ -180,8 +263,6 @@ function GainedJpUP.success()
 		print(string.format("-- base_r_s_m_learned3 = %x, Gained Jp UP", prpt.base_r_s_m_learned3))
 		str = str.." , Gained Jp UP"
 		ret = true
-	else
-		ret = false
 	end
 
 	debugPrint(str)
@@ -190,12 +271,12 @@ end
 
 
 ------------------------------------------------------------
--- Mandalia
+-- MandaliaRandom
 ------------------------------------------------------------
-Mandalia = {}
-Mandalia.logname = "ch1_random_encount10.log"
+MandaliaRandom = {}
+MandaliaRandom.logname = "ch1_random_encount10.log"
 
-function Mandalia.pre_attempt()
+function MandaliaRandom.pre_attempt()
 	-- move Gariland From Formation
 --	fadv(4)
 --	pressBtn({up=1}, 1)
@@ -206,8 +287,8 @@ function Mandalia.pre_attempt()
 --	fadv(50+1)
 end
 
-function Mandalia.pre_attempt2()
-	-- move Gariland From Mandalia
+function MandaliaRandom.pre_attempt2()
+	-- move Gariland From MandaliaRandom
 	--pressBtn({triangle=1}, 5)
 	--pressBtn({circle=1}, 3)
 	--pressBtn({up=1}, 1)
@@ -228,20 +309,20 @@ function Mandalia.pre_attempt2()
 	fadv(81105 - fc)
 end
 
-function Mandalia.attempt()
-	-- move Mandalia From Gariland
+function MandaliaRandom.attempt()
+	-- move MandaliaRandom From Gariland
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 1)  -- select Mandalia
+	pressBtn({down=1}, 1)  -- select MandaliaRandom
 	pressBtn({circle=1}, 1)
 	fadv(900)
 end
 
-function Mandalia.post_attempt()
+function MandaliaRandom.post_attempt()
 	-- pass
 end
 
-function Mandalia.success()
+function MandaliaRandom.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit

@@ -51,7 +51,7 @@ local begin_fc = emu.framecount()
 local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
-local seed
+local base_rng
 
 local interface = CriticalHit
 
@@ -73,11 +73,11 @@ for i=0, retry do
 		state = savestate.create()
 		savestate.save(state)
 
-		seed = memory.readdword(adr_rng)
+		base_rng = memory.readdword(adr_rng)
 	else
-		seed =  next_rng(seed)
-		memory.writedword(adr_rng, seed)
-		--seed =  next_rng(seed)  -- ?? enable Death_All, disable otherwise
+		base_rng = next_rng(base_rng)
+		memory.writedword(adr_rng, base_rng)
+		--base_rng = next_rng(base_rng)  -- ?? enable Death_All, disable otherwise
 	end
 
 	drawRetry(i, x, y)
@@ -85,13 +85,13 @@ for i=0, retry do
 
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
-	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
+	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X, base_rng = %08X -----", i, fc, rng, base_rng))
 
 	interface.attempt()
 
 	-- check results
 	if interface.success() then
-		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
+		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X*****", fc, rng))
 		print(string.format("  ***** best state. retry = %d, rng = %08X *****", i, rng))
 		interface.post_attempt()
 	end

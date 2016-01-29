@@ -65,7 +65,7 @@ debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute ---
 
 retry = 200
 
-for i=100, retry do
+for i=0, retry do
 	if initial == 1 then
 		initial = 0
 	end

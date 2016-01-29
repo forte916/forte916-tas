@@ -496,7 +496,7 @@ end
 -- CriticalHit
 ------------------------------------------------------------
 CriticalHit = {}
-CriticalHit.logname = "ch1_gariland_squire_turn3_1.log"
+CriticalHit.logname = "ch1_gariland_squire_turn3_2.log"
 
 function CriticalHit.pre_attempt()
 	pressBtn({circle=1}, 2)  -- select target
