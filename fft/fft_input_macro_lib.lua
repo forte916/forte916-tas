@@ -2614,16 +2614,16 @@ function TAS.math_CT5_Flare()
 	fadv(6+1)
 	-- before 2f from showing up status window in the left.
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 8)  -- action
+	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
-	pressBtn({circle=1}, 8)  -- math
+	pressBtn({circle=1}, 6)  -- math
 	pressBtn({circle=1}, 8)   -- CT
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 8)   -- 5
 	pressBtn({up=1}, 4)
 	pressBtn({up=1}, 2)
 	pressBtn({circle=1}, 4)   -- Flare
-	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 4)   -- confirm target
 	pressBtn({circle=1}, 1)   -- execute attack
 	--fadv(xx)
 end

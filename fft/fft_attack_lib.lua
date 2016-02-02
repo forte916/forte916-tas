@@ -430,11 +430,12 @@ end
 -- Death_All
 ------------------------------------------------------------
 Death_All = {}
-Death_All.logname = "ch4_death_all_ubs_4th_retry270.log"
+Death_All.logname = "ch2_araguay_death_all_test.log"
 
 function Death_All.pre_attempt()
-	pressBtn({circle=1}, 4)  -- select Death of math
-	pressBtn({circle=1}, 6)  -- confirm target
+	fadv(1)
+	--pressBtn({circle=1}, 4)  -- select Death of math
+	--pressBtn({circle=1}, 6)  -- confirm target
 end
 
 function Death_All.attempt()
@@ -449,8 +450,8 @@ end
 function Death_All.success()
 	local ret = false
 	local prpt = {}
-	local ofs_unit = adr_battle_unit2
-	local total_enemy = 6
+	local ofs_unit = adr_battle_unit
+	local total_enemy = 7
 	local enemy = 0
 	local str
 

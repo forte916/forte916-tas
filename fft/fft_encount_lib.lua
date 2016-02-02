@@ -147,7 +147,7 @@ function Mandalia.logHeader()
 	debugPrint(string.format("80, 4,4a,40/ 1,96, 6/67,68/ 36,10/172- 42,156/106,154/ , 真珠の2"))
 	debugPrint(string.format("80, 5,4a,81/ 2, 0, 6/70,70/ 35,10/193- 23,117/131,151/ , 真珠の3, throw stone recomended, beaten by ramza bolt2, "))
 	debugPrint(string.format("80, 6,4a,20/ 1,23, 6/67,72/ 36,11/144- 14,112/191,148/ , 真珠の4"))
-	debugPrint(string.format("82, 7,67,a0/ 1, 8, 5/40,50/ 42, 4/  0-  0,  0/  0,  0/ , 真珠の1, redpancer"))
+	debugPrint(string.format("82, 7,67,a0/ 1, 8, 5/40,50/ 42, 4/  0-  0,  0/  0,  0/ , 真珠の1, redpanther"))
 	debugPrint(string.format(""))
 end
 

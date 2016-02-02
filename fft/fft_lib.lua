@@ -707,8 +707,8 @@ function Bunit.readProperty(ofs_unit)
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
 	--prpt.info = Bunit.toString(prpt)
-	--prpt.info = Bunit.toString2(prpt)
-	prpt.info = Bunit.toString3(prpt)
+	prpt.info = Bunit.toString2(prpt)
+	--prpt.info = Bunit.toString3(prpt)
 	--prpt.info = Bunit.toString4(prpt)
 	return prpt
 end

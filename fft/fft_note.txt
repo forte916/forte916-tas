@@ -144,7 +144,7 @@ ch1-Gariland
        * use jp scroll glith, Ice -> Ice2
     * Counter Magic は必要ない. Balk は Face rod で OK
     * set Gained JP-UP, Black Magic
-    * remove Battle Shoes
+    * remove Battle Boots
   * Delita
     * change Chemist
   * Female Chemist
@@ -152,7 +152,7 @@ ch1-Gariland
     * learn Bolt, Toad, Magic attack up
        * use jp scroll glith, Ice -> Ice2
     * set Magic attack up
-    * equip Battle Shoes
+    * equip Battle Boots
   * Male Squire x2
     * change Knight
     * set Item
@@ -206,7 +206,7 @@ ch1-Mandalia
     * 15回行動 (1回 18jp or 21jp)
   * 味方が KO からクリスタルになるまでに Ramza 3回行動可能
     * Ramza 237jp 超えたら 味方を KO してよい
-    * 4回行動可能なときもあるが、 redpanser を倒す前に cristal となってしまう
+    * 4回行動可能なときもあるが、 redpanther を倒す前に cristal となってしまう
 
 
 * Gained JP-UP を覚えているか検証
@@ -380,6 +380,23 @@ ch2-Dorter
 ch2-Araguay
 -----------
 * CT3 Bolt3
+
+* ユニット9体分の effect
+* Bolt2 2926 - 1820 = 1106
+* Bolt3 2889 - 1820 = 1069
+* Ice   3137 - 1820 = 1317
+* Ice2  3517 - 1820 = 1697
+
+* 無事なようだなのセリフ
+* Bolt2 3254f
+* Bolt3 3217f
+* Ice   3255f (boco 生存でセリフ skip)
+* Ice2  3635f (boco 生存でセリフ skip)
+
+* Bolt3 が一番早い 約40f
+* Bolt2 と Ice はエフェクトとセリフ skip が相殺される
+
+
 
 ch2-Zirekile Falls
 ------------------
@@ -559,16 +576,26 @@ ch3-Yardow
 * Ninja Lv25 speed 9
 * Ninja Lv24 speed 9
 * Ninja には先制される. Rafa が倒されないように調整
+  * R1, when 2nd Ninja moves
+  * L1, when 3rd Ninja moves
 * Height prime Flare
 
 * Rafa equips Elf's mant (魔法回避25%)
   * 算術で Height を取得しない場合は Rafa は回避が必要
+
+* Ready から忍者が先制して Ramza 「おまえは...」まで
+  * 479890 - 478122 = 1768f
+  * Ramza も対象になるが CT4/CT5 の方が早そう
 
 * After battle, Change job to Wizard
 * Buy Wizard Rod (MA+2), Sprint Shoes (SP+1) in fitting room for speed 9
 * <del>Buy also 108 Gems here or get from Malark at end of ch3</del>
 * 108 gems は無くてもよい. 108 gems の代わりに Magic Gauntlet で OK
 * Ramza speed 9, MA 15
+
+ch3-Yuguo
+---------
+* CT3 Flare
 
 
 ch3-Riovanes (outside)
@@ -593,7 +620,7 @@ ch3-Riovanes (rooftop)
 * Celia  Lv29, HP 359, speed 8
 * Lede   Lv28, HP 334, speed 8
 * Elmdor には先制される
-* Height prime Flare
+* Height prime Flare. hit only Lede.
 
 
 ch4
@@ -1219,26 +1246,28 @@ SP   tick
 
 Frame counts of casting spell
 -----------------------------
+* Bolt3 が Bolt2 より 約4f早い
+
 * Bolt3  2105 - 1813 = 292f
 * Bolt3  6033 - 5738 = 295f
 * Bolt2  2624 - 2326 = 298f
 * Bolt   1583 - 1269 = 314f
-* Demi2  2634 - 2302 = 332f
-* Demi2  6089 - 5750 = 339f
-* Deth   2414 - 2049 = 365f
-* Deth   6106 - 5744 = 362f
-* Flare  2639 - 2224 = 415f
-* Flare  6160 - 5746 = 414f
-* Holy   2840 - 2206 = 634f
-* Holy   6375 - 5736 = 639f
-* Holy   6875 - 6243 = 632f
-
 * Ice    5645 - 5319 = 326f
 * Ice    6553 - 6227 = 326f
-* Ice2   5700 - 5330 = 370f
-* Ice2   6747 - 6378 = 369f
-* Ice3   5719 - 5373 = 346f
+* Demi2  2634 - 2302 = 332f
+* Demi2  6089 - 5750 = 339f
 * Ice3   6869 - 6526 = 343f
+* Ice3   5719 - 5373 = 346f
+* Death  6106 - 5744 = 362f
+* Death  2414 - 2049 = 365f
+* Ice2   6747 - 6378 = 369f
+* Ice2   5700 - 5330 = 370f
+* Flare  6160 - 5746 = 414f
+* Flare  2639 - 2224 = 415f
+* Holy   6875 - 6243 = 632f
+* Holy   2840 - 2206 = 634f
+* Holy   6375 - 5736 = 639f
+
 
 * Lightning Stab
 	455 - 240 = 215f
