@@ -470,7 +470,7 @@ end
 function TAS.Ch1_1_ramza_turn2()
 	-- ramza arrowed
 	fadv(7)
-	-- after 8f when 0x1FFE80 = 01FC
+	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({circle=1}, 9)  -- attack
@@ -495,7 +495,7 @@ end
 function TAS.Ch1_chemist_potion()
 	-- arrowed
 	fadv(7)
-	-- after 8f when 0x1FFE80 = 01FC
+	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({down=1}, 2)
@@ -888,7 +888,7 @@ end
 
 function TAS.enterFormation()
 	pressBtn({triangle=1}, 5)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
 	pressBtn({circle=1}, 1)
 	fadv(49)
 end
@@ -921,85 +921,261 @@ function TAS.cancelMenu()
 	pressBtn({x=1}, 5)
 end
 
-function TAS.jobChangeDelita()
-	pressBtn({up=1}, 2)
-	-- 44279
-	pressBtn({circle=1}, 2)
-	fadv(44)
-	-- 44325f
-	pressBtn({right=1}, 15-2)
+function TAS.jobChangeKnight()
+	pressBtn({triangle=1}, 2)  -- show menu
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(45+1)
+	pressBtn({right=1}, 1)
+	fadv(14-2)
+	pressBtn({right=1}, 1)
+	fadv(14-2)
 	pressBtn({circle=1}, 5)
-	-- 44344f
-	pressBtn({circle=1}, 2)
-	fadv(56-2)
-	-- 44402f
+	pressBtn({circle=1}, 1)
+	fadv(58-2)
+
+	pressBtn({l1=1}, 1)
+	fadv(23+17)
+	pressBtn({right=1}, 1)
+	fadv(14-2)
+	pressBtn({right=1}, 1)
+	fadv(14-2)
+	pressBtn({circle=1}, 5)
+	pressBtn({circle=1}, 1)
+	fadv(58-2)
+
+end
+
+function TAS.jobChangeDelita()
+	pressBtn({l1=1}, 5)
+	pressBtn({l1=1}, 1)
+	fadv(20)
+	pressBtn({right=1}, 1)
+	fadv(14-2)
+	pressBtn({circle=1}, 5)
+	pressBtn({circle=1}, 1)
+	fadv(58-2)
 end
 
 function TAS.jobChangeWizard()
-	pressBtn({l1=1}, 5)
-	fadv(37)
-	pressBtn({left=1}, 15-2)
+	pressBtn({l1=1}, 1)
+	fadv(23+17)
+	pressBtn({left=1}, 1)
+	fadv(14-2)
 	pressBtn({circle=1}, 5)
-	pressBtn({circle=1}, 2)
-	fadv(59-2)
+	pressBtn({circle=1}, 1)
+	fadv(58-2)
 end
 
 function TAS.cancelJobChange()
-	-- 44517f
-	pressBtn({x=1}, 2)
-	fadv(45)
-	-- 44564f
+	pressBtn({x=1}, 1)
+	fadv(48)
 end
 
 function TAS.learnWizard()
-	pressBtn({up=1}, 2)
-	pressBtn({circle=1}, 1)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)   -- ability
 	fadv(27)
-	pressBtn({up=1}, 2)
-	pressBtn({circle=1}, 10)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 10)  -- learn
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 1)  -- wizard
 	fadv(5)
-	pressBtn({circle=1}, 10)
-	pressBtn({square=1, down=1}, 4)
+	pressBtn({circle=1}, 3)   -- wizard
+	pressBtn({square=1, down=1}, 9)
 	pressBtn({up=1}, 4)
 	pressBtn({down=1}, 1)
 	fadv(5)
-	pressBtn({circle=1}, 4)
-	pressBtn({square=1, down=1}, 4)
-	pressBtn({circle=1}, 2)
-	fadv(11+1)
-	pressBtn({square=1, up=1}, 4)
+	pressBtn({circle=1}, 2)   -- Ice
+	pressBtn({square=1, down=1}, 2)
+	pressBtn({circle=1}, 1)   -- select yes
+	fadv(17)
+	pressBtn({square=1, up=1}, 3)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 1)
 	fadv(5)
-	pressBtn({circle=1}, 4)   -- select bolt
-	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({circle=1}, 4)   -- Bolt
+	pressBtn({circle=1}, 4)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Bolt2
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
 	pressBtn({right=1}, 4)
-	pressBtn({right=1}, 4)
-	pressBtn({circle=1}, 4)   -- select magic attack up
-	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({right=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Magic attack up
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
 	pressBtn({x=1}, 10)
-	pressBtn({x=1}, 4)
+	pressBtn({x=1}, 1)
+	fadv(4)
 end
 
 function TAS.setWizard()
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 2)   -- set
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 2)
-	pressBtn({down=1}, 3)
-	pressBtn({down=1}, 3)
-	fadv(2)
+	pressBtn({down=1}, 1)
+	fadv(4)
 	pressBtn({circle=1}, 10)  -- select slot
-	pressBtn({circle=1}, 2)   -- select magic attack up
-	fadv(3)
-	pressBtn({x=1}, 4)
-	fadv(1)
+	pressBtn({circle=1}, 1)   -- select magic attack up
+	fadv(6)
+	pressBtn({x=1}, 1)
+	fadv(5)
 end
 
+function TAS.learnRamzaSquireWizard()
+	pressBtn({r1=1}, 5+1)
+	pressBtn({r1=1}, 1)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 10)  -- learn
+	pressBtn({circle=1}, 2)   -- squire
+	pressBtn({right=1}, 4)
+	pressBtn({right=1}, 2)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Gained JP-UP
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
+	pressBtn({x=1}, 10)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)  -- wizard
+	fadv(5)
+	pressBtn({circle=1}, 2)   -- wizard
+	pressBtn({left=1}, 4)
+	pressBtn({left=1}, 2)
+	pressBtn({square=1, down=1}, 2)
+	pressBtn({up=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 2)   -- Ice
+	pressBtn({square=1, down=1}, 2)
+	pressBtn({circle=1}, 1)   -- select yes
+	fadv(19)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Toad
+	pressBtn({circle=1}, 4)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Death
+	pressBtn({circle=1}, 4)  -- select yes
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Flare
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(4)
+	pressBtn({square=1, up=1}, 1)
+	fadv(2)
+	pressBtn({up=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Bolt3
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
+	pressBtn({right=1}, 4)
+	pressBtn({right=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Magic attack up
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
+	pressBtn({x=1}, 10)
+	pressBtn({x=1}, 1)
+	fadv(4)
+end
+
+function TAS.setRamzaSquireWizard()
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)   -- set
+	fadv(4)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 1)   -- select black magic
+	fadv(2)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({circle=1}, 1)   -- select Gained JP-UP
+	fadv(6)
+end
+
+function TAS.setKnightItem()
+	pressBtn({r1=1}, 2)
+	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
+	fadv(4)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({right=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 1)   -- select Item
+	fadv(6)
+
+	pressBtn({r1=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({right=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 1)   -- select Item
+	fadv(6)
+	pressBtn({x=1}, 1)
+	fadv(2)
+	pressBtn({x=1}, 1)
+	fadv(31)
+end
+
+function TAS.removeKnightSword()
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)   -- item
+	fadv(26)
+	pressBtn({l1=1}, 2)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)   -- remove
+	fadv(4)
+	pressBtn({circle=1}, 1)   -- remove broad sword
+	fadv(5)
+end
+
+function TAS.removeRamzaBattleBoots()
+	pressBtn({l1=1}, 3)
+	pressBtn({up=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 1)   -- remove battle boots
+	fadv(5)
+	pressBtn({x=1}, 1)
+	fadv(5)
+end
+
+function TAS.equipWizard()
+	pressBtn({l1=1}, 6)
+	pressBtn({l1=1}, 2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)   -- best fits
+	fadv(3)
+	pressBtn({circle=1}, 1)   -- select OK
+	fadv(4)
+	pressBtn({x=1}, 1)
+	fadv(31-3)
+end
+
+
+-- @deprecated
 function TAS.learnRamzaYell()
 	pressBtn({l1=1}, 2)
 	pressBtn({up=1}, 3)
@@ -1020,14 +1196,12 @@ function TAS.learnRamzaYell()
 end
 
 function TAS.exitFormation()
-	-- 44905f
 	pressBtn({x=1}, 1)
 	fadv(43)
-	-- 44949f
 end
 
 function TAS.moveMandaliaFromFormationForEvent()
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 3)
 	pressBtn({down=1}, 1)
 	pressBtn({circle=1}, 1)
@@ -1043,7 +1217,7 @@ function TAS.moveMandaliaFromGariland()
 	fadv(50)
 end
 
-function TAS.ch1_3_mandalia_deploy()
+function TAS.ch1_3_mandalia_deploy_old()
 	-- -before 3f from reverse triangle
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 2)
@@ -1058,10 +1232,152 @@ function TAS.ch1_3_mandalia_deploy()
 	fadv(100)
 end
 
+function TAS.ch1_3_mandalia_deploy()
+	-- -before 3f from reverse triangle
+	pressBtn({left=1}, 1)
+	pressBtn({up=1}, 1)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1, circle}, 1)
+	pressBtn({l1=1, down=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({r1=1, right=1}, 2)
+	pressBtn({r1=1, right=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({r1=1, up=1}, 1)
+	pressBtn({circle=1}, 1)
+	pressBtn({start=1}, 3)
+	pressBtn({circle=1}, 1)
+end
+
+
+function TAS.ch1_3_turn1_knight()
+	-- arrowed
+	fadv(7)
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({down=1}, 1)
+	pressBtn({left=1}, 1)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(1)  -- wait 8f after 0x164908 = 0x001C
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({circle=1}, 9)  -- attack
+	pressBtn({right=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	pressBtn({circle=1}, 1)  -- execute attack
+	--fadv(xx)
+
+	-- arrowed
+	pressBtn({circle=1}, 2)  -- stand by
+	pressBtn({circle=1}, 1)
+end
+
 function TAS.ch1_3_turn1_wizard()
+	-- arrowed
+	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(5)
+	pressBtn({r1=1}, 1)   -- camera
+	--fadv(xx)
+
+	-- arrowed
+	fadv(1)  -- wait until 0x164908 = 0x001C
+	pressBtn({circle=1}, 18+1)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- Black Magic
+	pressBtn({circle=1}, 9)  -- Bolt
+	pressBtn({left=1}, 2)
+	pressBtn({down=1}, 1)
+	pressBtn({left=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)   -- select target
+	pressBtn({circle=1}, 1)   -- confirm target
+	fadv(4)  -- wait until 0x164908 = 0x001B
+	pressBtn({circle=1}, 1)   -- execute attack
+	--fadv(xx)
+
+	-- arrowed
+	pressBtn({circle=1}, 2)  -- stand by
+	pressBtn({circle=1}, 1)
 end
 
 function TAS.ch1_3_turn1_ramza()
+	-- arrowed
+	fadv(5+7)
+	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
+	pressBtn({circle=1}, 10)  -- move
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
+	pressBtn({circle=1}, 1)
+	--fadv(xx)
+
+	-- arrowed
+	fadv(1)  -- wait until 0x164908 = 0x001C
+	pressBtn({circle=1}, 18)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- Black Magic
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)  -- Toad
+	fadv(8)
+	pressBtn({circle=1}, 3)   -- select target
+	pressBtn({circle=1}, 1)   -- confirm target
+	fadv(3)  -- wait until 0x164908 = 0x001A
+	pressBtn({circle=1}, 1)   -- execute attack
+	--fadv(xx)
+
+	-- arrowed
+	pressBtn({circle=1}, 2)  -- stand by
+	pressBtn({circle=1}, 1)
+end
+
+function TAS.ch1_3_turnN_ramza()
+	-- arrowed
+	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({circle=1}, 9)  -- attack
+	pressBtn({up=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 2)  -- select target
+	pressBtn({circle=1}, 1)  -- confirm target
+	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	pressBtn({circle=1}, 1)  -- execute attack
+	--fadv(xx)
+	-- arrowed
+	fadv(6)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 1)
+end
+
+function TAS.ch1_3_turnN_standby()
+	-- arrowed
+	fadv(7)
+	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)  -- stand by
+	pressBtn({circle=1}, 1)
+end
+
+function TAS.ch1_3_turn1_ramza_old()
 	-- arrowed
 	fadv(9)
 	pressBtn({circle=1}, 10)  -- move
@@ -1074,11 +1390,11 @@ function TAS.ch1_3_turn1_ramza()
 	--fadv(xx)
 
 	-- arrowed
-	fadv(9)
+	fadv(1)
 	pressBtn({circle=1}, 18)
-	pressBtn({circle=1}, 10)  -- action
-	pressBtn({down=1}, 4)
-	pressBtn({circle=1}, 10)  -- guts
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)  -- guts
 	pressBtn({circle=1}, 11)  -- Yell
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 6)  -- confirm target
@@ -1091,7 +1407,7 @@ function TAS.ch1_3_turn1_ramza()
 	pressBtn({circle=1}, 2)
 end
 
-function TAS.ch1_3_turn1_ramza()
+function TAS.ch1_3_turn2_ramza_old()
 	-- arrowed
 	fadv(9)
 	pressBtn({circle=1}, 18)
@@ -1112,7 +1428,7 @@ function TAS.ch1_3_turn1_ramza()
 	pressBtn({circle=1}, 1)
 end
 
-function TAS.ch1_3_turnN_ramza_Yell()
+function TAS.ch1_3_turnN_ramza_Yell_old()
 	-- arrowed and shown AT
 	fadv(7)
 	pressBtn({down=1}, 2)

@@ -152,12 +152,20 @@ function Mandalia.logHeader()
 end
 
 function Mandalia.pre_attempt()
-	fadv(2)
+	fadv(3)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 3)
+	pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
+	--pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
+
+	-- relevant address??
+	-- 0x007562
+	-- 0x0328A0
 end
 
 function Mandalia.attempt()
-	pressBtn({x=1}, 1)
-	fadv(400)
+	pressBtn({circle=1}, 1)
+	fadv(900)
 end
 
 function Mandalia.post_attempt()
@@ -274,46 +282,57 @@ end
 -- MandaliaRandom
 ------------------------------------------------------------
 MandaliaRandom = {}
-MandaliaRandom.logname = "ch1_random_encount10.log"
+MandaliaRandom.logname = "ch1_random_encount13.log"
+
+function MandaliaRandom.logHeader()
+	debugPrint(string.format("### down (select Mandalia)"))
+	--debugPrint(string.format("### up   (select Igros)"))
+	debugPrint(string.format("    job id: 0x5e=chocobo, 0x61=goblin, 0x67=redpanther"))
+	debugPrint(string.format("    1 formation, 0 soldier office, cheat"))
+	--debugPrint(string.format("    0 formation, 0 soldier office, cheat"))
+	--debugPrint(string.format("    0 formation, 1 soldier office (jumped 28 rng)"))
+	debugPrint(string.format(""))
+end
 
 function MandaliaRandom.pre_attempt()
-	-- move Gariland From Formation
---	fadv(4)
---	pressBtn({up=1}, 1)
+	-- move Mandalia From Formation
+	--fadv(2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 3)
+	pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
+	--pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
 
---	pressBtn({circle=1}, 3)
---	pressBtn({up=1}, 1)
---	pressBtn({circle=1}, 1)
---	fadv(50+1)
+
+	-- move Gariland From Mandalia
+	--pressBtn({triangle=1}, 5)
+	--pressBtn({circle=1}, 3)
+	--pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
+	--pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
 end
 
 function MandaliaRandom.pre_attempt2()
-	-- move Gariland From MandaliaRandom
+	-- move Gariland From Mandalia
 	--pressBtn({triangle=1}, 5)
 	--pressBtn({circle=1}, 3)
 	--pressBtn({up=1}, 1)
 	--pressBtn({circle=1}, 1)
 	--fadv(50+1)
 
-	pressBtn({circle=1}, 1)
-	fadv(21)
-	pressBtn({down=1}, 7)
-	pressBtn({circle=1}, 1)  -- shop
-	fadv(67)
-	pressBtn({circle=1}, 1)  -- cancel message
-	fadv(47)
-	pressBtn({x=1}, 1)  -- exit city
-	fadv(4)
+	--pressBtn({circle=1}, 1)
+	--fadv(21)
+	--pressBtn({down=1}, 7)
+	--pressBtn({circle=1}, 1)  -- shop
+	--fadv(67)
+	--pressBtn({circle=1}, 1)  -- cancel message
+	--fadv(47)
+	--pressBtn({x=1}, 1)  -- exit city
+	--fadv(4)
 
-	local fc = emu.framecount()
-	fadv(81105 - fc)
+	--local fc = emu.framecount()
+	--fadv(81105 - fc)
 end
 
 function MandaliaRandom.attempt()
-	-- move MandaliaRandom From Gariland
-	pressBtn({triangle=1}, 5)
-	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 1)  -- select MandaliaRandom
 	pressBtn({circle=1}, 1)
 	fadv(900)
 end

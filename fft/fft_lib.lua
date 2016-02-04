@@ -706,8 +706,8 @@ function Bunit.readProperty(ofs_unit)
 	prpt.attack_accuracy = memory.readbyte(ofs_unit + Bunit.attack_accuracy )
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
-	--prpt.info = Bunit.toString(prpt)
-	prpt.info = Bunit.toString2(prpt)
+	prpt.info = Bunit.toString(prpt)
+	--prpt.info = Bunit.toString2(prpt)
 	--prpt.info = Bunit.toString3(prpt)
 	--prpt.info = Bunit.toString4(prpt)
 	return prpt
@@ -905,6 +905,66 @@ function Bunit.drawAll(x, y)
 end
 
 
+
+------------------------------------------------------------
+-- GameTime
+------------------------------------------------------------
+GameTime = {base_msec=0, base_sec=0, base_min=0, base_hour=0}
+
+--- Iincrement game clock.
+--  @see similar in dissassemble code below.
+--       sub_800425C4 in JPv1.1
+--       sub_800434DC in US
+function GameTime.increment()
+	base_msec = base_msec + 1
+	if base_msec > 59 then
+		base_msec = 0
+		base_sec = base_sec + 1
+		if base_sec > 59 then
+			base_sec = 0
+			base_min = base_min + 1
+			if base_min > 59 then
+				base_min = 0
+				base_hour = base_hour + 1
+				if base_hour > 999 then
+					base_hour = 1000
+				end
+			end
+		end
+	end
+
+	memory.writedword(adr_milsecs, base_msec)
+	memory.writedword(adr_seconds, base_sec )
+	memory.writedword(adr_minutes, base_min )
+	memory.writedword(adr_hours  , base_hour)
+end
+
+function GameTime.init()
+	base_msec = memory.readdword(adr_milsecs)
+	base_sec  = memory.readdword(adr_seconds)
+	base_min  = memory.readdword(adr_minutes)
+	base_hour = memory.readdword(adr_hours  )
+end
+
+function GameTime.read()
+	local gt = {}
+	gt.msec = memory.readdword(adr_milsecs)
+	gt.sec  = memory.readdword(adr_seconds)
+	gt.min  = memory.readdword(adr_minutes)
+	gt.hour = memory.readdword(adr_hours  )
+	return gt
+end
+
+function GameTime.format(gt)
+	return string.format("%02d:%02d:%02d .%02d", gt.hour, gt.min, gt.sec, gt.msec)
+end
+
+function GameTime.encountFormula(gt)
+	local sum = (gt.msec * 101) + (gt.sec * 10) + gt.min + gt.hour
+	return sum
+end
+
+
 ------------------------------------------------------------
 -- Zodiac sign
 ------------------------------------------------------------
@@ -927,10 +987,10 @@ Zodiac.Serpentarius  = 0xC0 -- ŽÖŒ­ = Serpentarius (neutral to all signs)
 Zodiac.notation = {"worst", "bad", "normal", "good", "best"}
 
 
--- @brief check zodiac sign compatibility with Ramza as Capricorn
+--- Check zodiac sign compatibility with Ramza as Capricorn.
 --        "bad : 0x00, 0x60, very bad : 0x30"
 --        "good: 0x10, 0x50, very good: 0x30"
--- @return 1:worst, 2:bad, 3:normal, 4:good, 5:best
+--  @return 1:worst, 2:bad, 3:normal, 4:good, 5:best
 function Zodiac.checkCompatibilityRamza(sign, gender)
 	local opposit = 0
 	local masked_sign

@@ -51,15 +51,15 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = GainedJpUP
+local interface = MandaliaRandom
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
-retry = 4000
+retry = 200
 
-for i=2525, retry do
+for i=0, retry do
 	if initial == 1 then
 		initial = 0
 	end
@@ -71,21 +71,25 @@ for i=2525, retry do
 
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
-	local game_fc = memory.readdword(adr_game_fc)
+	local game_time = GameTime.read()
 	local cur_session = memory.readdword(adr_cur_session)
-	local milsecs = memory.readdword(adr_milsecs)
-	local seconds = memory.readdword(adr_seconds)
-	local minutes = memory.readdword(adr_minutes)
-	local hours   = memory.readdword(adr_hours  )
 
-	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X, game_fc = %d, cur_session = %d, game_time = %dh %dmin %dsec .%dms -----", i, fc, rng, game_fc, cur_session, hours, minutes, seconds, milsecs))
+	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X"
+		..", game_time = %s, encountFormula = %d"
+		..", cur_session = %d -----", 
+		i, fc, rng, 
+		GameTime.format(game_time), 
+		GameTime.encountFormula(game_time), 
+		cur_session))
 
 	interface.attempt()
 
 	-- check results
 	if interface.success() then
-		debugPrint(string.format("***** best state. fc = %d, rng = %08X *****", fc, rng))
-		print(string.format("***** best state. retry = %d, rng = %08X *****", i, rng))
+		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X, game_time = %s *****",
+			fc, rng, GameTime.format(game_time)))
+		print(string.format("***** best state. retry = %d, rng = %08X, game_time = %s *****",
+			i, rng, GameTime.format(game_time)))
 		interface.post_attempt()
 	end
 

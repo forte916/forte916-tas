@@ -35,39 +35,6 @@ function drawRetry(count, x, y)
 	gui.text(x, y   , string.format(" retry:%d", count))
 end
 
--- @brief increment game clock. similar in dissassemble code below.
---        sub_800425C4 in JPv1.1
---        sub_800434DC in US
-function incrementGameClock()
-	base_milsecs = base_milsecs + 1
-	if base_milsecs > 59 then
-		base_milsecs = 0
-		base_seconds = base_seconds + 1
-		if base_seconds > 59 then
-			base_seconds = 0
-			base_minutes = base_minutes + 1
-			if base_minutes > 59 then
-				base_minutes = 0
-				base_hours = base_hours + 1
-				if base_hours > 999 then
-					base_hours = 1000
-				end
-			end
-		end
-	end
-
-	memory.writedword(adr_milsecs, base_milsecs)
-	memory.writedword(adr_seconds, base_seconds)
-	memory.writedword(adr_minutes, base_minutes)
-	memory.writedword(adr_hours  , base_hours)
-end
-
-function readGameClock()
-	base_milsecs = memory.readdword(adr_milsecs)
-	base_seconds = memory.readdword(adr_seconds)
-	base_minutes = memory.readdword(adr_minutes)
-	base_hours   = memory.readdword(adr_hours  )
-end
 
 ------------------------------------------------------------
 -- main
@@ -86,18 +53,14 @@ local rng = memory.readdword(adr_rng)
 local seed
 local base_game_fc
 local base_cur_session
-base_milsecs = 0
-base_seconds = 0
-base_minutes = 0
-base_hours   = 0
 
-local interface = GainedJpUP
+local interface = MandaliaRandom
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
-retry = 3000
+retry = 4000
 
 for i=0, retry do
 	if initial == 1 then
@@ -110,7 +73,7 @@ for i=0, retry do
 		--seed = memory.readdword(adr_rng)
 		--base_game_fc = memory.readdword(adr_game_fc)
 		--base_cur_session = memory.readdword(adr_cur_session)
-		readGameClock()
+		GameTime.init()
 	else
 		--seed =  next_rng(seed)
 		--memory.writedword(adr_rng, seed)
@@ -121,7 +84,7 @@ for i=0, retry do
 		--base_cur_session = base_cur_session + 1
 		--memory.writedword(adr_cur_session, base_cur_session)
 
-		incrementGameClock()
+		GameTime.increment()
 	end
 
 	drawRetry(i, x, y)
@@ -130,21 +93,25 @@ for i=0, retry do
 
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
-	local game_fc = memory.readdword(adr_game_fc)
+	local game_time = GameTime.read()
 	local cur_session = memory.readdword(adr_cur_session)
-	local milsecs = memory.readdword(adr_milsecs)
-	local seconds = memory.readdword(adr_seconds)
-	local minutes = memory.readdword(adr_minutes)
-	local hours   = memory.readdword(adr_hours  )
 
-	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X, game_fc = %d, cur_session = %d, game_time = %dh %dmin %dsec .%dms -----", i, fc, rng, game_fc, cur_session, hours, minutes, seconds, milsecs))
+	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X"
+		..", game_time = %s, encountFormula = %d"
+		..", cur_session = %d -----", 
+		i, fc, rng, 
+		GameTime.format(game_time), 
+		GameTime.encountFormula(game_time), 
+		cur_session))
 
 	interface.attempt()
 
 	-- check results
 	if interface.success() then
-		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
-		print(string.format("  ***** best state. retry = %d, rng = %08X *****", i, rng))
+		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X, game_time = %s *****",
+			fc, rng, GameTime.format(game_time)))
+		print(string.format("***** best state. retry = %d, rng = %08X, game_time = %s *****",
+			i, rng, GameTime.format(game_time)))
 		interface.post_attempt()
 	end
 

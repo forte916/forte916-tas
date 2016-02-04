@@ -1,5 +1,5 @@
 
-95
+101
 00000	00009010	d	h	0	RNG
 00001	00000000	S	S	0	----------------------------
 00002	00037808	d	h	0	text param
@@ -66,32 +66,38 @@
 0003F	00000000	S	S	0	----------------------------
 00040	00097F80	d	h	0	encount param
 00041	000A076C	d	h	0	encount param
-00042	000D105C	d	h	0	encount param
-00043	000D10A0	d	h	0	on location/on may way
-00044	000D10B4	d	h	0	dest location
-00045	00000000	S	S	0	----------------------------
-00046	0018E899	b	h	0	1st b unit id
-00047	0018EA59	b	h	0	2nd b unit id
-00048	0018EC19	b	h	0	3rd b unit id
-00049	0018EDD9	b	h	0	4th b unit id
-0004A	00000000	S	S	0	----------------------------
-0004B	0018E898	b	h	0	1st b ch
-0004C	0018E8A1	b	h	0	1st b zodiac
-0004D	0018E99C	w	u	0	1st b total_jp_squire
-0004E	0018E99E	w	u	0	1st b total_jp_chemist
-0004F	0018E9A8	w	u	0	1st b total_jp_wizard
-00050	00190498	b	h	0	17th b ch
-00051	001904A1	b	h	0	17th b zodiac
-00052	0019059C	w	u	0	17th b total_jp_squire
-00053	0019059E	w	u	0	17th b total_jp_chemist
-00054	001905A6	w	u	0	17th b total_jp_priest
-00055	001905A8	w	u	0	17th b total_jp_wizard
-00056	001905AA	w	u	0	17th b total_jp_time_mage
-00057	001905B2	w	u	0	17th b total_jp_oracle
-00058	001905BC	w	u	0	17th b total_jp_calculator
-00059	00000000	S	S	0	----------------------------
-0005A	000552F8	b	h	0	1st f ch
-0005B	000552FE	b	h	0	1st f zodiac
-0005C	0005538E	w	u	0	1st f total_jp_squire
-0005D	00055390	w	u	0	1st f total_jp_chemist
-0005E	0005539A	w	u	0	1st f total_jp_wizard
+00042	000D101C	d	h	0	encount param
+00043	000D1048	d	h	0	encount param
+00044	000D104C	d	h	0	encount param
+00045	000D1050	d	h	0	encount param
+00046	000D1054	d	h	0	encount param
+00047	000D1058	d	h	0	encount param
+00048	000D105C	d	h	0	encount param
+00049	000D10A0	d	h	0	on location/on may way
+0004A	000D10B4	d	h	0	dest location
+0004B	00000000	S	S	0	----------------------------
+0004C	0018E899	b	h	0	1st b unit id
+0004D	0018EA59	b	h	0	2nd b unit id
+0004E	0018EC19	b	h	0	3rd b unit id
+0004F	0018EDD9	b	h	0	4th b unit id
+00050	00000000	S	S	0	----------------------------
+00051	0018E898	b	h	0	1st b ch
+00052	0018E8A1	b	h	0	1st b zodiac
+00053	0018E99C	w	u	0	1st b total_jp_squire
+00054	0018E99E	w	u	0	1st b total_jp_chemist
+00055	0018E9A8	w	u	0	1st b total_jp_wizard
+00056	00190498	b	h	0	17th b ch
+00057	001904A1	b	h	0	17th b zodiac
+00058	0019059C	w	u	0	17th b total_jp_squire
+00059	0019059E	w	u	0	17th b total_jp_chemist
+0005A	001905A6	w	u	0	17th b total_jp_priest
+0005B	001905A8	w	u	0	17th b total_jp_wizard
+0005C	001905AA	w	u	0	17th b total_jp_time_mage
+0005D	001905B2	w	u	0	17th b total_jp_oracle
+0005E	001905BC	w	u	0	17th b total_jp_calculator
+0005F	00000000	S	S	0	----------------------------
+00060	000552F8	b	h	0	1st f ch
+00061	000552FE	b	h	0	1st f zodiac
+00062	0005538E	w	u	0	1st f total_jp_squire
+00063	00055390	w	u	0	1st f total_jp_chemist
+00064	0005539A	w	u	0	1st f total_jp_wizard

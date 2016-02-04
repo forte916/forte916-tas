@@ -22,7 +22,8 @@ FurShop glitch
 * soft rest しても rng seed の初期化は発生しない
 * furshop inventory 0x80056818 (JPv1.1)
 * furshop inventory 0x80059494 (US)
-* 編成画面が表示されたら soft reset でOK. ダーラボンのセリフは表示前で OK.
+* 暗転中にアイテムがロードされるので編成画面が表示されたら
+  即 soft reset でOK. ダーラボンのセリフは表示前でよい
 
 
 Ramza 初期ステータス
@@ -38,13 +39,13 @@ Ramza 初期ステータス
 ch1-Orbonne
 -----------
 * オーボンヌ内の最後の ovelia のセリフで敵星座が決定
+  * Gafgarion は 敵 2体に攻撃可能
+  * Agrius は 敵 1体に攻撃可能
+  * Gafgarion は Agrius 正面の敵と相性が悪いと別の 1体を狙う
+  * Gafgarion と Agruis が別々の敵を倒すよう誘導(調整)することで 2体を倒すことが可能
 
 * turn1
   * change option
-    *  2.カーソルのリピート速度  ->速い
-         --> TAS では必要なし??
-    *  4.指カーソルの速度  ->すごく速い
-         --> TAS では必要なし??
     *  5.メッセージの表示速度  ->速い
     *  6.ナビゲーションメッセージの有無  -> OFF
     *  7.アビリティ名の表示  -> OFF
@@ -52,18 +53,23 @@ ch1-Orbonne
     *  9.経験値Jp取得の表示  -> OFF
     * 11.ジョブ別装備付加アイテムの表示  -> OFF
     * 12.ジョブチェンジ時の最強装備  -> OFF
-  * 4マス進む
-  * 敵弓使いの中に「磨褐宮」のユニットが居た場合は
-    最優先で攻撃すること
+  * 3マス進む
 
-  * カメラ移動があると数フレーム遅くなる
-  * カメラ移動で敵や味方の行動開始フレームがずれるので、乱数調整が可能
-  * 戦闘後の最後の Ramza のセリフで味方ステータスが決定
+* 改善点
+    *  2.カーソルのリピート速度  ->速い
+         --> TAS では必要ない
+    *  4.指カーソルの速度  ->すごく速い
+         --> TAS では必要ない
+  * 4マスではなく 3マス進む
 
 
-* testrun_tas = 19406f,  5:23, "Let go of me" said Ovelia
-* optimze_tas = 16619f,  4:37, "Let go of me" said Ovelia
-* youtube_tas =       ,  4:25, "Let go of me" said Ovelia
+* カメラ移動があると数フレーム遅くなる
+* カメラ移動で敵や味方の行動開始フレームがずれるので、乱数調整が可能
+
+* "Let go of me" said Ovelia
+  * testrun_tas = 19406f,  5:23
+  * optimze_tas = 16619f,  4:37 , 2787f faster
+  * youtube_tas =       ,  4:25
 
 * Orbonne 戦闘終了の会話は 手動と text_skip.lua とで同じ結果
 * text_skip.lua を信用してもよさそう
@@ -71,11 +77,12 @@ ch1-Orbonne
 
 Lv1 Chemist 初期ステータス
 --------------------------
+* 戦闘後の最後の Ramza のセリフで味方ステータスが決定
 * High starting
   * Chemist JP
+    * grind 200 JP for Wizard
   * Faith
   * Chemist JP 190以上, Faith 70以上が理想
-  * Gariland で稼いで Lv2 になるのが理想
   * Female の方が MA が +1 高い
 
 
@@ -83,64 +90,83 @@ Lv1 Squire 初期ステータス
 ------------------------
 * High starting
   * Squire JP
+    * grind 200 JP for Knight
+  * Knight JP
+
+* ボツ案
+  * Squire JP
   * 味方見習い戦士で残り JP が 100以上
   * Gariland で稼いで 取得 Jp UP を覚えるため
   * その後クリスタル化して継承
+    * 見習いのクリスタルを Ramza は継承できないのでボツ案
   * もしくは Mandalia で取得 Jp UP を覚えている敵を探す
   * Gariland の敵は Lv1 のため取得Jp UP は覚えていない
 
 
 ch1-Gariland
 ------------
-* セーブ画面の入力後に敵星座が決定
-  * 屋根の上に来る Female Squire と相性良
+* セーブ画面のキャンセル後に敵星座が決定
+  * 屋根の上に来る Female Squire と相性良 (Any)
+  * lether hat and dagger の Male Squire と相性良 (Ramza)
 
 * 配置
+  ----F
+  XXMRF
+  XM---
 
 * turn1
   * カメラ移動があると数フレーム遅くなる
   * 敵移動中にカメラ移動する
   * Ramza セリフ後 再度 L2, R2
 
-
+### old
 * Ramza
   * Squire JP 250 for Gained JP UP(250) or Yell(200)
     * 実際は 300JP 貯まらない
   * Chemist JP 200 for Wizard
-
 * Chemist
   * Chemist JP 200 for Wizard
   * Lv2 (recomend because of boosting MP)
 
+### new
+* Ramza
+  * Squire  JP 250 for Gained JP UP(250)
+  * Chemist JP 200 for Wizard
+* Chemist
+  * Chemist JP 200 for Wizard
+* Squire
+  * Squire  JP 200 for Knight
 
 * 改善案
-  * 配置
-    * Ramza は左下に配置
   * turn1
-    * Ramza 右の屋根の上の敵を critical で一撃
+    * 右の屋根の上の敵を critical で倒す (any)
   * turn2
-    * Ramza 5歩でぎりぎり届く位置に敵が来てたら、critical で一撃
-    * この敵は投石を覚えていない方が早い
+    * lether hat and dagger の Male Squire を critical で倒す (Ramza)
+    * Ramza 5歩でぎりぎり届く
+    * この敵は投石を覚えていない方が早いが、そもそも投石が届く範囲に味方を移動させない
+  * L2, R2 を使いカメラ移動
+
+* ボツ案
   * 味方 Squire に取得Jp UP 覚えさせるため 250jp 稼ぐ
   * Gariland の敵は Lv1 のため取得Jp UP は覚えていない
-  * L2 押したほうがカメラ移動が減るかも
 
-
+### old
 * after battle
   * world map に出たら x で説明をキャンセル
   * Ramza, learn Yell 200JP
   * Chemist
-    * job change:  Wizard
-    * learn:  Bolt 50JP, MagicAttackUP 400JP
-    * set: MagicAttackUP
+    * job change Wizard
+    * learn Bolt 50JP, MagicAttackUP 400JP
+    * set MagicAttackUP
   * Chemist 以外のユニット除名
 
+### new
 * after battle 改善案
   * world map に出たら x で説明をキャンセル
   * 編成はバルバネスのイベント見たあと
   * ここでは除名しない
   * Ramza
-    * learn Gained JP-UP, Bolt2, Bolt3, Death, Flare, Magic attack up
+    * learn Gained JP-UP, Bolt3, Toad, Death, Flare, Magic attack up
        * use jp scroll glith, Ice -> Ice2
     * Counter Magic は必要ない. Balk は Face rod で OK
     * set Gained JP-UP, Black Magic
@@ -149,18 +175,18 @@ ch1-Gariland
     * change Chemist
   * Female Chemist
     * change Wizard
-    * learn Bolt, Toad, Magic attack up
+    * learn Bolt, Bolt2, Magic attack up
        * use jp scroll glith, Ice -> Ice2
     * set Magic attack up
-    * equip Battle Boots
+    * best fits to equip Battle Boots
   * Male Squire x2
     * change Knight
     * set Item
 
 
-
 ch1-Mandalia
------
+------------
+### old
 * Ramza
   * ためる 300jpと取得JpUP 250jp の 550JP を稼ぐ
   * ex1) エールを覚えてエールで稼ぐ
@@ -185,11 +211,21 @@ ch1-Mandalia
 
 * turn3
   * redpanther だけになるので稼ぐ
-  * Wizard, Bolt で Delita 巻き込んで自殺
+  * Wizard, Bolt で Delita 巻き込んで倒す
 
 * turnN
-  * algus の死体の奥の安全地帯で稼ぐ
+  * Algus の死体の奥の安全地帯で稼ぐ
 
+
+### new
+* Ramza
+  * Ramza   300jp for Accumulates
+  * Knight  250jp for Speed Break
+
+* 配置
+  * Ramza, Wizard, Knight x2
+  R-KXX
+  W-K-X
 
 * 改善案
   * Ramza,  300jp for Accumulates
@@ -224,13 +260,21 @@ ch1-Mandalia
     [6.1] Cristal
 
 
+### old
 * after battle, formation
   * Ramza
-    * job change:  Priest
-    * learn:  Accumulates 300JP, Gained JP UP 250JP
-    * set: guts, Gained JP UP
-  * Knight 
+    * job change Priest
+    * learn  Accumulates 300JP, Gained JP UP 250JP
+    * set guts, Gained JP UP
+
+### new
+  * Ramza
+    * job change Priest or Wizard
+    * learn Accumulates 300JP
+    * set Guts
+  * Knight
     * learn Speed Break
+
 
 
 ch1-random
@@ -285,12 +329,13 @@ ch1-random
 
 * learn
   * Priest - Holy
+     * Should NOT learn Holy here, but after ch4-Mulond
   * Wizard - Bolt3, Death, Flare, Counter Magic, Magic Attack UP
-    use jp scroll glith, Ice -> Ice2
+     * use jp scroll glith, Ice -> Ice2
   * Time mage - Quick(900jp), Demi2(550jp), MP Switch(400jp), Teleport(600jp)
-    use jp scroll glitch, stop -> quick, reflec -> slowja
+     * use jp scroll glitch, stop -> quick, reflec -> slowja
   * Calculator - All except Exp(2350jp)
-    Gained Exp UP(350jp) is not nedded
+     * Gained Exp UP(350jp) is not nedded
 
 * job change
   * Wizard
@@ -315,7 +360,7 @@ ch1-Sweegy
 * 敵Lv は ramaza と同じなので Bolt3 ではなく Flare が必要
 * 改善案
   * CT5 Death の方が早い
-  * L2 押したほうがカメラ移動が減るかも
+  * 敵移動中に L2 押したほうがカメラ移動が減るかも
 
 ch1-Dorter
 ----------
