@@ -54,8 +54,8 @@ adr_battle_unit21 = adr_battle_unit + (0x1C0 * 20)  -- 21th unit 0x190B98
 
 
 
-adr_pad_input_battle = 0x044778 -- US:0x045944, JP1.0:0xFFFFFF, 4byte, controller input in battle/event
-adr_pad_input_world  = 0xFFFFFF -- US:0x19A204, JP1.0:0xFFFFFF, 4byte, controller input in world map/formation
+adr_pad_input_battle = 0x044778 -- US:0x045944, JP1.0:0x03258C, 4byte, controller input in battle/event
+adr_pad_input_world  = 0xFFFFFF -- US:0x19A204, JP1.0:0x19087C, 4byte, controller input in world map/formation
 
 adr_game_fc        = 0x0315E8 -- US:0x0317B8, JP1.0:0xFFFFFF, 4byte, game frame counter
 
@@ -97,14 +97,17 @@ adr_map_id         = 0x054B6C -- US:0x0577E8, JP1.0:0x054858, 4byte, battle map 
 adr_event_bytes    = 0x054BFC -- US:0x057878, JP1.0:0xFFFFFF, 4byte, Event Byte Counter? (maybe just text?)
 
 adr_furshop_inventory = 0x056818 -- US:0x059494, JP1.0:0xFFFFFF, byte[256]
-adr_item_inventory    = 0x056A44 -- US:0x0596E0, JP1.0:0xFFFFFF, byte[256]
+adr_item_inventory    = 0x056A44 -- US:0x0596E0, JP1.0:0x056730, byte[256]
 
 -- BATTLE.bin
 adr_current_entd   = 0x06358C -- US:0x066238, JP1.0:0x063278, 4byte, Current ENTD Pointer
 adr_highest_lv     = 0x06365C -- US:0x066308, JP1.0:0x063348, 1byte, Highest Party Level
 
-adr_debug_menu     = 0x18E708 -- US:0xFFFFFF, JP1.0:0x18E3F4, debug mode
+adr_world_debug_menu  = 0x18E708 -- US:0x198090, JP1.0:0x18E3F4, debug mode
 	-- set 5, 6, 7, 8, then open menu in world map. debug mode??
+adr_battle_debug_menu = 0xFFFFFF -- US:0x16BC1C, JP1.0:0xFFFFFF, debug mode
+	-- set 3??
+adr_debug_menu        = 0x04A9C4 -- US:0xFFFFFF, JP1.0:0xFFFFFF, debug mode
 
 
 -- WLDCORE.bin
@@ -707,10 +710,10 @@ function Bunit.readProperty(ofs_unit)
 	prpt.attack_accuracy = memory.readbyte(ofs_unit + Bunit.attack_accuracy )
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
-	--prpt.info = Bunit.toString(prpt)
+	prpt.info = Bunit.toString(prpt)
 	--prpt.info = Bunit.toString2(prpt)
 	--prpt.info = Bunit.toString3(prpt)
-	prpt.info = Bunit.toString4(prpt)
+	--prpt.info = Bunit.toString4(prpt)
 	return prpt
 end
 
@@ -1011,7 +1014,7 @@ function Zodiac.checkCompatibilityRamza(sign, gender)
 	local masked_sign
 
 	masked_sign = bit.band(sign, 0xF0)
-	opposit = bit.band(gender, 0x80)  -- 0x80 is male., 0x40 is female
+	opposit = bit.band(gender, 0x80)  -- 0x80 is male, 0x40 is female
 
 	if masked_sign == Zodiac.Aries then
 		return 2
@@ -1020,7 +1023,7 @@ function Zodiac.checkCompatibilityRamza(sign, gender)
 	elseif masked_sign == Zodiac.Cancer and opposit ~= 0 then
 		return 1
 	elseif masked_sign == Zodiac.Cancer and opposit == 0 then
-		-- BUG:: monster is regarded as best, unfortunately
+		-- FIXME:: monster is regarded as best, unfortunately
 		return 5
 	elseif masked_sign == Zodiac.Taurus then
 		return 4
@@ -1030,4 +1033,35 @@ function Zodiac.checkCompatibilityRamza(sign, gender)
 
 	return 3
 end
+
+--- Check zodiac sign compatibility with Virgo.
+--        Virgo = Algus, Miluda, Wiegraf, Gafgarion
+--        "bad : 0x20, 0x80, very bad : 0xB0"
+--        "good: 0x10, 0x90, very good: 0xB0"
+--  @return 1:worst, 2:bad, 3:normal, 4:good, 5:best
+function Zodiac.checkCompatibilityVirgo(sign, gender)
+	local opposit = 0
+	local masked_sign
+
+	masked_sign = bit.band(sign, 0xF0)
+	opposit = bit.band(gender, 0x80)  -- 0x80 is male, 0x40 is female
+
+	if masked_sign == Zodiac.Gemini then
+		return 2
+	elseif masked_sign == Zodiac.Sagittarius then
+		return 2
+	elseif masked_sign == Zodiac.Pisces and opposit ~= 0 then
+		return 1
+	elseif masked_sign == Zodiac.Pisces and opposit == 0 then
+		-- FIXME:: monster is regarded as best, unfortunately
+		return 5
+	elseif masked_sign == Zodiac.Taurus then
+		return 4
+	elseif masked_sign == Zodiac.Capricorn then
+		return 4
+	end
+
+	return 3
+end
+
 

@@ -16,7 +16,7 @@ require "fft_lib"
 ------------------------------------------------------------
 
 function logHeader()
-	debugPrint("attack target.")
+	debugPrint("### case1: one enemy")
 	debugPrint(string.format("fc, rng"))
 end
 
@@ -68,7 +68,7 @@ end
 -- main
 ------------------------------------------------------------
 
-f = io.open("rolling_rng_in_attack.log", "a")
+f = io.open("rolling_rng_in_entd_flag.log", "a")
 if f == nil then print("error: Could not open file") end
 
 logHeader()

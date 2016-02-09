@@ -90,7 +90,7 @@
 00057	000A076C	d	h	0	location param
 00058	000A0770	d	h	0	location param
 00059	000A0774	d	h	0	location param
-0005A	000A0778	d	h	0	location param
+0005A	000A0778	d	h	0	arg1 of world map scripts
 0005B	000A077C	d	h	0	location param
 0005C	000A0780	d	h	0	location param
 0005D	00000000	S	S	0	----------------------------

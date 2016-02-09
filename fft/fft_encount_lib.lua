@@ -131,7 +131,7 @@ end
 -- Mandalia
 ------------------------------------------------------------
 Mandalia = {}
-Mandalia.logname = "ch1_mandalia_enemy1.log"
+Mandalia.logname = "ch1_mandalia_enemy2.log"
 
 
 function Mandalia.logHeader()
@@ -180,6 +180,7 @@ function Mandalia.success()
 	local compatibility = 0
 	local skill = 0
 	local matched = 0
+	local enemy = 0
 	local str
 
 	for i=1, total_enemy do
@@ -187,24 +188,40 @@ function Mandalia.success()
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
 
-		if prpt.no == 5 then
+		if prpt.no == 2 then
+			compatibility = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-algus", str, Zodiac.notation[compatibility])
+
+			skill = bit.band(prpt.thief_action_learned1, 0x40)  -- 0x40 means Steal Heart
+			if skill ~= 0 then
+				str = str..", charm"
+			end
+		end
+
+		if prpt.no == 3 then
+			compatibility = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-algus", str, Zodiac.notation[compatibility])
+		end
+
+		if prpt.no >= 4 and prpt.no <= 6 then
 			compatibility = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-ramza", str, Zodiac.notation[compatibility])
 
 			if compatibility > 3 or (compatibility == 3 and prpt.faith > 57) then
+				str = string.format("%s, bolt2", str)
+				enemy = enemy + 1
 				matched = matched + 1
 			end
 
 			skill = bit.band(prpt.base_action_learned1, 0x20)  -- 0x08 means Throw Stone
 			if skill ~= 0 then
-				print(string.format("-- base_action_learned1 = %x, Throw Stone", prpt.base_action_learned1))
-				str = str.." , throw stone"
+				str = str..", throw stone"
 				matched = matched + 1
 			end
 
-			if matched > 1 then
-				ret = true
-			end
+			--if matched > 1 then
+			--	ret = true
+			--end
 		end
 
 		if prpt.faith < 50 then
@@ -214,6 +231,9 @@ function Mandalia.success()
 		debugPrint(str)
 	end
 
+	if enemy > 2 then
+		ret = true
+	end
 	return ret
 end
 
@@ -282,54 +302,64 @@ end
 -- MandaliaRandom
 ------------------------------------------------------------
 MandaliaRandom = {}
-MandaliaRandom.logname = "ch1_random_encount13.log"
+MandaliaRandom.logname = "ch1_random_encount15.log"
 
 function MandaliaRandom.logHeader()
 	debugPrint(string.format("### down (select Mandalia)"))
 	--debugPrint(string.format("### up   (select Igros)"))
 	debugPrint(string.format("    job id: 0x5e=chocobo, 0x61=goblin, 0x67=redpanther"))
-	debugPrint(string.format("    1 formation, 0 soldier office, cheat"))
+	--debugPrint(string.format("    1 formation, 0 soldier office, cheat"))
 	--debugPrint(string.format("    0 formation, 0 soldier office, cheat"))
 	--debugPrint(string.format("    0 formation, 1 soldier office (jumped 28 rng)"))
 	debugPrint(string.format(""))
 end
 
+--function MandaliaRandom.pre_attempt()
+--	-- move Mandalia From Formation
+--	--fadv(2)
+--	pressBtn({up=1}, 1)
+--	pressBtn({circle=1}, 3)
+--	pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
+--	pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
+--end
+
+
+--function MandaliaRandom.pre_attempt()
+--	-- move Gariland From Mandalia
+--	pressBtn({triangle=1}, 5)
+--	pressBtn({circle=1}, 3)
+--	pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
+--	--pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
+--end
+
+
 function MandaliaRandom.pre_attempt()
-	-- move Mandalia From Formation
-	--fadv(2)
-	pressBtn({up=1}, 1)
-	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
-	--pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
-
-
-	-- move Gariland From Mandalia
-	--pressBtn({triangle=1}, 5)
-	--pressBtn({circle=1}, 3)
-	--pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
-	--pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
+	fadv(4)
 end
 
 function MandaliaRandom.pre_attempt2()
-	-- move Gariland From Mandalia
-	--pressBtn({triangle=1}, 5)
-	--pressBtn({circle=1}, 3)
-	--pressBtn({up=1}, 1)
-	--pressBtn({circle=1}, 1)
-	--fadv(50+1)
-
-	--pressBtn({circle=1}, 1)
-	--fadv(21)
-	--pressBtn({down=1}, 7)
-	--pressBtn({circle=1}, 1)  -- shop
-	--fadv(67)
-	--pressBtn({circle=1}, 1)  -- cancel message
-	--fadv(47)
-	--pressBtn({x=1}, 1)  -- exit city
-	--fadv(4)
-
-	--local fc = emu.framecount()
-	--fadv(81105 - fc)
+	--exitFormation()
+	pressBtn({x=1}, 5)
+	pressBtn({x=1}, 1)
+	fadv(44)
+	-- move Gariland From Formation
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 3)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)
+	fadv(6)
+	-- wait until arrive
+	local arrived = memory.readword(adr_on_location)
+	while arrived ~= 0x01 do
+		fadv(1)
+		arrived = memory.readword(adr_on_location)
+	end
+	-- moveMandaliaFromGariland
+	pressBtn({triangle=1}, 5)
+	pressBtn({circle=1}, 3)
+	pressBtn({down=1}, 1)
+	local fc = emu.framecount()
+	fadv(68691 - fc)
 end
 
 function MandaliaRandom.attempt()
@@ -348,6 +378,7 @@ function MandaliaRandom.success()
 	local total_enemy = 10
 	local enemy = 0
 	local str
+	local lagcount = emu.lagcount()
 
 	for i=1, total_enemy do
 		prpt = Bunit.readProperty(ofs_unit)
@@ -361,9 +392,9 @@ function MandaliaRandom.success()
 		debugPrint(str)
 	end
 
-	debugPrint(string.format("-- enemy = %2d", enemy))
+	debugPrint(string.format("-- enemy = %2d, lagcount = %d", enemy, lagcount))
 	if enemy < 3 then
-		print(string.format("-- enemy = %2d", enemy))
+		print(string.format("-- enemy = %2d, lagcount = %d", enemy, lagcount))
 		ret = true
 	else
 		ret = false

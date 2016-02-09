@@ -973,7 +973,34 @@ function TAS.cancelJobChange()
 	fadv(48)
 end
 
-function TAS.learnWizard()
+function TAS.learnItem()
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)   -- ability
+	fadv(27)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 10)  -- learn
+	pressBtn({down=1}, 1)  -- Item
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Item
+	pressBtn({square=1, down=1}, 6)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 2)   -- EyeDrop
+	pressBtn({square=1, up=1}, 2+1)
+	pressBtn({circle=1}, 1)   -- select yes
+	fadv(15)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Ether
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5+1)
+	pressBtn({x=1}, 1)
+	fadv(9)
+	-- coninue to learnBlackMagic2()
+end
+
+function TAS.learnBlackMagic1()
 	pressBtn({up=1}, 1)
 	pressBtn({circle=1}, 1)   -- ability
 	fadv(27)
@@ -983,10 +1010,10 @@ function TAS.learnWizard()
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 4)
-	pressBtn({down=1}, 1)  -- wizard
+	pressBtn({down=1}, 1)  -- Black Magic
 	fadv(5)
-	pressBtn({circle=1}, 3)   -- wizard
-	pressBtn({square=1, down=1}, 9)
+	pressBtn({circle=1}, 4)   -- Black Magic
+	pressBtn({square=1, down=1}, 6)
 	pressBtn({up=1}, 4)
 	pressBtn({down=1}, 1)
 	fadv(5)
@@ -1000,7 +1027,8 @@ function TAS.learnWizard()
 	pressBtn({down=1}, 1)
 	fadv(5)
 	pressBtn({circle=1}, 4)   -- Bolt
-	pressBtn({circle=1}, 4)  -- select yes
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(3)
 	pressBtn({down=1}, 1)
 	fadv(5)
 	pressBtn({circle=1}, 4)   -- Bolt2
@@ -1015,9 +1043,55 @@ function TAS.learnWizard()
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 1)
 	fadv(4)
+	-- coninue to setBlackMagic()
 end
 
-function TAS.setWizard()
+function TAS.learnBlackMagic2()
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)  -- Black Magic
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Black Magic
+	pressBtn({square=1, down=1}, 6)
+	pressBtn({up=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 2)   -- Ice
+	pressBtn({square=1, down=1}, 2)
+	pressBtn({circle=1}, 1)   -- select yes
+	fadv(19)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Toad
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(4)
+	pressBtn({square=1, up=1}, 1)
+	fadv(2)
+	pressBtn({circle=1}, 4)   -- Bolt2
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(3)
+	pressBtn({up=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Bolt
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
+	pressBtn({right=1}, 4)
+	pressBtn({right=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Magic attack up
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
+	pressBtn({x=1}, 10)
+	pressBtn({x=1}, 1)
+	fadv(4)
+	-- coninue to setBlackMagic()
+end
+
+function TAS.setMagicAttackUp()
 	pressBtn({down=1}, 1)
 	pressBtn({circle=1}, 2)   -- set
 	pressBtn({down=1}, 2)
@@ -1028,6 +1102,7 @@ function TAS.setWizard()
 	fadv(6)
 	pressBtn({x=1}, 1)
 	fadv(5)
+	-- coninue to learnRamzaSquireWizard()
 end
 
 function TAS.learnRamzaSquireWizard()
@@ -1069,11 +1144,13 @@ function TAS.learnRamzaSquireWizard()
 	pressBtn({down=1}, 1)
 	fadv(5)
 	pressBtn({circle=1}, 4)   -- Toad
-	pressBtn({circle=1}, 4)  -- select yes
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(3)
 	pressBtn({down=1}, 1)
 	fadv(5)
 	pressBtn({circle=1}, 4)   -- Death
-	pressBtn({circle=1}, 4)  -- select yes
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(3)
 	pressBtn({down=1}, 1)
 	fadv(5)
 	pressBtn({circle=1}, 4)   -- Flare
@@ -1095,6 +1172,7 @@ function TAS.learnRamzaSquireWizard()
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 1)
 	fadv(4)
+	-- continue to setRamzaSquireWizard()
 end
 
 function TAS.setRamzaSquireWizard()
@@ -1197,7 +1275,7 @@ end
 
 function TAS.exitFormation()
 	pressBtn({x=1}, 1)
-	fadv(43)
+	fadv(43+1)
 end
 
 function TAS.moveMandaliaFromFormationForEvent()
@@ -1451,8 +1529,8 @@ end
 function TAS.jobChangeRamza()
 	pressBtn({triangle=1}, 2)  -- show menu
 	pressBtn({down=1}, 2)
-	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 1)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 1)  -- job change
 	fadv(46)
 	pressBtn({left=1}, 15-2)
 	pressBtn({left=1}, 15-2)
@@ -1471,7 +1549,29 @@ function TAS.learnRamzaAccumulate()
 	pressBtn({circle=1}, 10)  -- select learn
 	pressBtn({circle=1}, 10)  -- select squire
 	pressBtn({circle=1}, 4)   -- select accumulate
-	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
+	pressBtn({x=1}, 10)
+	pressBtn({x=1}, 4+1)
+	pressBtn({down=1}, 1)
+	pressBtn({circle=1}, 5)   -- select set
+	pressBtn({circle=1}, 10)  -- select slot
+	pressBtn({circle=1}, 1)   -- select guts
+	fadv(6)
+	pressBtn({x=1}, 5)
+	--- continue to learnKnightSpeedBreak
+end
+
+function TAS.learnRamzaAccumulate_old()
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)  -- ability
+	fadv(27)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 10)  -- select learn
+	pressBtn({circle=1}, 10)  -- select squire
+	pressBtn({circle=1}, 4)   -- select accumulate
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
 	pressBtn({right=1}, 6)
 	pressBtn({right=1}, 6)
 	pressBtn({down=1}, 4)
@@ -1479,24 +1579,49 @@ function TAS.learnRamzaAccumulate()
 	pressBtn({down=1}, 1)
 	fadv(5)
 	pressBtn({circle=1}, 4)   -- select gained jp up
-	pressBtn({circle=1}, 6)  -- select yes
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(5)
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 4)
 	pressBtn({down=1}, 1)
 	pressBtn({circle=1}, 5)   -- select set
 	pressBtn({circle=1}, 10)  -- select slot
-	pressBtn({circle=1}, 4)   -- select guts
+	pressBtn({circle=1}, 3)   -- select guts
 	pressBtn({down=1}, 2)
 	pressBtn({down=1}, 1)
 	fadv(3)
 	pressBtn({circle=1}, 10)  -- select slot
 	pressBtn({circle=1}, 1)   -- select gained jp jp
 	fadv(5)
-	pressBtn({x=1}, 2)
+	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 1)
-	fadv(30-2)
+	fadv(31-3)
 	TAS.exitFormation()
 end
+
+function TAS.learnKnightSpeedBreak()
+	pressBtn({r1=1}, 2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 10)  -- learn
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)
+	fadv(5)
+	pressBtn({circle=1}, 10+2)   -- Knight
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 1)  -- Speed Break
+	fadv(5)
+	pressBtn({circle=1}, 4)   -- Speed Break
+	pressBtn({circle=1}, 1)  -- select yes
+	fadv(6)
+	pressBtn({x=1}, 10)
+	pressBtn({x=1}, 1)
+	fadv(6)
+	-- repeat
+end
+
 
 function TAS.moveGarilandFromFormation()
 	pressBtn({up=1}, 2)
@@ -1604,11 +1729,11 @@ function TAS.ch1_random_battle_Accumulate_ramza()
 	-- arrowed and shown AT
 	fadv(6+1)
 	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 10)  -- action
+	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
-	pressBtn({circle=1}, 10)  -- guts
+	pressBtn({circle=1}, 6)  -- guts
 	pressBtn({circle=1}, 4)   -- Accumulate
-	pressBtn({circle=1}, 6)   -- confirm target
+	pressBtn({circle=1}, 4)   -- confirm target
 	pressBtn({circle=1}, 1)   -- execute attack
 	fadv(63+1)  -- Accumulate animation
 	-- arrowed and shown AT
@@ -1633,6 +1758,16 @@ function TAS.ch1_random_battle_attack_ramza()
 	pressBtn({circle=1}, 6)  -- confirm target
 	pressBtn({circle=1}, 1)  -- execute attack
 	fadv(100)
+end
+
+
+function TAS.ch1_random_battle_SpeedBreak()
+	-- arrowed
+	fadv(7)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 4)  -- action
+	-- TODO:: implement
+
 end
 
 function TAS.jobChangeWizardRamza_learnMagic()

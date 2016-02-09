@@ -58,7 +58,7 @@
 00037	0009F248	d	h	0	location param
 00038	0009F24C	d	h	0	location param
 00039	0009F250	d	h	0	location param
-0003A	0009F254	d	h	0	location param
+0003A	0009F254	d	h	0	arg1 of world map scripts
 0003B	0009F25C	d	h	0	location param
 0003C	00000000	S	S	0	----------------------------
 0003D	00141654	d	h	0	inputs

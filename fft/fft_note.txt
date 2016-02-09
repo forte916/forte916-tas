@@ -223,6 +223,7 @@ ch1-Mandalia
   * Knight  250jp for Speed Break
 
 * 配置
+  * Ramza を 3 に配置するのが Delita との会話が一番はやい
   * Ramza, Wizard, Knight x2
   R-KXX
   W-K-X
@@ -244,7 +245,6 @@ ch1-Mandalia
     * Ramza 237jp 超えたら 味方を KO してよい
     * 4回行動可能なときもあるが、 redpanther を倒す前に cristal となってしまう
 
-
 * Gained JP-UP を覚えているか検証
   * バルバネスイベント後約 2700f 後に Geined JP-UP を覚えている敵がいる
   * game time が同じなら乱数は異なってもよい
@@ -258,6 +258,23 @@ ch1-Mandalia
     * これにより Famale Calculator もボツ案
   * http://www.gamefaqs.com/ps/197339-final-fantasy-tactics/faqs/3876
     [6.1] Cristal
+
+* 検証
+  * Algus がクリティカルで squire か thief を倒す
+    * 相性の良し悪しがあれば相性を優先
+    * 通常は squire を狙う
+  * Ramza が残りの 3 squire を Bolt2
+    * 相性良 かつ faith 47 以上
+    * 相性普通 かつ faith 57 以上
+  * wizard が Algus と残り 1体 を Bolt or Bolt2
+    * thief を残した場合は thief が charm を覚えていること
+  * これで最初のターンで redpanther 以外を倒せるが
+    安全地帯を作りにくいので、稼ぎには向かない
+  * Delita に Battle Boots を履かせたら Algus と Delita で安全地帯ができるかも
+  * デメリット
+    * Algus との相性、Ramza との相性の調整が難しい
+    * Algus のクリティカル(一撃で倒す)は出ない時は 500f 探索しても出ない
+    * 調整が大変なので結局は、定石の安置の作戦がいいかも
 
 
 ### old

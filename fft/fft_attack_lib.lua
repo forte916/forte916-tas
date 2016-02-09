@@ -320,10 +320,10 @@ end
 -- MandaliaAlgusTurn1
 ------------------------------------------------------------
 MandaliaAlgusTurn1 = {}
-MandaliaAlgusTurn1.logname = "ch1_mandalia_algus_turn1_2.log"
+MandaliaAlgusTurn1.logname = "ch1_mandalia_algus_turn1_3.log"
 
 function MandaliaAlgusTurn1.pre_attempt()
-	fadv(2)
+	--fadv(2)
 end
 
 function MandaliaAlgusTurn1.attempt()

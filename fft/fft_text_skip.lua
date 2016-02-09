@@ -290,8 +290,8 @@ local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 
 emu.registerbefore(Text.drawFlags)
 
---while event_id > 0 and flag_1FFE88 ~= 0x02 do
-while event_id > 0 do
+while event_id > 0 and flag_1FFE88 ~= 0x02 do
+--while event_id > 0 do
 
 	if initial == 1 then
 		initial = 0
