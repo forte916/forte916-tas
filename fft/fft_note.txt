@@ -329,7 +329,7 @@ ch1-random
 
 * learn
   * Priest - Holy
-     * Should NOT learn Holy here, but after ch4-Mulond
+     * Should NOT learn Holy here, but after ch4-Murond
   * Wizard - Bolt3, Death, Flare, Counter Magic, Magic Attack UP
      * use jp scroll glith, Ice -> Ice2
   * Time mage - Quick(900jp), Demi2(550jp), MP Switch(400jp), Teleport(600jp)
@@ -1429,23 +1429,45 @@ Encount research of random battle
 ----------------------------------
 * lua で検証できたこと
   * frame数が同じなら乱数を変えてもエンカウントする・しないの判定は変化しない
+  * エンカウントはフレーム単位で 3連続で発生, 7連続でなしの周期を繰り返している
   * frame数が同じなら乱数を変えても出撃する・しないの判定は変化しない
   * ゲーム内の milsec, sec, min, hour を書き換えれば結果が変わる
 
 * disassemble
   * milsec等を参照する関数としては sub_80125A04 (US) sub_801254F8(JPv1.1)が関係してそう
-  * http://ffhacktics.com/wiki/00125a04_-_00125cf8
   * sub_8008E540(US) から sub_80125A04(US) と下記の sub_8008F08C(US) が call されている
   * この辺がエンカ判定と出撃判定と(出撃ユニットのステータス決定)だと推測される
+  * http://ffhacktics.com/wiki/00125a04_-_00125cf8
+  * http://ffhacktics.com/wiki/Update_Seed_and_Calculate_Party_Data
+    * 拠点に到着するとゲームタイムを元に seed が更新される
+    * new seed = msec * 101 + sec * 10 + min + hour
+    * seed が更新されてから、ユニットの出撃判定とステータス決定が実行される
+    * よって到着時刻が同じなら、その後の乱数変化は常に同じになる
 
 
 * エンカウントするかどうかの判定
   * http://ffhacktics.com/wiki/0008f08c_-_0008f280
   * 0008f08c - 0008f280
-    * 戻り値が 0 ならエンカウント. 1 なら無し
+    * 戻り値が 0 なら無し. 1 ならエンカウント
+    * 恐らく拠点ごとにエンカウント率が設定されている
+    * 拠点情報は 0x80096A40 (US) から 0x18 each
+      拠点情報 の 3byte 目がエンカウント率と思われる
+    * Mandalia の場合 0x80096A40 (US) + (0x18 * 2) + 0x3 = 0x80096A94 に
+      0x1E (30% chance) が格納されている
     * 乱数call (jal 0x0002230c) が 2ヶ所にあるがどちらも最終的に
-      15bit 右シフトしているので 50% chance
+      0-99 の範囲に変換している
+    * 1回目の乱数 call でエンカウント判定を行う
+      rand(0..99) < 拠点のエンカウント率 (30)  のときにエンカウント発生
     * コード上は乱数が影響しているように見えるが lua の検証結果と矛盾する
+      --> seed がゲームタイムを元に更新されるので、到着時刻が同じなら乱数も同じとなる
+      --> 3連続発生、7連続なしの周期を繰り返しているが
+          これについては、乱数生成自体に周期があるとしか考えられない
+   * 周期の調査結果
+      --> Egg が存在しない場合 seed 更新後の最初の乱数生成はエンカウント判定となる
+      --> 1 frame ずつずらすと seed は 101 毎に増える
+      --> seed が 101 ずつ増えると エンカウント発生率は 90 ずつ増える
+      --> (見た目上は 1f ずれると 10 ずつ減少するように見える)
+      --> よって 3連続発生、7連続なしの周期が生じる
 
 
 * 出撃するかどうかの判定
@@ -1457,10 +1479,11 @@ Encount research of random battle
     0017fa34: 30420001 andi r2,r2,0x0001               r2 = 1 or 0. which means 50% chance to exist.
     0017fa38: 1040000a beq r2,r0,0x0017fa64            branch if unit can exist?
     </code>
-  * コード上は乱数が影響しているように見えるが lua の検証結果と矛盾する
+    * コード上は乱数が影響しているように見えるが lua の検証結果と矛盾する
+      --> seed がゲームタイムを元に更新されるので、到着時刻が同じなら乱数も同じとなる
 
 * バトル中の Critical Hit で乱数が 6個飛ぶ模様. 飛ぶのは行動決定後
-* 戦士斡旋所(Soldier office) で 乱数が 28個飛ぶ
+* 戦士斡旋所(Soldier office) で 乱数が 28個飛ぶ. 飛ぶのは Male Soldier を選択後
 
 
 
@@ -1473,6 +1496,7 @@ ROM hack
 * Main Data Locations:
   * RAM -> File
   *  -0x67000 -> Battle.bin
+  *  -0x67000 -> WLDCORE.bin
   *  -0xE0000 -> World.bin
   *   -0xF800 -> SCUS
   * -0x1BF000 -> REQUIRE.OUT

@@ -93,6 +93,7 @@ adr_month          = 0x054B58 -- US:0x0577D4, JP1.0:0x054844, 4byte, Month
 adr_day            = 0x054B5C -- US:0x0577D8, JP1.0:0x054848, 4byte, Day
 adr_cur_location   = 0x054B64 -- US:0x0577E0, JP1.0:0x054850, ?byte, Current Location
 adr_entd_data_id   = 0x054B68 -- US:0x0577E4, JP1.0:0x054854, 4byte, enemy set to be loaded
+adr_map_id         = 0x054B6C -- US:0x0577E8, JP1.0:0x054858, 4byte, battle map ID
 adr_event_bytes    = 0x054BFC -- US:0x057878, JP1.0:0xFFFFFF, 4byte, Event Byte Counter? (maybe just text?)
 
 adr_furshop_inventory = 0x056818 -- US:0x059494, JP1.0:0xFFFFFF, byte[256]
@@ -102,8 +103,8 @@ adr_item_inventory    = 0x056A44 -- US:0x0596E0, JP1.0:0xFFFFFF, byte[256]
 adr_current_entd   = 0x06358C -- US:0x066238, JP1.0:0x063278, 4byte, Current ENTD Pointer
 adr_highest_lv     = 0x06365C -- US:0x066308, JP1.0:0x063348, 1byte, Highest Party Level
 
-adr_debug_menu     = 0x18E708 -- set 5, 6, 7, 8, then open menu in world map. debug mode??
-adr_goto_test      = 0x18E708 -- goto test map??
+adr_debug_menu     = 0x18E708 -- US:0xFFFFFF, JP1.0:0x18E3F4, debug mode
+	-- set 5, 6, 7, 8, then open menu in world map. debug mode??
 
 
 -- WLDCORE.bin
@@ -706,10 +707,10 @@ function Bunit.readProperty(ofs_unit)
 	prpt.attack_accuracy = memory.readbyte(ofs_unit + Bunit.attack_accuracy )
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
-	prpt.info = Bunit.toString(prpt)
+	--prpt.info = Bunit.toString(prpt)
 	--prpt.info = Bunit.toString2(prpt)
 	--prpt.info = Bunit.toString3(prpt)
-	--prpt.info = Bunit.toString4(prpt)
+	prpt.info = Bunit.toString4(prpt)
 	return prpt
 end
 
@@ -939,11 +940,11 @@ function GameTime.increment()
 	memory.writedword(adr_hours  , base_hour)
 end
 
-function GameTime.init()
-	base_msec = memory.readdword(adr_milsecs)
-	base_sec  = memory.readdword(adr_seconds)
-	base_min  = memory.readdword(adr_minutes)
-	base_hour = memory.readdword(adr_hours  )
+function GameTime.init(hour, min, sec, msec)
+	base_msec = msec or memory.readdword(adr_milsecs)
+	base_sec  = sec  or memory.readdword(adr_seconds)
+	base_min  = min  or memory.readdword(adr_minutes)
+	base_hour = hour or memory.readdword(adr_hours  )
 end
 
 function GameTime.read()
@@ -956,11 +957,25 @@ function GameTime.read()
 end
 
 function GameTime.format(gt)
-	return string.format("%02d:%02d:%02d .%02d", gt.hour, gt.min, gt.sec, gt.msec)
+	if gt == nil then
+		return string.format("%02d:%02d:%02d.%02d", base_hour, base_min, base_sec, base_msec)
+	else
+		return string.format("%02d:%02d:%02d.%02d", gt.hour, gt.min, gt.sec, gt.msec)
+	end
 end
 
 function GameTime.encountFormula(gt)
 	local sum = (gt.msec * 101) + (gt.sec * 10) + gt.min + gt.hour
+	return sum
+end
+
+function GameTime.getSeed(gt)
+	local sum
+	if gt == nil then
+		sum = (base_msec * 101) + (base_sec * 10) + base_min + base_hour
+	else
+		sum = (gt.msec * 101) + (gt.sec * 10) + gt.min + gt.hour
+	end
 	return sum
 end
 

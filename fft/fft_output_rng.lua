@@ -16,6 +16,7 @@ require "fft_lib"
 ------------------------------------------------------------
 
 function logHeader()
+	debugPrint("attack target.")
 	debugPrint(string.format("fc, rng"))
 end
 
@@ -48,11 +49,26 @@ function outputNextRNG(retry , rng)
 end
 
 
+function outputRNG_GameTime(retry)
+	GameTime.init(0, 18, 21, 16)
+	debugPrint("game time, rng, random, encount formula")
+
+	for i=0, retry do
+		local rng = GameTime.getSeed()
+		local random = rand(rng)
+		local encount_formula = random * 100 / 0x8000
+		debugPrint(string.format("%s, %08X, %5d, %2d", GameTime.format(), rng, random, encount_formula))
+
+		GameTime.increment()
+	end
+
+end
+
 ------------------------------------------------------------
 -- main
 ------------------------------------------------------------
 
-f = io.open("next_rng_seed_0x714FCFD9_44246f_2_soldier.log", "a")
+f = io.open("rolling_rng_in_attack.log", "a")
 if f == nil then print("error: Could not open file") end
 
 logHeader()
@@ -63,6 +79,7 @@ end
 
 --outputNextRNG(1000, 0xFA073EF7)
 --outputNextRNG()
+--outputRNG_GameTime(200)
 f:flush()
 
 

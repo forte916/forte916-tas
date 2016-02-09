@@ -19,7 +19,7 @@ function drawRNG(x, y)
 	y = y or 0
 
 	local rng = memory.readdword(adr_rng)
-	local random = rand(adr_rng)
+	local random = rand(rng)
 
 	gui.text(x, y   , string.format(" rng:%08X", rng))
 	gui.text(x, y+8 , string.format(" rand:%d", random))

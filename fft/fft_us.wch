@@ -1,5 +1,5 @@
 
-74
+99
 00000	00009010	d	h	0	RNG
 00001	00000000	S	S	0	----------------------------
 00002	000317B8	d	h	0	frame counter??
@@ -28,7 +28,7 @@
 00019	000960D0	d	h	0	Map Zoom
 0001A	000960D4	d	h	0	controller input for map tilt?
 0001B	000960DC	d	h	0	cleared before setting next control script
-0001C	000960E4	d	h	0	set to 0x28 after prepping earned Exp/JP
+0001C	000960E4	d	h	0	Type of display
 0001D	000960F0	d	h	0	Set to 1 when status is selected in main battle menu
 0001E	000961C0	d	h	0	Timer Counter for cursor repeat speed
 0001F	00096204	d	h	0	post action display phase
@@ -36,41 +36,66 @@
 00021	00098DB8	d	h	0	cleared after post action
 00022	000A1C90	d	h	0	frames for animations
 00023	000A69D0	d	h	0	frames for animations for Mon sheets?
-00024	00141654	d	h	0	inputs
-00025	001630DA	d	h	0	Act menu display data
-00026	00165F84	d	h	0	Menu/message display byte
-00027	00165F88	d	h	0	pad input param
-00028	00165F9C	d	h	0	map data??
-00029	00165FA0	d	h	0	changes depending on displayed menu/message during battle
-0002A	00165FB0	d	h	0	unknown
-0002B	00165FB4	d	h	0	move selected, panel selected - set to 1 (Move to panel?)
-0002C	0016600C	d	h	0	some data
-0002D	00166010	d	h	0	unknown
-0002E	00166014	d	h	0	unknown
-0002F	00166018	d	h	0	incremented
-00030	00166048	d	h	0	freezes control to go to next event
-00031	00166050	d	h	0	unknown
-00032	00166080	d	h	0	unknown
-00033	00166084	d	h	0	unknown
-00034	00166090	d	h	0	unknow
-00035	00166094	d	h	0	unknown
-00036	0016609C	d	h	0	unknown
-00037	001660A0	d	h	0	unknown
-00038	001660A3	d	h	0	control variable used in 0x13b590
-00039	00169C8C	d	h	0	unknown
-0003A	00169CB0	d	h	0	unknown
-0003B	0016A394	d	h	0	unknown
-0003C	00173E68	d	h	0	changes with different message displayed
-0003D	001FFE80	d	h	0	showing msg
-0003E	001FFE88	d	h	0	showing msg
-0003F	001FFE90	d	h	0	unknown
-00040	001FFE98	d	h	0	unknown
-00041	001FFEA0	d	h	0	unknown
-00042	001FFEA8	d	h	0	unknown
-00043	001FFEAA	d	h	0	unknown
-00044	001FFEC0	d	h	0	unknown
-00045	001FFEC4	d	h	0	unknown
-00046	001FFEC8	d	h	0	unknown
-00047	001FFECA	d	h	0	unknown
-00048	001FFECC	d	h	0	unknown
-00049	001FFED0	d	h	0	unknown
+00024	00000000	S	S	0	----------------------------
+00025	000D0AF8	d	h	0	location param
+00026	000D0B24	d	h	0	location param
+00027	000D0B28	d	h	0	location param
+00028	000D0B2C	d	h	0	location param
+00029	000D0B30	d	h	0	location param
+0002A	000D0B34	d	h	0	location param
+0002B	000D0B38	d	h	0	location param
+0002C	000D0B7C	d	h	0	on_location/on may way
+0002D	000D0B80	d	h	0	location offset??
+0002E	000D0B90	d	h	0	dest_location
+0002F	000D0B94	d	h	0	location param
+00030	000D0B98	d	h	0	location param
+00031	000D0BAC	d	h	0	location param
+00032	000D456C	d	h	0	encount param
+00033	000D483C	d	h	0	encount param
+00034	00096A40	d	h	0	location data pointer
+00035	00096A64	d	h	0	location data 0x18 each
+00036	0009F244	d	h	0	location param
+00037	0009F248	d	h	0	location param
+00038	0009F24C	d	h	0	location param
+00039	0009F250	d	h	0	location param
+0003A	0009F254	d	h	0	location param
+0003B	0009F25C	d	h	0	location param
+0003C	00000000	S	S	0	----------------------------
+0003D	00141654	d	h	0	inputs
+0003E	001630DA	d	h	0	Act menu display data
+0003F	00165F84	d	h	0	Menu/message display byte
+00040	00165F88	d	h	0	pad input param
+00041	00165F9C	d	h	0	map data??
+00042	00165FA0	d	h	0	changes depending on displayed menu/message during battle
+00043	00165FB0	d	h	0	unknown
+00044	00165FB4	d	h	0	move selected, panel selected - set to 1 (Move to panel?)
+00045	0016600C	d	h	0	some data
+00046	00166010	d	h	0	unknown
+00047	00166014	d	h	0	unknown
+00048	00166018	d	h	0	incremented
+00049	00166048	d	h	0	freezes control to go to next event
+0004A	00166050	d	h	0	unknown
+0004B	00166080	d	h	0	unknown
+0004C	00166084	d	h	0	unknown
+0004D	00166090	d	h	0	unknow
+0004E	00166094	d	h	0	unknown
+0004F	0016609C	d	h	0	unknown
+00050	001660A0	d	h	0	unknown
+00051	001660A3	d	h	0	control variable used in 0x13b590
+00052	00169C8C	d	h	0	unknown
+00053	00169CB0	d	h	0	unknown
+00054	0016A394	d	h	0	unknown
+00055	00173E68	d	h	0	changes with different message displayed
+00056	001FFE80	d	h	0	showing msg
+00057	001FFE88	d	h	0	showing msg
+00058	001FFE90	d	h	0	unknown
+00059	001FFE98	d	h	0	unknown
+0005A	001FFEA0	d	h	0	unknown
+0005B	001FFEA8	d	h	0	unknown
+0005C	001FFEAA	d	h	0	unknown
+0005D	001FFEC0	d	h	0	unknown
+0005E	001FFEC4	d	h	0	unknown
+0005F	001FFEC8	d	h	0	unknown
+00060	001FFECA	d	h	0	unknown
+00061	001FFECC	d	h	0	unknown
+00062	001FFED0	d	h	0	unknown

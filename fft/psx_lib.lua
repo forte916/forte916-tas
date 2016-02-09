@@ -11,6 +11,8 @@ require "bit"
 -- BIOS functions
 ------------------------------------------------------------
 
+adr_rng = 0x9010 -- RNG seed, 4byte
+
 -- pure 32-bit multiplier
 function mul32(a, b)
         -- separate the value into two 8-bit values to prevent type casting
@@ -50,21 +52,19 @@ end
 --
 --   1103515245 == 0x41C64E6D
 --   12345 == 0x3039
-function rand(adr_rng)
-	if adr_rng == nil then return end
-
-	local seed = memory.readdword(adr_rng)
+function rand(seed)
+	seed = seed or memory.readdword(adr_rng)
 	local random
 
-	seed = mul32(seed, 1103515245) + 12345
-	random = bit.rshift(seed, 16)   -- same as x >>= 16
+	local next_seed = mul32(seed, 1103515245) + 12345
+	random = bit.rshift(next_seed, 16)   -- same as x >>= 16
 	random = bit.band(random, 0x7FFF)  -- same as x & 0x7FFF
 	return random
 end
 
 function next_rng(seed)
-	seed = mul32(seed, 1103515245) + 12345
-	return seed
+	local next_seed = mul32(seed, 1103515245) + 12345
+	return next_seed
 end
 
 

@@ -316,6 +316,53 @@ function OrbonneAgriasTurn3.success()
 end
 
 
+------------------------------------------------------------
+-- MandaliaAlgusTurn1
+------------------------------------------------------------
+MandaliaAlgusTurn1 = {}
+MandaliaAlgusTurn1.logname = "ch1_mandalia_algus_turn1_2.log"
+
+function MandaliaAlgusTurn1.pre_attempt()
+	fadv(2)
+end
+
+function MandaliaAlgusTurn1.attempt()
+	pressBtn({circle=1}, 1)
+	fadv(300)
+end
+
+function MandaliaAlgusTurn1.post_attempt()
+	-- pass
+end
+
+function MandaliaAlgusTurn1.success()
+	local ret = false
+	local prpt = {}
+	local str
+
+	prpt = Bunit.readProperty(adr_battle_unit3)
+	str = prpt.info
+
+	if prpt.hp == 0 then
+		str = string.format("%s, KO, hp=%d", str, prpt.hp)
+		print(str)
+		ret = true
+	end
+	debugPrint(str)
+
+	prpt = Bunit.readProperty(adr_battle_unit4)
+	str = prpt.info
+
+	if prpt.hp == 0 then
+		str = string.format("%s, KO, hp=%d", str, prpt.hp)
+		print(str)
+		ret = true
+	end
+	debugPrint(str)
+
+	return ret
+end
+
 
 
 ------------------------------------------------------------
