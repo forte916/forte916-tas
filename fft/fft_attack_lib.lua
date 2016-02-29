@@ -642,7 +642,7 @@ function CriticalInjured.success()
 	prpt = Bunit.readProperty(adr_battle_unit)
 	str = prpt.info
 
-	injured = bit.band(prpt.status_5A, 0x01)  -- 0x01 Critical injured
+	injured = bit.band(prpt.status_cur3, 0x01)  -- 0x01 Critical injured
 
 	if prpt.critical ~= 0 then
 		str = string.format("%s, hp=%d, critical hit", str, prpt.hp)

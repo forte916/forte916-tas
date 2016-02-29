@@ -1,19 +1,26 @@
 FFT note
 ========
 
+Emulator
+--------
+* psxjin v2.0.2
+* psxjin.ini
+  * PsxAuto=1
+  * PsxOut=1
+  * この設定をしないとガフガリオンの最初のターンでフリーズする
+  * disable coord check を checked にする設定も必要らしいが未検証
+
 RNG
 ----
-* BIOS によって initial RNG が異なる
-  --> 間違い
-  * どの ROM も seed = 1 で初期化される
-  * JP v1.1 では 474f に seed = 1 で初期化される
-  * 0f 時の rng値は単にゴミと思われる
-* SCPH7502.BIN では 14f 待つと 199/199
-* SCPH1000.BIN では  9f 待つと 199/199
-* SCPH1001.BIN では ??
-* ちなみに SCPH7502 だと戦闘時にフリーズする
-  * ガフガリオンの最初のターンでフリーズ現象は tasvideos にも報告あり
-  * BIOS の変更や disable coord check を checked で改善するらしい
+* 0x9010 in RAM address
+* use rand() in BIOS
+
+* about seed
+  * 電源投入時に seed = 1 で初期化される
+  * soft reset では seed は初期化されない
+  * 拠点到着時にゲーム時間を元に seed が更新される
+  * 1f 毎に変化する (1f 毎に rand を call している)
+
 
 FurShop glitch
 -------------
@@ -31,9 +38,13 @@ Ramza 初期ステータス
 * new game 押下後 Arazlam のセリフスキップ後にステータスが決定される
 * High starting
   * Squire と Chemist 以外のジョブの JP も高いバランス型が理想
-  * Must  : Squire JP, Chemist JP
-  * Should: Wizard JP, Priest JP, Calculator JP
-  * May   : Time mage JP, Oracle JP
+  * Squire  JP
+    * 190 or higher
+  * Chemist JP
+    * 190 or higher
+  * Wizard JP, Priest JP, Calculator JP, Time mage JP, Oracle JP
+    * 7ジョブ合計で 1200 以上が目安
+
 
 
 ch1-Orbonne
@@ -42,7 +53,8 @@ ch1-Orbonne
   * Gafgarion は 敵 2体に攻撃可能
   * Agrius は 敵 1体に攻撃可能
   * Gafgarion は Agrius 正面の敵と相性が悪いと別の 1体を狙う
-  * Gafgarion と Agruis が別々の敵を倒すよう誘導(調整)することで 2体を倒すことが可能
+  * Gafgarion と Agruis が別々の敵を倒すよう誘導(調整)することで
+    1ターン目で 2体を倒すことが可能
 
 * turn1
   * change option
@@ -134,7 +146,7 @@ ch1-Gariland
   * Chemist JP 200 for Wizard
 * Chemist
   * Chemist JP 200 for Wizard
-* Squire
+* Squire x2
   * Squire  JP 200 for Knight
 
 * 改善案
@@ -166,7 +178,7 @@ ch1-Gariland
   * 編成はバルバネスのイベント見たあと
   * ここでは除名しない
   * Ramza
-    * learn Gained JP-UP, Bolt3, Toad, Death, Flare, Magic attack up
+    * learn Gained JP-UP, Bolt3, Frog, Death, Flare, Magic attack up
        * use jp scroll glith, Ice -> Ice2
     * Counter Magic は必要ない. Balk は Face rod で OK
     * set Gained JP-UP, Black Magic
@@ -265,7 +277,8 @@ ch1-Mandalia
     * 通常は squire を狙う
   * Ramza が残りの 3 squire を Bolt2
     * 相性良 かつ faith 47 以上
-    * 相性普通 かつ faith 57 以上
+    * 相性普通 かつ faith 58 以上
+    * 相性悪 かつ faith 64 以上
   * wizard が Algus と残り 1体 を Bolt or Bolt2
     * thief を残した場合は thief が charm を覚えていること
   * これで最初のターンで redpanther 以外を倒せるが
@@ -296,6 +309,8 @@ ch1-Mandalia
 
 ch1-random
 -----
+* Goblin becomes speed 6 at Lv14
+
 * 改善案
   * 敵1体のみ編成を 1000f 程度探索
   * 2体目が Ramza に近づくまで 4 turn かかり、それが約 1000f
@@ -336,6 +351,14 @@ ch1-random
   * ラムザ エール 15回で Speed 18/ゴブリン Speed 6
   * sp18 と sp6 では goblin 待機だと ramza 3回 or 2回に goblin 1回行動
 
+* 改善案
+  * Speed Break をクリスタル継承すると稼ぎ不要
+  * Frog だと ハイト差 2 でも安全地帯となる
+
+* 改善案
+  * learn Exp(200jp) instead of Level(350jp) and Height(250jp)
+  * it's reduce to gain 400jp
+  * so, Ramza needs 1950 jp
 
 * grinding
     Priest    , Lv5, 1100JP, need 40 times action
@@ -350,9 +373,19 @@ ch1-random
   * Wizard - Bolt3, Death, Flare, Counter Magic, Magic Attack UP
      * use jp scroll glith, Ice -> Ice2
   * Time mage - Quick(900jp), Demi2(550jp), MP Switch(400jp), Teleport(600jp)
-     * use jp scroll glitch, stop -> quick, reflec -> slowja
+     * use jp scroll glitch, stop -> quick
+     * use jp scroll glitch, reflec -> slowja
+     * use jp scroll glitch, dontmove -> slowja (re-open menu needed)
   * Calculator - All except Exp(2350jp)
      * Gained Exp UP(350jp) is not nedded
+
+* JP-glitch
+  * Chemist
+     * use jp scroll glith, Eye drop -> Hi-potion
+     * use jp scroll glith, 乙女のキッス -> Ether
+  * Mediator
+    * 勧誘 -> ほめる (メニュー開き必要)
+    * 商談 -> 悪口   (メニュー開き不要)
 
 * job change
   * Wizard
@@ -367,7 +400,14 @@ ch1-random
   * 算術士の JP稼ぎが終了時点で lv21 が目安
   * ch2 Golgorand の前までに lv23 必須. lv23 Priest + Green Beret = speed 9
 
-* holy を覚えるための経過 frame = 167f
+* Formation
+  * ユニット一覧ではメニューを閉じないとユニット切り替えできない
+    メニューを閉じて開き直す分、最低でも 3f 遅くなる
+  * ユニット切り替えは、先にユニットを切り替えてユニット一覧に戻った方が早い
+  * 先にユニットを切り替えてメニューに戻るより、そのユニットでメニューに戻り
+    Item/Ability/Change Job/ を選択後に、ユニットを切り替えるとさらに早いかも
+
+  * holy を覚えるための経過 frame = 167f
 
 
 ch1-Sweegy
@@ -378,6 +418,19 @@ ch1-Sweegy
 * 改善案
   * CT5 Death の方が早い
   * 敵移動中に L2 押したほうがカメラ移動が減るかも
+
+* Redpanther
+  * Lv19 speed 7
+  * Lv20 speed 7
+  * Lv21 speed 7
+* Black Goblin
+  * Lv20 speed 6
+  * Lv21 speed 7
+* Bom
+  * Lv21 speed 6
+* Goblin
+  * Lv21 speed 6
+
 
 ch1-Dorter
 ----------
@@ -574,7 +627,7 @@ ch3
 ch3-Goland
 ----------
 * Olan Lv18, speed 9
-* max speed 9
+* highest speed 9
 
 * Olan に先制される
 * L2
@@ -588,15 +641,16 @@ ch3-Goland
 ch3-Lesalia
 -----------
 * Zalmo Lv24, HP 248, speed 7
-* max speed 7
+* highest speed 7
 
 * Lv4 Flare
 * hits an Knight as well.
+* 削ればいいので Bolt2 でもダメージ足りるかも
 
 
 ch3-Orbonne 2nd Floor
 -----------
-* max speed 7
+* highest speed 7
 
 * CT3 Flare
 * 編成画面を抜けるときに敵の相性が決定
@@ -606,7 +660,7 @@ ch3-Orbonne 2nd Floor
 ch3-Orbonne 3rd Floor
 -----------
 * Izlude Lv26, HP 342, speed 8
-* max speed 8
+* highest speed 8
 
 * remove Green Beret for speed 8
 * 初期配置を 2マス後ろ
@@ -616,7 +670,7 @@ ch3-Orbonne 3rd Floor
 ch3-Orbonne 1st Floor
 -----------
 * Wiegraf Lv27, HP 425, speed 10
-* max speed 10
+* highest speed 10
 
 * Equip Green Beret for speed 9
 * Wiegraf には先制される
@@ -625,7 +679,7 @@ ch3-Orbonne 1st Floor
 
 ch3-Grog
 --------
-* max speed 8
+* highest speed 8
 * weather: rain , but an chemist has Rubber Shoes
 
 * CT3 Flare
@@ -633,7 +687,7 @@ ch3-Grog
 
 ch3-Yardow
 ----------
-* max speed 9
+* highest speed 9
 * Ninja Lv26 speed 9
 * Ninja Lv25 speed 9
 * Ninja Lv24 speed 9
@@ -657,19 +711,23 @@ ch3-Yardow
 
 ch3-Yuguo
 ---------
+* highest speed 8
 * CT3 Flare
 
 
 ch3-Riovanes (outside)
 ------------
+* highest speed 8
 * 編成画面閉じるときに敵の相性が決定
 * CT3 Flare
 
 ch3-Riovanes (inside)
 ------------
+* highest speed 10
 * Wiegraf Lv28, HP 381, speed 10
 * Move and Height prime flare. (Wiegraf)
 
+* highest speed 8
 * Velius Lv31, HP 1131, speed 8
 * Lv prime Demi2 x2 (Velius)
 * hits an enemy as well
@@ -678,6 +736,7 @@ ch3-Riovanes (inside)
 
 ch3-Riovanes (rooftop)
 ------------
+* highest speed 9
 * Elmdor Lv33, HP 387, speed 9?? 10??
 * Celia  Lv29, HP 359, speed 8
 * Lede   Lv28, HP 334, speed 8
@@ -691,10 +750,12 @@ ch4
 ch4-Doguola
 ------------
 * リオファネス城からドグーラ峠までのエンカウント率は 5/10
+* highest speed 7
 * CT3 Flare
 
 ch4-Bervenia
 ------------
+* highest speed 9
 * Meliadoul Lv35, HP 343, speed 8
 * Ninja Lv31, speed 9
 * 忍者に先制されるので何もさせないようにする
@@ -703,11 +764,14 @@ ch4-Bervenia
 
 ch4-Finath
 ----------
+* highest speed depends on Ramza's Level.
+* 赤チョコボやうりぼうは Lv29 前後だと speed 9 の可能性がある
 * speed 9 の敵が出現しないように
 * CT3 Bolt3
 
 ch4-Zeltennia
-------------
+-------------
+* highest speed 7
 * Zalmo Lv35, HP 323, speed 7
 * Lv5 Flare
 * Ramza と Delita が Lv25 or Lv30 になっていない方が早い
@@ -715,12 +779,14 @@ ch4-Zeltennia
 
 ch4-Bed Dsert
 -------------
+* highest speed 11
 * Balk Lv35, HP 377, speed 11
+  * innate Magic Defend UP
 
 * 108 gems は無くてもよい. 108 gems の代わりに Magic Gauntlet で OK
 * Equip Magic Gauntlet from Sprint Shoes
 * Set Counter Magic from MP Switch
-* Ramza speed 8, MA 17
+* Ramza Lv30 speed 8, MA 17
 * CT prime flare. Flare is enough to kill, since MA is 17.
 * ブリザドとブリザラと発動するが、ブリザドのほうがエフェクトが短い
 
@@ -730,14 +796,24 @@ ch4-Besra North Wall
 * Equip Sprint Shoes
 * **NOT** Set MP Switch
 * ability のセットはここではしない
-* Select North Wall, since there are enemies who has speed 9 at the south wall.
-* Ramza speed 9, MA 15
+* Ramza Lv30 speed 9, MA 15
+
+* Select North Wall, since there is a Ninja who has speed 9 at the south wall.
 * 北か南かの選択で敵の相性が決定
+
+* highest speed 8
 * CT3 Flare
 
 
 ch4-Sluice
 ----------
+* Job change to Squire
+* Set Time Magic
+* Best fit for Move+1 (Red Shoes)
+* Ramza Lv30 speed 7, MA 8, move 5
+
+* highest speed 9
+
 * RTA 動画では
   * Ramza speed 12, move 4. auto-haste. 見習い戦士
   * Ramza は初期配置, ラヴィアンを 左1 上2
@@ -764,7 +840,7 @@ ch4-Sluice
 
 ch4-Zarghidas
 -------------
-* Make use of item duplication glich to get a second Excalibur.
+* Make use of item duplication glitch to get a second Excalibur.
 * Buy Aegis Shield(MA+1), Flash hat(MA+1, Speed+1) for Ramza
 * Buy Twist Headband(PA+2), Power Sleeve(PA+2) for Orlandu
 
@@ -1448,6 +1524,7 @@ Encount research of random battle
   * frame数が同じなら乱数を変えてもエンカウントする・しないの判定は変化しない
   * エンカウントはフレーム単位で 3連続で発生, 7連続でなしの周期を繰り返している
   * frame数が同じなら乱数を変えても出撃する・しないの判定は変化しない
+    * ただし編成画面で異なる行動をとると、到着時刻が同じでも編成が異なることがまれにある
   * ゲーム内の milsec, sec, min, hour を書き換えれば結果が変わる
 
 * disassemble
@@ -1485,6 +1562,7 @@ Encount research of random battle
       --> seed が 101 ずつ増えると エンカウント発生率は 90 ずつ増える
       --> (見た目上は 1f ずれると 10 ずつ減少するように見える)
       --> よって 3連続発生、7連続なしの周期が生じる
+      --> 60進数なので msec が 0 のときは 4連続発生、7連続なし、のようになる
 
 
 * 出撃するかどうかの判定
@@ -1498,10 +1576,36 @@ Encount research of random battle
     </code>
     * コード上は乱数が影響しているように見えるが lua の検証結果と矛盾する
       --> seed がゲームタイムを元に更新されるので、到着時刻が同じなら乱数も同じとなる
+    * ただし編成画面で異なる行動をとると、到着時刻が同じでも編成が異なることがまれにある
+      --> こちらについては lag frame でずれることがある
+    * lag frame でずれることがあるのを利用したいが、意図的に発生させる方法は不明
+
 
 * バトル中の Critical Hit で乱数が 6個飛ぶ模様. 飛ぶのは行動決定後
 * 戦士斡旋所(Soldier office) で 乱数が 28個飛ぶ. 飛ぶのは Male Soldier を選択後
 
+
+Knockback research
+------------------
+* Knockback はステータスではない. Effect の一種
+* Knockback の計算は下記
+  * http://ffhacktics.com/wiki/Knockback_Calculation
+  * Battle Unit の offset +0x05 に Immortal(0x04) のフラグを持つと Knockback しない
+  * また offset +0x05 が 0x03 の値でも Knockback しない
+
+* ちなみに Immortal はボス耐性フラグのようなもので
+  Knockback 以外でも Poach, Malboro, の耐性がある模様
+* さらに Immortal は以下のステータス耐性を持つ
+  * Crystal, Dead, Undead, Petrify, Invite, Confusion, Blood Suck.
+  * Treasure, Chicken, Frog, Charm, Sleep, Don't Act, Death Sentence
+
+* Knockback の発生率
+  * Criticak Hit とそれ以外で発生率が異なる
+  * Critical Hit ルーチン
+    * http://ffhacktics.com/wiki/Critical_Hit_Calculation
+  * Knockback ルーチン
+    * http://ffhacktics.com/wiki/Damage_and_Knockback_Routine_(Dash,_tackle,_throw_stone)
+    * attacker の Br が高く、target の Br が低いほど Knockback 発生率が高くなる
 
 
 ROM hack
@@ -1512,10 +1616,10 @@ ROM hack
 
 * Main Data Locations:
   * RAM -> File
+  *   -0xF800 -> SCUS
   *  -0x67000 -> Battle.bin
   *  -0x67000 -> WLDCORE.bin
   *  -0xE0000 -> World.bin
-  *   -0xF800 -> SCUS
   * -0x1BF000 -> REQUIRE.OUT
   * -0x1BF000 -> EQUIP.OUT
   * -0x1BF000 -> ATTACK.OUT

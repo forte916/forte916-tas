@@ -16,15 +16,22 @@ require "fft_lib"
 ------------------------------------------------------------
 
 function logHeader()
-	debugPrint("### case1: one enemy")
+	--debugPrint("### case1: one enemy")
+	debugPrint("### case2: do nothing")
 	debugPrint(string.format("fc, rng"))
 end
 
 function outputRNG()
 	local rng = memory.readdword(adr_rng)
 	local fc = emu.framecount()
+	local lagf = emu.lagged()
+	local str = string.format("%d, %08X", fc, rng)
 
-	debugPrint(string.format("%d, %08X", fc, rng))
+	if lagf then
+		str = string.format("%s, lagged", str)
+	end
+
+	debugPrint(str)
 end
 
 function outputNextRNG(retry , rng)
@@ -68,7 +75,7 @@ end
 -- main
 ------------------------------------------------------------
 
-f = io.open("rolling_rng_in_entd_flag.log", "a")
+f = io.open("rolling_rng_in_entd_flag2.log", "a")
 if f == nil then print("error: Could not open file") end
 
 logHeader()

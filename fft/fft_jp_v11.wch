@@ -1,5 +1,5 @@
 
-119
+125
 00000	00009010	d	h	0	RNG
 00001	00000000	S	S	0	----------------------------
 00002	00037808	d	h	0	text param
@@ -8,114 +8,120 @@
 00005	00037968	d	h	0	text param
 00006	0003796C	d	h	0	text param
 00007	00037978	d	h	0	event counter?
-00008	00054B3C	d	h	0	Event ID
-00009	00054BFC	d	h	0	Event Byte Counter? (maybe just text?)
-0000A	00164908	d	h	0	Menu_message_display_byte
-0000B	00164938	d	h	0	move selected, panel selected - set to 1 (Move to panel?)
-0000C	001D64FC	d	h	0	direction param
-0000D	001D6500	d	h	0	direction param
-0000E	001FFE80	d	h	0	showing msg
-0000F	001FFE88	d	h	0	showing msg
-00010	00096088	d	h	0	Type of display
-00011	000960B4	d	h	0	cleared_in_ability_effect_routines
-00012	000961A8	d	h	0	post_action_display_phase
-00013	000961B8	d	h	0	Action_Phase
-00014	0018D4E4	d	h	0	In_between_turn_control_variable
-00015	0018D4E8	d	h	0	Control_Variable
-00016	00000000	S	S	0	----------------------------
-00017	00038D88	d	h	0	unknown
-00018	00038F90	d	h	0	unknown
-00019	000461B4	d	h	0	unknown
-0001A	00164940	d	h	0	unknown
-0001B	001649E8	d	h	0	unknown
-0001C	0016490C	d	h	0	pad input param
-0001D	00164920	d	h	0	map data??
-0001E	00164924	d	h	0	changes depending on displayed menu/message during battle
-0001F	00164934	d	h	0	unknown
-00020	0016499C	d	h	0	incremented
-00021	001649CC	d	h	0	freezes control to go to next event
-00022	0000E2DC	d	h	0	text counter?
-00023	0000E304	d	h	0	text counter?
-00024	0000E308	d	h	0	text counter?
-00025	0000E32C	d	h	0	text counter?
-00026	0016BBB4	d	h	0	text box param
-00027	0016BBB8	d	h	0	text box param
-00028	0016BBC4	d	h	0	text box param
-00029	0016BBD4	d	h	0	text box param
-0002A	001FFE60	d	h	0	pad input?
-0002B	001FFE90	d	h	0	unknown
-0002C	00000000	S	S	0	----------------------------
-0002D	000315E8	d	u	0	frame counter??
-0002E	00036F34	d	h	0	event counter?
-0002F	000447B4	d	h	0	set to 1 after prepping Exp/JP
-00030	000447EC	d	u	0	milsecs
-00031	000447F0	d	u	0	seconds
-00032	000447F4	d	u	0	miniutes
-00033	000447F8	d	u	0	hours
-00034	0004BE78	d	h	0	session_param
-00035	00053E9C	d	h	0	code pointers?
-00036	00054A9C	d	h	0	cur_session
-00037	00054AA0	d	h	0	Map Data?
-00038	00054B2C	d	h	0	Wheather
-00039	00054B44	d	h	0	locks controller input
-0003A	00054B64	d	h	0	Current Location
-0003B	00054B68	d	h	0	ENTD Data ID (ENTD to load)
-0003C	0006358C	d	h	0	current ENTD pointer
-0003D	00044778	d	h	0	pad input battle
-0003E	00000000	d	h	0	pad input world
-0003F	001678B0	d	h	0	pad input 1f delay
-00040	0016BA80	d	h	0	pad input 1f delay
-00041	0016BA84	d	h	0	pad input 2f delay
-00042	0016BA88	d	h	0	pad input param?
-00043	0016BA8C	d	h	0	pad input param?
-00044	0016BA90	d	h	0	pad input param?
-00045	00000000	S	S	0	----------------------------
-00046	000D101C	d	h	0	location param
-00047	000D1048	d	h	0	location param
-00048	000D104C	d	h	0	location param
-00049	000D1050	d	h	0	location param
-0004A	000D1054	d	h	0	location param
-0004B	000D1058	d	h	0	location param
-0004C	000D105C	d	h	0	location param
-0004D	000D10A0	d	h	0	on location/on may way
-0004E	000D10A4	d	h	0	location offset??
-0004F	000D10B4	d	h	0	dest location
-00050	000D10B8	d	h	0	location param
-00051	000D10BC	d	h	0	location param
-00052	000D10DD	d	h	0	location param
-00053	000D4A90	d	h	0	encount param
-00054	000D4D60	d	h	0	encount param
-00055	00097F80	d	h	0	location data pointer
-00056	00097FA4	d	h	0	location data 0x18 each
-00057	000A076C	d	h	0	location param
-00058	000A0770	d	h	0	location param
-00059	000A0774	d	h	0	location param
-0005A	000A0778	d	h	0	arg1 of world map scripts
-0005B	000A077C	d	h	0	location param
-0005C	000A0780	d	h	0	location param
-0005D	00000000	S	S	0	----------------------------
-0005E	0018E899	b	h	0	1st b unit id
-0005F	0018EA59	b	h	0	2nd b unit id
-00060	0018EC19	b	h	0	3rd b unit id
-00061	0018EDD9	b	h	0	4th b unit id
-00062	00000000	S	S	0	----------------------------
-00063	0018E898	b	h	0	1st b ch
-00064	0018E8A1	b	h	0	1st b zodiac
-00065	0018E99C	w	u	0	1st b total_jp_squire
-00066	0018E99E	w	u	0	1st b total_jp_chemist
-00067	0018E9A8	w	u	0	1st b total_jp_wizard
-00068	00190498	b	h	0	17th b ch
-00069	001904A1	b	h	0	17th b zodiac
-0006A	0019059C	w	u	0	17th b total_jp_squire
-0006B	0019059E	w	u	0	17th b total_jp_chemist
-0006C	001905A6	w	u	0	17th b total_jp_priest
-0006D	001905A8	w	u	0	17th b total_jp_wizard
-0006E	001905AA	w	u	0	17th b total_jp_time_mage
-0006F	001905B2	w	u	0	17th b total_jp_oracle
-00070	001905BC	w	u	0	17th b total_jp_calculator
-00071	00000000	S	S	0	----------------------------
-00072	000552F8	b	h	0	1st f ch
-00073	000552FE	b	h	0	1st f zodiac
-00074	0005538E	w	u	0	1st f total_jp_squire
-00075	00055390	w	u	0	1st f total_jp_chemist
-00076	0005539A	w	u	0	1st f total_jp_wizard
+00008	001D64FC	d	h	0	direction param
+00009	001D6500	d	h	0	direction param
+0000A	001FFE80	d	h	0	showing msg
+0000B	001FFE88	d	h	0	showing msg
+0000C	00164908	d	h	0	Menu_message_display_byte
+0000D	00164938	d	h	0	move selected, panel selected - set to 1 (Move to panel?)
+0000E	00164904	d	h	0	unknown
+0000F	00164924	d	h	0	changes depending on displayed menu/message during battle
+00010	0016492C	d	h	0	unknown
+00011	001649D4	d	h	0	unknown
+00012	001649E4	d	h	0	unknown
+00013	001649E8	d	h	0	unknown
+00014	00096088	d	h	0	Type of display
+00015	000960B4	d	h	0	cleared_in_ability_effect_routines
+00016	000961A8	d	h	0	post_action_display_phase
+00017	000961B8	d	h	0	Action_Phase
+00018	0018D4E4	d	h	0	In_between_turn_control_variable
+00019	0018D4E8	d	h	0	Control_Variable
+0001A	00000000	S	S	0	----------------------------
+0001B	0018DF78	d	h	0	unknown
+0001C	001C16EC	d	h	0	unknown
+0001D	001C170C	d	h	0	unknown
+0001E	001C172C	d	h	0	unknown
+0001F	001F0530	d	h	0	unknown
+00020	001F0560	d	h	0	unknown
+00021	00000000	S	S	0	----------------------------
+00022	00038D88	d	h	0	unknown
+00023	00038F90	d	h	0	unknown
+00024	000461B4	d	h	0	unknown
+00025	0016490C	d	h	0	pad input param
+00026	00164920	d	h	0	map data pointer??
+00027	00164940	d	h	0	unknown
+00028	001649CC	d	h	0	freezes control to go to next event
+00029	0000E2DC	d	h	0	text counter?
+0002A	0000E304	d	h	0	text counter?
+0002B	0000E308	d	h	0	text counter?
+0002C	0000E32C	d	h	0	text counter?
+0002D	0016BBB4	d	h	0	text box param
+0002E	0016BBB8	d	h	0	text box param
+0002F	0016BBC4	d	h	0	text box param
+00030	0016BBD4	d	h	0	text box param
+00031	001FFE60	d	h	0	pad input?
+00032	001FFE90	d	h	0	unknown
+00033	00000000	S	S	0	----------------------------
+00034	000315E8	d	u	0	frame counter??
+00035	00036F34	d	h	0	event counter?
+00036	000447B4	d	h	0	set to 1 after prepping Exp/JP
+00037	000447EC	d	u	0	milsecs
+00038	000447F0	d	u	0	seconds
+00039	000447F4	d	u	0	miniutes
+0003A	000447F8	d	u	0	hours
+0003B	0004BE78	d	h	0	session_param
+0003C	00053E9C	d	h	0	code pointers?
+0003D	00054A9C	d	h	0	cur_session
+0003E	00054AA0	d	h	0	Map Data?
+0003F	00054B2C	d	h	0	Wheather
+00040	00054B3C	d	h	0	Event ID
+00041	00054B44	d	h	0	locks controller input
+00042	00054B64	d	h	0	Current Location
+00043	00054B68	d	h	0	ENTD Data ID (ENTD to load)
+00044	0006358C	d	h	0	current ENTD pointer
+00045	00054BFC	d	h	0	Event Byte Counter? (maybe just text?)
+00046	00044778	d	h	0	pad input battle
+00047	00000000	d	h	0	pad input world
+00048	001678B0	d	h	0	pad input 1f delay
+00049	0016BA80	d	h	0	pad input 1f delay
+0004A	0016BA84	d	h	0	pad input 2f delay
+0004B	0016BA88	d	h	0	pad input param?
+0004C	0016BA8C	d	h	0	pad input param?
+0004D	0016BA90	d	h	0	pad input param?
+0004E	00000000	S	S	0	----------------------------
+0004F	000D101C	d	h	0	location param
+00050	000D1048	d	h	0	location param
+00051	000D104C	d	h	0	location param
+00052	000D1050	d	h	0	location param
+00053	000D1054	d	h	0	location param
+00054	000D1058	d	h	0	location param
+00055	000D105C	d	h	0	location param
+00056	000D10A0	d	h	0	on location/on may way
+00057	000D10A4	d	h	0	location offset??
+00058	000D10B4	d	h	0	dest location
+00059	000D10B8	d	h	0	location param
+0005A	000D10BC	d	h	0	location param
+0005B	000D10DD	d	h	0	location param
+0005C	000D4A90	d	h	0	encount param
+0005D	000D4D60	d	h	0	encount param
+0005E	00097F80	d	h	0	location data pointer
+0005F	00097FA4	d	h	0	location data 0x18 each
+00060	000A076C	d	h	0	location param
+00061	000A0770	d	h	0	location param
+00062	000A0774	d	h	0	location param
+00063	000A0778	d	h	0	cur location for world map scripts
+00064	000A077C	d	h	0	location param
+00065	000A0780	d	h	0	location param
+00066	00000000	S	S	0	----------------------------
+00067	0018EA1E	w	h	0	 1st b unit ct
+00068	0018EBDE	w	h	0	 2nd b unit ct
+00069	0018ED9E	w	h	0	 3rd b unit ct
+0006A	0019061E	w	h	0	17th b unit ct
+0006B	001907DE	w	h	0	18th b unit ct
+0006C	0019099E	w	h	0	19th b unit ct
+0006D	00000000	S	S	0	----------------------------
+0006E	00190498	b	h	0	17th b ch
+0006F	001904A1	b	h	0	17th b zodiac
+00070	0019059C	w	u	0	17th b total_jp_squire
+00071	0019059E	w	u	0	17th b total_jp_chemist
+00072	001905A6	w	u	0	17th b total_jp_priest
+00073	001905A8	w	u	0	17th b total_jp_wizard
+00074	001905AA	w	u	0	17th b total_jp_time_mage
+00075	001905B2	w	u	0	17th b total_jp_oracle
+00076	001905BC	w	u	0	17th b total_jp_calculator
+00077	00000000	S	S	0	----------------------------
+00078	000552F8	b	h	0	1st f ch
+00079	000552FE	b	h	0	1st f zodiac
+0007A	0005538E	w	u	0	1st f total_jp_squire
+0007B	00055390	w	u	0	1st f total_jp_chemist
+0007C	0005539A	w	u	0	1st f total_jp_wizard

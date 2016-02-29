@@ -19,7 +19,7 @@ adr_rng = 0x9010
 adr_formation_unit   = 0x0552F8  --  1st unit in JP v1.1,    +0h,  +314h
 --adr_formation_unit   = 0x057F74  --  1st unit in US     , +2C7Ch, +2F90h
 
-adr_formation_unit1  = adr_battle_unit                   -- 1st unit 0x0552F8
+adr_formation_unit1  = adr_formation_unit                -- 1st unit 0x0552F8
 adr_formation_unit2  = adr_formation_unit + (0x100 * 1)  -- 2nd unit 0x0553F8
 adr_formation_unit3  = adr_formation_unit + (0x100 * 2)  -- 3rd unit 0x0554F8
 adr_formation_unit4  = adr_formation_unit + (0x100 * 3)  -- 4th unit 0x0555F8
@@ -326,7 +326,7 @@ Bunit.entd_flag = 0x05  -- 1byte, ENTD Flags, friend or enemy
 	-- 0x1X - Red Team
 	-- 0x0X - Blue Team
 	-- 0x08 - Control
-	-- 0x04 - Immortal
+	-- 0x04 - Immortal (also immune to knockback, poach, malboro, etc.)
 	-- 0x02 - (both set by Ramza when initialized)
 	-- 0x01 -
 Bunit.gender    = 0x06  -- 1byte
@@ -381,8 +381,42 @@ Bunit.X_crd       = 0x47  -- 1byte
 Bunit.Y_crd       = 0x48  -- 1byte
 Bunit.direct      = 0x49  -- 1byte, 0x80: higher elevation, 0x03: facing direction
 
--- offset 0x4A to 0x5C is good/bad status flags.
-Bunit.status_5A   = 0x5A  -- 1byte
+-- offset 0x4A to 0x4D is equip bytes.
+
+-- offset 0x4E to 0x52 is auto status flags.
+Bunit.status_auto1   = 0x4E  -- 1byte
+Bunit.status_auto2   = 0x4F  -- 1byte
+Bunit.status_auto3   = 0x50  -- 1byte
+Bunit.status_auto4   = 0x51  -- 1byte
+Bunit.status_auto5   = 0x52  -- 1byte
+
+-- offset 0x53 to 0x57 is immune status flags.
+Bunit.status_immune1 = 0x53  -- 1byte
+Bunit.status_immune2 = 0x54  -- 1byte
+Bunit.status_immune3 = 0x55  -- 1byte
+Bunit.status_immune4 = 0x56  -- 1byte
+Bunit.status_immune5 = 0x57  -- 1byte
+
+-- offset 0x58 to 0x5C is current?? good/bad status flags.
+Bunit.status_cur1    = 0x58  -- 1byte
+	-- 0x80
+	-- 0x40 Crystal
+	-- 0x20 Dead
+	-- 0x10 Undead
+	-- 0x08 Charging
+	-- 0x04 Jump
+	-- 0x02 Defending
+	-- 0x01 Performing
+Bunit.status_cur2    = 0x59  -- 1byte
+	-- 0x80 Petrify
+	-- 0x40 Invite
+	-- 0x20 Darkness
+	-- 0x10 Confusion
+	-- 0x08 Silence
+	-- 0x04 Blood Suck
+	-- 0x02 Cursed
+	-- 0x01 Treasure
+Bunit.status_cur3    = 0x5A  -- 1byte
 	-- 0x80 Oil
 	-- 0x40 Float
 	-- 0x20 Reraise
@@ -391,32 +425,51 @@ Bunit.status_5A   = 0x5A  -- 1byte
 	-- 0x04 Chicken
 	-- 0x02 Frog
 	-- 0x01 Critical
+Bunit.status_cur4    = 0x5B  -- 1byte
+	-- 0x80 Poison
+	-- 0x40 Regen
+	-- 0x20 Protect
+	-- 0x10 Shell
+	-- 0x08 Haste
+	-- 0x04 Slow
+	-- 0x02 Stop
+	-- 0x01 Wall
+Bunit.status_cur5    = 0x5C  -- 1byte
+	-- 0x80 Faith
+	-- 0x40 Innocent
+	-- 0x20 Charm
+	-- 0x10 Sleep
+	-- 0x08 Don't Move
+	-- 0x04 Don't Act
+	-- 0x02 Reflect
+	-- 0x01 Death Sentence
 
 -- offset 0x5D to 0x6C is CT of each skills.
 -- offset 0x6D to 0x71 is elemental compatibility
---
+-- offset 0x72 to 0x8A is raw stat and stat multiplier
+
 -- offset 0x8B to 0x8E is reaction abilities
-Bunit.reaction_affected1   = 0x8B  -- 1byte
-Bunit.reaction_affected2   = 0x8C  -- 1byte
-Bunit.reaction_affected3   = 0x8D  -- 1byte
-Bunit.reaction_affected4   = 0x8E  -- 1byte
+Bunit.reaction_active1   = 0x8B  -- 1byte
+Bunit.reaction_active2   = 0x8C  -- 1byte
+Bunit.reaction_active3   = 0x8D  -- 1byte
+Bunit.reaction_active4   = 0x8E  -- 1byte
 
 -- offset 0x8F to 0x92 is support  abilities
-Bunit.support_affected1    = 0x8F  -- 1byte
-Bunit.support_affected2    = 0x90  -- 1byte
+Bunit.support_active1    = 0x8F  -- 1byte
+Bunit.support_active2    = 0x90  -- 1byte
 	-- 0x40:Gained JP-UP
-Bunit.support_affected3    = 0x91  -- 1byte
-Bunit.support_affected4    = 0x92  -- 1byte
+Bunit.support_active3    = 0x91  -- 1byte
+Bunit.support_active4    = 0x92  -- 1byte
 
 -- offset 0x93 to 0x95 is movement abilities
-Bunit.movement_affected1   = 0x93  -- 1byte
-Bunit.movement_affected2   = 0x94  -- 1byte
-Bunit.movement_affected3   = 0x95  -- 1byte
+Bunit.movement_active1   = 0x93  -- 1byte
+Bunit.movement_active2   = 0x94  -- 1byte
+Bunit.movement_active3   = 0x95  -- 1byte
 
 -- offset 0x96 to 0x98 is movement abilities
-Bunit.unlocked_jobs1_8     = 0x96  -- 1byte
-Bunit.unlocked_jobs9_16    = 0x97  -- 1byte
-Bunit.unlocked_jobs17_20   = 0x98  -- 1byte
+Bunit.unlocked_jobs1_8   = 0x96  -- 1byte
+Bunit.unlocked_jobs9_16  = 0x97  -- 1byte
+Bunit.unlocked_jobs17_20 = 0x98  -- 1byte
 
 -- offset 0x99 to 0xD1 is action   abilities
 Bunit.base_action_learned1 = 0x99  -- 1byte
@@ -527,15 +580,38 @@ Bunit.entd_id       = 0x161 -- 1byte, ENTD ID
 -- offset 0x0165 - X Location? (For where AI tends to stay near)
 -- offset 0x0166 - Y Location?
 -- offset 0x0167 - AI/Autobattle setting
-Bunit.prioritized_target  = 0x168  -- 1byte
+	-- 0x40 - Focus on target?
+	-- 0x20 - Stay near X/Y? (+0x08 = never move once there)
+	-- 0x10 - more aggressive?
+	-- 0x08 - Coward-like?
+	-- 0x04 -
+	-- 0x02 -
+	-- 0x01 -
+Bunit.prioritized_target  = 0x168  -- 1byte, Prioritized Target
+-- offset 0x016C - Unit Quote/Name ID
+
 
 -- offset 0x016E - 0x018B, Target Data for action
+-- offset 0x016F - Skillset of last attack used
+-- offset 0x0170 - Currently Charging/Performing Action
+-- offset 0x017A
+	-- 0x10 = Stepping Stone
+	-- 0x01 = Walkable
+-- offset 0x0182 - Mount Info
+	--	0x80 - Unit ID of ridden Unit
+	--	0x40 - Being Ridden
+	--	0x20 -
+	--	0x1f - ID of unit Riding/Being ridden by this unit
 Bunit.unit_exist = 0x183  -- 1byte
-	-- offset 0x0183 - Dealing with unit's ability to appear in battle?
-	--  		(FF if unit can't exist?)
-	--  		(01 if unit exists, 00 if not (but later can?)?)
-	--  	0x80 - Was active, but is now disabled?
-	--  	0x02 - Unit will be removed from party? (no longer exists, treas/cryst?)
+-- offset 0x0183 - Dealing with unit's ability to appear in battle?
+	-- (FF if unit can't exist?)
+	-- (01 if unit exists, 00 if not (but later can?)?)
+	-- 0x80 - Was active, but is now disabled?
+	-- 0x02 - Unit will be removed from party? (no longer exists, treas/cryst?)
+-- offset 0x0184 Equipped Booleans
+	-- 0x08 - Sword Equipped
+	-- 0x04 - Materia Blade Equipped
+
 Bunit.cur_turn   = 0x186  -- 1byte
 Bunit.moved      = 0x187  -- 1byte
 Bunit.actioned   = 0x188  -- 1byte
@@ -558,29 +634,29 @@ Bunit.item_lost  = 0x18F  -- 1byte, Item to break/use
 -- offset 0x0198/0x0c - Gil Stolen/Lost
 -- offset 0x019a/0x0e - Reaction ID
 -- offset 0x019c/0x10 - Special Flags 1
--- offset 		0x80 - +1 Level
--- offset 		0x40 - Switch Team
--- offset 		0x20 - Poached
--- offset 		0x10 - Steal Item
--- offset 		0x08 - Stole targets item?
--- offset 		0x04 - Break Item
--- offset 		0x02 - Malboro (moldball virus)
--- offset 		0x01 - Golem
+	-- 0x80 - +1 Level
+	-- 0x40 - Switch Team
+	-- 0x20 - Poached
+	-- 0x10 - Steal Item
+	-- 0x08 - Stole targets item?
+	-- 0x04 - Break Item
+	-- 0x02 - Malboro (moldball virus)
+	-- 0x01 - Golem
 -- offset 0x019d/0x11 - Special Flags 2
--- offset 		0x80 - Reducing Golem Amount?
--- offset 		0x40 - Knockback
--- offset 		0x20 - 
--- offset 		0x10 - 
--- offset 		0x08 - Weakness?
--- offset 		0x04 - Absorption?
--- offset 		0x02 - Nullification? (Disabled by nullification)
--- offset 		0x01 - -1 Level
+	-- 0x80 - Reducing Golem Amount?
+	-- 0x40 - Knockback
+	-- 0x20 - 
+	-- 0x10 - 
+	-- 0x08 - Weakness?
+	-- 0x04 - Absorption?
+	-- 0x02 - Nullification? (Disabled by nullification)
+	-- 0x01 - -1 Level
 -- offset 0x019e/0x12 - SP Change
--- offset 		0x80 - Bonus Flag
+	-- 0x80 - Bonus Flag
 -- offset 0x019f/0x13 - CT Change
--- offset 		0xFF = "Quick"
--- offset 		0x7F = "CT0"
--- offset 		0x80 - Bonus Flag
+	-- 0xFF = "Quick"
+	-- 0x7F = "CT0"
+	-- 0x80 - Bonus Flag
 
 Bunit.attack_accuracy = 0x1B6  -- 1byte, Attack accuracy
 Bunit.main_target     = 0x1B9  -- 1byte, Main target ID??
@@ -602,6 +678,11 @@ function Bunit.readProperty(ofs_unit)
 	prpt.birthday  = memory.readbyte(ofs_unit + Bunit.birthday  )
 	prpt.zodiac    = memory.readbyte(ofs_unit + Bunit.zodiac    )
 
+	prpt.innate_ability1   = memory.readword(ofs_unit + Bunit.innate_ability1   )
+	prpt.innate_ability2   = memory.readword(ofs_unit + Bunit.innate_ability2   )
+	prpt.innate_ability3   = memory.readword(ofs_unit + Bunit.innate_ability3   )
+	prpt.innate_ability4   = memory.readword(ofs_unit + Bunit.innate_ability4   )
+
 	prpt.exp       = memory.readbyte(ofs_unit + Bunit.exp       )
 	prpt.lv        = memory.readbyte(ofs_unit + Bunit.lv        )
 	prpt.brave     = memory.readbyte(ofs_unit + Bunit.brave     )
@@ -618,22 +699,38 @@ function Bunit.readProperty(ofs_unit)
 
 	prpt.ct        = memory.readbyte(ofs_unit + Bunit.ct        )
 	prpt.direct    = memory.readbyte(ofs_unit + Bunit.direct    )
-	prpt.status_5A = memory.readbyte(ofs_unit + Bunit.status_5A )
 
-	prpt.reaction_affected1   = memory.readbyte(ofs_unit + Bunit.reaction_affected1   )
-	prpt.reaction_affected2   = memory.readbyte(ofs_unit + Bunit.reaction_affected2   )
-	prpt.reaction_affected3   = memory.readbyte(ofs_unit + Bunit.reaction_affected3   )
-	prpt.reaction_affected4   = memory.readbyte(ofs_unit + Bunit.reaction_affected4   )
-	prpt.support_affected1    = memory.readbyte(ofs_unit + Bunit.support_affected1    )
-	prpt.support_affected2    = memory.readbyte(ofs_unit + Bunit.support_affected2    )
-	prpt.support_affected3    = memory.readbyte(ofs_unit + Bunit.support_affected3    )
-	prpt.support_affected4    = memory.readbyte(ofs_unit + Bunit.support_affected4    )
-	prpt.movement_affected1   = memory.readbyte(ofs_unit + Bunit.movement_affected1   )
-	prpt.movement_affected2   = memory.readbyte(ofs_unit + Bunit.movement_affected2   )
-	prpt.movement_affected3   = memory.readbyte(ofs_unit + Bunit.movement_affected3   )
-	prpt.unlocked_jobs1_8     = memory.readbyte(ofs_unit + Bunit.unlocked_jobs1_8     )
-	prpt.unlocked_jobs9_16    = memory.readbyte(ofs_unit + Bunit.unlocked_jobs9_16    )
-	prpt.unlocked_jobs17_20   = memory.readbyte(ofs_unit + Bunit.unlocked_jobs17_20   )
+	prpt.status_auto1   = memory.readbyte(ofs_unit + Bunit.status_auto1   )
+	prpt.status_auto2   = memory.readbyte(ofs_unit + Bunit.status_auto2   )
+	prpt.status_auto3   = memory.readbyte(ofs_unit + Bunit.status_auto3   )
+	prpt.status_auto4   = memory.readbyte(ofs_unit + Bunit.status_auto4   )
+	prpt.status_auto5   = memory.readbyte(ofs_unit + Bunit.status_auto5   )
+	prpt.status_immune1 = memory.readbyte(ofs_unit + Bunit.status_immune1 )
+	prpt.status_immune2 = memory.readbyte(ofs_unit + Bunit.status_immune2 )
+	prpt.status_immune3 = memory.readbyte(ofs_unit + Bunit.status_immune3 )
+	prpt.status_immune4 = memory.readbyte(ofs_unit + Bunit.status_immune4 )
+	prpt.status_immune5 = memory.readbyte(ofs_unit + Bunit.status_immune5 )
+	prpt.status_cur1    = memory.readbyte(ofs_unit + Bunit.status_auto1   )
+	prpt.status_cur2    = memory.readbyte(ofs_unit + Bunit.status_auto2   )
+	prpt.status_cur3    = memory.readbyte(ofs_unit + Bunit.status_auto3   )
+	prpt.status_cur4    = memory.readbyte(ofs_unit + Bunit.status_auto4   )
+	prpt.status_cur5    = memory.readbyte(ofs_unit + Bunit.status_auto5   )
+
+
+	prpt.reaction_active1   = memory.readbyte(ofs_unit + Bunit.reaction_active1   )
+	prpt.reaction_active2   = memory.readbyte(ofs_unit + Bunit.reaction_active2   )
+	prpt.reaction_active3   = memory.readbyte(ofs_unit + Bunit.reaction_active3   )
+	prpt.reaction_active4   = memory.readbyte(ofs_unit + Bunit.reaction_active4   )
+	prpt.support_active1    = memory.readbyte(ofs_unit + Bunit.support_active1    )
+	prpt.support_active2    = memory.readbyte(ofs_unit + Bunit.support_active2    )
+	prpt.support_active3    = memory.readbyte(ofs_unit + Bunit.support_active3    )
+	prpt.support_active4    = memory.readbyte(ofs_unit + Bunit.support_active4    )
+	prpt.movement_active1   = memory.readbyte(ofs_unit + Bunit.movement_active1   )
+	prpt.movement_active2   = memory.readbyte(ofs_unit + Bunit.movement_active2   )
+	prpt.movement_active3   = memory.readbyte(ofs_unit + Bunit.movement_active3   )
+	prpt.unlocked_jobs1_8   = memory.readbyte(ofs_unit + Bunit.unlocked_jobs1_8   )
+	prpt.unlocked_jobs9_16  = memory.readbyte(ofs_unit + Bunit.unlocked_jobs9_16  )
+	prpt.unlocked_jobs17_20 = memory.readbyte(ofs_unit + Bunit.unlocked_jobs17_20 )
 
 	prpt.base_action_learned1      = memory.readbyte(ofs_unit + Bunit.base_action_learned1      )
 	prpt.base_action_learned2      = memory.readbyte(ofs_unit + Bunit.base_action_learned2      )
@@ -714,6 +811,7 @@ function Bunit.readProperty(ofs_unit)
 	--prpt.info = Bunit.toString2(prpt)
 	--prpt.info = Bunit.toString3(prpt)
 	--prpt.info = Bunit.toString4(prpt)
+	--prpt.info = Bunit.toString5(prpt)
 	return prpt
 end
 
@@ -786,7 +884,7 @@ end
 
 function Bunit.toString3(prpt)
 	local str = string.format("%2x,%2x,%2x,%2x/"
-			.."%2d,%2d/"
+			.."%2d,%2d,%2d/"
 			.."%2d,%2d/"
 			.."%3d,%2d/"
 			.."squire-%3d-%3d/%2x,%2x,%2x/"
@@ -795,7 +893,8 @@ function Bunit.toString3(prpt)
 			.."thief-%3d-%3d,%2x,%2x,%2x/"
 			.."%2x,%2x,%2x,%2x/"
 			.."%2x,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x/",
+			.."%2x,%2x,%2x/"
+			.."%3x,%3x,%3x,%3x/",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -803,6 +902,7 @@ function Bunit.toString3(prpt)
 
 			prpt.lv     ,
 			prpt.exp    ,
+			prpt.speed  ,
 
 			prpt.brave  ,
 			prpt.faith  ,
@@ -834,17 +934,21 @@ function Bunit.toString3(prpt)
 			prpt.thief_action_learned2 ,
 			prpt.thief_r_s_m_learned3  ,
 
-			prpt.reaction_affected1 ,
-			prpt.reaction_affected2 ,
-			prpt.reaction_affected3 ,
-			prpt.reaction_affected4 ,
-			prpt.support_affected1  ,
-			prpt.support_affected2  ,
-			prpt.support_affected3  ,
-			prpt.support_affected4  ,
-			prpt.movement_affected1 ,
-			prpt.movement_affected2 ,
-			prpt.movement_affected3 )
+			prpt.reaction_active1 ,
+			prpt.reaction_active2 ,
+			prpt.reaction_active3 ,
+			prpt.reaction_active4 ,
+			prpt.support_active1  ,
+			prpt.support_active2  ,
+			prpt.support_active3  ,
+			prpt.support_active4  ,
+			prpt.movement_active1 ,
+			prpt.movement_active2 ,
+			prpt.movement_active3 ,
+			prpt.innate_ability1  ,
+			prpt.innate_ability2  ,
+			prpt.innate_ability3  ,
+			prpt.innate_ability4  )
 
 	return str
 end
@@ -876,6 +980,48 @@ function Bunit.toString4(prpt)
 			prpt.total_JP_chemist   ,
 			prpt.total_JP_wizard    ,
 			prpt.total_JP_knight    )
+
+	return str
+end
+
+function Bunit.toString5(prpt)
+	local str = string.format("%2x,%2x,%2x,%2x/"
+			.."%2d,%2d,%2d/"
+			.."%2d,%2d/"
+			.."%3d,%2d/"
+			.."%2x,%2x,%2x,%2x,%2x/"
+			.."%2x,%2x,%2x,%2x,%2x/"
+			.."%2x,%2x,%2x,%2x,%2x/",
+			prpt.ch     ,
+			prpt.no     ,
+			prpt.job    ,
+			prpt.zodiac ,
+
+			prpt.lv     ,
+			prpt.exp    ,
+			prpt.speed  ,
+
+			prpt.brave  ,
+			prpt.faith  ,
+
+			prpt.hp     ,
+			prpt.mp     ,
+
+			prpt.status_auto1   ,
+			prpt.status_auto2   ,
+			prpt.status_auto3   ,
+			prpt.status_auto4   ,
+			prpt.status_auto5   ,
+			prpt.status_immune1 ,
+			prpt.status_immune2 ,
+			prpt.status_immune3 ,
+			prpt.status_immune4 ,
+			prpt.status_immune5 ,
+			prpt.status_cur1    ,
+			prpt.status_cur2    ,
+			prpt.status_cur3    ,
+			prpt.status_cur4    ,
+			prpt.status_cur5    )
 
 	return str
 end
@@ -931,7 +1077,7 @@ function GameTime.increment()
 				base_min = 0
 				base_hour = base_hour + 1
 				if base_hour > 999 then
-					base_hour = 1000
+					base_hour = 999
 				end
 			end
 		end

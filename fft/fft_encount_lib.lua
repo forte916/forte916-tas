@@ -207,7 +207,9 @@ function Mandalia.success()
 			compatibility = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-ramza", str, Zodiac.notation[compatibility])
 
-			if compatibility > 3 or (compatibility == 3 and prpt.faith > 57) then
+			if (compatibility > 3 and prpt.faith > 46)
+				or (compatibility == 3 and prpt.faith > 57) 
+				or (compatibility == 2 and prpt.faith > 63) then
 				str = string.format("%s, bolt2", str)
 				enemy = enemy + 1
 				matched = matched + 1
@@ -302,7 +304,7 @@ end
 -- MandaliaRandom
 ------------------------------------------------------------
 MandaliaRandom = {}
-MandaliaRandom.logname = "ch1_random_encount15.log"
+MandaliaRandom.logname = "ch1_random_encount21.log"
 
 function MandaliaRandom.logHeader()
 	debugPrint(string.format("### down (select Mandalia)"))
@@ -324,43 +326,44 @@ end
 --end
 
 
---function MandaliaRandom.pre_attempt()
---	-- move Gariland From Mandalia
---	pressBtn({triangle=1}, 5)
---	pressBtn({circle=1}, 3)
---	pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
---	--pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
---end
-
-
 function MandaliaRandom.pre_attempt()
-	fadv(4)
-end
-
-function MandaliaRandom.pre_attempt2()
-	--exitFormation()
-	pressBtn({x=1}, 5)
-	pressBtn({x=1}, 1)
-	fadv(44)
-	-- move Gariland From Formation
-	pressBtn({up=1}, 1)
-	pressBtn({circle=1}, 3)
-	pressBtn({up=1}, 1)
-	pressBtn({circle=1}, 1)
-	fadv(6)
-	-- wait until arrive
-	local arrived = memory.readword(adr_on_location)
-	while arrived ~= 0x01 do
-		fadv(1)
-		arrived = memory.readword(adr_on_location)
-	end
-	-- moveMandaliaFromGariland
+	-- move Mandalia From Gariland
+	fadv(2)
 	pressBtn({triangle=1}, 5)
 	pressBtn({circle=1}, 3)
-	pressBtn({down=1}, 1)
-	local fc = emu.framecount()
-	fadv(68691 - fc)
+	pressBtn({down=1}, 1)  -- enemy status is changed whether down or up
+	--pressBtn({up=1}, 1)  -- enemy status is changed whether down or up
 end
+
+
+--function MandaliaRandom.pre_attempt()
+--	fadv(4)
+--end
+
+--function MandaliaRandom.pre_attempt2()
+--	--exitFormation()
+--	pressBtn({x=1}, 5)
+--	pressBtn({x=1}, 1)
+--	fadv(44)
+--	-- move Gariland From Formation
+--	pressBtn({up=1}, 1)
+--	pressBtn({circle=1}, 3)
+--	pressBtn({up=1}, 1)
+--	pressBtn({circle=1}, 1)
+--	fadv(6)
+--	-- wait until arrive
+--	local arrived = memory.readword(adr_on_location)
+--	while arrived ~= 0x01 do
+--		fadv(1)
+--		arrived = memory.readword(adr_on_location)
+--	end
+--	-- moveMandaliaFromGariland
+--	pressBtn({triangle=1}, 5)
+--	pressBtn({circle=1}, 3)
+--	pressBtn({down=1}, 1)
+--	local fc = emu.framecount()
+--	fadv(68691 - fc)
+--end
 
 function MandaliaRandom.attempt()
 	pressBtn({circle=1}, 1)
