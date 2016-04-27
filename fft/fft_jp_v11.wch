@@ -28,11 +28,11 @@
 00019	0018D4E8	d	h	0	Control_Variable
 0001A	00000000	S	S	0	----------------------------
 0001B	0018DF78	d	h	0	unknown
-0001C	001C16EC	d	h	0	unknown
-0001D	001C170C	d	h	0	unknown
-0001E	001C172C	d	h	0	unknown
-0001F	001F0530	d	h	0	unknown
-00020	001F0560	d	h	0	unknown
+0001C	001C16EC	d	h	0	formation status param??
+0001D	001C170C	d	h	0	formation status param??
+0001E	001C172C	d	h	0	formation status param??
+0001F	001F0530	d	h	0	unknown in stack
+00020	001F0560	d	h	0	unknown in stack
 00021	00000000	S	S	0	----------------------------
 00022	00038D88	d	h	0	unknown
 00023	00038F90	d	h	0	unknown

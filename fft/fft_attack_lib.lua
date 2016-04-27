@@ -544,9 +544,11 @@ end
 -- CriticalHit
 ------------------------------------------------------------
 CriticalHit = {}
-CriticalHit.logname = "ch1_gariland_squire_turn3_2.log"
+--CriticalHit.logname = "ch1_gariland_squire_turn3_2.log"
+CriticalHit.logname = "ch4_sluice_turn1_1.log"
 
 function CriticalHit.pre_attempt()
+	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
 	fadv(3)
@@ -560,7 +562,7 @@ end
 
 function CriticalHit.attempt()
 	pressBtn({circle=1}, 1)  -- execute attack
-	fadv(150)
+	fadv(80)
 end
 
 function CriticalHit.post_attempt()
@@ -572,10 +574,14 @@ function CriticalHit.success()
 	local prpt = {}
 	local str
 
-	prpt = Bunit.readProperty(adr_battle_unit4)
+	prpt = Bunit.readProperty(adr_battle_unit8)
 	str = prpt.info
 
 	if prpt.critical ~= 0 then
+		if Bunit.isKnockback(prpt) ~= 0 then
+			str = string.format("%s, knockback", str)
+		end
+
 		str = string.format("%s, critical, hp=%d", str, prpt.hp)
 		print(str)
 		ret = true
@@ -642,8 +648,6 @@ function CriticalInjured.success()
 	prpt = Bunit.readProperty(adr_battle_unit)
 	str = prpt.info
 
-	injured = bit.band(prpt.status_cur3, 0x01)  -- 0x01 Critical injured
-
 	if prpt.critical ~= 0 then
 		str = string.format("%s, hp=%d, critical hit", str, prpt.hp)
 		print(str)
@@ -653,7 +657,7 @@ function CriticalInjured.success()
 		str = string.format("%s, hp=%d, KO", str, prpt.hp)
 		print(str)
 		ret = true
-	elseif injured ~= 0 then
+	elseif Bunit.isInjured(prpt) ~= 0 then
 		str = string.format("%s, hp=%d, critical injured", str, prpt.hp)
 		print(str)
 		ret = true

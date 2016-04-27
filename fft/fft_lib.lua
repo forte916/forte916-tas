@@ -633,6 +633,7 @@ Bunit.item_lost  = 0x18F  -- 1byte, Item to break/use
 -- offset 0x0196/0x0a - MP Recovery
 -- offset 0x0198/0x0c - Gil Stolen/Lost
 -- offset 0x019a/0x0e - Reaction ID
+Bunit.effect_flag1  = 0x19C  -- 1byte, Special Flags 1
 -- offset 0x019c/0x10 - Special Flags 1
 	-- 0x80 - +1 Level
 	-- 0x40 - Switch Team
@@ -642,6 +643,7 @@ Bunit.item_lost  = 0x18F  -- 1byte, Item to break/use
 	-- 0x04 - Break Item
 	-- 0x02 - Malboro (moldball virus)
 	-- 0x01 - Golem
+Bunit.effect_flag2  = 0x19D  -- 1byte, Special Flags 2
 -- offset 0x019d/0x11 - Special Flags 2
 	-- 0x80 - Reducing Golem Amount?
 	-- 0x40 - Knockback
@@ -804,11 +806,14 @@ function Bunit.readProperty(ofs_unit)
 	prpt.miss_type  = memory.readbyte(ofs_unit + Bunit.miss_type  )
 	prpt.item_lost  = memory.readbyte(ofs_unit + Bunit.item_lost  )
 
+	prpt.effect_flag1  = memory.readbyte(ofs_unit + Bunit.effect_flag1  )
+	prpt.effect_flag2  = memory.readbyte(ofs_unit + Bunit.effect_flag2  )
+
 	prpt.attack_accuracy = memory.readbyte(ofs_unit + Bunit.attack_accuracy )
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
-	prpt.info = Bunit.toString(prpt)
-	--prpt.info = Bunit.toString2(prpt)
+	--prpt.info = Bunit.toString(prpt)
+	prpt.info = Bunit.toString2(prpt)
 	--prpt.info = Bunit.toString3(prpt)
 	--prpt.info = Bunit.toString4(prpt)
 	--prpt.info = Bunit.toString5(prpt)
@@ -855,7 +860,9 @@ end
 function Bunit.toString2(prpt)
 	local str = string.format("%2x,%2x,%2x,%2x/"
 			.."%2d,%2d/"
-			.."%2x,%2x,%2x/%2x,%2x,%2x/%2x,%2x,%2x/"
+			.."%2x,%2x,%2x/%2x,%2x,%2x/"
+			.."%2x,%2x,%2x/"
+			.."%2x,%2x/"
 			.."%2d,%2x,%2x/",
 			prpt.ch     ,
 			prpt.no     ,
@@ -871,9 +878,13 @@ function Bunit.toString2(prpt)
 			prpt.turn_ended  ,
 			prpt.unit_id_ff  ,
 			prpt.ability_ct  ,
+
 			prpt.hit_miss    ,
 			prpt.critical    ,
 			prpt.miss_type   ,
+
+			prpt.effect_flag1   ,
+			prpt.effect_flag2   ,
 
 			prpt.attack_accuracy ,
 			prpt.main_target     ,
@@ -1052,6 +1063,55 @@ function Bunit.drawAll(x, y)
 
 		gui.text(x, y+(8*i) , prpt.info)
 	end
+end
+
+
+function Bunit.isRandomExists(prpt)
+	local entd_flag = bit.band(prpt.entd_flag, 0x50)  -- 0x50 Random exists
+	return entd_flag
+end
+
+function Bunit.isKnockback(prpt)
+	local kockbacked = bit.band(prpt.effect_flag2, 0x40)  -- 0x40 - Knockback
+	return kockbacked
+end
+
+function Bunit.isInjured(prpt)
+	local injured = bit.band(prpt.status_cur3, 0x01)  -- 0x01 Critical injured
+	return injured
+end
+
+function Bunit.isLearnedThrowStone(prpt)
+	local learned = bit.band(prpt.base_action_learned1, 0x20)  -- 0x08 means Throw Stone
+	return learned
+end
+
+function Bunit.isLearnedStealHeart(prpt)
+	local learned = bit.band(prpt.thief_action_learned1, 0x40)  -- 0x40 means Steal Heart
+	return learned
+end
+
+function Bunit.isLearnedGainedJpUp(prpt)
+	local learned = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
+	return learned
+end
+
+function Bunit.isLearnedLightningStab(prpt)
+	local learned = bit.band(prpt.base_action_learned1, 0x10)  -- 0x10 means Lightning Stab
+	return learned
+end
+
+function Bunit.isLearnedMove1(prpt)
+	local learned = bit.band(prpt.base_r_s_m_learned3, 0x04)  -- 0x04 means Move+1
+	return learned
+end
+
+function Bunit.isJobSquire(prpt)
+	return bit.band(prpt.job, 0x4A)  -- 0x4A means Squire
+end
+
+function Bunit.isJobChemist(prpt)
+	return bit.band(prpt.job, 0x4B)  -- 0x4B means Chemist
 end
 
 

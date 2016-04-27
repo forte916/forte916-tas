@@ -178,7 +178,6 @@ function Mandalia.success()
 	local ofs_unit = adr_battle_unit3
 	local total_enemy = 6
 	local compatibility = 0
-	local skill = 0
 	local matched = 0
 	local enemy = 0
 	local str
@@ -192,8 +191,7 @@ function Mandalia.success()
 			compatibility = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-algus", str, Zodiac.notation[compatibility])
 
-			skill = bit.band(prpt.thief_action_learned1, 0x40)  -- 0x40 means Steal Heart
-			if skill ~= 0 then
+			if Bunit.isLearnedStealHeart(prpt) ~= 0 then
 				str = str..", charm"
 			end
 		end
@@ -215,8 +213,7 @@ function Mandalia.success()
 				matched = matched + 1
 			end
 
-			skill = bit.band(prpt.base_action_learned1, 0x20)  -- 0x08 means Throw Stone
-			if skill ~= 0 then
+			if Bunit.isLearnedThrowStone(prpt) ~= 0 then
 				str = str..", throw stone"
 				matched = matched + 1
 			end
@@ -282,14 +279,12 @@ function GainedJpUP.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit3
-	local skill = 0
 	local str
 
 	prpt = Bunit.readProperty(ofs_unit)
 	str = prpt.info
 
-	skill = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
-	if skill ~= 0 then
+	if Bunit.isLearnedGainedJpUp(prpt) ~= 0 then
 		print(string.format("-- base_r_s_m_learned3 = %x, Gained Jp UP", prpt.base_r_s_m_learned3))
 		str = str.." , Gained Jp UP"
 		ret = true
@@ -558,7 +553,6 @@ function RouteEncount.success()
 	local ofs_unit = adr_battle_unit
 	local total_enemy = 12
 	local enemy = 0
-	local entd_flag = 0
 	local str
 
 	for i=1, total_enemy do
@@ -566,10 +560,9 @@ function RouteEncount.success()
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
 
-		entd_flag = bit.band(prpt.entd_flag, 0x50)  -- 0x50 Random enemy
-		if entd_flag ~= 0 then
+		if Bunit.isRandomExists(prpt) ~= 0 then
 			enemy = enemy + 1
-			str = str.." , random enemy"
+			str = str.." , random exists"
 		end
 		debugPrint(str)
 	end
@@ -679,23 +672,19 @@ function Orlandu.success()
 	local ret = false
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
-	local skill = 0
-	local move = 0
 	local matched =  0
 	local str
 
 	prpt = Bunit.readProperty(ofs_unit)
 	str = prpt.info
 
-	skill = bit.band(prpt.base_action_learned1, 0x10)  -- 0x10 means Lightning Stab
-	if skill ~= 0 and prpt.lv > 26 then
-		print(string.format("-- skill = %x, lv = %2d", skill, prpt.lv))
+	if Bunit.isLearnedLightningStab(prpt) ~= 0 and prpt.lv > 26 then
+		print(string.format("-- skill = %x, lv = %2d", prpt.base_action_learned1, prpt.lv))
 		str = str.." , Lightning Stab"
 		matched = matched + 1
 	end
 
-	move = bit.band(prpt.base_r_s_m_learned3, 0x04)  -- 0x04 means Move+1
-	if move ~= 0 then
+	if Bunit.isLearnedMove1(prpt) ~= 0 then
 		print(string.format("-- base_r_s_m_learned3 = %x, Move+1", prpt.base_r_s_m_learned3))
 		str = str.." , Move+1"
 		matched = matched + 1

@@ -104,16 +104,16 @@ function GarilandParty.success()
 			str = string.format("%s, faith", str)
 		end
 
-		if prpt.total_JP_squire > 119 and bit.band(prpt.job, 0x4A) ~= 0 then
+		if prpt.total_JP_squire > 119 and Bunit.isJobSquire(prpt) ~= 0 then
 			str = string.format("%s, squireTotal", str)
-		elseif prpt.total_JP_squire > 159 and bit.band(prpt.job, 0x4B) ~= 0 then
+		elseif prpt.total_JP_squire > 159 and Bunit.isJobChemist(prpt) ~= 0 then
 			str = string.format("%s, squireTotal", str)
 		end
 
-		if prpt.total_JP_chemist > 179 and bit.band(prpt.job, 0x4A) ~= 0 then
+		if prpt.total_JP_chemist > 179 and Bunit.isJobSquire(prpt) ~= 0 then
 			good = good + 1
 			str = string.format("%s, chemist", str)
-		elseif prpt.total_JP_chemist > 139 and bit.band(prpt.job, 0x4B) ~= 0 then
+		elseif prpt.total_JP_chemist > 139 and Bunit.isJobChemist(prpt) ~= 0 then
 			good = good + 1
 			str = string.format("%s, chemist", str)
 		end

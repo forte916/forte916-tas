@@ -814,6 +814,39 @@ ch4-Sluice
 
 * highest speed 9
 
+* PlanA
+  * Ramza
+    * squire, time magic, teleport, speed 10?
+  * General1
+    * squire, trhow stone, teleport, speed 10?
+  * General2
+    * squire, trhow stone, teleport, speed 10?
+  * turn1
+    * general1 moves and knockback knight
+    * general2 moves and knockback knight
+    * ramza moves and cast quick
+    * quick invoked, then ramza moves
+
+
+* PlanB
+  * Ramza
+    * squire, trhow stone, teleport, cirital quick, speed 10?
+  * General
+    * squire, trhow stone, teleport, speed 10?
+  * turn1
+    * ramza moves and knockback knight
+    * general moves and knockback knight
+    * enemy wizard
+    * enemy archer x2
+    * enemy knight attacks ramza, 156 damage
+    * ramza's critical quick invoked
+    * ramza moves and cast quick
+    * rest of enemies can act??
+    * quick invoked, then ramza moves
+
+
+
+
 * RTA 動画では
   * Ramza speed 12, move 4. auto-haste. 見習い戦士
   * Ramza は初期配置, ラヴィアンを 左1 上2
@@ -832,6 +865,7 @@ ch4-Sluice
 * Wizard は時魔法等の行動をさせない
   * Quick を使う場合はヘイストをさせない
   * Quick を使わない場合は敵のヘイストを自分も受ける
+
 * Orlandu status
   * Orlandu Lv27 以上かつ Lightning Stab を覚えている. Lv29 だと PA +1 なのでベター
   * エルムドア戦で Move+1 があるとよいので  Move+1 or rest of JP is higher than 200JP
@@ -1524,7 +1558,7 @@ Encount research of random battle
   * frame数が同じなら乱数を変えてもエンカウントする・しないの判定は変化しない
   * エンカウントはフレーム単位で 3連続で発生, 7連続でなしの周期を繰り返している
   * frame数が同じなら乱数を変えても出撃する・しないの判定は変化しない
-    * ただし編成画面で異なる行動をとると、到着時刻が同じでも編成が異なることがまれにある
+    * ただし編成画面で異なる行動をとると、到着時刻が同じでも敵編成が異なることがまれにある
   * ゲーム内の milsec, sec, min, hour を書き換えれば結果が変わる
 
 * disassemble
@@ -1606,6 +1640,17 @@ Knockback research
   * Knockback ルーチン
     * http://ffhacktics.com/wiki/Damage_and_Knockback_Routine_(Dash,_tackle,_throw_stone)
     * attacker の Br が高く、target の Br が低いほど Knockback 発生率が高くなる
+
+
+Research
+--------
+* ただし編成画面で異なる行動をとると、到着時刻が同じでも敵編成が異なることがまれにある
+  * 出撃画面で lag が発生する frame がずれてしまうのが原因の模様
+  * なぜ lag frame がずれるのかは不明
+  * 傾向として、編成画面で一定 frame が経過すると lag frame がずれる
+  * 編成画面では 0x801C16E6 や 0x801C1706 辺りにデータをストアしていて
+    この辺のアドレスの書き換え回数や値を見れば、法則がつかめるかもしれない
+
 
 
 ROM hack

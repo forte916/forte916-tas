@@ -52,7 +52,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = MandaliaAlgusTurn1
+local interface = CriticalHit
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
