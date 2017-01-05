@@ -165,7 +165,7 @@ function Battle.act_move_template()
 	-- arrowed
 	fadv(1)  -- wait until 0x164908 = 0x001C
 	pressBtn({circle=1}, 1)
-	fadv(12)
+	fadv(10+2)
 	pressBtn({circle=1}, 2)  -- confirm direction
 	pressBtn({circle=1}, 1)
 end

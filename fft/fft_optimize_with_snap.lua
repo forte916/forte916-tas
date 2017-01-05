@@ -214,7 +214,8 @@ local begin_date = os.date()
 local fc = emu.framecount()
 --local rng = memory.readdword(adr_rng)
 
-local interface = Cristal3
+--local interface = Cristal3
+local interface = Optimize
 
 
 retry = 200
@@ -239,7 +240,8 @@ for i=0, retry do
 
 		-- make dest directory in advance
 		local gdstr = gui.gdscreenshot()
-		gd.createFromGdStr(gdstr):png(string.format("snap/cristal_ability3_%df.png", fc))
+		--gd.createFromGdStr(gdstr):png(string.format("snap/cristal_ability3_%df.png", fc))
+		gd.createFromGdStr(gdstr):png(string.format("snap/ending_movie_%df.png", fc))
 	end
 
 	savestate.load(state)

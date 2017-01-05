@@ -2852,7 +2852,7 @@ function TAS.ch4_altima_turn3()
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 1)
 	pressBtn({circle=1}, 1)
-	fadv(6)
+	fadv(5+1)
 	pressBtn({l2=1}, 1)
 	--fadv(xx)  -- wait for moving
 

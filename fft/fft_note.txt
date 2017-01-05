@@ -870,7 +870,9 @@ ch4-Sluice
   * Orlandu Lv27 以上かつ Lightning Stab を覚えている. Lv29 だと PA +1 なのでベター
   * エルムドア戦で Move+1 があるとよいので  Move+1 or rest of JP is higher than 200JP
 
-* Encount odds is 6/10 from Bethla to Zarghidas
+* Bethla to Zarghidas
+  * Encounter 6/10 = 3/10 ベッド砂漠 + 3/10 フィナス河
+
 
 ch4-Zarghidas
 -------------
@@ -879,9 +881,10 @@ ch4-Zarghidas
 * Buy Twist Headband(PA+2), Power Sleeve(PA+2) for Orlandu
 
 * Formation
-* Ramza equip Exbalibur, Wizard Robe(MA+2), Magic Gauntlet(MA+2)
+* Ramza equip Excalibur, Wizard Robe(MA+2), Magic Gauntlet(MA+2)
 * Set Math Skill, MP Switch
 * Remove Teleport
+	* ラムザはもう歩くことはないので Teleport 解除は必要ない
 
 * Ramza, Lv30, speed 8, MA 13, Excalibur (speed 12)
 * Orlandu, Lv30, speed 8, PA 17, Excalibur (speed 12)
@@ -901,9 +904,11 @@ ch4-Germinas
 ------------
 * CT3 Death
 
+* Ramza 初期配置, Orlandu 初期配置 左1
+* 2部隊編成なので全員 squad 1 に出すことで squad 2 の編成画面をスキップさせる
+
 * TA 動画では
-  * Ramza 初期配置, Orlandu Ramza 左1
-  * 2部隊編成なので Orlandu も出す
+  * Ramza 初期配置, Orlandu 初期配置 左2
 
 * Note
   * Flare 629877 - 631321 = 1444f
@@ -912,6 +917,8 @@ ch4-Germinas
 ch4-Poeskas
 -----------
 * CT3 Flare
+
+* 死者にデスは効かないのでフレア
 
 
 ch4-Limberry (outside)
@@ -961,14 +968,18 @@ ch4-Limberry (inside)
 ch4-Zarela
 ----------
 * Zarela Lv44, HP 1171, speed 11
+
+* Ramza 初期配置, Orlandu 初期配置 上1
+  * この配置だとカメラの回転が少なくなる
+
 * Height prime Demi2
 * hits an enemy as well
-* Orlandu が剣技(Lightning Stab). 足りない場合は critical.
+* Orlandu Lightning Stab **critical**
 
 * RTA では
   * Ramza speed 12, MA 12, 黒魔道士
   * Ramza 初期配置, Orlandu ラムザの上1, ラヴィアン ラムザの 上1 左1
-  * この配置でカメラの回転 1回少なくなる
+  * この配置だとカメラの回転が少なくなる
   * Height prime Demi2
   * Orlandu が剣技. 足りない場合は ラヴィアン.
 
@@ -979,7 +990,7 @@ ch4-Zarela
   * Orlandu が剣技(Lightning Stab) critical.
 
 * Limberry to Igros
-  * encount 5/10 = 3/10 ドルボダル湿原 + 2/10 スウィージの森
+  * Encounter 5/10 = 3/10 ドルボダル湿原 + 2/10 スウィージの森
   * ただしずれるので絶対ではない
 * Limberry to Dorter
   * 恐らく 3/10 =  3/10 ドルボダル湿原 + 0/10 ゼイレキレの滝 + 0/10 アラグアイの森
@@ -991,7 +1002,7 @@ ch4-Zarela
 
 ch4-Adramelk
 ------------
-* Dycedarg Lv43, HP  462, speed 9?? 10??
+* Dycedarg Lv43, HP  462, speed 9
 * Adramelk Lv46, HP 1525, speed 10
 
 * Ramza 初期配置 の左1, Orlandu 初期配置
@@ -1356,9 +1367,18 @@ ch4-Murond (Altima)
 
 Ending
 ------
+### Take1
 * Last key frame = 803365f
 * "The end"      = 803979f (after 30f, 0x1FFE88 = 0x801FFF48) = 3:43:19
+* movie end      = 805007
 * rerecord-count = 59430
+
+### Take2 (improve last boss)
+* 359f shorter
+* Last key frame = 803006f
+* "The end"      = 803620f (after 30f, 0x1FFE88 = 0x801FFF48) = 3:43:13
+* movie end      = 804647
+* rerecord-count = 60253
 
 
 Mathable by Lv
@@ -1552,7 +1572,7 @@ Play Movie
 * http://www.twitch.tv/tideruglia/c/6013890
 
 
-Encount research of random battle
+Encounter research of random battle
 ----------------------------------
 * lua で検証できたこと
   * frame数が同じなら乱数を変えてもエンカウントする・しないの判定は変化しない
