@@ -7,8 +7,8 @@ Emulator
 * psxjin.ini
   * PsxAuto=1
   * PsxOut=1
-  * ‚±‚Ìİ’è‚ğ‚µ‚È‚¢‚ÆƒKƒtƒKƒŠƒIƒ“‚ÌÅ‰‚Ìƒ^[ƒ“‚ÅƒtƒŠ[ƒY‚·‚é
-  * disable coord check ‚ğ checked ‚É‚·‚éİ’è‚à•K—v‚ç‚µ‚¢‚ª–¢ŒŸØ
+  * ã“ã®è¨­å®šã‚’ã—ãªã„ã¨ã‚¬ãƒ•ã‚¬ãƒªã‚ªãƒ³ã®æœ€åˆã®ã‚¿ãƒ¼ãƒ³ã§ãƒ•ãƒªãƒ¼ã‚ºã™ã‚‹
+  * disable coord check ã‚’ checked ã«ã™ã‚‹è¨­å®šã‚‚å¿…è¦ã‚‰ã—ã„ãŒæœªæ¤œè¨¼
 
 RNG
 ----
@@ -16,125 +16,125 @@ RNG
 * use rand() in BIOS
 
 * about seed
-  * “dŒ¹“Š“ü‚É seed = 1 ‚Å‰Šú‰»‚³‚ê‚é
-  * soft reset ‚Å‚Í seed ‚Í‰Šú‰»‚³‚ê‚È‚¢
-  * ‹’“_“’…‚ÉƒQ[ƒ€ŠÔ‚ğŒ³‚É seed ‚ªXV‚³‚ê‚é
-  * 1f –ˆ‚É•Ï‰»‚·‚é (1f –ˆ‚É rand ‚ğ call ‚µ‚Ä‚¢‚é)
+  * é›»æºæŠ•å…¥æ™‚ã« seed = 1 ã§åˆæœŸåŒ–ã•ã‚Œã‚‹
+  * soft reset ã§ã¯ seed ã¯åˆæœŸåŒ–ã•ã‚Œãªã„
+  * æ‹ ç‚¹åˆ°ç€æ™‚ã«ã‚²ãƒ¼ãƒ æ™‚é–“ã‚’å…ƒã« seed ãŒæ›´æ–°ã•ã‚Œã‚‹
+  * 1f æ¯ã«å¤‰åŒ–ã™ã‚‹ (1f æ¯ã« rand ã‚’ call ã—ã¦ã„ã‚‹)
 
 
 FurShop glitch
 -------------
 * furshop glitch takes 1474f
 * 1638f is fastest at soft rest
-* soft rest ‚µ‚Ä‚à rng seed ‚Ì‰Šú‰»‚Í”­¶‚µ‚È‚¢
+* soft rest ã—ã¦ã‚‚ rng seed ã®åˆæœŸåŒ–ã¯ç™ºç”Ÿã—ãªã„
 * furshop inventory 0x80056818 (JPv1.1)
 * furshop inventory 0x80059494 (US)
-* ˆÃ“]’†‚ÉƒAƒCƒeƒ€‚ªƒ[ƒh‚³‚ê‚é‚Ì‚Å•Ò¬‰æ–Ê‚ª•\¦‚³‚ê‚½‚ç
-  ‘¦ soft reset ‚ÅOK. ƒ_[ƒ‰ƒ{ƒ“‚ÌƒZƒŠƒt‚Í•\¦‘O‚Å‚æ‚¢
+* æš—è»¢ä¸­ã«ã‚¢ã‚¤ãƒ†ãƒ ãŒãƒ­ãƒ¼ãƒ‰ã•ã‚Œã‚‹ã®ã§ç·¨æˆç”»é¢ãŒè¡¨ç¤ºã•ã‚ŒãŸã‚‰
+  å³ soft reset ã§OK. ãƒ€ãƒ¼ãƒ©ãƒœãƒ³ã®ã‚»ãƒªãƒ•ã¯è¡¨ç¤ºå‰ã§ã‚ˆã„
 
 
-Ramza ‰ŠúƒXƒe[ƒ^ƒX
+Ramza åˆæœŸã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
 --------------------
-* new game ‰Ÿ‰ºŒã Arazlam ‚ÌƒZƒŠƒtƒXƒLƒbƒvŒã‚ÉƒXƒe[ƒ^ƒX‚ªŒˆ’è‚³‚ê‚é
+* new game æŠ¼ä¸‹å¾Œ Arazlam ã®ã‚»ãƒªãƒ•ã‚¹ã‚­ãƒƒãƒ—å¾Œã«ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãŒæ±ºå®šã•ã‚Œã‚‹
 * High starting
-  * Squire ‚Æ Chemist ˆÈŠO‚ÌƒWƒ‡ƒu‚Ì JP ‚à‚‚¢ƒoƒ‰ƒ“ƒXŒ^‚ª—‘z
+  * Squire ã¨ Chemist ä»¥å¤–ã®ã‚¸ãƒ§ãƒ–ã® JP ã‚‚é«˜ã„ãƒãƒ©ãƒ³ã‚¹å‹ãŒç†æƒ³
   * Squire  JP
     * 190 or higher
   * Chemist JP
     * 190 or higher
   * Wizard JP, Priest JP, Calculator JP, Time mage JP, Oracle JP
-    * 7ƒWƒ‡ƒu‡Œv‚Å 1200 ˆÈã‚ª–ÚˆÀ
+    * 7ã‚¸ãƒ§ãƒ–åˆè¨ˆã§ 1200 ä»¥ä¸ŠãŒç›®å®‰
 
 
 
 ch1-Orbonne
 -----------
-* ƒI[ƒ{ƒ“ƒk“à‚ÌÅŒã‚Ì ovelia ‚ÌƒZƒŠƒt‚Å“G¯À‚ªŒˆ’è
-  * Gafgarion ‚Í “G 2‘Ì‚ÉUŒ‚‰Â”\
-  * Agrius ‚Í “G 1‘Ì‚ÉUŒ‚‰Â”\
-  * Gafgarion ‚Í Agrius ³–Ê‚Ì“G‚Æ‘Š«‚ªˆ«‚¢‚Æ•Ê‚Ì 1‘Ì‚ğ‘_‚¤
-  * Gafgarion ‚Æ Agruis ‚ª•ÊX‚Ì“G‚ğ“|‚·‚æ‚¤—U“±(’²®)‚·‚é‚±‚Æ‚Å
-    1ƒ^[ƒ“–Ú‚Å 2‘Ì‚ğ“|‚·‚±‚Æ‚ª‰Â”\
+* ã‚ªãƒ¼ãƒœãƒ³ãƒŒå†…ã®æœ€å¾Œã® ovelia ã®ã‚»ãƒªãƒ•ã§æ•µæ˜Ÿåº§ãŒæ±ºå®š
+  * Gafgarion ã¯ æ•µ 2ä½“ã«æ”»æ’ƒå¯èƒ½
+  * Agrius ã¯ æ•µ 1ä½“ã«æ”»æ’ƒå¯èƒ½
+  * Gafgarion ã¯ Agrius æ­£é¢ã®æ•µã¨ç›¸æ€§ãŒæ‚ªã„ã¨åˆ¥ã® 1ä½“ã‚’ç‹™ã†
+  * Gafgarion ã¨ Agruis ãŒåˆ¥ã€…ã®æ•µã‚’å€’ã™ã‚ˆã†èª˜å°(èª¿æ•´)ã™ã‚‹ã“ã¨ã§
+    1ã‚¿ãƒ¼ãƒ³ç›®ã§ 2ä½“ã‚’å€’ã™ã“ã¨ãŒå¯èƒ½
 
 * turn1
   * change option
-    *  5.ƒƒbƒZ[ƒW‚Ì•\¦‘¬“x  ->‘¬‚¢
-    *  6.ƒiƒrƒQ[ƒVƒ‡ƒ“ƒƒbƒZ[ƒW‚Ì—L–³  -> OFF
-    *  7.ƒAƒrƒŠƒeƒB–¼‚Ì•\¦  -> OFF
-    *  8.Œø‰ÊƒƒbƒZ[ƒW‚Ì•\¦  -> OFF
-    *  9.ŒoŒ±’lJpæ“¾‚Ì•\¦  -> OFF
-    * 11.ƒWƒ‡ƒu•Ê‘•”õ•t‰ÁƒAƒCƒeƒ€‚Ì•\¦  -> OFF
-    * 12.ƒWƒ‡ƒuƒ`ƒFƒ“ƒW‚ÌÅ‹­‘•”õ  -> OFF
-  * 3ƒ}ƒXi‚Ş
+    *  5.ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¡¨ç¤ºé€Ÿåº¦  ->é€Ÿã„
+    *  6.ãƒŠãƒ“ã‚²ãƒ¼ã‚·ãƒ§ãƒ³ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®æœ‰ç„¡  -> OFF
+    *  7.ã‚¢ãƒ“ãƒªãƒ†ã‚£åã®è¡¨ç¤º  -> OFF
+    *  8.åŠ¹æœãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¡¨ç¤º  -> OFF
+    *  9.çµŒé¨“å€¤Jpå–å¾—ã®è¡¨ç¤º  -> OFF
+    * 11.ã‚¸ãƒ§ãƒ–åˆ¥è£…å‚™ä»˜åŠ ã‚¢ã‚¤ãƒ†ãƒ ã®è¡¨ç¤º  -> OFF
+    * 12.ã‚¸ãƒ§ãƒ–ãƒã‚§ãƒ³ã‚¸æ™‚ã®æœ€å¼·è£…å‚™  -> OFF
+  * 3ãƒã‚¹é€²ã‚€
 
-* ‰ü‘P“_
-    *  2.ƒJ[ƒ\ƒ‹‚ÌƒŠƒs[ƒg‘¬“x  ->‘¬‚¢
-         --> TAS ‚Å‚Í•K—v‚È‚¢
-    *  4.wƒJ[ƒ\ƒ‹‚Ì‘¬“x  ->‚·‚²‚­‘¬‚¢
-         --> TAS ‚Å‚Í•K—v‚È‚¢
-  * 4ƒ}ƒX‚Å‚Í‚È‚­ 3ƒ}ƒXi‚Ş
+* æ”¹å–„ç‚¹
+    *  2.ã‚«ãƒ¼ã‚½ãƒ«ã®ãƒªãƒ”ãƒ¼ãƒˆé€Ÿåº¦  ->é€Ÿã„
+         --> TAS ã§ã¯å¿…è¦ãªã„
+    *  4.æŒ‡ã‚«ãƒ¼ã‚½ãƒ«ã®é€Ÿåº¦  ->ã™ã”ãé€Ÿã„
+         --> TAS ã§ã¯å¿…è¦ãªã„
+  * 4ãƒã‚¹ã§ã¯ãªã 3ãƒã‚¹é€²ã‚€
 
 
-* ƒJƒƒ‰ˆÚ“®‚ª‚ ‚é‚Æ”ƒtƒŒ[ƒ€’x‚­‚È‚é
-* ƒJƒƒ‰ˆÚ“®‚Å“G‚â–¡•û‚Ìs“®ŠJnƒtƒŒ[ƒ€‚ª‚¸‚ê‚é‚Ì‚ÅA—”’²®‚ª‰Â”\
+* ã‚«ãƒ¡ãƒ©ç§»å‹•ãŒã‚ã‚‹ã¨æ•°ãƒ•ãƒ¬ãƒ¼ãƒ é…ããªã‚‹
+* ã‚«ãƒ¡ãƒ©ç§»å‹•ã§æ•µã‚„å‘³æ–¹ã®è¡Œå‹•é–‹å§‹ãƒ•ãƒ¬ãƒ¼ãƒ ãŒãšã‚Œã‚‹ã®ã§ã€ä¹±æ•°èª¿æ•´ãŒå¯èƒ½
 
 * "Let go of me" said Ovelia
   * testrun_tas = 19406f,  5:23
   * optimze_tas = 16619f,  4:37 , 2787f faster
   * youtube_tas =       ,  4:25
 
-* Orbonne í“¬I—¹‚Ì‰ï˜b‚Í è“®‚Æ text_skip.lua ‚Æ‚Å“¯‚¶Œ‹‰Ê
-* text_skip.lua ‚ğM—p‚µ‚Ä‚à‚æ‚³‚»‚¤
+* Orbonne æˆ¦é—˜çµ‚äº†ã®ä¼šè©±ã¯ æ‰‹å‹•ã¨ text_skip.lua ã¨ã§åŒã˜çµæœ
+* text_skip.lua ã‚’ä¿¡ç”¨ã—ã¦ã‚‚ã‚ˆã•ãã†
 
 
-Lv1 Chemist ‰ŠúƒXƒe[ƒ^ƒX
+Lv1 Chemist åˆæœŸã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
 --------------------------
-* í“¬Œã‚ÌÅŒã‚Ì Ramza ‚ÌƒZƒŠƒt‚Å–¡•ûƒXƒe[ƒ^ƒX‚ªŒˆ’è
+* æˆ¦é—˜å¾Œã®æœ€å¾Œã® Ramza ã®ã‚»ãƒªãƒ•ã§å‘³æ–¹ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãŒæ±ºå®š
 * High starting
   * Chemist JP
     * grind 200 JP for Wizard
   * Faith
-  * Chemist JP 190ˆÈã, Faith 70ˆÈã‚ª—‘z
-  * Female ‚Ì•û‚ª MA ‚ª +1 ‚‚¢
+  * Chemist JP 190ä»¥ä¸Š, Faith 70ä»¥ä¸ŠãŒç†æƒ³
+  * Female ã®æ–¹ãŒ MA ãŒ +1 é«˜ã„
 
 
-Lv1 Squire ‰ŠúƒXƒe[ƒ^ƒX
+Lv1 Squire åˆæœŸã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
 ------------------------
 * High starting
   * Squire JP
     * grind 200 JP for Knight
   * Knight JP
 
-* ƒ{ƒcˆÄ
+* ãƒœãƒ„æ¡ˆ
   * Squire JP
-  * –¡•ûŒ©K‚¢ím‚Åc‚è JP ‚ª 100ˆÈã
-  * Gariland ‚Å‰Ò‚¢‚Å æ“¾ Jp UP ‚ğŠo‚¦‚é‚½‚ß
-  * ‚»‚ÌŒãƒNƒŠƒXƒ^ƒ‹‰»‚µ‚ÄŒp³
-    * Œ©K‚¢‚ÌƒNƒŠƒXƒ^ƒ‹‚ğ Ramza ‚ÍŒp³‚Å‚«‚È‚¢‚Ì‚Åƒ{ƒcˆÄ
-  * ‚à‚µ‚­‚Í Mandalia ‚Åæ“¾ Jp UP ‚ğŠo‚¦‚Ä‚¢‚é“G‚ğ’T‚·
-  * Gariland ‚Ì“G‚Í Lv1 ‚Ì‚½‚ßæ“¾Jp UP ‚ÍŠo‚¦‚Ä‚¢‚È‚¢
+  * å‘³æ–¹è¦‹ç¿’ã„æˆ¦å£«ã§æ®‹ã‚Š JP ãŒ 100ä»¥ä¸Š
+  * Gariland ã§ç¨¼ã„ã§ å–å¾— Jp UP ã‚’è¦šãˆã‚‹ãŸã‚
+  * ãã®å¾Œã‚¯ãƒªã‚¹ã‚¿ãƒ«åŒ–ã—ã¦ç¶™æ‰¿
+    * è¦‹ç¿’ã„ã®ã‚¯ãƒªã‚¹ã‚¿ãƒ«ã‚’ Ramza ã¯ç¶™æ‰¿ã§ããªã„ã®ã§ãƒœãƒ„æ¡ˆ
+  * ã‚‚ã—ãã¯ Mandalia ã§å–å¾— Jp UP ã‚’è¦šãˆã¦ã„ã‚‹æ•µã‚’æ¢ã™
+  * Gariland ã®æ•µã¯ Lv1 ã®ãŸã‚å–å¾—Jp UP ã¯è¦šãˆã¦ã„ãªã„
 
 
 ch1-Gariland
 ------------
-* ƒZ[ƒu‰æ–Ê‚ÌƒLƒƒƒ“ƒZƒ‹Œã‚É“G¯À‚ªŒˆ’è
-  * ‰®ª‚Ìã‚É—ˆ‚é Female Squire ‚Æ‘Š«—Ç (Any)
-  * lether hat and dagger ‚Ì Male Squire ‚Æ‘Š«—Ç (Ramza)
+* ã‚»ãƒ¼ãƒ–ç”»é¢ã®ã‚­ãƒ£ãƒ³ã‚»ãƒ«å¾Œã«æ•µæ˜Ÿåº§ãŒæ±ºå®š
+  * å±‹æ ¹ã®ä¸Šã«æ¥ã‚‹ Female Squire ã¨ç›¸æ€§è‰¯ (Any)
+  * lether hat and dagger ã® Male Squire ã¨ç›¸æ€§è‰¯ (Ramza)
 
-* ”z’u
+* é…ç½®
   ----F
   XXMRF
   XM---
 
 * turn1
-  * ƒJƒƒ‰ˆÚ“®‚ª‚ ‚é‚Æ”ƒtƒŒ[ƒ€’x‚­‚È‚é
-  * “GˆÚ“®’†‚ÉƒJƒƒ‰ˆÚ“®‚·‚é
-  * Ramza ƒZƒŠƒtŒã Ä“x L2, R2
+  * ã‚«ãƒ¡ãƒ©ç§»å‹•ãŒã‚ã‚‹ã¨æ•°ãƒ•ãƒ¬ãƒ¼ãƒ é…ããªã‚‹
+  * æ•µç§»å‹•ä¸­ã«ã‚«ãƒ¡ãƒ©ç§»å‹•ã™ã‚‹
+  * Ramza ã‚»ãƒªãƒ•å¾Œ å†åº¦ L2, R2
 
 ### old
 * Ramza
   * Squire JP 250 for Gained JP UP(250) or Yell(200)
-    * ÀÛ‚Í 300JP ’™‚Ü‚ç‚È‚¢
+    * å®Ÿéš›ã¯ 300JP è²¯ã¾ã‚‰ãªã„
   * Chemist JP 200 for Wizard
 * Chemist
   * Chemist JP 200 for Wizard
@@ -149,38 +149,38 @@ ch1-Gariland
 * Squire x2
   * Squire  JP 200 for Knight
 
-* ‰ü‘PˆÄ
+* æ”¹å–„æ¡ˆ
   * turn1
-    * ‰E‚Ì‰®ª‚Ìã‚Ì“G‚ğ critical ‚Å“|‚· (any)
+    * å³ã®å±‹æ ¹ã®ä¸Šã®æ•µã‚’ critical ã§å€’ã™ (any)
   * turn2
-    * lether hat and dagger ‚Ì Male Squire ‚ğ critical ‚Å“|‚· (Ramza)
-    * Ramza 5•à‚Å‚¬‚è‚¬‚è“Í‚­
-    * ‚±‚Ì“G‚Í“ŠÎ‚ğŠo‚¦‚Ä‚¢‚È‚¢•û‚ª‘‚¢‚ªA‚»‚à‚»‚à“ŠÎ‚ª“Í‚­”ÍˆÍ‚É–¡•û‚ğˆÚ“®‚³‚¹‚È‚¢
-  * L2, R2 ‚ğg‚¢ƒJƒƒ‰ˆÚ“®
+    * lether hat and dagger ã® Male Squire ã‚’ critical ã§å€’ã™ (Ramza)
+    * Ramza 5æ­©ã§ãã‚Šãã‚Šå±Šã
+    * ã“ã®æ•µã¯æŠ•çŸ³ã‚’è¦šãˆã¦ã„ãªã„æ–¹ãŒæ—©ã„ãŒã€ãã‚‚ãã‚‚æŠ•çŸ³ãŒå±Šãç¯„å›²ã«å‘³æ–¹ã‚’ç§»å‹•ã•ã›ãªã„
+  * L2, R2 ã‚’ä½¿ã„ã‚«ãƒ¡ãƒ©ç§»å‹•
 
-* ƒ{ƒcˆÄ
-  * –¡•û Squire ‚Éæ“¾Jp UP Šo‚¦‚³‚¹‚é‚½‚ß 250jp ‰Ò‚®
-  * Gariland ‚Ì“G‚Í Lv1 ‚Ì‚½‚ßæ“¾Jp UP ‚ÍŠo‚¦‚Ä‚¢‚È‚¢
+* ãƒœãƒ„æ¡ˆ
+  * å‘³æ–¹ Squire ã«å–å¾—Jp UP è¦šãˆã•ã›ã‚‹ãŸã‚ 250jp ç¨¼ã
+  * Gariland ã®æ•µã¯ Lv1 ã®ãŸã‚å–å¾—Jp UP ã¯è¦šãˆã¦ã„ãªã„
 
 ### old
 * after battle
-  * world map ‚Éo‚½‚ç x ‚Åà–¾‚ğƒLƒƒƒ“ƒZƒ‹
+  * world map ã«å‡ºãŸã‚‰ x ã§èª¬æ˜ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«
   * Ramza, learn Yell 200JP
   * Chemist
     * job change Wizard
     * learn Bolt 50JP, MagicAttackUP 400JP
     * set MagicAttackUP
-  * Chemist ˆÈŠO‚Ìƒ†ƒjƒbƒgœ–¼
+  * Chemist ä»¥å¤–ã®ãƒ¦ãƒ‹ãƒƒãƒˆé™¤å
 
 ### new
-* after battle ‰ü‘PˆÄ
-  * world map ‚Éo‚½‚ç x ‚Åà–¾‚ğƒLƒƒƒ“ƒZƒ‹
-  * •Ò¬‚Íƒoƒ‹ƒoƒlƒX‚ÌƒCƒxƒ“ƒgŒ©‚½‚ ‚Æ
-  * ‚±‚±‚Å‚Íœ–¼‚µ‚È‚¢
+* after battle æ”¹å–„æ¡ˆ
+  * world map ã«å‡ºãŸã‚‰ x ã§èª¬æ˜ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«
+  * ç·¨æˆã¯ãƒãƒ«ãƒãƒã‚¹ã®ã‚¤ãƒ™ãƒ³ãƒˆè¦‹ãŸã‚ã¨
+  * ã“ã“ã§ã¯é™¤åã—ãªã„
   * Ramza
     * learn Gained JP-UP, Bolt3, Frog, Death, Flare, Magic attack up
        * use jp scroll glith, Ice -> Ice2
-    * Counter Magic ‚Í•K—v‚È‚¢. Balk ‚Í Face rod ‚Å OK
+    * Counter Magic ã¯å¿…è¦ãªã„. Balk ã¯ Face rod ã§ OK
     * set Gained JP-UP, Black Magic
     * remove Battle Boots
   * Delita
@@ -200,33 +200,33 @@ ch1-Mandalia
 ------------
 ### old
 * Ramza
-  * ‚½‚ß‚é 300jp‚Ææ“¾JpUP 250jp ‚Ì 550JP ‚ğ‰Ò‚®
-  * ex1) ƒG[ƒ‹‚ğŠo‚¦‚ÄƒG[ƒ‹‚Å‰Ò‚®
-  * ex2) æ“¾JP UP ‚ğŠo‚¦‚Ä•’Ê‚Ìs“®‚Å‰Ò‚®
-  * ƒG[ƒ‹‚Ì•û‚ª‘S‘Ì‚ÅŒ©‚é‚Æ‘‚¢‚ç‚µ‚¢
+  * ãŸã‚ã‚‹ 300jpã¨å–å¾—JpUP 250jp ã® 550JP ã‚’ç¨¼ã
+  * ex1) ã‚¨ãƒ¼ãƒ«ã‚’è¦šãˆã¦ã‚¨ãƒ¼ãƒ«ã§ç¨¼ã
+  * ex2) å–å¾—JP UP ã‚’è¦šãˆã¦æ™®é€šã®è¡Œå‹•ã§ç¨¼ã
+  * ã‚¨ãƒ¼ãƒ«ã®æ–¹ãŒå…¨ä½“ã§è¦‹ã‚‹ã¨æ—©ã„ã‚‰ã—ã„
 
-* ”z’u
-  * Ramza ‚Æ•–‚“¹m
-  * redpanther ‚ª 2Œ‚‚Å“|‚¹‚é‚æ‚¤“GHP’²®
-    * ‘Š«—Ç (24 damage ‚Æ‚È‚é)
-    * ‘Š«•’Ê (20 damage) and HP40ˆÈ‰º
-    * ‰Ò‚¬I—¹Œã‚É Ramza ‚Ì Lv ‚ª nn ‚É‚È‚Á‚Ä‚¢‚é‘z’è
+* é…ç½®
+  * Ramza ã¨é»’é­”é“å£«
+  * redpanther ãŒ 2æ’ƒã§å€’ã›ã‚‹ã‚ˆã†æ•µHPèª¿æ•´
+    * ç›¸æ€§è‰¯ (24 damage ã¨ãªã‚‹)
+    * ç›¸æ€§æ™®é€š (20 damage) and HP40ä»¥ä¸‹
+    * ç¨¼ãçµ‚äº†å¾Œã« Ramza ã® Lv ãŒ nn ã«ãªã£ã¦ã„ã‚‹æƒ³å®š
 
 * turn1
   * Ramza, Yell
-  * •–‚“¹m, Bolt, “G1‘Ì“|‚·
+  * é»’é­”é“å£«, Bolt, æ•µ1ä½“å€’ã™
 
 * turn2
   * Ramza, Yell
-  * •–‚“¹m, Bolt, ƒAƒ‹ƒKƒX‚ğŠª‚«‚ñ‚Å“G3‘Ì“|‚·
-  * Algus ƒZƒŠƒtŒã Ä“x L2, R2
+  * é»’é­”é“å£«, Bolt, ã‚¢ãƒ«ã‚¬ã‚¹ã‚’å·»ãè¾¼ã‚“ã§æ•µ3ä½“å€’ã™
+  * Algus ã‚»ãƒªãƒ•å¾Œ å†åº¦ L2, R2
 
 * turn3
-  * redpanther ‚¾‚¯‚É‚È‚é‚Ì‚Å‰Ò‚®
-  * Wizard, Bolt ‚Å Delita Šª‚«‚ñ‚Å“|‚·
+  * redpanther ã ã‘ã«ãªã‚‹ã®ã§ç¨¼ã
+  * Wizard, Bolt ã§ Delita å·»ãè¾¼ã‚“ã§å€’ã™
 
 * turnN
-  * Algus ‚Ì€‘Ì‚Ì‰œ‚ÌˆÀ‘S’n‘Ñ‚Å‰Ò‚®
+  * Algus ã®æ­»ä½“ã®å¥¥ã®å®‰å…¨åœ°å¸¯ã§ç¨¼ã
 
 
 ### new
@@ -234,60 +234,60 @@ ch1-Mandalia
   * Ramza   300jp for Accumulates
   * Knight  250jp for Speed Break
 
-* ”z’u
-  * Ramza ‚ğ 3 ‚É”z’u‚·‚é‚Ì‚ª Delita ‚Æ‚Ì‰ï˜b‚ªˆê”Ô‚Í‚â‚¢
+* é…ç½®
+  * Ramza ã‚’ 3 ã«é…ç½®ã™ã‚‹ã®ãŒ Delita ã¨ã®ä¼šè©±ãŒä¸€ç•ªã¯ã‚„ã„
   * Ramza, Wizard, Knight x2
   R-KXX
   W-K-X
 
-* ‰ü‘PˆÄ
+* æ”¹å–„æ¡ˆ
   * Ramza,  300jp for Accumulates
   * Knight, 250jp for Speed Break
-  * Delita ‚Ì turn, L2, R2
-  * Algus ƒZƒŠƒtŒã Ä“x L2, R2
-  * “GƒV[ƒt‚Ì‚İ Lv2 ‚È‚Ì‚Å Gained JP-UP ‚ğŠo‚¦‚Ä‚¢‚é‰Â”\«‚ª‚ ‚é
-    ‚µ‚©‚µ Ramza(jobid=0x01) ‚Í Œ©K‚¢(jobid=0x4A) ‚ÌƒNƒŠƒXƒ^ƒ‹Œp³•s‰Â
+  * Delita ã® turn, L2, R2
+  * Algus ã‚»ãƒªãƒ•å¾Œ å†åº¦ L2, R2
+  * æ•µã‚·ãƒ¼ãƒ•ã®ã¿ Lv2 ãªã®ã§ Gained JP-UP ã‚’è¦šãˆã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚‹
+    ã—ã‹ã— Ramza(jobid=0x01) ã¯ è¦‹ç¿’ã„(jobid=0x4A) ã®ã‚¯ãƒªã‚¹ã‚¿ãƒ«ç¶™æ‰¿ä¸å¯
 
-* ŒŸØ
-  * Accumulates ‚Å 250jp ‰Ò‚®
-    * 22‰ñs“® (1‰ñ 12jp or 14jp)
-  * Gained JP-UP ‚Å 300jp ‰Ò‚®
-    * 15‰ñs“® (1‰ñ 18jp or 21jp)
-  * –¡•û‚ª KO ‚©‚çƒNƒŠƒXƒ^ƒ‹‚É‚È‚é‚Ü‚Å‚É Ramza 3‰ñs“®‰Â”\
-    * Ramza 237jp ’´‚¦‚½‚ç –¡•û‚ğ KO ‚µ‚Ä‚æ‚¢
-    * 4‰ñs“®‰Â”\‚È‚Æ‚«‚à‚ ‚é‚ªA redpanther ‚ğ“|‚·‘O‚É cristal ‚Æ‚È‚Á‚Ä‚µ‚Ü‚¤
+* æ¤œè¨¼
+  * Accumulates ã§ 250jp ç¨¼ã
+    * 22å›è¡Œå‹• (1å› 12jp or 14jp)
+  * Gained JP-UP ã§ 300jp ç¨¼ã
+    * 15å›è¡Œå‹• (1å› 18jp or 21jp)
+  * å‘³æ–¹ãŒ KO ã‹ã‚‰ã‚¯ãƒªã‚¹ã‚¿ãƒ«ã«ãªã‚‹ã¾ã§ã« Ramza 3å›è¡Œå‹•å¯èƒ½
+    * Ramza 237jp è¶…ãˆãŸã‚‰ å‘³æ–¹ã‚’ KO ã—ã¦ã‚ˆã„
+    * 4å›è¡Œå‹•å¯èƒ½ãªã¨ãã‚‚ã‚ã‚‹ãŒã€ redpanther ã‚’å€’ã™å‰ã« Crystal ã¨ãªã£ã¦ã—ã¾ã†
 
-* Gained JP-UP ‚ğŠo‚¦‚Ä‚¢‚é‚©ŒŸØ
-  * ƒoƒ‹ƒoƒlƒXƒCƒxƒ“ƒgŒã–ñ 2700f Œã‚É Geined JP-UP ‚ğŠo‚¦‚Ä‚¢‚é“G‚ª‚¢‚é
-  * game time ‚ª“¯‚¶‚È‚ç—”‚ÍˆÙ‚È‚Á‚Ä‚à‚æ‚¢
-  * ‚½‚¾‚µ game time ‚ª“¯‚¶‚Å‚à•Ò¬‰æ–Ê‚Ì•\¦‰ñ”??(world map‚Ì•\¦‰ñ”??) 
-    ‚ªˆÙ‚È‚é‚ÆAŠo‚¦‚Ä‚¢‚éƒXƒLƒ‹‚ªˆÙ‚È‚é
+* Gained JP-UP ã‚’è¦šãˆã¦ã„ã‚‹ã‹æ¤œè¨¼
+  * ãƒãƒ«ãƒãƒã‚¹ã‚¤ãƒ™ãƒ³ãƒˆå¾Œç´„ 2700f å¾Œã« Gained JP-UP ã‚’è¦šãˆã¦ã„ã‚‹æ•µãŒã„ã‚‹
+  * game time ãŒåŒã˜ãªã‚‰ä¹±æ•°ã¯ç•°ãªã£ã¦ã‚‚ã‚ˆã„
+  * ãŸã ã— game time ãŒåŒã˜ã§ã‚‚ç·¨æˆç”»é¢ã®è¡¨ç¤ºå›æ•°??(world mapã®è¡¨ç¤ºå›æ•°??) 
+    ãŒç•°ãªã‚‹ã¨ã€è¦šãˆã¦ã„ã‚‹ã‚¹ã‚­ãƒ«ãŒç•°ãªã‚‹
 
-* Gained JP-UP ‚Ì Cristal
-  * Job ‚ª“¯‚¶‚Å‚È‚¢‚ÆƒXƒLƒ‹Œp³•s‰Â
-  * Ramza(0x01) ‚Æ Male Squire(0x4A) ‚â job ‚ªˆÙ‚È‚é‚Ì‚ÅŒ©K‚¢ƒXƒLƒ‹‚ğŒp³•s‰Â
-  * ‹^–â“_‚Æ‚µ‚Ä Female Squire ‚à Male Squire ‚ÌƒXƒLƒ‹Œp³•s‰Â
-    * ‚±‚ê‚É‚æ‚è Famale Calculator ‚àƒ{ƒcˆÄ
+* Gained JP-UP ã® Crystal
+  * Job ãŒåŒã˜ã§ãªã„ã¨ã‚¹ã‚­ãƒ«ç¶™æ‰¿ä¸å¯
+  * Ramza(0x01) ã¨ Male Squire(0x4A) ã‚„ job ãŒç•°ãªã‚‹ã®ã§è¦‹ç¿’ã„ã‚¹ã‚­ãƒ«ã‚’ç¶™æ‰¿ä¸å¯
+  * ç–‘å•ç‚¹ã¨ã—ã¦ Female Squire ã‚‚ Male Squire ã®ã‚¹ã‚­ãƒ«ç¶™æ‰¿ä¸å¯
+    * ã“ã‚Œã«ã‚ˆã‚Š Female Calculator ã‚‚ãƒœãƒ„æ¡ˆ
   * http://www.gamefaqs.com/ps/197339-final-fantasy-tactics/faqs/3876
-    [6.1] Cristal
+    [6.1] Crystal
 
-* ŒŸØ
-  * Algus ‚ªƒNƒŠƒeƒBƒJƒ‹‚Å squire ‚© thief ‚ğ“|‚·
-    * ‘Š«‚Ì—Ç‚µˆ«‚µ‚ª‚ ‚ê‚Î‘Š«‚ğ—Dæ
-    * ’Êí‚Í squire ‚ğ‘_‚¤
-  * Ramza ‚ªc‚è‚Ì 3 squire ‚ğ Bolt2
-    * ‘Š«—Ç ‚©‚Â faith 47 ˆÈã
-    * ‘Š«•’Ê ‚©‚Â faith 58 ˆÈã
-    * ‘Š«ˆ« ‚©‚Â faith 64 ˆÈã
-  * wizard ‚ª Algus ‚Æc‚è 1‘Ì ‚ğ Bolt or Bolt2
-    * thief ‚ğc‚µ‚½ê‡‚Í thief ‚ª charm ‚ğŠo‚¦‚Ä‚¢‚é‚±‚Æ
-  * ‚±‚ê‚ÅÅ‰‚Ìƒ^[ƒ“‚Å redpanther ˆÈŠO‚ğ“|‚¹‚é‚ª
-    ˆÀ‘S’n‘Ñ‚ğì‚è‚É‚­‚¢‚Ì‚ÅA‰Ò‚¬‚É‚ÍŒü‚©‚È‚¢
-  * Delita ‚É Battle Boots ‚ğ—š‚©‚¹‚½‚ç Algus ‚Æ Delita ‚ÅˆÀ‘S’n‘Ñ‚ª‚Å‚«‚é‚©‚à
-  * ƒfƒƒŠƒbƒg
-    * Algus ‚Æ‚Ì‘Š«ARamza ‚Æ‚Ì‘Š«‚Ì’²®‚ª“ï‚µ‚¢
-    * Algus ‚ÌƒNƒŠƒeƒBƒJƒ‹(ˆêŒ‚‚Å“|‚·)‚Ío‚È‚¢‚Í 500f ’Tõ‚µ‚Ä‚ào‚È‚¢
-    * ’²®‚ª‘å•Ï‚È‚Ì‚ÅŒ‹‹Ç‚ÍA’èÎ‚ÌˆÀ’u‚Ììí‚ª‚¢‚¢‚©‚à
+* æ¤œè¨¼
+  * Algus ãŒã‚¯ãƒªãƒ†ã‚£ã‚«ãƒ«ã§ squire ã‹ thief ã‚’å€’ã™
+    * ç›¸æ€§ã®è‰¯ã—æ‚ªã—ãŒã‚ã‚Œã°ç›¸æ€§ã‚’å„ªå…ˆ
+    * é€šå¸¸ã¯ squire ã‚’ç‹™ã†
+  * Ramza ãŒæ®‹ã‚Šã® 3 squire ã‚’ Bolt2
+    * ç›¸æ€§è‰¯ ã‹ã¤ faith 47 ä»¥ä¸Š
+    * ç›¸æ€§æ™®é€š ã‹ã¤ faith 58 ä»¥ä¸Š
+    * ç›¸æ€§æ‚ª ã‹ã¤ faith 64 ä»¥ä¸Š
+  * wizard ãŒ Algus ã¨æ®‹ã‚Š 1ä½“ ã‚’ Bolt or Bolt2
+    * thief ã‚’æ®‹ã—ãŸå ´åˆã¯ thief ãŒ charm ã‚’è¦šãˆã¦ã„ã‚‹ã“ã¨
+  * ã“ã‚Œã§æœ€åˆã®ã‚¿ãƒ¼ãƒ³ã§ redpanther ä»¥å¤–ã‚’å€’ã›ã‚‹ãŒ
+    å®‰å…¨åœ°å¸¯ã‚’ä½œã‚Šã«ãã„ã®ã§ã€ç¨¼ãã«ã¯å‘ã‹ãªã„
+  * Delita ã« Battle Boots ã‚’å±¥ã‹ã›ãŸã‚‰ Algus ã¨ Delita ã§å®‰å…¨åœ°å¸¯ãŒã§ãã‚‹ã‹ã‚‚
+  * ãƒ‡ãƒ¡ãƒªãƒƒãƒˆ
+    * Algus ã¨ã®ç›¸æ€§ã€Ramza ã¨ã®ç›¸æ€§ã®èª¿æ•´ãŒé›£ã—ã„
+    * Algus ã®ã‚¯ãƒªãƒ†ã‚£ã‚«ãƒ«(ä¸€æ’ƒã§å€’ã™)ã¯å‡ºãªã„æ™‚ã¯ 500f æ¢ç´¢ã—ã¦ã‚‚å‡ºãªã„
+    * èª¿æ•´ãŒå¤§å¤‰ãªã®ã§çµå±€ã¯ã€å®šçŸ³ã®å®‰ç½®ã®ä½œæˆ¦ãŒã„ã„ã‹ã‚‚
 
 
 ### old
@@ -311,53 +311,53 @@ ch1-random
 -----
 * Goblin becomes speed 6 at Lv14
 
-* ‰ü‘PˆÄ
-  * “G1‘Ì‚Ì‚İ•Ò¬‚ğ 1000f ’ö“x’Tõ
-  * 2‘Ì–Ú‚ª Ramza ‚É‹ß‚Ã‚­‚Ü‚Å 4 turn ‚©‚©‚èA‚»‚ê‚ª–ñ 1000f
-  * ‚æ‚Á‚Ä 1000f ‘Ò‚Á‚½•û‚ªŒ‹‰Ê“I‚É‘‚­‚È‚é
-  * ƒGƒ“ƒJ—¦ 3/10 * “G1‘Ì‚Ì‚İ 1/256 = 3/2560 = –ñ1/853
-  * L2 ‰Ÿ‚µ‚½‚Ù‚¤‚ªƒJƒƒ‰ˆÚ“®‚ªŒ¸‚é‚©‚à
+* æ”¹å–„æ¡ˆ
+  * æ•µ1ä½“ã®ã¿ç·¨æˆã‚’ 1000f ç¨‹åº¦æ¢ç´¢
+  * 2ä½“ç›®ãŒ Ramza ã«è¿‘ã¥ãã¾ã§ 4 turn ã‹ã‹ã‚Šã€ãã‚ŒãŒç´„ 1000f
+  * ã‚ˆã£ã¦ 1000f å¾…ã£ãŸæ–¹ãŒçµæœçš„ã«æ—©ããªã‚‹
+  * ã‚¨ãƒ³ã‚«ç‡ 3/10 * æ•µ1ä½“ã®ã¿ 1/256 = 3/2560 = ç´„1/853
+  * L2 æŠ¼ã—ãŸã»ã†ãŒã‚«ãƒ¡ãƒ©ç§»å‹•ãŒæ¸›ã‚‹ã‹ã‚‚
 
-* ƒ{ƒcˆÄ
-  * ƒKƒbƒc‚Å‚Í‚È‚­˜bp‚Í‚Ç‚¤‚©
-    * ‚½‚ß‚é‚æ‚è’x‚¢‚ªAƒh[ƒsƒ“ƒO, Sleep, CT reset “™‚ª‰Â”\
-    * ˜bp‚Í Yell ‚Æ“¯‚¶ƒGƒtƒFƒNƒg‚Ì’·‚³ –ñ284f
-    * ƒ‚ƒ“ƒXƒ^[‚Í‚Ü‚¶‚ã‚¤Œê‚ğƒZƒbƒg‚µ‚È‚¢‚ÆŒø‚©‚È‚¢‚Ì‚ÅAÀ¿ƒh[ƒsƒ“ƒO‚Ì‚İ
-    * ‚Ü‚¶‚ã‚¤Œê‚ğƒZƒbƒg‚·‚é‚Ææ“¾JP UP ‚ªƒZƒbƒg‚Å‚«‚È‚¢‚Ì‚Åƒ{ƒc
+* ãƒœãƒ„æ¡ˆ
+  * ã‚¬ãƒƒãƒ„ã§ã¯ãªãè©±è¡“ã¯ã©ã†ã‹
+    * ãŸã‚ã‚‹ã‚ˆã‚Šé…ã„ãŒã€ãƒ‰ãƒ¼ãƒ”ãƒ³ã‚°, Sleep, CT reset ç­‰ãŒå¯èƒ½
+    * è©±è¡“ã¯ Yell ã¨åŒã˜ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é•·ã• ç´„284f
+    * ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼ã¯ã¾ã˜ã‚…ã†èªã‚’ã‚»ãƒƒãƒˆã—ãªã„ã¨åŠ¹ã‹ãªã„ã®ã§ã€å®Ÿè³ªãƒ‰ãƒ¼ãƒ”ãƒ³ã‚°ã®ã¿
+    * ã¾ã˜ã‚…ã†èªã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã¨å–å¾—JP UP ãŒã‚»ãƒƒãƒˆã§ããªã„ã®ã§ãƒœãƒ„
 
-* ƒ{ƒcˆÄ
-  * Time mage ‚Æ Calculator ‚Í–¡•û Wizard ‚ğo‚·
-    * calcurator ‚Ì‚Æ‚«‚É –¡•û Time mage ‚ğo‚¹‚ê‚Î haste ‚ğ‚©‚¯‚ê‚é
-  * 2‘Ì–Ú‚ÌƒSƒuƒŠƒ“‚Í Wizard ‚ª“|‚·
-  * Time mage ‚Ì‰Ò‚¬‚Í Haste (100jp) Šo‚¦‚é‚Æ‘‚¢‚Ì‚Å‚Í?
-    * –‚–@‚ğ‚½‚­‚³‚ñŠo‚¦‚é‚Æ menu ‚ªƒXƒNƒ[ƒ‹‚µ‚Ä‚µ‚Ü‚¢ loop ‘I‘ğ‚Å‚«‚È‚­‚È‚é
-  * Oracle ‚Ì‰Ò‚¬‚Í•s•Ï•s“® (100jp) ‚ğŠo‚¦‚é‚Æ‘‚¢‚Ì‚Å‚Í?
-    * •s•Ï•s“®‚Í‚·‚®Ø‚ê‚é
-  * ƒSƒuƒŠƒ“‚Í Lv14 ‚Å speed 6 ‚É‚È‚é–Í—l
-  * Time mage ‚Ì‚Æ‚«‚É goblin ‚ª Lv13 ˆÈ‰º‚É‚È‚é‚æ‚¤‚É’²®‚ª•K—v
+* ãƒœãƒ„æ¡ˆ
+  * Time mage ã¨ Calculator ã¯å‘³æ–¹ Wizard ã‚’å‡ºã™
+    * Calculator ã®ã¨ãã« å‘³æ–¹ Time mage ã‚’å‡ºã›ã‚Œã° haste ã‚’ã‹ã‘ã‚Œã‚‹
+  * 2ä½“ç›®ã®ã‚´ãƒ–ãƒªãƒ³ã¯ Wizard ãŒå€’ã™
+  * Time mage ã®ç¨¼ãã¯ Haste (100jp) è¦šãˆã‚‹ã¨æ—©ã„ã®ã§ã¯?
+    * é­”æ³•ã‚’ãŸãã•ã‚“è¦šãˆã‚‹ã¨ menu ãŒã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ã¦ã—ã¾ã„ loop é¸æŠã§ããªããªã‚‹
+  * Oracle ã®ç¨¼ãã¯ä¸å¤‰ä¸å‹• (100jp) ã‚’è¦šãˆã‚‹ã¨æ—©ã„ã®ã§ã¯?
+    * ä¸å¤‰ä¸å‹•ã¯ã™ãåˆ‡ã‚Œã‚‹
+  * ã‚´ãƒ–ãƒªãƒ³ã¯ Lv14 ã§ speed 6 ã«ãªã‚‹æ¨¡æ§˜
+  * Time mage ã®ã¨ãã« goblin ãŒ Lv13 ä»¥ä¸‹ã«ãªã‚‹ã‚ˆã†ã«èª¿æ•´ãŒå¿…è¦
     * Keep Ramza's Lv under 14
-  * Ramza speed 12, goblin speed 5 ‚Ì‚Æ‚«, Ramza 2‰ñs“®, goblin 1‰ñ‘Ò‹@ ‚Æ‚È‚é
+  * Ramza speed 12, goblin speed 5 ã®ã¨ã, Ramza 2å›è¡Œå‹•, goblin 1å›å¾…æ©Ÿ ã¨ãªã‚‹
 
-* ‰ü‘PˆÄ
-  * Yell (200JP) ‚æ‚è Speed Break (250JP) ‚Ì•û‚ªŒø‰Ê‚ª‚‚¢‚©‚à??
-  * “G‚Ì speed ‚ª’á‚¢˜”Õ‚Í ©•ª‚Ì speed ‚ğã‚°‚é‚æ‚è“G‚Ì speed ‚ğ‰º‚°‚é‚Ù‚¤‚ªŒø‰Ê‚ª‚‚¢
-    * sp6 ‚Æ sp1 ‚Å‚Í goblin s“®‚ÆˆÚ“®‚¾‚Æ ramza 6‰ñ ‚É goblin 1‰ñs“®
-    * sp6 ‚Æ sp1 ‚Å‚Í goblin ‘Ò‹@‚¾‚Æ ramza 5‰ñ or 4‰ñ‚É goblin 1‰ñs“®
-    * sp3 ‚Æ sp1 ‚Å‚Í goblin ‘Ò‹@‚¾‚Æ ramza x‰ñ or x‰ñ‚É goblin 1‰ñs“®
+* æ”¹å–„æ¡ˆ
+  * Yell (200JP) ã‚ˆã‚Š Speed Break (250JP) ã®æ–¹ãŒåŠ¹æœãŒé«˜ã„ã‹ã‚‚??
+  * æ•µã® speed ãŒä½ã„åºç›¤ã¯ è‡ªåˆ†ã® speed ã‚’ä¸Šã’ã‚‹ã‚ˆã‚Šæ•µã® speed ã‚’ä¸‹ã’ã‚‹ã»ã†ãŒåŠ¹æœãŒé«˜ã„
+    * sp6 ã¨ sp1 ã§ã¯ goblin è¡Œå‹•ã¨ç§»å‹•ã ã¨ ramza 6å› ã« goblin 1å›è¡Œå‹•
+    * sp6 ã¨ sp1 ã§ã¯ goblin å¾…æ©Ÿã ã¨ ramza 5å› or 4å›ã« goblin 1å›è¡Œå‹•
+    * sp3 ã¨ sp1 ã§ã¯ goblin å¾…æ©Ÿã ã¨ ramza xå› or xå›ã« goblin 1å›è¡Œå‹•
 
-* griding
-  * ƒ‰ƒ€ƒU ƒG[ƒ‹ 4‰ñ‚Å Speed 10/ƒSƒuƒŠƒ“ Speed 5
-  * sp10 ‚Æ sp5 ‚Å‚Í goblin ‘Ò‹@‚¾‚Æ ramza 2‰ñ or 1‰ñ‚É goblin 1‰ñs“®
-  * ƒ‰ƒ€ƒU ƒG[ƒ‹ 15‰ñ‚Å Speed 18/ƒSƒuƒŠƒ“ Speed 6
-  * sp18 ‚Æ sp6 ‚Å‚Í goblin ‘Ò‹@‚¾‚Æ ramza 3‰ñ or 2‰ñ‚É goblin 1‰ñs“®
+* grinding
+  * ãƒ©ãƒ ã‚¶ ã‚¨ãƒ¼ãƒ« 4å›ã§ Speed 10/ã‚´ãƒ–ãƒªãƒ³ Speed 5
+  * sp10 ã¨ sp5 ã§ã¯ goblin å¾…æ©Ÿã ã¨ ramza 2å› or 1å›ã« goblin 1å›è¡Œå‹•
+  * ãƒ©ãƒ ã‚¶ ã‚¨ãƒ¼ãƒ« 15å›ã§ Speed 18/ã‚´ãƒ–ãƒªãƒ³ Speed 6
+  * sp18 ã¨ sp6 ã§ã¯ goblin å¾…æ©Ÿã ã¨ ramza 3å› or 2å›ã« goblin 1å›è¡Œå‹•
 
-* ‰ü‘PˆÄ
-  * Speed Break ‚ğƒNƒŠƒXƒ^ƒ‹Œp³‚·‚é‚Æ‰Ò‚¬•s—v
-  * Frog ‚¾‚Æ ƒnƒCƒg· 2 ‚Å‚àˆÀ‘S’n‘Ñ‚Æ‚È‚é
+* æ”¹å–„æ¡ˆ
+  * Speed Break ã‚’ã‚¯ãƒªã‚¹ã‚¿ãƒ«ç¶™æ‰¿ã™ã‚‹ã¨ç¨¼ãä¸è¦
+  * Frog ã ã¨ ãƒã‚¤ãƒˆå·® 2 ã§ã‚‚å®‰å…¨åœ°å¸¯ã¨ãªã‚‹
 
-* ‰ü‘PˆÄ
+* æ”¹å–„æ¡ˆ
   * learn Exp(200jp) instead of Level(350jp) and Height(250jp)
-  * it's reduce to gain 400jp
+  * it can reduce 400jp to gain
   * so, Ramza needs 1950 jp
 
 * grinding
@@ -381,11 +381,11 @@ ch1-random
 
 * JP-glitch
   * Chemist
-     * use jp scroll glith, Eye drop -> Hi-potion
-     * use jp scroll glith, ‰³—‚ÌƒLƒbƒX -> Ether
+     * use jp scroll glitch, Eye drop -> Hi-potion
+     * use jp scroll glitch, ä¹™å¥³ã®ã‚­ãƒƒã‚¹ -> Ether
   * Mediator
-    * Š©—U -> ‚Ù‚ß‚é (ƒƒjƒ…[ŠJ‚«•K—v)
-    * ¤’k -> ˆ«Œû   (ƒƒjƒ…[ŠJ‚«•s—v)
+    * å‹§èª˜ -> ã»ã‚ã‚‹ (ãƒ¡ãƒ‹ãƒ¥ãƒ¼é–‹ãå¿…è¦)
+    * å•†è«‡ -> æ‚ªå£   (ãƒ¡ãƒ‹ãƒ¥ãƒ¼é–‹ãä¸è¦)
 
 * job change
   * Wizard
@@ -394,30 +394,30 @@ ch1-random
   * math
   * mp switch
   * magic attack up
-  * teleport ‚Í•t‚¯‚È‚¢ (Wiegraf í‚Å‚ÌˆÚ“®‚Å’x‚­‚È‚é‚©‚ç)
+  * teleport ã¯ä»˜ã‘ãªã„ (Wiegraf æˆ¦ã§ã®ç§»å‹•ã§é…ããªã‚‹ã‹ã‚‰)
 
 * Ramza's level
-  * Zpm‚Ì JP‰Ò‚¬‚ªI—¹“_‚Å lv21 ‚ª–ÚˆÀ
-  * ch2 Golgorand ‚Ì‘O‚Ü‚Å‚É lv23 •K{. lv23 Priest + Green Beret = speed 9
+  * ç®—è¡“å£«ã® JPç¨¼ããŒçµ‚äº†æ™‚ç‚¹ã§ lv21 ãŒç›®å®‰
+  * ch2 Golgorand ã®å‰ã¾ã§ã« lv23 å¿…é ˆ. lv23 Priest + Green Beret = speed 9
 
 * Formation
-  * ƒ†ƒjƒbƒgˆê——‚Å‚Íƒƒjƒ…[‚ğ•Â‚¶‚È‚¢‚Æƒ†ƒjƒbƒgØ‚è‘Ö‚¦‚Å‚«‚È‚¢
-    ƒƒjƒ…[‚ğ•Â‚¶‚ÄŠJ‚«’¼‚·•ªAÅ’á‚Å‚à 3f ’x‚­‚È‚é
-  * ƒ†ƒjƒbƒgØ‚è‘Ö‚¦‚ÍAæ‚Éƒ†ƒjƒbƒg‚ğØ‚è‘Ö‚¦‚Äƒ†ƒjƒbƒgˆê——‚É–ß‚Á‚½•û‚ª‘‚¢
-  * æ‚Éƒ†ƒjƒbƒg‚ğØ‚è‘Ö‚¦‚Äƒƒjƒ…[‚É–ß‚é‚æ‚èA‚»‚Ìƒ†ƒjƒbƒg‚Åƒƒjƒ…[‚É–ß‚è
-    Item/Ability/Change Job/ ‚ğ‘I‘ğŒã‚ÉAƒ†ƒjƒbƒg‚ğØ‚è‘Ö‚¦‚é‚Æ‚³‚ç‚É‘‚¢‚©‚à
+  * ãƒ¦ãƒ‹ãƒƒãƒˆä¸€è¦§ã§ã¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‰ã˜ãªã„ã¨ãƒ¦ãƒ‹ãƒƒãƒˆåˆ‡ã‚Šæ›¿ãˆã§ããªã„
+    ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‰ã˜ã¦é–‹ãç›´ã™åˆ†ã€æœ€ä½ã§ã‚‚ 3f é…ããªã‚‹
+  * ãƒ¦ãƒ‹ãƒƒãƒˆåˆ‡ã‚Šæ›¿ãˆã¯ã€å…ˆã«ãƒ¦ãƒ‹ãƒƒãƒˆã‚’åˆ‡ã‚Šæ›¿ãˆã¦ãƒ¦ãƒ‹ãƒƒãƒˆä¸€è¦§ã«æˆ»ã£ãŸæ–¹ãŒæ—©ã„
+  * å…ˆã«ãƒ¦ãƒ‹ãƒƒãƒˆã‚’åˆ‡ã‚Šæ›¿ãˆã¦ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹ã‚ˆã‚Šã€ãã®ãƒ¦ãƒ‹ãƒƒãƒˆã§ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚Š
+    Item/Ability/Change Job/ ã‚’é¸æŠå¾Œã«ã€ãƒ¦ãƒ‹ãƒƒãƒˆã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ã¨ã•ã‚‰ã«æ—©ã„ã‹ã‚‚
 
-  * holy ‚ğŠo‚¦‚é‚½‚ß‚ÌŒo‰ß frame = 167f
+  * holy ã‚’è¦šãˆã‚‹ãŸã‚ã®çµŒé frame = 167f
 
 
 ch1-Sweegy
 ----------
 * Ramza Lv25, speed 7, MA 11
-* speed 7 ‚Ì“G‚Éæ§‚³‚ê‚é‚Ì‚Å CT5 Flare
-* “GLv ‚Í ramaza ‚Æ“¯‚¶‚È‚Ì‚Å Bolt3 ‚Å‚Í‚È‚­ Flare ‚ª•K—v
-* ‰ü‘PˆÄ
-  * CT5 Death ‚Ì•û‚ª‘‚¢
-  * “GˆÚ“®’†‚É L2 ‰Ÿ‚µ‚½‚Ù‚¤‚ªƒJƒƒ‰ˆÚ“®‚ªŒ¸‚é‚©‚à
+* speed 7 ã®æ•µã«å…ˆåˆ¶ã•ã‚Œã‚‹ã®ã§ CT5 Flare
+* æ•µLv ã¯ ramaza ã¨åŒã˜ãªã®ã§ Bolt3 ã§ã¯ãªã Flare ãŒå¿…è¦
+* æ”¹å–„æ¡ˆ
+  * CT5 Death ã®æ–¹ãŒæ—©ã„
+  * æ•µç§»å‹•ä¸­ã« L2 æŠ¼ã—ãŸã»ã†ãŒã‚«ãƒ¡ãƒ©ç§»å‹•ãŒæ¸›ã‚‹ã‹ã‚‚
 
 * Redpanther
   * Lv19 speed 7
@@ -441,38 +441,38 @@ ch1-Sand Rat
 * CT3 Bolt3
 
 * After battle, Buy Thunder rod in Gariland to increase Bolt3
-  * Thunder rod ‚Í ch2 ƒS[ƒO‚ÌƒXƒ‰ƒ€ŠX‚Åí—˜•i‚Å‚à‚ç‚¦‚é
-  * ‚à‚µ‚»‚ê‚Ü‚Å damage ‚ª\•ª‚È‚ç‚±‚±‚Å”ƒ‚¤•K—v‚Í‚È‚µ
+  * Thunder rod ã¯ ch2 ã‚´ãƒ¼ã‚°ã®ã‚¹ãƒ©ãƒ è¡—ã§æˆ¦åˆ©å“ã§ã‚‚ã‚‰ãˆã‚‹
+  * ã‚‚ã—ãã‚Œã¾ã§ damage ãŒååˆ†ãªã‚‰ã“ã“ã§è²·ã†å¿…è¦ã¯ãªã—
 
 ch1-Thieves Fort
 ----------------
-* ‰Šú”z’u‚ğ¶ã‚É‚·‚é‚Æ‹“_ˆÚ“®‚È‚­í“¬I—¹
+* åˆæœŸé…ç½®ã‚’å·¦ä¸Šã«ã™ã‚‹ã¨è¦–ç‚¹ç§»å‹•ãªãæˆ¦é—˜çµ‚äº†
 * Height 3 Bolt3
 * hits another 2 enemies as well.
 
 ch1-Lenalia
 -----------
 * Lv4 Bolt3
-* Ramza ‚ª Lv20 ‚È‚ç hit
+* Ramza ãŒ Lv20 ãªã‚‰ hit
 
 ch1-Windmill
 ------------
 * Height 5 Bolt3
-* ˆÚ“®‚µ‚½‚Ù‚¤‚ªƒJƒƒ‰ˆÚ“®‚ªŒ¸‚é‚©‚à
+* ç§»å‹•ã—ãŸã»ã†ãŒã‚«ãƒ¡ãƒ©ç§»å‹•ãŒæ¸›ã‚‹ã‹ã‚‚
 
 ch1-Zeakden
 -----------
 * Height 4 Bolt3
-* Lv5 Bolt3 is fater, if Ramza is not Lv20 or Lv25
+* Lv5 Bolt3 is faster, if Ramza is not Lv20 or Lv25
 
 
 ch1-save time at the end of ch1
 ---------------
-* —˜—p‚·‚éÒ‚³‚ê‚éÒ‚Ì•\¦‚ªÁ‚¦‚½’¼Œã‚Ìƒ^ƒCƒ€
+* åˆ©ç”¨ã™ã‚‹è€…ã•ã‚Œã‚‹è€…ã®è¡¨ç¤ºãŒæ¶ˆãˆãŸç›´å¾Œã®ã‚¿ã‚¤ãƒ 
 * 1:13:44 in TAS
-* 1:12:08 in 30 segment TA (save time 1:11:08 ‚Ì–ñ1•ªŒã‚Æ‚İ‚È‚·)
+* 1:12:08 in 30 segment TA (save time 1:11:08 ã®ç´„1åˆ†å¾Œã¨ã¿ãªã™)
 * 1:18:14 in Claude RTA
-* 1:35:20 in ‚³‚Ú‚Ä‚ñ RTA
+* 1:35:20 in ã•ã¼ã¦ã‚“ RTA
 
 
 
@@ -481,53 +481,53 @@ ch2-Dorter
 * Before battle, change Gafgarion's job Chemist to remove equipment and reduce speed to 6
 * Thief Lv11 speed 7
 * Thief Lv9  speed 7
-* Thief ‚Éæ§‚³‚ê‚é
+* Thief ã«å…ˆåˆ¶ã•ã‚Œã‚‹
 * L2
 * CT5 Bolt3
 
 * Ramza Lv25, speed 7, MA 11
-* Ramza ‰Šú”z’u ‰E1ã1 in TA, ‚±‚ÌˆÊ’u‚¾‚Æ“ŠÎ‚ª“Í‚©‚È‚¢??
-* Ramza ˆê”Ô¶ã in RTA, ‚±‚ÌˆÊ’u‚¾‚Æ“ŠÎ‚ª“Í‚©‚È‚¢??
-* speed 7 ‚Ì Theif ‚É‚ÍŠî–{‹Z‚ğƒZƒbƒg‚µ‚Ä‚¢‚È‚¢‚©“ŠÎ‚ğŠo‚¦‚Ä‚¢‚È‚¢•û‚ª‘‚¢??
-* –§‹™ƒoƒO‚ğg‚¤‚È‚çA‚±‚ÌƒV[ƒt‚ª–§‹™‚ğŠo‚¦‚Ä‚¢‚é‚Ì‚ªğŒ
-* –§‹™‚ğŠo‚¦‚Ä‚¢‚é“GƒV[ƒt‚ğŠ©—U‚·‚é
+* Ramza åˆæœŸé…ç½® å³1ä¸Š1 in TA, ã“ã®ä½ç½®ã ã¨æŠ•çŸ³ãŒå±Šã‹ãªã„??
+* Ramza ä¸€ç•ªå·¦ä¸Š in RTA, ã“ã®ä½ç½®ã ã¨æŠ•çŸ³ãŒå±Šã‹ãªã„??
+* speed 7 ã® Theif ã«ã¯åŸºæœ¬æŠ€ã‚’ã‚»ãƒƒãƒˆã—ã¦ã„ãªã„ã‹æŠ•çŸ³ã‚’è¦šãˆã¦ã„ãªã„æ–¹ãŒæ—©ã„??
+* å¯†æ¼ãƒã‚°ã‚’ä½¿ã†ãªã‚‰ã€ã“ã®ã‚·ãƒ¼ãƒ•ãŒå¯†æ¼ã‚’è¦šãˆã¦ã„ã‚‹ã®ãŒæ¡ä»¶
+* å¯†æ¼ã‚’è¦šãˆã¦ã„ã‚‹æ•µã‚·ãƒ¼ãƒ•ã‚’å‹§èª˜ã™ã‚‹
 
 ch2-Araguay
 -----------
 * CT3 Bolt3
 
-* ƒ†ƒjƒbƒg9‘Ì•ª‚Ì effect
+* ãƒ¦ãƒ‹ãƒƒãƒˆ9ä½“åˆ†ã® effect
 * Bolt2 2926 - 1820 = 1106
 * Bolt3 2889 - 1820 = 1069
 * Ice   3137 - 1820 = 1317
 * Ice2  3517 - 1820 = 1697
 
-* –³–‚È‚æ‚¤‚¾‚È‚ÌƒZƒŠƒt
+* ç„¡äº‹ãªã‚ˆã†ã ãªã®ã‚»ãƒªãƒ•
 * Bolt2 3254f
 * Bolt3 3217f
-* Ice   3255f (boco ¶‘¶‚ÅƒZƒŠƒt skip)
-* Ice2  3635f (boco ¶‘¶‚ÅƒZƒŠƒt skip)
+* Ice   3255f (boco ç”Ÿå­˜ã§ã‚»ãƒªãƒ• skip)
+* Ice2  3635f (boco ç”Ÿå­˜ã§ã‚»ãƒªãƒ• skip)
 
-* Bolt3 ‚ªˆê”Ô‘‚¢ –ñ40f
-* Bolt2 ‚Æ Ice ‚ÍƒGƒtƒFƒNƒg‚ÆƒZƒŠƒt skip ‚ª‘ŠE‚³‚ê‚é
+* Bolt3 ãŒä¸€ç•ªæ—©ã„ ç´„40f
+* Bolt2 ã¨ Ice ã¯ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã¨ã‚»ãƒªãƒ• skip ãŒç›¸æ®ºã•ã‚Œã‚‹
 
 
 
 ch2-Zirekile Falls
 ------------------
 * Delita Lv11, speed 7
-* Delita ‚ªæ§‚·‚é
+* Delita ãŒå…ˆåˆ¶ã™ã‚‹
 * L2
-* Delita ‚ª –k“lœÓ‘Å(Crus Punch) ‚ğŠo‚¦‚Ä‚¢‚È‚¢(30%??)A‚Ü‚½‚Í –³‘oˆîÈ“Ë‚« ‚ğŠo‚¦‚Ä‚¢‚é‚Æ
-  1 ƒ^[ƒ“–Ú‚Å Gafgarion ‚ğ“|‚·‚Ì‚ÅA‚»‚ÌŒã‚Ì‰ï˜b‚ªˆêØ”­¶‚µ‚È‚¢
-* Delita ‚ª 1ƒ^[ƒ“–Ú‚Å Gafgarion ‚ğ“|‚¹‚Î CT3 Death ‚ÅI—¹
-* Gafgarion ‚Í‘•”õ‰ğœ‚È‚Ì‚Å HP ‚Í­‚È‚¢
+* Delita ãŒ åŒ—æ–—éª¨ç •æ‰“(Crus Punch) ã‚’è¦šãˆã¦ã„ãªã„(30%??)ã€ã¾ãŸã¯ ç„¡åŒç¨²å¦»çªã ã‚’è¦šãˆã¦ã„ã‚‹ã¨
+  1 ã‚¿ãƒ¼ãƒ³ç›®ã§ Gafgarion ã‚’å€’ã™ã®ã§ã€ãã®å¾Œã®ä¼šè©±ãŒä¸€åˆ‡ç™ºç”Ÿã—ãªã„
+* Delita ãŒ 1ã‚¿ãƒ¼ãƒ³ç›®ã§ Gafgarion ã‚’å€’ã›ã° CT3 Death ã§çµ‚äº†
+* Gafgarion ã¯è£…å‚™è§£é™¤ãªã®ã§ HP ã¯å°‘ãªã„
 
 
 ch2-Zaland
 ----------
 * Mustadio Lv10, speed 7
-* Mustadio ‚ªæ§‚·‚é
+* Mustadio ãŒå…ˆåˆ¶ã™ã‚‹
 * L2
 * CT3 Bolt3
 
@@ -543,7 +543,7 @@ ch2-Barius Hill
 
 ch2-Zigolis Swamp
 ----------
-* Uribo ‚Í‘‚¢‚Ì‚Åo‚È‚¢‚æ‚¤‚É
+* Uribo ã¯æ—©ã„ã®ã§å‡ºãªã„ã‚ˆã†ã«
 * CT3 Bolt3
 
 ch2-Goug
@@ -554,39 +554,39 @@ ch2-Goug
 * Thief Lv13, speed 7
 * CT5 Bolt3
 
-* Mustadio ‚Í Engineer ‚É–ß‚Á‚Ä‚¢‚é. speed 7 ‚Æ‚È‚é
-* speed 7 Thieves ‚ÉAæ‚É“®‚©‚ê‚é‚Ì‚ÅAMustadio ‚ÌƒŠƒAƒNƒVƒ‡ƒ“ƒAƒrƒŠƒeƒB‚ğ”­“®‚³‚¹‚È‚¢‚æ‚¤‚É
-* Mustadio ‚ª don't move ‚© don't act ‚ğ¬Œ÷‚³‚¹‚½•û‚ª‘‚¢. “G‚Í•K‚¸—¼•ûs“®‚·‚é‚½‚ß
-* ˆÚ“®‚æ‚èUŒ‚‚Ì‚Ù‚¤‚ªƒGƒtƒFƒNƒg‚ª’Z‚¢‚«‚ª‚·‚é‚Ì‚Å don't move is better??
-* í—˜•i‚Å Thunder rod
+* Mustadio ã¯ Engineer ã«æˆ»ã£ã¦ã„ã‚‹. speed 7 ã¨ãªã‚‹
+* speed 7 Thieves ã«ã€å…ˆã«å‹•ã‹ã‚Œã‚‹ã®ã§ã€Mustadio ã®ãƒªã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚¢ãƒ“ãƒªãƒ†ã‚£ã‚’ç™ºå‹•ã•ã›ãªã„ã‚ˆã†ã«
+* Mustadio ãŒ don't move ã‹ don't act ã‚’æˆåŠŸã•ã›ãŸæ–¹ãŒæ—©ã„. æ•µã¯å¿…ãšä¸¡æ–¹è¡Œå‹•ã™ã‚‹ãŸã‚
+* ç§»å‹•ã‚ˆã‚Šæ”»æ’ƒã®ã»ã†ãŒã‚¨ãƒ•ã‚§ã‚¯ãƒˆãŒçŸ­ã„ããŒã™ã‚‹ã®ã§ don't move is better??
+* æˆ¦åˆ©å“ã§ Thunder rod
 
 
 ch2-Warjilis
 ------------
-* ‚±‚±‚Å‚Í‰½‚à”ƒ‚í‚È‚¢. Barius Valley ‚ÌŒã‚É–ß‚Á‚Ä‚«‚Ä”ƒ‚¤
+* ã“ã“ã§ã¯ä½•ã‚‚è²·ã‚ãªã„. Barius Valley ã®å¾Œã«æˆ»ã£ã¦ãã¦è²·ã†
 * Before Barius Valley, Buy Green Beret
-* –‚“¹m‚Ìƒ}ƒ“ƒg(MA+1)‚ğ”ƒ‚¤‚©‚Ç‚¤‚©
-  * --> Queklain ‚ª Bolt3 x2 ‚Å“|‚¹‚é‚È‚ç•K—v
-      ‚»‚¤‚Å‚È‚¯‚ê‚Î•K—v‚È‚¢
-      Bolt3 ‚Å‚Í‚È‚­ Flare ‚ğg‚¤‚æ‚¤‚É‚È‚é‚Ì‚Æ
-      3Í–`“ª‚Å Magic Gauntlet(MA+2) ‚ğ”ƒ‚¤‚½‚ß
+* é­”é“å£«ã®ãƒãƒ³ãƒˆ(MA+1)ã‚’è²·ã†ã‹ã©ã†ã‹
+  * --> Queklain ãŒ Bolt3 x2 ã§å€’ã›ã‚‹ãªã‚‰å¿…è¦
+      ãã†ã§ãªã‘ã‚Œã°å¿…è¦ãªã„
+      Bolt3 ã§ã¯ãªã Flare ã‚’ä½¿ã†ã‚ˆã†ã«ãªã‚‹ã®ã¨
+      3ç« å†’é ­ã§ Magic Gauntlet(MA+2) ã‚’è²·ã†ãŸã‚
 
 
 ch2-Barius Valley
 -----------------
 * CT3 Bolt3
-* Agrias ‚É‚Í Bolt3 ‚ğƒK[ƒh‚µ‚Ä‚à‚ç‚¤
-* Agrias ‚Í Death –³Œø‚Á‚Û‚¢‚Ì‚Å Death ‚Å‚à‚æ‚¢‚ª Bolt3 ‚Ì•û‚ª‘‚¢
+* Agrias ã«ã¯ Bolt3 ã‚’ã‚¬ãƒ¼ãƒ‰ã—ã¦ã‚‚ã‚‰ã†
+* Agrias ã¯ Death ç„¡åŠ¹ã£ã½ã„ã®ã§ Death ã§ã‚‚ã‚ˆã„ãŒ Bolt3 ã®æ–¹ãŒæ—©ã„
 
-* ‰ü‘PˆÄ
-  * ‚±‚±‚Å –‚pt‚Ìñ ‚ª shop ‚É’Ç‰Á‚³‚ê‚é
-  * ”’–‚“¹m‚Éƒ`ƒFƒ“ƒW‚µ‚Ä‚©‚ç ˆê“x Warjilis ‚É–ß‚Á‚Ä”ƒ‚¢•¨
-  * Green Beret(speed +1), –‚pt‚Ìñ(MA+1), –‚“¹m‚Ìƒ}ƒ“ƒg(MA+1) in Fitting room
+* æ”¹å–„æ¡ˆ
+  * ã“ã“ã§ é­”è¡“å¸«ã®æ– ãŒ shop ã«è¿½åŠ ã•ã‚Œã‚‹
+  * ç™½é­”é“å£«ã«ãƒã‚§ãƒ³ã‚¸ã—ã¦ã‹ã‚‰ ä¸€åº¦ Warjilis ã«æˆ»ã£ã¦è²·ã„ç‰©
+  * Green Beret(speed +1), é­”è¡“å¸«ã®æ–(MA+1), é­”é“å£«ã®ãƒãƒ³ãƒˆ(MA+1) in Fitting room
   * Ramza Lv26, speed 9, MA 12
-  * MA 12 ‚¾‚Æ Golgrand ‚Æ Lionel (outside) ‚ª Bolt3 ‚Å“|‚¹‚é
-  * Flare ‚Æ Bolt3 ‚Í 120f ·. “G‚ª 15‘Ì‚È‚Ì‚Å 15 x 120f = 1800f
-  * Barius Valley ‚Æ Warjilis ‚Ì‰•œ‚â shop ‚ÌƒƒX‚Í xxf
-  * ƒoƒŠƒAƒX‚Ì’J‚ÌŒã‚ÉƒEƒH[ƒWƒŠƒX‚É–ß‚Á‚Ä”ƒ‚¢•¨‚·‚é•û‚ª‘‚­‚È‚é‚Æv‚¢‚Ü‚·
+  * MA 12 ã ã¨ Golgrand ã¨ Lionel (outside) ãŒ Bolt3 ã§å€’ã›ã‚‹
+  * Flare ã¨ Bolt3 ã¯ 120f å·®. æ•µãŒ 15ä½“ãªã®ã§ 15 x 120f = 1800f
+  * Barius Valley ã¨ Warjilis ã®å¾€å¾©ã‚„ shop ã®ãƒ­ã‚¹ã¯ xxf
+  * ãƒãƒªã‚¢ã‚¹ã®è°·ã®å¾Œã«ã‚¦ã‚©ãƒ¼ã‚¸ãƒªã‚¹ã«æˆ»ã£ã¦è²·ã„ç‰©ã™ã‚‹æ–¹ãŒæ—©ããªã‚‹ã¨æ€ã„ã¾ã™
 
 
 
@@ -594,9 +594,9 @@ ch2-Golgorand
 -------------
 * Gafgarion Lv17, speed 8
 
-* ch2 Golgorand ‚Ì‘O‚Ü‚Å‚É lv23 •K{. lv23 Priest + Green Beret = speed 9
+* ch2 Golgorand ã®å‰ã¾ã§ã« lv23 å¿…é ˆ. lv23 Priest + Green Beret = speed 9
 * Change job Priest, Equip Green Beret for speed 9
-* Priest ‚É‚È‚Á‚Ä MA ‚ª‰º‚ª‚é‚Ì‚Å CT Bolt3 ‚Åƒ_ƒ[ƒW‚ª‘«‚è‚È‚¯‚ê‚Î Flare
+* Priest ã«ãªã£ã¦ MA ãŒä¸‹ãŒã‚‹ã®ã§ CT Bolt3 ã§ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒè¶³ã‚Šãªã‘ã‚Œã° Flare
 * Ramza Lv26, speed 9, MA 10
 * CT3 Flare
 
@@ -610,14 +610,14 @@ ch2-Lionel (inside)
 ---------------
 * Queklain Lv20, HP 511, speed 9
 
-* Œã‚ë‚É”z’u‚µ‚Ä“G‚ğè‘O‚É—U“±‚³‚¹‚éB‚»‚Ì•û‚ª“G‚Ì•à”‚ª’Z‚»‚¤
-* Queklain ‚Éæ§‚³‚ê‚é. Sleep is bad, but Death Sentence is good.
+* å¾Œã‚ã«é…ç½®ã—ã¦æ•µã‚’æ‰‹å‰ã«èª˜å°ã•ã›ã‚‹ã€‚ãã®æ–¹ãŒæ•µã®æ­©æ•°ãŒçŸ­ãã†
+* Queklain ã«å…ˆåˆ¶ã•ã‚Œã‚‹. Sleep is bad, but Death Sentence is good.
 * L2
 * Height Prime Demi2/Height Prime Demi2
-* Height Prime ‚Ì•û‚ª Lv5 ‚æ‚è 2f ‘‚¢
-* Bolt3 ‚Í MA12 ‚Å‚à 180-190 ‚Ìƒ_ƒ[ƒW. MA ‚ğã‚°‚é‚æ‚è Demi2 ‚ª better??
-* Wizard , Thunder rod, ‘•”õ‚Å MA15 ‚É‚·‚é‚Æ Holy ‚ª 490 ƒ_ƒ[ƒW
-  Queklain ‚ª lower HP ‚È‚çˆêŒ‚
+* Height Prime ã®æ–¹ãŒ Lv5 ã‚ˆã‚Š 2f æ—©ã„
+* Bolt3 ã¯ MA12 ã§ã‚‚ 180-190 ã®ãƒ€ãƒ¡ãƒ¼ã‚¸. MA ã‚’ä¸Šã’ã‚‹ã‚ˆã‚Š Demi2 ãŒ better??
+* Wizard , Thunder rod, è£…å‚™ã§ MA15 ã«ã™ã‚‹ã¨ Holy ãŒ 490 ãƒ€ãƒ¡ãƒ¼ã‚¸
+  Queklain ãŒ lower HP ãªã‚‰ä¸€æ’ƒ
 
 ch3
 ---
@@ -629,13 +629,13 @@ ch3-Goland
 * Olan Lv18, speed 9
 * highest speed 9
 
-* Olan ‚Éæ§‚³‚ê‚é
+* Olan ã«å…ˆåˆ¶ã•ã‚Œã‚‹
 * L2
 * CT3 Flare
 
-* Olan ‚ÍA¯“V’â~‚Ì•û‚ªA«‘UŒ‚‚æ‚è‘‚¢
-* Olan ‚ÍA«‘UŒ‚‚Å critical ‚ğo‚·‚ÆAƒmƒbƒNƒoƒbƒN‚µ‚Ä“|‚¹‚é‚Ì‚Å
-  Flare ‚Ìƒ^[ƒQƒbƒg‚ªˆê‚ÂŒ¸‚é
+* Olan ã¯ã€æ˜Ÿå¤©åœæ­¢ã®æ–¹ãŒã€è¾æ›¸æ”»æ’ƒã‚ˆã‚Šæ—©ã„
+* Olan ã¯ã€è¾æ›¸æ”»æ’ƒã§ critical ã‚’å‡ºã™ã¨ã€ãƒãƒƒã‚¯ãƒãƒƒã‚¯ã—ã¦å€’ã›ã‚‹ã®ã§
+  Flare ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒä¸€ã¤æ¸›ã‚‹
 
 
 ch3-Lesalia
@@ -645,7 +645,7 @@ ch3-Lesalia
 
 * Lv4 Flare
 * hits an Knight as well.
-* í‚ê‚Î‚¢‚¢‚Ì‚Å Bolt2 ‚Å‚àƒ_ƒ[ƒW‘«‚è‚é‚©‚à
+* å‰Šã‚Œã°ã„ã„ã®ã§ Bolt2 ã§ã‚‚ãƒ€ãƒ¡ãƒ¼ã‚¸è¶³ã‚Šã‚‹ã‹ã‚‚
 
 
 ch3-Orbonne 2nd Floor
@@ -653,8 +653,8 @@ ch3-Orbonne 2nd Floor
 * highest speed 7
 
 * CT3 Flare
-* •Ò¬‰æ–Ê‚ğ”²‚¯‚é‚Æ‚«‚É“G‚Ì‘Š«‚ªŒˆ’è
-* —³‹Rm‚Í‘Š«‚ªˆ«‚¢‚Æ Flare ˆêŒ‚‚Å“|‚¹‚È‚¢
+* ç·¨æˆç”»é¢ã‚’æŠœã‘ã‚‹ã¨ãã«æ•µã®ç›¸æ€§ãŒæ±ºå®š
+* ç«œé¨å£«ã¯ç›¸æ€§ãŒæ‚ªã„ã¨ Flare ä¸€æ’ƒã§å€’ã›ãªã„
 
 
 ch3-Orbonne 3rd Floor
@@ -663,8 +663,8 @@ ch3-Orbonne 3rd Floor
 * highest speed 8
 
 * remove Green Beret for speed 8
-* ‰Šú”z’u‚ğ 2ƒ}ƒXŒã‚ë
-* Izlude ‚ª ˆÚ“®‚·‚é‚Ì‚Å Height 3 Flare
+* åˆæœŸé…ç½®ã‚’ 2ãƒã‚¹å¾Œã‚
+* Izlude ãŒ ç§»å‹•ã™ã‚‹ã®ã§ Height 3 Flare
 
 
 ch3-Orbonne 1st Floor
@@ -673,7 +673,7 @@ ch3-Orbonne 1st Floor
 * highest speed 10
 
 * Equip Green Beret for speed 9
-* Wiegraf ‚É‚Íæ§‚³‚ê‚é
+* Wiegraf ã«ã¯å…ˆåˆ¶ã•ã‚Œã‚‹
 * Height 5 Flare
 
 
@@ -691,22 +691,22 @@ ch3-Yardow
 * Ninja Lv26 speed 9
 * Ninja Lv25 speed 9
 * Ninja Lv24 speed 9
-* Ninja ‚É‚Íæ§‚³‚ê‚é. Rafa ‚ª“|‚³‚ê‚È‚¢‚æ‚¤‚É’²®
+* Ninja ã«ã¯å…ˆåˆ¶ã•ã‚Œã‚‹. Rafa ãŒå€’ã•ã‚Œãªã„ã‚ˆã†ã«èª¿æ•´
   * R1, when 2nd Ninja moves
   * L1, when 3rd Ninja moves
 * Height prime Flare
 
-* Rafa equips Elf's mant (–‚–@‰ñ”ğ25%)
-  * Zp‚Å Height ‚ğæ“¾‚µ‚È‚¢ê‡‚Í Rafa ‚Í‰ñ”ğ‚ª•K—v
+* Rafa equips Elf's mant (é­”æ³•å›é¿25%)
+  * ç®—è¡“ã§ Height ã‚’å–å¾—ã—ãªã„å ´åˆã¯ Rafa ã¯å›é¿ãŒå¿…è¦
 
-* Ready ‚©‚ç”EÒ‚ªæ§‚µ‚Ä Ramza u‚¨‚Ü‚¦‚Í...v‚Ü‚Å
+* Ready ã‹ã‚‰å¿è€…ãŒå…ˆåˆ¶ã—ã¦ Ramza ã€ŒãŠã¾ãˆã¯...ã€ã¾ã§
   * 479890 - 478122 = 1768f
-  * Ramza ‚à‘ÎÛ‚É‚È‚é‚ª CT4/CT5 ‚Ì•û‚ª‘‚»‚¤
+  * Ramza ã‚‚å¯¾è±¡ã«ãªã‚‹ãŒ CT4/CT5 ã®æ–¹ãŒæ—©ãã†
 
 * After battle, Change job to Wizard
 * Buy Wizard Rod (MA+2), Sprint Shoes (SP+1) in fitting room for speed 9
 * <del>Buy also 108 Gems here or get from Malark at end of ch3</del>
-* 108 gems ‚Í–³‚­‚Ä‚à‚æ‚¢. 108 gems ‚Ì‘ã‚í‚è‚É Magic Gauntlet ‚Å OK
+* 108 gems ã¯ç„¡ãã¦ã‚‚ã‚ˆã„. 108 gems ã®ä»£ã‚ã‚Šã« Magic Gauntlet ã§ OK
 * Ramza speed 9, MA 15
 
 ch3-Yuguo
@@ -718,7 +718,7 @@ ch3-Yuguo
 ch3-Riovanes (outside)
 ------------
 * highest speed 8
-* •Ò¬‰æ–Ê•Â‚¶‚é‚Æ‚«‚É“G‚Ì‘Š«‚ªŒˆ’è
+* ç·¨æˆç”»é¢é–‰ã˜ã‚‹ã¨ãã«æ•µã®ç›¸æ€§ãŒæ±ºå®š
 * CT3 Flare
 
 ch3-Riovanes (inside)
@@ -731,8 +731,8 @@ ch3-Riovanes (inside)
 * Velius Lv31, HP 1131, speed 8
 * Lv prime Demi2 x2 (Velius)
 * hits an enemy as well
-* Demi2 x4 ‚æ‚è Flare x3 ‚Ì•û‚ª‘‚¢
-  * ƒ_ƒ[ƒW‚ª‘«‚è‚ê‚Î Flare --> Demi2 ‚Æ‚µ‚½‚Ù‚¤‚ª‚æ‚¢‚©‚à
+* Demi2 x4 ã‚ˆã‚Š Flare x3 ã®æ–¹ãŒæ—©ã„
+  * ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒè¶³ã‚Šã‚Œã° Flare --> Demi2 ã¨ã—ãŸã»ã†ãŒã‚ˆã„ã‹ã‚‚
 
 ch3-Riovanes (rooftop)
 ------------
@@ -740,7 +740,7 @@ ch3-Riovanes (rooftop)
 * Elmdor Lv33, HP 387, speed 9?? 10??
 * Celia  Lv29, HP 359, speed 8
 * Lede   Lv28, HP 334, speed 8
-* Elmdor ‚É‚Íæ§‚³‚ê‚é
+* Elmdor ã«ã¯å…ˆåˆ¶ã•ã‚Œã‚‹
 * Height prime Flare. hit only Lede.
 
 
@@ -749,7 +749,7 @@ ch4
 
 ch4-Doguola
 ------------
-* ƒŠƒIƒtƒ@ƒlƒXé‚©‚çƒhƒO[ƒ‰“»‚Ü‚Å‚ÌƒGƒ“ƒJƒEƒ“ƒg—¦‚Í 5/10
+* ãƒªã‚ªãƒ•ã‚¡ãƒã‚¹åŸã‹ã‚‰ãƒ‰ã‚°ãƒ¼ãƒ©å³ ã¾ã§ã®ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆç‡ã¯ 5/10
 * highest speed 7
 * CT3 Flare
 
@@ -758,15 +758,15 @@ ch4-Bervenia
 * highest speed 9
 * Meliadoul Lv35, HP 343, speed 8
 * Ninja Lv31, speed 9
-* ”EÒ‚Éæ§‚³‚ê‚é‚Ì‚Å‰½‚à‚³‚¹‚È‚¢‚æ‚¤‚É‚·‚é
+* å¿è€…ã«å…ˆåˆ¶ã•ã‚Œã‚‹ã®ã§ä½•ã‚‚ã•ã›ãªã„ã‚ˆã†ã«ã™ã‚‹
 * Lv 5 Flare
-* Ramza ‚ª Lv25 or Lv30 ‚É‚È‚Á‚Ä‚¢‚È‚¢•û‚ª‘‚¢
+* Ramza ãŒ Lv25 or Lv30 ã«ãªã£ã¦ã„ãªã„æ–¹ãŒæ—©ã„
 
 ch4-Finath
 ----------
 * highest speed depends on Ramza's Level.
-* Ôƒ`ƒ‡ƒRƒ{‚â‚¤‚è‚Ú‚¤‚Í Lv29 ‘OŒã‚¾‚Æ speed 9 ‚Ì‰Â”\«‚ª‚ ‚é
-* speed 9 ‚Ì“G‚ªoŒ»‚µ‚È‚¢‚æ‚¤‚É
+* èµ¤ãƒãƒ§ã‚³ãƒœã‚„ã†ã‚Šã¼ã†ã¯ Lv29 å‰å¾Œã ã¨ speed 9 ã®å¯èƒ½æ€§ãŒã‚ã‚‹
+* speed 9 ã®æ•µãŒå‡ºç¾ã—ãªã„ã‚ˆã†ã«
 * CT3 Bolt3
 
 ch4-Zeltennia
@@ -774,7 +774,7 @@ ch4-Zeltennia
 * highest speed 7
 * Zalmo Lv35, HP 323, speed 7
 * Lv5 Flare
-* Ramza ‚Æ Delita ‚ª Lv25 or Lv30 ‚É‚È‚Á‚Ä‚¢‚È‚¢•û‚ª‘‚¢
+* Ramza ã¨ Delita ãŒ Lv25 or Lv30 ã«ãªã£ã¦ã„ãªã„æ–¹ãŒæ—©ã„
 
 
 ch4-Bed Dsert
@@ -783,23 +783,23 @@ ch4-Bed Dsert
 * Balk Lv35, HP 377, speed 11
   * innate Magic Defend UP
 
-* 108 gems ‚Í–³‚­‚Ä‚à‚æ‚¢. 108 gems ‚Ì‘ã‚í‚è‚É Magic Gauntlet ‚Å OK
+* 108 gems ã¯ç„¡ãã¦ã‚‚ã‚ˆã„. 108 gems ã®ä»£ã‚ã‚Šã« Magic Gauntlet ã§ OK
 * Equip Magic Gauntlet from Sprint Shoes
 * Set Counter Magic from MP Switch
 * Ramza Lv30 speed 8, MA 17
 * CT prime flare. Flare is enough to kill, since MA is 17.
-* ƒuƒŠƒUƒh‚ÆƒuƒŠƒUƒ‰‚Æ”­“®‚·‚é‚ªAƒuƒŠƒUƒh‚Ì‚Ù‚¤‚ªƒGƒtƒFƒNƒg‚ª’Z‚¢
+* ãƒ–ãƒªã‚¶ãƒ‰ã¨ãƒ–ãƒªã‚¶ãƒ©ã¨ç™ºå‹•ã™ã‚‹ãŒã€ãƒ–ãƒªã‚¶ãƒ‰ã®ã»ã†ãŒã‚¨ãƒ•ã‚§ã‚¯ãƒˆãŒçŸ­ã„
 
 
 ch4-Besra North Wall
 ---------
 * Equip Sprint Shoes
 * **NOT** Set MP Switch
-* ability ‚ÌƒZƒbƒg‚Í‚±‚±‚Å‚Í‚µ‚È‚¢
+* ability ã®ã‚»ãƒƒãƒˆã¯ã“ã“ã§ã¯ã—ãªã„
 * Ramza Lv30 speed 9, MA 15
 
 * Select North Wall, since there is a Ninja who has speed 9 at the south wall.
-* –k‚©“ì‚©‚Ì‘I‘ğ‚Å“G‚Ì‘Š«‚ªŒˆ’è
+* åŒ—ã‹å—ã‹ã®é¸æŠã§æ•µã®ç›¸æ€§ãŒæ±ºå®š
 
 * highest speed 8
 * CT3 Flare
@@ -813,6 +813,9 @@ ch4-Sluice
 * Ramza Lv30 speed 7, MA 8, move 5
 
 * highest speed 9
+
+* æˆ¦é—˜é–‹å§‹ã‹ã‚‰ Ramza ã®ã‚¿ãƒ¼ãƒ³ã¾ã§æ•µ8äººãŒè¡Œå‹•ã™ã‚‹
+  Testrun ã§ã¯ä½•ãƒ•ãƒ¬ãƒ¼ãƒ ã‹ã‹ã£ãŸã‹è¨ˆæ¸¬ã™ã‚‹ã“ã¨
 
 * PlanA
   * Ramza
@@ -847,31 +850,66 @@ ch4-Sluice
 
 
 
-* RTA “®‰æ‚Å‚Í
-  * Ramza speed 12, move 4. auto-haste. Œ©K‚¢ím
-  * Ramza ‚Í‰Šú”z’u, ƒ‰ƒ”ƒBƒAƒ“‚ğ ¶1 ã2
-  * Orlandu ‰Á“üŒã‚Í 3l‚Ì speed ‚ğ 12
+* RTA å‹•ç”»ã§ã¯
+  * Ramza speed 12, move 4. auto-haste. è¦‹ç¿’ã„æˆ¦å£«
+  * Ramza ã¯åˆæœŸé…ç½®, ãƒ©ãƒ´ã‚£ã‚¢ãƒ³ã‚’ å·¦1 ä¸Š2
+  * Orlandu åŠ å…¥å¾Œã¯ 3äººã® speed ã‚’ 12
 
-* TA “®‰æ‚Å‚Í
+* TA å‹•ç”»ã§ã¯
   * Change job of Squire.
   * Set ability of Time Magic
   * Set Teleport
-  * MP Switch ‚Í•t‚¯’¼‚³‚È‚¢( Counter Magic ‚Ì‚Ü‚Ü)
-  * Best fit's equipment (Å‹­‘•”õ)
-  * Equip Red shoes, if needed. Å‹­‘•”õŒã Red shoes ‚É•ÏX
+  * MP Switch ã¯ä»˜ã‘ç›´ã•ãªã„( Counter Magic ã®ã¾ã¾)
+  * Best fit's equipment (æœ€å¼·è£…å‚™)
+  * Equip Red shoes, if needed. æœ€å¼·è£…å‚™å¾Œ Red shoes ã«å¤‰æ›´
   * Ramza speed 7, move 5.
-  * Ramza ‰Šú”z’u ‰E1 ã1
+  * Ramza åˆæœŸé…ç½® å³1 ä¸Š1
 
-* Wizard ‚Í–‚–@“™‚Ìs“®‚ğ‚³‚¹‚È‚¢
-  * Quick ‚ğg‚¤ê‡‚ÍƒwƒCƒXƒg‚ğ‚³‚¹‚È‚¢
-  * Quick ‚ğg‚í‚È‚¢ê‡‚Í“G‚ÌƒwƒCƒXƒg‚ğ©•ª‚àó‚¯‚é
+* Wizard ã¯æ™‚é­”æ³•ç­‰ã®è¡Œå‹•ã‚’ã•ã›ãªã„
+  * Quick ã‚’ä½¿ã†å ´åˆã¯ãƒ˜ã‚¤ã‚¹ãƒˆã‚’ã•ã›ãªã„
+  * Quick ã‚’ä½¿ã‚ãªã„å ´åˆã¯æ•µã®ãƒ˜ã‚¤ã‚¹ãƒˆã‚’è‡ªåˆ†ã‚‚å—ã‘ã‚‹
+
+* æ”¹å–„æ¡ˆ1
+	* Time Mage ã‚’ 1äººå‡ºæ’ƒã•ã›ã¦ã€Ramza ã¨ Time Mage ãŒ Critical Quic (ç€•æ­»ã‚¯ã‚¤ãƒƒã‚¯) ã§çŸ­ç¸®ã™ã‚‹
+		1. Time Mage: move and throw stone, then knock back
+		1. Ramza: attack Time Mage or cast Quic to Time Mage
+		1. Time Mage: re-action Critical Quic, then move and throw stone, then knock back
+		1. Enemy: attack Ramza
+		1. Ramza: re-action Critical Quic, then move
+	* ã“ã®æ–¹æ³•ã ã¨ Ramza ã¯æ™‚é­”æ³•ä½¿ã‚ãªãã¦ã‚ˆã„??
+	* Ramza ã®è£…å‚™ã¯ã€HPä½ãã€move ã¯é«˜ã
+
+* æ”¹å–„æ¡ˆ2
+	* Time Mage ã‚’ 2äººå‡ºæ’ƒã•ã›ã¦ã€ãƒ†ãƒ¬ãƒ and æŠ•çŸ³
+		1. Time Mage: move and throw stone then knock back
+		1. Ramza: move and cast Quic to myself
+		1. Time Mage: move and throw stone then knock back
+		1. Ramza: Quic enchanged, then  move
+
+* æ”¹å–„æ¡ˆ3
+	* Time Mage, Thief ã® 2äººå‡ºæ’ƒã•ã›ã¦ã€Critical Quic, ãƒ†ãƒ¬ãƒ and æŠ•çŸ³
+		1. Time Mage: move and throw stone then knock back
+		1. Thief: attack Ramza
+		1. Ramza: re-action Critical Quic, then move and attack attack Time Mage
+		1. Time Mage: re-action Critical Quic, then move and throw stone, then knock back
+		1. Ramza: move
+
+* æ”¹å–„æ¡ˆ4
+	* Thief ã‚’ 1äººå‡ºæ’ƒã•ã›ã¦ã€Critical Quic
+		1. Thief: attack Ramza
+		1. Ramza: re-action Critical Quic, then move and throw stone, then knock back
+		1. Ramza: move and (Quic or è£…å‚™å¤‰æ›´)
+		1. Ramza: re-action Critical Quic, then move and (Quic or è£…å‚™å¤‰æ›´)
+		1. Ramza: re-action Critical Quic, then throw stone and move
+
+
 
 * Orlandu status
-  * Orlandu Lv27 ˆÈã‚©‚Â Lightning Stab ‚ğŠo‚¦‚Ä‚¢‚é. Lv29 ‚¾‚Æ PA +1 ‚È‚Ì‚Åƒxƒ^[
-  * ƒGƒ‹ƒ€ƒhƒAí‚Å Move+1 ‚ª‚ ‚é‚Æ‚æ‚¢‚Ì‚Å  Move+1 or rest of JP is higher than 200JP
+  * Orlandu Lv27 ä»¥ä¸Šã‹ã¤ Lightning Stab ã‚’è¦šãˆã¦ã„ã‚‹. Lv29 ã ã¨ PA +1 ãªã®ã§ãƒ™ã‚¿ãƒ¼
+  * ã‚¨ãƒ«ãƒ ãƒ‰ã‚¢æˆ¦ã§ Move+1 ãŒã‚ã‚‹ã¨ã‚ˆã„ã®ã§  Move+1 or rest of JP is higher than 200JP
 
 * Bethla to Zarghidas
-  * Encounter 6/10 = 3/10 ƒxƒbƒh»”™ + 3/10 ƒtƒBƒiƒX‰Í
+  * Encounter 6/10 = 3/10 ãƒ™ãƒƒãƒ‰ç ‚æ¼  + 3/10 ãƒ•ã‚£ãƒŠã‚¹æ²³
 
 
 ch4-Zarghidas
@@ -884,12 +922,12 @@ ch4-Zarghidas
 * Ramza equip Excalibur, Wizard Robe(MA+2), Magic Gauntlet(MA+2)
 * Set Math Skill, MP Switch
 * Remove Teleport
-	* ƒ‰ƒ€ƒU‚Í‚à‚¤•à‚­‚±‚Æ‚Í‚È‚¢‚Ì‚Å Teleport ‰ğœ‚Í•K—v‚È‚¢
+	* ãƒ©ãƒ ã‚¶ã¯ã‚‚ã†æ­©ãã“ã¨ã¯ãªã„ã®ã§ Teleport è§£é™¤ã¯å¿…è¦ãªã„
 
 * Ramza, Lv30, speed 8, MA 13, Excalibur (speed 12)
 * Orlandu, Lv30, speed 8, PA 17, Excalibur (speed 12)
 
-* TA “®‰æ‚Å‚Í
+* TA å‹•ç”»ã§ã¯
   * shop
   * dupe Excalibur
   * buy aegis shield for Ramza
@@ -904,11 +942,11 @@ ch4-Germinas
 ------------
 * CT3 Death
 
-* Ramza ‰Šú”z’u, Orlandu ‰Šú”z’u ¶1
-* 2•”‘à•Ò¬‚È‚Ì‚Å‘Sˆõ squad 1 ‚Éo‚·‚±‚Æ‚Å squad 2 ‚Ì•Ò¬‰æ–Ê‚ğƒXƒLƒbƒv‚³‚¹‚é
+* Ramza åˆæœŸé…ç½®, Orlandu åˆæœŸé…ç½® å·¦1
+* 2éƒ¨éšŠç·¨æˆãªã®ã§å…¨å“¡ squad 1 ã«å‡ºã™ã“ã¨ã§ squad 2 ã®ç·¨æˆç”»é¢ã‚’ã‚¹ã‚­ãƒƒãƒ—ã•ã›ã‚‹
 
-* TA “®‰æ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu ‰Šú”z’u ¶2
+* TA å‹•ç”»ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu åˆæœŸé…ç½® å·¦2
 
 * Note
   * Flare 629877 - 631321 = 1444f
@@ -918,7 +956,7 @@ ch4-Poeskas
 -----------
 * CT3 Flare
 
-* €Ò‚ÉƒfƒX‚ÍŒø‚©‚È‚¢‚Ì‚ÅƒtƒŒƒA
+* æ­»è€…ã«ãƒ‡ã‚¹ã¯åŠ¹ã‹ãªã„ã®ã§ãƒ•ãƒ¬ã‚¢
 
 
 ch4-Limberry (outside)
@@ -926,21 +964,21 @@ ch4-Limberry (outside)
 * Celia  Lv38, HP 413, speed 9
 * Lede   Lv37, HP 393, speed 9
 
-* Ramza ‰Šú”z’u ã1, Orlandu ‰Šú”z’u ¶4
+* Ramza åˆæœŸé…ç½® ä¸Š1, Orlandu åˆæœŸé…ç½® å·¦4
 * Orlandu Lightning Stab
-  * Flare ‚æ‚è Lightning Stab ‚Ì•û‚ª‘‚¢
-  * Lightning Stab ‚Ì•û‚ª Ramza ‚Ì Lv ‚ÉˆË‘¶‚µ‚È‚¢
-  * ˆÚ“®’†‚É L2. zoom out ‚µ‚½•û‚ª Lightning Stab ‚Í 15f ‘‚¢
-  * í“¬Œã‚Ì‰ï˜b‚ÅƒJƒƒ‰ˆÚ“®‚ª‚ ‚é‚ª zoom out ‚Æ zoom in ‚ÅŒo‰ßframe‚Í“¯‚¶
+  * Flare ã‚ˆã‚Š Lightning Stab ã®æ–¹ãŒæ—©ã„
+  * Lightning Stab ã®æ–¹ãŒ Ramza ã® Lv ã«ä¾å­˜ã—ãªã„
+  * ç§»å‹•ä¸­ã« L2. zoom out ã—ãŸæ–¹ãŒ Lightning Stab ã¯ 15f æ—©ã„
+  * æˆ¦é—˜å¾Œã®ä¼šè©±ã§ã‚«ãƒ¡ãƒ©ç§»å‹•ãŒã‚ã‚‹ãŒ zoom out ã¨ zoom in ã§çµŒéframeã¯åŒã˜
 
-* RTA ‚Å‚Í
-  * Ramza ‚ª Lv32 ‚È‚Ì‚Å Level prime flare ‚Å Ledy ‚ğ“|‚·
-  * Apanda ‚Ì Level ‚Íƒ‰ƒ“ƒ_ƒ€‚È‚Ì‚Å prime ‚É‚È‚ç‚È‚¢‚æ‚¤‚É’²®‚·‚é
+* RTA ã§ã¯
+  * Ramza ãŒ Lv32 ãªã®ã§ Level prime flare ã§ Ledy ã‚’å€’ã™
+  * Apanda ã® Level ã¯ãƒ©ãƒ³ãƒ€ãƒ ãªã®ã§ prime ã«ãªã‚‰ãªã„ã‚ˆã†ã«èª¿æ•´ã™ã‚‹
 
-* TA ‚Å‚Í
-  * Ramza ‰Šú”z’u ã1, Orlandu ‰Šú”z’u ¶4
-  * ‚±‚¤‚·‚é‚±‚Æ‚Å Orlandu ‚ª Ramza ‚æ‚è‘‚­s“®‚·‚é
-  * Orlandu Œ•‹Z
+* TA ã§ã¯
+  * Ramza åˆæœŸé…ç½® ä¸Š1, Orlandu åˆæœŸé…ç½® å·¦4
+  * ã“ã†ã™ã‚‹ã“ã¨ã§ Orlandu ãŒ Ramza ã‚ˆã‚Šæ—©ãè¡Œå‹•ã™ã‚‹
+  * Orlandu å‰£æŠ€
 
 
 ch4-Limberry (inside)
@@ -950,18 +988,18 @@ ch4-Limberry (inside)
 * Elmdor Lv41, HP 583, speed 10
 * Orlandu Lightning Stab **critical**
 
-* Ramza ‰Šú”z’u, Orlandu ‰Šú”z’u ¶2
+* Ramza åˆæœŸé…ç½®, Orlandu åˆæœŸé…ç½® å·¦2
 * Orlandu Lightning Stab
-  * ƒGƒ‹ƒ€ƒhƒA‚Ì‚İ‚ğ‘_‚¤ê‡‚Í Move+1 ‚ª•K—v
-  * ƒ_ƒ[ƒW‚ª‘«‚è‚È‚¢‚Ì‚Å Critical ‚ª•K—v
-  * Ramza ‚Ìê‡‚Í Flare ‚Å‚Íƒ_ƒ[ƒW‚ª‘«‚è‚È‚¢‚Ì‚Å Holy ‚ª•K—v
+  * ã‚¨ãƒ«ãƒ ãƒ‰ã‚¢ã®ã¿ã‚’ç‹™ã†å ´åˆã¯ Move+1 ãŒå¿…è¦
+  * ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒè¶³ã‚Šãªã„ã®ã§ Critical ãŒå¿…è¦
+  * Ramza ã®å ´åˆã¯ Flare ã§ã¯ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒè¶³ã‚Šãªã„ã®ã§ Holy ãŒå¿…è¦
 
-* RTA ‚Å‚Í
-  * Ramza speed 11, MA 14, •–‚“¹m
+* RTA ã§ã¯
+  * Ramza speed 11, MA 14, é»’é­”é“å£«
   * Level prime flare.
 
-* TA ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu o‚È‚¢
+* TA ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu å‡ºãªã„
   * Level prime holy.
 
 
@@ -969,35 +1007,35 @@ ch4-Zarela
 ----------
 * Zarela Lv44, HP 1171, speed 11
 
-* Ramza ‰Šú”z’u, Orlandu ‰Šú”z’u ã1
-  * ‚±‚Ì”z’u‚¾‚ÆƒJƒƒ‰‚Ì‰ñ“]‚ª­‚È‚­‚È‚é
+* Ramza åˆæœŸé…ç½®, Orlandu åˆæœŸé…ç½® ä¸Š1
+  * ã“ã®é…ç½®ã ã¨ã‚«ãƒ¡ãƒ©ã®å›è»¢ãŒå°‘ãªããªã‚‹
 
 * Height prime Demi2
 * hits an enemy as well
 * Orlandu Lightning Stab **critical**
 
-* RTA ‚Å‚Í
-  * Ramza speed 12, MA 12, •–‚“¹m
-  * Ramza ‰Šú”z’u, Orlandu ƒ‰ƒ€ƒU‚Ìã1, ƒ‰ƒ”ƒBƒAƒ“ ƒ‰ƒ€ƒU‚Ì ã1 ¶1
-  * ‚±‚Ì”z’u‚¾‚ÆƒJƒƒ‰‚Ì‰ñ“]‚ª­‚È‚­‚È‚é
+* RTA ã§ã¯
+  * Ramza speed 12, MA 12, é»’é­”é“å£«
+  * Ramza åˆæœŸé…ç½®, Orlandu ãƒ©ãƒ ã‚¶ã®ä¸Š1, ãƒ©ãƒ´ã‚£ã‚¢ãƒ³ ãƒ©ãƒ ã‚¶ã® ä¸Š1 å·¦1
+  * ã“ã®é…ç½®ã ã¨ã‚«ãƒ¡ãƒ©ã®å›è»¢ãŒå°‘ãªããªã‚‹
   * Height prime Demi2
-  * Orlandu ‚ªŒ•‹Z. ‘«‚è‚È‚¢ê‡‚Í ƒ‰ƒ”ƒBƒAƒ“.
+  * Orlandu ãŒå‰£æŠ€. è¶³ã‚Šãªã„å ´åˆã¯ ãƒ©ãƒ´ã‚£ã‚¢ãƒ³.
 
-* TA ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu Ramza ¶1
-  * ‚±‚Ì”z’u‚¾‚ÆƒJƒƒ‰‰ñ“]‚ª‘‚¦‚é. Ramza ‚Ì ã1 ‚ª‚æ‚¢
+* TA ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza å·¦1
+  * ã“ã®é…ç½®ã ã¨ã‚«ãƒ¡ãƒ©å›è»¢ãŒå¢—ãˆã‚‹. Ramza ã® ä¸Š1 ãŒã‚ˆã„
   * Height prime Demi2
-  * Orlandu ‚ªŒ•‹Z(Lightning Stab) critical.
+  * Orlandu ãŒå‰£æŠ€(Lightning Stab) critical.
 
 * Limberry to Igros
-  * Encounter 5/10 = 3/10 ƒhƒ‹ƒ{ƒ_ƒ‹¼Œ´ + 2/10 ƒXƒEƒB[ƒW‚ÌX
-  * ‚½‚¾‚µ‚¸‚ê‚é‚Ì‚Åâ‘Î‚Å‚Í‚È‚¢
+  * Encounter 5/10 = 3/10 ãƒ‰ãƒ«ãƒœãƒ€ãƒ«æ¹¿åŸ + 2/10 ã‚¹ã‚¦ã‚£ãƒ¼ã‚¸ã®æ£®
+  * ãŸã ã—ãšã‚Œã‚‹ã®ã§çµ¶å¯¾ã§ã¯ãªã„
 * Limberry to Dorter
-  * ‹°‚ç‚­ 3/10 =  3/10 ƒhƒ‹ƒ{ƒ_ƒ‹¼Œ´ + 0/10 ƒ[ƒCƒŒƒLƒŒ‚Ì‘ê + 0/10 ƒAƒ‰ƒOƒAƒC‚ÌX
-  * ‚½‚¾‚µ‚¸‚ê‚é‚Ì‚Åâ‘Î‚Å‚Í‚È‚¢
+  * æã‚‰ã 3/10 =  3/10 ãƒ‰ãƒ«ãƒœãƒ€ãƒ«æ¹¿åŸ + 0/10 ã‚¼ã‚¤ãƒ¬ã‚­ãƒ¬ã®æ» + 0/10 ã‚¢ãƒ©ã‚°ã‚¢ã‚¤ã®æ£®
+  * ãŸã ã—ãšã‚Œã‚‹ã®ã§çµ¶å¯¾ã§ã¯ãªã„
 * Dorter to Igros
-  * ‹°‚ç‚­ 3/10 =  3/10 ƒXƒEƒB[ƒW‚ÌX + 0/10 ƒ}ƒ“ƒ_ƒŠƒA•½Œ´
-  * ‚½‚¾‚µ‚¸‚ê‚é‚Ì‚Åâ‘Î‚Å‚Í‚È‚¢
+  * æã‚‰ã 3/10 =  3/10 ã‚¹ã‚¦ã‚£ãƒ¼ã‚¸ã®æ£® + 0/10 ãƒãƒ³ãƒ€ãƒªã‚¢å¹³åŸ
+  * ãŸã ã—ãšã‚Œã‚‹ã®ã§çµ¶å¯¾ã§ã¯ãªã„
 
 
 ch4-Adramelk
@@ -1005,41 +1043,41 @@ ch4-Adramelk
 * Dycedarg Lv43, HP  462, speed 9
 * Adramelk Lv46, HP 1525, speed 10
 
-* Ramza ‰Šú”z’u ‚Ì¶1, Orlandu ‰Šú”z’u
+* Ramza åˆæœŸé…ç½® ã®å·¦1, Orlandu åˆæœŸé…ç½®
 * Orlandu Lightning Stab **critical**
 * Height 4 Demi2
 * Height 4 Demi2
 
-* Dycedarg í‚Å L2 ‚ğ‰Ÿ‚·‚Æ 31f ‘‚¢
-* Adramelk í‚Å‚ÍƒY[ƒ€‚ªŒ³‚É–ß‚Á‚Ä‚¢‚é. ‚à‚¤ˆê“x L2 ‰Ÿ‚·•û‚ª loss ‚É‚È‚é‚©‚à
+* Dycedarg æˆ¦ã§ L2 ã‚’æŠ¼ã™ã¨ 31f æ—©ã„
+* Adramelk æˆ¦ã§ã¯ã‚ºãƒ¼ãƒ ãŒå…ƒã«æˆ»ã£ã¦ã„ã‚‹. ã‚‚ã†ä¸€åº¦ L2 æŠ¼ã™æ–¹ãŒ loss ã«ãªã‚‹ã‹ã‚‚
 
-* Reflect Mail ‚ğg‚¤‚È‚ç‚±‚±‚Å”ƒ‚¤
+* Reflect Mail ã‚’ä½¿ã†ãªã‚‰ã“ã“ã§è²·ã†
 
-* RTA ‚Å‚Í
-  * Ramza ‰Šú”z’u ‚Ì¶1, Orlandu ‰Šú”z’u
-  * ‚±‚Ì”z’u‚Å Orlandu ‚ªæ‚És“®‚·‚é
-  * ‚±‚Ì”z’u‚Å Orlandu ‚ª ƒ_ƒCƒXƒ_[ƒN‚É“Í‚­
-  * (Lightning Stab ‚ª‚ ‚ê‚Î”z’u•ÏX‚Ì•K—v‚Í‚È‚¢??)
-  * Orlandu, ˆÚ“®‚µ‚ÄŒ•‹Z
-  * Ramza, ˆÚ“®‚µ‚È‚¢‚Å Height 4 Bolt3.
-  * ˆÚ“®‚·‚é‚Æ‰ï˜bƒCƒxƒ“ƒg‚ª”­¶‚·‚é
+* RTA ã§ã¯
+  * Ramza åˆæœŸé…ç½® ã®å·¦1, Orlandu åˆæœŸé…ç½®
+  * ã“ã®é…ç½®ã§ Orlandu ãŒå…ˆã«è¡Œå‹•ã™ã‚‹
+  * ã“ã®é…ç½®ã§ Orlandu ãŒ ãƒ€ã‚¤ã‚¹ãƒ€ãƒ¼ã‚¯ã«å±Šã
+  * (Lightning Stab ãŒã‚ã‚Œã°é…ç½®å¤‰æ›´ã®å¿…è¦ã¯ãªã„??)
+  * Orlandu, ç§»å‹•ã—ã¦å‰£æŠ€
+  * Ramza, ç§»å‹•ã—ãªã„ã§ Height 4 Bolt3.
+  * ç§»å‹•ã™ã‚‹ã¨ä¼šè©±ã‚¤ãƒ™ãƒ³ãƒˆãŒç™ºç”Ÿã™ã‚‹
   * Height 4 Demi2
-  * Orlandu ‚ª 6ƒ}ƒXˆÈã—£‚ê‚é (‘r¸‚ğ‹ò‚ç‚í‚È‚¢‚½‚ß)
+  * Orlandu ãŒ 6ãƒã‚¹ä»¥ä¸Šé›¢ã‚Œã‚‹ (å–ªå¤±ã‚’å–°ã‚‰ã‚ãªã„ãŸã‚)
   * Height 5 Demi2
 
-* TA ‚Å‚Í
+* TA ã§ã¯
   * Buy Thief Hat(SP+2) for Ramza at Gariland
   * Buy Flash Hat(SP+1) for Orlandu at Gariland
 
   * Ramza,   Lv28, speed 10, MA 12, Excalibur (speed 15)
   * Orlandu, Lv27, speed  9, PA 14, Excalibur (speed 13.5)
 
-  * Ramza ‰Šú”z’u, Orlandu Ramza ¶1
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza å·¦1
   * Ramza CT3 Holy
-  * Orlandu, ˆÚ“®‚µ‚Ä Lightning stab
+  * Orlandu, ç§»å‹•ã—ã¦ Lightning stab
 
   * Height 4 Demi2
-  * Orlandu ‘Ò‹@
+  * Orlandu å¾…æ©Ÿ
   * Height 4 Demi2
 
 
@@ -1050,25 +1088,25 @@ ch4-Gariland
 
 * Ramza,   Lv31, speed  8, MA 13, Excalibur (speed 12)
 * Orlandu, Lv31, speed 10, PA 15, Excalibur (speed 15)
-* Orlandu ‚Å 2‘Ì“|‚·‚½‚ß‚É Orlandu ‚Ì speed ‚ğ Ramza ‚æ‚è‘å‚«‚­‚·‚é
+* Orlandu ã§ 2ä½“å€’ã™ãŸã‚ã« Orlandu ã® speed ã‚’ Ramza ã‚ˆã‚Šå¤§ããã™ã‚‹
 
 
 
 ch4-Murond (outside)
 ----------
-* Ramza ‰Šú”z’u  (1st Squad)
-* Orlandu ‰Šú”z’u ‰º1 (2nd Squad)
+* Ramza åˆæœŸé…ç½®  (1st Squad)
+* Orlandu åˆæœŸé…ç½® ä¸‹1 (2nd Squad)
 * Orlandu Lightning Stab
 * CT3 Death
 
 * zoom out test
-  * Orlandu ‘Ò‹@‚É L2 ‚È‚µ
+  * Orlandu å¾…æ©Ÿæ™‚ã« L2 ãªã—
      * ramza ct3 death 697841
      * ramza arrowed   698655
-  * Orlandu ‘Ò‹@‚É L2 ‚È‚µ, ramza ct3 death‚É L2 ‚ ‚è
+  * Orlandu å¾…æ©Ÿæ™‚ã« L2 ãªã—, ramza ct3 deathæ™‚ã« L2 ã‚ã‚Š
      * ramza ct3 death 697841
      * ramza arrowed   698671
-  * Orlandu ‘Ò‹@‚É L2 ‚ ‚è
+  * Orlandu å¾…æ©Ÿæ™‚ã« L2 ã‚ã‚Š
      * ramza ct3 death 697866
      * ramza arrowed   698677
 
@@ -1078,19 +1116,21 @@ ch4-Murond (outside)
 * Orlandu, Lv31, speed 8, PA 17, Excalibur (speed 12)
 
 
-* TA ‚Å‚Í
+* TA ã§ã¯
   * Ramza equip Holy Miter(MA+1) from Thief Hat
   * Ramza, Lv29, speed 8, MA 13, Excalibur (speed 12)
-  * Ramza ‰Šú”z’u  (1st Squad)
-  * Orlandu ‰Šú”z’u ‰º1 (2nd Squad)
+  * Ramza åˆæœŸé…ç½®  (1st Squad)
+  * Orlandu åˆæœŸé…ç½® ä¸‹1 (2nd Squad)
 
   * Orlandu Lightning Stab to kill 2 Mediators
   * Ramza CT3 flare
-  * Orlandu ‚Å 2‘Ì“|‚·•û‚ª Flare ‚Å 2‘Ì“|‚·‚æ‚è‘‚¢‚Ì‚©‚à
+  * Orlandu ã§ 2ä½“å€’ã™æ–¹ãŒ Flare ã§ 2ä½“å€’ã™ã‚ˆã‚Šæ—©ã„ã®ã‹ã‚‚
 
-* RTA ‚Å‚Í
+* RTA ã§ã¯
   * CT3 Flare
 
+* Second Squad ã« Orlandu ã‚’é…ç½®ã™ã‚‹ã¨ãƒ­ã‚¹ã ãŒã€Orlandu ã§ 2ä½“å€’ã™æ–¹ãŒæ—©ã„ã®ã‹ã‚‚ã—ã‚Œãªã„
+	* æœªæ¤œè¨¼??
 
 
 ch4-Murond (inside)
@@ -1099,21 +1139,21 @@ ch4-Murond (inside)
 * Rofal    Lv45, HP 419, speed 9
 * Kletian  Lv44, HP 361, speed 8
 
-* Ramza ‰Šú”z’u‚©‚ç ã1, Orlandu ‰Šú”z’u‚©‚ç ¶2
+* Ramza åˆæœŸé…ç½®ã‹ã‚‰ ä¸Š1, Orlandu åˆæœŸé…ç½®ã‹ã‚‰ å·¦2
 * Orlandu move up 4th and L2, then Lightning Stab
-* L2 zoomout ‚µ‚½•û‚ª 2f ‘‚¢
+* L2 zoomout ã—ãŸæ–¹ãŒ 2f æ—©ã„
 
 
-* RTA ‚Å‚Í
-  * Ramza ‰Šú”z’u‚©‚ç ã1, Orlandu ‰Šú”z’u‚©‚ç ¶2
-  * ‚±‚Ì”z’u‚Å Orlandu ‚ªæ‚És“®‚·‚é
-  * Orlandu Œ•‹Z
+* RTA ã§ã¯
+  * Ramza åˆæœŸé…ç½®ã‹ã‚‰ ä¸Š1, Orlandu åˆæœŸé…ç½®ã‹ã‚‰ å·¦2
+  * ã“ã®é…ç½®ã§ Orlandu ãŒå…ˆã«è¡Œå‹•ã™ã‚‹
+  * Orlandu å‰£æŠ€
 
-* TA ‚Å‚Í
+* TA ã§ã¯
   * Orlandu equip Twist Headband(PA+2)
   * Orlandu, Lv28, speed 8, PA 16, Excalibur (speed 12)
-  * Ramza ‰Šú”z’u‚©‚ç ã1, Orlandu ‰Šú”z’u‚©‚ç ¶2
-  * ‚±‚Ì”z’u‚Å Orlandu ‚ªæ‚És“®‚·‚é
+  * Ramza åˆæœŸé…ç½®ã‹ã‚‰ ä¸Š1, Orlandu åˆæœŸé…ç½®ã‹ã‚‰ å·¦2
+  * ã“ã®é…ç½®ã§ Orlandu ãŒå…ˆã«è¡Œå‹•ã™ã‚‹
   * Orlandu Lightning stab
 
 
@@ -1122,67 +1162,67 @@ ch4-Murond (Zalbag)
 ----------
 * Zalbag Lv54, HP 562, speed 11
 
-* Ramza ‰Šú”z’u‚©‚ç ã1, Orlandu ‰Šú”z’u‚©‚ç ¶2
+* Ramza åˆæœŸé…ç½®ã‹ã‚‰ ä¸Š1, Orlandu åˆæœŸé…ç½®ã‹ã‚‰ å·¦2
 * Orlandu move up 4th and L2, then Lightning Stab **critical**
 
 
-* RTA ‚Å‚Í
+* RTA ã§ã¯
   * Orlandu, speed 10, PA 15
-  * PA ‚ğã‚°‚Ä 1Œ‚‚Å“|‚·
-  * Ramza ‰Šú”z’u, Orlandu Ramza ‚Ì¶1
-  * Ramza ‚Ì speed ‚ğ 8ˆÈ‰º‚É‚·‚ê‚ÎA‰ï˜b‚ğ–h‚°‚é‚©‚à??
-  * Zalbag ‚Í Ramza ‚É ƒ}ƒWƒbƒNƒ‹[ƒCƒ“
-  * Orlandu ‚ª charge ’†‚ÉŒ•‹Z
+  * PA ã‚’ä¸Šã’ã¦ 1æ’ƒã§å€’ã™
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza ã®å·¦1
+  * Ramza ã® speed ã‚’ 8ä»¥ä¸‹ã«ã™ã‚Œã°ã€ä¼šè©±ã‚’é˜²ã’ã‚‹ã‹ã‚‚??
+  * Zalbag ã¯ Ramza ã« ãƒã‚¸ãƒƒã‚¯ãƒ«ãƒ¼ã‚¤ãƒ³
+  * Orlandu ãŒ charge ä¸­ã«å‰£æŠ€
 
-* TA ‚Å‚Í
-  * Ramza ‰Šú”z’u ã1, Orlandu ‰Šú”z’u ¶2
-  * Orlandu Œ•‹Z (Lightning Stab) critical
-  * Orlandu ‚ª Zalbag ‚æ‚èæ‚És“®‚·‚é‚Ì‚Å‰ï˜b‚ğ skip ‰Â”\
+* TA ã§ã¯
+  * Ramza åˆæœŸé…ç½® ä¸Š1, Orlandu åˆæœŸé…ç½® å·¦2
+  * Orlandu å‰£æŠ€ (Lightning Stab) critical
+  * Orlandu ãŒ Zalbag ã‚ˆã‚Šå…ˆã«è¡Œå‹•ã™ã‚‹ã®ã§ä¼šè©±ã‚’ skip å¯èƒ½
 
 
 
 ch4-Orbonne (UBS 4)
 -----------
-* ƒ‰ƒXƒ_ƒ“. ‚±‚±‚©‚ç‚Í–ß‚ê‚È‚¢
-* ŒŸØ—p‚É Reflect Ring ‚Æ Reflect Mail ‚ğ”ƒ‚¤
+* ãƒ©ã‚¹ãƒ€ãƒ³. ã“ã“ã‹ã‚‰ã¯æˆ»ã‚Œãªã„
+* æ¤œè¨¼ç”¨ã« Reflect Ring ã¨ Reflect Mail ã‚’è²·ã†
 
 * Ramza,   Lv32, speed  8, MA 14, Excalibur (speed 12)
-* Ramza ‰Šú”z’u ¶1, Orlandu Ramza ‚Ì¶3
-* Ramza ‚Ì Death ‚â Flare ‚Åˆê‘|‚Å‚«‚é—”‚ª‚È‚©‚Á‚½‚Ì‚Åˆêlc‚·
-  Orlandu ‚Åc‚Á‚½ˆêl‚ğ“|‚·
+* Ramza åˆæœŸé…ç½® å·¦1, Orlandu Ramza ã®å·¦3
+* Ramza ã® Death ã‚„ Flare ã§ä¸€æƒã§ãã‚‹ä¹±æ•°ãŒãªã‹ã£ãŸã®ã§ä¸€äººæ®‹ã™
+  Orlandu ã§æ®‹ã£ãŸä¸€äººã‚’å€’ã™
 * CT3 Death
 
-* RTA ‚Å‚Í
+* RTA ã§ã¯
   * Ramza speed 11, MA 14, Wizard
   * Orlandu speed 11, PA 12
-  * Ramza ‰Šú”z’u ¶1, Orlandu Ramza ‚Ì¶2
-  * ƒJƒƒ‰‚Ì‰ñ“]‚ğŒ¸‚ç‚·‚½‚ß
+  * Ramza åˆæœŸé…ç½® å·¦1, Orlandu Ramza ã®å·¦2
+  * ã‚«ãƒ¡ãƒ©ã®å›è»¢ã‚’æ¸›ã‚‰ã™ãŸã‚
   * CT5 flare
-  * Ramza ‚Ì Lv35 ‚É‚È‚Á‚Ä‚¢‚ê‚Î speed ‚ª 1ã¸‚·‚é
+  * Ramza ã® Lv35 ã«ãªã£ã¦ã„ã‚Œã° speed ãŒ 1ä¸Šæ˜‡ã™ã‚‹
 
-* TA ‚Å‚Í
-  * Ramza ‰Šú”z’u ¶1, Orlandu oŒ‚‚µ‚È‚¢
-  * ƒJƒƒ‰‚Ì‰ñ“]‚ğŒ¸‚ç‚·‚½‚ß
+* TA ã§ã¯
+  * Ramza åˆæœŸé…ç½® å·¦1, Orlandu å‡ºæ’ƒã—ãªã„
+  * ã‚«ãƒ¡ãƒ©ã®å›è»¢ã‚’æ¸›ã‚‰ã™ãŸã‚
   * CT3 holy
 
 
-ch4-Orbonne (Rolfal)
+ch4-Orbonne (Rofal)
 -----------
 * Rofal Lv54, HP 509, speed 10
-* Rofal ‚Í Defence UP, auto Protess Š—L‚È‚Ì‚Å Orlandu ‚ÌŒ•‹Z‚Ì damage ‚Í 200ˆÈ‰º
-* Ramza ‚Ì Flare ‚Å‚Í 390 damage, Holy ‚Å‚Í 520 damage. Holy ‚µ‚©‚È‚¢??
+* Rofal ã¯ Defense UP, Auto-Protect(with Save-The-Queen) æ‰€æœ‰ãªã®ã§ Orlandu ã®å‰£æŠ€ã® damage ã¯ 200ä»¥ä¸‹
+* Ramza ã® Flare ã§ã¯ 390 damage, Holy ã§ã¯ 520 damage. Holy ã—ã‹ãªã„??
 
-* Ramza ‰Šú”z’u, Orlandu oŒ‚‚µ‚È‚¢
+* Ramza åˆæœŸé…ç½®, Orlandu å‡ºæ’ƒã—ãªã„
 * Lv 3 Holy
 
-* RTA ‚Å‚Í
-  * speed 11 ‚Éæ§‚³‚ê‚é
+* RTA ã§ã¯
+  * speed 11 ã«å…ˆåˆ¶ã•ã‚Œã‚‹
   * Lv 3 flare
 
-* TA ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu oŒ‚‚µ‚È‚¢
+* TA ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu å‡ºæ’ƒã—ãªã„
   * Lv 3 Holy
-  * Ramza ‚Ì Lv30 ‚È‚Ì‚Å hit ‚·‚é (Excalibur ‚ª ¹‹zû)
+  * Ramza ã® Lv30 ãªã®ã§ hit ã™ã‚‹ (Excalibur ãŒ è–å¸å)
 
 
 
@@ -1193,22 +1233,23 @@ ch4-Murond (Kletian)
 * Orlandu, Lv32, speed 10, PA 15, Excalibur (speed 15)
 * Orlandu Lightning Stab **critical**
 
+* Ramza åˆæœŸé…ç½® å·¦1, Orlandu Ramza ã®å·¦3
 
 * Kletian Lv54, HP 420, speed 10
 * Ninja   Lv53, HP 311, speed 13
 * Ninja   Lv51, HP 308, speed 13
-* Ninja ‚Éæ§‚³‚ê‚é
+* Ninja ã«å…ˆåˆ¶ã•ã‚Œã‚‹
 * Orlandu Lightning Stab  **critical**
 
-* RTA ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu Ramza ‚Ìã1, ƒ‰ƒ”ƒBƒAƒ“ Orlandu ‚Ìã1
-  * “G”EÒ‚Ìƒ^[ƒ“‚ÅAR2 ‚Å‹“_•ÏX‚·‚é‚ÆƒJƒƒ‰ˆÚ“®‚ª‚È‚¢??
-  * Orlandu ‚ÌŒ•‹Z
+* RTA ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza ã®ä¸Š1, ãƒ©ãƒ´ã‚£ã‚¢ãƒ³ Orlandu ã®ä¸Š1
+  * æ•µå¿è€…ã®ã‚¿ãƒ¼ãƒ³ã§ã€R2 ã§è¦–ç‚¹å¤‰æ›´ã™ã‚‹ã¨ã‚«ãƒ¡ãƒ©ç§»å‹•ãŒãªã„??
+  * Orlandu ã®å‰£æŠ€
 
-* TA ‚Å‚Í
-  * Ramza ‰Šú”z’u ã1, Orlandu ‰Šú”z’u
-  * ‚±‚Ì”z’u‚Å Orlandu ‚ªæ‚És“®‚·‚é
-  * Orlandu ‚ÌŒ•‹Z
+* TA ã§ã¯
+  * Ramza åˆæœŸé…ç½® ä¸Š1, Orlandu åˆæœŸé…ç½®
+  * ã“ã®é…ç½®ã§ Orlandu ãŒå…ˆã«è¡Œå‹•ã™ã‚‹
+  * Orlandu ã®å‰£æŠ€
 
 
 ch4-Murond (Balk)
@@ -1219,30 +1260,30 @@ ch4-Murond (Balk)
 
 * Balk Lv55, HP 488, speed 13
 
-* Ramza ‰Šú”z’u ã1, Orlandu ‰Šú”z’u ¶1
-* Balk ‚Éæ§‚³‚ê‚é. –¡•û‹ß‚­‚É—U“±, L2
-* Balk ‚ÍƒuƒŒƒCƒYƒKƒ“‚æ‚è‘_Œ‚‚ª‘‚¢
+* Ramza åˆæœŸé…ç½® ä¸Š1, Orlandu åˆæœŸé…ç½® å·¦1
+* Balk ã«å…ˆåˆ¶ã•ã‚Œã‚‹. å‘³æ–¹è¿‘ãã«èª˜å°, L2
+* Balk ã¯ãƒ–ãƒ©ã‚¹ãƒˆã‚¬ãƒ³ã‚ˆã‚Šç‹™æ’ƒãŒæ—©ã„
 * Orlandu Lightning Stab **critical**
 
 * Balk
-  * Braze gun (Bolt2??) 395f = 2436f - 2041f
+  * Blast gun (Bolt2??) 395f = 2436f - 2041f
   * Snipe               280f = 2319f - 2039f
   * Snipe L2 zoom       265f = 2304f - 2039f  (15f faster)
-  * L2 ‚ª‚ ‚éA‚È‚µ‚ÅƒXƒNƒ[ƒ‹‹——£‚ª•Ï‚í‚é‚½‚ß‚©A—”‚ª‚¸‚êŒ‹‰Ê‚ª•Ï‚í‚é
+  * L2 ãŒã‚ã‚‹ã€ãªã—ã§ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«è·é›¢ãŒå¤‰ã‚ã‚‹ãŸã‚ã‹ã€ä¹±æ•°ãŒãšã‚ŒçµæœãŒå¤‰ã‚ã‚‹
 
 
-* RTA ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu Ramza ‚Ì¶1, ƒ‰ƒ”ƒBƒAƒ“ Ramza ‚Ì¶2, ã2
-  * Balk ‚ğ–¡•û‹ß‚­‚É—U“±
-  * Ramza ‚ªˆÚ“®‚µ‚Ä Lv 5 flare or Lv 5 Bolt3
-  * Ramza ‚ªˆÚ“®‚µ‚È‚¢‚Æ‰ï˜b‚ª”­¶‚·‚é
-  * Orlandu ‚ÅŒ•‹Z
+* RTA ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza ã®å·¦1, ãƒ©ãƒ´ã‚£ã‚¢ãƒ³ Ramza ã®å·¦2, ä¸Š2
+  * Balk ã‚’å‘³æ–¹è¿‘ãã«èª˜å°
+  * Ramza ãŒç§»å‹•ã—ã¦ Lv 5 flare or Lv 5 Bolt3
+  * Ramza ãŒç§»å‹•ã—ãªã„ã¨ä¼šè©±ãŒç™ºç”Ÿã™ã‚‹
+  * Orlandu ã§å‰£æŠ€
 
-* TA ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu Ramza ‚Ì¶1
-  * Balk ‚ğ–¡•û‹ß‚­‚É—U“±. Ramza ‚ÉeUŒ‚
-  * Ramza ‚ªˆÚ“®‚µ‚Ä CT prime holy
-  * Orlandu ‚ÅŒ•‹Z
+* TA ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza ã®å·¦1
+  * Balk ã‚’å‘³æ–¹è¿‘ãã«èª˜å°. Ramza ã«éŠƒæ”»æ’ƒ
+  * Ramza ãŒç§»å‹•ã—ã¦ CT prime holy
+  * Orlandu ã§å‰£æŠ€
 
 
 ch4-Murond (Hashmalum)
@@ -1250,118 +1291,131 @@ ch4-Murond (Hashmalum)
 * Hashmalum Lv59, HP 1450, speed 13
 
 * before battle,
-* Ramza ‚Í¡Œã Demi2 ‚µ‚©g‚í‚È‚¢‚Ì‚Å speed d‹‘•”õ
-* Ramza equip Thief Hat, Sprint Shees, White Robe
-* Orlandu, Equip Thief Hat, Refrect Ring
+* Ramza ã¯ä»Šå¾Œ Demi2 ã—ã‹ä½¿ã‚ãªã„ã®ã§ speed é‡è¦–è£…å‚™
+* Ramza equip Thief Hat, Sprint Shoes, White Robe
+* Orlandu, Equip Thief Hat, Reflect Ring
 
 * Ramza,   Lv32, speed 10, MA  9, Excalibur (speed 15)
 * Orlandu, Lv33, speed 10, PA 12, Excalibur (speed 15)
 
-* Ramza ‰Šú”z’u, Orlandu oŒ‚‚µ‚È‚¢
-  * Orlandu ‚ªoŒ‚‚µ‚Ä Ramza ‚Ì‹ß‚­‚É‚¢‚é‚Æ‚Šm—¦‚Åô”›(stop)‚ğg‚Á‚Ä‚­‚é
-  * ô•¶‚ğg‚í‚¹‚½‚Ù‚¤‚ª effect ‚ª’Z‚¢‚½‚ß Orlandu ‚ÍoŒ‚‚µ‚È‚¢
-  * 2Œ‚–Ú‚ª Demi2 ‚© chage’†‚É Orlandu ‚Ì critical ‚©‚Ç‚Á‚¿‚ª‘‚¢‚©‚Í”÷–­
-  * ’²®‚Ì‚µ‚â‚·‚³‚Í Demi2
+* Ramza åˆæœŸé…ç½®, Orlandu å‡ºæ’ƒã—ãªã„
+  * Orlandu ãŒå‡ºæ’ƒã—ã¦ Ramza ã®è¿‘ãã«ã„ã‚‹ã¨é«˜ç¢ºç‡ã§å‘ªç¸›(stop)ã‚’ä½¿ã£ã¦ãã‚‹
+		* Speed 10 ä»¥ä¸ŠãŒ 2äººä»¥ä¸Šã„ã‚‹ã¨å‘ªç¸›ãŒå„ªå…ˆã•ã‚Œã‚‹æ¨¡æ§˜
+  * å‘ªæ–‡ã‚’ä½¿ã‚ã›ãŸã»ã†ãŒ effect ãŒçŸ­ã„ãŸã‚ Orlandu ã¯å‡ºæ’ƒã—ãªã„
+  * 2æ’ƒç›®ãŒ Demi2 ã‹ chargeä¸­ã« Orlandu ã® critical ã‹ã©ã£ã¡ãŒæ—©ã„ã‹ã¯å¾®å¦™
+  * èª¿æ•´ã®ã—ã‚„ã™ã•ã¯ Demi2
+
+* Q:Hashmalum ã¯ Speed 13, å¯¾ã—ã¦ Ramza and Orlandu ã¯ Speed 15 ãªã®ã«ã€
+    ãªãœ Hashmalum ãŒå…ˆåˆ¶ã™ã‚‹ã®ã‹?
+* Q:Orlandu ãŒ Speed 14 ä»¥ä¸Šã€ã‹ã¤ã€ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒ 725 ä»¥ä¸Šãªã‚‰
+    Ramza ã¨ Orlandu ã§å…ˆåˆ¶ã§ãã‚‹ã®ã§ã¯ãªã„ã‹?
 
 * Lv prime Demi2
-* Hashmalum ‚ª–‚–@
-* Hashmalum ‚Ì chage ’†‚É Level prime Demi2
+* Hashmalum ãŒé­”æ³•
+* Hashmalum ã® chage ä¸­ã« Level prime Demi2
 
-* RTA ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu Ramza ‚Ì¶2, ã1, ƒ‰ƒ”ƒBƒAƒ“ Orlandu ‚Ìã1
-  * Hashmalum ‚ÉŸŒ³–‚–@ ‚ğg‚í‚¹‚é (Orlandu ‚Éô”›‚ª—ˆ‚È‚¢‚æ‚¤‚É‚·‚é‚½‚ß)
+* RTA ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza ã®å·¦2, ä¸Š1, ãƒ©ãƒ´ã‚£ã‚¢ãƒ³ Orlandu ã®ä¸Š1
+  * Hashmalum ã«æ¬¡å…ƒé­”æ³• ã‚’ä½¿ã‚ã›ã‚‹ (Orlandu ã«å‘ªç¸›ãŒæ¥ãªã„ã‚ˆã†ã«ã™ã‚‹ãŸã‚)
   * Ramza, Lv prime Demi2
-  * Orlandu Œ•‹Z
+  * Orlandu å‰£æŠ€
 
-* TA ‚Å‚Í
+* TA ã§ã¯
   * Ramza equip Thief Hat, Sprint Shoes
   * Ramza, speed 11, MA 11, Excalibur (speed 16.5)
-  * Ramza ‰Šú”z’u, Orlandu oŒ‚‚µ‚È‚¢
+  * Ramza åˆæœŸé…ç½®, Orlandu å‡ºæ’ƒã—ãªã„
   * Lv prime Demi2
-  * Hashmalum ‚ª–‚–@
-  * Hashmalum ‚Ì chage ’†‚É Level prime Demi2
+  * Hashmalum ãŒé­”æ³•
+  * Hashmalum ã® charge ä¸­ã« Level prime Demi2
 
 
 
 ch4-Murond (Altima)
 -----------
 * Altima   Lv56, HP 1391, speed 9
-* ‘æ“ñŒ`‘Ô Lv66, HP 3281, speed 12
+* ç¬¬äºŒå½¢æ…‹ Lv66, HP 3281, speed 12
 
 * before battle,
-* Ramza, Learn Demi, Short Charge, MP‰ñ•œˆÚ“®
-* Ramza, Set Time Magic, Short Charge, MP‰ñ•œˆÚ“®
-  * Lv33 ‚¾‚Æ White Robe ‚¾‚Æ MP97, Demi2(MP50), Demi(MP24) = MP98 ‚Å MP1 ‘«‚è‚È‚¢
-  * Œõ‚Ìƒ[ƒu‚âƒ[ƒuƒIƒuƒ[ƒh‚ª•K—v
-  * ¡‰ñ‚Í MP‰ñ•œˆÚ“®‚Åæ‚èØ‚Á‚½
+* Ramza, Learn Demi, Short Charge, MPå›å¾©ç§»å‹•
+* Ramza, Set Time Magic, Short Charge, MPå›å¾©ç§»å‹•
+  * Lv33 ã ã¨ White Robe ã ã¨ MP97, Demi2(MP50), Demi(MP24) = MP98 ã§ MP1 è¶³ã‚Šãªã„
+  * å…‰ã®ãƒ­ãƒ¼ãƒ–ã‚„ãƒ­ãƒ¼ãƒ–ã‚ªãƒ–ãƒ­ãƒ¼ãƒ‰ãŒå¿…è¦
+  * ä»Šå›ã¯ MPå›å¾©ç§»å‹•ã§ä¹—ã‚Šåˆ‡ã£ãŸ
+  * ç®—è¡“ã¯ Refect ä¸å¯ãªã®ã§æ™‚é­”æ³•ã‚’ã‚»ãƒƒãƒˆ
 
 * Ramza,   Lv33, speed 10, MA  9, Excalibur (speed 15)
 * Orlandu, Lv33, speed 10, PA 12, Excalibur (speed 15)
 
 
-* Ramza ‰Šú”z’u ã1, Orlandu ‰Šú”z’u ¶1
-* READY •\¦ (762196f)
-* Orlandu ˆÚ“®
+* Ramza åˆæœŸé…ç½® ä¸Š1, Orlandu åˆæœŸé…ç½® å·¦1
+* READY è¡¨ç¤º (762196f)
+* Orlandu ç§»å‹•
 * Ramza Demi2, reflect
-  * –‚–@‚Í reaction ‚ª”­“®‚·‚é‚Ì‚Å”­“®‚³‚¹‚È‚¢‚æ‚¤’²®
+  * æ™‚é­”æ³•ã¯ reaction ãŒç™ºå‹•ã™ã‚‹ã®ã§ç™ºå‹•ã•ã›ãªã„ã‚ˆã†èª¿æ•´
   * face up, 239f = 8114f - 7875f
-  * Zp‚¾‚Æ reaction ‚ª”­“®‚µ‚È‚¢‚ç‚µ‚¢??
-* ‘æ“ñŒ`‘Ô, HP 3281, Lv66, speed 11
+  * ç®—è¡“ã ã¨ reaction ãŒç™ºå‹•ã—ãªã„ã‚‰ã—ã„??
+* ç¬¬äºŒå½¢æ…‹, HP 3281, Lv66, speed 11
 * Ramza Demi, reflect
-* Ramza move, Demi, reflect. ‚±‚±‚Å L2 ‰Ÿ‚³‚È‚¢‚Ù‚¤‚ª 2f ‘‚©‚Á‚½. zoom in ‚ª‰e‹¿??
-* Congratulations! •\¦ (770518f)
+* Ramza move, Demi, reflect. ã“ã“ã§ L2 æŠ¼ã•ãªã„ã»ã†ãŒ 2f æ—©ã‹ã£ãŸ. zoom in ãŒå½±éŸ¿??
+
+
+* ç¬¬ä¸€å½¢æ…‹ã¯ HP 2000æœªæº€ãªã®ã§ã‚°ãƒ©ãƒ“ã‚¬ 2ç™ºã§çµ‚äº†
+* ç¬¬äºŒå½¢æ…‹ã¯ HP 4000æœªæº€ãªã®ã§ã‚°ãƒ©ãƒ“ãƒ‡ 4ç™ºã§çµ‚äº†
+* ãƒ©ã‚¹ãƒœã‚¹å¼±ã™ã
+
+* Congratulations! è¡¨ç¤º (770518f)
 * elapsed 8322f = 139sec
 
 
-  * READY •\¦ (825251f, è“®ƒeƒXƒg)
-  * Ramza ‰Šú”z’u ¶1, Orlandu ‰Šú”z’u
-  * Orlandu ˆÚ“®
+  * READY è¡¨ç¤º (825251f, æ‰‹å‹•ãƒ†ã‚¹ãƒˆ)
+  * Ramza åˆæœŸé…ç½® å·¦1, Orlandu åˆæœŸé…ç½®
+  * Orlandu ç§»å‹•
   * Ramza Demi2, reflect
-  * ‘æ“ñŒ`‘Ô, HP 3281, Lv66, speed 11
+  * ç¬¬äºŒå½¢æ…‹, HP 3281, Lv66, speed 11
   * Ramza Demi, reflect
   * Ramza Demi, reflect
-  * Congratulations! •\¦ (835093f, è“®ƒeƒXƒg)
+  * Congratulations! è¡¨ç¤º (835093f, æ‰‹å‹•ãƒ†ã‚¹ãƒˆ)
   * elapsed 9842f = 164sec
 
 
-* RTA ‚Å‚Í
-  * Ramza ‰Šú”z’u, Orlandu Ramza ‚Ì¶1, ƒ‰ƒ”ƒBƒAƒ“ Orlandu ‚Ì¶3
+* RTA ã§ã¯
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza ã®å·¦1, ãƒ©ãƒ´ã‚£ã‚¢ãƒ³ Orlandu ã®å·¦3
   * Altima, HP 1391, Lv56, speed 9
 
-  * READY •\¦ 4:15:35
+  * READY è¡¨ç¤º 4:15:35
   * Ramza height prime holy
-  * Alma ƒ}ƒoƒŠƒA
-  * Orlandu ˆÚ“® + Œ•‹Z
-  * ‘æ“ñŒ`‘Ô, HP 3281, Lv66, speed 11
+  * Alma ãƒãƒãƒªã‚¢
+  * Orlandu ç§»å‹• + å‰£æŠ€
+  * ç¬¬äºŒå½¢æ…‹, HP 3281, Lv66, speed 11
   * Ramza height prime slow
-  * ƒ‰ƒ”ƒBƒAƒ“ eŒ‚
-  * Alma ƒ}ƒoƒŠƒA to Ramza
-  * Orlandu Œ•‹Z
+  * ãƒ©ãƒ´ã‚£ã‚¢ãƒ³ éŠƒæ’ƒ
+  * Alma ãƒãƒãƒªã‚¢ to Ramza
+  * Orlandu å‰£æŠ€
   * Ramza height prime demi2
   * Ramza height prime demi2
-  * Orlandu Œ•‹Z
-  * Congratulations! •\¦ 4:18:46
+  * Orlandu å‰£æŠ€
+  * Congratulations! è¡¨ç¤º 4:18:46
   * elapsed 191sec
 
-* TA ‚Å‚Í
+* TA ã§ã¯
   * Orlandu equip Ragnarok
   * Orlandu, speed 8, PA 17
-  * Ramza ‰Šú”z’u, Orlandu Ramza ‚Ì¶1
+  * Ramza åˆæœŸé…ç½®, Orlandu Ramza ã®å·¦1
   * Altima, HP 1370, Lv56, speed 9
 
-  * READY •\¦ 2:22
+  * READY è¡¨ç¤º 2:22
   * Ramza height prime demi2
-  * Alma ‚Ìs“®‚É L2
-  * ˆÚ“® + Ramza height prime demi2
-  * ‘æ“ñŒ`‘Ô
-  * Orlandu ˆÚ“® + Œ•‹Z
-  * Orlnandu ‚Ìs“®‚É L2
+  * Alma ã®è¡Œå‹•æ™‚ã« L2
+  * ç§»å‹• + Ramza height prime demi2
+  * ç¬¬äºŒå½¢æ…‹
+  * Orlandu ç§»å‹• + å‰£æŠ€
+  * Orlnandu ã®è¡Œå‹•æ™‚ã« L2
   * Ramza height prime demi2
-  * Altima ‚ª Ramza ‚ğUŒ‚
+  * Altima ãŒ Ramza ã‚’æ”»æ’ƒ
   * Ramza height prime demi2
-  * Orlandu ‘Ò‹@
+  * Orlandu å¾…æ©Ÿ
   * Ramza height prime demi2
-  * Congratulations! •\¦ 4:51
+  * Congratulations! è¡¨ç¤º 4:51
   * elapsed 149sec
 
 
@@ -1399,7 +1453,7 @@ Mathable by  Height
 * ch1-Windmill, Height 5 Bolt3, Wiegraf
 * ch1-Zeakden, Height 4 Bolt3 or Lv5 Bolt3, Algus
 * ch2-Lionel (inside),  Height Prime Demi2 or Lv5 Demi2, Queklain
-* ch3-Orbonne 3rd Floor, Izlude ‚ª ˆÚ“®‚·‚é‚Ì‚Å Height 3 Flare. Izlude
+* ch3-Orbonne 3rd Floor, Izlude ãŒ ç§»å‹•ã™ã‚‹ã®ã§ Height 3 Flare. Izlude
 * ch3-Orbonne 1st Floor, Height 5 Flare, Wiegraf
 * ch3-Yardow,  Height prime Flare, **Defeat All**
 * ch3-Riovanes (inside), Move and Height prime flare. Wiegraf
@@ -1411,8 +1465,8 @@ Mathable by  Height
 
 CT
 ----
-* 3‚Ì”{”‚Ì tick(clock) ‚Å CT100 ‚É‚È‚éê‡A“G‚Ì CT ‚Í 3‚Ì”{”‚Æ‚È‚é
-* SP7, SP9, SP12 ‚ª‘Š“–
+* 3ã®å€æ•°ã® tick(clock) ã§ CT100 ã«ãªã‚‹å ´åˆã€æ•µã® CT ã¯ 3ã®å€æ•°ã¨ãªã‚‹
+* SP7, SP9, SP12 ãŒç›¸å½“
 
 SP   tick
  1 * 100 = 100
@@ -1438,7 +1492,7 @@ SP   tick
 
 Frame counts of casting spell
 -----------------------------
-* Bolt3 ‚ª Bolt2 ‚æ‚è –ñ4f‘‚¢
+* Bolt3 ãŒ Bolt2 ã‚ˆã‚Š ç´„4fæ—©ã„
 
 * Bolt3  2105 - 1813 = 292f
 * Bolt3  6033 - 5738 = 295f
@@ -1459,6 +1513,7 @@ Frame counts of casting spell
 * Holy   6875 - 6243 = 632f
 * Holy   2840 - 2206 = 634f
 * Holy   6375 - 5736 = 639f
+* ç¢‘å°å°(ãƒ–ãƒ¬ã‚¤ã‚¯) ???f
 
 
 * Lightning Stab
@@ -1470,8 +1525,8 @@ Frame counts of casting spell
 * Accumulate      64f
 * Goblin wait    110f
 
-* Invitation     300f  (15f ‚Í‰æ–ÊƒXƒNƒ[ƒ‹•ª‚©‚à)
-* Persuade(CT0)  300f  (15f ‚Í‰æ–ÊƒXƒNƒ[ƒ‹•ª‚©‚à)
+* Invitation     300f  (15f ã¯ç”»é¢ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«åˆ†ã‹ã‚‚)
+* Persuade(CT0)  300f  (15f ã¯ç”»é¢ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«åˆ†ã‹ã‚‚)
 * Preach(fa+4)   285f
 * Critical Quick 250f
 
@@ -1491,36 +1546,36 @@ Frame counts of casting spell
     4th turn  9359 - 9108 = 251f
     total                   982f
 
-* 17f (–ñ20f) to move 1 grid (–ñ20f)
-* LvUp effect ‚Í 24f??
-* LvUp effect ‚Í 40f?? Lv effect ’†‚Í 0x1FFE88 ‚ª 0x0137 ‚É‚È‚é
+* 17f (ç´„20f) to move 1 grid (ç´„20f)
+* LvUp effect ã¯ 24f??
+* LvUp effect ã¯ 40f?? Lv effect ä¸­ã¯ 0x1FFE88 ãŒ 0x0137 ã«ãªã‚‹
 
 
 
 Holy Knight / White Knight
 --------------------------
-Stasis Sword    •s“®–³–¾Œ•        Stop                100
-Split Punch     —–½Š„E‘Å        Doom (€‚Ìé)     400
-Crush Punch     –k“lœÓ‘Å        K.O. (ƒfƒX)         500
-Lightning Stab  –³‘oˆîÈ“Ë‚«      Silence             700
-Holy Explosion  ¹Œõ”š—ô”j        Confuse             800
+Stasis Sword    ä¸å‹•ç„¡æ˜å‰£        Stop                100
+Split Punch     ä¹±å‘½å‰²æ®ºæ‰“        Doom (æ­»ã®å®£å‘Š)     400
+Crush Punch     åŒ—æ–—éª¨ç •æ‰“        K.O. (ãƒ‡ã‚¹)         500
+Lightning Stab  ç„¡åŒç¨²å¦»çªã      Silence             700
+Holy Explosion  è–å…‰çˆ†è£‚ç ´        Confuse             800
 
 
 Zodiac sign
 -----------
-0x00 = ”’—r = Aries
-0x10 = ‹à‹ = Taurus
-0x20 = ‘oq = Gemini
-0x30 = ‹ŠI = Cancer
-0x40 = ‚q = Leo
-0x50 = ˆ— = Virgo
-0x60 = “V”‰ = Libra
-0x70 = “Vå™ = Scorpio
-0x80 = l”n = Sagittarius
-0x90 = –ã¹ = Capricorn
-0xA0 = •ó•r = Aquarius
-0xB0 = ‘o‹› = Pisces
-0xC0 = ÖŒ­ = Serpentarius (neutral to all signs)
+0x00 = ç™½ç¾Š = Aries
+0x10 = é‡‘ç‰› = Taurus
+0x20 = åŒå­ = Gemini
+0x30 = å·¨èŸ¹ = Cancer
+0x40 = ç…å­ = Leo
+0x50 = å‡¦å¥³ = Virgo
+0x60 = å¤©ç§¤ = Libra
+0x70 = å¤©è = Scorpio
+0x80 = äººé¦¬ = Sagittarius
+0x90 = ç£¨ç¾¯ = Capricorn
+0xA0 = å®ç“¶ = Aquarius
+0xB0 = åŒé­š = Pisces
+0xC0 = è›‡é£ = Serpentarius (neutral to all signs)
 
 * Ramza 0x90
   * very good    0x30         female Cancer
@@ -1554,13 +1609,13 @@ Lucavi
 --------
 | name     |Lv|HP        |MP        |SP|PA|MA|
 |----------|--|----------|----------|--|--|--|
-| Queklain |20| 480` 511|  343`368| 9|10| 8|
-| Velius   |31|1041`1131|  253`285| 8|12`14|11`13|
-| Zarela   |44|1098`1171|  687`736|11|15|10|
-| Adramelk |46|1405`1525|  386`435|10|14`16|10`12|
-| Hashmalum|59|1359`1450|  764`818|13|17|11|
-| Altima   |56|1281`1391|  432`485| 9|13`15|13`15|
-| Altima2  |66|3022`3281|  405`455|12|16`19|15`18|
+| Queklain |20| 480ï½ 511|  343ï½368| 9|10| 8|
+| Velius   |31|1041ï½1131|  253ï½285| 8|12ï½14|11ï½13|
+| Zarela   |44|1098ï½1171|  687ï½736|11|15|10|
+| Adramelk |46|1405ï½1525|  386ï½435|10|14ï½16|10ï½12|
+| Hashmalum|59|1359ï½1450|  764ï½818|13|17|11|
+| Altima   |56|1281ï½1391|  432ï½485| 9|13ï½15|13ï½15|
+| Altima2  |66|3022ï½3281|  405ï½455|12|16ï½19|15ï½18|
 
 
 Play Movie
@@ -1574,52 +1629,52 @@ Play Movie
 
 Encounter research of random battle
 ----------------------------------
-* lua ‚ÅŒŸØ‚Å‚«‚½‚±‚Æ
-  * frame”‚ª“¯‚¶‚È‚ç—”‚ğ•Ï‚¦‚Ä‚àƒGƒ“ƒJƒEƒ“ƒg‚·‚éE‚µ‚È‚¢‚Ì”»’è‚Í•Ï‰»‚µ‚È‚¢
-  * ƒGƒ“ƒJƒEƒ“ƒg‚ÍƒtƒŒ[ƒ€’PˆÊ‚Å 3˜A‘±‚Å”­¶, 7˜A‘±‚Å‚È‚µ‚ÌüŠú‚ğŒJ‚è•Ô‚µ‚Ä‚¢‚é
-  * frame”‚ª“¯‚¶‚È‚ç—”‚ğ•Ï‚¦‚Ä‚àoŒ‚‚·‚éE‚µ‚È‚¢‚Ì”»’è‚Í•Ï‰»‚µ‚È‚¢
-    * ‚½‚¾‚µ•Ò¬‰æ–Ê‚ÅˆÙ‚È‚és“®‚ğ‚Æ‚é‚ÆA“’…‚ª“¯‚¶‚Å‚à“G•Ò¬‚ªˆÙ‚È‚é‚±‚Æ‚ª‚Ü‚ê‚É‚ ‚é
-  * ƒQ[ƒ€“à‚Ì milsec, sec, min, hour ‚ğ‘‚«Š·‚¦‚ê‚ÎŒ‹‰Ê‚ª•Ï‚í‚é
+* lua ã§æ¤œè¨¼ã§ããŸã“ã¨
+  * frameæ•°ãŒåŒã˜ãªã‚‰ä¹±æ•°ã‚’å¤‰ãˆã¦ã‚‚ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ãƒ»ã—ãªã„ã®åˆ¤å®šã¯å¤‰åŒ–ã—ãªã„
+  * ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆã¯ãƒ•ãƒ¬ãƒ¼ãƒ å˜ä½ã§ 3é€£ç¶šã§ç™ºç”Ÿ, 7é€£ç¶šã§ãªã—ã®å‘¨æœŸã‚’ç¹°ã‚Šè¿”ã—ã¦ã„ã‚‹
+  * frameæ•°ãŒåŒã˜ãªã‚‰ä¹±æ•°ã‚’å¤‰ãˆã¦ã‚‚å‡ºæ’ƒã™ã‚‹ãƒ»ã—ãªã„ã®åˆ¤å®šã¯å¤‰åŒ–ã—ãªã„
+    * ãŸã ã—ç·¨æˆç”»é¢ã§ç•°ãªã‚‹è¡Œå‹•ã‚’ã¨ã‚‹ã¨ã€åˆ°ç€æ™‚åˆ»ãŒåŒã˜ã§ã‚‚æ•µç·¨æˆãŒç•°ãªã‚‹ã“ã¨ãŒã¾ã‚Œã«ã‚ã‚‹
+  * ã‚²ãƒ¼ãƒ å†…ã® milsec, sec, min, hour ã‚’æ›¸ãæ›ãˆã‚Œã°çµæœãŒå¤‰ã‚ã‚‹
 
 * disassemble
-  * milsec“™‚ğQÆ‚·‚éŠÖ”‚Æ‚µ‚Ä‚Í sub_80125A04 (US) sub_801254F8(JPv1.1)‚ªŠÖŒW‚µ‚Ä‚»‚¤
-  * sub_8008E540(US) ‚©‚ç sub_80125A04(US) ‚Æ‰º‹L‚Ì sub_8008F08C(US) ‚ª call ‚³‚ê‚Ä‚¢‚é
-  * ‚±‚Ì•Ó‚ªƒGƒ“ƒJ”»’è‚ÆoŒ‚”»’è‚Æ(oŒ‚ƒ†ƒjƒbƒg‚ÌƒXƒe[ƒ^ƒXŒˆ’è)‚¾‚Æ„‘ª‚³‚ê‚é
+  * milsecç­‰ã‚’å‚ç…§ã™ã‚‹é–¢æ•°ã¨ã—ã¦ã¯ sub_80125A04 (US) sub_801254F8(JPv1.1)ãŒé–¢ä¿‚ã—ã¦ãã†
+  * sub_8008E540(US) ã‹ã‚‰ sub_80125A04(US) ã¨ä¸‹è¨˜ã® sub_8008F08C(US) ãŒ call ã•ã‚Œã¦ã„ã‚‹
+  * ã“ã®è¾ºãŒã‚¨ãƒ³ã‚«åˆ¤å®šã¨å‡ºæ’ƒåˆ¤å®šã¨(å‡ºæ’ƒãƒ¦ãƒ‹ãƒƒãƒˆã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹æ±ºå®š)ã ã¨æ¨æ¸¬ã•ã‚Œã‚‹
   * http://ffhacktics.com/wiki/00125a04_-_00125cf8
   * http://ffhacktics.com/wiki/Update_Seed_and_Calculate_Party_Data
-    * ‹’“_‚É“’…‚·‚é‚ÆƒQ[ƒ€ƒ^ƒCƒ€‚ğŒ³‚É seed ‚ªXV‚³‚ê‚é
+    * æ‹ ç‚¹ã«åˆ°ç€ã™ã‚‹ã¨ã‚²ãƒ¼ãƒ ã‚¿ã‚¤ãƒ ã‚’å…ƒã« seed ãŒæ›´æ–°ã•ã‚Œã‚‹
     * new seed = msec * 101 + sec * 10 + min + hour
-    * seed ‚ªXV‚³‚ê‚Ä‚©‚çAƒ†ƒjƒbƒg‚ÌoŒ‚”»’è‚ÆƒXƒe[ƒ^ƒXŒˆ’è‚ªÀs‚³‚ê‚é
-    * ‚æ‚Á‚Ä“’…‚ª“¯‚¶‚È‚çA‚»‚ÌŒã‚Ì—”•Ï‰»‚Íí‚É“¯‚¶‚É‚È‚é
+    * seed ãŒæ›´æ–°ã•ã‚Œã¦ã‹ã‚‰ã€ãƒ¦ãƒ‹ãƒƒãƒˆã®å‡ºæ’ƒåˆ¤å®šã¨ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹æ±ºå®šãŒå®Ÿè¡Œã•ã‚Œã‚‹
+    * ã‚ˆã£ã¦åˆ°ç€æ™‚åˆ»ãŒåŒã˜ãªã‚‰ã€ãã®å¾Œã®ä¹±æ•°å¤‰åŒ–ã¯å¸¸ã«åŒã˜ã«ãªã‚‹
 
 
-* ƒGƒ“ƒJƒEƒ“ƒg‚·‚é‚©‚Ç‚¤‚©‚Ì”»’è
+* ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ã‹ã©ã†ã‹ã®åˆ¤å®š
   * http://ffhacktics.com/wiki/0008f08c_-_0008f280
   * 0008f08c - 0008f280
-    * –ß‚è’l‚ª 0 ‚È‚ç–³‚µ. 1 ‚È‚çƒGƒ“ƒJƒEƒ“ƒg
-    * ‹°‚ç‚­‹’“_‚²‚Æ‚ÉƒGƒ“ƒJƒEƒ“ƒg—¦‚ªİ’è‚³‚ê‚Ä‚¢‚é
-    * ‹’“_î•ñ‚Í 0x80096A40 (US) ‚©‚ç 0x18 each
-      ‹’“_î•ñ ‚Ì 3byte –Ú‚ªƒGƒ“ƒJƒEƒ“ƒg—¦‚Æv‚í‚ê‚é
-    * Mandalia ‚Ìê‡ 0x80096A40 (US) + (0x18 * 2) + 0x3 = 0x80096A94 ‚É
-      0x1E (30% chance) ‚ªŠi”[‚³‚ê‚Ä‚¢‚é
-    * —”call (jal 0x0002230c) ‚ª 2ƒ–Š‚É‚ ‚é‚ª‚Ç‚¿‚ç‚àÅI“I‚É
-      0-99 ‚Ì”ÍˆÍ‚É•ÏŠ·‚µ‚Ä‚¢‚é
-    * 1‰ñ–Ú‚Ì—” call ‚ÅƒGƒ“ƒJƒEƒ“ƒg”»’è‚ğs‚¤
-      rand(0..99) < ‹’“_‚ÌƒGƒ“ƒJƒEƒ“ƒg—¦ (30)  ‚Ì‚Æ‚«‚ÉƒGƒ“ƒJƒEƒ“ƒg”­¶
-    * ƒR[ƒhã‚Í—”‚ª‰e‹¿‚µ‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¦‚é‚ª lua ‚ÌŒŸØŒ‹‰Ê‚Æ–µ‚‚·‚é
-      --> seed ‚ªƒQ[ƒ€ƒ^ƒCƒ€‚ğŒ³‚ÉXV‚³‚ê‚é‚Ì‚ÅA“’…‚ª“¯‚¶‚È‚ç—”‚à“¯‚¶‚Æ‚È‚é
-      --> 3˜A‘±”­¶A7˜A‘±‚È‚µ‚ÌüŠú‚ğŒJ‚è•Ô‚µ‚Ä‚¢‚é‚ª
-          ‚±‚ê‚É‚Â‚¢‚Ä‚ÍA—”¶¬©‘Ì‚ÉüŠú‚ª‚ ‚é‚Æ‚µ‚©l‚¦‚ç‚ê‚È‚¢
-   * üŠú‚Ì’²¸Œ‹‰Ê
-      --> Egg ‚ª‘¶İ‚µ‚È‚¢ê‡ seed XVŒã‚ÌÅ‰‚Ì—”¶¬‚ÍƒGƒ“ƒJƒEƒ“ƒg”»’è‚Æ‚È‚é
-      --> 1 frame ‚¸‚Â‚¸‚ç‚·‚Æ seed ‚Í 101 –ˆ‚É‘‚¦‚é
-      --> seed ‚ª 101 ‚¸‚Â‘‚¦‚é‚Æ ƒGƒ“ƒJƒEƒ“ƒg”­¶—¦‚Í 90 ‚¸‚Â‘‚¦‚é
-      --> (Œ©‚½–Úã‚Í 1f ‚¸‚ê‚é‚Æ 10 ‚¸‚ÂŒ¸­‚·‚é‚æ‚¤‚ÉŒ©‚¦‚é)
-      --> ‚æ‚Á‚Ä 3˜A‘±”­¶A7˜A‘±‚È‚µ‚ÌüŠú‚ª¶‚¶‚é
-      --> 60i”‚È‚Ì‚Å msec ‚ª 0 ‚Ì‚Æ‚«‚Í 4˜A‘±”­¶A7˜A‘±‚È‚µA‚Ì‚æ‚¤‚É‚È‚é
+    * æˆ»ã‚Šå€¤ãŒ 0 ãªã‚‰ç„¡ã—. 1 ãªã‚‰ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆ
+    * æã‚‰ãæ‹ ç‚¹ã”ã¨ã«ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆç‡ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹
+    * æ‹ ç‚¹æƒ…å ±ã¯ 0x80096A40 (US) ã‹ã‚‰ 0x18 each
+      æ‹ ç‚¹æƒ…å ± ã® 3byte ç›®ãŒã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆç‡ã¨æ€ã‚ã‚Œã‚‹
+    * Mandalia ã®å ´åˆ 0x80096A40 (US) + (0x18 * 2) + 0x3 = 0x80096A94 ã«
+      0x1E (30% chance) ãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹
+    * ä¹±æ•°call (jal 0x0002230c) ãŒ 2ãƒ¶æ‰€ã«ã‚ã‚‹ãŒã©ã¡ã‚‰ã‚‚æœ€çµ‚çš„ã«
+      0-99 ã®ç¯„å›²ã«å¤‰æ›ã—ã¦ã„ã‚‹
+    * 1å›ç›®ã®ä¹±æ•° call ã§ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆåˆ¤å®šã‚’è¡Œã†
+      rand(0..99) < æ‹ ç‚¹ã®ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆç‡ (30)  ã®ã¨ãã«ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆç™ºç”Ÿ
+    * ã‚³ãƒ¼ãƒ‰ä¸Šã¯ä¹±æ•°ãŒå½±éŸ¿ã—ã¦ã„ã‚‹ã‚ˆã†ã«è¦‹ãˆã‚‹ãŒ lua ã®æ¤œè¨¼çµæœã¨çŸ›ç›¾ã™ã‚‹
+      --> seed ãŒã‚²ãƒ¼ãƒ ã‚¿ã‚¤ãƒ ã‚’å…ƒã«æ›´æ–°ã•ã‚Œã‚‹ã®ã§ã€åˆ°ç€æ™‚åˆ»ãŒåŒã˜ãªã‚‰ä¹±æ•°ã‚‚åŒã˜ã¨ãªã‚‹
+      --> 3é€£ç¶šç™ºç”Ÿã€7é€£ç¶šãªã—ã®å‘¨æœŸã‚’ç¹°ã‚Šè¿”ã—ã¦ã„ã‚‹ãŒ
+          ã“ã‚Œã«ã¤ã„ã¦ã¯ã€ä¹±æ•°ç”Ÿæˆè‡ªä½“ã«å‘¨æœŸãŒã‚ã‚‹ã¨ã—ã‹è€ƒãˆã‚‰ã‚Œãªã„
+   * å‘¨æœŸã®èª¿æŸ»çµæœ
+      --> Egg ãŒå­˜åœ¨ã—ãªã„å ´åˆ seed æ›´æ–°å¾Œã®æœ€åˆã®ä¹±æ•°ç”Ÿæˆã¯ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆåˆ¤å®šã¨ãªã‚‹
+      --> 1 frame ãšã¤ãšã‚‰ã™ã¨ seed ã¯ 101 æ¯ã«å¢—ãˆã‚‹
+      --> seed ãŒ 101 ãšã¤å¢—ãˆã‚‹ã¨ ã‚¨ãƒ³ã‚«ã‚¦ãƒ³ãƒˆç™ºç”Ÿç‡ã¯ 90 ãšã¤å¢—ãˆã‚‹
+      --> (è¦‹ãŸç›®ä¸Šã¯ 1f ãšã‚Œã‚‹ã¨ 10 ãšã¤æ¸›å°‘ã™ã‚‹ã‚ˆã†ã«è¦‹ãˆã‚‹)
+      --> ã‚ˆã£ã¦ 3é€£ç¶šç™ºç”Ÿã€7é€£ç¶šãªã—ã®å‘¨æœŸãŒç”Ÿã˜ã‚‹
+      --> 60é€²æ•°ãªã®ã§ msec ãŒ 0 ã®ã¨ãã¯ 4é€£ç¶šç™ºç”Ÿã€7é€£ç¶šãªã—ã€ã®ã‚ˆã†ã«ãªã‚‹
 
 
-* oŒ‚‚·‚é‚©‚Ç‚¤‚©‚Ì”»’è
+* å‡ºæ’ƒã™ã‚‹ã‹ã©ã†ã‹ã®åˆ¤å®š
   * http://ffhacktics.com/wiki/Big_ENTD_unit_loading_routine
   * 0017F8A0 - 0017FBE8: Big ENTD unit loading routine
     <code>
@@ -1628,48 +1683,48 @@ Encounter research of random battle
     0017fa34: 30420001 andi r2,r2,0x0001               r2 = 1 or 0. which means 50% chance to exist.
     0017fa38: 1040000a beq r2,r0,0x0017fa64            branch if unit can exist?
     </code>
-    * ƒR[ƒhã‚Í—”‚ª‰e‹¿‚µ‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¦‚é‚ª lua ‚ÌŒŸØŒ‹‰Ê‚Æ–µ‚‚·‚é
-      --> seed ‚ªƒQ[ƒ€ƒ^ƒCƒ€‚ğŒ³‚ÉXV‚³‚ê‚é‚Ì‚ÅA“’…‚ª“¯‚¶‚È‚ç—”‚à“¯‚¶‚Æ‚È‚é
-    * ‚½‚¾‚µ•Ò¬‰æ–Ê‚ÅˆÙ‚È‚és“®‚ğ‚Æ‚é‚ÆA“’…‚ª“¯‚¶‚Å‚à•Ò¬‚ªˆÙ‚È‚é‚±‚Æ‚ª‚Ü‚ê‚É‚ ‚é
-      --> ‚±‚¿‚ç‚É‚Â‚¢‚Ä‚Í lag frame ‚Å‚¸‚ê‚é‚±‚Æ‚ª‚ ‚é
-    * lag frame ‚Å‚¸‚ê‚é‚±‚Æ‚ª‚ ‚é‚Ì‚ğ—˜—p‚µ‚½‚¢‚ªAˆÓ}“I‚É”­¶‚³‚¹‚é•û–@‚Í•s–¾
+    * ã‚³ãƒ¼ãƒ‰ä¸Šã¯ä¹±æ•°ãŒå½±éŸ¿ã—ã¦ã„ã‚‹ã‚ˆã†ã«è¦‹ãˆã‚‹ãŒ lua ã®æ¤œè¨¼çµæœã¨çŸ›ç›¾ã™ã‚‹
+      --> seed ãŒã‚²ãƒ¼ãƒ ã‚¿ã‚¤ãƒ ã‚’å…ƒã«æ›´æ–°ã•ã‚Œã‚‹ã®ã§ã€åˆ°ç€æ™‚åˆ»ãŒåŒã˜ãªã‚‰ä¹±æ•°ã‚‚åŒã˜ã¨ãªã‚‹
+    * ãŸã ã—ç·¨æˆç”»é¢ã§ç•°ãªã‚‹è¡Œå‹•ã‚’ã¨ã‚‹ã¨ã€åˆ°ç€æ™‚åˆ»ãŒåŒã˜ã§ã‚‚ç·¨æˆãŒç•°ãªã‚‹ã“ã¨ãŒã¾ã‚Œã«ã‚ã‚‹
+      --> ã“ã¡ã‚‰ã«ã¤ã„ã¦ã¯ lag frame ã§ãšã‚Œã‚‹ã“ã¨ãŒã‚ã‚‹
+    * lag frame ã§ãšã‚Œã‚‹ã“ã¨ãŒã‚ã‚‹ã®ã‚’åˆ©ç”¨ã—ãŸã„ãŒã€æ„å›³çš„ã«ç™ºç”Ÿã•ã›ã‚‹æ–¹æ³•ã¯ä¸æ˜
 
 
-* ƒoƒgƒ‹’†‚Ì Critical Hit ‚Å—”‚ª 6ŒÂ”ò‚Ô–Í—l. ”ò‚Ô‚Ì‚Ís“®Œˆ’èŒã
-* ímˆ´ùŠ(Soldier office) ‚Å —”‚ª 28ŒÂ”ò‚Ô. ”ò‚Ô‚Ì‚Í Male Soldier ‚ğ‘I‘ğŒã
+* ãƒãƒˆãƒ«ä¸­ã® Critical Hit ã§ä¹±æ•°ãŒ 6å€‹é£›ã¶æ¨¡æ§˜. é£›ã¶ã®ã¯è¡Œå‹•æ±ºå®šå¾Œ
+* æˆ¦å£«æ–¡æ—‹æ‰€(Soldier office) ã§ ä¹±æ•°ãŒ 28å€‹é£›ã¶. é£›ã¶ã®ã¯ Male Soldier ã‚’é¸æŠå¾Œ
 
 
 Knockback research
 ------------------
-* Knockback ‚ÍƒXƒe[ƒ^ƒX‚Å‚Í‚È‚¢. Effect ‚Ìˆêí
-* Knockback ‚ÌŒvZ‚Í‰º‹L
+* Knockback ã¯ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã§ã¯ãªã„. Effect ã®ä¸€ç¨®
+* Knockback ã®è¨ˆç®—ã¯ä¸‹è¨˜
   * http://ffhacktics.com/wiki/Knockback_Calculation
-  * Battle Unit ‚Ì offset +0x05 ‚É Immortal(0x04) ‚Ìƒtƒ‰ƒO‚ğ‚Â‚Æ Knockback ‚µ‚È‚¢
-  * ‚Ü‚½ offset +0x05 ‚ª 0x03 ‚Ì’l‚Å‚à Knockback ‚µ‚È‚¢
+  * Battle Unit ã® offset +0x05 ã« Immortal(0x04) ã®ãƒ•ãƒ©ã‚°ã‚’æŒã¤ã¨ Knockback ã—ãªã„
+  * ã¾ãŸ offset +0x05 ãŒ 0x03 ã®å€¤ã§ã‚‚ Knockback ã—ãªã„
 
-* ‚¿‚È‚İ‚É Immortal ‚Íƒ{ƒX‘Ï«ƒtƒ‰ƒO‚Ì‚æ‚¤‚È‚à‚Ì‚Å
-  Knockback ˆÈŠO‚Å‚à Poach, Malboro, ‚Ì‘Ï«‚ª‚ ‚é–Í—l
-* ‚³‚ç‚É Immortal ‚ÍˆÈ‰º‚ÌƒXƒe[ƒ^ƒX‘Ï«‚ğ‚Â
+* ã¡ãªã¿ã« Immortal ã¯ãƒœã‚¹è€æ€§ãƒ•ãƒ©ã‚°ã®ã‚ˆã†ãªã‚‚ã®ã§
+  Knockback ä»¥å¤–ã§ã‚‚ Poach, Malboro, ã®è€æ€§ãŒã‚ã‚‹æ¨¡æ§˜
+* ã•ã‚‰ã« Immortal ã¯ä»¥ä¸‹ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è€æ€§ã‚’æŒã¤
   * Crystal, Dead, Undead, Petrify, Invite, Confusion, Blood Suck.
   * Treasure, Chicken, Frog, Charm, Sleep, Don't Act, Death Sentence
 
-* Knockback ‚Ì”­¶—¦
-  * Criticak Hit ‚Æ‚»‚êˆÈŠO‚Å”­¶—¦‚ªˆÙ‚È‚é
-  * Critical Hit ƒ‹[ƒ`ƒ“
+* Knockback ã®ç™ºç”Ÿç‡
+  * Criticak Hit ã¨ãã‚Œä»¥å¤–ã§ç™ºç”Ÿç‡ãŒç•°ãªã‚‹
+  * Critical Hit ãƒ«ãƒ¼ãƒãƒ³
     * http://ffhacktics.com/wiki/Critical_Hit_Calculation
-  * Knockback ƒ‹[ƒ`ƒ“
+  * Knockback ãƒ«ãƒ¼ãƒãƒ³
     * http://ffhacktics.com/wiki/Damage_and_Knockback_Routine_(Dash,_tackle,_throw_stone)
-    * attacker ‚Ì Br ‚ª‚‚­Atarget ‚Ì Br ‚ª’á‚¢‚Ù‚Ç Knockback ”­¶—¦‚ª‚‚­‚È‚é
+    * attacker ã® Br ãŒé«˜ãã€target ã® Br ãŒä½ã„ã»ã© Knockback ç™ºç”Ÿç‡ãŒé«˜ããªã‚‹
 
 
 Research
 --------
-* ‚½‚¾‚µ•Ò¬‰æ–Ê‚ÅˆÙ‚È‚és“®‚ğ‚Æ‚é‚ÆA“’…‚ª“¯‚¶‚Å‚à“G•Ò¬‚ªˆÙ‚È‚é‚±‚Æ‚ª‚Ü‚ê‚É‚ ‚é
-  * oŒ‚‰æ–Ê‚Å lag ‚ª”­¶‚·‚é frame ‚ª‚¸‚ê‚Ä‚µ‚Ü‚¤‚Ì‚ªŒ´ˆö‚Ì–Í—l
-  * ‚È‚º lag frame ‚ª‚¸‚ê‚é‚Ì‚©‚Í•s–¾
-  * ŒXŒü‚Æ‚µ‚ÄA•Ò¬‰æ–Ê‚Åˆê’è frame ‚ªŒo‰ß‚·‚é‚Æ lag frame ‚ª‚¸‚ê‚é
-  * •Ò¬‰æ–Ê‚Å‚Í 0x801C16E6 ‚â 0x801C1706 •Ó‚è‚Éƒf[ƒ^‚ğƒXƒgƒA‚µ‚Ä‚¢‚Ä
-    ‚±‚Ì•Ó‚ÌƒAƒhƒŒƒX‚Ì‘‚«Š·‚¦‰ñ”‚â’l‚ğŒ©‚ê‚ÎA–@‘¥‚ª‚Â‚©‚ß‚é‚©‚à‚µ‚ê‚È‚¢
+* ãŸã ã—ç·¨æˆç”»é¢ã§ç•°ãªã‚‹è¡Œå‹•ã‚’ã¨ã‚‹ã¨ã€åˆ°ç€æ™‚åˆ»ãŒåŒã˜ã§ã‚‚æ•µç·¨æˆãŒç•°ãªã‚‹ã“ã¨ãŒã¾ã‚Œã«ã‚ã‚‹
+  * å‡ºæ’ƒç”»é¢ã§ lag ãŒç™ºç”Ÿã™ã‚‹ frame ãŒãšã‚Œã¦ã—ã¾ã†ã®ãŒåŸå› ã®æ¨¡æ§˜
+  * ãªãœ lag frame ãŒãšã‚Œã‚‹ã®ã‹ã¯ä¸æ˜
+  * å‚¾å‘ã¨ã—ã¦ã€ç·¨æˆç”»é¢ã§ä¸€å®š frame ãŒçµŒéã™ã‚‹ã¨ lag frame ãŒãšã‚Œã‚‹
+  * ç·¨æˆç”»é¢ã§ã¯ 0x801C16E6 ã‚„ 0x801C1706 è¾ºã‚Šã«ãƒ‡ãƒ¼ã‚¿ã‚’ã‚¹ãƒˆã‚¢ã—ã¦ã„ã¦
+    ã“ã®è¾ºã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã®æ›¸ãæ›ãˆå›æ•°ã‚„å€¤ã‚’è¦‹ã‚Œã°ã€æ³•å‰‡ãŒã¤ã‹ã‚ã‚‹ã‹ã‚‚ã—ã‚Œãªã„
 
 
 
