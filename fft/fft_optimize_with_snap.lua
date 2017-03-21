@@ -39,43 +39,118 @@ end
 
 
 ------------------------------------------------------------
--- Optimize
+-- SkipPv
 ------------------------------------------------------------
-Optimize = {}
+SkipPv = {}
+--SkipPv.logname = "snap/opening_skip_pv3_%df.png"
+SkipPv.logname = "snap/opening_skip_pv4_%df.png"
+--SkipPv.logname = "snap/ending_movie_%df.png"
 
-function Optimize.pre_attempt()
+function SkipPv.pre_attempt()
 	-- pass
 end
 
-function Optimize.attempt()
+function SkipPv.attempt()
 	pressBtn({start=1}, 1)  -- skip opening
-	fadv(500)
+	--fadv(500)
 	--fadv(360)
+	fadv(200)
 end
 
-function Optimize.post_attempt()
+function SkipPv.post_attempt()
 	-- pass
 end
 
-function Optimize.success()
+function SkipPv.success()
 	return true -- always true
 end
 
 ------------------------------------------------------------
--- Cristal1
+-- SkipOpeningMovie
 ------------------------------------------------------------
-Cristal1 = {}
+SkipOpeningMovie = {}
+SkipOpeningMovie.logname = "snap/opening_skip_pv4_%df.png"
 
-function Cristal1.pre_attempt()
+function SkipOpeningMovie.pre_attempt()
+	-- pass
+end
+
+function SkipOpeningMovie.attempt()
+	pressBtn({start=1}, 1)  -- skip opening
+	fadv(500)
+end
+
+function SkipOpeningMovie.post_attempt()
+	-- pass
+end
+
+function SkipOpeningMovie.success()
+	return true -- always true
+end
+
+------------------------------------------------------------
+-- KeyDown
+------------------------------------------------------------
+KeyDown = {}
+KeyDown.logname = "snap/opening_keydown_%df.png"
+
+function KeyDown.pre_attempt()
+	-- pass
+end
+
+function KeyDown.attempt()
+	pressBtn({down=1}, 1)  -- skip opening
+	fadv(200)
+end
+
+function KeyDown.post_attempt()
+	-- pass
+end
+
+function KeyDown.success()
+	return true -- always true
+end
+
+------------------------------------------------------------
+-- KeyCancel
+------------------------------------------------------------
+KeyCancel = {}
+KeyCancel.logname = "snap/opening_keycancel2_%df.png"
+
+function KeyCancel.pre_attempt()
+	-- pass
+end
+
+function KeyCancel.attempt()
+	pressBtn({x=1}, 1)  -- cancel message
+	pressBtn({circle=1}, 1)  -- cancel message
+	fadv(200)
+end
+
+function KeyCancel.post_attempt()
+	-- pass
+end
+
+function KeyCancel.success()
+	return true -- always true
+end
+
+------------------------------------------------------------
+-- Crystal1
+------------------------------------------------------------
+Crystal1 = {}
+Crystal1.logname = "snap/crystal_ability1_%df.png"
+
+function Crystal1.pre_attempt()
 	fadv(7)
 end
 
-function Cristal1.attempt()
+function Crystal1.attempt()
 	pressBtn({circle=1}, 1)  -- stand by
 	fadv(10)
 end
 
-function Cristal1.post_attempt()
+function Crystal1.post_attempt()
 	local male_turn = memory.readword(adr_battle_unit17 + Bunit.cur_turn)
 
 	while male_turn ~= 0x01 do
@@ -108,26 +183,27 @@ function Cristal1.post_attempt()
 	fadv(30)
 end
 
-function Cristal1.success()
+function Crystal1.success()
 	return true -- always true
 end
 
 
 ------------------------------------------------------------
--- Cristal2
+-- Crystal2
 ------------------------------------------------------------
-Cristal2 = {}
+Crystal2 = {}
+Crystal2.logname = "snap/crystal_ability2_%df.png"
 
-function Cristal2.pre_attempt()
+function Crystal2.pre_attempt()
 	fadv(7)
 end
 
-function Cristal2.attempt()
+function Crystal2.attempt()
 	pressBtn({circle=1}, 1)  -- stand by
 	fadv(10)
 end
 
-function Cristal2.post_attempt()
+function Crystal2.post_attempt()
 	local ofs_unit = adr_battle_unit20
 	local wiz_turn = memory.readword(ofs_unit + Bunit.cur_turn)
 
@@ -154,25 +230,26 @@ function Cristal2.post_attempt()
 	fadv(30)
 end
 
-function Cristal2.success()
+function Crystal2.success()
 	return true -- always true
 end
 
 ------------------------------------------------------------
--- Cristal3
+-- Crystal3
 ------------------------------------------------------------
-Cristal3 = {}
+Crystal3 = {}
+Crystal3.logname = "snap/crystal_ability3_%df.png"
 
-function Cristal3.pre_attempt()
+function Crystal3.pre_attempt()
 	fadv(7)
 end
 
-function Cristal3.attempt()
+function Crystal3.attempt()
 	pressBtn({circle=1}, 1)  -- stand by
 	fadv(10)
 end
 
-function Cristal3.post_attempt()
+function Crystal3.post_attempt()
 	local ofs_unit = adr_battle_unit20
 	local wiz_turn = memory.readword(ofs_unit + Bunit.cur_turn)
 
@@ -194,7 +271,7 @@ function Cristal3.post_attempt()
 	fadv(30)
 end
 
-function Cristal3.success()
+function Crystal3.success()
 	return true -- always true
 end
 
@@ -214,8 +291,9 @@ local begin_date = os.date()
 local fc = emu.framecount()
 --local rng = memory.readdword(adr_rng)
 
---local interface = Cristal3
-local interface = Optimize
+--local interface = Crystal3
+--local interface = SkipPv
+local interface = SkipOpeningMovie
 
 
 retry = 200
@@ -240,8 +318,7 @@ for i=0, retry do
 
 		-- make dest directory in advance
 		local gdstr = gui.gdscreenshot()
-		--gd.createFromGdStr(gdstr):png(string.format("snap/cristal_ability3_%df.png", fc))
-		gd.createFromGdStr(gdstr):png(string.format("snap/ending_movie_%df.png", fc))
+		gd.createFromGdStr(gdstr):png(string.format(interface.logname, fc))
 	end
 
 	savestate.load(state)

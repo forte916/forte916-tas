@@ -86,6 +86,13 @@ ch1-Orbonne
 * Orbonne 戦闘終了の会話は 手動と text_skip.lua とで同じ結果
 * text_skip.lua を信用してもよさそう
 
+```
+### fft_optimize1 は retry=5 を採用
+* retry=5 は gaf が Lv up, JP Lv up する
+* Lv up は約 100f, JP Lv up は 約50f のエフェクトを消費する
+* retry=29 のように Lv up エフェクトのない構成を選択した方がよい
+```
+
 
 Lv1 Chemist 初期ステータス
 --------------------------
@@ -312,6 +319,47 @@ ch1-random
 * Goblin becomes speed 6 at Lv14
 
 * 改善案
+	* Battle 1
+		* 汎用A: squire/chemist
+			* speed break x1( or x2) to 汎用E
+			* speed break x2 to goblin
+			* become crystal
+		* 汎用E: (Gariland で出撃していない) squire/chemist
+			* squrie up to Lv2, chemist up to Lv2
+			* inherit crystal
+		* Ramza:
+			* Frog to goblin
+	* Battle 2
+		* 汎用B: knight
+			* speed break x1( or x2) to 汎用E
+			* speed break x2 to goblin
+			* become crystal
+		* 汎用C: wizard
+			* Frog to goblin
+			* inherit crystal
+	* Battle 3
+		* 汎用C: wizard
+			* speed break x2 to goblin
+			* Frog to goblin
+			* become crystal
+	* Battle 4
+		* 汎用E: wizard
+			* speed break x1( or x2) to 汎用E
+			* speed break x2 to goblin
+			* become crystal
+		* 汎用D: wizard
+			* Frog to goblin
+			* inherit crystal
+	* Battle 3
+		* 汎用D: wizard
+			* speed break x2 to goblin
+			* Frog to goblin
+			* become crystal
+
+
+
+
+* 改善案
   * 敵1体のみ編成を 1000f 程度探索
   * 2体目が Ramza に近づくまで 4 turn かかり、それが約 1000f
   * よって 1000f 待った方が結果的に早くなる
@@ -490,6 +538,8 @@ ch2-Dorter
 * Ramza 一番左上 in RTA, この位置だと投石が届かない??
 * speed 7 の Theif には基本技をセットしていないか投石を覚えていない方が早い??
 * 密漁バグを使うなら、このシーフが密漁を覚えているのが条件
+	* 覚えているだけでなく、セットしているのがベター
+	* 水門の攻略のために鎧を盗むもあるとベターかも
 * 密漁を覚えている敵シーフを勧誘する
 
 ch2-Araguay
@@ -896,7 +946,7 @@ ch4-Sluice
 
 * 改善案4
 	* Thief を 1人出撃させて、Critical Quic
-		1. Thief: attack Ramza
+		1. Thief: attack (or steel armor) Ramza
 		1. Ramza: re-action Critical Quic, then move and throw stone, then knock back
 		1. Ramza: move and (Quic or 装備変更)
 		1. Ramza: re-action Critical Quic, then move and (Quic or 装備変更)

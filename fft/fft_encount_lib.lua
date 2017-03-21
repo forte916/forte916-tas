@@ -17,16 +17,29 @@ require "fft_lib"
 Orbonne = {}
 Orbonne.logname = "ch1_orbonne_party1.log"
 
-Orbonne.name = {"ramza", "agrias", "gaf", "alicia", "lavian", "kinght", "archer", "archer", "archer", "chemist", "rad"}
+Orbonne.name = {"ramza", "agrias", "gaf", "alicia", "lavian", "knight", "archer", "archer", "archer", "chemist", "rad"}
 
 function Orbonne.logHeader()
-	debugPrint(string.format("Agrias = 0x30 = Canser"))
+	debugPrint(string.format("Agrias = 0x30 = Cancer"))
 	debugPrint(string.format(" * good: 0x70, 0xB0, very good: 0x90"))
 	debugPrint(string.format(" * bad : 0x00, 0x60, very bad : 0x90"))
 	debugPrint(string.format(""))
 	debugPrint(string.format("Gafgar = 0x50 = Virgo"))
 	debugPrint(string.format(" * good: 0x10, 0x90, very good: 0xB0"))
 	debugPrint(string.format(" * bad : 0x20, 0x80, very bad : 0xB0"))
+	debugPrint(string.format(""))
+	debugPrint(string.format("-- Bunit Legend --"))
+	debugPrint(string.format(" 2 ff  2 90:cc  2  0  0: 9 94  6:73 61:150  25:400 191  80:, ramza  "))
+	debugPrint(string.format("34  1 34 30:84 34  1  1:10 53  6:71 63:206  27:165 282  65:, agrias "))
+	debugPrint(string.format("17 ff 17 50:c4 17  0  2:10 21  7:61 67:209  25:166 243  16:, gaf    "))
+	debugPrint(string.format("81  3 4c b0:84 84  1  3: 8 82  6:61 62:108  17:245 124  75:, alicia "))
+	debugPrint(string.format("81  4 4c  0:84 85  1  4: 8 98  6:62 61:107  18:206 126  36:, lavian "))
+	debugPrint(string.format("80  5 4c 61:94 86  1  5: 9  0  6:65 46:135  17:211 171  41:, knight "))
+	debugPrint(string.format("80  6 4d 61:94 87  1  6: 7 75  6:46 70: 65  12:208 197  38:, archer "))
+	debugPrint(string.format("80  7 4d 10:94 88  1  7: 7 65  6:62 62: 56  12:227 193   7:, archer "))
+	debugPrint(string.format("80  8 4d 40:94 89  1  8: 6 87  6:48 67: 60  12:242 150  22:, archer "))
+	debugPrint(string.format("80  9 4b b0:94 8a  1  9: 6  6  6:71 49: 54  19:184 175  14:, chemist"))
+	debugPrint(string.format("80 ff 4a 91: 4 83  0  a: 8 75  6:63 60: 95  23:197 241  27:, rad    "))
 	debugPrint(string.format(""))
 end
 
@@ -145,7 +158,7 @@ function Mandalia.logHeader()
 	debugPrint(string.format("80, 2,53,61/ 2,31, 6/53,53/ 42, 7/289- 69,110/157,142/ , 真珠の5, thief"))
 	debugPrint(string.format("80, 3,4a,50/ 1,91, 6/61,68/ 10,10/127- 47,116/153,199/ , 真珠の6, algus"))
 	debugPrint(string.format("80, 4,4a,40/ 1,96, 6/67,68/ 36,10/172- 42,156/106,154/ , 真珠の2"))
-	debugPrint(string.format("80, 5,4a,81/ 2, 0, 6/70,70/ 35,10/193- 23,117/131,151/ , 真珠の3, throw stone recomended, defeat at first, "))
+	debugPrint(string.format("80, 5,4a,81/ 2, 0, 6/70,70/ 35,10/193- 23,117/131,151/ , 真珠の3, throw stone recommended, defeat at first, "))
 	debugPrint(string.format("80, 6,4a,20/ 1,23, 6/67,72/ 36,11/144- 14,112/191,148/ , 真珠の4"))
 	debugPrint(string.format("82, 7,67,a0/ 1, 8, 5/40,50/ 42, 4/  0-  0,  0/  0,  0/ , 真珠の1, redpanther"))
 	debugPrint(string.format(""))

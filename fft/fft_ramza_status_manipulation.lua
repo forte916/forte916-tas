@@ -29,18 +29,31 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
+function drawRetry(count, x, y)
+	x = x or 0
+	y = y or 30
+
+	gui.text(x, y   , string.format(" retry:%d", count))
+end
+
+
+------------------------------------------------------------
+-- functions
+------------------------------------------------------------
 
 Ramza = {}
-Ramza.logname = "ramza_status1a.log"
+Ramza.logname = "ramza_status_3.log"
 Ramza.best_st = {}
 Ramza.cur_st = {}
 
 function Ramza.logHeader()
-	-- pass
+	debugPrint(string.format("-- Funit Legend --"))
+	debugPrint(string.format("%s  cur_sum | ret |", Funit.info_header))
+	debugPrint(string.format(""))
 end
 
 function Ramza.pre_attempt()
-	fadv(3)
+	--fadv(3)
 	--fadv(8)
 end
 
@@ -90,6 +103,7 @@ function Ramza.success()
 
 	cur_prpt = Funit.readProperty(adr_formation_unit)
 	str = cur_prpt.info
+	if str == nil then return nil end
 
 	Ramza.cur_st.togal_JP_squire     = cur_prpt.total_JP_squire
 	Ramza.cur_st.togal_JP_chemist    = cur_prpt.total_JP_chemist
@@ -104,7 +118,12 @@ function Ramza.success()
 	end
 
 	ret = Ramza.compareStatus(cur_sum)
-	debugPrint(string.format("%s, %d, %s", str, cur_sum, ret))
+	if ret == nil then
+		compared = ""
+	else
+		compared = ret
+	end
+	debugPrint(string.format("%s, %d, %s", str, cur_sum, compared))
 
 	return ret
 end
@@ -117,7 +136,7 @@ function Ramza.format_st(st)
 		st_sum = st_sum + value
 	end
 
-	st_info = string.format("sum = %d", st_sum)
+	st_info = string.format("best = %d", st_sum)
 	debugPrint(st_info)
 	print(st_info)
 end
@@ -151,6 +170,7 @@ for i=0, retry do
 		initial = 0
 	end
 
+	drawRetry(i, x, y)
 	interface.pre_attempt()
 	fadv(i)
 	fc = emu.framecount()

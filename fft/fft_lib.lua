@@ -251,6 +251,8 @@ function Funit.readProperty(ofs_unit)
 	return prpt
 end
 
+Funit.info_header = "| ch, no, job, zodiac | lv, exp, brave, faith | squire, chemist, priest, wizard, time, oracle, calc | mpp1 |"
+
 function Funit.toString(prpt)
 	local str = string.format("%2x,%2x,%2x,%2x," 
 			.." %2d,%2d,%2d,%2d,"
@@ -1194,19 +1196,19 @@ end
 ------------------------------------------------------------
 Zodiac = {}
 
-Zodiac.Aries         = 0x00 -- ”’—r = Aries
-Zodiac.Taurus        = 0x10 -- ‹à‹ = Taurus
-Zodiac.Gemini        = 0x20 -- ‘oq = Gemini
-Zodiac.Cancer        = 0x30 -- ‹ŠI = Cancer
-Zodiac.Leo           = 0x40 -- ‚q = Leo
-Zodiac.Virgo         = 0x50 -- ˆ— = Virgo
-Zodiac.Libra         = 0x60 -- “V”‰ = Libra
-Zodiac.Scorpio       = 0x70 -- “Vå™ = Scorpio
-Zodiac.Sagittarius   = 0x80 -- l”n = Sagittarius
-Zodiac.Capricorn     = 0x90 -- –ã¹ = Capricorn
-Zodiac.Aquarius      = 0xA0 -- •ó•r = Aquarius
-Zodiac.Pisces        = 0xB0 -- ‘o‹› = Pisces
-Zodiac.Serpentarius  = 0xC0 -- ÖŒ­ = Serpentarius (neutral to all signs)
+Zodiac.Aries         = 0x00 -- ç™½ç¾Š = Aries
+Zodiac.Taurus        = 0x10 -- é‡‘ç‰› = Taurus
+Zodiac.Gemini        = 0x20 -- åŒå­ = Gemini
+Zodiac.Cancer        = 0x30 -- å·¨èŸ¹ = Cancer
+Zodiac.Leo           = 0x40 -- ç…å­ = Leo
+Zodiac.Virgo         = 0x50 -- å‡¦å¥³ = Virgo
+Zodiac.Libra         = 0x60 -- å¤©ç§¤ = Libra
+Zodiac.Scorpio       = 0x70 -- å¤©è = Scorpio
+Zodiac.Sagittarius   = 0x80 -- äººé¦¬ = Sagittarius
+Zodiac.Capricorn     = 0x90 -- ç£¨ç¾¯ = Capricorn
+Zodiac.Aquarius      = 0xA0 -- å®ç“¶ = Aquarius
+Zodiac.Pisces        = 0xB0 -- åŒé­š = Pisces
+Zodiac.Serpentarius  = 0xC0 -- è›‡é£ = Serpentarius (neutral to all signs)
 
 Zodiac.notation = {"worst", "bad", "normal", "good", "best"}
 
