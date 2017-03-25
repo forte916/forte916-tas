@@ -15,7 +15,7 @@ require "fft_lib"
 -- Orbonne
 ------------------------------------------------------------
 Orbonne = {}
-Orbonne.logname = "ch1_orbonne_party1.log"
+Orbonne.logname = "ch1_1_orbonne_party3.log"
 
 Orbonne.name = {"ramza", "agrias", "gaf", "alicia", "lavian", "knight", "archer", "archer", "archer", "chemist", "rad"}
 
@@ -29,17 +29,18 @@ function Orbonne.logHeader()
 	debugPrint(string.format(" * bad : 0x20, 0x80, very bad : 0xB0"))
 	debugPrint(string.format(""))
 	debugPrint(string.format("-- Bunit Legend --"))
-	debugPrint(string.format(" 2 ff  2 90:cc  2  0  0: 9 94  6:73 61:150  25:400 191  80:, ramza  "))
-	debugPrint(string.format("34  1 34 30:84 34  1  1:10 53  6:71 63:206  27:165 282  65:, agrias "))
-	debugPrint(string.format("17 ff 17 50:c4 17  0  2:10 21  7:61 67:209  25:166 243  16:, gaf    "))
-	debugPrint(string.format("81  3 4c b0:84 84  1  3: 8 82  6:61 62:108  17:245 124  75:, alicia "))
-	debugPrint(string.format("81  4 4c  0:84 85  1  4: 8 98  6:62 61:107  18:206 126  36:, lavian "))
-	debugPrint(string.format("80  5 4c 61:94 86  1  5: 9  0  6:65 46:135  17:211 171  41:, knight "))
-	debugPrint(string.format("80  6 4d 61:94 87  1  6: 7 75  6:46 70: 65  12:208 197  38:, archer "))
-	debugPrint(string.format("80  7 4d 10:94 88  1  7: 7 65  6:62 62: 56  12:227 193   7:, archer "))
-	debugPrint(string.format("80  8 4d 40:94 89  1  8: 6 87  6:48 67: 60  12:242 150  22:, archer "))
-	debugPrint(string.format("80  9 4b b0:94 8a  1  9: 6  6  6:71 49: 54  19:184 175  14:, chemist"))
-	debugPrint(string.format("80 ff 4a 91: 4 83  0  a: 8 75  6:63 60: 95  23:197 241  27:, rad    "))
+	debugPrint(string.format("%s", Bunit.info_header4))
+	debugPrint(string.format(" 2,ff, 2,90 |  9,81, 6 | 64,51 | 152,24 | 465-145,194 | 127,114 | ramza  "))
+	debugPrint(string.format("34, 1,34,30 | 10,79, 6 | 71,63 | 204,26 | 162- 62,247 | 126,117 | agrias "))
+	debugPrint(string.format("17,ff,17,50 | 10,89, 7 | 61,67 | 210,25 | 149- 49,283 | 232,148 | gaf    "))
+	debugPrint(string.format("81, 3,4c,b0 |  8,50, 6 | 61,62 | 108,17 | 276-106,153 | 136,401 | alicia "))
+	debugPrint(string.format("81, 4,4c, 0 |  8,39, 6 | 62,61 | 105,18 | 266- 96,126 | 185,400 | lavian "))
+	debugPrint(string.format("80, 5,4c,90 |  9,73, 6 | 50,47 | 135,17 | 293- 13,183 | 154,789 | knight , 真珠の3"))
+	debugPrint(string.format("80, 6,4d,51 |  7, 2, 6 | 67,67 |  65,13 | 244- 74,192 | 142,106 | archer , 真珠の4, beaten by gaf"))
+	debugPrint(string.format("80, 7,4d,40 |  7,92, 6 | 64,63 |  56,12 | 287-117,128 | 180,192 | archer , 真珠の2, beaten by agrias"))
+	debugPrint(string.format("80, 8,4d,30 |  6,81, 6 | 73,56 |  63,11 | 209- 39,120 | 198,166 | archer , 真珠の5"))
+	debugPrint(string.format("80, 9,4b, 0 |  6,78, 6 | 70,63 |  55,19 | 188-108,176 | 140,146 | chemist, 真珠の1"))
+	debugPrint(string.format("80,ff,4a,91 |  8,13, 6 | 63,60 |  96,23 | 156- 76,253 | 148,116 | rad    "))
 	debugPrint(string.format(""))
 end
 
@@ -61,6 +62,10 @@ function Orbonne.success()
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
 	local total_enemy = 11
+	local gaf_comp = 0  -- compatibility
+	local agrias_comp = 0  -- compatibility
+	local ramza_comp = 0  -- compatibility
+	local enemy = 0
 	local str
 
 	for i=1, total_enemy do
@@ -68,11 +73,80 @@ function Orbonne.success()
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
 
-		str = string.format("%s, %s", str, Orbonne.name[i])
+		str = string.format("%s %s", str, Orbonne.name[i])
+
+		if prpt.no == 5 then
+			ramza_comp = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-ramza", str, Zodiac.notation[ramza_comp])
+
+			if (ramza_comp > 3) then
+				str = string.format("%s, matched", str)
+				--enemy = enemy + 1
+			end
+		end
+
+		-- should be beaten by gaf
+		if prpt.no == 6 then
+			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
+
+			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
+
+			if (gaf_comp > 3) then
+				str = string.format("%s, matched", str)
+				enemy = enemy + 1
+			end
+		end
+
+		-- should be beaten by agrias
+		if prpt.no == 7 then
+			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
+
+			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
+
+			if (gaf_comp < 3 and agrias_comp > 2) then
+				str = string.format("%s, matched", str)
+				enemy = enemy + 1
+			end
+		end
+
+		if prpt.no == 8 then
+			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
+
+			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
+
+			if (gaf_comp > 3 or agrias_comp > 3) then
+				str = string.format("%s, matched", str)
+				--enemy = enemy + 1
+			end
+		end
+
+		if prpt.no == 9 then
+			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
+
+			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
+
+			if (gaf_comp > 3 or agrias_comp > 3) then
+				str = string.format("%s, matched", str)
+				--enemy = enemy + 1
+			end
+		end
+
+
 		debugPrint(str)
 	end
 
-	return false  -- always false
+	if enemy > 0 then
+		ret = true
+	end
+	return ret
 end
 
 
@@ -80,7 +154,7 @@ end
 -- Gariland
 ------------------------------------------------------------
 Gariland = {}
-Gariland.logname = "ch1_gariland_enemy1.log"
+Gariland.logname = "ch1_2_gariland_enemy3.log"
 
 
 function Gariland.logHeader()
@@ -144,7 +218,7 @@ end
 -- Mandalia
 ------------------------------------------------------------
 Mandalia = {}
-Mandalia.logname = "ch1_mandalia_enemy2.log"
+Mandalia.logname = "ch1_3_mandalia_enemy3.log"
 
 
 function Mandalia.logHeader()
@@ -254,7 +328,7 @@ end
 -- GainedJpUP
 ------------------------------------------------------------
 GainedJpUP = {}
-GainedJpUP.logname = "ch1_mandalia_gained_jp_up_cheat3.log"
+GainedJpUP.logname = "ch1_3_mandalia_gained_jp_up_cheat3.log"
 function GainedJpUP.logHeader()
 	debugPrint(string.format("the most right culumn is base_r_s_m_learned3"))
 	debugPrint(string.format("    0x80:Counter Tackle"))

@@ -82,7 +82,7 @@ adr_direction_1D6602 = 0x1D6602
 
 
 adr_direction_1D6500 = 0x1D6500
-  -- 0x00EC: DIRECT_WIN
+  -- 0x00EC: DIRECT_DEFEAT_X
   -- 0x00AA: DIRECT_READY
   -- 0x008E: DIRECT_CONGRAT
   -- 0x00BB: DIRECT_BONUS_MONEY
@@ -109,7 +109,7 @@ Text.condition = Text.TEXT_NONE
 Text.text_end_fc = nil
 
 Text.DIRECT_NONE         = 0
-Text.DIRECT_WIN          = 1 -- 0x3E00, 0x00EC
+Text.DIRECT_DEFEAT_X     = 1 -- 0x3E00, 0x00EC
 Text.DIRECT_READY        = 2 -- 0x3E30, 0x00AA
 Text.DIRECT_CONGRAT      = 3 -- 0x3E00, 0x008E
 Text.DIRECT_BONUS_MONEY  = 4 -- 0x3E00, 0x00BB
@@ -224,10 +224,10 @@ function Text.skipDirection()
 	if Text.direction == Text.DIRECT_NONE
 			and direction == 0x3E00
 			and kind == 0x00EC then
-		print(string.format("direction = 0x%04X, kind = 0x%04X, DIRECT_WIN", direction, kind))
-		Text.direction = Text.DIRECT_WIN
+		print(string.format("direction = 0x%04X, kind = 0x%04X, DIRECT_DEFEAT_X", direction, kind))
+		Text.direction = Text.DIRECT_DEFEAT_X
 		pressBtn({circle=1}, 1)
-	elseif Text.direction == Text.DIRECT_WIN
+	elseif Text.direction == Text.DIRECT_DEFEAT_X
 			and direction == 0x3E30
 			and kind == 0x00AA then
 		print(string.format("direction = 0x%04X, kind = 0x%04X, DIRECT_READY", direction, kind))

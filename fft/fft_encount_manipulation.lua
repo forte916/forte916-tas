@@ -51,7 +51,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = MandaliaRandom
+local interface = Orbonne
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
@@ -59,7 +59,7 @@ if interface.logHeader ~= nil then interface.logHeader() end
 
 retry = 1000
 
-for i=200, retry do
+for i=0, retry do
 	if initial == 1 then
 		initial = 0
 	end

@@ -815,20 +815,20 @@ function Bunit.readProperty(ofs_unit)
 	prpt.main_target     = memory.readbyte(ofs_unit + Bunit.main_target     )
 
 	--prpt.info = Bunit.toString(prpt)
-	prpt.info = Bunit.toString2(prpt)
+	--prpt.info = Bunit.toString2(prpt)
 	--prpt.info = Bunit.toString3(prpt)
-	--prpt.info = Bunit.toString4(prpt)
+	prpt.info = Bunit.toString4(prpt)
 	--prpt.info = Bunit.toString5(prpt)
 	return prpt
 end
 
 function Bunit.toString(prpt)
-	local str = string.format("%2x,%2x,%2x,%2x,%2x,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x/"
-			.."%2d,%2d,%2d/"
-			.."%2d,%2d/"
-			.."%3d,%2d/"
-			.."%3d-%3d,%3d/",
+	local str = string.format("%2x,%2x,%2x,%2x,%2x,%2x,%2x,%2x | "
+			.."%2x,%2x,%2x | "
+			.."%2d,%2d,%2d | "
+			.."%2d,%2d | "
+			.."%3d,%2d | "
+			.."%3d-%3d,%3d | ",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.party  ,
@@ -860,12 +860,12 @@ function Bunit.toString(prpt)
 end
 
 function Bunit.toString2(prpt)
-	local str = string.format("%2x,%2x,%2x,%2x/"
-			.."%2d,%2d/"
-			.."%2x,%2x,%2x/%2x,%2x,%2x/"
-			.."%2x,%2x,%2x/"
-			.."%2x,%2x/"
-			.."%2d,%2x,%2x/",
+	local str = string.format("%2x,%2x,%2x,%2x | "
+			.."%2d,%2d | "
+			.."%2x,%2x,%2x | %2x,%2x,%2x | "
+			.."%2x,%2x,%2x | "
+			.."%2x,%2x | "
+			.."%2d,%2x,%2x | ",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -896,18 +896,18 @@ function Bunit.toString2(prpt)
 end
 
 function Bunit.toString3(prpt)
-	local str = string.format("%2x,%2x,%2x,%2x/"
-			.."%2d,%2d,%2d/"
-			.."%2d,%2d/"
-			.."%3d,%2d/"
-			.."squire-%3d-%3d/%2x,%2x,%2x/"
-			.."chemist-%3d-%3d,%2x,%2x,%2x/"
-			.."archer-%3d-%3d,%2x,%2x,%2x/"
-			.."thief-%3d-%3d,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x/"
-			.."%3x,%3x,%3x,%3x/",
+	local str = string.format("%2x,%2x,%2x,%2x | "
+			.."%2d,%2d,%2d | "
+			.."%2d,%2d | "
+			.."%3d,%2d | "
+			.."squire-%3d-%3d | %2x,%2x,%2x | "
+			.."chemist-%3d-%3d,%2x,%2x,%2x | "
+			.."archer-%3d-%3d,%2x,%2x,%2x | "
+			.."thief-%3d-%3d,%2x,%2x,%2x | "
+			.."%2x,%2x,%2x,%2x | "
+			.."%2x,%2x,%2x,%2x | "
+			.."%2x,%2x,%2x | "
+			.."%3x,%3x,%3x,%3x | ",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -966,13 +966,15 @@ function Bunit.toString3(prpt)
 	return str
 end
 
+Bunit.info_header4 = "| ch, no, job, zodiac | lv, exp, speed | brave, faith | hp, mp | total_JP_squire, JP_squire, total_JP_chemist, total_JP_wizard, total_JP_knight |"
+
 function Bunit.toString4(prpt)
-	local str = string.format("%2x,%2x,%2x,%2x/"
-			.."%2d,%2d,%2d/"
-			.."%2d,%2d/"
-			.."%3d,%2d/"
-			.."%3d-%3d,%3d/"
-			.."%3d,%3d/",
+	local str = string.format("%2x,%2x,%2x,%2x | "
+			.."%2d,%2d,%2d | "
+			.."%2d,%2d | "
+			.."%3d,%2d | "
+			.."%3d-%3d,%3d | "
+			.."%3d,%3d | ",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -998,13 +1000,13 @@ function Bunit.toString4(prpt)
 end
 
 function Bunit.toString5(prpt)
-	local str = string.format("%2x,%2x,%2x,%2x/"
-			.."%2d,%2d,%2d/"
-			.."%2d,%2d/"
-			.."%3d,%2d/"
-			.."%2x,%2x,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x,%2x,%2x/"
-			.."%2x,%2x,%2x,%2x,%2x/",
+	local str = string.format("%2x,%2x,%2x,%2x | "
+			.."%2d,%2d,%2d | "
+			.."%2d,%2d | "
+			.."%3d,%2d | "
+			.."%2x,%2x,%2x,%2x,%2x | "
+			.."%2x,%2x,%2x,%2x,%2x | "
+			.."%2x,%2x,%2x,%2x,%2x | ",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -1212,64 +1214,99 @@ Zodiac.Serpentarius  = 0xC0 -- 蛇遣 = Serpentarius (neutral to all signs)
 
 Zodiac.notation = {"worst", "bad", "normal", "good", "best"}
 
+Zodiac.WORST  = 1
+Zodiac.BAD    = 2
+Zodiac.NORMAL = 3
+Zodiac.GOOD   = 4
+Zodiac.BEST   = 5
+
 
 --- Check zodiac sign compatibility with Ramza as Capricorn.
---        "bad : 0x00, 0x60, very bad : 0x30"
 --        "good: 0x10, 0x50, very good: 0x30"
+--        "bad : 0x00, 0x60, very bad : 0x30"
 --  @return 1:worst, 2:bad, 3:normal, 4:good, 5:best
 function Zodiac.checkCompatibilityRamza(sign, gender)
-	local opposit = 0
+	local same_sex = 0
 	local masked_sign
 
 	masked_sign = bit.band(sign, 0xF0)
-	opposit = bit.band(gender, 0x80)  -- 0x80 is male, 0x40 is female
+	same_sex = bit.band(gender, 0x80)  -- 0x80 is male, 0x40 is female
 
-	if masked_sign == Zodiac.Aries then
-		return 2
-	elseif masked_sign == Zodiac.Libra then
-		return 2
-	elseif masked_sign == Zodiac.Cancer and opposit ~= 0 then
-		return 1
-	elseif masked_sign == Zodiac.Cancer and opposit == 0 then
-		-- FIXME:: monster is regarded as best, unfortunately
-		return 5
-	elseif masked_sign == Zodiac.Taurus then
-		return 4
+	if masked_sign == Zodiac.Taurus then
+		return Zodiac.GOOD
 	elseif masked_sign == Zodiac.Virgo then
-		return 4
+		return Zodiac.GOOD
+	elseif masked_sign == Zodiac.Aries then
+		return Zodiac.BAD
+	elseif masked_sign == Zodiac.Libra then
+		return Zodiac.BAD
+	elseif masked_sign == Zodiac.Cancer and same_sex == 0 then
+		-- FIXME:: monster is regarded as best, unfortunately
+		return Zodiac.BEST
+	elseif masked_sign == Zodiac.Cancer and same_sex ~= 0 then
+		return Zodiac.WORST
 	end
 
-	return 3
+	return Zodiac.NORMAL
 end
 
 --- Check zodiac sign compatibility with Virgo.
 --        Virgo = Algus, Miluda, Wiegraf, Gafgarion
---        "bad : 0x20, 0x80, very bad : 0xB0"
 --        "good: 0x10, 0x90, very good: 0xB0"
+--        "bad : 0x20, 0x80, very bad : 0xB0"
 --  @return 1:worst, 2:bad, 3:normal, 4:good, 5:best
 function Zodiac.checkCompatibilityVirgo(sign, gender)
-	local opposit = 0
+	local same_sex = 0
 	local masked_sign
 
 	masked_sign = bit.band(sign, 0xF0)
-	opposit = bit.band(gender, 0x80)  -- 0x80 is male, 0x40 is female
+	same_sex = bit.band(gender, 0x80)  -- 0x80 is male, 0x40 is female
 
-	if masked_sign == Zodiac.Gemini then
-		return 2
-	elseif masked_sign == Zodiac.Sagittarius then
-		return 2
-	elseif masked_sign == Zodiac.Pisces and opposit ~= 0 then
-		return 1
-	elseif masked_sign == Zodiac.Pisces and opposit == 0 then
-		-- FIXME:: monster is regarded as best, unfortunately
-		return 5
-	elseif masked_sign == Zodiac.Taurus then
-		return 4
+	if masked_sign == Zodiac.Taurus then
+		return Zodiac.GOOD
 	elseif masked_sign == Zodiac.Capricorn then
-		return 4
+		return Zodiac.GOOD
+	elseif masked_sign == Zodiac.Gemini then
+		return Zodiac.BAD
+	elseif masked_sign == Zodiac.Sagittarius then
+		return Zodiac.BAD
+	elseif masked_sign == Zodiac.Pisces and same_sex == 0 then
+		-- FIXME:: monster is regarded as best, unfortunately
+		return Zodiac.BEST
+	elseif masked_sign == Zodiac.Pisces and same_sex ~= 0 then
+		return Zodiac.WORST
 	end
 
-	return 3
+	return Zodiac.NORMAL
+end
+
+--- Check zodiac sign compatibility with Agrias as Cancer.
+--        "good: 0x70, 0xB0, very good: 0x90"
+--        "bad : 0x00, 0x60, very bad : 0x90"
+--  @return 1:worst, 2:bad, 3:normal, 4:good, 5:best
+function Zodiac.checkCompatibilityAgrias(sign, gender)
+	local same_sex = 0
+	local masked_sign
+
+	masked_sign = bit.band(sign, 0xF0)
+	same_sex = bit.band(gender, 0x40)  -- 0x80 is male, 0x40 is female
+
+	if masked_sign == Zodiac.Scorpio then
+		return Zodiac.GOOD
+	elseif masked_sign == Zodiac.Pisces then
+		return Zodiac.GOOD
+	elseif masked_sign == Zodiac.Aries then
+		return Zodiac.BAD
+	elseif masked_sign == Zodiac.Libra then
+		return Zodiac.BAD
+	elseif masked_sign == Zodiac.Capricorn and same_sex == 0 then
+		-- FIXME:: monster is regarded as best, unfortunately
+		return Zodiac.BEST
+	elseif masked_sign == Zodiac.Capricorn and same_sex ~= 0 then
+		return Zodiac.WORST
+	end
+
+	return Zodiac.NORMAL
 end
 
 

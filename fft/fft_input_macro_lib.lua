@@ -115,7 +115,7 @@ function TAS.skipOpeningMovie()
 	-- starting moveie
 	fadv(11)
 	pressBtn({start=1}, 1)  -- skip opening movie
-	fadv(600)
+	fadv(500)
 end
 
 function TAS.skipOrbonne()
@@ -150,8 +150,8 @@ function TAS.skipOrbonne()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(1)
+	pressBtn({circle=1}, 1)
+	fadv(2)
 	pressBtn({x=1}, 1)
 
 
@@ -159,16 +159,16 @@ function TAS.skipOrbonne()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(2)
+	pressBtn({circle=1}, 1)
+	fadv(3)
 	pressBtn({circle=1}, 2)
 
 	-- agrias, 3888f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(2)
+	pressBtn({circle=1}, 1)
+	fadv(3)
 	pressBtn({circle=1}, 2)
 
 
@@ -181,8 +181,8 @@ function TAS.skipOrbonne()
 	fadv(7)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(2)
+	pressBtn({circle=1}, 1)
+	fadv(1)
 	pressBtn({x=1}, 1)
 
 
@@ -191,7 +191,8 @@ function TAS.skipOrbonne()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+	fadv(1)
 	pressBtn({x=1}, 1)
 
 
@@ -208,22 +209,24 @@ function TAS.skipOrbonne()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+	fadv(1)
 	pressBtn({x=1}, 1)
-	fadv(13)
+	fadv(15)
 
 	-- agrias, 4312f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(2)
+	pressBtn({circle=1}, 1)
+	fadv(1)
 	pressBtn({x=1}, 1)
 
 
 	-- ovelia, 4418f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+	fadv(1)
 	pressBtn({x=1}, 1)
 
 
@@ -259,8 +262,8 @@ function TAS.skipOrbonne()
 	fadv(2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(1)
+	pressBtn({circle=1}, 1)
+	fadv(2)
 	pressBtn({x=1}, 1)
 
 	-- ramza, 5334f
