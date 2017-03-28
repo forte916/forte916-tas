@@ -30,7 +30,7 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 adr_text_flag_037808 = 0x037808
 adr_text_flag_037968 = 0x037968
-  -- 0x0189: before 1f shown text
+  -- 0x0189: 1f before shown text
   -- 0x0409: unapprove pad input
   -- 0x1409: ???
   -- 0x0589: keep in every 2f until the end of text
@@ -38,32 +38,32 @@ adr_text_flag_037968 = 0x037968
 
 adr_text_flag_03780C = 0x03780C
 adr_text_flag_03796C = 0x03796C
-  -- 0x01FF: before 1f shown text
+  -- 0x01FF: 1f before shown text
   -- 0x0054: the end of text (pad input is available before 3f to change 0x0054)
 
 adr_text_flag_164938 = 0x164938  -- 2byte??
-  -- 0x0073: before 1f shown text
+  -- 0x0073: 1f before shown text
   --       and keep 0x73 in every 2f until the end of text
   -- 0xFFFF: otherwise
 
 adr_text_flag_1FFE80 = 0x1FFE80  -- 2byte??
-  -- 0x0073: before 1f shown text
+  -- 0x0073: 1f before shown text
   --       and keep 0x73 until pad input
   -- 0x0000: otherwise
 
 adr_text_flag_1FFE88 = 0x1FFE88
   -- 0x0001: current turn
-  -- 0x0002: before 1f arrowed at current turn
+  -- 0x0002: 1f before arrowed at current turn
   -- 0xFFFF: text end
 
 adr_text_flag_1FFE8C = 0x1FFE8C
-  -- 0x0002: before 1f arrowed at current turn
+  -- 0x0002: 1f before arrowed at current turn
 
 adr_text_flag_1FFE98 = 0x1FFE98
-  -- 0x00C0: before 1f shown text
+  -- 0x00C0: 1f before shown text
   -- 0x0000: otherwise
 adr_text_flag_1FFEA0 = 0x1FFEA0
-  -- 0xFF80: before 1f shown text
+  -- 0xFF80: 1f before shown text
   -- 0xFFFF: otherwise
 adr_text_flag_1FFEA8 = 0x1FFEA8
 
@@ -71,14 +71,14 @@ adr_text_flag_1FFEA8 = 0x1FFEA8
 adr_direction_1D64FE = 0x1D64FE
 adr_direction_1D6566 = 0x1D6566
 adr_direction_1D65CE = 0x1D65CE
-  -- 0x3E00: before 7f shown term of win, before 3f shown congratulations
-  -- 0x3E30: before 3f shown ready
+  -- 0x3E00: 7f before shown defeat X, 3f before shown congratulations
+  -- 0x3E30: 3f before shown ready
 
 adr_direction_1D6532 = 0x1D6532
 adr_direction_1D659A = 0x1D659A
 adr_direction_1D6602 = 0x1D6602
-  -- 0x3E00: before 7f shown term of win
-  -- 0x3E12: before 3f shown ready
+  -- 0x3E00: 7f before shown defeat X
+  -- 0x3E12: 3f before shown ready
 
 
 adr_direction_1D6500 = 0x1D6500

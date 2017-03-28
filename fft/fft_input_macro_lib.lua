@@ -303,8 +303,8 @@ function TAS.Ch1_1_skipOrbonneEntrance()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
-	fadv(1)
+	pressBtn({circle=1}, 1)
+	fadv(2)
 	pressBtn({x=1}, 1)
 	fadv(2)
 	pressBtn({circle=1}, 2)
@@ -394,6 +394,22 @@ function TAS.Ch1_1_gafgarion_turn1()
 
 end
 
+function TAS.Ch1_1_gafgarion_turn1_skip_skill_name()
+	-- Effect の文字列が表示される 5f 前に 0x164908 が 0x1C となる
+	-- このとき x で Effect window を skip 可能
+	pressBtn({x=1}, 1)
+end
+
+function TAS.Ch1_1_gafgarion_turn1_skip_skill_msg()
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+	pressBtn({x=1}, 1)
+	-- このあとはボタンを押しても押さなくても閉じるフレームは変わらない
+end
+
 function TAS.Ch1_1_ramza_turn1()
 	-- ramza arrowed
 	fadv(7)
@@ -455,11 +471,11 @@ function TAS.Ch1_1_ramza_turn1()
 	fadv(6)
 
 	-- move
-	pressBtn({circle=1}, 6)  -- maybe 4f?? not 6f
+	pressBtn({circle=1}, 6)
 	pressBtn({circle=1}, 10)
-	pressBtn({left=1}, 2)
-	pressBtn({left=1}, 2)
-	pressBtn({left=1}, 1)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 1)
 	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
@@ -481,11 +497,11 @@ function TAS.Ch1_1_ramza_turn2()
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({circle=1}, 9)  -- attack
-	pressBtn({right=1}, 1)
+	pressBtn({down=1}, 1)
 	fadv(1)
 	pressBtn({circle=1}, 2)   -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(3)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 
 	-- wait here for luck manipulation
 	pressBtn({circle=1}, 1)   -- execute attack
@@ -511,7 +527,7 @@ function TAS.Ch1_chemist_potion()
 	fadv(1)
 	pressBtn({circle=1}, 2)   -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(3)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)   -- execute attack
 	fadv(9)  -- wait until 0x164908 = 0x001C
 	pressBtn({circle=1}, 1)   -- skip "potion" msg
@@ -1032,7 +1048,7 @@ function TAS.moveMandaliaFromGariland()
 end
 
 function TAS.ch1_3_mandalia_deploy_old()
-	-- -before 3f from reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 2)
@@ -1047,7 +1063,7 @@ function TAS.ch1_3_mandalia_deploy_old()
 end
 
 function TAS.ch1_3_mandalia_deploy()
-	-- -before 3f from reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({left=1}, 1)
 	pressBtn({up=1}, 1)
 	pressBtn({left=1}, 2)
@@ -1084,7 +1100,7 @@ function TAS.ch1_3_turn1_knight()
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(3)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)  -- wait for effect
 
@@ -1170,7 +1186,7 @@ function TAS.ch1_3_turnN_ramza()
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(3)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)  -- wait for effect
 	
@@ -1410,7 +1426,7 @@ function TAS.moveGarilandFromMandalia()
 end
 
 function TAS.ch1_random_battle_mandalia_deploy()
-	-- -before 3f from reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({right=1}, 1)
 	pressBtn({up=1}, 1)
 	pressBtn({right=1, circle=1}, 1)
@@ -1537,7 +1553,7 @@ function TAS.ch1_random_battle_SpeedBreak()
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(3)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)
 end
@@ -1837,7 +1853,7 @@ function TAS.buyThunderRod()
 end
 
 function TAS.ch2_defect_member()
-	-- before 1f from getting to center
+	-- 1f before from getting to center
 	pressBtn({circle=1}, 2)
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 1)
@@ -2201,7 +2217,7 @@ function TAS.ch4_Sluice_turn2()
 end
 
 function TAS.ch4_join_member()
-	-- before 1f from getting to center
+	-- 1f before from getting to center
 	pressBtn({circle=1}, 4)
 	pressBtn({circle=1}, 1)
 	fadv(250)
@@ -2376,7 +2392,7 @@ end
 
 
 function TAS.ch4_Germinas_deploy()
-	-- -before 3f from reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({r1=1, left=1}, 1)
 	pressBtn({circle=1}, 1)
 	pressBtn({start=1}, 3)
@@ -2386,7 +2402,7 @@ function TAS.ch4_Germinas_deploy()
 end
 
 function TAS.ch4_Limberry_outside_deploy()
-	-- -before 3f from reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({up=1, circle=1}, 1)
 	pressBtn({r1=1, left=1}, 2)
 	pressBtn({left=1}, 2)
@@ -2424,7 +2440,7 @@ function TAS.ch4_Limberry_outside_turn1()
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(16)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(16)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)
 end
@@ -2459,7 +2475,7 @@ end
 
 -- also, ch4_Murond_inside, ch4_Murond_zalbag
 function TAS.ch4_Limberry_inside_deploy()
-	-- -before 3f from reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({up=1, circle=1}, 1)
 	pressBtn({r1=1, left=1}, 1)
 	pressBtn({down=1}, 1)
@@ -2470,7 +2486,7 @@ function TAS.ch4_Limberry_inside_deploy()
 end
 
 function TAS.ch4_Limberry_zarela_deploy()
-	-- -before 3f from reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({circle=1}, 1)  --??
 	pressBtn({r1=1, up=1}, 1)
 	pressBtn({circle=1}, 1)
@@ -2561,7 +2577,7 @@ function TAS.ch4_Murond_outside_turn1()
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(7)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(7)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)  -- wait for effect
 	
@@ -2623,7 +2639,7 @@ function TAS.ch4_Murond_inside_turn1()
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(16)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(16)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)  -- wait for effect
 end
@@ -2652,14 +2668,14 @@ function TAS.ch4_Kletian_turn1()
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(3)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)  -- wait for effect
 end
 
 function TAS.ch4_Balk_deploy()
 	-- also last battle.
-	-- before 3f from reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({up=1, circle=1}, 1)
 	pressBtn({r1=1, left=1}, 1)
 	pressBtn({down=1, circle=1}, 1)
@@ -2696,7 +2712,7 @@ function TAS.ch4_Balk_turn1()
 	fadv(1)
 	pressBtn({circle=1}, 2)  -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(23)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(23)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 	pressBtn({circle=1}, 1)  -- execute attack
 	--fadv(xx)  -- wait for effect
 end
@@ -2831,7 +2847,7 @@ end
 function TAS.ch4_altima_turn1()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -2854,7 +2870,7 @@ end
 function TAS.ch4_altima_turn3()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({circle=1}, 10)  -- move
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 1)
@@ -2885,7 +2901,7 @@ end
 
 
 function TAS.skip_intermediate_save()
-	-- -before 2f from shown "check"
+	-- 2f before shown "check"
 	pressBtn({x=1}, 1)
 	fadv(100)
 end
@@ -2893,18 +2909,18 @@ end
 
 
 function TAS.battle_deploy()
-	-- -before 3f from shown reverse triangle
+	-- 3f before shown reverse triangle
 	pressBtn({start=1}, 3)
 	pressBtn({circle=1}, 1)
 	fadv(100)
 end
 
 function TAS.skip_term_of_win()
-	-- -before 7f from shown term of win
+	-- 7f before shown term of win
 	pressBtn({circle=1}, 1)
 	-- fadv(66-3)
 	-- fadv(8-3)
-	-- -before 3f from READY
+	-- 3f before shown READY
 	pressBtn({circle=1}, 1)
 	fadv(100)
 end
@@ -2942,7 +2958,7 @@ end
 function TAS.math_CT5_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -2961,7 +2977,7 @@ end
 function TAS.math_Level4_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -2982,7 +2998,7 @@ end
 function TAS.math_Level3_Holy()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -3000,7 +3016,7 @@ end
 function TAS.math_CT3_Bolt3()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -3018,7 +3034,7 @@ end
 function TAS.math_Height_Prime_Demi2()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -3036,7 +3052,7 @@ end
 function TAS.math_CT3_Flare()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -3055,7 +3071,7 @@ end
 function TAS.math_CT3_Death()
 	-- arrowed and shown AT
 	fadv(6+1)
-	-- before 2f from showing up status window in the left.
+	-- 2f before shown status window in the left.
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({up=1}, 2)
@@ -3072,7 +3088,7 @@ function TAS.math_CT3_Death()
 end
 
 function TAS.skip_battle_congratulations()
-	-- before 3f shown "Congratulations"
+	-- 3f before shown "Congratulations"
 	-- when 0x1D6500 = 0x00BB
 	pressBtn({circle=1}, 4)   -- show "This operation is completed"
 	pressBtn({circle=1}, 1)   -- skip congratulations
