@@ -497,7 +497,7 @@ function TAS.Ch1_1_ramza_turn2()
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({circle=1}, 9)  -- attack
-	pressBtn({down=1}, 1)
+	pressBtn({right=1}, 1)
 	fadv(1)
 	pressBtn({circle=1}, 2)   -- select target
 	pressBtn({circle=1}, 1)  -- confirm target

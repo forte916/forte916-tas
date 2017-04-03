@@ -11,32 +11,76 @@ require "psx_lib"
 require "fft_lib"
 
 adr_text_flag_1FFE88 = 0x1FFE88
+adr_text_flag_096088 = 0x096088
+adr_text_flag_0961B8 = 0x0961B8
+adr_text_flag_164908 = 0x164908
 
 
 ------------------------------------------------------------
 -- OrbonneGafgarionTurn1
 ------------------------------------------------------------
 OrbonneGafgarionTurn1 = {}
-OrbonneGafgarionTurn1.logname = "ch1_orbonne_gaf_turn1_2.log"
+OrbonneGafgarionTurn1.logname = "ch1_1_orbonne_gaf_turn1_25.log"
+OrbonneGafgarionTurn1.retry = 500
 
 function OrbonneGafgarionTurn1.pre_attempt()
 	pressBtn({circle=1}, 1)  -- skip msg
-	fadv(1)
-	pressBtn({circle=1}, 1)  -- skip msg
 end
 
-function OrbonneGafgarionTurn1.attempt()
-	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-
+function OrbonneGafgarionTurn1.attempt_type1()
 	pressBtn({x=1}, 1)  -- skip msg
 
+	--local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)  -- msg flag
+	local flag_096088 = memory.readword(adr_text_flag_096088)
+	local flag_0961B8 = memory.readword(adr_text_flag_0961B8)  -- Action_Phase
+	local flag_164908 = memory.readword(adr_text_flag_164908)  -- Menu_message_display_byte
+
+	--while flag_1FFE88 ~= 0x04 do
+	--	fadv(1)
+	--	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	--end
+
+	while flag_096088 ~= 0x10 do
+		fadv(1)
+		flag_096088 = memory.readword(adr_text_flag_096088)
+	end
+	-- 恐らく zoom-in  状態の場合に 9f 待つ必要がある
+	-- 恐らく zoom-out 状態の場合だと 4f 待つだけでよい
+	fadv(8+1)
+	pressBtn({r1=1, l2=1}, 1)  -- camera and zoom out during movement
+
+	flag_0961B8 = memory.readword(adr_text_flag_0961B8)
+	while flag_0961B8 ~= 0x01 do
+		fadv(1)
+		flag_0961B8 = memory.readword(adr_text_flag_0961B8)
+	end
+
+	flag_164908 = memory.readword(adr_text_flag_164908)
+	while flag_164908 ~= 0x1C do
+		fadv(1)
+		flag_164908 = memory.readword(adr_text_flag_164908)
+	end
+	-- wait until 0x164908 = 0x001C, which frame is 5f before shown "Effect"
+	-- このとき x で Effect window を skip 可能
+	pressBtn({x=1}, 1)
+	fadv(220)
+
+end
+
+-- no_optimize, support_both_skill_msg_and_skill_name
+--function OrbonneGafgarionTurn1.attempt_type2()
+function OrbonneGafgarionTurn1.attempt()
+	pressBtn({x=1}, 1)  -- skip msg
+
+	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)  -- msg flag
 	while flag_1FFE88 ~= 0x04 do
 		fadv(1)
 		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 	end
-	fadv(9)
+	fadv(8+1)
 	pressBtn({r1=1, l2=1}, 1)  -- camera and zoom out in moving
 	fadv(470)
+
 end
 
 function OrbonneGafgarionTurn1.post_attempt()
@@ -44,31 +88,31 @@ function OrbonneGafgarionTurn1.post_attempt()
 end
 
 function OrbonneGafgarionTurn1.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 
-	prpt = Bunit.readProperty(adr_battle_unit7)
+	prpt = Bunit.readProperty(adr_battle_unit7) -- archer
 	debugPrint(prpt.info)
 
-	if prpt.critical ~= 0 then
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
 		print(string.format("  critical, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical, hp=%d", prpt.hp))
-		ret = true
-	elseif prpt.hp == 0 then
-		print(string.format("  take down, hp=%d", prpt.hp))
-		debugPrint(string.format("  take down, hp=%d", prpt.hp))
-		ret = true
+		ret = "good"
 	else
 		debugPrint(string.format("  normal, hp=%d", prpt.hp))
-		ret = false
+		ret = nil
 	end
 
 	return ret
 end
 
 function OrbonneGafgarionTurn1.waitForBest()
-	local retry = 20
-	local best_rng = 0x442B008C
+	local retry = 33
+	local best_rng = 0x9509B866
 
 	for i=0, retry do
 		local rng = memory.readdword(adr_rng)
@@ -86,11 +130,13 @@ end
 -- OrbonneAgriasTurn1
 ------------------------------------------------------------
 OrbonneAgriasTurn1 = {}
-OrbonneAgriasTurn1.logname = "ch1_orbonne_agrias_turn1_1.log"
+OrbonneAgriasTurn1.logname = "ch1_1_orbonne_agrias_turn1_28.log"
+OrbonneAgriasTurn1.retry = 200
 
 function OrbonneAgriasTurn1.pre_attempt()
 	--pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 9)
+	pressBtn({up=1}, 1)  -- 試行前に up key なしで最初のフレームを手動で検証すること
 end
 
 function OrbonneAgriasTurn1.attempt()
@@ -103,23 +149,23 @@ function OrbonneAgriasTurn1.post_attempt()
 end
 
 function OrbonneAgriasTurn1.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 
-	prpt = Bunit.readProperty(adr_battle_unit8)
+	prpt = Bunit.readProperty(adr_battle_unit8) -- archer
 	debugPrint(prpt.info)
 
-	if prpt.critical ~= 0 then
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
 		print(string.format("  critical, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical, hp=%d", prpt.hp))
-		ret = true
-	elseif prpt.hp == 0 then
-		print(string.format("  take down, hp=%d", prpt.hp))
-		debugPrint(string.format("  take down, hp=%d", prpt.hp))
-		ret = true
+		ret = "good"
 	else
 		debugPrint(string.format("  normal, hp=%d", prpt.hp))
-		ret = false
+		ret = nil
 	end
 
 	return ret
@@ -142,16 +188,236 @@ end
 
 
 ------------------------------------------------------------
+-- OrbonneAgriasTurn1_TypeB
+------------------------------------------------------------
+OrbonneAgriasTurn1_TypeB = {}
+OrbonneAgriasTurn1_TypeB.logname = "ch1_1_orbonne_agrias_turn1_28.log"
+OrbonneAgriasTurn1_TypeB.retry = 64
+
+function OrbonneAgriasTurn1_TypeB.pre_attempt()
+	local flag_096088 = memory.readword(adr_text_flag_096088)
+	while flag_096088 ~= 0x10 do
+		fadv(1)
+		flag_096088 = memory.readword(adr_text_flag_096088)
+	end
+	fadv(4)
+end
+
+function OrbonneAgriasTurn1_TypeB.attempt()
+	pressBtn({r2=1}, 1)  -- camera in moving
+	fadv(300)
+end
+
+function OrbonneAgriasTurn1_TypeB.post_attempt()
+	-- pass
+end
+
+function OrbonneAgriasTurn1_TypeB.success()
+	local ret = nil
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit8) -- archer
+	debugPrint(prpt.info)
+
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = "good"
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = nil
+	end
+
+	return ret
+end
+
+function OrbonneAgriasTurn1_TypeB.waitForBest()
+	local retry = 20
+	local best_rng = 0x442B008C
+
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
+end
+
+
+------------------------------------------------------------
+-- OrbonneAliciaTurn1
+------------------------------------------------------------
+OrbonneAliciaTurn1 = {}
+OrbonneAliciaTurn1.logname = "ch1_1_orbonne_alicia_turn1_3.log"
+
+function OrbonneAliciaTurn1.pre_attempt()
+	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+
+	while flag_1FFE88 ~= 0x06 do
+		fadv(1)
+		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	end
+	fadv(4)
+end
+
+function OrbonneAliciaTurn1.attempt()
+	pressBtn({l1=1}, 1)  -- camera in moving
+	--fadv(1100)
+	fadv(2300)
+end
+
+function OrbonneAliciaTurn1.post_attempt()
+	-- pass
+end
+
+function OrbonneAliciaTurn1.success()
+	local ret = nil
+	-- success condition: knight moves in front of ramza
+	-- succeeded: retry=10, 23, 27
+	--return ret
+
+	-- success condition1: knight moves in front of ramza
+	-- success condition2: rad attacks knight with critical
+	-- wait until 13300
+	return OrbonneRadTurn1.success()
+end
+
+
+------------------------------------------------------------
+-- OrbonneRadTurn1
+------------------------------------------------------------
+OrbonneRadTurn1 = {}
+OrbonneRadTurn1.logname = "ch1_1_orbonne_rad_turn1_3.log"
+OrbonneRadTurn1.retry = 64
+
+function OrbonneRadTurn1.pre_attempt()
+	local flag_096088 = memory.readword(adr_text_flag_096088)
+	while flag_096088 ~= 0x10 do
+		fadv(1)
+		flag_096088 = memory.readword(adr_text_flag_096088)
+	end
+
+	--local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	--while flag_1FFE88 ~= 0x04 do
+	--	fadv(1)
+	--	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	--end
+	fadv(4)
+end
+
+function OrbonneRadTurn1.attempt()
+	pressBtn({r1=1}, 1)  -- camera in moving
+	fadv(300)
+end
+
+function OrbonneRadTurn1.post_attempt()
+	-- pass
+end
+
+function OrbonneRadTurn1.success()
+	local ret = nil
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit6) -- knight
+	debugPrint(prpt.info)
+
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = "good"
+	elseif prpt.hp < 85 then
+		print(string.format("  low HP, hp=%d", prpt.hp))
+		debugPrint(string.format("  low HP, hp=%d", prpt.hp))
+		ret = "good"
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = nil
+	end
+
+	return ret
+end
+
+
+------------------------------------------------------------
+-- OrbonneGafgarionTurn2
+------------------------------------------------------------
+OrbonneGafgarionTurn2 = {}
+OrbonneGafgarionTurn2.logname = "ch1_1_orbonne_gaf_turn2_3.log"
+OrbonneGafgarionTurn2.retry = 60
+
+function OrbonneGafgarionTurn2.pre_attempt()
+	local flag_096088 = memory.readword(adr_text_flag_096088)
+	while flag_096088 ~= 0x10 do
+		fadv(1)
+		flag_096088 = memory.readword(adr_text_flag_096088)
+	end
+	fadv(4)
+end
+
+function OrbonneGafgarionTurn2.attempt()
+	pressBtn({l1=1}, 1)  -- camera in moving
+	fadv(400)
+end
+
+function OrbonneGafgarionTurn2.post_attempt()
+	-- pass
+end
+
+function OrbonneGafgarionTurn2.success()
+	local ret = nil
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit9) -- archer
+	debugPrint(prpt.info)
+
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = "good"
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = nil
+	end
+
+	return ret
+end
+
+
+------------------------------------------------------------
 -- OrbonneRamzaTurn2
 ------------------------------------------------------------
 OrbonneRamzaTurn2 = {}
-OrbonneRamzaTurn2.logname = "ch1_orbonne_ramza_turn2_3.log"
+OrbonneRamzaTurn2.logname = "ch1_1_orbonne_ramza_turn2_4.log"
+OrbonneRamzaTurn2.retry = 200
+OrbonneRamzaTurn2.odd_number_retry = true
+
+function OrbonneRamzaTurn2.logHeader()
+	debugPrint(string.format("----- odd_number_retry = %s -----", tostring(OrbonneRamzaTurn2.odd_number_retry)))
+	debugPrint(string.format(""))
+end
 
 function OrbonneRamzaTurn2.pre_attempt()
-	fadv(1)  -- for odd number retry
+	if OrbonneRamzaTurn2.odd_number_retry == true then
+		fadv(1)  -- for odd number retry
+	end
 	pressBtn({circle=1}, 2)   -- select target
 	pressBtn({circle=1}, 1)  -- confirm target
-	fadv(3)  -- before 5f shown "Menu", wait until 0x164908 = 0x001B
+	fadv(3)  -- wait until 0x164908 = 0x001B, which frame is 5f before shown "Menu"
 end
 
 function OrbonneRamzaTurn2.attempt()
@@ -164,23 +430,28 @@ function OrbonneRamzaTurn2.post_attempt()
 end
 
 function OrbonneRamzaTurn2.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 
-	prpt = Bunit.readProperty(adr_battle_unit6)
+	prpt = Bunit.readProperty(adr_battle_unit6) -- knight
 	debugPrint(prpt.info)
 
-	if prpt.critical ~= 0 then
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
 		print(string.format("  critical, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical, hp=%d", prpt.hp))
-		ret = true
+		ret = "good"
+	--elseif prpt.hp < 37 then
 	elseif prpt.hp < 31 then
-		print(string.format("  take down, hp=%d", prpt.hp))
-		debugPrint(string.format("  take down, hp=%d", prpt.hp))
-		ret = true
+		print(string.format("  low HP, hp=%d", prpt.hp))
+		debugPrint(string.format("  low HP, hp=%d", prpt.hp))
+		ret = "good"
 	else
 		debugPrint(string.format("  normal, hp=%d", prpt.hp))
-		ret = false
+		ret = nil
 	end
 
 	return ret
@@ -202,10 +473,84 @@ function OrbonneRamzaTurn2.waitForBest()
 end
 
 ------------------------------------------------------------
+-- OrbonneAliciaAgriasTurn2
+------------------------------------------------------------
+OrbonneAliciaAgriasTurn2 = {}
+OrbonneAliciaAgriasTurn2.logname = "ch1_1_orbonne_alicia_agrias_turn2_3.log"
+OrbonneAliciaAgriasTurn2.retry = 200
+
+function OrbonneAliciaAgriasTurn2.pre_attempt()
+	fadv(7)
+end
+
+function OrbonneAliciaAgriasTurn2.attempt()
+	pressBtn({circle=1}, 1)   -- execute attack
+
+	local flag_096088 = memory.readword(adr_text_flag_096088)
+	while flag_096088 ~= 0x10 do
+		fadv(1)
+		flag_096088 = memory.readword(adr_text_flag_096088)
+	end
+	fadv(4)
+	pressBtn({r2=1}, 1)  -- camera in moving
+
+	--fadv(800)
+	fadv(1500)
+end
+
+function OrbonneAliciaAgriasTurn2.post_attempt()
+	-- pass
+end
+
+function OrbonneAliciaAgriasTurn2.success()
+	local ret = nil
+	local enemy = 0
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit6) -- knight
+	debugPrint(prpt.info)
+
+	if prpt.hp == 0 then
+		--print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		enemy = enemy + 1
+	elseif prpt.critical ~= 0 then
+		--print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		enemy = enemy + 1
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+	end
+
+
+	--prpt = Bunit.readProperty(adr_battle_unit9) -- archer
+	prpt = Bunit.readProperty(adr_battle_unit10) -- chemist
+	debugPrint(prpt.info)
+
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		enemy = enemy + 1
+	elseif prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		enemy = enemy + 1
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+	end
+
+	if enemy > 1 then
+		ret = "best"
+	end
+	return ret
+end
+
+
+------------------------------------------------------------
 -- OrbonneAliciaTurn2
 ------------------------------------------------------------
 OrbonneAliciaTurn2 = {}
-OrbonneAliciaTurn2.logname = "ch1_orbonne_alicia_turn2_1.log"
+OrbonneAliciaTurn2.logname = "ch1_1_orbonne_alicia_turn2_1.log"
 
 function OrbonneAliciaTurn2.pre_attempt()
 	fadv(7)
@@ -236,39 +581,39 @@ function OrbonneAliciaTurn2.post_attempt()
 end
 
 function OrbonneAliciaTurn2.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 
 	prpt = Bunit.readProperty(adr_battle_unit6)
 	debugPrint(prpt.info)
 
-	if prpt.critical ~= 0 then
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
 		print(string.format("  critical, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical, hp=%d", prpt.hp))
-		ret = true
-	elseif prpt.hp == 0 then
-		print(string.format("  take down, hp=%d", prpt.hp))
-		debugPrint(string.format("  take down, hp=%d", prpt.hp))
-		ret = true
+		ret = "good"
 	else
 		debugPrint(string.format("  normal, hp=%d", prpt.hp))
-		ret = false
+		ret = nil
 	end
 
 	return ret
 end
 
 ------------------------------------------------------------
--- OrbonneAgriasTurn3
+-- OrbonneAgriasTurn2
 ------------------------------------------------------------
-OrbonneAgriasTurn3 = {}
-OrbonneAgriasTurn3.logname = "ch1_orbonne_agrias_turn3_1.log"
+OrbonneAgriasTurn2 = {}
+OrbonneAgriasTurn2.logname = "ch1_1_orbonne_agrias_turn2_1.log"
 
-function OrbonneAgriasTurn3.pre_attempt()
+function OrbonneAgriasTurn2.pre_attempt()
 	fadv(7)
 end
 
-function OrbonneAgriasTurn3.attempt()
+function OrbonneAgriasTurn2.attempt()
 	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
 
 	pressBtn({circle=1}, 1)   -- execute attack
@@ -288,28 +633,77 @@ function OrbonneAgriasTurn3.attempt()
 	fadv(1200)  -- 16168f - 15286f
 end
 
-function OrbonneAgriasTurn3.post_attempt()
+function OrbonneAgriasTurn2.post_attempt()
 	-- pass
 end
 
-function OrbonneAgriasTurn3.success()
-	local ret = false
+function OrbonneAgriasTurn2.success()
+	local ret = nil
 	local prpt = {}
 
 	prpt = Bunit.readProperty(adr_battle_unit9)
 	debugPrint(prpt.info)
 
-	if prpt.critical ~= 0 then
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
 		print(string.format("  critical, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical, hp=%d", prpt.hp))
-		ret = true
-	elseif prpt.hp == 0 then
-		print(string.format("  take down, hp=%d", prpt.hp))
-		debugPrint(string.format("  take down, hp=%d", prpt.hp))
-		ret = true
+		ret = "good"
 	else
 		debugPrint(string.format("  normal, hp=%d", prpt.hp))
-		ret = false
+		ret = nil
+	end
+
+	return ret
+end
+
+
+------------------------------------------------------------
+-- OrbonneAgriasTurn2TypeB
+------------------------------------------------------------
+OrbonneAgriasTurn2TypeB = {}
+OrbonneAgriasTurn2TypeB.logname = "ch1_1_orbonne_agrias_turn2_3.log"
+
+function OrbonneAgriasTurn2TypeB.pre_attempt()
+	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+
+	while flag_1FFE88 ~= 0x03 do
+		fadv(1)
+		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	end
+	fadv(4)
+end
+
+function OrbonneAgriasTurn2TypeB.attempt()
+	pressBtn({r2=1}, 1)  -- camera in moving
+	fadv(300)
+end
+
+function OrbonneAgriasTurn2TypeB.post_attempt()
+	-- pass
+end
+
+function OrbonneAgriasTurn2TypeB.success()
+	local ret = nil
+	local prpt = {}
+
+	prpt = Bunit.readProperty(adr_battle_unit9)
+	debugPrint(prpt.info)
+
+	if prpt.hp == 0 then
+		print(string.format("  K.O, hp=%d", prpt.hp))
+		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
+		ret = "best"
+	elseif prpt.critical ~= 0 then
+		print(string.format("  critical, hp=%d", prpt.hp))
+		debugPrint(string.format("  critical, hp=%d", prpt.hp))
+		ret = "good"
+	else
+		debugPrint(string.format("  normal, hp=%d", prpt.hp))
+		ret = nil
 	end
 
 	return ret
@@ -320,7 +714,7 @@ end
 -- MandaliaAlgusTurn1
 ------------------------------------------------------------
 MandaliaAlgusTurn1 = {}
-MandaliaAlgusTurn1.logname = "ch1_mandalia_algus_turn1_3.log"
+MandaliaAlgusTurn1.logname = "ch1_3_mandalia_algus_turn1_3.log"
 
 function MandaliaAlgusTurn1.pre_attempt()
 	--fadv(2)
@@ -336,7 +730,7 @@ function MandaliaAlgusTurn1.post_attempt()
 end
 
 function MandaliaAlgusTurn1.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 	local str
 
@@ -344,9 +738,9 @@ function MandaliaAlgusTurn1.success()
 	str = prpt.info
 
 	if prpt.hp == 0 then
-		str = string.format("%s, KO, hp=%d", str, prpt.hp)
+		str = string.format("%s, K.O, hp=%d", str, prpt.hp)
 		print(str)
-		ret = true
+		ret = "best"
 	end
 	debugPrint(str)
 
@@ -354,9 +748,9 @@ function MandaliaAlgusTurn1.success()
 	str = prpt.info
 
 	if prpt.hp == 0 then
-		str = string.format("%s, KO, hp=%d", str, prpt.hp)
+		str = string.format("%s, K.O, hp=%d", str, prpt.hp)
 		print(str)
-		ret = true
+		ret = "best"
 	end
 	debugPrint(str)
 
@@ -386,7 +780,7 @@ function Zirekile_Falls.post_attempt()
 end
 
 function Zirekile_Falls.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 	local ofs_unit = adr_battle_unit5
 	local total_enemy = 5
@@ -408,9 +802,9 @@ function Zirekile_Falls.success()
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy == total_enemy then
 		print(string.format("-- enemy = %2d", enemy))
-		ret = true
+		ret = "best"
 	else
-		ret = false
+		ret = nil
 	end
 
 	return ret
@@ -437,7 +831,7 @@ function Barius_Valley.post_attempt()
 end
 
 function Barius_Valley.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 	local ofs_unit = adr_battle_unit2
 	local total_enemy = 6
@@ -447,7 +841,7 @@ function Barius_Valley.success()
 	prpt = Bunit.readProperty(adr_battle_unit)
 	if prpt.hp == 0 then
 		debugPrint(string.format("-- agrias.hp = %2d", prpt.hp))
-		return false
+		return nil
 	end
 
 	for i=1, total_enemy do
@@ -465,9 +859,9 @@ function Barius_Valley.success()
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy == total_enemy then
 		print(string.format("-- enemy = %2d", enemy))
-		ret = true
+		ret = "best"
 	else
-		ret = false
+		ret = nil
 	end
 
 	return ret
@@ -495,7 +889,7 @@ function Death_All.post_attempt()
 end
 
 function Death_All.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
 	local total_enemy = 7
@@ -517,9 +911,9 @@ function Death_All.success()
 	debugPrint(string.format("-- enemy = %2d", enemy))
 	if enemy == total_enemy then
 		print(string.format("-- enemy = %2d", enemy))
-		ret = true
+		ret = "best"
 	else
-		ret = false
+		ret = nil
 	end
 
 	return ret
@@ -570,27 +964,27 @@ function CriticalHit.post_attempt()
 end
 
 function CriticalHit.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 	local str
 
 	prpt = Bunit.readProperty(adr_battle_unit8)
 	str = prpt.info
 
-	if prpt.critical ~= 0 then
+	if prpt.hp == 0 then
+		str = string.format("%s, K.O, hp=%d", str, prpt.hp)
+		print(str)
+		ret = "best"
+	elseif prpt.critical ~= 0 then
 		if Bunit.isKnockback(prpt) ~= 0 then
-			str = string.format("%s, knockback", str)
+			str = string.format("%s, knock back", str)
 		end
 
 		str = string.format("%s, critical, hp=%d", str, prpt.hp)
 		print(str)
-		ret = true
-	elseif prpt.hp == 0 then
-		str = string.format("%s, KO, hp=%d", str, prpt.hp)
-		print(str)
-		ret = true
+		ret = "good"
 	else
-		ret = false
+		ret = nil
 	end
 
 	debugPrint(str)
@@ -640,7 +1034,7 @@ function CriticalInjured.post_attempt()
 end
 
 function CriticalInjured.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 	local injured = 0
 	local str
@@ -654,15 +1048,15 @@ function CriticalInjured.success()
 	end
 
 	if prpt.hp == 0 then
-		str = string.format("%s, hp=%d, KO", str, prpt.hp)
+		str = string.format("%s, hp=%d, K.O", str, prpt.hp)
 		print(str)
-		ret = true
+		ret = "best"
 	elseif Bunit.isInjured(prpt) ~= 0 then
 		str = string.format("%s, hp=%d, critical injured", str, prpt.hp)
 		print(str)
-		ret = true
+		ret = "good"
 	else
-		ret = false
+		ret = nil
 	end
 
 	debugPrint(str)

@@ -52,18 +52,22 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = CriticalHit
+local interface = OrbonneGafgarionTurn1
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
+if interface.logHeader ~= nil then interface.logHeader() end
 
 --debugPrint(string.format("----- pre_attempt=none, attempt=select, confirm, execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, attempt=confirm, execute -----", i, fc, rng))
-debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
+--debugPrint(string.format("----- pre_attempt=select, confirm, attempt=execute -----", i, fc, rng))
 --debugPrint(string.format("----- pre_attempt=select, confirm, execute, attempt=none -----", i, fc, rng))
 
-
-retry = 200
+if interface.retry ~= nil then
+	retry = interface.retry
+else
+	retry = 500
+end
 
 for i=0, retry do
 	if initial == 1 then
@@ -79,10 +83,11 @@ for i=0, retry do
 
 	interface.attempt()
 
-	-- check status
-	if interface.success() then
-		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
-		print(string.format("  ***** best state. retry = %d, rng = %08X *****", i, rng))
+	-- check result
+	local result =  interface.success()
+	if result then
+		debugPrint(string.format("  ***** %s state. fc = %d, rng = %08X *****", result, fc, rng))
+		print(string.format("  ***** %s state. retry = %d, rng = %08X *****", result, i, rng))
 		interface.post_attempt()
 	end
 

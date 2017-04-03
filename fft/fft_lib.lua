@@ -1111,13 +1111,28 @@ function Bunit.isLearnedMove1(prpt)
 end
 
 function Bunit.isJobSquire(prpt)
-	return bit.band(prpt.job, 0x4A)  -- 0x4A means Squire
+	if prpt.job == 0x4A then  -- 0x4A means Squire
+		return true
+	else 
+		return false
+	end
 end
 
 function Bunit.isJobChemist(prpt)
-	return bit.band(prpt.job, 0x4B)  -- 0x4B means Chemist
+	if prpt.job == 0x4B then  -- 0x4B means Chemist
+		return true
+	else 
+		return false
+	end
 end
 
+function Bunit.isMale(prpt)
+	return bit.band(prpt.gender, 0x80)  -- 0x80 is male, 0x40 is female
+end
+
+function Bunit.isFemale(prpt)
+	return bit.band(prpt.gender, 0x40)  -- 0x80 is male, 0x40 is female
+end
 
 
 ------------------------------------------------------------

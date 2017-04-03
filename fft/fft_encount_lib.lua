@@ -79,6 +79,9 @@ function Orbonne.success()
 			ramza_comp = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-ramza", str, Zodiac.notation[ramza_comp])
 
+			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
+
 			if (ramza_comp > 3) then
 				str = string.format("%s, matched", str)
 				--enemy = enemy + 1
@@ -154,8 +157,9 @@ end
 -- Gariland
 ------------------------------------------------------------
 Gariland = {}
-Gariland.logname = "ch1_2_gariland_enemy3.log"
+Gariland.logname = "ch1_2_gariland_enemy4.log"
 
+Orbonne.name = {"delita", "broad", "dagger", "dagger", "item", "female"}
 
 function Gariland.logHeader()
 	debugPrint(string.format("Ramza = 0x90 = Capricorn"))
@@ -164,11 +168,11 @@ function Gariland.logHeader()
 	debugPrint(string.format(""))
 	debugPrint(string.format("-- Bunit Legend --"))
 	debugPrint(string.format(" 4  0  4 81: 1 94  6:71 55: 50  14:104- 24 142:130 137:, delita"))
-	debugPrint(string.format("80  1 4a 10: 1 90  6:51 58: 44  10:159- 29 197:131 142:, 真珠の4, broad"))
-	debugPrint(string.format("80  2 4a 20: 1 19  6:47 68: 43  10:180- 90 117:131 139:, 真珠の1, dagger, beaten by ramza"))
-	debugPrint(string.format("80  3 4a 81: 1 66  6:69 60: 36  10:101- 21 107:166 131:, 真珠の3, dagger"))
-	debugPrint(string.format("80  4 4b 51: 1 21  6:38 66: 38  10:147- 17 146:197 155:, 真珠の5, item"))
-	debugPrint(string.format("81  5 4a 20: 1 26  6:70 51: 33  11:135- 55 148:197 148:, 真珠の2, female"))
+	debugPrint(string.format("80  1 4a 10: 1 90  6:51 58: 44  10:159- 29 197:131 142:, broad , 真珠の4"))
+	debugPrint(string.format("80  2 4a 20: 1 19  6:47 68: 43  10:180- 90 117:131 139:, dagger, 真珠の1, beaten by ramza"))
+	debugPrint(string.format("80  3 4a 81: 1 66  6:69 60: 36  10:101- 21 107:166 131:, dagger, 真珠の3"))
+	debugPrint(string.format("80  4 4b 51: 1 21  6:38 66: 38  10:147- 17 146:197 155:, item  , 真珠の5"))
+	debugPrint(string.format("81  5 4a 20: 1 26  6:70 51: 33  11:135- 55 148:197 148:, female, 真珠の2"))
 	debugPrint(string.format(""))
 
 end
@@ -198,6 +202,8 @@ function Gariland.success()
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
+
+		str = string.format("%s %s", str, Orbonne.Gariland[i])
 
 		compatibility = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
 		str = string.format("%s, %s-ramza", str, Zodiac.notation[compatibility])

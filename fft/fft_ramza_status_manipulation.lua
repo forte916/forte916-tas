@@ -182,9 +182,8 @@ for i=0, retry do
 	-- check result
 	local result =  interface.success()
 	if result then
-		debugPrint(string.format("***** %s state. fc = %d, rng = %08X *****", result, fc, rng))
-		print(string.format("***** %s state. fc = %d, rng = %08X *****", result, fc, rng))
-
+		debugPrint(string.format("  ***** %s state. fc = %d, rng = %08X *****", result, fc, rng))
+		print(string.format("  ***** %s state. retry = %d, rng = %08X *****", result, i, rng))
 		interface.post_attempt()
 	end
 

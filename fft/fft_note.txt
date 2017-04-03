@@ -78,9 +78,29 @@ ch1-Orbonne
 * カメラ移動があると数フレーム遅くなる
 * カメラ移動で敵や味方の行動開始フレームがずれるので、乱数調整が可能
 
+* Gafgarion turn1
+* Agrius
+* Ramza turn1
+* Ramza turn1
+* Alicia & Lavian turn1
+	* Alicia か Lavian のどちらかで L1 回転する
+	* どちらが早いかは、その後の敵の行動にも左右される
+
+* Rad turn1
+	* 可能であれば、Alicia で L1 した savestate と Lavian で L1 した savestate を用意し
+	* 両方の savestate をもとに clitical が出るか検証すべき
+
+
+* 最後の敵を倒す前にカメラを戦闘前と同じ視点にしておく
+	* 別の視点だと Agrius が扉に移動する際にカメラ回転してしまう
+	* 可能であれば Agrius は扉近くが望ましい
+
+
 * "Let go of me" said Ovelia
   * testrun_tas = 19406f,  5:23
-  * optimze_tas = 16619f,  4:37 , 2787f faster
+  * optimze_tas = 16619f,  4:37 , 2787f faster, optimize
+  * optimze_tas = 16073f,  4:xx , 3333f faster, 546f faster, retry=9
+  * optimze_tas = 16055f,  4:xx , 3351f faster, 564f faster, retry=57
   * youtube_tas =       ,  4:25
 
 * Orbonne 戦闘終了の会話は 手動と text_skip.lua とで同じ結果
@@ -1599,6 +1619,10 @@ Frame counts of casting spell
 * 17f (約20f) to move 1 grid (約20f)
 * LvUp effect は 24f??
 * LvUp effect は 40f?? Lv effect 中は 0x1FFE88 が 0x0137 になる
+
+
+* normal HP damage と guard と critical の effect frame 数は同じ
+* guard は 数 frame 遅いときがある??
 
 
 

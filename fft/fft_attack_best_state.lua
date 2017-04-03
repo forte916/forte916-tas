@@ -46,9 +46,9 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = CriticalHit
+local interface = OrbonneGafgarionTurn1
 
-f = io.open(interface.logname, "a")
+--f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 
 retry = 0
@@ -59,12 +59,12 @@ for i=0, retry do
 
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
-	debugPrint(string.format("----- fc = %d, rng = %08X -----", fc, rng))
+	print(string.format("----- fc = %d, rng = %08X -----", fc, rng))
 
 	interface.attempt()
 
 	if interface.success() then
-		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
+		print(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
 		interface.post_attempt()
 	else
 		print(string.format("error: Could not take best action. fc = %d, rng = %08X", fc, rng))
