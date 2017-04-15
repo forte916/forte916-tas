@@ -46,6 +46,14 @@ function mul32(a, b)
                bit.bor(z[5], bit.lshift(z[6], 8), bit.lshift(z[7], 16), bit.lshift(z[8], 24))
 end
 
+function readRNG()
+	return memory.readdword(adr_rng)
+end
+
+function writeRNG(seed)
+	memory.writedword(adr_rng, seed)
+end
+
 -- A(2Fh) - rand()
 --   Advances the random generator as "x=x*41C64E6Dh+3039h" (aka plus 12345 decimal), 
 --   and returns a 15bit random value "R2=(x/10000h) AND 7FFFh".
@@ -53,20 +61,29 @@ end
 --   1103515245 == 0x41C64E6D
 --   12345 == 0x3039
 function rand(seed)
-	seed = seed or memory.readdword(adr_rng)
+	seed = seed or readRNG()
 	local random
 
-	local next_seed = mul32(seed, 1103515245) + 12345
+	local next_seed = next_rng(seed)
 	random = bit.rshift(next_seed, 16)   -- same as x >>= 16
 	random = bit.band(random, 0x7FFF)  -- same as x & 0x7FFF
 	return random
 end
 
 function next_rng(seed)
-	local next_seed = mul32(seed, 1103515245) + 12345
-	return next_seed
+	return  mul32(seed, 1103515245) + 12345
 end
 
+------------------------------------------------------------
+-- Draw functinos
+------------------------------------------------------------
+
+function drawRetry(count, x, y)
+	x = x or 0
+	y = y or 30
+
+	gui.text(x, y   , string.format(" retry:%d", count))
+end
 
 ------------------------------------------------------------
 -- Joypad utility

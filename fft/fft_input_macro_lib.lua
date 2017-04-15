@@ -49,9 +49,21 @@ function TAS.startTutorial()
 	pressBtn({down=1}, 1)  -- 
 	fadv(1)
 	pressBtn({down=1}, 1)  -- 
-	pressBtn({circle=1}, 1)  -- enter tutorial
+	pressBtn({start=1}, 1)  -- enter tutorial
 	--fadv(xx)
 end
+
+function TAS.softresetTutorial()
+	-- wait until 'Menu' shown
+	fadv(5)
+	pressBtn({circle=1}, 1)  -- 
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- 
+	-- wait until items set in furshop inventory at 0x80056818 (JPv1.1)
+	--fadv(75)
+	pressBtn({l1=1, r1=1, select=1, start=1}, 1)  -- soft reset
+end
+
 
 -- @deprecated
 function TAS.skipArazlam()
@@ -160,23 +172,24 @@ function TAS.skipOrbonne()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
-	fadv(3)
-	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({x=1}, 1)
 
 	-- agrias, 3888f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
-	fadv(3)
-	pressBtn({circle=1}, 2)
+	fadv(1)
+	pressBtn({x=1}, 1)
 
 
 	-- gafgarion, 4066f
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+	fadv(1)
 	pressBtn({x=1}, 1)
 	fadv(7)
 	pressBtn({circle=1}, 2)
@@ -201,7 +214,8 @@ function TAS.skipOrbonne()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+	fadv(1)
 	pressBtn({x=1}, 1)
 	fadv(7)
 	pressBtn({circle=1}, 2)
@@ -404,7 +418,6 @@ function TAS.Ch1_1_gafgarion_turn1_skip_skill_msg()
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
 	pressBtn({x=1}, 1)
 	-- このあとはボタンを押しても押さなくても閉じるフレームは変わらない
@@ -426,44 +439,44 @@ function TAS.Ch1_1_ramza_turn1()
 
 	-- change option5
 	pressBtn({circle=1}, 6)
-	pressBtn({up=1}, 2)
+	pressBtn({up=1}, 2)		-- fast
 	pressBtn({circle=1}, 2)
 
 	-- change option6
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 6)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)	-- off
 	pressBtn({circle=1}, 2)
 
 	-- change option7
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 6)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)	-- off
 	pressBtn({circle=1}, 2)
 
 	-- change option8
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 6)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)	-- off
 	pressBtn({circle=1}, 2)
 
 	-- change option9
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 6)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)	-- off
 	pressBtn({circle=1}, 2)
 
 	-- change option11
 	pressBtn({down=1}, 4)
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 6)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)	-- off
 	pressBtn({circle=1}, 2)
 
 	-- change option12
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 6)
-	pressBtn({down=1}, 2)
+	pressBtn({down=1}, 2)	-- off
 	pressBtn({circle=1}, 2)
 
 	pressBtn({x=1}, 6)
@@ -491,9 +504,9 @@ function TAS.Ch1_1_ramza_turn1()
 end
 
 function TAS.Ch1_1_ramza_turn2()
+	-- wait 9f after 0x1FFE80 = 0x00B1, wait 7f after arrowed
 	-- ramza arrowed
 	fadv(7)
-	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({circle=1}, 9)  -- attack
@@ -513,9 +526,9 @@ function TAS.Ch1_1_ramza_turn2()
 end
 
 function TAS.Ch1_chemist_potion()
+	-- wait 9f after 0x1FFE80 = 0x00B1, wait 7f after arrowed
 	-- arrowed
 	fadv(7)
-	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({down=1}, 2)
@@ -1110,8 +1123,8 @@ function TAS.ch1_3_turn1_knight()
 end
 
 function TAS.ch1_3_turn1_wizard()
+	-- wait 9f after 0x1FFE80 = 0x00B1, wait 7f after arrowed
 	-- arrowed
-	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
 	pressBtn({circle=1}, 10)  -- move
 	pressBtn({down=1}, 2)
 	pressBtn({down=1}, 2)
@@ -1145,9 +1158,9 @@ function TAS.ch1_3_turn1_wizard()
 end
 
 function TAS.ch1_3_turn1_ramza()
+	-- wait 9f after 0x1FFE80 = 0x00B1, wait 7f after arrowed
 	-- arrowed
 	fadv(5+7)
-	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
 	pressBtn({circle=1}, 10)  -- move
 	pressBtn({left=1}, 2)
 	pressBtn({left=1}, 2)
@@ -1177,8 +1190,8 @@ function TAS.ch1_3_turn1_ramza()
 end
 
 function TAS.ch1_3_turnN_ramza()
+	-- wait 9f after 0x1FFE80 = 0x00B1, wait 7f after arrowed
 	-- arrowed
-	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
 	pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 4)  -- action
 	pressBtn({circle=1}, 9)  -- attack
@@ -1196,9 +1209,9 @@ function TAS.ch1_3_turnN_ramza()
 end
 
 function TAS.ch1_3_turnN_standby()
+	-- wait 9f after 0x1FFE80 = 0x00B1, wait 7f after arrowed
 	-- arrowed
 	fadv(7)
-	-- fadv(xx)  -- wait 9f after 0x1FFE80 = 0x00B1
 	Battle.fullWait()
 end
 

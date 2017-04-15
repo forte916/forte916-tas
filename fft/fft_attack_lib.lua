@@ -9,78 +9,100 @@
 
 require "psx_lib"
 require "fft_lib"
+require "fft_battle_lib"
 
-adr_text_flag_1FFE88 = 0x1FFE88
-adr_text_flag_096088 = 0x096088
-adr_text_flag_0961B8 = 0x0961B8
-adr_text_flag_164908 = 0x164908
+adr_text_flag_037808 = 0x037808  -- ?byte  -- text param
 
 
 ------------------------------------------------------------
 -- OrbonneGafgarionTurn1
 ------------------------------------------------------------
 OrbonneGafgarionTurn1 = {}
-OrbonneGafgarionTurn1.logname = "ch1_1_orbonne_gaf_turn1_25.log"
+OrbonneGafgarionTurn1.logname = "ch1_1_orbonne_gaf_turn1_79.log"
 OrbonneGafgarionTurn1.retry = 500
 
 function OrbonneGafgarionTurn1.pre_attempt()
 	pressBtn({circle=1}, 1)  -- skip msg
 end
 
+function OrbonneGafgarionTurn1.attempt()
+	OrbonneGafgarionTurn1.attempt_type1()
+	--OrbonneGafgarionTurn1.attempt_type2()
+	--OrbonneGafgarionTurn1.attempt_type3()
+end
+
 function OrbonneGafgarionTurn1.attempt_type1()
 	pressBtn({x=1}, 1)  -- skip msg
 
-	--local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)  -- msg flag
-	local flag_096088 = memory.readword(adr_text_flag_096088)
-	local flag_0961B8 = memory.readword(adr_text_flag_0961B8)  -- Action_Phase
-	local flag_164908 = memory.readword(adr_text_flag_164908)  -- Menu_message_display_byte
-
-	--while flag_1FFE88 ~= 0x04 do
-	--	fadv(1)
-	--	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	--end
-
-	while flag_096088 ~= 0x10 do
-		fadv(1)
-		flag_096088 = memory.readword(adr_text_flag_096088)
-	end
+	Battle.waitForStartingToMove()
 	-- 恐らく zoom-in  状態の場合に 9f 待つ必要がある
 	-- 恐らく zoom-out 状態の場合だと 4f 待つだけでよい
 	fadv(8+1)
-	pressBtn({r1=1, l2=1}, 1)  -- camera and zoom out during movement
-
-	flag_0961B8 = memory.readword(adr_text_flag_0961B8)
-	while flag_0961B8 ~= 0x01 do
-		fadv(1)
-		flag_0961B8 = memory.readword(adr_text_flag_0961B8)
+	if true then
+		pressBtn({r1=1, l2=1}, 1)  -- 12f faster than r2, l2
+	else
+		pressBtn({r2=1, l2=1}, 1)  -- 12f slower than r1, l2
+		-- r2, l2 の方は ramza が arrowed になる際に余分なスクロールが発生する
 	end
 
-	flag_164908 = memory.readword(adr_text_flag_164908)
-	while flag_164908 ~= 0x1C do
-		fadv(1)
-		flag_164908 = memory.readword(adr_text_flag_164908)
-	end
+	Battle.waitForStartingToSkillEffect()
+
+	Battle.waitForFinishedToMove()
 	-- wait until 0x164908 = 0x001C, which frame is 5f before shown "Effect"
 	-- このとき x で Effect window を skip 可能
 	pressBtn({x=1}, 1)
-	fadv(220)
 
+	Battle.waitForFinishedToSkillEffect()
 end
 
--- no_optimize, support_both_skill_msg_and_skill_name
---function OrbonneGafgarionTurn1.attempt_type2()
-function OrbonneGafgarionTurn1.attempt()
+function OrbonneGafgarionTurn1.attempt_type2()
 	pressBtn({x=1}, 1)  -- skip msg
 
-	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)  -- msg flag
-	while flag_1FFE88 ~= 0x04 do
-		fadv(1)
-		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	end
-	fadv(8+1)
-	pressBtn({r1=1, l2=1}, 1)  -- camera and zoom out in moving
-	fadv(470)
+	local flag_037808 = memory.readword(adr_text_flag_037808)  -- text param
 
+	Battle.waitForStartingToMove()
+	-- 恐らく zoom-in  状態の場合に 9f 待つ必要がある
+	-- 恐らく zoom-out 状態の場合だと 4f 待つだけでよい
+	fadv(8+1)
+	if true then
+		pressBtn({r1=1, l2=1}, 1)  -- 12f faster than r2, l2
+	else
+		pressBtn({r2=1, l2=1}, 1)  -- 12f slower than r1, l2
+		-- r2, l2 の方は ramza が arrowed になる際に余分なスクロールが発生する
+	end
+
+	Battle.waitForStartingToSkillEffect()
+
+	flag_037808 = memory.readword(adr_text_flag_037808)
+	while flag_037808 ~= 0x0189 do
+		fadv(1)
+		flag_037808 = memory.readword(adr_text_flag_037808)
+	end
+
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+	pressBtn({x=1}, 1)
+
+	Battle.waitForFinishedToSkillEffect()
+end
+
+
+-- no_optimize, support_both_skill_msg_and_skill_name
+function OrbonneGafgarionTurn1.attempt_type3()
+	pressBtn({x=1}, 1)  -- skip msg
+
+	Battle.waitForStartingToMove()
+	fadv(8+1)
+	if true then
+		pressBtn({r1=1, l2=1}, 1)  -- 12f faster than r2, l2
+	else
+		pressBtn({r2=1, l2=1}, 1)  -- 12f slower than r1, l2
+		-- r2, l2 の方は ramza が arrowed になる際に余分なスクロールが発生する
+	end
+
+	Battle.waitForFinishedToSkillEffect()
 end
 
 function OrbonneGafgarionTurn1.post_attempt()
@@ -111,8 +133,8 @@ function OrbonneGafgarionTurn1.success()
 end
 
 function OrbonneGafgarionTurn1.waitForBest()
-	local retry = 33
-	local best_rng = 0x9509B866
+	local retry = 13
+	local best_rng = 0x1F5ACE66
 
 	for i=0, retry do
 		local rng = memory.readdword(adr_rng)
@@ -130,18 +152,115 @@ end
 -- OrbonneAgriasTurn1
 ------------------------------------------------------------
 OrbonneAgriasTurn1 = {}
-OrbonneAgriasTurn1.logname = "ch1_1_orbonne_agrias_turn1_28.log"
+OrbonneAgriasTurn1.logname = "ch1_1_orbonne_agrias_turn1_23.log"
 OrbonneAgriasTurn1.retry = 200
 
-function OrbonneAgriasTurn1.pre_attempt()
+function OrbonneAgriasTurn1.pre_attempt_type1()
+	Battle.waitForTurnUnitNo(0x00) -- 0x00 is ramza
+	-- 7f after ramza arrowed
+	pressBtn({x=1}, 6)
+	pressBtn({triangle=1}, 1)
+	fadv(2)
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 1)
+	fadv(45)
+	fadv(2)
+	pressBtn({square=1, down=1}, 2)
+	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 4)
+
+	-- change option5
+	pressBtn({circle=1}, 6)
+	pressBtn({up=1}, 2)		-- fast
+	pressBtn({circle=1}, 2)
+
+	-- change option6
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)	-- off
+	pressBtn({circle=1}, 2)
+
+	-- change option7
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)	-- off
+	pressBtn({circle=1}, 2)
+
+	-- change option8
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)	-- off
+	pressBtn({circle=1}, 2)
+
+	-- change option9
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)	-- off
+	pressBtn({circle=1}, 2)
+
+	-- change option11
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)	-- off
+	pressBtn({circle=1}, 2)
+
+	-- change option12
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)	-- off
+	pressBtn({circle=1}, 2)
+
+	pressBtn({x=1}, 6)
+	pressBtn({x=1}, 1)
+	fadv(6)
+
+	-- move
+	pressBtn({circle=1}, 6)
+	pressBtn({circle=1}, 10)
+	if false then
+		pressBtn({down=1}, 2)
+		pressBtn({down=1}, 2)
+		pressBtn({down=1}, 1)
+	else
+		pressBtn({right=1}, 2)
+		pressBtn({right=1}, 2)
+		pressBtn({right=1}, 1)
+	end
+	pressBtn({circle=1}, 1)
+
+	Battle.waitForFinishedToMove()
+
+	-- wait
+	pressBtn({circle=1}, 1)
+	Battle.waitForTurnUnitNo(0x00) -- 0x00 is ramza
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 9)
+	if true then
+		if false then
+			pressBtn({up=1}, 1)  -- 試行前に up button なしで最初のフレームを手動で検証すること
+		else
+			pressBtn({left=1}, 1)  -- 試行前に left button なしで最初のフレームを手動で検証すること
+		end
+	end
+end
+
+function OrbonneAgriasTurn1.pre_attempt_type2()
 	--pressBtn({down=1}, 2)
 	pressBtn({circle=1}, 9)
 	pressBtn({up=1}, 1)  -- 試行前に up key なしで最初のフレームを手動で検証すること
 end
 
+function OrbonneAgriasTurn1.pre_attempt()
+	OrbonneAgriasTurn1.pre_attempt_type1()
+	--OrbonneAgriasTurn1.pre_attempt_type2()
+end
+
 function OrbonneAgriasTurn1.attempt()
 	pressBtn({circle=1}, 1)
-	fadv(400)
+	Battle.waitForTurnNextUnit()  -- agrias turn
+	fadv(6)  -- irregular, 0xB1 again
+	Battle.waitForTurnNextUnit()  -- lavian turn
 end
 
 function OrbonneAgriasTurn1.post_attempt()
@@ -172,8 +291,8 @@ function OrbonneAgriasTurn1.success()
 end
 
 function OrbonneAgriasTurn1.waitForBest()
-	local retry = 20
-	local best_rng = 0x442B008C
+	local retry = 51
+	local best_rng = 0x3D33D64D
 
 	for i=0, retry do
 		local rng = memory.readdword(adr_rng)
@@ -192,14 +311,10 @@ end
 ------------------------------------------------------------
 OrbonneAgriasTurn1_TypeB = {}
 OrbonneAgriasTurn1_TypeB.logname = "ch1_1_orbonne_agrias_turn1_28.log"
-OrbonneAgriasTurn1_TypeB.retry = 64
+OrbonneAgriasTurn1_TypeB.retry = 50
 
 function OrbonneAgriasTurn1_TypeB.pre_attempt()
-	local flag_096088 = memory.readword(adr_text_flag_096088)
-	while flag_096088 ~= 0x10 do
-		fadv(1)
-		flag_096088 = memory.readword(adr_text_flag_096088)
-	end
+	Battle.waitForStartingToMove()
 	fadv(4)
 end
 
@@ -213,41 +328,11 @@ function OrbonneAgriasTurn1_TypeB.post_attempt()
 end
 
 function OrbonneAgriasTurn1_TypeB.success()
-	local ret = nil
-	local prpt = {}
-
-	prpt = Bunit.readProperty(adr_battle_unit8) -- archer
-	debugPrint(prpt.info)
-
-	if prpt.hp == 0 then
-		print(string.format("  K.O, hp=%d", prpt.hp))
-		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
-		ret = "best"
-	elseif prpt.critical ~= 0 then
-		print(string.format("  critical, hp=%d", prpt.hp))
-		debugPrint(string.format("  critical, hp=%d", prpt.hp))
-		ret = "good"
-	else
-		debugPrint(string.format("  normal, hp=%d", prpt.hp))
-		ret = nil
-	end
-
-	return ret
+	return OrbonneAgriasTurn1.success()
 end
 
 function OrbonneAgriasTurn1_TypeB.waitForBest()
-	local retry = 20
-	local best_rng = 0x442B008C
-
-	for i=0, retry do
-		local rng = memory.readdword(adr_rng)
-		if rng == best_rng then
-			return
-		else
-			emu.frameadvance()
-		end
-	end
-	print("error: Could not find best rng.")
+	return OrbonneAgriasTurn1.waitForBest()
 end
 
 
@@ -255,22 +340,27 @@ end
 -- OrbonneAliciaTurn1
 ------------------------------------------------------------
 OrbonneAliciaTurn1 = {}
-OrbonneAliciaTurn1.logname = "ch1_1_orbonne_alicia_turn1_3.log"
+OrbonneAliciaTurn1.logname = "ch1_1_orbonne_alicia_turn1_23.log"
+OrbonneAliciaTurn1.retry = 50
 
 function OrbonneAliciaTurn1.pre_attempt()
-	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-
-	while flag_1FFE88 ~= 0x06 do
-		fadv(1)
-		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	end
+	Battle.waitForStartingToMove()
 	fadv(4)
 end
 
 function OrbonneAliciaTurn1.attempt()
-	pressBtn({l1=1}, 1)  -- camera in moving
-	--fadv(1100)
-	fadv(2300)
+	if false then
+		pressBtn({l1=1}, 1)  -- rotate camera
+	else
+		pressBtn({r2=1}, 1)  -- angle camera
+	end
+	
+	Battle.waitForTurnUnitNo(0x04)  -- lavian
+	Battle.waitForTurnUnitNo(0x05)  -- knight
+	Battle.waitForTurnUnitNo(0x08)  -- archer
+	Battle.waitForTurnUnitNo(0x09)  -- chemist
+	Battle.waitForTurnUnitNo(0x0A)  -- rad
+	Battle.waitForTurnUnitNo(0x02)  -- gaf
 end
 
 function OrbonneAliciaTurn1.post_attempt()
@@ -280,7 +370,7 @@ end
 function OrbonneAliciaTurn1.success()
 	local ret = nil
 	-- success condition: knight moves in front of ramza
-	-- succeeded: retry=10, 23, 27
+	-- succeeded: retry=7, 8, 26, 28, 30, 31, 34, 35
 	--return ret
 
 	-- success condition1: knight moves in front of ramza
@@ -294,27 +384,25 @@ end
 -- OrbonneRadTurn1
 ------------------------------------------------------------
 OrbonneRadTurn1 = {}
-OrbonneRadTurn1.logname = "ch1_1_orbonne_rad_turn1_3.log"
+OrbonneRadTurn1.logname = "ch1_1_orbonne_rad_turn1_23.log"
 OrbonneRadTurn1.retry = 64
 
 function OrbonneRadTurn1.pre_attempt()
-	local flag_096088 = memory.readword(adr_text_flag_096088)
-	while flag_096088 ~= 0x10 do
-		fadv(1)
-		flag_096088 = memory.readword(adr_text_flag_096088)
-	end
-
-	--local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	--while flag_1FFE88 ~= 0x04 do
-	--	fadv(1)
-	--	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	--end
-	fadv(4)
+	Battle.waitForTurnUnitNo(0x08)  -- archer
+	Battle.waitForStartingToMove()
+	--fadv(4)
+	fadv(11)
 end
 
 function OrbonneRadTurn1.attempt()
-	pressBtn({r1=1}, 1)  -- camera in moving
-	fadv(300)
+	if false then
+		pressBtn({r1=1}, 1)  -- rotate camera
+	else
+		pressBtn({r2=1}, 1)  -- angle camera
+	end
+	Battle.waitForTurnUnitNo(0x09)  -- chemist
+	Battle.waitForTurnUnitNo(0x0A)  -- rad
+	Battle.waitForTurnUnitNo(0x02)  -- gaf
 end
 
 function OrbonneRadTurn1.post_attempt()
@@ -348,26 +436,42 @@ function OrbonneRadTurn1.success()
 	return ret
 end
 
+function OrbonneRadTurn1.waitForBest()
+	local retry = 42
+	local best_rng = 0x8DDD6BFB
+
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
+end
 
 ------------------------------------------------------------
 -- OrbonneGafgarionTurn2
 ------------------------------------------------------------
 OrbonneGafgarionTurn2 = {}
-OrbonneGafgarionTurn2.logname = "ch1_1_orbonne_gaf_turn2_3.log"
-OrbonneGafgarionTurn2.retry = 60
+OrbonneGafgarionTurn2.logname = "ch1_1_orbonne_gaf_turn2_23.log"
+OrbonneGafgarionTurn2.retry = 50
 
 function OrbonneGafgarionTurn2.pre_attempt()
-	local flag_096088 = memory.readword(adr_text_flag_096088)
-	while flag_096088 ~= 0x10 do
-		fadv(1)
-		flag_096088 = memory.readword(adr_text_flag_096088)
-	end
+	Battle.waitForStartingToMove()
 	fadv(4)
 end
 
 function OrbonneGafgarionTurn2.attempt()
-	pressBtn({l1=1}, 1)  -- camera in moving
-	fadv(400)
+	if false then
+		pressBtn({r1=1}, 1)  -- rotate camera
+	else
+		pressBtn({r2=1}, 1)  -- angle camera
+	end
+
+	Battle.waitForStartingToSkillEffect()
+	Battle.waitForFinishedToSkillEffect()
 end
 
 function OrbonneGafgarionTurn2.post_attempt()
@@ -378,7 +482,11 @@ function OrbonneGafgarionTurn2.success()
 	local ret = nil
 	local prpt = {}
 
-	prpt = Bunit.readProperty(adr_battle_unit9) -- archer
+	if false then
+		prpt = Bunit.readProperty(adr_battle_unit9) -- archer
+	else
+		prpt = Bunit.readProperty(adr_battle_unit10) -- chemist
+	end
 	debugPrint(prpt.info)
 
 	if prpt.hp == 0 then
@@ -397,12 +505,28 @@ function OrbonneGafgarionTurn2.success()
 	return ret
 end
 
+function OrbonneGafgarionTurn2.waitForBest()
+	local retry = 48
+	local best_rng = 0x4892C5B9
+
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
+end
+
+
 
 ------------------------------------------------------------
 -- OrbonneRamzaTurn2
 ------------------------------------------------------------
 OrbonneRamzaTurn2 = {}
-OrbonneRamzaTurn2.logname = "ch1_1_orbonne_ramza_turn2_4.log"
+OrbonneRamzaTurn2.logname = "ch1_1_orbonne_ramza_turn2_23.log"
 OrbonneRamzaTurn2.retry = 200
 OrbonneRamzaTurn2.odd_number_retry = true
 
@@ -412,6 +536,17 @@ function OrbonneRamzaTurn2.logHeader()
 end
 
 function OrbonneRamzaTurn2.pre_attempt()
+	Battle.waitForTurnUnitNo(0x00)  -- 0x00 is ramza
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 4)  -- action
+	pressBtn({circle=1}, 9)  -- attack
+	if false then
+		pressBtn({down=1}, 1)
+	else
+		pressBtn({right=1}, 1)
+	end
+	fadv(1)
+
 	if OrbonneRamzaTurn2.odd_number_retry == true then
 		fadv(1)  -- for odd number retry
 	end
@@ -426,7 +561,11 @@ function OrbonneRamzaTurn2.attempt()
 end
 
 function OrbonneRamzaTurn2.post_attempt()
-	-- pass
+	Battle.waitForTurnUnitNo(0x00)
+	-- select wait
+	pressBtn({down=1}, 4)
+	pressBtn({down=1}, 2)
+	pressBtn({circle=1}, 1)  -- select wait
 end
 
 function OrbonneRamzaTurn2.success()
@@ -444,8 +583,8 @@ function OrbonneRamzaTurn2.success()
 		print(string.format("  critical, hp=%d", prpt.hp))
 		debugPrint(string.format("  critical, hp=%d", prpt.hp))
 		ret = "good"
-	--elseif prpt.hp < 37 then
-	elseif prpt.hp < 31 then
+	--elseif prpt.hp < 37 then  -- if alicia has good compatibility
+	elseif prpt.hp < 31 then  -- if alicia has normal compatibility
 		print(string.format("  low HP, hp=%d", prpt.hp))
 		debugPrint(string.format("  low HP, hp=%d", prpt.hp))
 		ret = "good"
@@ -458,8 +597,8 @@ function OrbonneRamzaTurn2.success()
 end
 
 function OrbonneRamzaTurn2.waitForBest()
-	local retry = 20
-	local best_rng = 0x442B008C
+	local retry = 32
+	local best_rng = 0x399BC177
 
 	for i=0, retry do
 		local rng = memory.readdword(adr_rng)
@@ -484,13 +623,9 @@ function OrbonneAliciaAgriasTurn2.pre_attempt()
 end
 
 function OrbonneAliciaAgriasTurn2.attempt()
-	pressBtn({circle=1}, 1)   -- execute attack
+	pressBtn({circle=1}, 1)   -- ramza wait
 
-	local flag_096088 = memory.readword(adr_text_flag_096088)
-	while flag_096088 ~= 0x10 do
-		fadv(1)
-		flag_096088 = memory.readword(adr_text_flag_096088)
-	end
+	Battle.waitForStartingToMove()
 	fadv(4)
 	pressBtn({r2=1}, 1)  -- camera in moving
 
@@ -557,20 +692,11 @@ function OrbonneAliciaTurn2.pre_attempt()
 end
 
 function OrbonneAliciaTurn2.attempt()
-	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	pressBtn({circle=1}, 1)   -- ramza wait
 
-	pressBtn({circle=1}, 1)   -- execute attack
-
-	while flag_1FFE88 ~= 0x04 do
-		fadv(1)
-		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	end
+	Battle.waitForStartingToMove()  -- moving alicia
 	fadv(2)
-	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	while flag_1FFE88 ~= 0x04 do
-		fadv(1)
-		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	end
+	Battle.waitForStartingToMove()  -- moving agrias
 	fadv(8)
 	pressBtn({r2=1}, 1)  -- camera in moving
 	fadv(220)
@@ -607,30 +733,25 @@ end
 -- OrbonneAgriasTurn2
 ------------------------------------------------------------
 OrbonneAgriasTurn2 = {}
-OrbonneAgriasTurn2.logname = "ch1_1_orbonne_agrias_turn2_1.log"
+OrbonneAgriasTurn2.logname = "ch1_1_orbonne_agrias_turn2_23.log"
+OrbonneAgriasTurn2.retry = 200
 
 function OrbonneAgriasTurn2.pre_attempt()
 	fadv(7)
 end
 
 function OrbonneAgriasTurn2.attempt()
-	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	pressBtn({circle=1}, 1)   -- ramza wait
 
-	pressBtn({circle=1}, 1)   -- execute attack
+	Battle.waitForTurnUnitNo(0x03)  -- alicia
+	Battle.waitForTurnUnitNo(0x04)  -- lavian
+	Battle.waitForTurnUnitNo(0x01)  -- agrias
+	Battle.waitForStartingToMove()  -- moving agrias
+	fadv(4)
+	--pressBtn({r2=1}, 1)  -- angle camera
 
-	while flag_1FFE88 ~= 0x04 do
-		fadv(1)
-		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	end
-	fadv(2)
-	flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	while flag_1FFE88 ~= 0x04 do
-		fadv(1)
-		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-	end
-	fadv(8)
-	pressBtn({r2=1}, 1)  -- camera in moving
-	fadv(1200)  -- 16168f - 15286f
+	Battle.waitForStartingToSkillEffect()
+	Battle.waitForFinishedToSkillEffect()
 end
 
 function OrbonneAgriasTurn2.post_attempt()
@@ -641,7 +762,11 @@ function OrbonneAgriasTurn2.success()
 	local ret = nil
 	local prpt = {}
 
-	prpt = Bunit.readProperty(adr_battle_unit9)
+	if false then
+		prpt = Bunit.readProperty(adr_battle_unit10) -- chemist
+	else
+		prpt = Bunit.readProperty(adr_battle_unit9) -- archer
+	end
 	debugPrint(prpt.info)
 
 	if prpt.hp == 0 then
@@ -660,53 +785,47 @@ function OrbonneAgriasTurn2.success()
 	return ret
 end
 
+function OrbonneAgriasTurn2.waitForBest()
+	local retry = 56
+	local best_rng = 0xC455188B
 
-------------------------------------------------------------
--- OrbonneAgriasTurn2TypeB
-------------------------------------------------------------
-OrbonneAgriasTurn2TypeB = {}
-OrbonneAgriasTurn2TypeB.logname = "ch1_1_orbonne_agrias_turn2_3.log"
-
-function OrbonneAgriasTurn2TypeB.pre_attempt()
-	local flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
-
-	while flag_1FFE88 ~= 0x03 do
-		fadv(1)
-		flag_1FFE88 = memory.readword(adr_text_flag_1FFE88)
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
 	end
+	print("error: Could not find best rng.")
+end
+
+
+
+------------------------------------------------------------
+-- OrbonneAgriasTurn2_TypeB
+------------------------------------------------------------
+OrbonneAgriasTurn2_TypeB = {}
+OrbonneAgriasTurn2_TypeB.logname = "ch1_1_orbonne_agrias_turn2_23.log"
+OrbonneAgriasTurn2_TypeB.retry = 60
+
+function OrbonneAgriasTurn2_TypeB.pre_attempt()
+	Battle.waitForStartingToMove()
 	fadv(4)
 end
 
-function OrbonneAgriasTurn2TypeB.attempt()
-	pressBtn({r2=1}, 1)  -- camera in moving
-	fadv(300)
+function OrbonneAgriasTurn2_TypeB.attempt()
+	pressBtn({r2=1}, 1)  -- angle camera
+	Battle.waitForStartingToSkillEffect()
+	Battle.waitForFinishedToSkillEffect()
 end
 
-function OrbonneAgriasTurn2TypeB.post_attempt()
+function OrbonneAgriasTurn2_TypeB.post_attempt()
 	-- pass
 end
 
-function OrbonneAgriasTurn2TypeB.success()
-	local ret = nil
-	local prpt = {}
-
-	prpt = Bunit.readProperty(adr_battle_unit9)
-	debugPrint(prpt.info)
-
-	if prpt.hp == 0 then
-		print(string.format("  K.O, hp=%d", prpt.hp))
-		debugPrint(string.format("  K.O, hp=%d", prpt.hp))
-		ret = "best"
-	elseif prpt.critical ~= 0 then
-		print(string.format("  critical, hp=%d", prpt.hp))
-		debugPrint(string.format("  critical, hp=%d", prpt.hp))
-		ret = "good"
-	else
-		debugPrint(string.format("  normal, hp=%d", prpt.hp))
-		ret = nil
-	end
-
-	return ret
+function OrbonneAgriasTurn2_TypeB.success()
+	return OrbonneAgriasTurn2.success()
 end
 
 

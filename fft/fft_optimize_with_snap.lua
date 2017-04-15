@@ -43,7 +43,7 @@ end
 ------------------------------------------------------------
 SkipPv = {}
 --SkipPv.logname = "snap/opening_skip_pv3_%df.png"
-SkipPv.logname = "snap/opening_skip_pv4_%df.png"
+SkipPv.logname = "snap/opening_skip_pv5_%df.png"
 --SkipPv.logname = "snap/ending_movie_%df.png"
 
 function SkipPv.pre_attempt()
@@ -292,8 +292,8 @@ local fc = emu.framecount()
 --local rng = memory.readdword(adr_rng)
 
 --local interface = Crystal3
---local interface = SkipPv
-local interface = SkipOpeningMovie
+local interface = SkipPv
+--local interface = SkipOpeningMovie
 
 
 retry = 200

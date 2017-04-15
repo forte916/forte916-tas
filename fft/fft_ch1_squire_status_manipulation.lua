@@ -29,12 +29,6 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
-function drawRetry(count, x, y)
-	x = x or 0
-	y = y or 30
-
-	gui.text(x, y   , string.format(" retry:%d", count))
-end
 
 
 ------------------------------------------------------------
@@ -42,7 +36,7 @@ end
 ------------------------------------------------------------
 
 GarilandParty = {}
-GarilandParty.logname = "ch1_2_gariland_party4.log"
+GarilandParty.logname = "ch1_2_gariland_party_23.log"
 
 GarilandParty.best_st = {}
 GarilandParty.cur_st = {}
@@ -110,13 +104,13 @@ function GarilandParty.fitChemist(prpt)
 	if Bunit.isJobSquire(prpt) == true then
 		if prpt.total_JP_chemist > 190 then
 			best_fit = best_fit + 1
-		elseif prpt.total_JP_chemist > 179 then
+		elseif prpt.total_JP_chemist > 169 then
 			good_fit = good_fit + 1
 		end
 	elseif Bunit.isJobChemist(prpt) == true then
 		if prpt.total_JP_chemist > 160 then
 			best_fit = best_fit + 1
-		elseif prpt.total_JP_chemist > 139 then
+		elseif prpt.total_JP_chemist > 129 then
 			good_fit = good_fit + 1
 		end
 	end
@@ -172,13 +166,13 @@ function GarilandParty.fitSquire(prpt)
 	if Bunit.isJobSquire(prpt) == true then
 		if prpt.total_JP_squire > 135 then
 			best_fit = best_fit + 1
-		elseif prpt.total_JP_squire > 119 then
+		elseif prpt.total_JP_squire > 109 then
 			good_fit = good_fit + 1
 		end
 	elseif Bunit.isJobChemist(prpt) == true then
 		if prpt.total_JP_squire > 165 then
 			best_fit = best_fit + 1
-		elseif prpt.total_JP_squire > 149 then
+		elseif prpt.total_JP_squire > 139 then
 			good_fit = good_fit + 1
 		end
 	end
@@ -203,7 +197,7 @@ function GarilandParty.fitKnight(prpt, str)
 		good_fit = good_fit + 1
 	end
 
-	if prpt.total_JP_knight > 190 then
+	if prpt.total_JP_knight > 189 then
 		best_fit = best_fit + 1
 	elseif prpt.total_JP_knight > 169 then
 		good_fit = good_fit + 1
@@ -258,38 +252,39 @@ function GarilandParty.success()
 	local ofs_unit = adr_battle_unit3
 	local total_party = 6
 	local str
-	local candidate = 0
-	local good_fit = 0
-	local best_fit = 0
+	local wizard_best = 0
+	local wizard_good = 0
+	local knight_best = 0
+	local knight_good = 0
+	local inherit_best = 0
+	local inherit_good = 0
 
 	for i=1, total_party do
-		local wizard_fit = 0
-		local knight_fit = 0
-		local inherit_fit = 0
+		local fit = nil
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
 
 
-		wizard_fit, str = GarilandParty.fitWizard(prpt, str)
-		if wizard_fit == "best" then
-			best_fit = best_fit + 1
-		elseif wizard_fit == "good" then
-			good_fit = good_fit + 1
+		fit, str = GarilandParty.fitWizard(prpt, str)
+		if fit == "best" then
+			wizard_best = wizard_best + 1
+		elseif fit == "good" then
+			wizard_good = wizard_good + 1
 		end
 
-		knight_fit, str = GarilandParty.fitKnight(prpt, str)
-		if knight_fit == "best" then
-			best_fit = best_fit + 1
-		elseif knight_fit == "good" then
-			good_fit = good_fit + 1
+		fit, str = GarilandParty.fitKnight(prpt, str)
+		if fit == "best" then
+			knight_best = knight_best + 1
+		elseif fit == "good" then
+			knight_good = knight_good + 1
 		end
 
-		inherit_fit, str = GarilandParty.fitInherit(prpt, str)
-		if inherit_fit == "best" then
-			candidate = candidate + 1
-		elseif inherit_fit == "good" then
-			candidate = candidate + 1
+		fit, str = GarilandParty.fitInherit(prpt, str)
+		if fit == "best" then
+			inherit_best = inherit_best + 1
+		elseif fit == "good" then
+			inherit_good = inherit_good + 1
 		end
 
 --		if prpt.total_JP_wizard > 179 then
@@ -308,9 +303,9 @@ function GarilandParty.success()
 		debugPrint(str)
 	end
 
-	if best_fit > 2 then
+	if wizard_best > 0 and knight_best > 1 and inherit_best > 1 then
 		ret = "best"
-	elseif good_fit > 2 or (best_fit + good_fit) > 2 then
+	elseif (wizard_best + wizard_good) > 0 and (knight_best + knight_good) > 1 and (inherit_best + inherit_good) > 1 then
 		ret = "good"
 	end
 
@@ -418,8 +413,8 @@ for i=0, retry do
 	local result =  interface.success()
 	if result then
 		--debugPrint(string.format("***** best state. fc = %d, %s, rng = %08X *****", fc, GarilandParty.format_st(GarilandParty.best_st), rng))
-		debugPrint(string.format("  ***** %s state. fc = %d, rng = %08X *****", result, fc, rng))
-		print(string.format("  ***** %s state. retry = %d, rng = %08X *****", result, i, rng))
+		debugPrint(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
+		print(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
 		interface.post_attempt()
 	end
 

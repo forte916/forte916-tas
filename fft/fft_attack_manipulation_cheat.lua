@@ -29,12 +29,6 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
-function drawRetry(count, x, y)
-	x = x or 0
-	y = y or 30
-
-	gui.text(x, y   , string.format(" retry:%d", count))
-end
 
 
 ------------------------------------------------------------

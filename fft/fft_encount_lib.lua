@@ -15,11 +15,16 @@ require "fft_lib"
 -- Orbonne
 ------------------------------------------------------------
 Orbonne = {}
-Orbonne.logname = "ch1_1_orbonne_party3.log"
+Orbonne.logname = "ch1_1_orbonne_party5.log"
+Orbonne.retry = 500
 
 Orbonne.name = {"ramza", "agrias", "gaf", "alicia", "lavian", "knight", "archer", "archer", "archer", "chemist", "rad"}
 
 function Orbonne.logHeader()
+	debugPrint(string.format("Ramza = 0x90 = Capricorn"))
+	debugPrint(string.format(" * good: 0x10, 0x50, very good: 0x30"))
+	debugPrint(string.format(" * bad : 0x00, 0x60, very bad : 0x30"))
+	debugPrint(string.format(""))
 	debugPrint(string.format("Agrias = 0x30 = Cancer"))
 	debugPrint(string.format(" * good: 0x70, 0xB0, very good: 0x90"))
 	debugPrint(string.format(" * bad : 0x00, 0x60, very bad : 0x90"))
@@ -27,6 +32,10 @@ function Orbonne.logHeader()
 	debugPrint(string.format("Gafgar = 0x50 = Virgo"))
 	debugPrint(string.format(" * good: 0x10, 0x90, very good: 0xB0"))
 	debugPrint(string.format(" * bad : 0x20, 0x80, very bad : 0xB0"))
+	debugPrint(string.format(""))
+	debugPrint(string.format("Alicia = 0xB0 = Pisces"))
+	debugPrint(string.format(" * good: 0x30, 0x70, very good: 0x50"))
+	debugPrint(string.format(" * bad : 0x20, 0x80, very bad : 0x50"))
 	debugPrint(string.format(""))
 	debugPrint(string.format("-- Bunit Legend --"))
 	debugPrint(string.format("%s", Bunit.info_header4))
@@ -58,13 +67,14 @@ function Orbonne.post_attempt()
 end
 
 function Orbonne.success()
-	local ret = false
+	local ret = nil
 	local prpt = {}
 	local ofs_unit = adr_battle_unit
 	local total_enemy = 11
-	local gaf_comp = 0  -- compatibility
-	local agrias_comp = 0  -- compatibility
 	local ramza_comp = 0  -- compatibility
+	local agrias_comp = 0  -- compatibility
+	local gaf_comp = 0  -- compatibility
+	local alicia_comp = 0  -- compatibility
 	local enemy = 0
 	local str
 
@@ -75,6 +85,7 @@ function Orbonne.success()
 
 		str = string.format("%s %s", str, Orbonne.name[i])
 
+		-- knight:
 		if prpt.no == 5 then
 			ramza_comp = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-ramza", str, Zodiac.notation[ramza_comp])
@@ -82,13 +93,16 @@ function Orbonne.success()
 			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
 
-			if (ramza_comp > 3) then
+			alicia_comp = Zodiac.checkCompatibilityAlicia(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-alicia", str, Zodiac.notation[alicia_comp])
+
+			if (ramza_comp > 3 and alicia_comp > 3) then
 				str = string.format("%s, matched", str)
 				--enemy = enemy + 1
 			end
 		end
 
-		-- should be beaten by gaf
+		-- archer: should be beaten by gaf
 		if prpt.no == 6 then
 			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
@@ -102,7 +116,7 @@ function Orbonne.success()
 			end
 		end
 
-		-- should be beaten by agrias
+		-- archer: should be beaten by agrias
 		if prpt.no == 7 then
 			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
@@ -110,25 +124,29 @@ function Orbonne.success()
 			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
 
-			if (gaf_comp < 3 and agrias_comp > 2) then
+			if (gaf_comp < 3) then
 				str = string.format("%s, matched", str)
 				enemy = enemy + 1
 			end
 		end
 
+		-- archer:
 		if prpt.no == 8 then
+			ramza_comp = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-ramza", str, Zodiac.notation[ramza_comp])
+
 			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
 
 			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
 
-			if (gaf_comp > 3 or agrias_comp > 3) then
+			if (ramza_comp > 3) then
 				str = string.format("%s, matched", str)
-				--enemy = enemy + 1
 			end
 		end
 
+		-- chemist:
 		if prpt.no == 9 then
 			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
@@ -136,18 +154,34 @@ function Orbonne.success()
 			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
 
-			if (gaf_comp > 3 or agrias_comp > 3) then
+			if (gaf_comp > 3) then
 				str = string.format("%s, matched", str)
-				--enemy = enemy + 1
 			end
 		end
 
+		-- lavian:
+		if prpt.no == 4 then
+			if Bunit.isLearnedThrowStone(prpt) ~= 0 then
+				str = str..", throw stone"
+
+				if Bunit.isSetBasicSkill(prpt) then
+					str = str.." set"
+				else
+					str = str.." NOT set"
+				end
+			end
+		end
+
+		
+		if Bunit.isSetBlackSkill(prpt) then
+			str = str..", Black-Magic set"
+		end
 
 		debugPrint(str)
 	end
 
 	if enemy > 0 then
-		ret = true
+		ret = "best"
 	end
 	return ret
 end
@@ -159,7 +193,7 @@ end
 Gariland = {}
 Gariland.logname = "ch1_2_gariland_enemy4.log"
 
-Orbonne.name = {"delita", "broad", "dagger", "dagger", "item", "female"}
+Gariland.name = {"delita", "broad", "dagger", "dagger", "item", "female"}
 
 function Gariland.logHeader()
 	debugPrint(string.format("Ramza = 0x90 = Capricorn"))

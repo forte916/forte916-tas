@@ -29,17 +29,20 @@ emu.speedmode("turbo")       -- drops some frames
 -- defines
 ------------------------------------------------------------
 
-adr_text_flag_1FFE80 = 0x1FFE80  -- 2byte
+adr_text_flag_164908 = 0x164908  -- 2byte  -- Menu_message_display_byte
+  -- 0x1C: finished moving
+
+adr_text_flag_1FFE80 = 0x1FFE80  -- 2byte  -- showing msg
   -- 0x00B1: current turn.
-  -- 0xFFnn: nn is same as unit's No. before 3f acceptance for input
+  -- 0xFFnn: nn is same as unit's No. 3f before acceptance for input
 
 adr_text_flag_1FFE81 = 0x1FFE81  -- 1byte
-  -- 0xFF: before 3f acceptance for input
+  -- 0xFF: 3f before acceptance for input
 
-adr_text_flag_1FFE88 = 0x1FFE88  -- 2byte??
-  -- 0xFFnn: nn is same as unit's No. before 3f acceptance for input
+adr_text_flag_1FFE88 = 0x1FFE88  -- 2byte??  -- showing msg
+  -- 0xFFnn: nn is same as unit's No. 3f before acceptance for input
   -- 0x0001: current turn
-  -- 0x0002: before 1f arrowed at current turn
+  -- 0x0002: 1f before arrowed at current turn
   -- 0xFFFF: text end
 
 adr_effect_flag_0960B4 = 0x0960B4  -- 2byte??
@@ -47,10 +50,32 @@ adr_effect_flag_0960B4 = 0x0960B4  -- 2byte??
   -- 0x00: doing effect
   -- 0x01: done effect
 
+adr_text_flag_096088 = 0x096088  --  ?byte  -- Type of display
+  -- 0x10: start to moving
+  -- 0x11: 1f after acceptance for change camera
+
+
+adr_text_flag_0961B8 = 0x0961B8  -- ?byte  -- Action_Phase
+  -- 0x01: during skill effect
+  -- 0x03: out of skill effect
+
+
 ------------------------------------------------------------
 -- Battle
 ------------------------------------------------------------
 Battle = {}
+
+--- This func is not accuracy. because 0xB1 is become multiple times.
+function Battle.waitForTurnNextUnit()
+	local flag_1FFE80 = memory.readbyte(adr_text_flag_1FFE80)
+
+	-- wait until 2f before arrowed
+	while not (0xB1 == flag_1FFE80) do
+		fadv(1)
+		flag_1FFE80 = memory.readbyte(adr_text_flag_1FFE80)
+	end
+	fadv(2)
+end
 
 --- Check if Unit's turn or not.
 -- @return 1:Unit's turn,  0:others turn.
@@ -60,35 +85,79 @@ end
 
 function Battle.waitForTurn(adr_unit)
 	local unit_no = memory.readbyte(adr_unit + Bunit.no)
-	local flag_1FFE80 = memory.readbyte(adr_text_flag_1FFE80)
+	Battle.waitForTurnUnitNo(unit_no)
+end
 
-	-- wait until acceptance for input
-	while not (unit_no == flag_1FFE80) do
+--- wait until 1f before acceptance for input
+function Battle.waitForTurnUnitNo1FBefore(unit_no)
+	local flag_1FFE80 = memory.readword(adr_text_flag_1FFE80)
+	local unit_no_ff = 0xFF00 + unit_no
+
+	while not (unit_no_ff == flag_1FFE80) do
 		fadv(1)
-		flag_1FFE80 = memory.readbyte(adr_text_flag_1FFE80)
+		flag_1FFE80 = memory.readword(adr_text_flag_1FFE80)
 	end
 
-	fadv(1)
-	flag_1FFE80 = memory.readbyte(adr_text_flag_1FFE80)
-	if unit_no == flag_1FFE80 then
+	while unit_no_ff == flag_1FFE80 do
 		fadv(1)
+		flag_1FFE80 = memory.readword(adr_text_flag_1FFE80)
 	end
+end
+
+--- wait until acceptance for input
+function Battle.waitForTurnUnitNo(unit_no)
+	Battle.waitForTurnUnitNo1FBefore(unit_no)
 	fadv(1)
 end
 
 function Battle.waitForEffect(adr_unit)
 	local unit_no = memory.readbyte(adr_unit + Bunit.no)
+	local unit_no_ff = 0xFF00 + unit_no
 	local flag_1FFE80 = memory.readbyte(adr_text_flag_1FFE80)
 	local flag_0960B4 = memory.readbyte(adr_effect_flag_0960B4)
 
 	-- wait until acceptance for input
-	while not (unit_no == flag_1FFE80 and flag_0960B4 == 1) do
+	while not (unit_no_ff == flag_1FFE80 and flag_0960B4 == 1) do
 		fadv(1)
 		flag_1FFE80 = memory.readbyte(adr_text_flag_1FFE80)
 		flag_0960B4 = memory.readbyte(adr_effect_flag_0960B4)
 	end
-
 	fadv(2)
+end
+
+function Battle.waitForStartingToSkillEffect()
+	flag_0961B8 = memory.readword(adr_text_flag_0961B8)
+	while flag_0961B8 ~= 0x01 do
+		fadv(1)
+		flag_0961B8 = memory.readword(adr_text_flag_0961B8)
+	end
+end
+
+function Battle.waitForFinishedToSkillEffect()
+	flag_0961B8 = memory.readword(adr_text_flag_0961B8)
+	while flag_0961B8 == 0x01 do
+		fadv(1)
+		flag_0961B8 = memory.readword(adr_text_flag_0961B8)
+	end
+end
+
+
+function Battle.waitForFinishedToMove()
+	local flag_164908 = memory.readbyte(adr_text_flag_164908)
+
+	-- wait until acceptance for input
+	while not (0x1C == flag_164908) do
+		fadv(1)
+		flag_164908 = memory.readbyte(adr_text_flag_164908)
+	end
+end
+
+function Battle.waitForStartingToMove()
+	local flag_096088 = memory.readword(adr_text_flag_096088)
+	while not (0x10 == flag_096088) do
+		fadv(1)
+		flag_096088 = memory.readword(adr_text_flag_096088)
+	end
 end
 
 function Battle.fullWait()

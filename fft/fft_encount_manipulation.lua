@@ -28,12 +28,6 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
-function drawRetry(count, x, y)
-	x = x or 0
-	y = y or 30
-
-	gui.text(x, y   , string.format(" retry:%d", count))
-end
 
 
 ------------------------------------------------------------
@@ -57,7 +51,11 @@ f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
-retry = 1000
+if interface.retry ~= nil then
+	retry = interface.retry
+else
+	retry = 500
+end
 
 for i=0, retry do
 	if initial == 1 then
@@ -84,12 +82,13 @@ for i=0, retry do
 
 	interface.attempt()
 
-	-- check results
-	if interface.success() then
-		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X, game_time = %s *****",
-			fc, rng, GameTime.format(game_time)))
-		print(string.format("***** best state. retry = %d, rng = %08X, game_time = %s *****",
-			i, rng, GameTime.format(game_time)))
+	-- check result
+	local result =  interface.success()
+	if result then
+		debugPrint(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X, game_time = %s *****",
+			result, i, fc, rng, GameTime.format(game_time)))
+		print(string.format("***** %s state. retry = %d, fc = %d, rng = %08X, game_time = %s *****",
+			result, i, fc, rng, GameTime.format(game_time)))
 		interface.post_attempt()
 	end
 

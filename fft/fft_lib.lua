@@ -687,6 +687,12 @@ function Bunit.readProperty(ofs_unit)
 	prpt.innate_ability3   = memory.readword(ofs_unit + Bunit.innate_ability3   )
 	prpt.innate_ability4   = memory.readword(ofs_unit + Bunit.innate_ability4   )
 
+	prpt.primary_skill     = memory.readbyte(ofs_unit + Bunit.primary_skill     )
+	prpt.secondary_skill   = memory.readbyte(ofs_unit + Bunit.secondary_skill   )
+	prpt.reaction_ability  = memory.readword(ofs_unit + Bunit.reaction_ability  )
+	prpt.support_ability   = memory.readword(ofs_unit + Bunit.support_ability   )
+	prpt.movement_ability  = memory.readword(ofs_unit + Bunit.movement_ability  )
+
 	prpt.exp       = memory.readbyte(ofs_unit + Bunit.exp       )
 	prpt.lv        = memory.readbyte(ofs_unit + Bunit.lv        )
 	prpt.brave     = memory.readbyte(ofs_unit + Bunit.brave     )
@@ -861,9 +867,9 @@ end
 
 function Bunit.toString2(prpt)
 	local str = string.format("%2x,%2x,%2x,%2x | "
-			.."%2d,%2d | "
-			.."%2x,%2x,%2x | %2x,%2x,%2x | "
-			.."%2x,%2x,%2x | "
+			.."%2d,%3d | "
+			.."%x,%x,%x,%x,%x | "
+			.."%x,%x,%x | "
 			.."%2x,%2x | "
 			.."%2d,%2x,%2x | ",
 			prpt.ch     ,
@@ -878,7 +884,6 @@ function Bunit.toString2(prpt)
 			prpt.moved       ,
 			prpt.actioned    ,
 			prpt.turn_ended  ,
-			prpt.unit_id_ff  ,
 			prpt.ability_ct  ,
 
 			prpt.hit_miss    ,
@@ -895,19 +900,22 @@ function Bunit.toString2(prpt)
 	return str
 end
 
+Bunit.info_header3 = "| ch, no, job, zodiac | lv, exp, speed | brave, faith | hp, mp | innate | skill set | reaction_active | support_active | movement_active | squire learned | chemist learned | archer learned | thief learned |"
+
 function Bunit.toString3(prpt)
 	local str = string.format("%2x,%2x,%2x,%2x | "
 			.."%2d,%2d,%2d | "
 			.."%2d,%2d | "
 			.."%3d,%2d | "
-			.."squire-%3d-%3d | %2x,%2x,%2x | "
-			.."chemist-%3d-%3d,%2x,%2x,%2x | "
-			.."archer-%3d-%3d,%2x,%2x,%2x | "
-			.."thief-%3d-%3d,%2x,%2x,%2x | "
+			.."%3x,%3x,%3x,%3x | "
+			.."%2x,%2x,%3x,%3x,%3x | "
 			.."%2x,%2x,%2x,%2x | "
 			.."%2x,%2x,%2x,%2x | "
 			.."%2x,%2x,%2x | "
-			.."%3x,%3x,%3x,%3x | ",
+			.."squire-%3d-%3d | %2x,%2x,%2x | "
+			.."chemist-%3d-%3d,%2x,%2x,%2x | "
+			.."archer-%3d-%3d,%2x,%2x,%2x | "
+			.."thief-%3d-%3d,%2x,%2x,%2x | ",
 			prpt.ch     ,
 			prpt.no     ,
 			prpt.job    ,
@@ -922,6 +930,31 @@ function Bunit.toString3(prpt)
 
 			prpt.hp     ,
 			prpt.mp     ,
+
+			prpt.innate_ability1  ,
+			prpt.innate_ability2  ,
+			prpt.innate_ability3  ,
+			prpt.innate_ability4  ,
+
+			prpt.primary_skill    ,
+			prpt.secondary_skill  ,
+			prpt.reaction_ability ,
+			prpt.support_ability  ,
+			prpt.movement_ability ,
+
+			prpt.reaction_active1 ,
+			prpt.reaction_active2 ,
+			prpt.reaction_active3 ,
+			prpt.reaction_active4 ,
+
+			prpt.support_active1  ,
+			prpt.support_active2  ,
+			prpt.support_active3  ,
+			prpt.support_active4  ,
+
+			prpt.movement_active1 ,
+			prpt.movement_active2 ,
+			prpt.movement_active3 ,
 
 			prpt.total_JP_squire    ,
 			prpt.JP_squire    ,
@@ -945,23 +978,7 @@ function Bunit.toString3(prpt)
 			prpt.JP_thief    ,
 			prpt.thief_action_learned1 ,
 			prpt.thief_action_learned2 ,
-			prpt.thief_r_s_m_learned3  ,
-
-			prpt.reaction_active1 ,
-			prpt.reaction_active2 ,
-			prpt.reaction_active3 ,
-			prpt.reaction_active4 ,
-			prpt.support_active1  ,
-			prpt.support_active2  ,
-			prpt.support_active3  ,
-			prpt.support_active4  ,
-			prpt.movement_active1 ,
-			prpt.movement_active2 ,
-			prpt.movement_active3 ,
-			prpt.innate_ability1  ,
-			prpt.innate_ability2  ,
-			prpt.innate_ability3  ,
-			prpt.innate_ability4  )
+			prpt.thief_r_s_m_learned3  )
 
 	return str
 end
@@ -1083,6 +1100,26 @@ end
 function Bunit.isInjured(prpt)
 	local injured = bit.band(prpt.status_cur3, 0x01)  -- 0x01 Critical injured
 	return injured
+end
+
+function Bunit.isSetBasicSkill(prpt)
+	if prpt.primary_skill == SkillSet.Basic then
+		return true
+	elseif prpt.secondary_skill == SkillSet.Basic then
+		return true
+	else
+		return false
+	end
+end
+
+function Bunit.isSetBlackSkill(prpt)
+	if prpt.primary_skill == SkillSet.Black then
+		return true
+	elseif prpt.secondary_skill == SkillSet.Black then
+		return true
+	else
+		return false
+	end
 end
 
 function Bunit.isLearnedThrowStone(prpt)
@@ -1207,6 +1244,25 @@ function GameTime.getSeed(gt)
 	return sum
 end
 
+------------------------------------------------------------
+-- Skill set
+------------------------------------------------------------
+SkillSet = {}
+SkillSet.Basic       = 0x05  -- squire
+SkillSet.Item        = 0x06  -- chemist
+SkillSet.Battle      = 0x07  -- knight
+SkillSet.Charge      = 0x08  -- archer
+SkillSet.Punch       = 0x09  -- monk
+SkillSet.White       = 0x0A  -- priest
+SkillSet.Black       = 0x0B  -- wizard
+SkillSet.Time        = 0x0C  -- time mage
+SkillSet.Summon      = 0x0D  -- summoner
+SkillSet.Steal       = 0x0E  -- thief
+SkillSet.Talk        = 0x0F  -- Mediator
+SkillSet.YinYang     = 0x10  -- Oracle
+SkillSet.Math        = 0x15  -- Calculator
+SkillSet.Guts        = 0x1A  -- Ramza
+
 
 ------------------------------------------------------------
 -- Zodiac sign
@@ -1318,6 +1374,35 @@ function Zodiac.checkCompatibilityAgrias(sign, gender)
 		-- FIXME:: monster is regarded as best, unfortunately
 		return Zodiac.BEST
 	elseif masked_sign == Zodiac.Capricorn and same_sex ~= 0 then
+		return Zodiac.WORST
+	end
+
+	return Zodiac.NORMAL
+end
+
+--- Check zodiac sign compatibility with Alicia as Pisces.
+--        "good: 0x30, 0x70, very good: 0x50"
+--        "bad : 0x20, 0x80, very bad : 0x50"
+--  @return 1:worst, 2:bad, 3:normal, 4:good, 5:best
+function Zodiac.checkCompatibilityAlicia(sign, gender)
+	local same_sex = 0
+	local masked_sign
+
+	masked_sign = bit.band(sign, 0xF0)
+	same_sex = bit.band(gender, 0x40)  -- 0x80 is male, 0x40 is female
+
+	if masked_sign == Zodiac.Cancer then
+		return Zodiac.GOOD
+	elseif masked_sign == Zodiac.Scorpio then
+		return Zodiac.GOOD
+	elseif masked_sign == Zodiac.Gemini then
+		return Zodiac.BAD
+	elseif masked_sign == Zodiac.Sagittarius then
+		return Zodiac.BAD
+	elseif masked_sign == Zodiac.Virgo and same_sex == 0 then
+		-- FIXME:: monster is regarded as best, unfortunately
+		return Zodiac.BEST
+	elseif masked_sign == Zodiac.Virgo and same_sex ~= 0 then
 		return Zodiac.WORST
 	end
 

@@ -25,7 +25,7 @@ RNG
 FurShop glitch
 -------------
 * furshop glitch takes 1474f
-* 1638f is fastest at soft rest
+* 1637f is fastest at soft rest
 * soft rest しても rng seed の初期化は発生しない
 * furshop inventory 0x80056818 (JPv1.1)
 * furshop inventory 0x80059494 (US)
@@ -45,6 +45,11 @@ Ramza 初期ステータス
   * Wizard JP, Priest JP, Calculator JP, Time mage JP, Oracle JP
     * 7ジョブ合計で 1200 以上が目安
 
+* RNG とラグフレーム
+	* ラグフレームの総数を変えても RNG が同じであれば status は同じ
+	* ただし、 Tutorial で soft reset した場合と即 cancel した場合では、同じ RNG でも status は変わる
+	* よって、調整にラグフレームの総数を変えるのは意味がない
+	* メモリ内の何らかの状態が変われば、同じ RNG でも結果は変わる
 
 
 ch1-Orbonne
@@ -55,6 +60,28 @@ ch1-Orbonne
   * Gafgarion は Agrius 正面の敵と相性が悪いと別の 1体を狙う
   * Gafgarion と Agruis が別々の敵を倒すよう誘導(調整)することで
     1ターン目で 2体を倒すことが可能
+
+* Orbonne party condition
+	* MUST:
+		* gaf: ID6 の archer と相性が良い or ID7 の archer と相性が悪い (turn1)
+		* knight: agrias と best 相性でない
+	
+	* Better:
+		* gaf の turn1 で スキルの詠唱ではなく、スキル名が表示される
+			* これは RNG で変わらない
+			* 戦闘前に既に決定されていると思われる。
+		* Lv up, Jp up しない
+		* 味方が黒魔法を持っていない (特に rad)
+			* rad が Black-Magic を持っていると、思考時間が顕著に長くなる
+		* lavian は thrown stone を set (turn1 で投石すると turn2 は回ってこない)
+		* knight と ramza の相性が良い. ramza と rad のクリティカルで 2hit で倒せる
+			* knight と ramza, alicia の相性が normal の場合、normal hit では 3hit で倒せないので、誰かの critical が必須
+		* gaf: ID8 の archer と相性が良い or ID9 の chemist と相性が悪い (turn2)
+			* gaf の turn2 で chemist を倒すと、agrias が archer を倒さないといけなくなり扉から離れる
+			* また chemist を最後に残した場合、lavian が投石を持っていない場合 lavian のダメージが入るため
+			  agrias は critical が必要ない
+		* agrias: Jp 163以上は Jp up する. Jp 162 以下はぎりぎり Jp up しない
+
 
 * turn1
   * change option
@@ -79,17 +106,24 @@ ch1-Orbonne
 * カメラ移動で敵や味方の行動開始フレームがずれるので、乱数調整が可能
 
 * Gafgarion turn1
-* Agrius
+	* L2 zoom out
+	* R1 (rotate) or R2 (angle)
+	* R1 の方が 12f 早い
+* Agrius turn1
 * Ramza turn1
-* Ramza turn1
+	* knight に背を向ける向きで待機
 * Alicia & Lavian turn1
 	* Alicia か Lavian のどちらかで L1 回転する
 	* どちらが早いかは、その後の敵の行動にも左右される
-
 * Rad turn1
-	* 可能であれば、Alicia で L1 した savestate と Lavian で L1 した savestate を用意し
-	* 両方の savestate をもとに clitical が出るか検証すべき
+	* Alicia, Lavian, その後の enemy の turn のそれぞれで、カメラ操作を試し clitical が出るか検証すべき
 
+* Agrias turn2
+	* Agrias turn2 の前に camera 視点を戦闘前と同じ視点にしておく
+		* 他の視点だと、移動時に回転する
+	* Agrias をなるべく扉近くに誘導する
+		* そのために chemist を最後に残すのがよい
+		* archer を最後に残すと扉からの距離が長くなり、余分に移動する
 
 * 最後の敵を倒す前にカメラを戦闘前と同じ視点にしておく
 	* 別の視点だと Agrius が扉に移動する際にカメラ回転してしまう
@@ -97,11 +131,22 @@ ch1-Orbonne
 
 
 * "Let go of me" said Ovelia
-  * testrun_tas = 19406f,  5:23
-  * optimze_tas = 16619f,  4:37 , 2787f faster, optimize
-  * optimze_tas = 16073f,  4:xx , 3333f faster, 546f faster, retry=9
-  * optimze_tas = 16055f,  4:xx , 3351f faster, 564f faster, retry=57
-  * youtube_tas =       ,  4:25
+  * testrun_tas   = 19406f,  5:23
+  * optimze_tas   = 16619f,  4:37 , 2787f faster, optimize
+  * calc2_tas     = 16073f,  4:xx , 3333f faster, 546f faster, retry=9
+  * calc2_tas     = 16055f,  4:xx , 3351f faster, 564f faster, retry=57
+  * calc2_furshop = 16326f,  4:xx , 3080f faster, 293f faster, retry=23
+  * calc2_furshop = 16446f,  4:37 , 2960f faster, 173f faster, retry=31
+  * calc2_furshop = 16883f,  4:37 , xxxxf faster, xxxf faster, retry=22
+  * youtube_tas   =       ,  4:25
+
+* "ゴルターナ軍にいるんだ" said Ramza
+  * calc2_furshop = 18071f - 16326f = 1745f, retry=23		29f slower
+  * calc2_furshop = 18162f - 16446f = 1716f, retry=31
+  * calc2_furshop = 18599f - 16883f = 1716f, retry=22
+
+
+
 
 * Orbonne 戦闘終了の会話は 手動と text_skip.lua とで同じ結果
 * text_skip.lua を信用してもよさそう
@@ -1727,9 +1772,9 @@ Encounter research of random battle
   * 0008f08c - 0008f280
     * 戻り値が 0 なら無し. 1 ならエンカウント
     * 恐らく拠点ごとにエンカウント率が設定されている
-    * 拠点情報は 0x80096A40 (US) から 0x18 each
+    * 拠点情報は 0x80096A64 (US) から 0x18 each
       拠点情報 の 3byte 目がエンカウント率と思われる
-    * Mandalia の場合 0x80096A40 (US) + (0x18 * 2) + 0x3 = 0x80096A94 に
+    * Mandalia の場合 0x80096A64 (US) + (0x18 * 2) + 0x3 = 0x80096A94 に
       0x1E (30% chance) が格納されている
     * 乱数call (jal 0x0002230c) が 2ヶ所にあるがどちらも最終的に
       0-99 の範囲に変換している

@@ -28,7 +28,20 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
+function waitForBest()
+	local retry = 48
+	local best_rng = 0x4892C5B9
 
+	for i=0, retry do
+		local rng = memory.readdword(adr_rng)
+		if rng == best_rng then
+			return
+		else
+			emu.frameadvance()
+		end
+	end
+	print("error: Could not find best rng.")
+end
 
 
 ------------------------------------------------------------
@@ -46,16 +59,21 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = OrbonneGafgarionTurn1
+local interface = OrbonneAgriasTurn2
 
 --f = io.open(interface.logname, "a")
-if f == nil then print("error: Could not open file") end
+--if f == nil then print("error: Could not open file") end
 
 retry = 0
 
 for i=0, retry do
 	interface.pre_attempt()
-	interface.waitForBest()
+
+	if interface.waitForBest ~= nil then
+		interface.waitForBest()
+	else
+		waitForBest()
+	end
 
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
@@ -63,8 +81,10 @@ for i=0, retry do
 
 	interface.attempt()
 
-	if interface.success() then
-		print(string.format("  ***** best state. fc = %d, rng = %08X *****", fc, rng))
+	-- check result
+	local result =  interface.success()
+	if result then
+		print(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
 		interface.post_attempt()
 	else
 		print(string.format("error: Could not take best action. fc = %d, rng = %08X", fc, rng))
@@ -79,5 +99,5 @@ print(string.format("    end:: %s,  fc = %d", os.date(), fc))
 print(string.format("elapsed:: fc = %d", fc - begin_fc))
 emu.speedmode("normal")
 emu.pause()
-f:close()
+--f:close()
 
