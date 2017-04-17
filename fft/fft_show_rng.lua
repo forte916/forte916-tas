@@ -40,24 +40,20 @@ function markRNGList(rnglist)
 	local seed = readRNG()
 	local found = false
 
-	print(string.format("----10 %08X", seed))
+	--print(string.format("----10 seed:   %08X, %u, %s", seed, seed, tostring(seed)))
 
 	for i=1, #rnglist, 1 do
-		print(string.format("----20 , %08X, %08X, %d", seed, rnglist[i].rng, i))
-		print(string.format("----21 , %s, %s, %d", tostring(seed), tostring(rnglist[i].rng), i))
+		--print(string.format("----20 , %d", i))
+		--print(string.format("  --21 seed:   %08X, %u, %s", seed, seed, tostring(seed)))
+		--print(string.format("  --22 rnglist: %08X, %u, %s", rnglist[i].rng, rnglist[i].rng, tostring(rnglist[i].rng)))
 		if seed == rnglist[i].rng then
 			rnglist[i].mark  = "*"
 			found = true
-			print(string.format("----30 , %08X, %08X, %d, found", seed, rnglist[i].rng, i))
+			--print(string.format("----30 , %08X, %08X, %d, found", seed, rnglist[i].rng, i))
 			break
 		end
 	end
-	if found == false then
-		print(string.format("----40 %08X , update rng", seed))
-		rnglist = predictRNGList(predict_count)
-		print(string.format("----50 %08X , update rng", seed))
-	end
-	return rnglist
+	return rnglist, found
 end
 
 function drawRNG(x, y)
@@ -82,10 +78,11 @@ end
 ------------------------------------------------------------
 
 initial = 1
-predict_count = 40
+predict_count = 25
 predict_list = {}
 
 while true do
+	local found = false
 
 	if initial == 1 then
 		--Funit.showAll()
@@ -94,7 +91,11 @@ while true do
 		initial = 0
 	end
 
-	predict_list = markRNGList(predict_list)
+	predict_list, found = markRNGList(predict_list)
+	if found == false then
+		predict_list = predictRNGList(predict_count)
+		predict_list, found = markRNGList(predict_list)
+	end
 	drawRNGList(predict_list, x, y)
 
 	drawRNG()

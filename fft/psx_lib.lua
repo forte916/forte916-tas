@@ -6,12 +6,15 @@
 --
 
 require "bit"
+require "math"
 
 ------------------------------------------------------------
 -- BIOS functions
 ------------------------------------------------------------
 
-adr_rng = 0x9010 -- RNG seed, 4byte
+MAX_INT = math.pow(2, 31)  -- MAX_INT = 2^31
+adr_rng = 0x9010 -- BIOS RNG seed, 4byte
+
 
 -- pure 32-bit multiplier
 function mul32(a, b)
@@ -26,7 +29,7 @@ function mul32(a, b)
         y[3] = bit.band(bit.rshift(b, 16), 0xff)
         y[4] = bit.band(bit.rshift(b, 24), 0xff)
         -- calculate for each bytes
-        local v, c
+        local v, c, ret
         v = x[1] * y[1]
         z[1], c = bit.band(v, 0xff), bit.rshift(v, 8)
         v = c + x[2] * y[1] + x[1] * y[2]
@@ -42,8 +45,10 @@ function mul32(a, b)
         v = c + x[4] * y[4]
         z[7], z[8] = bit.band(v, 0xff), bit.rshift(v, 8)
         -- compose them and return it
-        return bit.bor(z[1], bit.lshift(z[2], 8), bit.lshift(z[3], 16), bit.lshift(z[4], 24)),
-               bit.bor(z[5], bit.lshift(z[6], 8), bit.lshift(z[7], 16), bit.lshift(z[8], 24))
+        ret = bit.bor(z[1], bit.lshift(z[2], 8), bit.lshift(z[3], 16), bit.lshift(z[4], 24)),
+              bit.bor(z[5], bit.lshift(z[6], 8), bit.lshift(z[7], 16), bit.lshift(z[8], 24))
+        ret =  ret - bit.band(ret, MAX_INT) * 2  -- convert signed to unsigned
+        return ret
 end
 
 function readRNG()
@@ -64,14 +69,15 @@ function rand(seed)
 	seed = seed or readRNG()
 	local random
 
-	local next_seed = next_rng(seed)
-	random = bit.rshift(next_seed, 16)   -- same as x >>= 16
+	--local next_seed = next_rng(seed)
+	--random = bit.rshift(next_seed, 16)   -- same as x >>= 16
+	random = bit.rshift(seed, 16)   -- same as x >>= 16
 	random = bit.band(random, 0x7FFF)  -- same as x & 0x7FFF
 	return random
 end
 
 function next_rng(seed)
-	return  mul32(seed, 1103515245) + 12345
+	return mul32(seed, 1103515245) + 12345
 end
 
 ------------------------------------------------------------
