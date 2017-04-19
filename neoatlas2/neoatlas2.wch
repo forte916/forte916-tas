@@ -1,0 +1,14 @@
+
+12
+00000	00009010	d	h	0	BIOS RNG
+00001	00000000	S	S	0	----------------------------
+00002	0011FD94	d	u	0	counter
+00003	0000E32C	d	h	0	param
+00004	00121D44	d	h	0	param
+00005	00121D60	d	h	0	param
+00006	00121D64	d	h	0	param
+00007	001BD778	d	h	0	param
+00008	001BD77C	d	h	0	param
+00009	1F801120	d	h	0	RC2wait param
+0000A	1F801124	d	h	0	RC2wait param
+0000B	1F801128	d	h	0	RC2wait param
