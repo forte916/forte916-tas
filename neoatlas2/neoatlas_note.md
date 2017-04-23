@@ -90,6 +90,32 @@ Neo ATLAS 2
 * [Wazap](http://jp.wazap.com/game/4643/cheats/)
 
 
+## RNG
+```
+random_sub_800EE4F0:
+lui     $v1, 0x41C6
+lw      $v0, 0x444($gp)
+li      $v1, 0x41C64E6D
+mult    $v0, $v1
+mflo    $a0
+addiu   $v0, $a0, 0x3039
+sw      $v0, 0x444($gp)
+srl     $v0, 16
+jr      $ra
+andi    $v0, 0x7FFF
+ # End of function random_sub_800EE4F0
+```
+
+## ROM hack
+* Main Data Locations:
+  * RAM -> File
+  *   -0x???? -> SLPS_022.28
+  * -0x05A000 -> TITLE.bin
+  * -0x1BD810 -> REPORT.bin
+  * -0x1BD810 -> WINDOW.bin
+  * -0x1BD810 -> ENDING.bin
+  * -0x1EFF00 -> SAVELOAD.bin
+
 
 ------------------------------------------------------------
 
