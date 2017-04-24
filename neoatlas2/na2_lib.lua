@@ -13,21 +13,47 @@
 ------------------------------------------------------------
 
 city_offset       = 0x001AED48  -- 0x40 each
-city_jedda        = 0x001AED48  -- city_offset
-city_alecsandria  = 0x001AED88  -- city_offset + (0x40 * 1)
-city_chunis       = 0x001AEDC8  -- city_offset + (0x40 * 2)
-city_toripoli     = 0x001AEE08  -- city_offset + (0x40 * 3)
+city_jeddah       = 0x001AED48  -- city_offset
+city_alexandria   = 0x001AED88  -- city_offset + (0x40 * 1)
+city_tunis        = 0x001AEDC8  -- city_offset + (0x40 * 2)
+city_tripoli      = 0x001AEE08  -- city_offset + (0x40 * 3)
 city_lisbon       = 0x001AEE48  -- city_offset + (0x40 * 4)
 city_london       = 0x001AEE88  -- city_offset + (0x40 * 5)
 
 
 adr_gp            = 0x00121E80  -- global pointer
+adr_game_speed    = 0x00121EEE  -- adr_gp + 0x006E -- 1byte
+adr_scale1        = 0x00121F78  -- adr_gp + 0x00F8 -- 1byte
 adr_total_city    = 0x0012226C  -- adr_gp + 0x03EC -- 2byte total city count??
-adr_rng           = adr_gp + 0x0444  -- rng
+adr_rng           = 0x001222C4  -- adr_gp + 0x0444 -- 4byte
+adr_scale2        = 0x001223F0  -- adr_gp + 0x0570 -- 1byte
 
-
-adr_money         = 0x00122528  -- 4byte
+adr_money         = 0x00122528  -- adr_gp + 0x06A8 -- 4byte
 	-- eg.) 0x05F5E0FF = 99990000 = 9999万
+
+
+
+Global = {}
+Global.base       = { adr=0x00121E80, ofs=0        } -- xbyte
+Global.game_speed = { adr=0x00121EEE, ofs=0x006E   } -- 1byte
+Global.scale1     = { adr=0x00121F78, ofs=0x00F8   } -- 1byte
+Global.total_city = { adr=0x0012226C, ofs=0x03EC   } -- 2byte
+Global.rng        = { adr=0x001222C4, ofs=0x0444   } -- 4byte
+Global.scale2     = { adr=0x001223F0, ofs=0x0570   } -- 1byte
+Global.date_param = { adr=0x00122458, ofs=0x05D8   } -- 4byte -- copy of Date.date_param16??
+Global.money      = { adr=0x00122528, ofs=0x06A8   } -- 4byte
+
+Date = {}
+Date.base         = { adr=0x00132118, ofs=0        } -- 4byte
+Date.date_param04 = { adr=0x0013211C, ofs=0x04     } -- 4byte
+Date.date_param08 = { adr=0x00132120, ofs=0x08     } -- 4byte
+Date.year         = { adr=0x00132124, ofs=0x12     } -- 2byte
+Date.month        = { adr=0x00132126, ofs=0x14     } -- 1byte
+Date.day          = { adr=0x00132127, ofs=0x15     } -- 1byte
+Date.date_param16 = { adr=0x00132128, ofs=0x16     } -- 4byte
+Date.date_param1A = { adr=0x0013212C, ofs=0x1A     } -- 4byte
+
+
 
 
 
@@ -283,6 +309,24 @@ function City.drawAll(ofs_city, x, y)
 	end
 end
 
+
+------------------------------------------------------------
+-- Voyage
+------------------------------------------------------------
+Voyage = {}
+
+function Voyage.getState()
+	local header = memory.readdword(0x001BD810)
+	if header == 0x00000004 then
+		return Voyage.STATE_REPORT
+	elseif header == 0x00000005 then
+		return Voyage.STATE_WINDOW
+	elseif header == 0x00000006 then
+		return Voyage.STATE_ENDING
+	else
+		return Voyage.STATE_OTHER
+	end
+end
 
 
 

@@ -5,10 +5,36 @@ Neo ATLAS 2
 * SLPS02238		First release
 * SLPS02974		Artdink best choice
 
+## ROM hack
+* Main Data Locations:
+  * RAM -> File
+  *   -0x???? -> SLPS_022.28
+  * -0x05A000 -> TITLE.bin
+  * -0x1BD810 -> REPORT.bin
+  * -0x1BD810 -> WINDOW.bin
+  * -0x1BD810 -> ENDING.bin
+  * -0x1EFF00 -> SAVELOAD.bin
 
-## UFO
-> UFOって最初に未確定地域を確定した時にスケール４で探せば出るはず
-> 数年前の事なんで自信無いけど、だから大抵アフリカで見つかる
+
+## RNG
+* RNG formula is same as PSX BIOS rand()
+* Advances the random generator as "x=x*41C64E6Dh+3039h" (aka plus 12345 decimal),
+* and returns a 15bit random value "R2=(x/10000h) AND 7FFFh".
+* seed is stored at 0x001222C4 (which is gp plus 0x444)
+```asm
+random_sub_800EE4F0:
+lui     $v1, 0x41C6
+lw      $v0, 0x444($gp)
+li      $v1, 0x41C64E6D
+mult    $v0, $v1
+mflo    $a0
+addiu   $v0, $a0, 0x3039
+sw      $v0, 0x444($gp)
+srl     $v0, 16
+jr      $ra
+andi    $v0, 0x7FFF
+ # End of function random_sub_800EE4F0
+```
 
 
 ## メモリアドレス
@@ -84,37 +110,15 @@ Neo ATLAS 2
 	* 801AEE72 05DC
 
 
+## UFO
+> UFOって最初に未確定地域を確定した時にスケール４で探せば出るはず
+> 数年前の事なんで自信無いけど、だから大抵アフリカで見つかる
+
 ## 攻略サイト
 * [Neo ATLAS II 航海日誌](http://www.ne.jp/asahi/personal/heaven/games/atlas2/)
 * [NEO ATLAS 2 攻略？ 序盤金策用](http://blog.goo.ne.jp/tarkarsar/e/a133cab21bf96e29051c5b451b493209)
 * [Wazap](http://jp.wazap.com/game/4643/cheats/)
 
-
-## RNG
-```
-random_sub_800EE4F0:
-lui     $v1, 0x41C6
-lw      $v0, 0x444($gp)
-li      $v1, 0x41C64E6D
-mult    $v0, $v1
-mflo    $a0
-addiu   $v0, $a0, 0x3039
-sw      $v0, 0x444($gp)
-srl     $v0, 16
-jr      $ra
-andi    $v0, 0x7FFF
- # End of function random_sub_800EE4F0
-```
-
-## ROM hack
-* Main Data Locations:
-  * RAM -> File
-  *   -0x???? -> SLPS_022.28
-  * -0x05A000 -> TITLE.bin
-  * -0x1BD810 -> REPORT.bin
-  * -0x1BD810 -> WINDOW.bin
-  * -0x1BD810 -> ENDING.bin
-  * -0x1EFF00 -> SAVELOAD.bin
 
 
 ------------------------------------------------------------

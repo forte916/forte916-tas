@@ -77,7 +77,7 @@ function rand(seed)
 end
 
 function next_rng(seed)
-	return mul32(seed, 1103515245) + 12345
+	return mul32(seed, 0x41C64E6D) + 0x3039
 end
 
 ------------------------------------------------------------
