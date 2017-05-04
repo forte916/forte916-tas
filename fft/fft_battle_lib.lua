@@ -53,7 +53,7 @@ adr_effect_flag_0960B4 = 0x0960B4  -- 2byte??
 adr_text_flag_096088 = 0x096088  --  ?byte  -- Type of display
   -- 0x10: start to moving
   -- 0x11: 1f after acceptance for change camera
-
+  -- 0x19: 1f before green panel, 3f after acceptance for moving cursor
 
 adr_text_flag_0961B8 = 0x0961B8  -- ?byte  -- Action_Phase
   -- 0x01: during skill effect
@@ -155,6 +155,14 @@ end
 function Battle.waitForStartingToMove()
 	local flag_096088 = memory.readword(adr_text_flag_096088)
 	while not (0x10 == flag_096088) do
+		fadv(1)
+		flag_096088 = memory.readword(adr_text_flag_096088)
+	end
+end
+
+function Battle.waitForGreenPanel()
+	local flag_096088 = memory.readword(adr_text_flag_096088)
+	while not (0x19 == flag_096088) do
 		fadv(1)
 		flag_096088 = memory.readword(adr_text_flag_096088)
 	end

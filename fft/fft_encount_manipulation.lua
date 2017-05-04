@@ -4,8 +4,8 @@
 -- This script manipulates encounts and enemy status.
 --
 -- Usage
---   1. Set interface as proper clsss.
---   1. Start this script properlly.
+--   1. Set interface class properly.
+--   2. Start this script properly.
 --
 
 require "fft_encount_lib"
@@ -58,12 +58,13 @@ else
 end
 
 for i=0, retry do
+	drawRetry(i, x, y)
+	interface.pre_attempt()
+
 	if initial == 1 then
 		initial = 0
 	end
 
-	drawRetry(i, x, y)
-	interface.pre_attempt()
 	fadv(i)
 	if interface.pre_attempt2 ~= nil then interface.pre_attempt2() end
 

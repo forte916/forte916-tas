@@ -43,69 +43,67 @@ local initial = 1
 local begin_fc = emu.framecount()
 local begin_date = os.date()
 local fc = emu.framecount()
-local rng = memory.readdword(adr_rng)
+--local rng = memory.readdword(adr_rng)
 local seed
-local base_game_fc
-local base_cur_session
 
-local interface = MandaliaRandom
+local interface = Orbonne
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
-retry = 4000
+if interface.retry ~= nil then
+	retry = interface.retry
+else
+	retry = 500
+end
 
 for i=0, retry do
+	drawRetry(i, x, y)
+	interface.pre_attempt()
+
 	if initial == 1 then
 		initial = 0
 		fadv(i)
 
-		state = savestate.create()
-		savestate.save(state)
+		seed = memory.readdword(adr_rng)
+		--seed = 0xA9A7D947
 
-		--seed = memory.readdword(adr_rng)
-		--base_game_fc = memory.readdword(adr_game_fc)
-		--base_cur_session = memory.readdword(adr_cur_session)
-		GameTime.init()
+		--GameTime.init()
 	else
-		--seed =  next_rng(seed)
-		--memory.writedword(adr_rng, seed)
+		seed =  next_rng(seed)
+		memory.writedword(adr_rng, seed)
 
-		--base_game_fc = base_game_fc + 1
-		--memory.writedword(adr_game_fc, base_game_fc)
-
-		--base_cur_session = base_cur_session + 1
-		--memory.writedword(adr_cur_session, base_cur_session)
-
-		GameTime.increment()
+		--GameTime.increment()
 	end
 
-	drawRetry(i, x, y)
-	interface.pre_attempt()
+
 	if interface.pre_attempt2 ~= nil then interface.pre_attempt2() end
 
 	fc = emu.framecount()
-	rng = memory.readdword(adr_rng)
+	--rng = memory.readdword(adr_rng)
 	local game_time = GameTime.read()
 	local cur_session = memory.readdword(adr_cur_session)
+	--print(string.format("  seed: %08X, %d, %u, %s", seed, seed, seed, tostring(seed)))
+	--print(string.format("  rng : %08X, %d, %u, %s", rng, rng, rng, tostring(rng)))
 
 	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X"
 		..", game_time = %s, encountFormula = %d"
 		..", cur_session = %d -----", 
-		i, fc, rng, 
+		i, fc, seed, 
 		GameTime.format(game_time), 
 		GameTime.encountFormula(game_time), 
 		cur_session))
 
 	interface.attempt()
 
-	-- check results
-	if interface.success() then
-		debugPrint(string.format("  ***** best state. fc = %d, rng = %08X, game_time = %s *****",
-			fc, rng, GameTime.format(game_time)))
-		print(string.format("***** best state. retry = %d, rng = %08X, game_time = %s *****",
-			i, rng, GameTime.format(game_time)))
+	-- check result
+	local result =  interface.success()
+	if result then
+		debugPrint(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X, game_time = %s *****",
+			result, i, fc, seed, GameTime.format(game_time)))
+		print(string.format("***** %s state. retry = %d, fc = %d, rng = %08X, game_time = %s *****",
+			result, i, fc, seed, GameTime.format(game_time)))
 		interface.post_attempt()
 	end
 

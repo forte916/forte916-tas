@@ -36,36 +36,119 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 GarilandParty = {}
-GarilandParty.logname = "ch1_2_gariland_party_23.log"
+GarilandParty.logname = "ch1_2_gariland_partyE4.log"
+GarilandParty.retry = 500
 
 GarilandParty.best_st = {}
 GarilandParty.cur_st = {}
 
+-- TODO: refactoring using bit flag
+GarilandParty.fit = {
+	faith_best   = 0,
+	faith_good   = 0,
+	squire_best  = 0,
+	squire_good  = 0,
+	chemist_best = 0,
+	chemist_good = 0,
+	priest_best  = 0,
+	priest_good  = 0,
+	wizard_best  = 0,
+	wizard_good  = 0,
+	knight_best  = 0,
+	knight_good  = 0,
+	inherit_best = 0,
+	inherit_good = 0,
+	math_best    = 0,
+	math_good    = 0,
+}
+fit = GarilandParty.fit
+
+function GarilandParty.clearFit()
+	for key, value in pairs(GarilandParty.fit) do
+		GarilandParty.fit[key] = 0
+	end
+end
+
+function GarilandParty.incrementFit(prpt)
+	for key, value in pairs(GarilandParty.fit) do
+		GarilandParty.fit[key] = value + prpt[key]
+	end
+end
+
+function GarilandParty.matchBestMath()
+	if fit.wizard_best > 0 and fit.knight_best > 0 and fit.math_best > 0 then
+		return true
+	else 
+		return false
+	end
+end
+
+function GarilandParty.matchGoodMath()
+	if (fit.wizard_best + fit.wizard_good) > 0 and (fit.knight_best + fit.knight_good) > 0 and (fit.math_best + fit.math_good) > 0 then
+		return true
+	else 
+		return false
+	end
+end
+
+function GarilandParty.matchBestPriest()
+	if fit.wizard_best > 0 and fit.knight_best > 0 and fit.priest_best > 0 then
+		return true
+	else 
+		return false
+	end
+end
+
+function GarilandParty.matchGoodPriest()
+	if (fit.wizard_best + fit.wizard_good) > 0 and (fit.knight_best + fit.knight_good) > 0 and (fit.priest_best + fit.priest_good) > 0 then
+		return true
+	else 
+		return false
+	end
+end
+
+
+function GarilandParty.matchBestWizard()
+	if fit.wizard_best > 0 and fit.knight_best > 0 then
+		return true
+	else 
+		return false
+	end
+end
+
+function GarilandParty.matchGoodWizard()
+	if (fit.wizard_best + fit.wizard_good) > 0 and (fit.knight_best + fit.knight_good) > 0 then
+		return true
+	else 
+		return false
+	end
+end
+
+
 function GarilandParty.logHeader()
 	debugPrint(string.format("-- Bunit Legend --"))
-	debugPrint(string.format("%s", Bunit.info_header4))
-	debugPrint(string.format("80, 2,4a,30 |  1,40, 6 | 53,61 |  43,10 | 150- 70,161 | 145,181 |"))
-	debugPrint(string.format("80, 3,4a,40 |  1,34, 6 | 50,67 |  44,10 | 168- 18,163 | 140,161 |"))
-	debugPrint(string.format("80, 4,4b,20 |  1,45, 6 | 57,70 |  38,11 | 104- 14,194 | 137,127 |"))
-	debugPrint(string.format("81, 5,4a,20 |  1,36, 6 | 62,63 |  41,11 | 155- 75,173 | 141,191 |"))
-	debugPrint(string.format("81, 6,4a,30 |  1,79, 6 | 56,59 |  41,11 | 146- 66,107 | 198,169 |"))
-	debugPrint(string.format("81, 7,4b, 0 |  1,37, 6 | 58,61 |  36,11 | 169- 89,117 | 145,179 |"))
+	debugPrint(string.format("%s", Bunit.info_header5))
+	debugPrint(string.format(" 4, 1, 4,81 |  1,88 | 71,55 | 169- 39,113 | 153 | 181,125,154,124,121 | delita"))
+	debugPrint(string.format("80, 2,4a,20 |  1,87 | 48,47 | 107- 27,123 | 180 | 171,163,109,123,177 |  973 |"))
+	debugPrint(string.format("80, 3,4a,91 |  1,45 | 56,61 | 100- 20,134 | 107 | 110,163,162,115,143 |  927 |"))
+	debugPrint(string.format("80, 4,4b, 0 |  1,51 | 68,71 | 155- 75,118 | 177 | 171,186,109,162,149 | 1050 |"))
+	debugPrint(string.format("81, 5,4a,51 |  1,49 | 60,61 | 182- 12,163 | 186 | 107,114,145,121,122 |  954 |"))
+	debugPrint(string.format("81, 6,4a, 0 |  1,54 | 53,69 | 176-  6,155 | 172 | 183,168,122,198,102 | 1104 |"))
+	debugPrint(string.format("81, 7,4b,30 |  1,50 | 66,61 | 195- 25,117 | 114 | 156,110,175,175,100 | 1028 |"))
 	debugPrint(string.format(""))
 end
 
 function GarilandParty.pre_attempt()
-	fadv(2)
-	pressBtn({circle=1}, 1)
+	fadv(12-1)
+	pressBtn({x=1}, 1)
+	fadv(5)
 end
 
 function GarilandParty.attempt()
 	pressBtn({x=1}, 1)
-	fadv(5500)
+	fadv(600)
 
-	for i=1, 120 do
-		pressBtn({circle=1}, 9)
-	end
-
+	--fadv(200)
 end
 
 function GarilandParty.post_attempt()
@@ -73,7 +156,7 @@ function GarilandParty.post_attempt()
 end
 
 
-function GarilandParty.checkCalcGrind(prpt)
+function GarilandParty.fitCalculator(prpt, str)
 	local calc_st = {}
 	local calc_sum = 0
 
@@ -88,204 +171,166 @@ function GarilandParty.checkCalcGrind(prpt)
 	for key, value in pairs(calc_st) do
 		calc_sum = calc_sum + value
 	end
+	str = string.format("%s%4d |", str, calc_sum)
 
-	if calc_sum > 1999 then
-		debugPrint(string.format("calc_st = %s", calc_st))
-		print(string.format("calc_st = %s", calc_st))
+	prpt.math_best = 0
+	prpt.math_good = 0
+	if calc_sum >= 1200 then
+		prpt.math_best = 1
+		str = string.format("%s, math+", str)
+	elseif calc_sum >= 1160 then
+		prpt.math_good = 1
+		str = string.format("%s, math-", str)
 	end
-
-	return calc_sum
+	return prpt, str
 end
 
-function GarilandParty.fitChemist(prpt)
-	local good_fit = 0
-	local best_fit = 0
-
-	if Bunit.isJobSquire(prpt) == true then
-		if prpt.total_JP_chemist > 190 then
-			best_fit = best_fit + 1
-		elseif prpt.total_JP_chemist > 169 then
-			good_fit = good_fit + 1
-		end
-	elseif Bunit.isJobChemist(prpt) == true then
-		if prpt.total_JP_chemist > 160 then
-			best_fit = best_fit + 1
-		elseif prpt.total_JP_chemist > 129 then
-			good_fit = good_fit + 1
-		end
-	end
-
-	if best_fit > 0 then
-		return "best"
-	elseif good_fit > 0 then
-		return "good"
-	end
-end
-
-function GarilandParty.fitWizard(prpt, str)
-	local good_fit = 0
-	local best_fit = 0
-	local fit = nil
-
+function GarilandParty.fitFaith(prpt, str)
+	prpt.faith_best = 0
+	prpt.faith_good = 0
 	if Bunit.isFemale(prpt) ~= 0 then
 		if prpt.faith > 70 then
-			best_fit = best_fit + 1
+			prpt.faith_best = 1
 			str = string.format("%s, faith+", str)
 		elseif prpt.faith > 67 then
-			good_fit = good_fit + 1
+			prpt.faith_good = 1
 			str = string.format("%s, faith-", str)
 		end
 	elseif Bunit.isMale(prpt) ~= 0 then
 		if prpt.faith > 70 then
-			good_fit = good_fit + 1
+			prpt.faith_good = 1
 			str = string.format("%s, faith-", str)
 		end
 	end
-
-	fit = GarilandParty.fitChemist(prpt)
-	if fit == "best" then
-		best_fit = best_fit + 1
-	elseif fit == "good" then
-		good_fit = good_fit + 1
-	end
-
-	if best_fit > 1 then
-		str = string.format("%s, wizard+", str)
-		return "best", str
-	elseif good_fit > 1 or (best_fit + good_fit) > 1 then
-		str = string.format("%s, wizard-", str)
-		return "good", str
-	end
-	return nil, str
+	return prpt, str
 end
 
-function GarilandParty.fitSquire(prpt)
-	local good_fit = 0
-	local best_fit = 0
-
+function GarilandParty.fitChemist(prpt, str)
+	prpt.chemist_best = 0
+	prpt.chemist_good = 0
 	if Bunit.isJobSquire(prpt) == true then
-		if prpt.total_JP_squire > 135 then
-			best_fit = best_fit + 1
-		elseif prpt.total_JP_squire > 109 then
-			good_fit = good_fit + 1
+		if prpt.total_JP_chemist > 190 then
+			prpt.chemist_best = 1
+			str = string.format("%s, chemist+", str)
+		elseif prpt.total_JP_chemist > 179 then
+			prpt.chemist_good = 1
+			str = string.format("%s, chemist-", str)
 		end
 	elseif Bunit.isJobChemist(prpt) == true then
-		if prpt.total_JP_squire > 165 then
-			best_fit = best_fit + 1
-		elseif prpt.total_JP_squire > 139 then
-			good_fit = good_fit + 1
+		if prpt.total_JP_chemist > 169 then
+			prpt.chemist_best = 1
+			str = string.format("%s, chemist+", str)
+		elseif prpt.total_JP_chemist > 139 then
+			prpt.chemist_good = 1
+			str = string.format("%s, chemist-", str)
 		end
 	end
 
-	if best_fit > 0 then
-		return "best"
-	elseif good_fit > 0 then
-		return "good"
+	return prpt, str
+end
+
+function GarilandParty.fitWizard(prpt, str)
+	prpt.wizard_best = 0
+	prpt.wizard_good = 0
+	prpt, str = GarilandParty.fitFaith(prpt, str)
+	prpt, str = GarilandParty.fitChemist(prpt, str)
+
+	if prpt.faith_best > 0 and prpt.chemist_best > 0 then
+		prpt.wizard_best = 1
+		str = string.format("%s, wizard+", str)
+	elseif (prpt.faith_best + prpt.faith_good) > 0 and (prpt.chemist_best + prpt.chemist_good) > 0 then
+		prpt.wizard_good = 1
+		str = string.format("%s, wizard-", str)
 	end
-	return nil
+	return prpt, str
+end
+
+function GarilandParty.fitSquire(prpt, str)
+	prpt.squire_best = 0
+	prpt.squire_good = 0
+	if Bunit.isJobSquire(prpt) == true then
+		if prpt.total_JP_squire > 164 then
+			prpt.squire_best = 1
+			str = string.format("%s, squire+", str)
+		elseif prpt.total_JP_squire > 139 then
+			prpt.squire_good = 1
+			str = string.format("%s, squire-", str)
+		end
+	elseif Bunit.isJobChemist(prpt) == true then
+		if prpt.total_JP_squire > 179 then
+			prpt.squire_best = 1
+			str = string.format("%s, squire+", str)
+		elseif prpt.total_JP_squire > 154 then
+			prpt.squire_good = 1
+			str = string.format("%s, squire-", str)
+		end
+	end
+
+	return prpt, str
 end
 
 function GarilandParty.fitKnight(prpt, str)
-	local good_fit = 0
-	local best_fit = 0
-	local fit = nil
+	prpt.knight_best = 0
+	prpt.knight_good = 0
+	prpt, str = GarilandParty.fitSquire(prpt, str)
 
-	fit = GarilandParty.fitSquire(prpt)
-	if fit == "best" then
-		best_fit = best_fit + 1
-	elseif fit == "good" then
-		good_fit = good_fit + 1
-	end
-
-	if prpt.total_JP_knight > 189 then
-		best_fit = best_fit + 1
-	elseif prpt.total_JP_knight > 169 then
-		good_fit = good_fit + 1
-	end
-
-	if best_fit > 1 then
+	if prpt.total_JP_knight > 189 and prpt.squire_best > 0 then
+		prpt.knight_best = 1
 		str = string.format("%s, knight+", str)
-		return "best", str
-	elseif good_fit > 1 or (best_fit + good_fit) > 1 then
+	elseif prpt.total_JP_knight > 169 and (prpt.squire_best + prpt.squire_good) > 0 then
+		prpt.knight_good = 1
 		str = string.format("%s, knight-", str)
-		return "good", str
 	end
-	return nil, str
+	return prpt, str
 end
 
 function GarilandParty.fitInherit(prpt, str)
-	local good_fit = 0
-	local best_fit = 0
-	local fit = nil
-
-	fit = GarilandParty.fitSquire(prpt)
-	if fit == "best" then
-		best_fit = best_fit + 1
-		str = string.format("%s, squire+", str)
-	elseif fit == "good" then
-		good_fit = good_fit + 1
-		str = string.format("%s, squire-", str)
-	end
-
-	fit = GarilandParty.fitChemist(prpt)
-	if fit == "best" then
-		best_fit = best_fit + 1
-		str = string.format("%s, chemist+", str)
-	elseif fit == "good" then
-		good_fit = good_fit + 1
-		str = string.format("%s, chemist-", str)
-	end
-
-	if best_fit > 1 then
+	prpt.inherit_best = 0
+	prpt.inherit_good = 0
+	if prpt.squire_best > 0 and prpt.chemist_best > 0 then
+		prpt.inherit_best = 1
 		str = string.format("%s, inherit+", str)
-		return "best", str
-	elseif good_fit > 1 or (best_fit + good_fit) > 1 then
+	elseif (prpt.squire_best + prpt.squire_good) > 0 and (prpt.chemist_best + prpt.chemist_good) > 0 then
+		prpt.inherit_good = 1
 		str = string.format("%s, inherit-", str)
-		return "good", str
 	end
-	return nil, str
+	return prpt, str
 end
 
-function GarilandParty.success()
+function GarilandParty.fitPriest(prpt, str)
+	prpt.priest_best = 0
+	prpt.priest_good = 0
+	--prpt, str = GarilandParty.fitChemist(prpt, str)
+
+	if prpt.total_JP_priest > 189 and prpt.chemist_best > 0 then
+		prpt.priest_best = 1
+		str = string.format("%s, priest+", str)
+	elseif prpt.total_JP_priest > 169 and (prpt.chemist_best + prpt.chemist_good) > 0 then
+		prpt.priest_good = 1
+		str = string.format("%s, priest-", str)
+	end
+	return prpt, str
+end
+
+function GarilandParty.successGeneric()
 	local ret = nil
 	local prpt = {}
 	local ofs_unit = adr_battle_unit3
 	local total_party = 6
 	local str
-	local wizard_best = 0
-	local wizard_good = 0
-	local knight_best = 0
-	local knight_good = 0
-	local inherit_best = 0
-	local inherit_good = 0
+
+	GarilandParty.clearFit()
 
 	for i=1, total_party do
-		local fit = nil
 		prpt = Bunit.readProperty(ofs_unit)
 		ofs_unit = ofs_unit + 0x1C0
 		str = prpt.info
 
+		prpt, str = GarilandParty.fitCalculator(prpt, str)
 
-		fit, str = GarilandParty.fitWizard(prpt, str)
-		if fit == "best" then
-			wizard_best = wizard_best + 1
-		elseif fit == "good" then
-			wizard_good = wizard_good + 1
-		end
-
-		fit, str = GarilandParty.fitKnight(prpt, str)
-		if fit == "best" then
-			knight_best = knight_best + 1
-		elseif fit == "good" then
-			knight_good = knight_good + 1
-		end
-
-		fit, str = GarilandParty.fitInherit(prpt, str)
-		if fit == "best" then
-			inherit_best = inherit_best + 1
-		elseif fit == "good" then
-			inherit_good = inherit_good + 1
-		end
+		prpt, str = GarilandParty.fitWizard(prpt, str)
+		prpt, str = GarilandParty.fitKnight(prpt, str)
+		prpt, str = GarilandParty.fitInherit(prpt, str)
 
 --		if prpt.total_JP_wizard > 179 then
 --			str = string.format("%s, wizardJP", str)
@@ -295,21 +340,65 @@ function GarilandParty.success()
 			str = string.format("%s, squireJP", str)
 		end
 
---		local math  = GarilandParty.checkCalcGrind(prpt)
---		if math > 1999 then
---			str = string.format("%s, math(%d)", str, math)
---		end
+		prpt, str = GarilandParty.fitPriest(prpt, str)
 
 		debugPrint(str)
+		GarilandParty.incrementFit(prpt)
 	end
 
-	if wizard_best > 0 and knight_best > 1 and inherit_best > 1 then
-		ret = "best"
-	elseif (wizard_best + wizard_good) > 0 and (knight_best + knight_good) > 1 and (inherit_best + inherit_good) > 1 then
-		ret = "good"
+	if GarilandParty.matchBestMath() then
+		ret = "best_math"
+	elseif GarilandParty.matchBestPriest() then
+		ret = "best_priest"
+	elseif GarilandParty.matchBestWizard() then
+		ret = "best_wizard"
+	elseif GarilandParty.matchGoodMath() then
+		ret = "good_math"
+	elseif GarilandParty.matchGoodPriest() then
+		ret = "good_priest"
+	elseif GarilandParty.matchGoodWizard() then
+		ret = "good_wizard"
 	end
 
 	return ret
+end
+
+function GarilandParty.successDelita()
+	local ret = nil
+	local prpt = {}
+	local ofs_unit = adr_battle_unit2
+	local str
+
+	prpt = Bunit.readProperty(ofs_unit)
+	str = prpt.info
+	str = str.."delita"
+
+	if Bunit.isLearnedDefend(prpt) ~= 0 then
+		str = str..", Defend"
+
+		if Bunit.isSetDefend(prpt) then
+			str = str.." set"
+		else
+			str = str.." NOT set"
+		end
+	end
+
+	if Bunit.isLearnedThrowStone(prpt) ~= 0 then
+		str = str..", throw stone"
+
+		if Bunit.isSetBasicSkill(prpt) then
+			str = str.." set"
+		else
+			str = str.." NOT set"
+		end
+	end
+
+	debugPrint(str)
+end
+
+function GarilandParty.success()
+	GarilandParty.successDelita()
+	return GarilandParty.successGeneric()
 end
 
 -- @deplicated
@@ -383,6 +472,7 @@ local begin_fc = emu.framecount()
 local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
+local seed
 
 local interface = GarilandParty
 
@@ -390,29 +480,50 @@ f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
 if interface.logHeader ~= nil then interface.logHeader() end
 
+if interface.retry ~= nil then
+	retry = interface.retry
+else
+	retry = 500
+end
 
-retry = 1000
 
 for i=0, retry do
-	if initial == 1 then
-		--GarilandParty.best_st.faith     = 0
-		--GarilandParty.best_st.chemistJP = 0
-		initial = 0
-	end
-
 	drawRetry(i, x, y)
 	interface.pre_attempt()
+
+	if initial == 1 then
+		initial = 0
+	end
 	fadv(i)
+
+
+--	if initial == 1 then
+--		initial = 0
+--		fadv(i)
+--
+--		--seed = memory.readdword(adr_rng)
+--		--seed = 0xD0ED60DA  -- 16700f
+--		--seed = 0x66FBF315  -- 17000f
+--		--seed = 0x60797F1D  -- 17343f
+--		--seed = 0x785C9B05  -- 17190f
+--		seed = 0x4C4BFA3E
+--	else
+--		seed = next_rng(seed)
+--		memory.writedword(adr_rng, seed)
+--	end
+
+
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
+
 	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
+	--debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X, seed = %08X -----", i, fc, rng, seed))
 
 	interface.attempt()
 
 	-- check result
 	local result =  interface.success()
 	if result then
-		--debugPrint(string.format("***** best state. fc = %d, %s, rng = %08X *****", fc, GarilandParty.format_st(GarilandParty.best_st), rng))
 		debugPrint(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
 		print(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
 		interface.post_attempt()

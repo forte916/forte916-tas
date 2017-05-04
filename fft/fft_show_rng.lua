@@ -22,7 +22,7 @@ function predictRNGList(count)
 
 	for i=1, count do
 		rnglist[i] = { rng = seed, mark = "" }
-		seed = next_rng(seed)
+		seed = next_rng_unsigned(seed)
 	end
 	return rnglist
 end

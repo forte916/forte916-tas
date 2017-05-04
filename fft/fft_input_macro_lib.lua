@@ -134,15 +134,14 @@ function TAS.skipOrbonne()
 	fc = emu.framecount()
 	print(string.format("skipOrbonne: fc = %d", fc))
 
-	-- agrias, 3155f
+	-- agrias
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
 	pressBtn({x=1}, 1)
-	-- agrias, 3163f
 	fadv(95)
 
-	-- ovelia, 3257f
+	-- ovelia
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -150,7 +149,7 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 	--fadv(xx)
 	
-	-- agrias, 3414f
+	-- agrias
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -158,7 +157,7 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 	--fadv(xx)
 	
-	-- simon, 3545f
+	-- simon
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -167,7 +166,8 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 
 
-	-- gafgarion, 3844f
+	-- gafgarion
+	-- 2f before 0x80037808 = 0x0409
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -175,7 +175,8 @@ function TAS.skipOrbonne()
 	fadv(1)
 	pressBtn({x=1}, 1)
 
-	-- agrias, 3888f
+	-- agrias
+	-- 2f before 0x80037808 = 0x0189
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -184,7 +185,8 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 
 
-	-- gafgarion, 4066f
+	-- gafgarion
+	-- 2f before 0x80037808 = 0x0189
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -199,7 +201,8 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 
 
-	-- agrias, 4190f
+	-- agrias
+	-- 2f before 0x80037808 = 0x0189
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -209,7 +212,8 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 
 
-	-- gafgarion, 4252f
+	-- gafgarion
+	-- 2f before 0x80037808 = 0x0189
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -228,7 +232,8 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 	fadv(15)
 
-	-- agrias, 4312f
+	-- agrias
+	-- 2f before 0x80037808 = 0x0189
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
@@ -236,7 +241,7 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 
 
-	-- ovelia, 4418f
+	-- ovelia
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
@@ -244,30 +249,31 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 
 
-	-- simon, 4762f
+	-- simon
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
 	pressBtn({x=1}, 1)
 
-	-- ovelia, 4784f
+	-- ovelia
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
 	pressBtn({x=1}, 1)
 
 
-	-- knight, 5121f
-	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 2)
-	pressBtn({circle=1}, 1)
-	pressBtn({x=1}, 1)
-
-	-- simon, 5151f
+	-- knight
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
 	pressBtn({x=1}, 1)
 
-	-- gafgarion, 5290f
+	-- simon
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 2)
+	pressBtn({circle=1}, 1)
+	pressBtn({x=1}, 1)
+
+	-- gafgarion
+	-- 2f before 0x80037808 = 0x0409
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -280,7 +286,7 @@ function TAS.skipOrbonne()
 	fadv(2)
 	pressBtn({x=1}, 1)
 
-	-- ramza, 5334f
+	-- ramza
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -289,7 +295,7 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 	fadv(3)
 
-	-- gafgarion, 5348f
+	-- gafgarion
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
@@ -300,7 +306,7 @@ function TAS.skipOrbonne()
 	pressBtn({x=1}, 1)
 
 
-	-- ovelia, 5670f
+	-- ovelia
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
 	-- if wait here, change enemy status.
@@ -308,7 +314,7 @@ function TAS.skipOrbonne()
 end
 
 function TAS.Ch1_1_skipOrbonneEntrance()
-	-- agrias, 6762f
+	-- agrias
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
@@ -327,7 +333,7 @@ function TAS.Ch1_1_skipOrbonneEntrance()
 	pressBtn({x=1}, 1)
 
 
-	-- enemy, 6876f
+	-- enemy
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -343,7 +349,7 @@ function TAS.Ch1_1_skipOrbonneEntrance()
 	pressBtn({x=1}, 1)
 
 
-	-- gafgarion, 7120f
+	-- gafgarion
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -352,7 +358,7 @@ function TAS.Ch1_1_skipOrbonneEntrance()
 	pressBtn({circle=1}, 1)
 	pressBtn({x=1}, 1)
 
-	-- agrias, 7232f
+	-- agrias
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -360,7 +366,7 @@ function TAS.Ch1_1_skipOrbonneEntrance()
 	pressBtn({x=1}, 1)
 
 
-	-- gafgarion, 7284f
+	-- gafgarion
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 1)
@@ -375,7 +381,7 @@ function TAS.Ch1_1_skipOrbonneEntrance()
 end
 
 function TAS.Ch1_1_gafgarion_turn1()
-	-- gafgarion, 8239f
+	-- gafgarion
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -383,7 +389,7 @@ function TAS.Ch1_1_gafgarion_turn1()
 	pressBtn({circle=1}, 1)
 	pressBtn({x=1}, 1)
 
-	-- agrias, 8430f
+	-- agrias
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -398,7 +404,7 @@ function TAS.Ch1_1_gafgarion_turn1()
 	pressBtn({circle=1}, 1)
 	pressBtn({x=1}, 1)
 	
-	-- gafgarion, 8559f
+	-- gafgarion
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
 	pressBtn({circle=1}, 2)
@@ -433,23 +439,9 @@ function TAS.Ch1_1_ramza_turn1()
 	pressBtn({circle=1}, 1)
 	fadv(45)
 	fadv(2)
-	pressBtn({square=1, down=1}, 2)
-	pressBtn({up=1}, 4)
-	pressBtn({up=1}, 4)
-
-	-- change option5
-	pressBtn({circle=1}, 6)
-	pressBtn({up=1}, 2)		-- fast
-	pressBtn({circle=1}, 2)
-
-	-- change option6
-	pressBtn({down=1}, 2)
-	pressBtn({circle=1}, 6)
-	pressBtn({down=1}, 2)	-- off
-	pressBtn({circle=1}, 2)
 
 	-- change option7
-	pressBtn({down=1}, 2)
+	pressBtn({square=1, down=1}, 2)
 	pressBtn({circle=1}, 6)
 	pressBtn({down=1}, 2)	-- off
 	pressBtn({circle=1}, 2)
@@ -479,6 +471,26 @@ function TAS.Ch1_1_ramza_turn1()
 	pressBtn({down=1}, 2)	-- off
 	pressBtn({circle=1}, 2)
 
+	-- change option6
+	pressBtn({square=1, up=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({down=1}, 2)	-- off
+	pressBtn({circle=1}, 2)
+
+	-- change option5
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({up=1}, 2)		-- fast
+	pressBtn({circle=1}, 2)
+
+	-- change option4
+	pressBtn({up=1}, 2)
+	pressBtn({circle=1}, 6)
+	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 4)
+	pressBtn({up=1}, 2)		-- very fast
+	pressBtn({circle=1}, 2)
+
 	pressBtn({x=1}, 6)
 	pressBtn({x=1}, 1)
 	fadv(6)
@@ -488,7 +500,7 @@ function TAS.Ch1_1_ramza_turn1()
 	pressBtn({circle=1}, 10)
 	pressBtn({down=1}, 2)
 	pressBtn({down=1}, 2)
-	pressBtn({down=1}, 1)
+	pressBtn({down=1, right=1}, 1)
 	pressBtn({circle=1}, 1)
 	--fadv(xx)
 
@@ -1347,7 +1359,7 @@ function TAS.learnRamzaAccumulate_old()
 	pressBtn({down=1}, 1)
 	fadv(3)
 	pressBtn({circle=1}, 10)  -- select slot
-	pressBtn({circle=1}, 1)   -- select gained jp jp
+	pressBtn({circle=1}, 1)   -- select gained jp up
 	fadv(5)
 	pressBtn({x=1}, 10)
 	pressBtn({x=1}, 1)

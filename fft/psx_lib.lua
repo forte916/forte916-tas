@@ -47,7 +47,6 @@ function mul32(a, b)
         -- compose them and return it
         ret = bit.bor(z[1], bit.lshift(z[2], 8), bit.lshift(z[3], 16), bit.lshift(z[4], 24)),
               bit.bor(z[5], bit.lshift(z[6], 8), bit.lshift(z[7], 16), bit.lshift(z[8], 24))
-        ret =  ret - bit.band(ret, MAX_INT) * 2  -- convert signed to unsigned
         return ret
 end
 
@@ -69,8 +68,6 @@ function rand(seed)
 	seed = seed or readRNG()
 	local random
 
-	--local next_seed = next_rng(seed)
-	--random = bit.rshift(next_seed, 16)   -- same as x >>= 16
 	random = bit.rshift(seed, 16)   -- same as x >>= 16
 	random = bit.band(random, 0x7FFF)  -- same as x & 0x7FFF
 	return random
@@ -78,6 +75,11 @@ end
 
 function next_rng(seed)
 	return mul32(seed, 0x41C64E6D) + 0x3039
+end
+
+function next_rng_unsigned(seed)
+	local ret = mul32(seed, 0x41C64E6D) + 0x3039
+	return ret - bit.band(ret, MAX_INT) * 2  -- convert signed to unsigned
 end
 
 ------------------------------------------------------------
@@ -96,7 +98,7 @@ end
 ------------------------------------------------------------
 
 function fadv(n)
-	n = n or 1
+	if n == nil or n == 0 then return end
 	for i=1, n do
 		emu.frameadvance()
 	end

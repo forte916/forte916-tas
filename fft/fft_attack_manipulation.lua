@@ -2,7 +2,7 @@
 -- Emulater: psxjin v2.0.2
 --
 -- This script manipulates attack action with waiting frames.
--- ex.) critical, death all and survive someone.
+-- ex.) critical, death all or survive someone.
 --
 -- Usage
 --   1. Set interface class properly.
@@ -46,7 +46,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = OrbonneGafgarionTurn1
+local interface = OrbonneAliciaTurn2_TypeB
 
 f = io.open(interface.logname, "a")
 if f == nil then print("error: Could not open file") end
@@ -63,13 +63,15 @@ else
 	retry = 500
 end
 
+--for i=0, retry, 2 do
 for i=0, retry do
+	drawRetry(i, x, y)
+	interface.pre_attempt()
+
 	if initial == 1 then
 		initial = 0
 	end
 
-	drawRetry(i, x, y)
-	interface.pre_attempt()
 	fadv(i)
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)

@@ -15,8 +15,8 @@ require "fft_lib"
 -- Orbonne
 ------------------------------------------------------------
 Orbonne = {}
-Orbonne.logname = "ch1_1_orbonne_party5.log"
-Orbonne.retry = 500
+Orbonne.logname = "ch1_1_orbonne_party6.log"
+Orbonne.retry = 100
 
 Orbonne.name = {"ramza", "agrias", "gaf", "alicia", "lavian", "knight", "archer", "archer", "archer", "chemist", "rad"}
 
@@ -68,14 +68,15 @@ end
 
 function Orbonne.success()
 	local ret = nil
-	local prpt = {}
+	local prpt = {}  -- property
 	local ofs_unit = adr_battle_unit
 	local total_enemy = 11
 	local ramza_comp = 0  -- compatibility
-	local agrias_comp = 0  -- compatibility
-	local gaf_comp = 0  -- compatibility
-	local alicia_comp = 0  -- compatibility
-	local enemy = 0
+	local agrias_comp = 0
+	local gaf_comp = 0
+	local alicia_comp = 0
+	local match_knight = 0
+	local match_archer = 0
 	local str
 
 	for i=1, total_enemy do
@@ -98,7 +99,7 @@ function Orbonne.success()
 
 			if (ramza_comp > 3 and alicia_comp > 3) then
 				str = string.format("%s, matched", str)
-				--enemy = enemy + 1
+				match_knight = match_knight + 1
 			end
 		end
 
@@ -112,7 +113,7 @@ function Orbonne.success()
 
 			if (gaf_comp > 3) then
 				str = string.format("%s, matched", str)
-				enemy = enemy + 1
+				match_archer = match_archer + 1
 			end
 		end
 
@@ -126,7 +127,7 @@ function Orbonne.success()
 
 			if (gaf_comp < 3) then
 				str = string.format("%s, matched", str)
-				enemy = enemy + 1
+				match_archer = match_archer + 1
 			end
 		end
 
@@ -141,20 +142,23 @@ function Orbonne.success()
 			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
 
-			if (ramza_comp > 3) then
+			if ramza_comp > 3 or gaf_comp > 3 then
 				str = string.format("%s, matched", str)
 			end
 		end
 
 		-- chemist:
 		if prpt.no == 9 then
+			ramza_comp = Zodiac.checkCompatibilityRamza(prpt.zodiac, prpt.gender)
+			str = string.format("%s, %s-ramza", str, Zodiac.notation[ramza_comp])
+
 			gaf_comp = Zodiac.checkCompatibilityVirgo(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-gaf", str, Zodiac.notation[gaf_comp])
 
 			agrias_comp = Zodiac.checkCompatibilityAgrias(prpt.zodiac, prpt.gender)
 			str = string.format("%s, %s-agrias", str, Zodiac.notation[agrias_comp])
 
-			if (gaf_comp > 3) then
+			if ramza_comp > 3 or gaf_comp > 3 then
 				str = string.format("%s, matched", str)
 			end
 		end
@@ -180,8 +184,10 @@ function Orbonne.success()
 		debugPrint(str)
 	end
 
-	if enemy > 0 then
+	if match_archer > 0 and match_knight > 0 then
 		ret = "best"
+	elseif match_archer > 0 then
+		ret = "good"
 	end
 	return ret
 end

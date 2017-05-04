@@ -513,8 +513,18 @@ Bunit.summoner_action_learned1  = 0xB1  -- 1byte
 Bunit.summoner_action_learned2  = 0xB2  -- 1byte
 Bunit.summoner_r_s_m_learned3   = 0xB3  -- 1byte
 Bunit.thief_action_learned1     = 0xB4  -- 1byte
+	-- 0x80:Gil Taking
+	-- 0x40:Steal Heart
+	-- 0x20:Steal Helmet
+	-- 0x10:Steal Armor
+	-- 0x08:Steal Shield
+	-- 0x04:Steal Weapon
+	-- 0x02:Steal Accessory
+	-- 0x01:Steal Exp
 Bunit.thief_action_learned2     = 0xB5  -- 1byte
 Bunit.thief_r_s_m_learned3      = 0xB6  -- 1byte
+	-- 0x80:Caution, 0x40:Gilgame Heart, 0x20:Catch, 0x10:Secret Hunt
+	-- 0x08:Move+2, 0x04:Jump+2
 
 
 
@@ -823,8 +833,9 @@ function Bunit.readProperty(ofs_unit)
 	--prpt.info = Bunit.toString(prpt)
 	--prpt.info = Bunit.toString2(prpt)
 	--prpt.info = Bunit.toString3(prpt)
-	prpt.info = Bunit.toString4(prpt)
-	--prpt.info = Bunit.toString5(prpt)
+	--prpt.info = Bunit.toString4(prpt)
+	prpt.info = Bunit.toString5(prpt)
+	--prpt.info = Bunit.toString6(prpt)
 	return prpt
 end
 
@@ -1016,7 +1027,42 @@ function Bunit.toString4(prpt)
 	return str
 end
 
+Bunit.info_header5 = "| ch, no, job, zodiac | lv, exp | brave, faith | squire, squire, chemist | knight | priest, wizard, time, oracle, calc |"
+
 function Bunit.toString5(prpt)
+	local str = string.format("%2x,%2x,%2x,%2x | "
+			.."%2d,%2d | "
+			.."%2d,%2d | "
+			.."%3d-%3d,%3d | "
+			.."%3d | "
+			.."%3d,%3d,%3d,%3d,%3d | ",
+			prpt.ch     ,
+			prpt.no     ,
+			prpt.job    ,
+			prpt.zodiac ,
+
+			prpt.lv     ,
+			prpt.exp    ,
+
+			prpt.brave  ,
+			prpt.faith  ,
+
+			prpt.total_JP_squire     ,
+			prpt.JP_squire           ,
+			prpt.total_JP_chemist    ,
+
+			prpt.total_JP_knight     ,
+
+			prpt.total_JP_priest     ,
+			prpt.total_JP_wizard     ,
+			prpt.total_JP_time_mage  ,
+			prpt.total_JP_oracle     ,
+			prpt.total_JP_calculator )
+
+	return str
+end
+
+function Bunit.toString6(prpt)
 	local str = string.format("%2x,%2x,%2x,%2x | "
 			.."%2d,%2d,%2d | "
 			.."%2d,%2d | "
@@ -1122,33 +1168,80 @@ function Bunit.isSetBlackSkill(prpt)
 	end
 end
 
+function Bunit.isSetDefend(prpt)
+	if prpt.support_ability ==  0x01DF then -- Defend
+		return true
+	else
+		return false
+	end
+end
+
+function Bunit.isSetGainedJpUp(prpt)
+	if prpt.support_ability ==  0x01CF then -- Gained JP-UP
+		return true
+	else
+		return false
+	end
+end
+
+function Bunit.isSetSecretHunt(prpt)
+	if prpt.support_ability ==  0x01D7 then -- Secret Hunt
+		return true
+	else
+		return false
+	end
+end
+
+function Bunit.isSetMove1(prpt)
+	if prpt.movement_ability ==  0x01E6 then -- Move+1
+		return true
+	elseif prpt.movement_ability ==  0x01E7 then -- Move+2
+		return true
+	elseif prpt.movement_ability ==  0x01E8 then -- Move+3
+		return true
+	else
+		return false
+	end
+end
+
+
 function Bunit.isLearnedThrowStone(prpt)
-	local learned = bit.band(prpt.base_action_learned1, 0x20)  -- 0x08 means Throw Stone
-	return learned
-end
-
-function Bunit.isLearnedStealHeart(prpt)
-	local learned = bit.band(prpt.thief_action_learned1, 0x40)  -- 0x40 means Steal Heart
-	return learned
-end
-
-function Bunit.isLearnedGainedJpUp(prpt)
-	local learned = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- 0x08 means Gained Jp UP
+	local learned = bit.band(prpt.base_action_learned1, 0x20)  -- Throw Stone / Crus Punch
 	return learned
 end
 
 function Bunit.isLearnedLightningStab(prpt)
-	local learned = bit.band(prpt.base_action_learned1, 0x10)  -- 0x10 means Lightning Stab
+	local learned = bit.band(prpt.base_action_learned1, 0x10)  -- Heal / Lightning Stab
+	return learned
+end
+
+function Bunit.isLearnedHolyExplosion(prpt)
+	local learned = bit.band(prpt.base_action_learned1, 0x08)  -- Yell / Holy Explosion
+	return learned
+end
+
+function Bunit.isLearnedDefend(prpt)
+	local learned = bit.band(prpt.base_r_s_m_learned3, 0x10)  -- Defend
+	return learned
+end
+
+function Bunit.isLearnedGainedJpUp(prpt)
+	local learned = bit.band(prpt.base_r_s_m_learned3, 0x08)  -- Gained Jp UP
 	return learned
 end
 
 function Bunit.isLearnedMove1(prpt)
-	local learned = bit.band(prpt.base_r_s_m_learned3, 0x04)  -- 0x04 means Move+1
+	local learned = bit.band(prpt.base_r_s_m_learned3, 0x04)  -- Move+1
+	return learned
+end
+
+function Bunit.isLearnedStealHeart(prpt)
+	local learned = bit.band(prpt.thief_action_learned1, 0x40)  -- Steal Heart
 	return learned
 end
 
 function Bunit.isJobSquire(prpt)
-	if prpt.job == 0x4A then  -- 0x4A means Squire
+	if prpt.job == 0x4A then  -- Squire
 		return true
 	else 
 		return false
@@ -1156,7 +1249,7 @@ function Bunit.isJobSquire(prpt)
 end
 
 function Bunit.isJobChemist(prpt)
-	if prpt.job == 0x4B then  -- 0x4B means Chemist
+	if prpt.job == 0x4B then  -- Chemist
 		return true
 	else 
 		return false

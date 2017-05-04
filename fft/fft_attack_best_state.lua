@@ -28,11 +28,8 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 -- functions
 ------------------------------------------------------------
-function waitForBest()
-	local retry = 48
-	local best_rng = 0x4892C5B9
-
-	for i=0, retry do
+function waitForBest(best_retry, best_rng)
+	for i=0, best_retry do
 		local rng = memory.readdword(adr_rng)
 		if rng == best_rng then
 			return
@@ -59,7 +56,7 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = OrbonneAgriasTurn2
+local interface = OrbonneAliciaTurn2_TypeB
 
 --f = io.open(interface.logname, "a")
 --if f == nil then print("error: Could not open file") end
@@ -69,11 +66,7 @@ retry = 0
 for i=0, retry do
 	interface.pre_attempt()
 
-	if interface.waitForBest ~= nil then
-		interface.waitForBest()
-	else
-		waitForBest()
-	end
+	waitForBest(interface.best_retry, interface.best_rng)
 
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)

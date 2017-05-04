@@ -12,21 +12,22 @@ Emulator
 
 RNG
 ----
-* 0x9010 in RAM address
-* use rand() in BIOS
+* 0x9010 is the address of RNG with BIOS rand() function
 
 * about seed
-  * 電源投入時に seed = 1 で初期化される
-  * soft reset では seed は初期化されない
-  * 拠点到着時にゲーム時間を元に seed が更新される
-  * 1f 毎に変化する (1f 毎に rand を call している)
+	* When srand() is called
+	  * 電源投入時に seed = 1 で初期化される
+	  * 拠点到着時にゲーム時間を元に seed が更新される
+	  * soft reset では seed は更新されない (srand は呼ばれない)
+	* When rand() is called
+	  * 1f 毎に変化する (1f 毎に rand を call している)
 
 
 FurShop glitch
 -------------
 * furshop glitch takes 1474f
 * 1637f is fastest at soft rest
-* soft rest しても rng seed の初期化は発生しない
+* soft reset しても rng seed の初期化は発生しない
 * furshop inventory 0x80056818 (JPv1.1)
 * furshop inventory 0x80059494 (US)
 * 暗転中にアイテムがロードされるので編成画面が表示されたら
@@ -95,11 +96,16 @@ ch1-Orbonne
   * 3マス進む
 
 * 改善点
-    *  2.カーソルのリピート速度  ->速い
-         --> TAS では必要ない
-    *  4.指カーソルの速度  ->すごく速い
-         --> TAS では必要ない
-  * 4マスではなく 3マス進む
+	* この window も ←←→→ のような入力で表示が早くなるか検証する
+	*  2.カーソルのリピート速度  ->速い
+		* バトルフィールドでのパネル移動
+		* パネル移動は 1f おきの入力を受け付ける TAS の方が早いのでオプション変更の必要ない
+	*  4.指カーソルの速度  ->すごく速い
+		* Menu の上下左右移動
+		* 5つ以上連続移動する場合は、押しっぱなしの方が早い
+		* Worldmap でも有効なら TAS でも必要か
+	* 4マスではなく 3マス進む
+		* --> 3マス進むより最大歩数進んで 2turn 目に弓使いもしくはアイテム士を倒すほうが早い
 
 
 * カメラ移動があると数フレーム遅くなる
@@ -135,6 +141,7 @@ ch1-Orbonne
   * optimze_tas   = 16619f,  4:37 , 2787f faster, optimize
   * calc2_tas     = 16073f,  4:xx , 3333f faster, 546f faster, retry=9
   * calc2_tas     = 16055f,  4:xx , 3351f faster, 564f faster, retry=57
+  * calc2_furshop = 15623f,  4:xx , 3783f faster, 996f faster, retry=23
   * calc2_furshop = 16326f,  4:xx , 3080f faster, 293f faster, retry=23
   * calc2_furshop = 16446f,  4:37 , 2960f faster, 173f faster, retry=31
   * calc2_furshop = 16883f,  4:37 , xxxxf faster, xxxf faster, retry=22
@@ -185,6 +192,15 @@ Lv1 Squire 初期ステータス
     * 見習いのクリスタルを Ramza は継承できないのでボツ案
   * もしくは Mandalia で取得 Jp UP を覚えている敵を探す
   * Gariland の敵は Lv1 のため取得Jp UP は覚えていない
+
+
+* taskitten-san TAS
+	* party
+	* Chemist:faith=73, chemist=196, Taurus(金牛)
+	* Squire :squire=184, knight=195
+	* hire
+	* Squire :faith=69, squire=185, chemist=198, wizard=162, priest=110, oracle=199, time=137, calc=198, total=1189, Aries(白羊)
+	* Squire :faith=68, chemist=191, priest=195, Aquarius(宝瓶)
 
 
 ch1-Gariland
@@ -381,6 +397,7 @@ ch1-Mandalia
 
 ch1-random
 -----
+* Priest and Monk becomes speed 7 at Lv8
 * Goblin becomes speed 6 at Lv14
 
 * 改善案
@@ -519,6 +536,7 @@ ch1-random
   * ユニット切り替えは、先にユニットを切り替えてユニット一覧に戻った方が早い
   * 先にユニットを切り替えてメニューに戻るより、そのユニットでメニューに戻り
     Item/Ability/Change Job/ を選択後に、ユニットを切り替えるとさらに早いかも
+  * →→←← と押すことで skill windows の表示が早くなる??
 
   * holy を覚えるための経過 frame = 167f
 
@@ -638,6 +656,8 @@ ch2-Zirekile Falls
 * Delita が 1ターン目で Gafgarion を倒せば CT3 Death で終了
 * Gafgarion は装備解除なので HP は少ない
 
+* 改善案
+	* Delita が gaf と knight の 2体を clitical で K.O
 
 ch2-Zaland
 ----------
@@ -752,6 +772,12 @@ ch3-Goland
 * Olan は、辞書攻撃で critical を出すと、ノックバックして倒せるので
   Flare のターゲットが一つ減る
 
+* 改善案
+	* Olan 行動前に
+		* Olan にゴクウの棒(イノセン) or イノセン or シェル で reduce damage
+		* or
+		* Olan に haste or slow or stop or 説法で CT をずらす
+		* CT5 Bolt3
 
 ch3-Lesalia
 -----------
@@ -798,6 +824,11 @@ ch3-Grog
 * weather: rain , but an chemist has Rubber Shoes
 
 * CT3 Flare
+
+* 改善案
+	* CT5 Ice3
+	* or
+	* K.O chemist in advance, CT5 Bolt3
 
 
 ch3-Yardow
@@ -1578,31 +1609,46 @@ Mathable by  Height
 * ch4-Murond (Altima), Height prime Demi2
 
 
+Job Level
+---------
+| Job Lv | Job point |
+| 1      |  100-199  |
+| 2      |  200-299  |
+| 3      |  400-499  |
+| 4      |  700-799  |
+| 5      | 1100-1199 |
+| 6      | 1600-1699 |
+| 7      | 2200-2299 |
+| 8      | 3000-2099 |
+
+
 CT
 ----
 * 3の倍数の tick(clock) で CT100 になる場合、敵の CT は 3の倍数となる
 * SP7, SP9, SP12 が相当
 
-SP   tick
+SP  tick
  1 * 100 = 100
  2 * 50 = 100
  3 * 34 = 102
- 4 * 25 = 100  (Quick)
+ 4 * 25 = 100
  5 * 20 = 100
  6 * 17 = 102
  7 * 15 = 105
  8 * 13 = 104
  9 * 12 = 108
-10 * 10 = 100  (Demi2, JP??)
+10 * 10 = 100  Demi2, Death
 11 * 10 = 110
-12 *  9 = 108  (Demi2, US??)
+12 *  9 = 108  Demi2 US??
 13 *  8 = 104
-15 *  7 = 105
-17 *  6 = 102  (Demi)
-20 *  5 = 100  (Demi2, short charge, JP??)
-25 *  4 = 100
-34 *  3 = 102  (Demi, short charge)
-50 *  2 = 100
+15 *  7 = 105  Bolt3, Flare
+17 *  6 = 102  Demi
+20 *  5 = 100  Bolt2, Demi2-short, Toad
+25 *  4 = 100  Quick, Bolt
+30 *  4 = 120  Bolt3-short, Flare-short
+34 *  3 = 102  Demi-short
+40 *  3 = 120  Bolt2-short
+50 *  2 = 100  Haste, Quick-short, Bolt-short
 
 
 Frame counts of casting spell
