@@ -22,118 +22,130 @@ RNG
 	* When rand() is called
 	  * 1f 毎に変化する (1f 毎に rand を call している)
 
-
-FurShop glitch
--------------
-* furshop glitch takes 1474f
-* 1637f is fastest at soft rest
-* soft reset しても rng seed の初期化は発生しない
-* furshop inventory 0x80056818 (JPv1.1)
-* furshop inventory 0x80059494 (US)
-* 暗転中にアイテムがロードされるので編成画面が表示されたら
-  即 soft reset でOK. ダーラボンのセリフは表示前でよい
-
-
-Ramza 初期ステータス
---------------------
-* new game 押下後 Arazlam のセリフスキップ後にステータスが決定される
-* High starting
-  * Squire と Chemist 以外のジョブの JP も高いバランス型が理想
-  * Squire  JP
-    * 190 or higher
-  * Chemist JP
-    * 190 or higher
-  * Wizard JP, Priest JP, Calculator JP, Time mage JP, Oracle JP
-    * 7ジョブ合計で 1200 以上が目安
-
 * RNG とラグフレーム
 	* ラグフレームの総数を変えても RNG が同じであれば status は同じ
 	* ただし、 Tutorial で soft reset した場合と即 cancel した場合では、同じ RNG でも status は変わる
 	* よって、調整にラグフレームの総数を変えるのは意味がない
 	* メモリ内の何らかの状態が変われば、同じ RNG でも結果は変わる
 
+FurShop glitch
+--------------
+* furshop glitch takes 1474f
+* 1637f is fastest at soft rest
+* soft reset しても rng seed の初期化は発生しない
+* furshop inventory
+	* 0x80056818 (JPv1.1)
+	* 0x80059494 (US)
+* Tutorial -> 編成編 -> 暗転中にアイテムがロードされるので編成画面が表示されたら、
+  即 soft reset でOK. ダーラボンのセリフは表示前でよい
 
-ch1-Orbonne
------------
-* オーボンヌ内の最後の ovelia のセリフで敵星座が決定
+
+Ramza 初期ステータス
+--------------------
+* new game 押下後 Arazlam のセリフスキップ後にステータスが決定される
+* Ramza math chart
+	* Squire と Chemist 以外のジョブの JP も高いバランス型が理想
+		* Squire  JP: 190 or higher
+		* Chemist JP: 190 or higher
+		* 7ジョブ合計で 1200 以上が目安
+* Other chart
+  * Squire  JP: 190 or higher
+  * Chemist JP: 198 or higher
+
+
+
+
+ch1-Orbonne party status
+------------------------
+* Ovelia の最後のセリフで味方と敵ステータスが決定
   * Gafgarion は 敵 2体に攻撃可能
   * Agrius は 敵 1体に攻撃可能
   * Gafgarion は Agrius 正面の敵と相性が悪いと別の 1体を狙う
-  * Gafgarion と Agruis が別々の敵を倒すよう誘導(調整)することで
+  * Gafgarion と Agrius が別々の敵を倒すよう誘導(調整)することで
     1ターン目で 2体を倒すことが可能
 
 * Orbonne party condition
 	* MUST:
 		* gaf: ID6 の archer と相性が良い or ID7 の archer と相性が悪い (turn1)
-		* knight: agrias と best 相性でない
+		* knight: rad と alicia が共に相性良以上
+			* rad と alicia のクリティカルで 2hit で倒せる
 	
 	* Better:
 		* gaf の turn1 で スキルの詠唱ではなく、スキル名が表示される
 			* これは RNG で変わらない
 			* 戦闘前に既に決定されていると思われる。
+			* 詠唱は 100f 程度遅い
 		* Lv up, Jp up しない
+			* Lv up は約 100f, JP Lv up は 約50f のエフェクトを消費する
+			* (ただし実質 30f 程度のロスらしい)
 		* 味方が黒魔法を持っていない (特に rad)
-			* rad が Black-Magic を持っていると、思考時間が顕著に長くなる
-		* lavian は thrown stone を set (turn1 で投石すると turn2 は回ってこない)
-		* knight と ramza の相性が良い. ramza と rad のクリティカルで 2hit で倒せる
-			* knight と ramza, alicia の相性が normal の場合、normal hit では 3hit で倒せないので、誰かの critical が必須
-		* gaf: ID8 の archer と相性が良い or ID9 の chemist と相性が悪い (turn2)
-			* gaf の turn2 で chemist を倒すと、agrias が archer を倒さないといけなくなり扉から離れる
-			* また chemist を最後に残した場合、lavian が投石を持っていない場合 lavian のダメージが入るため
-			  agrias は critical が必要ない
-		* agrias: Jp 163以上は Jp up する. Jp 162 以下はぎりぎり Jp up しない
+			* rad が Black-Magic を持っていると、思考時間が顕著に長くなる(体感なので未検証)
+		* lavian は thrown stone を set していない
+			* lavian の 2turn目は来ない
+		* agrias: Jp 163以上は Jp up する. Jp 162 以下はぎりぎり Jp up しない (これは 2turn 行動する場合の条件だが Agrius の 2turn目は来ない)
 
 
-* turn1
-  * change option
-    *  5.メッセージの表示速度  ->速い
-    *  6.ナビゲーションメッセージの有無  -> OFF
-    *  7.アビリティ名の表示  -> OFF
-    *  8.効果メッセージの表示  -> OFF
-    *  9.経験値Jp取得の表示  -> OFF
-    * 11.ジョブ別装備付加アイテムの表示  -> OFF
-    * 12.ジョブチェンジ時の最強装備  -> OFF
-  * 3マス進む
+
+ch1-Orbonne
+-----------
+* Agrius のセリフで square + up すると乱数をずらせる
+
+* Gafgarion turn1
+	* camera l2(zoom-out), r1(rotate)
+	* K.O archer(id6)
+* Ramza turn1
+	* change option
+		*  4.指カーソルの速度  ->すごく速い
+			* Menu の上下左右移動
+			* 5つ以上連続移動する場合は、押しっぱなしの方が早い
+			* Worldmap でも有効なら TAS でも必要か
+		*  5.メッセージの表示速度  ->速い
+		*  6.ナビゲーションメッセージの有無  -> OFF
+		*  7.アビリティ名の表示  -> OFF
+		*  8.効果メッセージの表示  -> OFF
+		*  9.経験値Jp取得の表示  -> OFF
+		* 11.ジョブ別装備付加アイテムの表示  -> OFF
+		* 12.ジョブチェンジ時の最強装備  -> OFF
+	* move
+		* ↓↓↓→
+		* カメラ回転を抑えるためにもっと良い移動場所があるかもしれない
+* Agrius turn1
+	* K.O archer(id7)
+* alicia turn1
+* lavian turn1
+	* camera r1(rotate), r1(rotate)
+* rad turn1
+	* attack knight
+* gaf turn2
+	* camera l1(rotate), l1(rotate)
+		* 乱数があれば r1 を 1回でも良い
+	* K.O archer or chemist
+* Ramza turn2
+	* move
+		* ↓↓↓ or  ↓↓→
+	* K.O archer or chemist
+* Alicia turn2
+	* camera r2(tilt)
+	* K.O knight
+
 
 * 改善点
-	* この window も ←←→→ のような入力で表示が早くなるか検証する
 	*  2.カーソルのリピート速度  ->速い
 		* バトルフィールドでのパネル移動
 		* パネル移動は 1f おきの入力を受け付ける TAS の方が早いのでオプション変更の必要ない
-	*  4.指カーソルの速度  ->すごく速い
-		* Menu の上下左右移動
-		* 5つ以上連続移動する場合は、押しっぱなしの方が早い
-		* Worldmap でも有効なら TAS でも必要か
-	* 4マスではなく 3マス進む
-		* --> 3マス進むより最大歩数進んで 2turn 目に弓使いもしくはアイテム士を倒すほうが早い
 
 
 * カメラ移動があると数フレーム遅くなる
 * カメラ移動で敵や味方の行動開始フレームがずれるので、乱数調整が可能
 
-* Gafgarion turn1
-	* L2 zoom out
-	* R1 (rotate) or R2 (angle)
-	* R1 の方が 12f 早い
-* Agrius turn1
-* Ramza turn1
-	* knight に背を向ける向きで待機
-* Alicia & Lavian turn1
-	* Alicia か Lavian のどちらかで L1 回転する
-	* どちらが早いかは、その後の敵の行動にも左右される
-* Rad turn1
-	* Alicia, Lavian, その後の enemy の turn のそれぞれで、カメラ操作を試し clitical が出るか検証すべき
-
-* Agrias turn2
-	* Agrias turn2 の前に camera 視点を戦闘前と同じ視点にしておく
-		* 他の視点だと、移動時に回転する
-	* Agrias をなるべく扉近くに誘導する
+* Tips
+	* Agrius をなるべく扉近くに誘導する
+		* 扉からの距離が長い程、移動距離が長くなり遅い
 		* そのために chemist を最後に残すのがよい
-		* archer を最後に残すと扉からの距離が長くなり、余分に移動する
-
-* 最後の敵を倒す前にカメラを戦闘前と同じ視点にしておく
-	* 別の視点だと Agrius が扉に移動する際にカメラ回転してしまう
-	* 可能であれば Agrius は扉近くが望ましい
+		* archer を最後に残すと移動距離が長くなる
+	* 戦闘終了前に camera 視点を戦闘前と同じ視点にしておく
+		* 他の視点だと、移動時に回転する
+		* 回転のロスは未検証 (場合によってはロス無し??)
 
 
 * "Let go of me" said Ovelia
@@ -158,17 +170,13 @@ ch1-Orbonne
 * Orbonne 戦闘終了の会話は 手動と text_skip.lua とで同じ結果
 * text_skip.lua を信用してもよさそう
 
-```
-### fft_optimize1 は retry=5 を採用
-* retry=5 は gaf が Lv up, JP Lv up する
-* Lv up は約 100f, JP Lv up は 約50f のエフェクトを消費する
-* retry=29 のように Lv up エフェクトのない構成を選択した方がよい
-```
 
-
-Lv1 Chemist 初期ステータス
---------------------------
+ch1-Gariland party status
+------------------------
 * 戦闘後の最後の Ramza のセリフで味方ステータスが決定
+* Agrius のセリフ送りを遅らせることで乱数をずらせる
+
+### Lv1 Chemist 初期ステータス
 * High starting
   * Chemist JP
     * grind 200 JP for Wizard
@@ -177,8 +185,7 @@ Lv1 Chemist 初期ステータス
   * Female の方が MA が +1 高い
 
 
-Lv1 Squire 初期ステータス
-------------------------
+### Lv1 Squire 初期ステータス
 * High starting
   * Squire JP
     * grind 200 JP for Knight
@@ -203,11 +210,15 @@ Lv1 Squire 初期ステータス
 	* Squire :faith=68, chemist=191, priest=195, Aquarius(宝瓶)
 
 
-ch1-Gariland
-------------
+ch1-Gariland enemy status
+-------------------------
 * セーブ画面のキャンセル後に敵星座が決定
   * 屋根の上に来る Female Squire と相性良 (Any)
   * lether hat and dagger の Male Squire と相性良 (Ramza)
+
+
+ch1-Gariland
+------------
 
 * 配置
   ----F
@@ -1607,6 +1618,70 @@ Mathable by  Height
 * ch4-Zarela, Height prime Demi2, hits an enemy as well. Zarela
 * ch4-Adramelk, Height 4 Demi2. Adramelk
 * ch4-Murond (Altima), Height prime Demi2
+
+
+会話イベント
+------------
+* ch1-Gariland
+	* Ramza AT turn1
+* ch1-Dorter
+	* Delita AT turn1
+* ch1-Thieves Fort
+	* Miluda At after low HP
+* ch1-Lenalia
+	* Delita AT turn1
+	* Miluda At after low HP
+* ch1-Windmill
+	* Delita AT turn1
+	* Wiegraf AT after low HP
+* ch1-Zeakden
+	* Ramza AT turn1
+	* Algus AT
+	* Delita AT
+* ch2-Zirekile Falls
+	* Ramza AT turn1
+	* Ovelia AT turn1
+	* Agrius AT turn1
+* ch2-Barius Valley
+	* Agrius AT turn1
+* ch2-Golgorand
+	* Gafgarion AT turn1
+	* Ramza AT turn1
+	* Agrius AT
+* ch2-Lionel (inside)
+	* Ramza AT after low HP
+* ch3-Lesalia
+	* Zalmo AT after low HP
+	* Alma AT
+* ch3-Orbonne 3rd Floor
+	* Izlude AT after low HP
+	* Ramza AT
+* ch3-Orbonne 1st Floor
+	* Wiegraf AT
+	* Ramza AT
+	* Wiegraf AT after low HP
+* ch3-Yardow
+	* Ramza AT
+	* Malark AT
+	* Malark leave
+	* Lafa leave
+* ch3-Riovanes (outside)
+	* Ramza AT
+	* Malark leave
+	* Lafa leave
+* ch3-Riovanes (inside)
+	* Ramza AT after Wiegraf has low HP
+* ch4-Bervenia
+	* Ramza AT after Meliadoul has low HP
+	* Meliadoul AT
+	* Ramza AT
+* ch4-Zeltennia
+	* Zalmo AT after low HP
+	* Ramza AT
+* ch4-Bed Dsert
+	* Balk AT after low HP
+* ch4-Sluice
+	* Ramza AT
 
 
 Job Level
