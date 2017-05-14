@@ -63,38 +63,38 @@ Date.date_param1A = { adr=0x0013212C, ofs=0x1A     } -- 4byte
 City = {}
 
 -- offset of city structure
-City.off_00            = 0x00  -- ?byte
-City.off_02            = 0x02  -- ?byte
-City.off_04            = 0x04  -- ?byte
-City.off_06            = 0x06  -- ?byte
-City.off_08            = 0x08  -- ?byte
-City.off_0A            = 0x0A  -- ?byte
-City.off_0C            = 0x0C  -- ?byte
-City.off_0E            = 0x0E  -- ?byte
+City.ofs_00            = 0x00  -- ?byte
+City.ofs_02            = 0x02  -- ?byte
+City.ofs_04            = 0x04  -- ?byte
+City.ofs_06            = 0x06  -- ?byte
+City.ofs_08            = 0x08  -- ?byte
+City.ofs_0A            = 0x0A  -- ?byte
+City.ofs_0C            = 0x0C  -- ?byte
+City.ofs_0E            = 0x0E  -- ?byte
 City.city_no           = 0x10  -- ?byte, city id??
-City.off_12            = 0x12  -- ?byte
-City.off_14            = 0x14  -- ?byte
-City.off_16            = 0x16  -- ?byte
-City.off_18            = 0x18  -- 2byte
+City.ofs_12            = 0x12  -- ?byte
+City.ofs_14            = 0x14  -- ?byte
+City.ofs_16            = 0x16  -- ?byte
+City.ofs_18            = 0x18  -- 2byte
 City.city_id           = 0x1A  -- 2byte
 City.population        = 0x1C  -- 2byte, 1 - 0xFFFF (100 - 6,553,500)
-City.off_1E            = 0x1E  -- ?byte
-City.off_20            = 0x20  -- ?byte
-City.off_22            = 0x22  -- ?byte
-City.off_24            = 0x24  -- ?byte
-City.off_26            = 0x26  -- ?byte
+City.ofs_1E            = 0x1E  -- ?byte
+City.ofs_20            = 0x20  -- ?byte
+City.ofs_22            = 0x22  -- ?byte
+City.ofs_24            = 0x24  -- ?byte
+City.ofs_26            = 0x26  -- ?byte
 City.product1_id       = 0x28  -- 2byte,
 City.product1_stock    = 0x2A  -- 2byte, 0 - 0x05DC(1500) (0% - 100%)
-City.off_2C            = 0x2C  -- ?byte, if trading, not zero, func pointer?
-City.off_2E            = 0x2E  -- ?byte, if trading, not zero, func pointer?
+City.ofs_2C            = 0x2C  -- ?byte, if trading, not zero, func pointer?
+City.ofs_2E            = 0x2E  -- ?byte, if trading, not zero, func pointer?
 City.product2_id       = 0x30  -- 2byte,
 City.product2_stock    = 0x32  -- 2byte, 0(0%) - 0x05DC(100%)
-City.off_34            = 0x34  -- ?byte, if trading, not zero, func pointer?
-City.off_36            = 0x36  -- ?byte, if trading, not zero, func pointer?
+City.ofs_34            = 0x34  -- ?byte, if trading, not zero, func pointer?
+City.ofs_36            = 0x36  -- ?byte, if trading, not zero, func pointer?
 City.product3_id       = 0x38  -- 2byte,
 City.product3_stock    = 0x3A  -- 2byte, 0(0%) - 0x05DC(100%)
-City.off_3C            = 0x3C  -- ?byte, if trading, not zero, func pointer?
-City.off_3E            = 0x3E  -- ?byte, if trading, not zero, func pointer?
+City.ofs_3C            = 0x3C  -- ?byte, if trading, not zero, func pointer?
+City.ofs_3E            = 0x3E  -- ?byte, if trading, not zero, func pointer?
 
 
 function City.readProperty(ofs_city)
@@ -102,38 +102,38 @@ function City.readProperty(ofs_city)
 	--print(string.format("-- ofs_city = %08X", ofs_city))
 
 	-- Read properties
-	prpt.off_00            = memory.readword(ofs_city + City.off_00            )
-	prpt.off_02            = memory.readword(ofs_city + City.off_02            )
-	prpt.off_04            = memory.readword(ofs_city + City.off_04            )
-	prpt.off_06            = memory.readword(ofs_city + City.off_06            )
-	prpt.off_08            = memory.readword(ofs_city + City.off_08            )
-	prpt.off_0A            = memory.readword(ofs_city + City.off_0A            )
-	prpt.off_0C            = memory.readword(ofs_city + City.off_0C            )
-	prpt.off_0E            = memory.readword(ofs_city + City.off_0E            )
+	prpt.ofs_00            = memory.readword(ofs_city + City.ofs_00            )
+	prpt.ofs_02            = memory.readword(ofs_city + City.ofs_02            )
+	prpt.ofs_04            = memory.readword(ofs_city + City.ofs_04            )
+	prpt.ofs_06            = memory.readword(ofs_city + City.ofs_06            )
+	prpt.ofs_08            = memory.readword(ofs_city + City.ofs_08            )
+	prpt.ofs_0A            = memory.readword(ofs_city + City.ofs_0A            )
+	prpt.ofs_0C            = memory.readword(ofs_city + City.ofs_0C            )
+	prpt.ofs_0E            = memory.readword(ofs_city + City.ofs_0E            )
 	prpt.city_no           = memory.readword(ofs_city + City.city_no           )
-	prpt.off_12            = memory.readword(ofs_city + City.off_12            )
-	prpt.off_14            = memory.readword(ofs_city + City.off_14            )
-	prpt.off_16            = memory.readword(ofs_city + City.off_16            )
-	prpt.off_18            = memory.readword(ofs_city + City.off_18            )
+	prpt.ofs_12            = memory.readword(ofs_city + City.ofs_12            )
+	prpt.ofs_14            = memory.readword(ofs_city + City.ofs_14            )
+	prpt.ofs_16            = memory.readword(ofs_city + City.ofs_16            )
+	prpt.ofs_18            = memory.readword(ofs_city + City.ofs_18            )
 	prpt.city_id           = memory.readword(ofs_city + City.city_id           )
 	prpt.population        = memory.readword(ofs_city + City.population        )
-	prpt.off_1E            = memory.readword(ofs_city + City.off_1E            )
-	prpt.off_20            = memory.readword(ofs_city + City.off_20            )
-	prpt.off_22            = memory.readword(ofs_city + City.off_22            )
-	prpt.off_24            = memory.readword(ofs_city + City.off_24            )
-	prpt.off_26            = memory.readword(ofs_city + City.off_26            )
+	prpt.ofs_1E            = memory.readword(ofs_city + City.ofs_1E            )
+	prpt.ofs_20            = memory.readword(ofs_city + City.ofs_20            )
+	prpt.ofs_22            = memory.readword(ofs_city + City.ofs_22            )
+	prpt.ofs_24            = memory.readword(ofs_city + City.ofs_24            )
+	prpt.ofs_26            = memory.readword(ofs_city + City.ofs_26            )
 	prpt.product1_id       = memory.readword(ofs_city + City.product1_id       )
 	prpt.product1_stock    = memory.readword(ofs_city + City.product1_stock    )
-	prpt.off_2C            = memory.readword(ofs_city + City.off_2C            )
-	prpt.off_2E            = memory.readword(ofs_city + City.off_2E            )
+	prpt.ofs_2C            = memory.readword(ofs_city + City.ofs_2C            )
+	prpt.ofs_2E            = memory.readword(ofs_city + City.ofs_2E            )
 	prpt.product2_id       = memory.readword(ofs_city + City.product2_id       )
 	prpt.product2_stock    = memory.readword(ofs_city + City.product2_stock    )
-	prpt.off_34            = memory.readword(ofs_city + City.off_34            )
-	prpt.off_36            = memory.readword(ofs_city + City.off_36            )
+	prpt.ofs_34            = memory.readword(ofs_city + City.ofs_34            )
+	prpt.ofs_36            = memory.readword(ofs_city + City.ofs_36            )
 	prpt.product3_id       = memory.readword(ofs_city + City.product3_id       )
 	prpt.product3_stock    = memory.readword(ofs_city + City.product3_stock    )
-	prpt.off_3C            = memory.readword(ofs_city + City.off_3C            )
-	prpt.off_3E            = memory.readword(ofs_city + City.off_3E            )
+	prpt.ofs_3C            = memory.readword(ofs_city + City.ofs_3C            )
+	prpt.ofs_3E            = memory.readword(ofs_city + City.ofs_3E            )
 	--print(string.format("-- city_id    = %d, %08X", prpt.city_id   , ofs_city + City.city_id           ))
 	--print(string.format("-- population = %d, %08X", prpt.population, ofs_city + City.population        ))
 
@@ -151,7 +151,7 @@ function City.toString1(prpt)
 			.."%02x,%d | "
 			.."%02x,%d | "
 			.."%02x,%d | ",
-			prpt.off_18            ,
+			prpt.ofs_18            ,
 			prpt.city_id           ,
 			prpt.population        ,
 
@@ -173,29 +173,29 @@ function City.toString2(prpt)
 			.."%02x,%d,%2x,%2x | "
 			.."%02x,%d,%2x,%2x | "
 			.."%02x,%d,%2x,%2x | ",
-			prpt.off_18            ,
+			prpt.ofs_18            ,
 			prpt.city_id           ,
 			prpt.population        ,
-			prpt.off_1E            ,
-			prpt.off_20            ,
-			prpt.off_22            ,
-			prpt.off_24            ,
-			prpt.off_26            ,
+			prpt.ofs_1E            ,
+			prpt.ofs_20            ,
+			prpt.ofs_22            ,
+			prpt.ofs_24            ,
+			prpt.ofs_26            ,
 
 			prpt.product1_id       ,
 			prpt.product1_stock    ,
-			prpt.off_2C            ,
-			prpt.off_2E            ,
+			prpt.ofs_2C            ,
+			prpt.ofs_2E            ,
 
 			prpt.product2_id       ,
 			prpt.product2_stock    ,
-			prpt.off_34            ,
-			prpt.off_36            ,
+			prpt.ofs_34            ,
+			prpt.ofs_36            ,
 
 			prpt.product3_id       ,
 			prpt.product3_stock    ,
-			prpt.off_3C            ,
-			prpt.off_3E            )
+			prpt.ofs_3C            ,
+			prpt.ofs_3E            )
 	return str
 end
 
@@ -209,44 +209,44 @@ function City.toString3(prpt)
 			.."%2x,%2x,%2x,%2x | "
 			.."%2x,%2x,%2x,%2x | "
 			.."%2x,%2x,%2x,%2x | ",
-			prpt.off_18            ,
+			prpt.ofs_18            ,
 			prpt.city_id           ,
 			prpt.population        ,
-			prpt.off_1E            ,
-			prpt.off_20            ,
-			prpt.off_22            ,
-			prpt.off_24            ,
-			prpt.off_26            ,
+			prpt.ofs_1E            ,
+			prpt.ofs_20            ,
+			prpt.ofs_22            ,
+			prpt.ofs_24            ,
+			prpt.ofs_26            ,
 
 			prpt.product1_id       ,
 			prpt.product1_stock    ,
-			prpt.off_2C            ,
-			prpt.off_2E            ,
+			prpt.ofs_2C            ,
+			prpt.ofs_2E            ,
 
 			prpt.product2_id       ,
 			prpt.product2_stock    ,
-			prpt.off_34            ,
-			prpt.off_36            ,
+			prpt.ofs_34            ,
+			prpt.ofs_36            ,
 
 			prpt.product3_id       ,
 			prpt.product3_stock    ,
-			prpt.off_3C            ,
-			prpt.off_3E            ,
+			prpt.ofs_3C            ,
+			prpt.ofs_3E            ,
 
-			prpt.off_00            ,
-			prpt.off_02            ,
-			prpt.off_04            ,
-			prpt.off_06            ,
+			prpt.ofs_00            ,
+			prpt.ofs_02            ,
+			prpt.ofs_04            ,
+			prpt.ofs_06            ,
 
-			prpt.off_08            ,
-			prpt.off_0A            ,
-			prpt.off_0C            ,
-			prpt.off_0E            ,
+			prpt.ofs_08            ,
+			prpt.ofs_0A            ,
+			prpt.ofs_0C            ,
+			prpt.ofs_0E            ,
 
 			prpt.city_no           ,
-			prpt.off_12            ,
-			prpt.off_14            ,
-			prpt.off_16            )
+			prpt.ofs_12            ,
+			prpt.ofs_14            ,
+			prpt.ofs_16            )
 	return str
 end
 
@@ -258,27 +258,27 @@ function City.toString4(prpt)
 			.."%2x,%2x | "
 			.."%2x,%2x | "
 			.."%2x,%2x,%2x,%2x | ",
-			prpt.off_18            ,
+			prpt.ofs_18            ,
 			prpt.city_id           ,
 			prpt.population        ,
-			prpt.off_1E            ,
-			prpt.off_20            ,
-			prpt.off_22            ,
-			prpt.off_24            ,
-			prpt.off_26            ,
+			prpt.ofs_1E            ,
+			prpt.ofs_20            ,
+			prpt.ofs_22            ,
+			prpt.ofs_24            ,
+			prpt.ofs_26            ,
 
 			prpt.product1_id       ,
 
-			prpt.off_00            ,
-			prpt.off_02            ,
+			prpt.ofs_00            ,
+			prpt.ofs_02            ,
 
-			prpt.off_08            ,
-			prpt.off_0A            ,
+			prpt.ofs_08            ,
+			prpt.ofs_0A            ,
 
 			prpt.city_no           ,
-			prpt.off_12            ,
-			prpt.off_14            ,
-			prpt.off_16            )
+			prpt.ofs_12            ,
+			prpt.ofs_14            ,
+			prpt.ofs_16            )
 	return str
 end
 

@@ -1,5 +1,5 @@
 
-69
+95
 00000	00009010	d	h	0	BIOS RNG
 00001	001222C4	d	h	0	RNG
 00002	00000000	S	S	0	----------------------------
@@ -69,3 +69,29 @@
 00042	001BD778	d	h	0	param
 00043	001BD77C	d	h	0	param
 00044	00000000	S	S	0	----------------------------
+00045	0018D9C8	d	h	0	voyage
+00046	0018D9D4	d	h	0	voyage
+00047	0018D9D8	d	h	0	voyage
+00048	0018D9DC	d	h	0	voyage
+00049	0018D9E0	d	h	0	voyage
+0004A	00000000	S	S	0	----------------------------
+0004B	0012C536	w	h	0	param
+0004C	0012CB36	w	h	0	param
+0004D	00132118	d	h	0	param
+0004E	00193090	d	h	0	param
+0004F	001930B4	d	h	0	param
+00050	001FFED0	d	h	0	stack
+00051	001FFEE0	d	h	0	stack
+00052	001FFF20	d	h	0	stack
+00053	001FFF24	d	h	0	stack
+00054	001FFF38	d	h	0	stack
+00055	001FFF3C	d	h	0	stack
+00056	001FFF40	d	h	0	stack
+00057	00000000	S	S	0	----------------------------
+00058	00122324	d	h	0	pad input
+00059	00122328	d	h	0	pad input
+0005A	001223E8	d	h	0	latitude
+0005B	001223EC	d	h	0	londitude
+0005C	00122610	d	h	0	text
+0005D	0012260E	d	h	0	text
+0005E	00000000	S	S	0	----------------------------

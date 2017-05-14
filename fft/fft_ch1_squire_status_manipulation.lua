@@ -36,8 +36,9 @@ emu.speedmode("turbo")       -- drops some frames
 ------------------------------------------------------------
 
 GarilandParty = {}
-GarilandParty.logname = "ch1_2_gariland_partyE4.log"
-GarilandParty.retry = 500
+--GarilandParty.logname = "ch1_1_orbonne_generic_choice_partyE4.log"
+GarilandParty.logname = "ch1_1_orbonne_generic_choice_partyE4_cheat.log"
+GarilandParty.retry = 5000
 
 GarilandParty.best_st = {}
 GarilandParty.cur_st = {}
@@ -491,33 +492,35 @@ for i=0, retry do
 	drawRetry(i, x, y)
 	interface.pre_attempt()
 
-	if initial == 1 then
-		initial = 0
-	end
-	fadv(i)
-
-
 --	if initial == 1 then
 --		initial = 0
---		fadv(i)
---
---		--seed = memory.readdword(adr_rng)
---		--seed = 0xD0ED60DA  -- 16700f
---		--seed = 0x66FBF315  -- 17000f
---		--seed = 0x60797F1D  -- 17343f
---		--seed = 0x785C9B05  -- 17190f
---		seed = 0x4C4BFA3E
---	else
---		seed = next_rng(seed)
---		memory.writedword(adr_rng, seed)
 --	end
+--	fadv(i)
+
+-- 
+-- cheat retry
+-- 
+	if initial == 1 then
+		initial = 0
+		fadv(i)
+
+		--seed = memory.readdword(adr_rng)
+		--seed = 0xD0ED60DA  -- 16700f
+		seed = 0x66FBF315  -- 17000f
+		--seed = 0x60797F1D  -- 17343f
+		--seed = 0x785C9B05  -- 17190f
+		--seed = 0x4C4BFA3E
+	else
+		seed = next_rng(seed)
+		memory.writedword(adr_rng, seed)
+	end
 
 
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
 
-	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
-	--debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X, seed = %08X -----", i, fc, rng, seed))
+	--debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
+	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X, seed = %08X -----", i, fc, rng, seed))
 
 	interface.attempt()
 
