@@ -48,5 +48,4 @@ end
 
 print(string.format("<<< lua bot is finished <<<"))
 emu.pause()
-f:close()
 

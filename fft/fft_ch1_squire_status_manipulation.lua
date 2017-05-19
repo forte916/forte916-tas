@@ -542,7 +542,7 @@ debugPrint(string.format("<<< lua bot is finished <<<"))
 debugPrint(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
 debugPrint(string.format("    end:: %s,  fc = %d", os.date(), fc))
 debugPrint(string.format("elapsed:: fc = %d", fc - begin_fc))
+f:close()
 emu.speedmode("normal")
 emu.pause()
-f:close()
 

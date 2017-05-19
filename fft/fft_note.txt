@@ -1604,7 +1604,7 @@ Mathable by Lv
 * ch4-Orbonne (Rolfal), Level 3 Holy
 * ch4-Murond (Hashmalum), Lv prime Demi2
 
-Mathable by  Height
+Mathable by Height
 -------------------
 * ch1-Thieves Fort, Height 3 Bolt3, hits another 2 enemies as well. Miluda
 * ch1-Windmill, Height 5 Bolt3, Wiegraf

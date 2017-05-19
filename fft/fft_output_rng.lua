@@ -91,6 +91,6 @@ f:flush()
 
 
 print(string.format("<<< lua bot is finished <<<"))
-emu.pause()
 f:close()
+emu.pause()
 
