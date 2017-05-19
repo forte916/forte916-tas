@@ -54,6 +54,8 @@ Date.date_param16 = { adr=0x00132128, ofs=0x16     } -- 4byte
 Date.date_param1A = { adr=0x0013212C, ofs=0x1A     } -- 4byte
 
 
+adr_coor_x        = 0x001223E8  -- cursor x
+adr_coor_y        = 0x001223EC  -- cursor y
 
 
 
@@ -63,38 +65,44 @@ Date.date_param1A = { adr=0x0013212C, ofs=0x1A     } -- 4byte
 City = {}
 
 -- offset of city structure
-City.ofs_00            = 0x00  -- ?byte
-City.ofs_02            = 0x02  -- ?byte
-City.ofs_04            = 0x04  -- ?byte
-City.ofs_06            = 0x06  -- ?byte
-City.ofs_08            = 0x08  -- ?byte
-City.ofs_0A            = 0x0A  -- ?byte
-City.ofs_0C            = 0x0C  -- ?byte
-City.ofs_0E            = 0x0E  -- ?byte
-City.city_no           = 0x10  -- ?byte, city id??
-City.ofs_12            = 0x12  -- ?byte
-City.ofs_14            = 0x14  -- ?byte
+City.city_fp           = 0x00  -- 4byte func pointer (previous city??)
+City.city_x            = 0x04  -- 2byte longitude (coord_X)
+City.city_y            = 0x06  -- 2byte latitude  (coord_Y)
+City.port_fp           = 0x08  -- 4byte func pointer (previous port??)
+City.port_x            = 0x0C  -- 2byte longitude (coord_X)
+City.port_y            = 0x0E  -- 2byte latitude  (coord_Y)
+City.city_no           = 0x10  -- 2byte, city index
+City.ofs_12            = 0x12  -- ?byte, d=地図未登場??, f=地図登場&未発見, 1f=発見済
+City.friend            = 0x14  -- 1byte, low 3bit friendship, hi 5bit ???
+	-- low 3bit friendship
+	-- 0 = 
+	-- 1 = 敵対心
+	-- 2 = 
+	-- 3 = 非協力的
+	-- 4 = 協力的
+	-- 5 = 友好的
+	-- 6 = 非常に友好的
+	-- 7 = 歓迎
+City.atmosphere        = 0x15  -- 1byte, atmosphere
+
 City.ofs_16            = 0x16  -- ?byte
 City.ofs_18            = 0x18  -- 2byte
-City.city_id           = 0x1A  -- 2byte
+City.city_id           = 0x1A  -- 2byte, city id??
 City.population        = 0x1C  -- 2byte, 1 - 0xFFFF (100 - 6,553,500)
-City.ofs_1E            = 0x1E  -- ?byte
-City.ofs_20            = 0x20  -- ?byte
-City.ofs_22            = 0x22  -- ?byte
-City.ofs_24            = 0x24  -- ?byte
+City.city_x_init       = 0x1E  -- ?byte
+City.city_y_init       = 0x20  -- ?byte
+City.port_x_init       = 0x22  -- ?byte
+City.port_y_init       = 0x24  -- ?byte
 City.ofs_26            = 0x26  -- ?byte
 City.product1_id       = 0x28  -- 2byte,
-City.product1_stock    = 0x2A  -- 2byte, 0 - 0x05DC(1500) (0% - 100%)
-City.ofs_2C            = 0x2C  -- ?byte, if trading, not zero, func pointer?
-City.ofs_2E            = 0x2E  -- ?byte, if trading, not zero, func pointer?
+City.product1_stock    = 0x2A  -- 2byte, 0 - 0x05DC (0 - 1500) (0% - 100%)
+City.product1_fp       = 0x2C  -- 4byte, if trading, none zero as func pointer?
 City.product2_id       = 0x30  -- 2byte,
-City.product2_stock    = 0x32  -- 2byte, 0(0%) - 0x05DC(100%)
-City.ofs_34            = 0x34  -- ?byte, if trading, not zero, func pointer?
-City.ofs_36            = 0x36  -- ?byte, if trading, not zero, func pointer?
+City.product2_stock    = 0x32  -- 2byte, 0 - 0x05DC (0 - 1500) (0% - 100%)
+City.product2_fp       = 0x34  -- 4byte, if trading, none zero as func pointer?
 City.product3_id       = 0x38  -- 2byte,
-City.product3_stock    = 0x3A  -- 2byte, 0(0%) - 0x05DC(100%)
-City.ofs_3C            = 0x3C  -- ?byte, if trading, not zero, func pointer?
-City.ofs_3E            = 0x3E  -- ?byte, if trading, not zero, func pointer?
+City.product3_stock    = 0x3A  -- 2byte, 0 - 0x05DC (0 - 1500) (0% - 100%)
+City.product3_fp       = 0x3C  -- 4byte, if trading, none zero as func pointer?
 
 
 function City.readProperty(ofs_city)
@@ -102,38 +110,36 @@ function City.readProperty(ofs_city)
 	--print(string.format("-- ofs_city = %08X", ofs_city))
 
 	-- Read properties
-	prpt.ofs_00            = memory.readword(ofs_city + City.ofs_00            )
-	prpt.ofs_02            = memory.readword(ofs_city + City.ofs_02            )
-	prpt.ofs_04            = memory.readword(ofs_city + City.ofs_04            )
-	prpt.ofs_06            = memory.readword(ofs_city + City.ofs_06            )
-	prpt.ofs_08            = memory.readword(ofs_city + City.ofs_08            )
-	prpt.ofs_0A            = memory.readword(ofs_city + City.ofs_0A            )
-	prpt.ofs_0C            = memory.readword(ofs_city + City.ofs_0C            )
-	prpt.ofs_0E            = memory.readword(ofs_city + City.ofs_0E            )
-	prpt.city_no           = memory.readword(ofs_city + City.city_no           )
-	prpt.ofs_12            = memory.readword(ofs_city + City.ofs_12            )
-	prpt.ofs_14            = memory.readword(ofs_city + City.ofs_14            )
-	prpt.ofs_16            = memory.readword(ofs_city + City.ofs_16            )
-	prpt.ofs_18            = memory.readword(ofs_city + City.ofs_18            )
-	prpt.city_id           = memory.readword(ofs_city + City.city_id           )
-	prpt.population        = memory.readword(ofs_city + City.population        )
-	prpt.ofs_1E            = memory.readword(ofs_city + City.ofs_1E            )
-	prpt.ofs_20            = memory.readword(ofs_city + City.ofs_20            )
-	prpt.ofs_22            = memory.readword(ofs_city + City.ofs_22            )
-	prpt.ofs_24            = memory.readword(ofs_city + City.ofs_24            )
-	prpt.ofs_26            = memory.readword(ofs_city + City.ofs_26            )
-	prpt.product1_id       = memory.readword(ofs_city + City.product1_id       )
-	prpt.product1_stock    = memory.readword(ofs_city + City.product1_stock    )
-	prpt.ofs_2C            = memory.readword(ofs_city + City.ofs_2C            )
-	prpt.ofs_2E            = memory.readword(ofs_city + City.ofs_2E            )
-	prpt.product2_id       = memory.readword(ofs_city + City.product2_id       )
-	prpt.product2_stock    = memory.readword(ofs_city + City.product2_stock    )
-	prpt.ofs_34            = memory.readword(ofs_city + City.ofs_34            )
-	prpt.ofs_36            = memory.readword(ofs_city + City.ofs_36            )
-	prpt.product3_id       = memory.readword(ofs_city + City.product3_id       )
-	prpt.product3_stock    = memory.readword(ofs_city + City.product3_stock    )
-	prpt.ofs_3C            = memory.readword(ofs_city + City.ofs_3C            )
-	prpt.ofs_3E            = memory.readword(ofs_city + City.ofs_3E            )
+	prpt.city_fp           = memory.readdword(ofs_city + City.city_fp          )
+	prpt.city_x            = memory.readword( ofs_city + City.city_x           )
+	prpt.city_y            = memory.readword( ofs_city + City.city_y           )
+	prpt.port_fp           = memory.readdword(ofs_city + City.port_fp          )
+	prpt.port_x            = memory.readword( ofs_city + City.port_x           )
+	prpt.port_y            = memory.readword( ofs_city + City.port_y           )
+	prpt.city_no           = memory.readword( ofs_city + City.city_no          )
+	prpt.ofs_12            = memory.readword( ofs_city + City.ofs_12           )
+	--prpt.friend            = memory.readbyte( ofs_city + City.friend           )
+	prpt.ofs_14            = bit.band(memory.readbyte(ofs_city + City.friend), 0xF8)  -- hi  5bit
+	prpt.friend            = bit.band(memory.readbyte(ofs_city + City.friend), 0x07)  -- low 3bit
+	prpt.atmosphere        = memory.readbyte( ofs_city + City.atmosphere       )
+	prpt.ofs_16            = memory.readword( ofs_city + City.ofs_16           )
+	prpt.ofs_18            = memory.readword( ofs_city + City.ofs_18           )
+	prpt.city_id           = memory.readword( ofs_city + City.city_id          )
+	prpt.population        = memory.readword( ofs_city + City.population       )
+	prpt.city_x_init       = memory.readword( ofs_city + City.city_x_init      )
+	prpt.city_y_init       = memory.readword( ofs_city + City.city_y_init      )
+	prpt.port_x_init       = memory.readword( ofs_city + City.port_x_init      )
+	prpt.port_y_init       = memory.readword( ofs_city + City.port_y_init      )
+	prpt.ofs_26            = memory.readword( ofs_city + City.ofs_26           )
+	prpt.product1_id       = memory.readword( ofs_city + City.product1_id      )
+	prpt.product1_stock    = memory.readword( ofs_city + City.product1_stock   )
+	prpt.product1_fp       = memory.readdword(ofs_city + City.product1_fp      )
+	prpt.product2_id       = memory.readword( ofs_city + City.product2_id      )
+	prpt.product2_stock    = memory.readword( ofs_city + City.product2_stock   )
+	prpt.product2_fp       = memory.readdword(ofs_city + City.product2_fp      )
+	prpt.product3_id       = memory.readword( ofs_city + City.product3_id      )
+	prpt.product3_stock    = memory.readword( ofs_city + City.product3_stock   )
+	prpt.product3_fp       = memory.readdword(ofs_city + City.product3_fp      )
 	--print(string.format("-- city_id    = %d, %08X", prpt.city_id   , ofs_city + City.city_id           ))
 	--print(string.format("-- population = %d, %08X", prpt.population, ofs_city + City.population        ))
 
@@ -170,82 +176,78 @@ City.info_header2 = "| 18, id, pop, 1E, 20, 22, 24, 26 | id, stock, 2C, 2E | id,
 
 function City.toString2(prpt)
 	local str = string.format("%2x,%2x,%d,%2x,%2x,%2x,%2x,%2x | "
-			.."%02x,%d,%2x,%2x | "
-			.."%02x,%d,%2x,%2x | "
-			.."%02x,%d,%2x,%2x | ",
+			.."%02x,%d,%x | "
+			.."%02x,%d,%x | "
+			.."%02x,%d,%x | ",
 			prpt.ofs_18            ,
 			prpt.city_id           ,
 			prpt.population        ,
-			prpt.ofs_1E            ,
-			prpt.ofs_20            ,
-			prpt.ofs_22            ,
-			prpt.ofs_24            ,
+			prpt.city_x_init       ,
+			prpt.city_y_init       ,
+			prpt.port_x_init       ,
+			prpt.port_y_init       ,
 			prpt.ofs_26            ,
 
 			prpt.product1_id       ,
 			prpt.product1_stock    ,
-			prpt.ofs_2C            ,
-			prpt.ofs_2E            ,
+			prpt.product1_fp       ,
 
 			prpt.product2_id       ,
 			prpt.product2_stock    ,
-			prpt.ofs_34            ,
-			prpt.ofs_36            ,
+			prpt.product2_fp       ,
 
 			prpt.product3_id       ,
 			prpt.product3_stock    ,
-			prpt.ofs_3C            ,
-			prpt.ofs_3E            )
+			prpt.product3_fp       )
 	return str
 end
 
 City.info_header3 = "| 18, id, pop, 1E, 20, 22, 24, 26 | id, stock, 2C, 2E | id, stock, 34, 36 | id, stock, 3C, 3E | 00, 02, 04, 06 | 08, 0A, 0C, 0E | no, 12, 14, 16 |"
 
 function City.toString3(prpt)
-	local str = string.format("%2x,%2x,%d,%2x,%2x,%2x,%2x,%2x | "
-			.."%02x,%d,%2x,%2x | "
-			.."%02x,%d,%2x,%2x | "
-			.."%02x,%d,%2x,%2x | "
-			.."%2x,%2x,%2x,%2x | "
-			.."%2x,%2x,%2x,%2x | "
-			.."%2x,%2x,%2x,%2x | ",
+	local str = string.format("%x,%3d %d | "
+			.."%x,%x,%x,%x,%2x | "
+			.."%02x,%d,%x | "
+			.."%02x,%d,%x | "
+			.."%02x,%d,%x | "
+			.."%x,%x,%x | "
+			.."%x,%x,%x | "
+			.."%3d,%2x,%2x,%2x,%2x,%2x | ",
 			prpt.ofs_18            ,
 			prpt.city_id           ,
 			prpt.population        ,
-			prpt.ofs_1E            ,
-			prpt.ofs_20            ,
-			prpt.ofs_22            ,
-			prpt.ofs_24            ,
+
+			prpt.city_x_init       ,
+			prpt.city_y_init       ,
+			prpt.port_x_init       ,
+			prpt.port_y_init       ,
 			prpt.ofs_26            ,
 
 			prpt.product1_id       ,
 			prpt.product1_stock    ,
-			prpt.ofs_2C            ,
-			prpt.ofs_2E            ,
+			prpt.product1_fp       ,
 
 			prpt.product2_id       ,
 			prpt.product2_stock    ,
-			prpt.ofs_34            ,
-			prpt.ofs_36            ,
+			prpt.product2_fp       ,
 
 			prpt.product3_id       ,
 			prpt.product3_stock    ,
-			prpt.ofs_3C            ,
-			prpt.ofs_3E            ,
+			prpt.product3_fp       ,
 
-			prpt.ofs_00            ,
-			prpt.ofs_02            ,
-			prpt.ofs_04            ,
-			prpt.ofs_06            ,
+			prpt.city_fp           ,
+			prpt.city_x            ,
+			prpt.city_y            ,
 
-			prpt.ofs_08            ,
-			prpt.ofs_0A            ,
-			prpt.ofs_0C            ,
-			prpt.ofs_0E            ,
+			prpt.port_fp           ,
+			prpt.port_x            ,
+			prpt.port_y            ,
 
 			prpt.city_no           ,
 			prpt.ofs_12            ,
 			prpt.ofs_14            ,
+			prpt.friend            ,
+			prpt.atmosphere        ,
 			prpt.ofs_16            )
 	return str
 end
@@ -253,31 +255,33 @@ end
 City.info_header4 = ""
 
 function City.toString4(prpt)
-	local str = string.format("%2x,%2x,%d,%2x,%2x,%2x,%2x,%2x | "
+	local str = string.format("%x,%3d %d | "
+			.."%x,%x,%x,%x,%2x | "
 			.."%02x | "
-			.."%2x,%2x | "
-			.."%2x,%2x | "
-			.."%2x,%2x,%2x,%2x | ",
+			.."%x | "
+			.."%x | "
+			.."%3d,%2x,%2x,%2x,%2x,%2x | ",
 			prpt.ofs_18            ,
 			prpt.city_id           ,
 			prpt.population        ,
-			prpt.ofs_1E            ,
-			prpt.ofs_20            ,
-			prpt.ofs_22            ,
-			prpt.ofs_24            ,
+
+			prpt.city_x_init       ,
+			prpt.city_y_init       ,
+			prpt.port_x_init       ,
+			prpt.port_y_init       ,
 			prpt.ofs_26            ,
 
 			prpt.product1_id       ,
 
-			prpt.ofs_00            ,
-			prpt.ofs_02            ,
+			prpt.city_fp           ,
 
-			prpt.ofs_08            ,
-			prpt.ofs_0A            ,
+			prpt.port_fp           ,
 
 			prpt.city_no           ,
 			prpt.ofs_12            ,
 			prpt.ofs_14            ,
+			prpt.friend            ,
+			prpt.atmosphere        ,
 			prpt.ofs_16            )
 	return str
 end

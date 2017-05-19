@@ -90,8 +90,8 @@
 00057	00000000	S	S	0	----------------------------
 00058	00122324	d	h	0	pad input
 00059	00122328	d	h	0	pad input
-0005A	001223E8	d	h	0	latitude
-0005B	001223EC	d	h	0	londitude
+0005A	001223E8	d	h	0	longitude(coord_X)
+0005B	001223EC	d	h	0	latitude(coord_Y)
 0005C	00122610	d	h	0	text
 0005D	0012260E	d	h	0	text
 0005E	00000000	S	S	0	----------------------------
