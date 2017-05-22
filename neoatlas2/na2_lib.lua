@@ -21,41 +21,30 @@ city_lisbon       = 0x001AEE48  -- city_offset + (0x40 * 4)
 city_london       = 0x001AEE88  -- city_offset + (0x40 * 5)
 
 
-adr_gp            = 0x00121E80  -- global pointer
-adr_game_speed    = 0x00121EEE  -- adr_gp + 0x006E -- 1byte
-adr_scale1        = 0x00121F78  -- adr_gp + 0x00F8 -- 1byte
-adr_total_city    = 0x0012226C  -- adr_gp + 0x03EC -- 2byte total city count??
-adr_rng           = 0x001222C4  -- adr_gp + 0x0444 -- 4byte
-adr_scale2        = 0x001223F0  -- adr_gp + 0x0570 -- 1byte
-
-adr_money         = 0x00122528  -- adr_gp + 0x06A8 -- 4byte
+Global = {}
+Global.base       = { adr=0x00121E80, ofs=0      } -- xbyte, global pointer
+Global.game_speed = { adr=0x00121EEE, ofs=0x006E } -- 1byte, 0,2,4 (slow, normal, fast)
+Global.scale1     = { adr=0x00121F78, ofs=0x00F8 } -- 1byte, 0 - 3 (1 - 4)
+Global.total_city = { adr=0x0012226C, ofs=0x03EC } -- 2byte
+Global.rng        = { adr=0x001222C4, ofs=0x0444 } -- 4byte
+Global.pad_input1 = { adr=0x00122324, ofs=0x04A4 } -- 4byte, pad input
+Global.pad_input2 = { adr=0x00122328, ofs=0x04A8 } -- 4byte, pad input
+Global.coordX     = { adr=0x001223E8, ofs=0x0568 } -- 4byte, cursor X
+Global.coordY     = { adr=0x001223EC, ofs=0x056C } -- 4byte, cursor Y
+Global.scale2     = { adr=0x001223F0, ofs=0x0570 } -- 1byte
+Global.date_param = { adr=0x00122458, ofs=0x05D8 } -- 4byte, copy of Date.param16??
+Global.money      = { adr=0x00122528, ofs=0x06A8 } -- 4byte
 	-- eg.) 0x05F5E0FF = 99990000 = 9999万
 
-
-
-Global = {}
-Global.base       = { adr=0x00121E80, ofs=0        } -- xbyte
-Global.game_speed = { adr=0x00121EEE, ofs=0x006E   } -- 1byte, 0,2,4 (slow, normal, fast)
-Global.scale1     = { adr=0x00121F78, ofs=0x00F8   } -- 1byte, 0 - 3 (1 - 4)
-Global.total_city = { adr=0x0012226C, ofs=0x03EC   } -- 2byte
-Global.rng        = { adr=0x001222C4, ofs=0x0444   } -- 4byte
-Global.scale2     = { adr=0x001223F0, ofs=0x0570   } -- 1byte
-Global.date_param = { adr=0x00122458, ofs=0x05D8   } -- 4byte -- copy of Date.date_param16??
-Global.money      = { adr=0x00122528, ofs=0x06A8   } -- 4byte
-
 Date = {}
-Date.base         = { adr=0x00132118, ofs=0        } -- 4byte
-Date.date_param04 = { adr=0x0013211C, ofs=0x04     } -- 4byte
-Date.date_param08 = { adr=0x00132120, ofs=0x08     } -- 4byte
-Date.year         = { adr=0x00132124, ofs=0x12     } -- 2byte
-Date.month        = { adr=0x00132126, ofs=0x14     } -- 1byte
-Date.day          = { adr=0x00132127, ofs=0x15     } -- 1byte
-Date.date_param16 = { adr=0x00132128, ofs=0x16     } -- 4byte
-Date.date_param1A = { adr=0x0013212C, ofs=0x1A     } -- 4byte
-
-
-adr_coor_x        = 0x001223E8  -- cursor x
-adr_coor_y        = 0x001223EC  -- cursor y
+Date.elaplsed_days   = { adr=0x00132118, ofs=0    } -- 4byte, elapsed days
+Date.param04         = { adr=0x0013211C, ofs=0x04 } -- 4byte
+Date.resolution_time = { adr=0x00132120, ofs=0x08 } -- 4byte, resolution time (0-1024)
+Date.year            = { adr=0x00132124, ofs=0x12 } -- 2byte
+Date.month           = { adr=0x00132126, ofs=0x14 } -- 1byte
+Date.day             = { adr=0x00132127, ofs=0x15 } -- 1byte
+Date.param16         = { adr=0x00132128, ofs=0x16 } -- 4byte
+Date.param1A         = { adr=0x0013212C, ofs=0x1A } -- 4byte
 
 
 
@@ -333,6 +322,118 @@ function Voyage.getState()
 end
 
 
+
+------------------------------------------------------------
+-- Cursor
+------------------------------------------------------------
+Cursor = {}
+
+--Cursor.scale1_deltaX  = 0x20
+--Cursor.scale2_deltaX  = 0x20
+--Cursor.scale3_deltaX  = 0x20
+--Cursor.scale4_deltaX  = 0x20
+--
+--Cursor.scale1_deltaY  = 0x20
+--Cursor.scale2_deltaY  = 0x20
+--Cursor.scale3_deltaY  = 0x20
+--Cursor.scale4_deltaY  = 0x20
+--
+--Cursor.scale1_marginX = 0x20
+--Cursor.scale2_marginX = 0x20
+--Cursor.scale3_marginX = 0x20
+--Cursor.scale4_marginX = 0x20
+--
+--Cursor.scale1_marginY = 0x20
+--Cursor.scale2_marginY = 0x20
+--Cursor.scale3_marginY = 0x20
+--Cursor.scale4_marginY = 0x20
+
+function Cursor.move(toX, toY, toScale)
+	local pad = {triangle=1}
+	local movedX = false
+	local movedY = false
+
+	while movedX == false or movedY == false do
+		local curX = memory.readdword(Global.coordX.adr)
+		local curY = memory.readdword(Global.coordY.adr)
+		local diffX = curX - toX
+		local diffY = curY - toY
+
+		if diffX > 0 then
+			pad.left = 1
+		elseif diffX < 0 then
+			pad.right = 1
+		else
+			movedX = true
+		end
+
+		if diffY > 0 then
+			pad.down = 1
+		elseif diffY < 0 then
+			pad.up = 1
+		else
+			movedY = true
+		end
+
+		pressBtn(pad, 1)
+	end
+end
+
+function Cursor.Zoom(toScale)
+	local zoomed = false
+	while zoomed == false do
+		local curScale = memory.readbyte(Global.scale1.adr)
+		local diffScale = curScale - toScale
+		if diffScale > 0 then
+			pressBtn({r2=1}, 1)  -- zoom out
+			fadv(35)
+		elseif diffScale < 0 then
+			pressBtn({l2=1}, 1)  -- zoom in
+			fadv(35)
+		else
+			zoomed = true
+		end
+	end
+end
+
+
+------------------------------------------------------------
+-- Text
+------------------------------------------------------------
+Text = {]
+Text.adr_12260E = 0x0012260E -- 2byte, text flag
+	-- 0x00 : out of text event
+	-- 0x01 : during text event
+
+Text.NONE    = 0
+Text.TEXTING = 1
+
+
+function Text.skip()
+	local pre_state = memory.readword(Text.adr_12260E)
+
+	while true do
+		local cur_state  = memory.readword(Text.adr_12260E)
+		if cur_state == Text.NONE and pre_state == Text.NONE then
+			pre_state = cur_state
+			fadv(1)
+		elseif cur_state == Text.TEXTING and pre_state == Text.NONE then
+			pre_state = cur_state
+			-- skip text
+			fadv(1)
+			pressBtn({x=1}, 2)  -- skip text
+		elseif cur_state == Text.TEXTING and pre_state == Text.TEXTING then
+			pre_state = cur_state
+			local input = memory.readdword(Global.pad_input1)
+			if input ~= 0 then
+				fadv(1)
+			end
+			pressBtn({x=1}, 2)  -- skip text
+		elseif cur_state == Text.NONE and pre_state == Text.TEXTING then
+			break
+		end
+	end
+end
 
 ------------------------------------------------------------
 -- Product id

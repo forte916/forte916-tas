@@ -6,8 +6,8 @@
 00003	001223EC	d	h	0	coord_Y(latitude)
 00004	00122324	d	h	0	pad input
 00005	00122328	d	h	0	pad input
-00006	00122610	d	h	0	text
-00007	0012260E	d	h	0	text
+00006	0012260C	d	h	0	text
+00007	00122610	d	h	0	text
 00008	0012226C	w	s	0	total city count??
 00009	00121EEE	w	s	0	game speed 0,2,4 (slow, normal, fast)
 0000A	00000000	S	S	0	----------------------------
@@ -21,16 +21,16 @@
 00012	001FFC68	d	h	0	text param(stack)
 00013	00000000	S	S	0	----------------------------
 00014	0011FD74	d	u	0	param
-00015	0011FD94	d	u	0	counter
+00015	0011FD94	d	u	0	frame counter
 00016	00121E80	d	s	0	grobal pointer
 00017	00121F78	w	s	0	scale 0 - 3 (1 - 4)
-00018	001223F0	w	s	0	scale
+00018	001223F0	w	s	0	scale 0 - 3 (1 - 4)
 00019	00122458	d	s	0	copy of date param 16??
 0001A	00122528	d	u	0	money
 0001B	00000000	S	S	0	----------------------------
 0001C	00132118	d	s	0	elapsed days
 0001D	0013211C	d	s	0	date param 04
-0001E	00132120	d	s	0	day timer(0-1024)
+0001E	00132120	d	s	0	resolution time (0-1024)
 0001F	00132124	w	s	0	year
 00020	00132126	b	s	0	month
 00021	00132127	b	s	0	day
@@ -84,15 +84,15 @@
 00051	001BD778	d	h	0	param
 00052	001BD77C	d	h	0	param
 00053	00000000	S	S	0	----------------------------
-00054	0018D9C8	d	h	0	voyage
-00055	0018D9D4	d	h	0	voyage
-00056	0018D9D8	d	h	0	voyage
-00057	0018D9DC	d	h	0	voyage
-00058	0018D9E0	d	h	0	voyage
-00059	00000000	S	S	0	----------------------------
-0005A	0012C536	w	h	0	param
-0005B	0012CB36	w	h	0	param
-0005C	00132118	d	h	0	param
+00054	001BD810	d	h	0	voyage state
+00055	0018D9C8	d	h	0	voyage
+00056	0018D9D4	d	h	0	voyage
+00057	0018D9D8	d	h	0	voyage
+00058	0018D9DC	d	h	0	voyage
+00059	0018D9E0	d	h	0	voyage
+0005A	00000000	S	S	0	----------------------------
+0005B	0012C536	w	h	0	param
+0005C	0012CB36	w	h	0	param
 0005D	00193090	d	h	0	param
 0005E	001930B4	d	h	0	param
 0005F	001FFED0	d	h	0	stack

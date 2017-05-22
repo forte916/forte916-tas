@@ -89,8 +89,8 @@ function TAS.clickTreasure()
 	-- accepting for pad input
 end
 
-function TAS.zoomIn()
-	pressBtn({r2=1}, 1)  -- zoom in
+function TAS.zoomOut()
+	pressBtn({r2=1}, 1)  -- zoom out
 	fadv(32+1)
 	-- sometimes, 0x02E1 in 0x0000E2D8
 	-- accepting for cursor movement
@@ -98,8 +98,8 @@ function TAS.zoomIn()
 	-- accepting for zoom
 end
 
-function TAS.zoomOut()
-	pressBtn({l2=1}, 1)  -- zoom out
+function TAS.zoomIn()
+	pressBtn({l2=1}, 1)  -- zoom in
 	fadv(32+1)
 	-- sometimes, 0x02E1 in 0x0000E2D8
 	-- accepting for cursor movement
