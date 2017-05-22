@@ -38,6 +38,7 @@ andi    $v0, 0x7FFF
 
 
 ## メモリアドレス
+* 0x0012AA32 - 0x0012BC28 : ベルデ西部の雲の標高と思われる
 
 
 ## Cheat code
@@ -119,6 +120,17 @@ andi    $v0, 0x7FFF
 * [NEO ATLAS 2 攻略？ 序盤金策用](http://blog.goo.ne.jp/tarkarsar/e/a133cab21bf96e29051c5b451b493209)
 * [Wazap](http://jp.wazap.com/game/4643/cheats/)
 
+
+## Optimise
+* タレントム -> バルカ へカーソル移動
+	* scale 3 のまま move
+		* cursor 移動は 2f 遅かった
+		* ただしマダス貝の報奨で 2f 早いため追いついて結局同じ frame
+	* zoom out (scale 2) -> move -> zoom in (scale 3)
+		* cursor 移動は 2f 早かった
+		* ただしマダス貝の報奨で 2f 遅いため追いつかれて結局同じ frame
+		* zoom するとゲーム内時間が止まるので、乱数が動かない
+		* その結果、frame 数は同じだが乱数をずらすことが可能
 
 
 ------------------------------------------------------------

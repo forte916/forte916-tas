@@ -13,7 +13,8 @@ require "math"
 ------------------------------------------------------------
 
 MAX_INT = math.pow(2, 31)  -- MAX_INT = 2^31
-adr_rng = 0x9010 -- BIOS RNG seed, 4byte
+--adr_rng = 0x9010 -- BIOS RNG seed, 4byte
+adr_rng = 0x001222C4  -- RNG of NeoAtlas2, 4byte
 
 
 -- pure 32-bit multiplier

@@ -35,8 +35,8 @@ adr_money         = 0x00122528  -- adr_gp + 0x06A8 -- 4byte
 
 Global = {}
 Global.base       = { adr=0x00121E80, ofs=0        } -- xbyte
-Global.game_speed = { adr=0x00121EEE, ofs=0x006E   } -- 1byte
-Global.scale1     = { adr=0x00121F78, ofs=0x00F8   } -- 1byte
+Global.game_speed = { adr=0x00121EEE, ofs=0x006E   } -- 1byte, 0,2,4 (slow, normal, fast)
+Global.scale1     = { adr=0x00121F78, ofs=0x00F8   } -- 1byte, 0 - 3 (1 - 4)
 Global.total_city = { adr=0x0012226C, ofs=0x03EC   } -- 2byte
 Global.rng        = { adr=0x001222C4, ofs=0x0444   } -- 4byte
 Global.scale2     = { adr=0x001223F0, ofs=0x0570   } -- 1byte
@@ -66,11 +66,11 @@ City = {}
 
 -- offset of city structure
 City.city_fp           = 0x00  -- 4byte func pointer (previous city??)
-City.city_x            = 0x04  -- 2byte longitude (coord_X)
-City.city_y            = 0x06  -- 2byte latitude  (coord_Y)
+City.city_x            = 0x04  -- 2byte coord_X (longitude)
+City.city_y            = 0x06  -- 2byte coord_Y  (latitude)
 City.port_fp           = 0x08  -- 4byte func pointer (previous port??)
-City.port_x            = 0x0C  -- 2byte longitude (coord_X)
-City.port_y            = 0x0E  -- 2byte latitude  (coord_Y)
+City.port_x            = 0x0C  -- 2byte coord_X (longitude)
+City.port_y            = 0x0E  -- 2byte coord_Y  (latitude)
 City.city_no           = 0x10  -- 2byte, city index
 City.ofs_12            = 0x12  -- ?byte, d=地図未登場??, f=地図登場&未発見, 1f=発見済
 City.friend            = 0x14  -- 1byte, low 3bit friendship, hi 5bit ???
