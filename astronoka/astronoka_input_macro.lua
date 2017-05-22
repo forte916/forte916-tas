@@ -1,7 +1,7 @@
 -- Astronoka
 -- This is a key inputs for speed run
 --
--- + Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- + Usage
 --   1. Start this script whenever you want to input key macros.

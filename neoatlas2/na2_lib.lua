@@ -1,5 +1,5 @@
 -- ROM: Neo ATLAS 2 (J) [SLPS-02238]
--- Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- This is a library of neoatlas2.
 --

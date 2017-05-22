@@ -1,7 +1,7 @@
 -- Astronoka
 -- This is a key inputs for speed run.
 --
--- + Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- + Usage
 --   1. require "astronoka_key_macro_lib"
@@ -399,7 +399,7 @@ function TAS.inputName()
 	--joypadSetHelper(1, {left=1}, 8)
 	--joypadSetHelper(1, {circle=1}, 6)  -- press S
 
-	-- input user name, "É^ÉX"
+	-- input user name, "„Çø„Çπ"
 	joypadSetHelper(1, {right=1}, 8)
 	joypadSetHelper(1, {right=1}, 8)
 	joypadSetHelper(1, {right=1}, 8)

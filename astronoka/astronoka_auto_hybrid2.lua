@@ -2,7 +2,7 @@
 -- This is auto hybrid script, also shows hybrid expectation.
 -- You can uncomment target_vegee, if needed.
 --
--- + Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- + Usage
 --   1. Prepare seeds below

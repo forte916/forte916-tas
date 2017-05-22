@@ -1,7 +1,7 @@
 -- Astronoka
 -- This is a library of astronoka.
 --
--- + Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- + Usage
 --   1. require "astronoka_lib"
@@ -137,43 +137,43 @@ adr_art_score2 = 0x1FFE20  -- art score. same value as score1
 -- ## Properties of vegee
 -- kind1
 knd_kyouka    = 0x00  -- golden kyouka-shu, other kyouka-shu
-knd_kuzu      = 0x00  -- ‚­‚¸–ìØ
-knd_hourensou = 0x01  -- ŒŠƒzƒEƒŒƒ“‘
-knd_nira      = 0x02  -- ƒjƒ‰ƒNƒ‰ƒEƒ“
-knd_kyabetsu  = 0x03  -- “§–¾ƒLƒƒƒxƒc
-knd_paseri    = 0x04  -- ƒEƒLƒEƒLƒpƒZƒŠ
-knd_karifura  = 0x05  -- ƒJƒŠƒtƒ‰ƒ{[ƒ‹
-knd_mame      = 0x06  -- ‰F’ˆƒ}ƒ
-knd_karashi   = 0x07  -- ƒzƒ^ƒ‹“‚hq
-knd_wakame    = 0x08  -- ^‹óƒƒJƒ
-knd_konbu     = 0x09  -- Œ–ÊƒRƒ“ƒu
-knd_chingen   = 0x0A  -- ƒ`ƒ“ƒQƒ“ƒcƒŠ[
-knd_piman     = 0x0B  -- —d¸ƒs[ƒ}ƒ“
-knd_herb      = 0x0C  -- …»ƒn[ƒu
-knd_shimaimo  = 0x0D  -- ƒVƒ}ƒCƒ‚
-knd_kabu      = 0x0E  -- ¯ƒJƒu
-knd_renkon    = 0x0F  -- ˜‚©‚¯ƒŒƒ“ƒRƒ“
-knd_ninjin    = 0x10  -- ƒRƒXƒ‚ƒjƒ“ƒWƒ“
-knd_tamanegi  = 0x11  -- ƒ^ƒ}ƒlƒMƒ{ƒ€
-knd_imokyu    = 0x12  -- ƒCƒ‚‹…
-knd_gobou     = 0x13  -- ƒSƒ{ƒE‹Ê
-knd_kabocha   = 0x14  -- ‰Î¯ƒJƒ{ƒ`ƒƒ
-knd_garlic    = 0x15  -- ƒgƒQƒK[ƒŠƒbƒN
-knd_takenoko  = 0x16  -- ƒJƒuƒgƒ^ƒPƒmƒR
-knd_matsutake = 0x17  -- –»‰¤ƒ}ƒcƒ^ƒP
-knd_kifujin   = 0x18  -- ‹M•wl
-knd_tomato    = 0x19  -- ƒgƒ}ƒgƒjƒAƒ“
-knd_kyuri     = 0x1A  -- “d“”ƒLƒ…[ƒŠ
-knd_nasu      = 0x1B  -- “y¯ƒiƒX
-knd_meron     = 0x1C  -- ƒh[ƒ€ƒƒƒ“
-knd_remon     = 0x1D  -- ‚Ğ‚æ‚±ƒŒƒ‚ƒ“
-knd_corn      = 0x1E  -- ƒƒEƒ\ƒNƒR[ƒ“
-knd_peach     = 0x1F  -- –CŠÛƒs[ƒ`
-knd_ichigo    = 0x20  -- ƒCƒ`ƒSƒuƒhƒE
-knd_pine      = 0x21  -- Œõ‘¬ƒpƒCƒ“
-knd_suica     = 0x22  -- ƒXƒCƒJƒ^ƒ[
-knd_dorian    = 0x23  -- ‹â‰ÍƒhƒŠƒAƒ“
-knd_astro     = 0x24  -- ƒAƒXƒgƒƒLƒ“ƒO
+knd_kuzu      = 0x00  -- ããšé‡èœ
+knd_hourensou = 0x01  -- ç©´ãƒ›ã‚¦ãƒ¬ãƒ³è‰
+knd_nira      = 0x02  -- ãƒ‹ãƒ©ã‚¯ãƒ©ã‚¦ãƒ³
+knd_kyabetsu  = 0x03  -- é€æ˜ã‚­ãƒ£ãƒ™ãƒ„
+knd_paseri    = 0x04  -- ã‚¦ã‚­ã‚¦ã‚­ãƒ‘ã‚»ãƒª
+knd_karifura  = 0x05  -- ã‚«ãƒªãƒ•ãƒ©ãƒœãƒ¼ãƒ«
+knd_mame      = 0x06  -- å®‡å®™ãƒãƒ¡
+knd_karashi   = 0x07  -- ãƒ›ã‚¿ãƒ«å”è¾›å­
+knd_wakame    = 0x08  -- çœŸç©ºãƒ¯ã‚«ãƒ¡
+knd_konbu     = 0x09  -- æœˆé¢ã‚³ãƒ³ãƒ–
+knd_chingen   = 0x0A  -- ãƒãƒ³ã‚²ãƒ³ãƒ„ãƒªãƒ¼
+knd_piman     = 0x0B  -- å¦–ç²¾ãƒ”ãƒ¼ãƒãƒ³
+knd_herb      = 0x0C  -- æ°´æ™¶ãƒãƒ¼ãƒ–
+knd_shimaimo  = 0x0D  -- ã‚·ãƒã‚¤ãƒ¢
+knd_kabu      = 0x0E  -- æ˜Ÿã‚«ãƒ–
+knd_renkon    = 0x0F  -- è…°ã‹ã‘ãƒ¬ãƒ³ã‚³ãƒ³
+knd_ninjin    = 0x10  -- ã‚³ã‚¹ãƒ¢ãƒ‹ãƒ³ã‚¸ãƒ³
+knd_tamanegi  = 0x11  -- ã‚¿ãƒãƒã‚®ãƒœãƒ 
+knd_imokyu    = 0x12  -- ã‚¤ãƒ¢çƒ
+knd_gobou     = 0x13  -- ã‚´ãƒœã‚¦ç‰
+knd_kabocha   = 0x14  -- ç«æ˜Ÿã‚«ãƒœãƒãƒ£
+knd_garlic    = 0x15  -- ãƒˆã‚²ã‚¬ãƒ¼ãƒªãƒƒã‚¯
+knd_takenoko  = 0x16  -- ã‚«ãƒ–ãƒˆã‚¿ã‚±ãƒã‚³
+knd_matsutake = 0x17  -- å†¥ç‹ãƒãƒ„ã‚¿ã‚±
+knd_kifujin   = 0x18  -- è²´å©¦äºº
+knd_tomato    = 0x19  -- ãƒˆãƒãƒˆãƒ‹ã‚¢ãƒ³
+knd_kyuri     = 0x1A  -- é›»ç¯ã‚­ãƒ¥ãƒ¼ãƒª
+knd_nasu      = 0x1B  -- åœŸæ˜ŸãƒŠã‚¹
+knd_meron     = 0x1C  -- ãƒ‰ãƒ¼ãƒ ãƒ¡ãƒ­ãƒ³
+knd_remon     = 0x1D  -- ã²ã‚ˆã“ãƒ¬ãƒ¢ãƒ³
+knd_corn      = 0x1E  -- ãƒ­ã‚¦ã‚½ã‚¯ã‚³ãƒ¼ãƒ³
+knd_peach     = 0x1F  -- ç ²ä¸¸ãƒ”ãƒ¼ãƒ
+knd_ichigo    = 0x20  -- ã‚¤ãƒã‚´ãƒ–ãƒ‰ã‚¦
+knd_pine      = 0x21  -- å…‰é€Ÿãƒ‘ã‚¤ãƒ³
+knd_suica     = 0x22  -- ã‚¹ã‚¤ã‚«ã‚¿ãƒ¯ãƒ¼
+knd_dorian    = 0x23  -- éŠ€æ²³ãƒ‰ãƒªã‚¢ãƒ³
+knd_astro     = 0x24  -- ã‚¢ã‚¹ãƒˆãƒ­ã‚­ãƒ³ã‚°
 
 -- eponym1
 knd_any_golden = 0x00
@@ -1220,74 +1220,74 @@ end
 Baboo = {}
 
 Baboo.DNA ={
-	-- ƒQ[ƒ€“àƒf[ƒ^‚ÉJIS‚Å‘‚©‚ê‚Ä‚¢‚½ƒl[ƒ€B
-	-- —D‚`“™‚Ì€–Ú‚ÌˆÓ–¡‚Í”cˆ¬‚µ‚Ä‚¢‚Ü‚¹‚ñB
-	"YuuA" ,	--1508D8 —D‚`		01 -- greater value, greater baboo.
-	"YuuB" ,	--1508DC —D‚a		02
-	"Weight" ,	--1508E0 ‘Ìd		03
-	"High" ,	--1508E4 g’·		04
-	"Ude" , 	--1508E8 ˜r—Í		05
-	"Ashi" , 	--1508EC ‹r—Í		06
-	"Ago" , 	--1508F0 ƒAƒS		07
-	"Wing" ,	--1508F4 ‰H’l		08
-	"Pit" , 	--1508F8 ‘ÏŒŠ		09
-	"Fan" , 	--1508FC ‘Ïî•—‹@	10
-	"Jump" ,	--150900 ‘ÏƒWƒƒƒ“ƒv	11
-	"Guru" ,	--150904 ‘ÏƒOƒ‹ƒOƒ‹	12
-	"Water" ,	--150908 ‘Ï—â…		13
-	"Punch" ,	--15090C ‘Ïƒpƒ“ƒ`	14
-	"Biri" ,	--150910 ‘ÏƒrƒŠƒrƒŠ	15
-	"Balloon" ,	--150914 ‘Ï•—‘D		16
-	"Tawara" ,	--150918 ‘Ï•Ä		17
-	"Omedeto" ,	--15091C ‘Ï‚¨‚ß‚Å‚Æ‚¤	18
-	"NiseEsa" ,	--150920 ‘ÏƒGƒT		19
-	"Kakashi" ,	--150924 ‘ÏƒJƒJƒV	20
-	"Mochi" ,	--150928 ‘Ï‚Æ‚è‚à‚¿	21
-	"Kousen" ,	--15092C ‘Ï‰öŒõü	22
-	"Like" ,	--150930 ‰õ		23
-	"DisLike" ,	--150934 •s‰õ		24
-	"HP" ,		--150938 ƒXƒ^ƒ~ƒiiHPj	25
-	"Seikaku" ,	--15093C «‚b		26
-	"Kuufuku" ,	--150940 ‹ó• 		27
-	"Shokuryo" ,	--150944 H—Ê		28
-	"Shokusen" ,	--150948 ì‘I		29
-	"Tabekata" ,	--15094C H•û		30
-	"YarukiP" ,	--150950 ‚â‚é‹C(‘Øİ)	31
-	"Movement" ,	--150954 ˆÚ—Ê		32
-	"Favo A" ,	--150958 D‚`		33
-	"Favo B" ,	--15095C D‚a		34
-	"Favo C" ,	--150960 D‚b		35
-	"Favo S" ,	--150964 D‚r		36
-	"Pit-D" ,	--150968 —’¼		37
-	"Pit-U" ,	--15096C —‰I		38
-	"Pit-J" ,	--150970 —”ò		39
-	"Jump-D" ,	--150974 ƒW’¼		40
-	"Jump-U" ,	--150978 ƒW‰I		41
-	"Jump-J" ,	--15097C ƒW”ò		42
-	"Guru-D" ,	--150980 ‰ñ’¼		43
-	"Guru-U" ,	--150984 ‰ñ‰I		44
-	"Guru-J" ,	--150988 ‰ñ”ò		45
-	"Mochi-D" ,	--15098C ‚à’¼		46
-	"Mochi-U" ,	--150990 ‚à‰I		47
-	"Mochi-J" ,	--150994 ‚à”ò		48
-	"Ray-D" ,	--150998 Œõ’¼		49
-	"Ray-U" ,	--15099C Œõ‰I		50
-	"Ray-J" ,	--1509A0 Œõ”ò		51
-	"Punch-D" ,	--1509A4 ‰£’¼		52
-	"Punch-U" ,	--1509A8 ‰£‰I		53
-	"Punch-J" ,	--1509AC ‰£”ò		54
-	"Punch-A" ,	--1509B0 ‰£‰ó		55
-	"Punch-P" ,	--1509B4 ‰£‰Ÿ		56
-	"Biri-D" ,	--1509B8 ƒr’¼		57
-	"Biri-U" ,	--1509BC ƒr‰I		58
-	"Biri-J" ,	--1509C0 ƒr”ò		59
-	"Biri-A" ,	--1509C4 ƒr‰ó		60
-	"Biri-P" ,	--1509C8 ƒr‰Ÿ		61
-	"Obj-U" ,	--1509CC ‘¼‰I		62
-	"Obj-J" ,	--1509D0 ‘¼”ò		63
-	"Obj-A" ,	--1509D4 ‘¼‰ó		64
-	"Obj-P" ,	--1509D8 ‘¼‰Ÿ		65
-	"Drop"  	--1509DC —•¨		66
+	-- ã‚²ãƒ¼ãƒ å†…ãƒ‡ãƒ¼ã‚¿ã«JISã§æ›¸ã‹ã‚Œã¦ã„ãŸãƒãƒ¼ãƒ ã€‚
+	-- å„ªï¼¡ç­‰ã®é …ç›®ã®æ„å‘³ã¯æŠŠæ¡ã—ã¦ã„ã¾ã›ã‚“ã€‚
+	"YuuA" ,	--1508D8 å„ªï¼¡		01 -- greater value, greater baboo.
+	"YuuB" ,	--1508DC å„ªï¼¢		02
+	"Weight" ,	--1508E0 ä½“é‡		03
+	"High" ,	--1508E4 èº«é•·		04
+	"Ude" , 	--1508E8 è…•åŠ›		05
+	"Ashi" , 	--1508EC è„šåŠ›		06
+	"Ago" , 	--1508F0 ã‚¢ã‚´		07
+	"Wing" ,	--1508F4 ç¾½å€¤		08
+	"Pit" , 	--1508F8 è€ç©´		09
+	"Fan" , 	--1508FC è€æ‰‡é¢¨æ©Ÿ	10
+	"Jump" ,	--150900 è€ã‚¸ãƒ£ãƒ³ãƒ—	11
+	"Guru" ,	--150904 è€ã‚°ãƒ«ã‚°ãƒ«	12
+	"Water" ,	--150908 è€å†·æ°´		13
+	"Punch" ,	--15090C è€ãƒ‘ãƒ³ãƒ	14
+	"Biri" ,	--150910 è€ãƒ“ãƒªãƒ“ãƒª	15
+	"Balloon" ,	--150914 è€é¢¨èˆ¹		16
+	"Tawara" ,	--150918 è€ç±³		17
+	"Omedeto" ,	--15091C è€ãŠã‚ã§ã¨ã†	18
+	"NiseEsa" ,	--150920 è€ã‚¨ã‚µ		19
+	"Kakashi" ,	--150924 è€ã‚«ã‚«ã‚·	20
+	"Mochi" ,	--150928 è€ã¨ã‚Šã‚‚ã¡	21
+	"Kousen" ,	--15092C è€æ€ªå…‰ç·š	22
+	"Like" ,	--150930 å¿«		23
+	"DisLike" ,	--150934 ä¸å¿«		24
+	"HP" ,		--150938 ã‚¹ã‚¿ãƒŸãƒŠï¼ˆHPï¼‰	25
+	"Seikaku" ,	--15093C æ€§ï¼£		26
+	"Kuufuku" ,	--150940 ç©ºè…¹		27
+	"Shokuryo" ,	--150944 é£Ÿé‡		28
+	"Shokusen" ,	--150948 ä½œé¸		29
+	"Tabekata" ,	--15094C é£Ÿæ–¹		30
+	"YarukiP" ,	--150950 ã‚„ã‚‹æ°—(æ»åœ¨)	31
+	"Movement" ,	--150954 ç§»é‡		32
+	"Favo A" ,	--150958 å¥½ï¼¡		33
+	"Favo B" ,	--15095C å¥½ï¼¢		34
+	"Favo C" ,	--150960 å¥½ï¼£		35
+	"Favo S" ,	--150964 å¥½ï¼³		36
+	"Pit-D" ,	--150968 è½ç›´		37
+	"Pit-U" ,	--15096C è½è¿‚		38
+	"Pit-J" ,	--150970 è½é£›		39
+	"Jump-D" ,	--150974 ã‚¸ç›´		40
+	"Jump-U" ,	--150978 ã‚¸è¿‚		41
+	"Jump-J" ,	--15097C ã‚¸é£›		42
+	"Guru-D" ,	--150980 å›ç›´		43
+	"Guru-U" ,	--150984 å›è¿‚		44
+	"Guru-J" ,	--150988 å›é£›		45
+	"Mochi-D" ,	--15098C ã‚‚ç›´		46
+	"Mochi-U" ,	--150990 ã‚‚è¿‚		47
+	"Mochi-J" ,	--150994 ã‚‚é£›		48
+	"Ray-D" ,	--150998 å…‰ç›´		49
+	"Ray-U" ,	--15099C å…‰è¿‚		50
+	"Ray-J" ,	--1509A0 å…‰é£›		51
+	"Punch-D" ,	--1509A4 æ®´ç›´		52
+	"Punch-U" ,	--1509A8 æ®´è¿‚		53
+	"Punch-J" ,	--1509AC æ®´é£›		54
+	"Punch-A" ,	--1509B0 æ®´å£Š		55
+	"Punch-P" ,	--1509B4 æ®´æŠ¼		56
+	"Biri-D" ,	--1509B8 ãƒ“ç›´		57
+	"Biri-U" ,	--1509BC ãƒ“è¿‚		58
+	"Biri-J" ,	--1509C0 ãƒ“é£›		59
+	"Biri-A" ,	--1509C4 ãƒ“å£Š		60
+	"Biri-P" ,	--1509C8 ãƒ“æŠ¼		61
+	"Obj-U" ,	--1509CC ä»–è¿‚		62
+	"Obj-J" ,	--1509D0 ä»–é£›		63
+	"Obj-A" ,	--1509D4 ä»–å£Š		64
+	"Obj-P" ,	--1509D8 ä»–æŠ¼		65
+	"Drop"  	--1509DC è½ç‰©		66
 }
 
 function Baboo.drawInfo(x, y)
@@ -1309,7 +1309,7 @@ function Baboo.drawInfo(x, y)
 end
 
 function Baboo.showStatus()
-	-- 20ŒÂ‘Ì66—v‘f‚ğo—Í
+	-- 20å€‹ä½“66è¦ç´ ã‚’å‡ºåŠ›
 
 	for j=0,65 do
 		text = string.format("%02d,%8s", j+1, Baboo.DNA[j+1])

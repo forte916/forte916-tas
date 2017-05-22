@@ -1,5 +1,5 @@
 -- ROM: Final Fantasy Tactics (J) (v1.1) [SLPS-00770]
--- Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- This is a library for battle to make pad input easier.
 --

@@ -1,5 +1,5 @@
 -- Common libraries of PSX BIOS and emulator.
--- Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- Usage
 --   + require "psx_lib"

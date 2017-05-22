@@ -1,7 +1,7 @@
 -- Astronoka
 -- This script manipulate a baboo appearance.
 --
--- + Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- + Usage
 --   1. Start this script in a field.

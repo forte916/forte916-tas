@@ -1,5 +1,5 @@
 -- ROM: Final Fantasy Tactics (J) (v1.1) [SLPS-00770]
--- Emulater: psxjin v2.0.2
+-- Emulator: psxjin v2.0.2
 --
 -- This script outputs rng.
 --
