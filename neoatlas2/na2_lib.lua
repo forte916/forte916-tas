@@ -61,7 +61,7 @@ City.port_fp           = 0x08  -- 4byte func pointer (previous port??)
 City.port_x            = 0x0C  -- 2byte coord_X (longitude)
 City.port_y            = 0x0E  -- 2byte coord_Y  (latitude)
 City.city_no           = 0x10  -- 2byte, city index
-City.ofs_12            = 0x12  -- ?byte, d=地図未登場??, f=地図登場&未発見, 1f=発見済
+City.discover          = 0x12  -- 2byte, d=地図未登場??, f=地図登場&未発見, 1f=発見済
 City.friend            = 0x14  -- 1byte, low 3bit friendship, hi 5bit ???
 	-- low 3bit friendship
 	-- 0 = 
@@ -74,7 +74,7 @@ City.friend            = 0x14  -- 1byte, low 3bit friendship, hi 5bit ???
 	-- 7 = 歓迎
 City.atmosphere        = 0x15  -- 1byte, atmosphere
 
-City.ofs_16            = 0x16  -- ?byte
+City.ofs_16            = 0x16  -- 2byte
 City.ofs_18            = 0x18  -- 2byte
 City.city_id           = 0x1A  -- 2byte, city id??
 City.population        = 0x1C  -- 2byte, 1 - 0xFFFF (100 - 6,553,500)
@@ -106,7 +106,7 @@ function City.readProperty(ofs_city)
 	prpt.port_x            = memory.readword( ofs_city + City.port_x           )
 	prpt.port_y            = memory.readword( ofs_city + City.port_y           )
 	prpt.city_no           = memory.readword( ofs_city + City.city_no          )
-	prpt.ofs_12            = memory.readword( ofs_city + City.ofs_12           )
+	prpt.discover          = memory.readword( ofs_city + City.discover         )
 	--prpt.friend            = memory.readbyte( ofs_city + City.friend           )
 	prpt.ofs_14            = bit.band(memory.readbyte(ofs_city + City.friend), 0xF8)  -- hi  5bit
 	prpt.friend            = bit.band(memory.readbyte(ofs_city + City.friend), 0x07)  -- low 3bit
@@ -142,7 +142,7 @@ end
 City.info_header1 = "| 18, id, pop | id, stock | id, stock | id, stock |"
 
 function City.toString1(prpt)
-	local str = string.format("%2x,%2x,%d | "
+	local str = string.format("%x,%3d,%d | "
 			.."%02x,%d | "
 			.."%02x,%d | "
 			.."%02x,%d | ",
@@ -161,16 +161,18 @@ function City.toString1(prpt)
 	return str
 end
 
-City.info_header2 = "| 18, id, pop, 1E, 20, 22, 24, 26 | id, stock, 2C, 2E | id, stock, 34, 36 | id, stock, 3C, 3E |"
+City.info_header2 = "| 18, id, pop | c_x, c_y, p_x, p_y, 26 | id, stock, fp | id, stock, fp | id, stock, fp |"
 
 function City.toString2(prpt)
-	local str = string.format("%2x,%2x,%d,%2x,%2x,%2x,%2x,%2x | "
+	local str = string.format("%x,%3d,%d | "
+			.."%x,%x,%x,%x,%2x | "
 			.."%02x,%d,%x | "
 			.."%02x,%d,%x | "
 			.."%02x,%d,%x | ",
 			prpt.ofs_18            ,
 			prpt.city_id           ,
 			prpt.population        ,
+
 			prpt.city_x_init       ,
 			prpt.city_y_init       ,
 			prpt.port_x_init       ,
@@ -191,10 +193,10 @@ function City.toString2(prpt)
 	return str
 end
 
-City.info_header3 = "| 18, id, pop, 1E, 20, 22, 24, 26 | id, stock, 2C, 2E | id, stock, 34, 36 | id, stock, 3C, 3E | 00, 02, 04, 06 | 08, 0A, 0C, 0E | no, 12, 14, 16 |"
+City.info_header3 = "| 18, id, pop | c_x, c_y, p_x, p_y, 26 | id, stock, fp | id, stock, fp | id, stock, fp | c_fp, c_x, c_y | p_fp, p_x, p_y | no, dis, 14, fri, atm, 16 |"
 
 function City.toString3(prpt)
-	local str = string.format("%x,%3d %d | "
+	local str = string.format("%x,%3d,%d | "
 			.."%x,%x,%x,%x,%2x | "
 			.."%02x,%d,%x | "
 			.."%02x,%d,%x | "
@@ -233,7 +235,7 @@ function City.toString3(prpt)
 			prpt.port_y            ,
 
 			prpt.city_no           ,
-			prpt.ofs_12            ,
+			prpt.discover          ,
 			prpt.ofs_14            ,
 			prpt.friend            ,
 			prpt.atmosphere        ,
@@ -241,10 +243,10 @@ function City.toString3(prpt)
 	return str
 end
 
-City.info_header4 = ""
+City.info_header4 = "| 18, id, pop | c_x, c_y, p_x, p_y, 26 | id | c_fp | p_fp | no, dis, 14, fri, atm, 16 |"
 
 function City.toString4(prpt)
-	local str = string.format("%x,%3d %d | "
+	local str = string.format("%x,%3d,%d | "
 			.."%x,%x,%x,%x,%2x | "
 			.."%02x | "
 			.."%x | "
@@ -267,7 +269,7 @@ function City.toString4(prpt)
 			prpt.port_fp           ,
 
 			prpt.city_no           ,
-			prpt.ofs_12            ,
+			prpt.discover          ,
 			prpt.ofs_14            ,
 			prpt.friend            ,
 			prpt.atmosphere        ,
@@ -276,12 +278,11 @@ function City.toString4(prpt)
 end
 
 function City.showAll()
-	local prpt = {}
 	local ofs_city = city_offset
 
 	print(string.format("-- City --"))
 	for i=1, 256 do
-		prpt = City.readProperty(ofs_city)
+		local prpt = City.readProperty(ofs_city)
 		--print(prpt.info2)
 		print(string.format("%s %08X", prpt.info3, ofs_city))
 		ofs_city = ofs_city + 0x40
@@ -293,31 +294,73 @@ function City.drawAll(ofs_city, x, y)
 	x = x or 0
 	y = y or 20
 
-	local prpt = {}
-
 	for i=1, 20 do
-		prpt = City.readProperty(ofs_city)
+		local prpt = City.readProperty(ofs_city)
 		ofs_city = ofs_city + 0x40
 		gui.text(x, y+(8*i) , prpt.info4)
 	end
 end
 
+function City.getAll()
+	local cities = {}
+	local ofs_city = city_offset
+
+	for i=1, 256 do
+		local prpt = City.readProperty(ofs_city)
+		cities[i] = prpt
+		ofs_city = ofs_city + 0x40
+	end
+	return cities
+end
 
 ------------------------------------------------------------
--- Voyage
+-- Window
 ------------------------------------------------------------
-Voyage = {}
+Window = {}
+Window.adr_loaded_bin = 0x001BD810
 
-function Voyage.getState()
-	local header = memory.readdword(0x001BD810)
-	if header == 0x00000004 then
-		return Voyage.STATE_REPORT
-	elseif header == 0x00000005 then
-		return Voyage.STATE_WINDOW
-	elseif header == 0x00000006 then
-		return Voyage.STATE_ENDING
+function Window.getState()
+	local header = memory.readdword(Window.adr_loaded_bin)
+	if header == 0x04 then
+		return Window.STATE_REPORT
+	elseif header == 0x05 then
+		return Window.STATE_WINDOW
+	elseif header == 0x06 then
+		return Window.STATE_ENDING
 	else
-		return Voyage.STATE_OTHER
+		return Window.STATE_OTHER
+	end
+end
+
+function Window.changeScale(toScale)
+	local curScale = memory.readbyte(Global.scale1.adr)
+	local diffScale = curScale - toScale
+
+	if diffScale > 0 then
+		pressBtn({r2=1}, 1)  -- zoom out
+		fadv(35)
+	elseif diffScale < 0 then
+		pressBtn({l2=1}, 1)  -- zoom in
+		fadv(35)
+	else
+		return
+	end
+	Window.changeScale(toScale)
+end
+
+function Window.Zoom(toScale)
+	while true do
+		local curScale = memory.readbyte(Global.scale1.adr)
+		local diffScale = curScale - toScale
+		if diffScale > 0 then
+			pressBtn({r2=1}, 1)  -- zoom out
+			fadv(35)
+		elseif diffScale < 0 then
+			pressBtn({l2=1}, 1)  -- zoom in
+			fadv(35)
+		else
+			return
+		end
 	end
 end
 
@@ -376,23 +419,6 @@ function Cursor.move(toX, toY, toScale)
 		end
 
 		pressBtn(pad, 1)
-	end
-end
-
-function Cursor.Zoom(toScale)
-	local zoomed = false
-	while zoomed == false do
-		local curScale = memory.readbyte(Global.scale1.adr)
-		local diffScale = curScale - toScale
-		if diffScale > 0 then
-			pressBtn({r2=1}, 1)  -- zoom out
-			fadv(35)
-		elseif diffScale < 0 then
-			pressBtn({l2=1}, 1)  -- zoom in
-			fadv(35)
-		else
-			zoomed = true
-		end
 	end
 end
 

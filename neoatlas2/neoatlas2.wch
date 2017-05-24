@@ -84,7 +84,7 @@
 00051	001BD778	d	h	0	param
 00052	001BD77C	d	h	0	param
 00053	00000000	S	S	0	----------------------------
-00054	001BD810	d	h	0	voyage state
+00054	001BD810	d	h	0	window state
 00055	0018D9C8	d	h	0	voyage
 00056	0018D9D4	d	h	0	voyage
 00057	0018D9D8	d	h	0	voyage
