@@ -430,17 +430,25 @@ Text = {}
 Text.adr_12260E = 0x0012260E -- 2byte, text flag
 	-- 0x00 : out of text event
 	-- 0x01 : during text event
-
 Text.NONE    = 0
 Text.TEXTING = 1
 
+Text.adr_1226DE = 0x001226DE -- 2byte, believe flag
+	-- 0x00 : believe view
+	-- 0x01 : otherwise
+Text.BELIEVE_VIEW = 0
+Text.OTHER_VIEW   = 1
 
 function Text.skip()
 	local pre_state = memory.readword(Text.adr_12260E)
 
 	while true do
 		local cur_state  = memory.readword(Text.adr_12260E)
-		if cur_state == Text.NONE and pre_state == Text.NONE then
+		local believe_flag = memory.readword(Text.adr_1226DE)
+
+		if believe_flag == Text.BELIEVE_VIEW then
+			break
+		elseif cur_state == Text.NONE and pre_state == Text.NONE then
 			pre_state = cur_state
 			fadv(1)
 		elseif cur_state == Text.TEXTING and pre_state == Text.NONE then
@@ -450,7 +458,7 @@ function Text.skip()
 			pressBtn({x=1}, 2)  -- skip text
 		elseif cur_state == Text.TEXTING and pre_state == Text.TEXTING then
 			pre_state = cur_state
-			local input = memory.readdword(Global.pad_input1)
+			local input = memory.readdword(Global.pad_input1.adr)
 			if input ~= 0 then
 				fadv(1)
 			end

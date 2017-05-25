@@ -9,7 +9,7 @@
 --
 
 require "psx_lib"
-require "na2_snap_lib"
+require "na2_bot_lib"
 
 ------------------------------------------------------------
 -- initialize
@@ -46,7 +46,14 @@ local begin_date = os.date()
 local fc = emu.framecount()
 local rng = memory.readdword(adr_rng)
 
-local interface = SkipTitle
+--local interface = SkipTitle
+local interface = VoyageBot
+
+if interface.logname ~= nil then
+	f = io.open(interface.logname, "a")
+	if f == nil then print("error: Could not open file") end
+end
+if interface.logHeader ~= nil then interface.logHeader() end
 
 if interface.retry ~= nil then
 	retry = interface.retry
@@ -65,26 +72,28 @@ for i=0, retry do
 	fadv(i)
 	fc = emu.framecount()
 	rng = memory.readdword(adr_rng)
-	--print(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
+	debugPrint(string.format("----- retry = %d, fc = %d, rng = %08X -----", i, fc, rng))
 
 	interface.attempt()
 
 	-- check result
 	local result = interface.success()
 	if result then
-		print(string.format("***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
+		debugPrint(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
 		interface.post_attempt(fc)
 	end
 
+	f:flush()
 	savestate.load(state)
 end
 
 
 fc = emu.framecount()
-print(string.format("<<< lua bot is finished <<<"))
-print(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
-print(string.format("    end:: %s,  fc = %d", os.date(), fc))
-print(string.format("elapsed:: fc = %d", fc - begin_fc))
+debugPrint(string.format("<<< lua bot is finished <<<"))
+debugPrint(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
+debugPrint(string.format("    end:: %s,  fc = %d", os.date(), fc))
+debugPrint(string.format("elapsed:: fc = %d", fc - begin_fc))
+f:close()
 emu.speedmode("normal")
 emu.pause()
 

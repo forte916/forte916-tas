@@ -68,16 +68,18 @@ function VoyageBot.attempt()
 	pressBtn({circle=1}, 1)  -- departure
 
 	-- text skip until the end of report
-	--while true do
-	--	condition = memory.readword(0x00000000)
-	--	if condition == 0xFFFF then
-	--		break
-	--	end
-	--	Text.skip()
-	--end
+	while true do
+		local believe_flag = memory.readword(Text.adr_1226DE)
+		if believe_flag == Text.BELIEVE_VIEW then
+			break
+		end
+		Text.skip()
+	end
 
+	fadv(100)
+	pressBtn({circle=1}, 3)  -- believe
 	pressBtn({circle=1}, 1)  -- believe
-	fadv(200)
+	fadv(90)
 end
 
 function VoyageBot.post_attempt(fc)
@@ -85,7 +87,8 @@ function VoyageBot.post_attempt(fc)
 	local gdstr = gui.gdscreenshot()
 	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname, fc))
 
-	Window.changeScale(1)  -- 1 means scale 2
+	--Window.changeScale(1)  -- 1 means scale 2
+	fadv(140)
 
 	fc = emu.framecount()
 	gdstr = gui.gdscreenshot()
@@ -103,7 +106,6 @@ function VoyageBot.findNewCity()
 	end
 
 	for i = 1, #cities do
-		debugPrint("-- New City")
 		debugPrint(cities[i].info3)
 	end
 
@@ -120,7 +122,7 @@ function VoyageBot.success()
 	--end
 	debugPrint(string.format("  pre_total=%d, post_total=%d", VoyageBot.pre_total, VoyageBot.post_total))
 
-	local new_cities = City.findNewCity()
+	local new_cities = VoyageBot.findNewCity()
 	if #new_cities > 0 then
 		return "best"
 	end
