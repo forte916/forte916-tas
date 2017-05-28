@@ -60,7 +60,7 @@ City.city_y            = 0x06  -- 2byte coord_Y  (latitude)
 City.port_fp           = 0x08  -- 4byte func pointer (previous port??)
 City.port_x            = 0x0C  -- 2byte coord_X (longitude)
 City.port_y            = 0x0E  -- 2byte coord_Y  (latitude)
-City.city_no           = 0x10  -- 2byte, city index
+City.city_id           = 0x10  -- 2byte, city index
 City.discover          = 0x12  -- 2byte, d=地図未登場??, f=地図登場&未発見, 1f=発見済
 City.friend            = 0x14  -- 1byte, low 3bit friendship, hi 5bit ???
 	-- low 3bit friendship
@@ -76,7 +76,7 @@ City.atmosphere        = 0x15  -- 1byte, atmosphere
 
 City.ofs_16            = 0x16  -- 2byte
 City.ofs_18            = 0x18  -- 2byte
-City.city_id           = 0x1A  -- 2byte, city id??
+City.city_name         = 0x1A  -- 2byte, city name??
 City.population        = 0x1C  -- 2byte, 1 - 0xFFFF (100 - 6,553,500)
 City.city_x_init       = 0x1E  -- ?byte
 City.city_y_init       = 0x20  -- ?byte
@@ -105,7 +105,7 @@ function City.readProperty(ofs_city)
 	prpt.port_fp           = memory.readdword(ofs_city + City.port_fp          )
 	prpt.port_x            = memory.readword( ofs_city + City.port_x           )
 	prpt.port_y            = memory.readword( ofs_city + City.port_y           )
-	prpt.city_no           = memory.readword( ofs_city + City.city_no          )
+	prpt.city_id           = memory.readword( ofs_city + City.city_id          )
 	prpt.discover          = memory.readword( ofs_city + City.discover         )
 	--prpt.friend            = memory.readbyte( ofs_city + City.friend           )
 	prpt.ofs_14            = bit.band(memory.readbyte(ofs_city + City.friend), 0xF8)  -- hi  5bit
@@ -113,7 +113,7 @@ function City.readProperty(ofs_city)
 	prpt.atmosphere        = memory.readbyte( ofs_city + City.atmosphere       )
 	prpt.ofs_16            = memory.readword( ofs_city + City.ofs_16           )
 	prpt.ofs_18            = memory.readword( ofs_city + City.ofs_18           )
-	prpt.city_id           = memory.readword( ofs_city + City.city_id          )
+	prpt.city_name         = memory.readword( ofs_city + City.city_name        )
 	prpt.population        = memory.readword( ofs_city + City.population       )
 	prpt.city_x_init       = memory.readword( ofs_city + City.city_x_init      )
 	prpt.city_y_init       = memory.readword( ofs_city + City.city_y_init      )
@@ -129,7 +129,7 @@ function City.readProperty(ofs_city)
 	prpt.product3_id       = memory.readword( ofs_city + City.product3_id      )
 	prpt.product3_stock    = memory.readword( ofs_city + City.product3_stock   )
 	prpt.product3_fp       = memory.readdword(ofs_city + City.product3_fp      )
-	--print(string.format("-- city_id    = %d, %08X", prpt.city_id   , ofs_city + City.city_id           ))
+	--print(string.format("-- city_name  = %d, %08X", prpt.city_name , ofs_city + City.city_name         ))
 	--print(string.format("-- population = %d, %08X", prpt.population, ofs_city + City.population        ))
 
 	prpt.info1 = City.toString1(prpt)
@@ -139,141 +139,117 @@ function City.readProperty(ofs_city)
 	return prpt
 end
 
-City.info_header1 = "| 18, id, pop | id, stock | id, stock | id, stock |"
+City.info_header1 = "| id, dis | name, pop | id, stock | id, stock | id, stock |"
 
 function City.toString1(prpt)
-	local str = string.format("%x,%3d,%d | "
+	local str = string.format("%3d,%2x | "
+			.."%d,%d | "
 			.."%02x,%d | "
 			.."%02x,%d | "
 			.."%02x,%d | ",
-			prpt.ofs_18            ,
-			prpt.city_id           ,
-			prpt.population        ,
+			prpt.city_id          ,
+			prpt.discover         ,
 
-			prpt.product1_id       ,
-			prpt.product1_stock    ,
+			prpt.city_name        ,
+			prpt.population       ,
 
-			prpt.product2_id       ,
-			prpt.product2_stock    ,
+			prpt.product1_id      ,
+			prpt.product1_stock   ,
 
-			prpt.product3_id       ,
-			prpt.product3_stock    )
+			prpt.product2_id      ,
+			prpt.product2_stock   ,
+
+			prpt.product3_id      ,
+			prpt.product3_stock   )
 	return str
 end
 
-City.info_header2 = "| 18, id, pop | c_x, c_y, p_x, p_y, 26 | id, stock, fp | id, stock, fp | id, stock, fp |"
+City.info_header2 = ""
 
 function City.toString2(prpt)
-	local str = string.format("%x,%3d,%d | "
-			.."%x,%x,%x,%x,%2x | "
-			.."%02x,%d,%x | "
-			.."%02x,%d,%x | "
-			.."%02x,%d,%x | ",
-			prpt.ofs_18            ,
-			prpt.city_id           ,
-			prpt.population        ,
-
-			prpt.city_x_init       ,
-			prpt.city_y_init       ,
-			prpt.port_x_init       ,
-			prpt.port_y_init       ,
-			prpt.ofs_26            ,
-
-			prpt.product1_id       ,
-			prpt.product1_stock    ,
-			prpt.product1_fp       ,
-
-			prpt.product2_id       ,
-			prpt.product2_stock    ,
-			prpt.product2_fp       ,
-
-			prpt.product3_id       ,
-			prpt.product3_stock    ,
-			prpt.product3_fp       )
+	local str = "no info"
 	return str
 end
 
-City.info_header3 = "| 18, id, pop | c_x, c_y, p_x, p_y, 26 | id, stock, fp | id, stock, fp | id, stock, fp | c_fp, c_x, c_y | p_fp, p_x, p_y | no, dis, 14, fri, atm, 16 |"
+City.info_header3 = "| id, dis, 14, fri, atm, 16 18 | name, pop | id, stock, fp | id, stock, fp | id, stock, fp | c_fp, c_x, c_y | p_fp, p_x, p_y | c_x, c_y, p_x, p_y, 26 |"
 
 function City.toString3(prpt)
-	local str = string.format("%x,%3d,%d | "
-			.."%x,%x,%x,%x,%2x | "
+	local str = string.format("%3d,%2x,%2x,%2x,%2x,%2x,%x | "
+			.."%d,%d | "
 			.."%02x,%d,%x | "
 			.."%02x,%d,%x | "
 			.."%02x,%d,%x | "
 			.."%x,%x,%x | "
 			.."%x,%x,%x | "
-			.."%3d,%2x,%2x,%2x,%2x,%2x | ",
-			prpt.ofs_18            ,
-			prpt.city_id           ,
-			prpt.population        ,
+			.."%x,%x,%x,%x,%2x | ",
+			prpt.city_id          ,
+			prpt.discover         ,
+			prpt.ofs_14           ,
+			prpt.friend           ,
+			prpt.atmosphere       ,
+			prpt.ofs_16           ,
+			prpt.ofs_18           ,
 
-			prpt.city_x_init       ,
-			prpt.city_y_init       ,
-			prpt.port_x_init       ,
-			prpt.port_y_init       ,
-			prpt.ofs_26            ,
+			prpt.city_name        ,
+			prpt.population       ,
 
-			prpt.product1_id       ,
-			prpt.product1_stock    ,
-			prpt.product1_fp       ,
+			prpt.product1_id      ,
+			prpt.product1_stock   ,
+			prpt.product1_fp      ,
 
-			prpt.product2_id       ,
-			prpt.product2_stock    ,
-			prpt.product2_fp       ,
+			prpt.product2_id      ,
+			prpt.product2_stock   ,
+			prpt.product2_fp      ,
 
-			prpt.product3_id       ,
-			prpt.product3_stock    ,
-			prpt.product3_fp       ,
+			prpt.product3_id      ,
+			prpt.product3_stock   ,
+			prpt.product3_fp      ,
 
-			prpt.city_fp           ,
-			prpt.city_x            ,
-			prpt.city_y            ,
+			prpt.city_fp          ,
+			prpt.city_x           ,
+			prpt.city_y           ,
 
-			prpt.port_fp           ,
-			prpt.port_x            ,
-			prpt.port_y            ,
+			prpt.port_fp          ,
+			prpt.port_x           ,
+			prpt.port_y           ,
 
-			prpt.city_no           ,
-			prpt.discover          ,
-			prpt.ofs_14            ,
-			prpt.friend            ,
-			prpt.atmosphere        ,
-			prpt.ofs_16            )
+			prpt.city_x_init      ,
+			prpt.city_y_init      ,
+			prpt.port_x_init      ,
+			prpt.port_y_init      ,
+			prpt.ofs_26           )
+
 	return str
 end
 
-City.info_header4 = "| 18, id, pop | c_x, c_y, p_x, p_y, 26 | id | c_fp | p_fp | no, dis, 14, fri, atm, 16 |"
+City.info_header4 = "| id, dis, 14, fri, atm, 16 18 | name, pop | id, stock | p_fp, p_x, p_y | 26 |"
 
 function City.toString4(prpt)
-	local str = string.format("%x,%3d,%d | "
-			.."%x,%x,%x,%x,%2x | "
-			.."%02x | "
-			.."%x | "
-			.."%x | "
-			.."%3d,%2x,%2x,%2x,%2x,%2x | ",
-			prpt.ofs_18            ,
-			prpt.city_id           ,
-			prpt.population        ,
+	local str = string.format("%3d,%2x,%2x,%2x,%2x,%2x,%x | "
+			.."%d,%d | "
+			.."%02x,%d | "
+			.."%x,%x,%x | "
+			.."%2x | ",
+			prpt.city_id          ,
+			prpt.discover         ,
+			prpt.ofs_14           ,
+			prpt.friend           ,
+			prpt.atmosphere       ,
+			prpt.ofs_16           ,
+			prpt.ofs_18           ,
 
-			prpt.city_x_init       ,
-			prpt.city_y_init       ,
-			prpt.port_x_init       ,
-			prpt.port_y_init       ,
-			prpt.ofs_26            ,
+			prpt.city_name        ,
+			prpt.population       ,
 
-			prpt.product1_id       ,
+			prpt.product1_id      ,
+			prpt.product1_stock   ,
 
-			prpt.city_fp           ,
+			prpt.port_fp          ,
+			prpt.port_x           ,
+			prpt.port_y           ,
 
-			prpt.port_fp           ,
+			prpt.ofs_26           )
 
-			prpt.city_no           ,
-			prpt.discover          ,
-			prpt.ofs_14            ,
-			prpt.friend            ,
-			prpt.atmosphere        ,
-			prpt.ofs_16            )
 	return str
 end
 
@@ -283,7 +259,6 @@ function City.showAll()
 	print(string.format("-- City --"))
 	for i=1, 256 do
 		local prpt = City.readProperty(ofs_city)
-		--print(prpt.info2)
 		print(string.format("%s %08X", prpt.info3, ofs_city))
 		ofs_city = ofs_city + 0x40
 	end
@@ -434,20 +409,36 @@ Text.NONE    = 0
 Text.TEXTING = 1
 
 Text.adr_1226DE = 0x001226DE -- 2byte, believe flag
-	-- 0x00 : believe view
-	-- 0x01 : otherwise
-Text.BELIEVE_VIEW = 0
-Text.OTHER_VIEW   = 1
+	-- 0x00 : otherwise
+	-- 0x01 : believe selected
+
+Text.adr_1226E0 = 0x001226E0 -- 2byte, believe flag
+	-- 0x00 : otherwise
+	-- 0x01 : believe view
+
+Text.adr_1227B8 = 0x001227B8 -- 2byte, believe flag
+	-- 0x00 : otherwise
+	-- 0x01 : loading movie??
+	-- 0x02 : believe view
+Text.OTHER_VIEW   = 0
+Text.BELIEVE_VIEW = 2
+
+Text.adr_1FFCC8 = 0x001FFCC8 -- 4byte, stack
+Text.INCREASE_REWARD   = 0x800A64CC
+
 
 function Text.skip()
 	local pre_state = memory.readword(Text.adr_12260E)
 
 	while true do
 		local cur_state  = memory.readword(Text.adr_12260E)
-		local believe_flag = memory.readword(Text.adr_1226DE)
+		local believe_flag = memory.readword(Text.adr_1227B8)
+		local reward_flag = memory.readdword(Text.adr_1FFCC8)
 
 		if believe_flag == Text.BELIEVE_VIEW then
 			break
+		elseif reward_flag == Text.INCREASE_REWARD then
+			pressBtn({x=1}, 1)  -- skip reward
 		elseif cur_state == Text.NONE and pre_state == Text.NONE then
 			pre_state = cur_state
 			fadv(1)

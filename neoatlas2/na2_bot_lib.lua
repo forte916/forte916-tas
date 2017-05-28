@@ -48,8 +48,9 @@ end
 -- VoyageBot
 ------------------------------------------------------------
 VoyageBot = {}
-VoyageBot.logname = "voyage_result.log"
-VoyageBot.picname = "snap/voyage_result_%df.png"
+VoyageBot.logname  = "voyage_result2.log"
+VoyageBot.picname1 = "snap/voyage_result2_land_%df.png"
+VoyageBot.picname2 = "snap/voyage_result2_city_%df.png"
 VoyageBot.retry = 200
 
 VoyageBot.pre_cities  = {}
@@ -57,19 +58,26 @@ VoyageBot.pre_total   = {}
 VoyageBot.post_cities = {}
 VoyageBot.post_total  = {}
 
+function VoyageBot.logHeader()
+	debugPrint(string.format("-- Product ID Legend --"))
+	debugPrint(string.format("   00=salt, 09=cacao, 0a=Hg, 0d=ivory, 1d=coffee"))
+	debugPrint(string.format(""))
+end
+
 function VoyageBot.pre_attempt()
-	-- pass
+	fadv(2)
 end
 
 function VoyageBot.attempt()
 	VoyageBot.pre_cities = City.getAll()
 	VoyageBot.pre_total  = memory.readword(Global.total_city.adr)
 
-	pressBtn({circle=1}, 1)  -- departure
+	pressBtn({l2=1}, 3)  -- zoom in
+	pressBtn({l2=1}, 1)  -- zoom in
 
 	-- text skip until the end of report
 	while true do
-		local believe_flag = memory.readword(Text.adr_1226DE)
+		local believe_flag = memory.readword(Text.adr_1227B8)
 		if believe_flag == Text.BELIEVE_VIEW then
 			break
 		end
@@ -85,14 +93,14 @@ end
 function VoyageBot.post_attempt(fc)
 	-- make sure the dest directory exists
 	local gdstr = gui.gdscreenshot()
-	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname, fc))
+	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname1, fc))
 
 	--Window.changeScale(1)  -- 1 means scale 2
-	fadv(140)
+	fadv(170)
 
 	fc = emu.framecount()
 	gdstr = gui.gdscreenshot()
-	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname, fc))
+	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname2, fc))
 end
 
 
@@ -124,7 +132,7 @@ function VoyageBot.success()
 
 	local new_cities = VoyageBot.findNewCity()
 	if #new_cities > 0 then
-		return "best"
+		return "good"
 	end
 
 	-- TODO: If discover a land with no cities, define as "good"

@@ -1,5 +1,5 @@
 
-109
+119
 00000	001222C4	d	h	0	RNG
 00001	00000000	S	S	0	----------------------------
 00002	001223E8	d	h	0	coord_X(longitude)
@@ -8,104 +8,114 @@
 00005	00122328	d	h	0	pad input
 00006	0012260C	d	h	0	text
 00007	00122610	d	h	0	text
-00008	0012226C	w	s	0	total city count??
-00009	00121EEE	w	s	0	game speed 0,2,4 (slow, normal, fast)
-0000A	00000000	S	S	0	----------------------------
-0000B	0000E2D4	d	h	0	text param
-0000C	0000E2D8	d	h	0	text param
-0000D	00122494	d	h	0	text param
-0000E	00122B80	d	h	0	text param
-0000F	001883E4	d	h	0	text param
-00010	001FFC40	d	h	0	text param(stack)
-00011	001FFC44	d	h	0	text param(stack)
-00012	001FFC68	d	h	0	text param(stack)
-00013	00000000	S	S	0	----------------------------
-00014	0011FD74	d	u	0	param
-00015	0011FD94	d	u	0	frame counter
-00016	00121E80	d	s	0	grobal pointer
-00017	00121F78	w	s	0	scale 0 - 3 (1 - 4)
-00018	001223F0	w	s	0	scale 0 - 3 (1 - 4)
-00019	00122458	d	s	0	copy of date param 16??
-0001A	00122528	d	u	0	money
-0001B	00000000	S	S	0	----------------------------
-0001C	00132118	d	s	0	elapsed days
-0001D	0013211C	d	s	0	date param 04
-0001E	00132120	d	s	0	resolution time (0-1024)
-0001F	00132124	w	s	0	year
-00020	00132126	b	s	0	month
-00021	00132127	b	s	0	day
-00022	00132128	d	s	0	date param 16
-00023	0013212C	d	s	0	date param 1A
+00008	001227B8	d	h	0	believe
+00009	001227C4	d	h	0	text
+0000A	00122770	d	h	0	movie param
+0000B	00000000	S	S	0	----------------------------
+0000C	0016D3A8	d	h	0	text param
+0000D	0016D3E8	d	h	0	text param
+0000E	0000E2D4	d	h	0	text param
+0000F	0000E2D8	d	h	0	text param
+00010	00122494	d	h	0	text param
+00011	0012286C	d	h	0	text param
+00012	00122B80	d	h	0	text param
+00013	001883E4	d	h	0	text param
+00014	001BCF4C	d	h	0	finding new
+00015	001FFC40	d	h	0	text param(stack)
+00016	001FFC44	d	h	0	text param(stack)
+00017	001FFC68	d	h	0	text param(stack)
+00018	001FFCC8	d	h	0	text param(increase reward)
+00019	00000000	S	S	0	----------------------------
+0001A	0012226C	w	s	0	total city count??
+0001B	00121EEE	w	s	0	game speed 0,2,4 (slow, normal, fast)
+0001C	00121F78	w	s	0	scale 0 - 3 (1 - 4)
+0001D	001223F0	w	s	0	scale 0 - 3 (1 - 4)
+0001E	0011FD74	d	u	0	param
+0001F	0011FD94	d	u	0	frame counter
+00020	00121E80	d	s	0	grobal pointer
+00021	00122458	d	s	0	copy of date param 16??
+00022	00122528	d	u	0	money
+00023	00122530	d	u	0	total reward
 00024	00000000	S	S	0	----------------------------
-00025	00121D44	d	h	0	param
-00026	00121D60	d	h	0	param
-00027	00121D64	d	h	0	param
-00028	001A81D8	d	u	0	param
-00029	001A8430	d	u	0	param
-0002A	001A8438	d	u	0	param
-0002B	001A843C	d	u	0	param
-0002C	001A8440	d	u	0	param
-0002D	001A8448	d	u	0	param
-0002E	001A8450	d	u	0	param
-0002F	001A8688	d	u	0	param
-00030	001A8698	d	u	0	param
-00031	001A8768	d	u	0	param
-00032	001ABC18	d	u	0	param
-00033	001ABC20	d	u	0	param
-00034	001AEA48	d	u	0	param
-00035	001AEA4C	d	u	0	param
-00036	001AEA4E	d	u	0	param
-00037	001AEA50	d	u	0	param
-00038	001AEA54	d	u	0	param
-00039	001AEA84	d	u	0	param
-0003A	001AEA8C	d	u	0	param
-0003B	001AEAD4	d	u	0	param
-0003C	001AEAD8	d	u	0	param
-0003D	001AED48	d	u	0	jeddah and city offset
-0003E	001AED58	d	u	0	city off_10 city_no??
-0003F	001AED6A	d	u	0	city off_22
-00040	001AF948	d	u	0	param
-00041	001AF970	d	u	0	param
-00042	001AF988	d	u	0	param
-00043	001AF9B0	d	u	0	param
-00044	001AFF0C	d	u	0	param
-00045	001AFFC8	d	u	0	param
-00046	001AFFCC	w	u	0	param
-00047	001AFFCE	w	u	0	param
-00048	001AFFD8	d	u	0	param
-00049	001AFFE0	d	u	0	param
-0004A	001AFFE2	w	u	0	param
-0004B	001AFFE4	w	u	0	param
-0004C	001AFFE6	w	u	0	param
-0004D	001AFFE8	w	u	0	param
-0004E	001AFFEA	w	u	0	param
-0004F	001AFFEC	w	u	0	param
-00050	0000E32C	d	h	0	param
-00051	001BD778	d	h	0	param
-00052	001BD77C	d	h	0	param
-00053	00000000	S	S	0	----------------------------
-00054	001BD810	d	h	0	window state
-00055	0018D9C8	d	h	0	voyage
-00056	0018D9D4	d	h	0	voyage
-00057	0018D9D8	d	h	0	voyage
-00058	0018D9DC	d	h	0	voyage
-00059	0018D9E0	d	h	0	voyage
-0005A	00000000	S	S	0	----------------------------
-0005B	0012C536	w	h	0	param
-0005C	0012CB36	w	h	0	param
-0005D	00193090	d	h	0	param
-0005E	001930B4	d	h	0	param
-0005F	001FFED0	d	h	0	stack
-00060	001FFEE0	d	h	0	stack
-00061	001FFF20	d	h	0	stack
-00062	001FFF24	d	h	0	stack
-00063	001FFF38	d	h	0	stack
-00064	001FFF3C	d	h	0	stack
-00065	001FFF40	d	h	0	stack
-00066	00000000	S	S	0	----------------------------
-00067	001226DE	d	h	0	believe
-00068	001227B8	d	h	0	believe
-00069	0016BD70	d	h	0	believe
-0006A	0016C330	d	h	0	believe
-0006B	0017C698	d	h	0	believe
-0006C	00000000	S	S	0	----------------------------
+00025	00132118	d	s	0	elapsed days
+00026	0013211C	d	s	0	date param 04
+00027	00132120	d	s	0	resolution time (0-1024)
+00028	00132124	w	s	0	year
+00029	00132126	b	s	0	month
+0002A	00132127	b	s	0	day
+0002B	00132128	d	s	0	date param 16
+0002C	0013212C	d	s	0	date param 1A
+0002D	00000000	S	S	0	----------------------------
+0002E	00121D44	d	h	0	param
+0002F	00121D60	d	h	0	param
+00030	00121D64	d	h	0	param
+00031	001A81D8	d	u	0	param
+00032	001A8430	d	u	0	param
+00033	001A8438	d	u	0	param
+00034	001A843C	d	u	0	param
+00035	001A8440	d	u	0	param
+00036	001A8448	d	u	0	param
+00037	001A8450	d	u	0	param
+00038	001A8688	d	u	0	param
+00039	001A8698	d	u	0	param
+0003A	001A8768	d	u	0	param
+0003B	001ABC18	d	u	0	param
+0003C	001ABC20	d	u	0	param
+0003D	001AEA48	d	u	0	param
+0003E	001AEA4C	d	u	0	param
+0003F	001AEA4E	d	u	0	param
+00040	001AEA50	d	u	0	param
+00041	001AEA54	d	u	0	param
+00042	001AEA84	d	u	0	param
+00043	001AEA8C	d	u	0	param
+00044	001AEAD4	d	u	0	param
+00045	001AEAD8	d	u	0	param
+00046	001AED48	d	u	0	jeddah and city offset
+00047	001AED58	d	u	0	city off_10 city_no??
+00048	001AED6A	d	u	0	city off_22
+00049	001AF948	d	u	0	param
+0004A	001AF970	d	u	0	param
+0004B	001AF988	d	u	0	param
+0004C	001AF9B0	d	u	0	param
+0004D	001AFF0C	d	u	0	param
+0004E	001AFFC8	d	u	0	param
+0004F	001AFFCC	w	u	0	param
+00050	001AFFCE	w	u	0	param
+00051	001AFFD8	d	u	0	param
+00052	001AFFE0	d	u	0	param
+00053	001AFFE2	w	u	0	param
+00054	001AFFE4	w	u	0	param
+00055	001AFFE6	w	u	0	param
+00056	001AFFE8	w	u	0	param
+00057	001AFFEA	w	u	0	param
+00058	001AFFEC	w	u	0	param
+00059	0000E32C	d	h	0	param
+0005A	001BD778	d	h	0	param
+0005B	001BD77C	d	h	0	param
+0005C	00000000	S	S	0	----------------------------
+0005D	001BD810	d	h	0	window state
+0005E	0016BC10	d	h	0	arrive
+0005F	0018D9C8	d	h	0	voyage
+00060	0018D9D4	d	h	0	voyage
+00061	0018D9D8	d	h	0	voyage
+00062	0018D9DC	d	h	0	voyage
+00063	0018D9E0	d	h	0	voyage
+00064	00000000	S	S	0	----------------------------
+00065	0012C536	w	h	0	param
+00066	0012CB36	w	h	0	param
+00067	00193090	d	h	0	param
+00068	001930B4	d	h	0	param
+00069	001FFED0	d	h	0	stack
+0006A	001FFEE0	d	h	0	stack
+0006B	001FFF20	d	h	0	stack
+0006C	001FFF24	d	h	0	stack
+0006D	001FFF38	d	h	0	stack
+0006E	001FFF3C	d	h	0	stack
+0006F	001FFF40	d	h	0	stack
+00070	00000000	S	S	0	----------------------------
+00071	001226DC	d	h	0	believe
+00072	001226E0	d	h	0	believe
+00073	0016BD70	d	h	0	believe
+00074	0016C330	d	h	0	believe
+00075	0017C698	d	h	0	believe
+00076	00000000	S	S	0	----------------------------

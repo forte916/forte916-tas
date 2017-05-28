@@ -89,6 +89,40 @@ function TAS.clickTreasure()
 	-- accepting for pad input
 end
 
+function TAS.equipAndVoyage()
+	pressBtn({r1=1}, 2)      -- show admiral window
+	pressBtn({right=1}, 3)
+	pressBtn({right=1}, 2)
+	pressBtn({right=1}, 1)
+	pressBtn({circle=1}, 1)  -- select item
+	fadv(35)
+	pressBtn({square=1}, 1)
+	fadv(23)
+	pressBtn({square=1}, 1)
+	fadv(20)
+	pressBtn({square=1}, 1)
+	fadv(21)
+	pressBtn({x=1}, 1)  -- close
+	fadv(24)
+	pressBtn({left=1}, 3)
+	pressBtn({left=1}, 2)
+	pressBtn({left=1}, 1)
+	pressBtn({circle=1}, 1)  -- select voyage
+	fadv(43)
+	pressBtn({triangle=1, down=1}, 7)  -- move cursor
+	fadv(2)
+	pressBtn({circle=1}, 1)  -- point
+	fadv(2)
+	pressBtn({square=1}, 1)  -- show window
+	fadv(1)
+	pressBtn({circle=1}, 1)  -- finish course setting
+
+	-- text
+	fadv(38)
+	pressBtn({circle=1}, 1)  -- confirm
+end
+
+
 function TAS.zoomOut()
 	pressBtn({r2=1}, 1)  -- zoom out
 	fadv(32+1)

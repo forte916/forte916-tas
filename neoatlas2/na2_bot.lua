@@ -55,11 +55,7 @@ if interface.logname ~= nil then
 end
 if interface.logHeader ~= nil then interface.logHeader() end
 
-if interface.retry ~= nil then
-	retry = interface.retry
-else
-	retry = 500
-end
+retry = interface.retry or 500
 
 for i=0, retry do
 	drawRetry(i, x, y)
@@ -83,7 +79,7 @@ for i=0, retry do
 		interface.post_attempt(fc)
 	end
 
-	f:flush()
+	if f ~= nil then f:flush() end
 	savestate.load(state)
 end
 
@@ -93,7 +89,7 @@ debugPrint(string.format("<<< lua bot is finished <<<"))
 debugPrint(string.format("  start:: %s,  fc = %d", begin_date, begin_fc))
 debugPrint(string.format("    end:: %s,  fc = %d", os.date(), fc))
 debugPrint(string.format("elapsed:: fc = %d", fc - begin_fc))
-f:close()
+if f ~= nil then f:close() end
 emu.speedmode("normal")
 emu.pause()
 
