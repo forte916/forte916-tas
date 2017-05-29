@@ -103,8 +103,8 @@
 00064	00000000	S	S	0	----------------------------
 00065	0012C536	w	h	0	param
 00066	0012CB36	w	h	0	param
-00067	00193090	d	h	0	param
-00068	001930B4	d	h	0	param
+00067	00193090	d	h	0	ufo x,y
+00068	001930B4	d	h	0	object x,y ??
 00069	001FFED0	d	h	0	stack
 0006A	001FFEE0	d	h	0	stack
 0006B	001FFF20	d	h	0	stack

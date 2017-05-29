@@ -33,7 +33,7 @@ function SkipTitle.attempt()
 	fadv(200)
 end
 
-function SkipTitle.post_attempt(fc)
+function SkipTitle.post_attempt(retry, fc)
 	-- make sure the dest directory exists
 	local gdstr = gui.gdscreenshot()
 	gd.createFromGdStr(gdstr):png(string.format(SkipTitle.picname, fc))
@@ -50,7 +50,7 @@ end
 VoyageBot = {}
 VoyageBot.logname  = "voyage_result2.log"
 VoyageBot.picname1 = "snap/voyage_result2_land_%df.png"
-VoyageBot.picname2 = "snap/voyage_result2_city_%df.png"
+VoyageBot.picname2 = "snap/voyage_result2_city_%df_retry_%d.png"
 VoyageBot.retry = 200
 
 VoyageBot.pre_cities  = {}
@@ -90,7 +90,7 @@ function VoyageBot.attempt()
 	fadv(90)
 end
 
-function VoyageBot.post_attempt(fc)
+function VoyageBot.post_attempt(retry, fc)
 	-- make sure the dest directory exists
 	local gdstr = gui.gdscreenshot()
 	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname1, fc))
@@ -100,7 +100,7 @@ function VoyageBot.post_attempt(fc)
 
 	fc = emu.framecount()
 	gdstr = gui.gdscreenshot()
-	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname2, fc))
+	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname2, fc, retry))
 end
 
 
@@ -139,4 +139,12 @@ function VoyageBot.success()
 
 	return ret
 end
+
+VoyageBot.best_retry = 133
+VoyageBot.best_rng = 0x97264179
+
+----- retry = 128, fc = 9764, rng = AB9F2E27 -----
+----- retry = 131, fc = 9767, rng = ED7F6D72 -----
+----- retry = 133, fc = 9769, rng = 97264179 -----
+
 

@@ -76,7 +76,7 @@ for i=0, retry do
 	local result = interface.success()
 	if result then
 		debugPrint(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
-		interface.post_attempt(fc)
+		interface.post_attempt(i, fc)
 	end
 
 	if f ~= nil then f:flush() end

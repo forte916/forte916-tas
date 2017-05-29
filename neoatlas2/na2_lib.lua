@@ -31,6 +31,8 @@ Global.pad_input1 = { adr=0x00122324, ofs=0x04A4 } -- 4byte, pad input
 Global.pad_input2 = { adr=0x00122328, ofs=0x04A8 } -- 4byte, pad input
 Global.coordX     = { adr=0x001223E8, ofs=0x0568 } -- 4byte, cursor X
 Global.coordY     = { adr=0x001223EC, ofs=0x056C } -- 4byte, cursor Y
+Global.coordX2    = { adr=0x00122408, ofs=0x0568 } -- 4byte, cursor X
+Global.coordY2    = { adr=0x0012240C, ofs=0x056C } -- 4byte, cursor Y
 Global.scale2     = { adr=0x001223F0, ofs=0x0570 } -- 1byte
 Global.date_param = { adr=0x00122458, ofs=0x05D8 } -- 4byte, copy of Date.param16??
 Global.money      = { adr=0x00122528, ofs=0x06A8 } -- 4byte
@@ -459,6 +461,77 @@ function Text.skip()
 		end
 	end
 end
+
+------------------------------------------------------------
+-- Treasure
+------------------------------------------------------------
+Treasure = {}
+
+adr_ufo_x = 0x00193090  -- 2byte
+adr_ufo_y = 0x00193092  -- 2byte
+
+coord_almagest_x         = 0x9200
+coord_almagest_y         = 0x3A20
+coord_arabian_nights_x   = 0x9F00
+coord_arabian_nights_y   = 0x3900
+coord_cannary_diamond_x  = 0x6F00
+coord_cannary_diamond_y  = 0x3500
+
+coord_almagest_balloon_x = 0x9220
+coord_almagest_balloon_y = 0x3A20
+adr_almagest_baloon_x    = 0x00066414  -- 2byte
+adr_almagest_baloon_y    = 0x00066416  -- 2byte
+
+
+adr_arabian_nights_x1    = 0x0017E870  -- 2byte
+adr_arabian_nights_x2    = 0x0017FB8A  -- 2byte
+--adr_arabian_nights_y2    = 0x0017FB8C  -- 2byte
+adr_arabian_nights_x3    = 0x0017FB8E  -- 2byte
+adr_arabian_nights_x4    = 0x001AB70C  -- 2byte
+adr_arabian_nights_x5    = 0x001AB720  -- 2byte
+
+adr_cannary_diamond_x1   = 0x0017EA64  -- 2byte
+adr_cannary_diamond_x2   = 0x0017EA78  -- 2byte
+adr_cannary_diamond_x3   = 0x0017EA8C  -- 2byte
+adr_cannary_diamond_x4   = 0x001AD278 -- 2byte
+adr_cannary_diamond_x5   = 0x001AD28C -- 2byte
+
+coord_teneriso_x         = 0x7500
+coord_teneriso_y         = 0x4300
+adr_teneriso_x1          = 0x001ABE80
+adr_teneriso_x2          = 0x001ABE94
+
+coord_osujua_x           = 0x9500
+coord_osujua_y           = 0x2D00
+adr_osujua_x1            = 0x001ABF34
+adr_osujua_x2            = 0x001ABF48
+
+
+coord_sunken_ship_x      = 0x6D00
+coord_sunken_ship_y      = 0x3900
+adr_sunken_ship_x1       = 0x001338D4
+adr_sunken_ship_x2       = 0x0017E848
+adr_sunken_ship_x3       = 0x001ADEE4
+adr_sunken_ship_x4       = 0x001ADEF8
+
+
+coord_alchemy_x          = 0x81C0
+coord_alchemy_y          = 0x2AC0
+adr_alchemy_x1           = 0x0017FBA2
+adr_alchemy_x2           = 0x0017FBA6
+adr_alchemy_x3           = 0x001ADD04
+adr_alchemy_x4           = 0x001ADD18
+adr_alchemy_x5           = 0x001AE448
+
+
+coord_doll_house_x       = 0x85C8
+coord_doll_house_y       = 0x2900
+adr_doll_house_x1        = 0x0017E938
+adr_doll_house_x2        = 0x0017E94C
+adr_doll_house_x3        = 0x001AE0C4
+adr_doll_house_x4        = 0x001AE0D8
+
+
 
 ------------------------------------------------------------
 -- Product id
