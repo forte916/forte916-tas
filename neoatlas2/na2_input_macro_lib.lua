@@ -90,7 +90,7 @@ function TAS.clickTreasure()
 end
 
 function TAS.equipAndVoyage()
-	pressBtn({r1=1}, 2)      -- show admiral window
+	pressBtn({r1=1}, 3)      -- show admiral window
 	pressBtn({right=1}, 3)
 	pressBtn({right=1}, 2)
 	pressBtn({right=1}, 1)
@@ -117,10 +117,60 @@ function TAS.equipAndVoyage()
 	fadv(1)
 	pressBtn({circle=1}, 1)  -- finish course setting
 
-	-- text
+	-- text skip
 	fadv(38)
 	pressBtn({circle=1}, 1)  -- confirm
 end
+
+function TAS.buyAndVoyage()
+	pressBtn({r1=1}, 3)      -- show admiral window
+	pressBtn({right=1}, 2)
+	pressBtn({up=1}, 1)
+	pressBtn({circle=1}, 1)  -- select ship
+	-- text skip
+	fadv(37) -- until 0xF801ED964 in 0x001FFCC8
+	pressBtn({circle=1}, 1)  -- select change
+	fadv(13)
+	pressBtn({right=1}, 1)
+	fadv(4)
+	pressBtn({right=1}, 1)
+	fadv(3)
+	pressBtn({circle=1}, 1)  -- select ship
+	fadv(6)
+	pressBtn({right=1}, 1)
+	fadv(1)
+	pressBtn({circle=1}, 1)  -- buy 4 ships
+	-- text skip
+	fadv(44)
+	pressBtn({down=1}, 1)
+	pressBtn({left=1}, 1)
+	pressBtn({circle=1}, 1)  -- select voyage
+
+end
+
+function TAS.levelupShip()
+	Text.skip()
+	--fadv(41)
+
+	pressBtn({right=1}, 1)
+	fadv(5)
+	pressBtn({right=1}, 1)
+	fadv(3)
+	pressBtn({circle=1}, 1)  -- select ship
+	fadv(8)
+	pressBtn({circle=1}, 1)  -- decide
+	--fadv(x)
+	pressBtn({circle=1}, 1)  -- yes
+	fadv(36)
+	pressBtn({x=1}, 1)  -- close
+end
+
+function TAS.selectObject()
+	pressBtn({circle=1}, 1)  -- select object
+	fadv(1)
+	pressBtn({x=1}, 1)  -- close
+end
+
 
 
 function TAS.zoomOut()

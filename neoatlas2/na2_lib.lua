@@ -428,6 +428,10 @@ Text.BELIEVE_VIEW = 2
 Text.adr_1FFCC8 = 0x001FFCC8 -- 4byte, stack
 Text.INCREASE_REWARD   = 0x800A64CC
 
+Text.adr_00E2D4 = 0x0000E2D4 -- 2byte, text flag
+	-- 0x?? : otherwise, accept pad inputs
+	-- 0x5C : Not accept pad inputs
+
 
 function Text.skip()
 	local pre_state = memory.readword(Text.adr_12260E)
@@ -447,8 +451,12 @@ function Text.skip()
 		elseif cur_state == Text.TEXTING and pre_state == Text.NONE then
 			pre_state = cur_state
 			-- skip text
-			fadv(1)
-			pressBtn({x=1}, 2)  -- skip text
+			local txt_flag  = memory.readword(Text.adr_00E2D4)
+			if txt_flag == 0x5C then
+				fadv(1)
+			end	
+			--pressBtn({x=1}, 2)  -- skip text
+			pressBtn({circle=1}, 2)  -- skip text
 		elseif cur_state == Text.TEXTING and pre_state == Text.TEXTING then
 			pre_state = cur_state
 			local input = memory.readdword(Global.pad_input1.adr)

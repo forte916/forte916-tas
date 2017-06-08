@@ -73,10 +73,11 @@ for i=0, retry do
 	interface.attempt()
 
 	-- check result
-	local result = interface.success()
+	local result = interface.success(i)
 	if result then
+		fc = emu.framecount()
 		debugPrint(string.format("  ***** %s state. retry = %d, fc = %d, rng = %08X *****", result, i, fc, rng))
-		interface.post_attempt(i, fc)
+		interface.post_attempt(i)
 	end
 
 	if f ~= nil then f:flush() end

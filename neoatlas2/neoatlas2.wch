@@ -12,19 +12,19 @@
 00009	001227C4	d	h	0	text
 0000A	00122770	d	h	0	movie param
 0000B	00000000	S	S	0	----------------------------
-0000C	0016D3A8	d	h	0	text param
-0000D	0016D3E8	d	h	0	text param
-0000E	0000E2D4	d	h	0	text param
-0000F	0000E2D8	d	h	0	text param
-00010	00122494	d	h	0	text param
-00011	0012286C	d	h	0	text param
-00012	00122B80	d	h	0	text param
-00013	001883E4	d	h	0	text param
-00014	001BCF4C	d	h	0	finding new
-00015	001FFC40	d	h	0	text param(stack)
-00016	001FFC44	d	h	0	text param(stack)
-00017	001FFC68	d	h	0	text param(stack)
-00018	001FFCC8	d	h	0	text param(increase reward)
+0000C	0000E2D4	d	h	0	text param
+0000D	0000E2D8	d	h	0	text param
+0000E	001FFCC8	d	h	0	text param(increase reward)
+0000F	0016D3A8	d	h	0	text param
+00010	0016D3E8	d	h	0	text param
+00011	00122494	d	h	0	text param
+00012	0012286C	d	h	0	text param
+00013	00122B80	d	h	0	text param
+00014	001883E4	d	h	0	text param
+00015	001BCF4C	d	h	0	finding new
+00016	001FFC40	d	h	0	text param(stack)
+00017	001FFC44	d	h	0	text param(stack)
+00018	001FFC68	d	h	0	text param(stack)
 00019	00000000	S	S	0	----------------------------
 0001A	0012226C	w	s	0	total city count??
 0001B	00121EEE	w	s	0	game speed 0,2,4 (slow, normal, fast)

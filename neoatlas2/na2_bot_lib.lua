@@ -48,9 +48,9 @@ end
 -- VoyageBot
 ------------------------------------------------------------
 VoyageBot = {}
-VoyageBot.logname  = "voyage_result2.log"
-VoyageBot.picname1 = "snap/voyage_result2_land_%df.png"
-VoyageBot.picname2 = "snap/voyage_result2_city_%df_retry_%d.png"
+VoyageBot.logname  = "voyage_result9.log"
+VoyageBot.picname1 = "snap/voyage_result9_land_%df_retry_%d.png"
+VoyageBot.picname2 = "snap/voyage_result9_city_%df_retry_%d.png"
 VoyageBot.retry = 200
 
 VoyageBot.pre_cities  = {}
@@ -65,15 +65,34 @@ function VoyageBot.logHeader()
 end
 
 function VoyageBot.pre_attempt()
-	fadv(2)
+	fadv(1)
 end
 
 function VoyageBot.attempt()
 	VoyageBot.pre_cities = City.getAll()
 	VoyageBot.pre_total  = memory.readword(Global.total_city.adr)
 
-	pressBtn({l2=1}, 3)  -- zoom in
-	pressBtn({l2=1}, 1)  -- zoom in
+	local txt_flag  = memory.readword(Text.adr_00E2D4)
+	if txt_flag == 0x5C then
+		fadv(1)
+	end	
+	pressBtn({circle=1}, 1)  -- point
+	fadv(2)
+	txt_flag  = memory.readword(Text.adr_00E2D4)
+	if txt_flag >= 0x1B then
+		fadv(1)
+	end	
+	pressBtn({square=1}, 1)  -- show window
+	fadv(1)
+	txt_flag  = memory.readword(Text.adr_00E2D4)
+	if txt_flag == 0x5C then
+		fadv(1)
+	end	
+	pressBtn({circle=1}, 1)  -- finish course setting
+	fadv(20)
+
+	--pressBtn({l2=1}, 3)  -- zoom in
+	--pressBtn({l2=1}, 1)  -- zoom in
 
 	-- text skip until the end of report
 	while true do
@@ -90,15 +109,12 @@ function VoyageBot.attempt()
 	fadv(90)
 end
 
-function VoyageBot.post_attempt(retry, fc)
-	-- make sure the dest directory exists
-	local gdstr = gui.gdscreenshot()
-	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname1, fc))
-
+function VoyageBot.post_attempt(retry)
 	--Window.changeScale(1)  -- 1 means scale 2
 	fadv(170)
 
-	fc = emu.framecount()
+	-- make sure the dest directory exists
+	local fc = emu.framecount()
 	gdstr = gui.gdscreenshot()
 	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname2, fc, retry))
 end
@@ -120,8 +136,14 @@ function VoyageBot.findNewCity()
 	return cities
 end
 
-function VoyageBot.success()
+function VoyageBot.success(retry)
 	local ret = nil
+
+	-- TODO: If discover a land with no cities, define as "good"
+	local fc = emu.framecount()
+	local gdstr = gui.gdscreenshot()
+	gd.createFromGdStr(gdstr):png(string.format(VoyageBot.picname1, fc, retry))
+
 	VoyageBot.post_cities = City.getAll()
 	VoyageBot.post_total  = memory.readword(Global.total_city.adr)
 
@@ -135,16 +157,23 @@ function VoyageBot.success()
 		return "good"
 	end
 
-	-- TODO: If discover a land with no cities, define as "good"
 
 	return ret
 end
 
-VoyageBot.best_retry = 133
+--VoyageBot.best_retry = 131
+--VoyageBot.best_rng = 0xED7F6D72
+VoyageBot.best_retry = 134
 VoyageBot.best_rng = 0x97264179
 
+
+-- good state
+--  ***** good state. retry = 127, fc = 9763, rng = D53CB750 *****
+--  ***** good state. retry = 131, fc = 9767, rng = ED7F6D72 *****
+--  ***** good state. retry = 134, fc = 9770, rng = 97264179 *****
+
+-- other results
 ----- retry = 128, fc = 9764, rng = AB9F2E27 -----
 ----- retry = 131, fc = 9767, rng = ED7F6D72 -----
 ----- retry = 133, fc = 9769, rng = 97264179 -----
-
 
